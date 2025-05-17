@@ -1,0 +1,1172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="cds_zui_uploadpr_o2" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="I_StorageLocationStdVHType" sap:label="Storage Location" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="StorageLocation"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="PlantName" sap:label="Plant"/>
+                <Property Name="StorageLocation" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="StorageLocationName" sap:label="Storage Location"/>
+                <Property Name="StorageLocationName" Type="Edm.String" MaxLength="16" sap:label="Storage Loc. Name" sap:quickinfo="Storage Location Name"/>
+                <Property Name="ConfigDeprecationCode" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:text="ConfignDeprecationCodeName" sap:label="Validity" sap:quickinfo="Deprecated Entries"/>
+                <Property Name="ConfignDeprecationCodeName" Type="Edm.String" MaxLength="60" sap:label="Validity Text" sap:quickinfo="Value Help: Flag Obsolete Entries"/>
+                <Property Name="PlantName" Type="Edm.String" MaxLength="30" sap:label="Plant Name"/>
+            </EntityType>
+            <EntityType Name="ApprovalHistoryType" sap:label="Workflow Approval History" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="WorkflowId"/>
+                    <PropertyRef Name="InstanceId"/>
+                    <PropertyRef Name="Zseq"/>
+                    <PropertyRef Name="ApplicationId"/>
+                    <PropertyRef Name="CurrentNode"/>
+                    <PropertyRef Name="UserZseq"/>
+                </Key>
+                <Property Name="WorkflowId" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="InstanceId" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
+                <Property Name="Zseq" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative"/>
+                <Property Name="ApplicationId" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative"/>
+                <Property Name="CurrentNode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative"/>
+                <Property Name="UserZseq" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative"/>
+                <Property Name="NextNode" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative"/>
+                <Property Name="Operator" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ApprovalStatus" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Remark" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User"/>
+                <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Created On" sap:quickinfo="Creation Date Time"/>
+                <Property Name="LastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Last Changed By User"/>
+                <Property Name="LastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time"/>
+                <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
+                <Property Name="title" Type="Edm.String" MaxLength="50"/>
+                <Property Name="nodename" Type="Edm.String" MaxLength="35"/>
+            </EntityType>
+            <EntityType Name="PurchaseReqType" sap:label="Projection View for ZR_TMM_1006" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="UUID"/>
+                </Key>
+                <Property Name="Delete_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Update_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UUID" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ApplyDepart" Type="Edm.String" MaxLength="3" sap:text="ApplyDepartText"/>
+                <Property Name="PrNo" Type="Edm.String" MaxLength="10" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="PrItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="PrType" Type="Edm.String" MaxLength="4" sap:text="PrTypeText"/>
+                <Property Name="OrderType" Type="Edm.String" MaxLength="4" sap:text="OrderTypeText"/>
+                <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
+                <Property Name="PurchaseOrg" Type="Edm.String" MaxLength="4"/>
+                <Property Name="PurchaseGrp" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
+                <Property Name="ItemCategory" Type="Edm.String" MaxLength="4"/>
+                <Property Name="AccountType" Type="Edm.String" MaxLength="1"/>
+                <Property Name="MatID" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="MatDesc" Type="Edm.String" MaxLength="80"/>
+                <Property Name="MaterialGroup" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Quantity" Type="Edm.Decimal" Precision="18" Scale="3"/>
+                <Property Name="Unit" Type="Edm.String" MaxLength="3"/>
+                <Property Name="Price" Type="Edm.Decimal" Precision="18" Scale="3"/>
+                <Property Name="UnitPrice" Type="Edm.Decimal" Precision="18" Scale="3"/>
+                <Property Name="DeliveryDate" Type="Edm.String" MaxLength="8"/>
+                <Property Name="Location" Type="Edm.String" MaxLength="4" sap:value-list="standard"/>
+                <Property Name="ReturnItem" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Free" Type="Edm.String" MaxLength="1"/>
+                <Property Name="GlAccount" Type="Edm.String" MaxLength="10"/>
+                <Property Name="CostCenter" Type="Edm.String" MaxLength="14"/>
+                <Property Name="WbsElemnt" Type="Edm.String" MaxLength="20"/>
+                <Property Name="OrderId" Type="Edm.String" MaxLength="12" sap:label="指図"/>
+                <Property Name="AssetNo" Type="Edm.String" MaxLength="20"/>
+                <Property Name="Tax" Type="Edm.String" MaxLength="2"/>
+                <Property Name="ItemText" Type="Edm.String" MaxLength="200"/>
+                <Property Name="PrBy" Type="Edm.String" MaxLength="10"/>
+                <Property Name="TrackNo" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Ean" Type="Edm.String" MaxLength="20"/>
+                <Property Name="CustomerRec" Type="Edm.String" MaxLength="1"/>
+                <Property Name="AssetOri" Type="Edm.String" MaxLength="20"/>
+                <Property Name="MemoText" Type="Edm.String" MaxLength="200"/>
+                <Property Name="BuyPurpoose" Type="Edm.String" MaxLength="2" sap:text="BuyPurposeText"/>
+                <Property Name="IsLink" Type="Edm.String" MaxLength="1"/>
+                <Property Name="ApproveStatus" Type="Edm.String" MaxLength="1" sap:text="ApproveStatusText"/>
+                <Property Name="PurchaseOrder" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="PurchaseOrderItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Kyoten" Type="Edm.String" MaxLength="2" sap:text="KyotenText"/>
+                <Property Name="IsApprove" Type="Edm.String" MaxLength="1"/>
+                <Property Name="SupplierMat" Type="Edm.String" MaxLength="35"/>
+                <Property Name="PolinkBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="User Name"/>
+                <Property Name="DocumentInfoRecordDocType" Type="Edm.String" MaxLength="3"/>
+                <Property Name="DocumentInfoRecordDocNumber" Type="Edm.String" MaxLength="25"/>
+                <Property Name="DocumentInfoRecordDocVersion" Type="Edm.String" MaxLength="2"/>
+                <Property Name="DocumentInfoRecordDocPart" Type="Edm.String" MaxLength="3"/>
+                <Property Name="ApplyDate" Type="Edm.String" MaxLength="8"/>
+                <Property Name="ApplyTime" Type="Edm.String" MaxLength="6"/>
+                <Property Name="CreatedAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Type" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Message Type" sap:quickinfo="Message type: S Success, E Error, W Warning, I Info, A Abort"/>
+                <Property Name="ResultText" Type="Edm.String" MaxLength="256"/>
+                <Property Name="Message" Type="Edm.String" MaxLength="1033"/>
+                <Property Name="LocalCreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="LocalCreatedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Created On" sap:quickinfo="Creation Date Time" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="LocalLastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Local Instance Last Changed By User" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="LatCahangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="WorkflowId" Type="Edm.String" MaxLength="20"/>
+                <Property Name="InstanceId" Type="Edm.Guid" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
+                <Property Name="ApplicationId" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative"/>
+                <Property Name="ApplyDepartText" Type="Edm.String" MaxLength="120" sap:label="Name"/>
+                <Property Name="PrTypeText" Type="Edm.String" MaxLength="120"/>
+                <Property Name="OrderTypeText" Type="Edm.String" MaxLength="120"/>
+                <Property Name="BuyPurposeText" Type="Edm.String" MaxLength="120"/>
+                <Property Name="KyotenText" Type="Edm.String" MaxLength="120"/>
+                <Property Name="ApproveStatusText" Type="Edm.String" MaxLength="120"/>
+                <NavigationProperty Name="to_Attachment" Relationship="cds_zui_uploadpr_o2.assoc_FB3819DD6A7636A2687DB2C7F9B1D3C3" FromRole="FromRole_assoc_FB3819DD6A7636A2687DB2C7F9B1D3C3" ToRole="ToRole_assoc_FB3819DD6A7636A2687DB2C7F9B1D3C3"/>
+            </EntityType>
+            <EntityType Name="PurchaseReqAttachmentType" sap:label="MM-011 Attachments" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PrUuid"/>
+                    <PropertyRef Name="FileUuid"/>
+                </Key>
+                <Property Name="PrUuid" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
+                <Property Name="FileUuid" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
+                <Property Name="FileSeq" Type="Edm.Int32" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/>
+                <Property Name="FileType" Type="Edm.String" MaxLength="128" sap:display-format="UpperCase" sap:label="Mime Type"/>
+                <Property Name="FileName" Type="Edm.String" MaxLength="128" sap:label="File Name"/>
+                <Property Name="FileSize" Type="Edm.Int32" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/>
+                <Property Name="S3Filename" Type="Edm.String" MaxLength="128" sap:label="File Name"/>
+                <Property Name="PrUuidC36" Type="Edm.String" MaxLength="36" sap:display-format="UpperCase" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                <Property Name="FileUuidC36" Type="Edm.String" MaxLength="36" sap:display-format="UpperCase" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User"/>
+                <Property Name="CreatedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Created On" sap:quickinfo="Creation Date Time"/>
+                <Property Name="LastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Last Changed By User"/>
+                <Property Name="LastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time"/>
+                <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
+            </EntityType>
+            <EntityType Name="SAP__Currency" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CurrencyCode"/>
+                </Key>
+                <Property Name="CurrencyCode" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+                <Property Name="ISOCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="ISO Code"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="15" sap:label="Short Text"/>
+                <Property Name="DecimalPlaces" Type="Edm.Byte" Nullable="false" sap:label="Decimals"/>
+            </EntityType>
+            <EntityType Name="SAP__UnitOfMeasure" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="UnitCode"/>
+                </Key>
+                <Property Name="UnitCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Internal UoM" sap:semantics="unit-of-measure"/>
+                <Property Name="ISOCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="ISO Code"/>
+                <Property Name="ExternalCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Commercial"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Meas. Unit Text"/>
+                <Property Name="DecimalPlaces" Type="Edm.Int16" sap:label="Decimal Places"/>
+            </EntityType>
+            <EntityType Name="SAP__DocumentDescription" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID"/>
+                <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="CreatedAt" Type="Edm.DateTime" Nullable="false" Precision="0" sap:label="Time Stamp"/>
+                <Property Name="FileName" Type="Edm.String" Nullable="false" MaxLength="256"/>
+                <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="256"/>
+                <NavigationProperty Name="Format" Relationship="cds_zui_uploadpr_o2.to_format" FromRole="FromRole_to_format" ToRole="ToRole_to_format"/>
+                <NavigationProperty Name="FileShare" Relationship="cds_zui_uploadpr_o2.to_fileshare" FromRole="FromRole_to_fileshare" ToRole="ToRole_to_fileshare"/>
+                <NavigationProperty Name="TableColumns" Relationship="cds_zui_uploadpr_o2.to_tablecolumns" FromRole="FromRole_to_tablecolumns" ToRole="ToRole_to_tablecolumns"/>
+                <NavigationProperty Name="CoverPage" Relationship="cds_zui_uploadpr_o2.to_coverpage" FromRole="FromRole_to_coverpage" ToRole="ToRole_to_coverpage"/>
+                <NavigationProperty Name="Signature" Relationship="cds_zui_uploadpr_o2.to_signature" FromRole="FromRole_to_signature" ToRole="ToRole_to_signature"/>
+                <NavigationProperty Name="PDFStandard" Relationship="cds_zui_uploadpr_o2.to_pdfstandard" FromRole="FromRole_to_pdfstandard" ToRole="ToRole_to_pdfstandard"/>
+                <NavigationProperty Name="Hierarchy" Relationship="cds_zui_uploadpr_o2.to_Hierarchy" FromRole="FromRole_to_Hierarchy" ToRole="ToRole_to_Hierarchy"/>
+                <NavigationProperty Name="Header" Relationship="cds_zui_uploadpr_o2.to_header" FromRole="FromRole_to_header" ToRole="ToRole_to_header"/>
+                <NavigationProperty Name="Footer" Relationship="cds_zui_uploadpr_o2.to_Footer" FromRole="FromRole_to_Footer" ToRole="ToRole_to_Footer"/>
+            </EntityType>
+            <EntityType Name="SAP__FileShare" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Repository" Type="Edm.String" Nullable="false" MaxLength="100" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Folder" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__Format" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="FitToPage" Type="cds_zui_uploadpr_o2.SAP__FitToPage" Nullable="false"/>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FontSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Orientation" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PaperSize" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BorderSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MarginSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FontName" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Font Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Padding" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TextDirectionLayout" Type="Edm.String" Nullable="false" MaxLength="40" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__PDFStandard" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UsePDFAConformance" Type="Edm.Boolean" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DoEnableAccessibility" Type="Edm.Boolean" Nullable="false" sap:label="Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__TableColumns" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="Name"/>
+                    <PropertyRef Name="Header"/>
+                </Key>
+                <Property Name="Format" Type="cds_zui_uploadpr_o2.SAP__TableColumnFormat" Nullable="false"/>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Header" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HorizontalAlignment" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__CoverPage" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Title"/>
+                    <PropertyRef Name="Id"/>
+                    <PropertyRef Name="Name"/>
+                </Key>
+                <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Value" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__Signature" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DoSign" Type="Edm.Boolean" Nullable="false" sap:label="Indicator" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Reason" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__Hierarchy" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DistanceFromRootElement" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DrillStateElement" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__PDFHeader" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Right" Type="cds_zui_uploadpr_o2.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Left" Type="cds_zui_uploadpr_o2.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Center" Type="cds_zui_uploadpr_o2.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__PDFFooter" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Right" Type="cds_zui_uploadpr_o2.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Left" Type="cds_zui_uploadpr_o2.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Center" Type="cds_zui_uploadpr_o2.SAP__HeaderFooterField" Nullable="false"/>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SAP__ValueHelp" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="VALUEHELP"/>
+                </Key>
+                <Property Name="VALUEHELP" Type="Edm.String" Nullable="false"/>
+                <Property Name="FIELD_VALUE" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="DESCRIPTION" Type="Edm.String"/>
+            </EntityType>
+            <ComplexType Name="ZR_UPLOAD_PARAMETER">
+                <Property Name="Event" Type="Edm.String" MaxLength="20"/>
+                <Property Name="RecordUUID" Type="Edm.String" MaxLength="36" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                <Property Name="Zzkey" Type="Edm.String" sap:label="Zzkey" sap:quickinfo="String Type"/>
+            </ComplexType>
+            <ComplexType Name="SAP__FitToPage">
+                <Property Name="ErrorRecoveryBehavior" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Error behavior" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IsEnabled" Type="Edm.Boolean" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MinimumFontSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <ComplexType Name="SAP__TableColumnFormat">
+                <Property Name="DisplayFormat" Type="Edm.String" Nullable="false" MaxLength="40" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IANATimezone" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IANATimezoneProperty" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <ComplexType Name="SAP__HeaderFooterField">
+                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <Association Name="assoc_FB3819DD6A7636A2687DB2C7F9B1D3C3" sap:content-version="1">
+                <End Type="cds_zui_uploadpr_o2.PurchaseReqType" Multiplicity="1" Role="FromRole_assoc_FB3819DD6A7636A2687DB2C7F9B1D3C3"/>
+                <End Type="cds_zui_uploadpr_o2.PurchaseReqAttachmentType" Multiplicity="*" Role="ToRole_assoc_FB3819DD6A7636A2687DB2C7F9B1D3C3"/>
+            </Association>
+            <Association Name="to_format" sap:content-version="1">
+                <End Type="cds_zui_uploadpr_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_format"/>
+                <End Type="cds_zui_uploadpr_o2.SAP__Format" Multiplicity="1" Role="ToRole_to_format"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_format">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_format">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_fileshare" sap:content-version="1">
+                <End Type="cds_zui_uploadpr_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_fileshare"/>
+                <End Type="cds_zui_uploadpr_o2.SAP__FileShare" Multiplicity="1" Role="ToRole_to_fileshare"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_fileshare">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_fileshare">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_tablecolumns" sap:content-version="1">
+                <End Type="cds_zui_uploadpr_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_tablecolumns"/>
+                <End Type="cds_zui_uploadpr_o2.SAP__TableColumns" Multiplicity="*" Role="ToRole_to_tablecolumns"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_tablecolumns">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_tablecolumns">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_coverpage" sap:content-version="1">
+                <End Type="cds_zui_uploadpr_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_coverpage"/>
+                <End Type="cds_zui_uploadpr_o2.SAP__CoverPage" Multiplicity="*" Role="ToRole_to_coverpage"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_coverpage">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_coverpage">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_signature" sap:content-version="1">
+                <End Type="cds_zui_uploadpr_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_signature"/>
+                <End Type="cds_zui_uploadpr_o2.SAP__Signature" Multiplicity="1" Role="ToRole_to_signature"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_signature">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_signature">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_pdfstandard" sap:content-version="1">
+                <End Type="cds_zui_uploadpr_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_pdfstandard"/>
+                <End Type="cds_zui_uploadpr_o2.SAP__PDFStandard" Multiplicity="1" Role="ToRole_to_pdfstandard"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_pdfstandard">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_pdfstandard">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_Hierarchy" sap:content-version="1">
+                <End Type="cds_zui_uploadpr_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_Hierarchy"/>
+                <End Type="cds_zui_uploadpr_o2.SAP__Hierarchy" Multiplicity="1" Role="ToRole_to_Hierarchy"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_Hierarchy">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_Hierarchy">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_header" sap:content-version="1">
+                <End Type="cds_zui_uploadpr_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_header"/>
+                <End Type="cds_zui_uploadpr_o2.SAP__PDFHeader" Multiplicity="1" Role="ToRole_to_header"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_header">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_header">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_Footer" sap:content-version="1">
+                <End Type="cds_zui_uploadpr_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_Footer"/>
+                <End Type="cds_zui_uploadpr_o2.SAP__PDFFooter" Multiplicity="1" Role="ToRole_to_Footer"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_Footer">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_Footer">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="cds_zui_uploadpr_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
+                <EntitySet Name="I_StorageLocationStdVH" EntityType="cds_zui_uploadpr_o2.I_StorageLocationStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ApprovalHistory" EntityType="cds_zui_uploadpr_o2.ApprovalHistoryType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="PurchaseReq" EntityType="cds_zui_uploadpr_o2.PurchaseReqType" sap:content-version="1" sap:deletable-path="Delete_mc" sap:updatable-path="Update_mc"/>
+                <EntitySet Name="PurchaseReqAttachment" EntityType="cds_zui_uploadpr_o2.PurchaseReqAttachmentType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_uploadpr_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zui_uploadpr_o2.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__TableColumnsSet" EntityType="cds_zui_uploadpr_o2.SAP__TableColumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__CoverPageSet" EntityType="cds_zui_uploadpr_o2.SAP__CoverPage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__SignatureSet" EntityType="cds_zui_uploadpr_o2.SAP__Signature" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__HierarchySet" EntityType="cds_zui_uploadpr_o2.SAP__Hierarchy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__PDFHeaderSet" EntityType="cds_zui_uploadpr_o2.SAP__PDFHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__PDFFooterSet" EntityType="cds_zui_uploadpr_o2.SAP__PDFFooter" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SAP__ValueHelpSet" EntityType="cds_zui_uploadpr_o2.SAP__ValueHelp" sap:content-version="1"/>
+                <EntitySet Name="SAP__Currencies" EntityType="cds_zui_uploadpr_o2.SAP__Currency" sap:content-version="1"/>
+                <EntitySet Name="SAP__UnitsOfMeasure" EntityType="cds_zui_uploadpr_o2.SAP__UnitOfMeasure" sap:content-version="1"/>
+                <EntitySet Name="SAP__MyDocumentDescriptions" EntityType="cds_zui_uploadpr_o2.SAP__DocumentDescription" sap:content-version="1"/>
+                <EntitySet Name="SAP__FileShareSet" EntityType="cds_zui_uploadpr_o2.SAP__FileShare" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_FB3819DD6A7636A2687DB2C7F9B1D3C3" Association="cds_zui_uploadpr_o2.assoc_FB3819DD6A7636A2687DB2C7F9B1D3C3" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="PurchaseReq" Role="FromRole_assoc_FB3819DD6A7636A2687DB2C7F9B1D3C3"/>
+                    <End EntitySet="PurchaseReqAttachment" Role="ToRole_assoc_FB3819DD6A7636A2687DB2C7F9B1D3C3"/>
+                </AssociationSet>
+                <AssociationSet Name="to_HierarchySet" Association="cds_zui_uploadpr_o2.to_Hierarchy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_Hierarchy"/>
+                    <End EntitySet="SAP__HierarchySet" Role="ToRole_to_Hierarchy"/>
+                </AssociationSet>
+                <AssociationSet Name="to_tablecolumnsSet" Association="cds_zui_uploadpr_o2.to_tablecolumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_tablecolumns"/>
+                    <End EntitySet="SAP__TableColumnsSet" Role="ToRole_to_tablecolumns"/>
+                </AssociationSet>
+                <AssociationSet Name="to_headerSet" Association="cds_zui_uploadpr_o2.to_header" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_header"/>
+                    <End EntitySet="SAP__PDFHeaderSet" Role="ToRole_to_header"/>
+                </AssociationSet>
+                <AssociationSet Name="to_FooterSet" Association="cds_zui_uploadpr_o2.to_Footer" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_Footer"/>
+                    <End EntitySet="SAP__PDFFooterSet" Role="ToRole_to_Footer"/>
+                </AssociationSet>
+                <AssociationSet Name="to_formatSet" Association="cds_zui_uploadpr_o2.to_format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_format"/>
+                    <End EntitySet="SAP__FormatSet" Role="ToRole_to_format"/>
+                </AssociationSet>
+                <AssociationSet Name="to_fileshareSet" Association="cds_zui_uploadpr_o2.to_fileshare" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_fileshare"/>
+                    <End EntitySet="SAP__FileShareSet" Role="ToRole_to_fileshare"/>
+                </AssociationSet>
+                <AssociationSet Name="to_pdfstandardSet" Association="cds_zui_uploadpr_o2.to_pdfstandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_pdfstandard"/>
+                    <End EntitySet="SAP__PDFStandardSet" Role="ToRole_to_pdfstandard"/>
+                </AssociationSet>
+                <AssociationSet Name="to_signatureSet" Association="cds_zui_uploadpr_o2.to_signature" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_signature"/>
+                    <End EntitySet="SAP__SignatureSet" Role="ToRole_to_signature"/>
+                </AssociationSet>
+                <AssociationSet Name="to_coverpageSet" Association="cds_zui_uploadpr_o2.to_coverpage" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_coverpage"/>
+                    <End EntitySet="SAP__CoverPageSet" Role="ToRole_to_coverpage"/>
+                </AssociationSet>
+                <FunctionImport Name="batchProcess" ReturnType="cds_zui_uploadpr_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
+                    <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
+                    <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
+                    <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                </FunctionImport>
+                <FunctionImport Name="createPurchaseOrder" ReturnType="cds_zui_uploadpr_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
+                    <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
+                    <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
+                    <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                </FunctionImport>
+                <FunctionImport Name="handleFile" ReturnType="cds_zui_uploadpr_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
+                    <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
+                    <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
+                    <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                </FunctionImport>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Location" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String=""/>
+                        <PropertyValue Property="CollectionPath" String="I_StorageLocationStdVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Location"/>
+                                    <PropertyValue Property="ValueListProperty" String="StorageLocation"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="StorageLocationName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterIn">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Plant"/>
+                                    <PropertyValue Property="ValueListProperty" String="Plant"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ConfigDeprecationCode"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ConfignDeprecationCodeName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PlantName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.cds_zui_uploadpr_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ChangedAt" Path="LatCahangedAt"/>
+                <Annotation Term="Common.CreatedAt" Path="LocalCreatedAt"/>
+                <Annotation Term="Common.CreatedBy" Path="LocalCreatedBy"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.cds_zui_uploadpr_o2_Entities/ApprovalHistory" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.cds_zui_uploadpr_o2_Entities/I_StorageLocationStdVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.cds_zui_uploadpr_o2_Entities/PurchaseReq" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Path="Delete_mc"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>Delete_mc</PropertyPath>
+                                <PropertyPath>Update_mc</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_Attachment"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>Delete_mc</PropertyPath>
+                                <PropertyPath>Update_mc</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Path="Update_mc"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.cds_zui_uploadpr_o2_Entities/PurchaseReqAttachment" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/AccountType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/ApplicationId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/ApplyDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/ApplyDepart" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/ApplyDepartText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/ApplyTime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/ApproveStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/ApproveStatusText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/AssetNo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/AssetOri" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/BuyPurpoose" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/BuyPurposeText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/CostCenter" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/CustomerRec" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/DeliveryDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/DocumentInfoRecordDocNumber" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/DocumentInfoRecordDocPart" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/DocumentInfoRecordDocType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/DocumentInfoRecordDocVersion" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Ean" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Free" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/GlAccount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/InstanceId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/IsApprove" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/IsLink" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/ItemCategory" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/ItemText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Kyoten" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/KyotenText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/MatDesc" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/MatID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/MaterialGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/MemoText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Message" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/OrderId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/OrderType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/OrderTypeText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/PolinkBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/PrBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/PrType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/PrTypeText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Price" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/PurchaseGrp" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/PurchaseOrg" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Quantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/ResultText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/ReturnItem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Supplier" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/SupplierMat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Tax" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/TrackNo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Type" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Unit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/UnitPrice" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/WbsElemnt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/WorkflowId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.I_StorageLocationStdVHType/ConfigDeprecationCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__CodeList.IsConfigurationDeprecationCode"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.cds_zui_uploadpr_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">
+                    <Record Type="Org.OData.Capabilities.V1.BatchSupportType">
+                        <PropertyValue Property="ReferencesAcrossChangeSetsSupported" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.CurrencyCodes">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__Currencies"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__UnitsOfMeasure"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="./$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="SAP__MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="Padding" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="TextDirectionLayout" Bool="true"/>
+                        <PropertyValue Property="UploadToFileShare" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                        <PropertyValue Property="Treeview" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__CodeList.SAP__DocumentDescription">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__MyDocumentDescriptions"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/LocalCreatedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_TSTMPL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqAttachmentType/LocalLastChangedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LOCINST_LASTCHANGE_TSTMPL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/PolinkBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=SYUNAME&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqAttachmentType/LastChangedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_USER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.I_StorageLocationStdVHType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/LocalCreatedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_USER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.I_StorageLocationStdVHType/StorageLocation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LGORT_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.ApprovalHistoryType/CreatedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_TSTMPL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.ApprovalHistoryType/LastChangedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_TSTMPL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqAttachmentType/LastChangedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_TSTMPL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/LatCahangedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_TSTMPL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqAttachmentType/CreatedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_TSTMPL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqAttachmentType/CreatedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_USER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Type" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BAPI_MTYPE&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/LocalLastChangedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LOCINST_LASTCHANGE_TSTMPL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.ApprovalHistoryType/LastChangedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_USER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/MatID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.I_StorageLocationStdVHType/ConfigDeprecationCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CONFIG_DEPRECATION_CODE&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/Supplier" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LIFNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.ApprovalHistoryType/CreatedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_USER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/PurchaseOrderItem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=EBELP&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/PurchaseOrder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=EBELN&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.ApprovalHistoryType/LocalLastChangedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LOCINST_LASTCHANGE_TSTMPL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.PurchaseReqType/LocalLastChangedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LOCINST_LASTCHANGE_USER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__Currency/CurrencyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.Text" Path="Text"/>
+                <Annotation Term="SAP__common.UnitSpecificScale" Path="DecimalPlaces"/>
+                <Annotation Term="SAP__CodeList.StandardCode" Path="ISOCode"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__UnitOfMeasure/UnitCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.Text" Path="Text"/>
+                <Annotation Term="SAP__common.UnitSpecificScale" Path="DecimalPlaces"/>
+                <Annotation Term="SAP__CodeList.StandardCode" Path="ISOCode"/>
+                <Annotation Term="SAP__CodeList.ExternalCode" Path="ExternalCode"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__UnitOfMeasure" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.AlternateKeys">
+                    <Collection>
+                        <Record>
+                            <PropertyValue Property="Key">
+                                <Collection>
+                                    <Record>
+                                        <PropertyValue Property="Name" Path="ExternalCode"/>
+                                        <PropertyValue Property="Alias" String="ExternalCode"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__DocumentDescription/CreatedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__DocumentDescription/CreatedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__Format/TextDirectionLayout" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Description" String="Setting the text direction-layout is supported"/>
+                <Annotation Term="SAP__core.LongDescription" String="PDF supports setting the text direction-layout (e.g. left-to-right or right-to-left) in the document description"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__DocumentDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__capabilties.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilties.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilties.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilties.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Format/Orientation"/>
+                                    <PropertyValue Property="AllowedExpressions" String="Multivalue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Format/PaperSize"/>
+                                    <PropertyValue Property="AllowedExpressions" String="Multivalue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__Format/FitToPage/ErrorRecoveryBehavior" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="../../../../SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27ErrorRecoveryBehaviour%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__Format/FontName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27FontName%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__Format/PaperSize" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27PaperSize%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__PDFHeader/Left" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HeaderFooter%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__PDFHeader/Right" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HeaderFooter%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__PDFHeader/Center" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HeaderFooter%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__PDFFooter/Left" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HeaderFooter%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__PDFFooter/Right" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HeaderFooter%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__PDFFooter/Center" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HeaderFooter%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__TableColumns/Format/Display_Format" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27TableColumnFormat%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__FileShare" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27FileShare%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__Format/Orientation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27FontName%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_uploadpr_o2.SAP__TableColumns/HorizontalAlignment" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27HorizontalAlignment%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <atom:link rel="self" href="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_UPLOADPR_O2/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_UPLOADPR_O2/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

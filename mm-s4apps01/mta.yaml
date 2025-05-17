@@ -1,0 +1,235 @@
+_schema-version: "3.2"
+ID: mm-s4apps01
+description: MM - Fiori Apps
+version: 0.0.1
+modules:
+- name: mm-s4apps01-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: mm-s4apps01-destination-service
+    parameters:
+      content-target: true
+  - name: mm-s4apps01-repo-host
+    parameters:
+      service-key:
+        name: mm-s4apps01-repo-host-key
+  - name: mm-s4apps01-uaa
+    parameters:
+      service-key:
+        name: mm-s4apps01-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: mm-s4apps01_repo_host
+          ServiceInstanceName: mm-s4apps01-html5-srv
+          ServiceKeyName: mm-s4apps01-repo-host-key
+          sap.cloud.service: mm-s4apps01
+        - Authentication: OAuth2UserTokenExchange
+          Name: mm-s4apps01_uaa
+          ServiceInstanceName: mm-s4apps01-xsuaa-srv
+          ServiceKeyName: mm-s4apps01-uaa-key
+          sap.cloud.service: mm-s4apps01
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+- name: mm-s4apps01-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: mm-s4apps01-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - mmsourcelistupload.zip
+      name: mmsourcelistupload
+      target-path: resources/
+    # - artifacts:
+    #   - mmpurinforecordupload.zip
+    #   name: mmpurinforecordupload
+    #   target-path: resources/
+    # - artifacts:
+    #   - mmpurinforecordchange.zip
+    #   name: mmpurinforecordchange
+    #   target-path: resources/
+    - artifacts:
+      - mmpochange.zip
+      name: mmpochange
+      target-path: resources/
+    - artifacts:
+      - mmpoacceptance.zip
+      name: mmpoacceptance
+      target-path: resources/
+    - artifacts:
+      - mmpodataanalysis.zip
+      name: mmpodataanalysis
+      target-path: resources/
+    - artifacts:
+      - mmuploadpurchasereq.zip
+      name: mmuploadpurchasereq
+      target-path: resources/
+    - artifacts:
+      - mmphysicalinventoryupload.zip
+      name: mmphysicalinventoryupload
+      target-path: resources/
+    - artifacts:
+      - mmzpurchasepricevariance.zip
+      name: mmzpurchasepricevariance
+      target-path: resources/
+    - artifacts:
+      - mmpoposting.zip
+      name: mmpoposting
+      target-path: resources/
+    - artifacts:  
+      - mmpurinfomasterlist.zip
+      name: mmpurinfomasterlist
+      target-path: resources/
+    - artifacts:
+      - mmzprworkflow.zip
+      name: mmzprworkflow
+      target-path: resources/     
+- name: mmsourcelistupload
+  type: html5
+  path: sourcelistupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+# - name: mmpurinforecordupload
+#   type: html5
+#   path: purinforecordupload
+#   build-parameters:
+#     build-result: dist
+#     builder: custom
+#     commands:
+#     - npm run build:cf
+#     supported-platforms: []
+# - name: mmpurinforecordchange
+#   type: html5
+#   path: purinforecordchange
+#   build-parameters:
+#     build-result: dist
+#     builder: custom
+#     commands:
+#     - npm run build:cf
+#     supported-platforms: []
+- name: mmpochange
+  type: html5
+  path: pochange
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmpoacceptance
+  type: html5
+  path: poacceptance
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmpodataanalysis
+  type: html5
+  path: podataanalysis
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmphysicalinventoryupload
+  type: html5
+  path: physicalinventoryupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmuploadpurchasereq
+  type: html5
+  path: uploadpurchasereq
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmzpurchasepricevariance
+  type: html5
+  path: zpurchasepricevariance
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmpoposting
+  type: html5
+  path: poposting
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmpurinfomasterlist
+  type: html5
+  path: purinfomasterlist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmzprworkflow
+  type: html5
+  path: zprworkflow
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: mm-s4apps01-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: mm-s4apps01-xsuaa-srv
+    service-plan: application
+- name: mm-s4apps01-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: mm-s4apps01-destination-service
+    service-plan: lite
+- name: mm-s4apps01-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: mm-s4apps01-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo

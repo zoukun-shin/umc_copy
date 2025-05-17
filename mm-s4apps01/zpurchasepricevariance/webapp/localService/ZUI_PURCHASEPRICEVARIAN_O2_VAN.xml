@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../../sap/zui_purchasepricevarian_o2/$metadata">
+        <edmx:Include Namespace="ZUI_PURCHASEPRICEVARIAN_O2" Alias="SAP"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="zui_purchasepricevarian_o2_van.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_purchasepricevariance_o2.I_SupplierType/DataControllerSet">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.I_SupplierType/DataController1">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.I_SupplierType/DataController2">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.I_SupplierType/DataController3">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.I_SupplierType/DataController4">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.I_SupplierType/DataController5">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.I_SupplierType/DataController6">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.I_SupplierType/DataController7">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.I_SupplierType/DataController8">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.I_SupplierType/DataController9">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.I_SupplierType/DataController10">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchaseOrderItem">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/CompanyCode">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchasingOrganization">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/DocumentCurrency">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchaseOrderDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchaseOrderItemCategory">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchaseOrderItemText">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/OrderQuantity">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchaseOrderQuantityUnit">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/NetPriceAmount">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/NetPriceQuantity">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/StorageLocation">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchasingInfoRecord">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PricingDateControl">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PricingDateControl2">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/Currency">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchaseOrderStr">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PriceDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/ScheduleLineDeliveryDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PurchasingGroupName">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/OrganizationBPName1">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/StorageLocationName">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/YY1_CUSTOMERMATERIAL_PRD">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PricingDateControlText">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PricingDateControl2Text">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/DeliveryDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/PostingDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/ConditionValidityStartDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/ConditionValidityEndDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/ConditionQuantity">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/CurrentPrice">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/NewPrice">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_purchasepricevariance_o2.ZC_PURCHASEPRICEVARIANCEType/Difference">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="_Entities"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

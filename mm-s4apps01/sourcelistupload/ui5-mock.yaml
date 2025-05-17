@@ -1,0 +1,39 @@
+specVersion: "3.1"
+metadata:
+  name: mm.sourcelistupload
+type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false
+        ui5:
+          path:
+            - /resources
+            - /test-resources
+          url: https://ui5.sap.com
+        backend:
+          - path: /sap
+            url: https://my412552-api.s4hana.cloud.sap
+            destination: UMC_Dev_Customizing_BTP
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        mountPath: /
+        services:
+          - urlPath: /sap/opu/odata4/sap/zui_purchasingsourcelist_o4/srvd/sap/zui_purchasingsourcelist_o4/0001
+            generateMockData: true
+            metadataXmlPath: ./webapp/localService/mainService/metadata.xml
+            mockdataRootPath: ./webapp/localService/data
+          - urlPath: /sap/opu/odata4/sap/zui_purchasingsourcelist_o4/srvd/sap/zui_purchasingsourcelist_o4/0001/
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/mockdata
+            generateMockData: true
+        annotations: []
