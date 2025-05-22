@@ -167,6 +167,8 @@
                 <Property Name="AmountMonth35" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityMonth36" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
                 <Property Name="AmountMonth36" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="QuantityMonth37" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
+                <Property Name="AmountMonth37" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="QuantityUnspecified" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BaseUnit" sap:label="Quantity"/>
                 <Property Name="AmountUnspecified" Type="Edm.Decimal" Precision="15" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
             </EntityType>
@@ -206,6 +208,7 @@
                 <Property Name="FileName" Type="Edm.String" Nullable="false" MaxLength="256"/>
                 <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="256"/>
                 <NavigationProperty Name="Format" Relationship="cds_zui_inventory_aging_o2.to_format" FromRole="FromRole_to_format" ToRole="ToRole_to_format"/>
+                <NavigationProperty Name="FileShare" Relationship="cds_zui_inventory_aging_o2.to_fileshare" FromRole="FromRole_to_fileshare" ToRole="ToRole_to_fileshare"/>
                 <NavigationProperty Name="TableColumns" Relationship="cds_zui_inventory_aging_o2.to_tablecolumns" FromRole="FromRole_to_tablecolumns" ToRole="ToRole_to_tablecolumns"/>
                 <NavigationProperty Name="CoverPage" Relationship="cds_zui_inventory_aging_o2.to_coverpage" FromRole="FromRole_to_coverpage" ToRole="ToRole_to_coverpage"/>
                 <NavigationProperty Name="Signature" Relationship="cds_zui_inventory_aging_o2.to_signature" FromRole="FromRole_to_signature" ToRole="ToRole_to_signature"/>
@@ -213,6 +216,14 @@
                 <NavigationProperty Name="Hierarchy" Relationship="cds_zui_inventory_aging_o2.to_Hierarchy" FromRole="FromRole_to_Hierarchy" ToRole="ToRole_to_Hierarchy"/>
                 <NavigationProperty Name="Header" Relationship="cds_zui_inventory_aging_o2.to_header" FromRole="FromRole_to_header" ToRole="ToRole_to_header"/>
                 <NavigationProperty Name="Footer" Relationship="cds_zui_inventory_aging_o2.to_Footer" FromRole="FromRole_to_Footer" ToRole="ToRole_to_Footer"/>
+            </EntityType>
+            <EntityType Name="SAP__FileShare" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Repository" Type="Edm.String" Nullable="false" MaxLength="100" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Folder" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="SAP__Format" sap:content-version="1">
                 <Key>
@@ -227,6 +238,7 @@
                 <Property Name="MarginSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="FontName" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Font Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Padding" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TextDirectionLayout" Type="Edm.String" Nullable="false" MaxLength="40" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="SAP__PDFStandard" sap:content-version="1">
                 <Key>
@@ -256,8 +268,8 @@
                 </Key>
                 <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Value" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Value" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="SAP__Signature" sap:content-version="1">
                 <Key>
@@ -327,6 +339,18 @@
                         <PropertyRef Name="Id"/>
                     </Principal>
                     <Dependent Role="ToRole_to_format">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_fileshare" sap:content-version="1">
+                <End Type="cds_zui_inventory_aging_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_fileshare"/>
+                <End Type="cds_zui_inventory_aging_o2.SAP__FileShare" Multiplicity="1" Role="ToRole_to_fileshare"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_fileshare">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_fileshare">
                         <PropertyRef Name="Id"/>
                     </Dependent>
                 </ReferentialConstraint>
@@ -431,6 +455,7 @@
                 <EntitySet Name="SAP__Currencies" EntityType="cds_zui_inventory_aging_o2.SAP__Currency" sap:content-version="1"/>
                 <EntitySet Name="SAP__UnitsOfMeasure" EntityType="cds_zui_inventory_aging_o2.SAP__UnitOfMeasure" sap:content-version="1"/>
                 <EntitySet Name="SAP__MyDocumentDescriptions" EntityType="cds_zui_inventory_aging_o2.SAP__DocumentDescription" sap:content-version="1"/>
+                <EntitySet Name="SAP__FileShareSet" EntityType="cds_zui_inventory_aging_o2.SAP__FileShare" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <AssociationSet Name="to_HierarchySet" Association="cds_zui_inventory_aging_o2.to_Hierarchy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_Hierarchy"/>
                     <End EntitySet="SAP__HierarchySet" Role="ToRole_to_Hierarchy"/>
@@ -450,6 +475,10 @@
                 <AssociationSet Name="to_formatSet" Association="cds_zui_inventory_aging_o2.to_format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_format"/>
                     <End EntitySet="SAP__FormatSet" Role="ToRole_to_format"/>
+                </AssociationSet>
+                <AssociationSet Name="to_fileshareSet" Association="cds_zui_inventory_aging_o2.to_fileshare" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_fileshare"/>
+                    <End EntitySet="SAP__FileShareSet" Role="ToRole_to_fileshare"/>
                 </AssociationSet>
                 <AssociationSet Name="to_pdfstandardSet" Association="cds_zui_inventory_aging_o2.to_pdfstandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_pdfstandard"/>
@@ -650,6 +679,8 @@
                         <PropertyValue Property="Padding" Bool="true"/>
                         <PropertyValue Property="HeaderFooter" Bool="true"/>
                         <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="TextDirectionLayout" Bool="true"/>
+                        <PropertyValue Property="UploadToFileShare" Bool="true"/>
                         <PropertyValue Property="ResultSizeDefault" Int="20000"/>
                         <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
                         <PropertyValue Property="Treeview" Bool="true"/>
@@ -661,6 +692,198 @@
                         <PropertyValue Property="CollectionPath" String="SAP__MyDocumentDescriptions"/>
                     </Record>
                 </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.I_CompanyCodeVHType/ChartOfAccounts" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KTOPL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth11" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth7" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.I_CompanyCodeVHType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth24" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth29" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth25" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth34" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.I_CompanyCodeVHType/Language" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=SPRAS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth18" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth16" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth14" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth26" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.I_CompanyCodeVHType/CityName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ORT01&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth28" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/ValuationQuantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth9" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth21" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth32" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth12" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth23" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth30" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth19" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/ProductDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MAKTX&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/MaterialPriceUnitQty" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PEINH&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth8" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.I_CompanyCodeVHType/FinancialManagementArea" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=FIKRS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.I_CompanyCodeVHType/Country" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LAND1&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth31" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/BaseUnit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/Ledger" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=FINS_LEDGER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/FiscalPeriod" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=POPER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth35" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.I_CompanyCodeVHType/Company" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=RCOMP_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth22" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth15" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth3" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth20" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityUnspecified" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth5" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth6" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.I_CompanyCodeVHType/ControllingArea" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KOKRS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/BusinessPartner" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KUNNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/FiscalYear" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=GJAHR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth27" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/ProductType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MTART&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth10" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth4" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.I_CompanyCodeVHType/FiscalYearVariant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PERIV&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/ProfitCenter" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRCTR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth13" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth17" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/Product" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.ZC_LedgerVHType/Ledger" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=FINS_LEDGER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth36" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.I_CompanyCodeVHType/Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth33" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.I_CompanyCodeVHType/CreditControlArea" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KKBER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth37" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_inventory_aging_o2.SAP__Currency/CurrencyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.Text" Path="Text"/>
@@ -694,6 +917,10 @@
             </Annotations>
             <Annotations Target="cds_zui_inventory_aging_o2.SAP__DocumentDescription/CreatedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.SAP__Format/TextDirectionLayout" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Description" String="Setting the text direction-layout is supported"/>
+                <Annotation Term="SAP__core.LongDescription" String="PDF supports setting the text direction-layout (e.g. left-to-right or right-to-left) in the document description"/>
             </Annotations>
             <Annotations Target="cds_zui_inventory_aging_o2.SAP__DocumentDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__capabilties.InsertRestrictions">
@@ -819,6 +1046,15 @@
                     <Record>
                         <PropertyValue Property="Url" String="./$metadata"/>
                         <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27TableColumnFormat%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.SAP__FileShare" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27FileShare%27"/>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>

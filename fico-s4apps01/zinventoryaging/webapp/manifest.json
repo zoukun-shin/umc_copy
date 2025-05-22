@@ -21,9 +21,9 @@
         "type": "OData",
         "settings": {
           "annotations": [
-            "mainService_Annotation"
+            "ZUI_INVENTORY_AGING_O2_VAN"
           ],
-          "localUri": "localService/metadata.xml",
+          "localUri": "localService/mainService/metadata.xml",
           "odataVersion": "2.0"
         }
       },
@@ -31,16 +31,16 @@
         "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
         "type": "OData",
         "settings": {
-            "annotations": [],
-            "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
-            "odataVersion": "4.0"
+          "annotations": [],
+          "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+          "odataVersion": "4.0"
         }
       },
-      "mainService_Annotation": {
-        "uri": "/destinations/UMC_Dev_Customizing_BTP/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_INVENTORY_AGING_O2_VAN',Version='0001')/$value/",
+      "ZUI_INVENTORY_AGING_O2_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_INVENTORY_AGING_O2_VAN',Version='0001')/$value/",
         "type": "ODataAnnotation",
         "settings": {
-          "localUri": "localService/mainService_Annotation.xml"
+          "localUri": "localService/mainService/ZUI_INVENTORY_AGING_O2_VAN.xml"
         }
       }
     },
@@ -106,10 +106,10 @@
         "dataSource": "AuthorityService",
         "preload": true,
         "settings": {
-            "synchronizationMode": "None",
-            "operationMode": "Server",
-            "autoExpandSelect": true,
-            "earlyRequests": true
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
         }
       }
     },
