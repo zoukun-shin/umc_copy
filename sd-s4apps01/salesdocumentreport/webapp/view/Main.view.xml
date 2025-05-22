@@ -23,9 +23,9 @@
             <f:DynamicPageTitle id="idDynamicPageTitle">
                 <f:heading>
                     <sv:SmartVariantManagement
-                        id="idSmartVariantManagement"
+                        id="__SVM01"
                         showShare="true"
-                        persistencyKey="SalesReportSFB"
+                        persistencyKey="SalesReportSVM"
                         showExecuteOnSelection="true"
                         entitySet="SalesReport"
                     />
@@ -42,7 +42,7 @@
                         persistencyKey="SalesReportSFB"
                         search="onSearch"
                         class="sapUiResponsiveMargin"
-                        
+                        smartVariant="__SVM01"
                     >
                         <smartFilterBar:controlConfiguration>
                             <!-- Sales Organization Bar -->
