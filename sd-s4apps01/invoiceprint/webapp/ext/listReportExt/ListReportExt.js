@@ -213,7 +213,7 @@ sap.ui.define([
                 CustomerName: aSelectedItem[0].CustomerName,
                 TelephoneNumber1: aSelectedItem[0].TelephoneNumber1,
                 FaxNumber: aSelectedItem[0].FaxNumber,
-                TotalNetAmount: Decimal(aSelectedItem[0].TotalNetAmount).toFixed(0),
+                TotalNetAmount: "", // Decimal(aSelectedItem[0].TotalNetAmount).toFixed(0), // MOD BY XINLEI XU 2025/05/29 CM#4423
                 CompanyCodeParameterValue: aSelectedItem[0].CompanyCodeParameterValue,
                 RemitAddress: aSelectedItem[0].RemitAddress,
                 NetAmount10: iTotalNetAmount10.valueOf(),
@@ -224,11 +224,16 @@ sap.ui.define([
                     results: []
                 }
             }
+            // ADD BEGIN BY XINLEI XU 2025/05/29 CM#4423
+            InvoicePrint.TotalNetAmount = parseFloat(InvoicePrint.NetAmountIncludeTax10) + parseFloat(InvoicePrint.NetAmountExclude);
             // 请求书行项目
+            var iIndex = 0;
             var results = [];
             aSelectedItem.forEach(item => {
+                iIndex += 1;
+                // ADD END BY XINLEI XU 2025/05/29 CM#4423
                 results.push({
-                    BillingDocumentItem: item.BillingDocumentItem,
+                    BillingDocumentItem: iIndex, // item.BillingDocumentItem, // MOD BY XINLEI XU 2025/05/29 CM#4423
                     BillingDocumentDate: item.BillingDocumentDate,
                     SalesDocument: item.SalesDocument,
                     MaterialByCustomer: item.MaterialByCustomer || item.Product,
