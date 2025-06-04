@@ -50,6 +50,7 @@ sap.ui.define([
                             Edit: aAllAccessBtns.some(btn => btn.AccessId === "uploadpurchasereq-Edit"),
                             AttachmentDelete: aAllAccessBtns.some(btn => btn.AccessId === "uploadpurchasereq-AttachmentDelete"),
                             AttachmentUpload: aAllAccessBtns.some(btn => btn.AccessId === "uploadpurchasereq-AttachmentUpload"),
+                            DeletePR: aAllAccessBtns.some(btn => btn.AccessId === "uploadpurchasereq-DeletePR") // ADD BY XINLEI XU 2025/06/04
                         },
                         data: {
                             PlantSet: context._AssignPlant,
