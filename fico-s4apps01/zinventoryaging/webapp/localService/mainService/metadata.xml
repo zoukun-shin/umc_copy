@@ -60,6 +60,14 @@
                 <Property Name="CountryChartOfAccounts" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Alternative Chart of Accounts" sap:quickinfo="Alternative Chart of Accounts for Country/Region"/>
                 <Property Name="FinancialManagementArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="FM Area" sap:quickinfo="Financial Management Area"/>
             </EntityType>
+            <EntityType Name="I_ProductStdVHType" sap:label="Product Value Help" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Product"/>
+                </Key>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:text="Product_Text" sap:label="Product" sap:quickinfo="Product Number"/>
+                <Property Name="Product_Text" Type="Edm.String" MaxLength="40" sap:label="Product Description" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ProductExternalID" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="External Product ID" sap:quickinfo="External Representation of Material Number"/>
+            </EntityType>
             <EntityType Name="InventoryAgingType" sap:label="長期滞在＆低価法レポート" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Ledger"/>
@@ -74,7 +82,7 @@
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:filter-restriction="single-value" sap:label="Fiscal Year" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="FiscalPeriod" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="NonNegative" sap:filter-restriction="single-value" sap:label="Posting Period" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
                 <Property Name="ProductDescription" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
                 <Property Name="ProductType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Material Type"/>
                 <Property Name="ProductTypeName" Type="Edm.String" MaxLength="25"/>
@@ -441,6 +449,7 @@
             </Association>
             <EntityContainer Name="cds_zui_inventory_aging_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
                 <EntitySet Name="I_CompanyCodeVH" EntityType="cds_zui_inventory_aging_o2.I_CompanyCodeVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_ProductStdVH" EntityType="cds_zui_inventory_aging_o2.I_ProductStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="InventoryAging" EntityType="cds_zui_inventory_aging_o2.InventoryAgingType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ZC_LedgerVH" EntityType="cds_zui_inventory_aging_o2.ZC_LedgerVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_inventory_aging_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
@@ -573,10 +582,50 @@
                     </Record>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/Product" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Material"/>
+                        <PropertyValue Property="CollectionPath" String="I_ProductStdVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Product"/>
+                                    <PropertyValue Property="ValueListProperty" String="Product"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Product_Text"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ProductExternalID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
             <Annotations Target="cds_zui_inventory_aging_o2.cds_zui_inventory_aging_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
             </Annotations>
             <Annotations Target="cds_zui_inventory_aging_o2.cds_zui_inventory_aging_o2_Entities/I_CompanyCodeVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.cds_zui_inventory_aging_o2_Entities/I_ProductStdVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
                         <PropertyValue Property="Deletable" Bool="false"/>
@@ -807,6 +856,9 @@
             <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth15" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.I_ProductStdVHType/Product" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTNUMBER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth3" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
             </Annotations>
@@ -821,6 +873,9 @@
             </Annotations>
             <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth6" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.I_ProductStdVHType/ProductExternalID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR_EXTERNAL&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_inventory_aging_o2.I_CompanyCodeVHType/ControllingArea" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KOKRS&amp;origin=JG5_100"/>
@@ -863,6 +918,9 @@
             </Annotations>
             <Annotations Target="cds_zui_inventory_aging_o2.ZC_LedgerVHType/Ledger" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=FINS_LEDGER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.I_ProductStdVHType/Product_Text" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth36" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>

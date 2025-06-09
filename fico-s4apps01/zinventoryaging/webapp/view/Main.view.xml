@@ -33,10 +33,9 @@
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>	
                                 <smartFilterBar:ControlConfiguration index='40' key="Ledger" mandatory="mandatory" filterType="single" controlType="dropDownList" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Ledger}"/>
-
+                                <smartFilterBar:ControlConfiguration index='50' key="Product" visibleInAdvancedArea="true" label="{i18n>Product}"/>
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="Plant" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="Product" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ProductDescription" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ProductType" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ProductTypeName" visible="false"/>
@@ -129,6 +128,8 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="AmountMonth35" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="QuantityMonth36" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="AmountMonth36" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QuantityMonth37" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth37" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="QuantityUnspecified" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="AmountUnspecified" visible="false"/>
                             </smartFilterBar:controlConfiguration>
