@@ -115,6 +115,17 @@ sap.ui.define([
                     aResults = JSON.parse(oResponse.results[0].DynamicData);
                 }
                 if (aResults.length > 0) {
+                    // ADD BEGIN BY XINLEI XU 2025/06/12 报表和下载文件中 日期格式从 YYYY-MM-DD 改成 YYYY/MM/DD
+                    for (let index = 0; index < aResults.length; index++) {
+                        const element = aResults[index];
+                        element['PURCHASEORDERDATE'] = element['PURCHASEORDERDATE'].replace(/-/g, "/");
+                        element['SCHEDULELINEDELIVERYDATE'] = element['SCHEDULELINEDELIVERYDATE'].replace(/-/g, "/");
+                        element['MRPDELIVERYDATE'] = element['MRPDELIVERYDATE'].replace(/-/g, "/");
+                        element['MRPELEMENTRESCHEDULINGDATE'] = element['MRPELEMENTRESCHEDULINGDATE'].replace(/-/g, "/");
+                        element['DELIVERYDATE'] = element['DELIVERYDATE'].replace(/-/g, "/");
+                        element['POSSIBLEPRODUCTIONDATE'] = element['POSSIBLEPRODUCTIONDATE'].replace(/-/g, "/");
+                    }
+                    // ADD END BY XINLEI XU 2025/06/12
                     this.getModel("local").setProperty("/resultSet", aResults);
                 } else {
                     MessageBox.error(this.getModel("i18n").getResourceBundle().getText("NoData"));
