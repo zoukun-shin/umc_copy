@@ -73,7 +73,7 @@ sap.ui.define([
                 // 获取sheet1单元格的内容
                 var oSheet1 = oWB.Sheets[oWB.SheetNames[0]];
                 // 将单元格的内容转换成数组的形式（自动将第一行作为抬头）
-                var aSheet1 = XLSX.utils.sheet_to_row_object_array(oSheet1, {raw: false});
+                var aSheet1 = XLSX.utils.sheet_to_row_object_array(oSheet1, { raw: false });
                 // for循环每一行的内容添加到数据集当中,数据从第excel的3行开始（第一行默认为技术字段，不读取，第二行为说明行，JS中从0开始，所以从1开始读）
                 var pritem = 0;
                 for (var i = 6; i < aSheet1.length; i++) {
@@ -98,10 +98,13 @@ sap.ui.define([
                         MatID: aSheet1[i]["MatID"] || "",
                         MatDesc: aSheet1[i]["MatDesc"] || "",
                         MaterialGroup: aSheet1[i]["MaterialGroup"] || "",
-                        Quantity: aSheet1[i]["Quantity"] || "0",
+                        // Quantity: aSheet1[i]["Quantity"] || "0",
+                        Quantity: parseFloat(aSheet1[i]["Quantity"]) || 0,
                         Unit: aSheet1[i]["Unit"] || "",
-                        Price: aSheet1[i]["Price"] || "0",
-                        UnitPrice: aSheet1[i]["UnitPrice"] || "0",
+                        // Price: aSheet1[i]["Price"] || "0",
+                        Price: parseFloat(aSheet1[i]["Price"]) || 0,
+                        // UnitPrice: aSheet1[i]["UnitPrice"] || "0",
+                        UnitPrice: parseFloat(aSheet1[i]["UnitPrice"]) || 0,
                         // DeliveryDate: formatter.convertISOString(aSheet1[i]["DeliveryDate"]) || "",
                         DeliveryDate: aSheet1[i]["DeliveryDate"] || "",
                         Location: aSheet1[i]["Location"] || "",
@@ -141,7 +144,7 @@ sap.ui.define([
                 } else {
                     this.byId("idCheckButton").setEnabled(false);
                 }
-                
+
 
                 this._LocalData.setProperty("/excelSet", aExcelSet)
                 this._BusyDialog.close();
@@ -166,7 +169,7 @@ sap.ui.define([
                     isInconsistencies = true; // 发现不一致，返回 true
                 }
             }
-            if(!isInconsistencies) {
+            if (!isInconsistencies) {
                 // 遍历数组，检查每个对象的这四个属性是否与基准一致
                 for (let i = 1; i < aExcelSet.length; i++) {
                     const obj = aExcelSet[i];

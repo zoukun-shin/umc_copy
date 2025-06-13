@@ -64,6 +64,16 @@ sap.ui.define([
                 return value;
             }
         },
+        // 0000/00/00
+        formatDate: function (value) {
+            if (value) {
+                var oDateFormat = DateFormat.getTimeInstance({
+                    pattern: "yyyy/MM/dd"
+                });
+                return oDateFormat.format(new Date(value));
+            }
+            return value;
+        },
 
         // 00:00:00
         time: function (value) {
