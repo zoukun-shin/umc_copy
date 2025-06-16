@@ -322,7 +322,8 @@ sap.ui.define([
 
             let s1 = "";
             let sNum = Number(this.byId("zdays").getValue());
-            sNum = 17 + sNum;
+            //最后一列
+            sNum = 18 + sNum;
             aRows.forEach(function (oRow, index) {
                 let c7Cell = oRow.getCells()[8];
                 sType = c7Cell.getText();
@@ -344,7 +345,7 @@ sap.ui.define([
 
 
                 if (sType === "W") {
-                    for (let j = 19; j < sNum; j++) {
+                    for (let j = 19; j <= sNum; j++) {
                         let cColor = oRow.getCells()[j];
                         let CellId = cColor.getId();
                         let oItems = cColor.getItems();
@@ -371,7 +372,7 @@ sap.ui.define([
 
                     }
                 } else {
-                    for (let j = 19; j < sNum; j++) {
+                    for (let j = 19; j <= sNum; j++) {
                         let cColor = oRow.getCells()[j];
                         let CellId = cColor.getId();
                         $("#" + CellId).parent().parent().css("background-color", "");
@@ -384,7 +385,8 @@ sap.ui.define([
         onEdit: function (oEvent) {
             var oTable = this.byId("ReportTable");
             let sNum = Number(this.byId("zdays").getValue());
-            sNum = 18 + sNum;
+            //最后一列
+            sNum = 18 + sNum;   
             var aRows = oTable.getRows();
             var sType = "";
             var sSobmx = "";
@@ -397,7 +399,7 @@ sap.ui.define([
                         sSobmx = c6Cell.getText();
                         if (sType === "I" || sType === "P") {
 
-                            for (var j = 19; j < sNum; j++) {
+                            for (var j = 19; j <= sNum; j++) {
                                 var cEdit = aRows[i].getCells()[j];
                                 var oItems = cEdit.getItems();
                                 if (cEdit) {
@@ -424,7 +426,7 @@ sap.ui.define([
                             var sSobmx = c6Cell.getText();
                             if (sType === "I" || sType === "P") {
 
-                                for (var j = 19; j < sNum; j++) {
+                                for (var j = 19; j <= sNum; j++) {
                                     var cEdit = aRows[i].getCells()[j];
                                     if (cEdit && cEdit.getItems) {
                                         var oItems = cEdit.getItems();
