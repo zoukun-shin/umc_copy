@@ -181,19 +181,22 @@ sap.ui.define([
             _callOData: function (bEvent) {
                 var aPromise = [];
                 var aExcelSet = this.getModel("local").getProperty("/excelSet");
-                var aGroupKey = this.removeDuplicates(aExcelSet, ["Material", "Plant"]);
-                var aGroupItems;
-                for (var m = 0; m < aGroupKey.length; m++) {
-                    const sMaterial = aGroupKey[m].Material;
-                    const sPlant = aGroupKey[m].Plant;
-                    aGroupItems = [];
-                    for (var n = 0; n < aExcelSet.length; n++) {
-                        if (aExcelSet[n].Material === sMaterial && aExcelSet[n].Plant === sPlant) {
-                            aGroupItems.push(aExcelSet[n]);
-                        }
-                    }
-                    aPromise.push(this._callODataAction(bEvent, aGroupItems));
-                }
+                // MOD BEGIN BY XINLEI XU 2025/06/16 CM#4602
+                // var aGroupKey = this.removeDuplicates(aExcelSet, ["Material", "Plant"]);
+                // var aGroupItems;
+                // for (var m = 0; m < aGroupKey.length; m++) {
+                //     const sMaterial = aGroupKey[m].Material;
+                //     const sPlant = aGroupKey[m].Plant;
+                //     aGroupItems = [];
+                //     for (var n = 0; n < aExcelSet.length; n++) {
+                //         if (aExcelSet[n].Material === sMaterial && aExcelSet[n].Plant === sPlant) {
+                //             aGroupItems.push(aExcelSet[n]);
+                //         }
+                //     }
+                //     aPromise.push(this._callODataAction(bEvent, aGroupItems));
+                // }
+                aPromise.push(this._callODataAction(bEvent, aExcelSet));
+                // MOD END BY XINLEI XU 2025/06/16 CM#4602
                 try {
                     this._BusyDialog.open();
                     Promise.all(aPromise).then((aContext) => {
