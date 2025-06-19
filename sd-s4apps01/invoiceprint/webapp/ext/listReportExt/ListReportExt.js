@@ -214,7 +214,7 @@ sap.ui.define([
                 TelephoneNumber1: aSelectedItem[0].TelephoneNumber1,
                 FaxNumber: aSelectedItem[0].FaxNumber,
                 TotalNetAmount: "", // Decimal(aSelectedItem[0].TotalNetAmount).toFixed(0), // MOD BY XINLEI XU 2025/05/29 CM#4423
-                CompanyCodeParameterValue: aSelectedItem[0].CompanyCodeParameterValue,
+                CompanyCodeParameterValue: "T" + aSelectedItem[0].CompanyCodeParameterValue, // aSelectedItem[0].CompanyCodeParameterValue, // MOD BY XINLEI XU 2025/06/19 CM#4423
                 RemitAddress: aSelectedItem[0].RemitAddress,
                 NetAmount10: iTotalNetAmount10.valueOf(),
                 NetAmountTax10: iTotalNetAmountTax10.valueOf(),
