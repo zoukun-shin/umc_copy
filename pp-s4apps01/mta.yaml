@@ -131,6 +131,10 @@ modules:
       - ppzecn.zip
       name: ppzecn
       target-path: resources/
+    - artifacts:
+      - ppzumespostingdatemgt.zip
+      name: ppzumespostingdatemgt
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -323,6 +327,15 @@ modules:
 - name: ppzecn
   type: html5
   path: zecn
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzumespostingdatemgt
+  type: html5
+  path: zumespostingdatemgt
   build-parameters:
     build-result: dist
     builder: custom

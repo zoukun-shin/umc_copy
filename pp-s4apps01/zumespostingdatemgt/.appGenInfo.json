@@ -1,0 +1,29 @@
+{
+  "generationParameters": {
+    "generationDate": "Thu Jun 19 2025 03:06:08 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "https://my412552.s4hana.cloud.sap/sap/opu/odata4/sap/zui_tpp1019_o4/srvd/sap/zui_tpp1019_o4/0001/",
+    "appName": "zumespostingdatemgt",
+    "appTitle": "UMES Posting Date Management",
+    "appDescription": "UMES Posting Date Management",
+    "appNamespace": "pp",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.18",
+    "enableCodeAssist": false,
+    "enableEslint": false,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.18.0",
+    "template": "List Report Page V4",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [
+      {
+        "type": "Main Entity",
+        "value": "ZC_TPP1019"
+      }
+    ],
+    "launchText": "In order to launch the generated app, simply run the following from the generated app root folder:\n\n```\n    npm start\n```"
+  }
+}
