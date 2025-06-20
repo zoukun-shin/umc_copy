@@ -86,6 +86,8 @@
                 <Property Name="ProductDescription" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
                 <Property Name="ProductType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Material Type"/>
                 <Property Name="ProductTypeName" Type="Edm.String" MaxLength="25"/>
+                <Property Name="ProductGroup" Type="Edm.String" MaxLength="9" sap:display-format="UpperCase" sap:label="Material Group"/>
+                <Property Name="ProductGroupName" Type="Edm.String" MaxLength="20" sap:label="Material Group Desc." sap:quickinfo="Material Group Description"/>
                 <Property Name="MRPResponsible" Type="Edm.String" MaxLength="3"/>
                 <Property Name="MRPControllerName" Type="Edm.String" MaxLength="18"/>
                 <Property Name="ChargeableSupplyFlag" Type="Edm.String" MaxLength="5"/>
@@ -792,6 +794,9 @@
             </Annotations>
             <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/ValuationQuantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/ProductGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATKL&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_inventory_aging_o2.InventoryAgingType/QuantityMonth9" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>

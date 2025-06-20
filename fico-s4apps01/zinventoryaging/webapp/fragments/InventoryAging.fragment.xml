@@ -67,6 +67,7 @@
                         <Text text="{ProductDescription}" wrapping="false" />
                     </table:template>
                 </table:Column>
+
                 <table:Column width="8rem" label="{i18n>ProductType}" sortProperty="ProductType" filterProperty="ProductType">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ProductType", "leadingProperty":"ProductType"}'/>
@@ -81,6 +82,22 @@
                     </table:customData>
                     <table:template>
                         <Text text="{ProductTypeName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ProductGroup}" sortProperty="ProductGroup" filterProperty="ProductGroup">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ProductGroup", "leadingProperty":"ProductGroup"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ProductGroup}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ProductGroupName}" sortProperty="ProductGroupName" filterProperty="ProductGroupName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ProductGroupName", "leadingProperty":"ProductGroupName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ProductGroupName}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>MRPResponsible}" sortProperty="MRPResponsible" filterProperty="MRPResponsible">

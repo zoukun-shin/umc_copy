@@ -39,6 +39,8 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="ProductDescription" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ProductType" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ProductTypeName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductGroup" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductGroupName" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MRPResponsible" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MRPControllerName" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ChargeableSupplyFlag" visible="false"/>
