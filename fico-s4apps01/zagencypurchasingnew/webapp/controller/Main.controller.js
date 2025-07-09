@@ -153,6 +153,12 @@ sap.ui.define([
             while (iLen--) {
                 var sPath = this._oTable.getContextByIndex(aSelectedItems[iLen]).getPath();
                 var oRow = this.getModel().getObject(sPath);
+                // ADD BEGIN BY XINLEI XU 2025/07/09 金额字段格式化为数值
+                oRow.Currency1 = parseFloat(oRow.Currency1);
+                oRow.Currency2 = parseFloat(oRow.Currency2);
+                oRow.Currency3 = parseFloat(oRow.Currency3);
+                oRow.Currency4 = parseFloat(oRow.Currency4);
+                // ADD END BY XINLEI XU 2025/07/09
                 items.push(oRow);
             }
             var oRequestData = {
