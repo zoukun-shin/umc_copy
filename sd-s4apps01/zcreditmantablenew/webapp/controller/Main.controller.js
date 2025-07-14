@@ -8,7 +8,8 @@ sap.ui.define([
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sd/zcreditmantablenew/model/formatter",
-], function (Base, Column, Text, MessageBox, BusyDialog, MessageToast, Filter, FilterOperator, formatter) {
+	"sap/ui/export/Spreadsheet"
+], function (Base, Column, Text, MessageBox, BusyDialog, MessageToast, Filter, FilterOperator, formatter, Spreadsheet) {
 	"use strict";
 
 	return Base.extend("sd.zcreditmantablenew.controller.Main", {
@@ -50,7 +51,8 @@ sap.ui.define([
 				}
 				this.getModel("local").setProperty("/authorityCheck", {
 					button: {
-						View: aAllAccessBtns.some(btn => btn.AccessId === "zcreditmantablenew-View")
+						View: aAllAccessBtns.some(btn => btn.AccessId === "zcreditmantablenew-View"),
+						Export: aAllAccessBtns.some(btn => btn.AccessId === "zcreditmantablenew-Export")
 					},
 					data: {
 						PlantSet: context._AssignPlant,
@@ -96,13 +98,6 @@ sap.ui.define([
 
 		getTableContent: function (aFilters, oFilterData, oTable) {
 			var that = this;
-			// if (oFilterData.Material) {
-			// 	var b = this.readProductOldID(oFilterData.Material);
-			// }
-			// Promise.all([this.readData(aFilters), b]).then((results) => {
-
-
-			// Promise.all([this.readData(aFilters)]).then((results) => {
 			this._BusyDialog.open();
 			Promise.all([this.readData(aFilters)]).then((results) => {
 				if (results[0].results.length > 0) {
@@ -114,9 +109,6 @@ sap.ui.define([
 					MessageBox.error("対象データが無いです。");
 					that.getModel("local").setProperty("/data", results[0].results);
 					that.buildListResultUITable(oTable, results[0].results[0]);
-
-
-
 				}
 			}).catch((error) => {
 				MessageBox.error(error);
@@ -133,9 +125,6 @@ sap.ui.define([
 					urlParameters: {
 						"$top": 999999999
 					},
-					// urlParameters: {
-					// 	"$expand": "toResults"
-					// },
 					success: function (oData) {
 						resolve(oData);
 					},
@@ -313,7 +302,6 @@ sap.ui.define([
 					hAlign: "End"
 				}));
 			}
-
 		},
 
 		buildMonthlyColumnsOfUITable: function (oTable) {
@@ -357,6 +345,7 @@ sap.ui.define([
 				}));
 			}
 		},
+
 		onUITableRowsUpdated: function (oEvent) {
 			var oTable = oEvent.getSource();
 			var aRows = oTable.getRows();
@@ -505,6 +494,75 @@ sap.ui.define([
 					pRow = aRows[i];
 				}
 			}
+		},
+
+		// ADD BEGIN BY XINLEI XU 2025/07/11
+		onExport: function () {
+			var oTable = this.byId("tablelist");
+			var sFileName = this.getModel("i18n").getResourceBundle().getText("title");
+			this._exportExcel(oTable, sFileName);
+		},
+
+		_exportExcel: function (oTable, sFileName) {
+			var sPath = oTable.getBindingPath("rows");
+			var aExcelSet = this.getModel("local").getProperty(sPath) ? this.getModel("local").getProperty(sPath) : [];
+			var aExcelCol = [];
+			var aTableCol = oTable.getColumns();
+			for (var i = 0; i < aTableCol.length; i++) {
+				if (aTableCol[i].getVisible()) {
+					var sLabelText = aTableCol[i].getAggregation("label").getText();
+					var sType, sTextAlign, bDelimiter, iScale;
+					var sFieldName = aTableCol[i].getAggregation("template").mBindingInfos.text.parts[0].path;
+					switch (sFieldName) {
+						//  Number 分隔符
+						case "LimitAmount":
+						case "zmonth1":
+						case "zmonth2":
+						case "zmonth3":
+						case "zmonth4":
+						case "zmonth5":
+						case "zmonth6":
+						case "zmonth7":
+						case "zmonth8":
+						case "zmonth9":
+						case "zmonth10":
+						case "zmonth11":
+						case "zmonth12":
+							sType = sap.ui.export.EdmType.String;
+							sTextAlign = "End";
+							bDelimiter = true;
+							break;
+						default:
+							sType = sap.ui.export.EdmType.String;
+							sTextAlign = "Begin";
+							break;
+					}
+					var oExcelCol = {
+						label: sLabelText,
+						type: sType,
+						property: aTableCol[i].getAggregation("template").getBindingPath("text"),
+						width: parseFloat(aTableCol[i].getWidth()),
+						textAlign: sTextAlign,
+						delimiter: bDelimiter,
+						scale: iScale
+					};
+					aExcelCol.push(oExcelCol);
+				}
+			}
+			var oSettings = {
+				workbook: {
+					columns: aExcelCol,
+					context: {
+						version: "1.54",
+						hierarchyLevel: "level"
+					}
+				},
+				dataSource: aExcelSet,
+				fileName: sFileName + "_" + this.getCurrentDateTime() + ".xlsx"
+			};
+			// export excel file
+			new Spreadsheet(oSettings).build();
 		}
+		// ADD END BY XINLEI XU 2025/07/11
 	});
 });

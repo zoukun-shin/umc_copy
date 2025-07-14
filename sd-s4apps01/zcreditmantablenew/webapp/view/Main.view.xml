@@ -72,13 +72,14 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <table:Table id="tablelist" rows="{local>/data}" rowMode="Auto" rowsUpdated="onUITableRowsUpdated" selectionMode="None">
+            <table:Table id="tablelist" rows="{local>/data}" rowMode="Auto" rowsUpdated="onUITableRowsUpdated" fixedColumnCount="6" selectionMode="None">
                 <table:extension>
                     <OverflowToolbar>
                         <!-- <Title text="{i18n>Results}"/> -->
                         <Text text="{i18n>Results}" visible="{= ${local>/data}.length === 0}"/>
                         <Text text="{i18n>Results}({= ${local>/data}.length})" visible="{= ${local>/data}.length > 0}"/>
-                        <ToolbarSpacer></ToolbarSpacer>
+                        <ToolbarSpacer/>
+                        <Button icon="sap-icon://excel-attachment" type="Ghost" text="{i18n>Download}" press="onExport" enabled="{= ${local>/authorityCheck/button/Export} &amp;&amp; ${local>/data}.length > 0}"/>
                     </OverflowToolbar>
                 </table:extension>
             </table:Table>
