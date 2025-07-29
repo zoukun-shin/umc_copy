@@ -1,10 +1,10 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "./Base",
     "sap/ui/core/UIComponent"
-], function (Controller, UIComponent) {
+], function (Base, UIComponent) {
     "use strict";
 
-    return Controller.extend("pp.zcomponentusagelist.controller.Main", {
+    return Base.extend("pp.zcomponentusagelist.controller.Main", {
         onInit: function () {
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
@@ -97,13 +97,13 @@ sap.ui.define([
 
             // 根据选择框，添加过滤条件传值到后端
             var filters = oEvent.getParameters().bindingParams.filters;
-            if(!filters){
-                filters =[];
+            if (!filters) {
+                filters = [];
             }
 
             var sNoDisplayNonProduct = this.byId("idCB1").getSelected();
 
-            if (sNoDisplayNonProduct === true) { 
+            if (sNoDisplayNonProduct === true) {
                 var oIndicator1Filter = new sap.ui.model.Filter({
                     path: "NoDisplayNonProduct",
                     operator: "EQ",
@@ -111,6 +111,32 @@ sap.ui.define([
                 });
                 filters.push(oIndicator1Filter);
             }
+        },
+
+        // ADD BEGIN BY XINLEI XU 2025/07/29
+        onBeforeExport: function (oEvent) {
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
+            this._exportExcel(mExcelSettings, sFileName);
+        },
+
+        _exportExcel: function (mExcelSettings, sFileName) {
+            mExcelSettings.workbook.columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    //  Date
+                    case "HighLevelMatValidityStartDate":
+                        oColumn.type = sap.ui.export.EdmType.Date;
+                        break;
+                    case "BillOfMaterialItemQuantity":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                }
+            });
+            mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
         }
+        // ADD END BY XINLEI XU 2025/07/29
     });
 });

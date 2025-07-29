@@ -18,7 +18,7 @@
         </smartTable:customToolbar>
        <table:Table id="idTable" selectionMode="None" rowMode="Auto">
             <table:columns>
-                <table:Column width="4rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
+                <table:Column width="6rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant"}'/>
                     </table:customData>
@@ -26,7 +26,7 @@
                         <Text text="{Plant}" />
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>BillOfMaterialComponent}" sortProperty="BillOfMaterialComponent" filterProperty="BillOfMaterialComponent">
+                <table:Column width="10rem" label="{i18n>BillOfMaterialComponent}" sortProperty="BillOfMaterialComponent" filterProperty="BillOfMaterialComponent">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialComponent", "leadingProperty":"BillOfMaterialComponent"}'/>
                     </table:customData>
@@ -34,7 +34,7 @@
                         <Text text="{BillOfMaterialComponent}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>ComponentDescription}" sortProperty="ComponentDescription" filterProperty="ComponentDescription">
+                <table:Column width="13rem" label="{i18n>ComponentDescription}" sortProperty="ComponentDescription" filterProperty="ComponentDescription">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ComponentDescription", "leadingProperty":"ComponentDescription"}'/>
                     </table:customData>
@@ -58,7 +58,7 @@
                         <Text text="{ProductManufacturerNumber}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="8rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material">
+                <table:Column width="12rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Material", "leadingProperty":"Material"}'/>
                     </table:customData>
@@ -74,7 +74,7 @@
                         <Text text="{Product}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ProductDescription}" sortProperty="ProductDescription" filterProperty="ProductDescription">
+                <table:Column width="15rem" label="{i18n>ProductDescription}" sortProperty="ProductDescription" filterProperty="ProductDescription">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ProductDescription", "leadingProperty":"ProductDescription"}'/>
                     </table:customData>
@@ -114,7 +114,7 @@
                         <Text text="{BillOfMaterialItemNumber}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>BillOfMaterialItemQuantity}" sortProperty="BillOfMaterialItemQuantity" filterProperty="BillOfMaterialItemQuantity">
+                <table:Column width="12rem" label="{i18n>BillOfMaterialItemQuantity}" sortProperty="BillOfMaterialItemQuantity" filterProperty="BillOfMaterialItemQuantity" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialItemQuantity", "leadingProperty":"BillOfMaterialItemQuantity"}'/>
                     </table:customData>
