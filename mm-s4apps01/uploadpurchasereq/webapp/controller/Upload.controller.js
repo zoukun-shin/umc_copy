@@ -24,7 +24,18 @@ sap.ui.define([
             //     "',DocumentInfoRecordDocNumber='" + "10000000000" + "',DocumentInfoRecordDocVersion='" +
             //     "00" + "',DocumentInfoRecordDocPart='" + "000" + "')";
             // oUploadSet.bindElement(sPath);
+
+            this.getRouter().getRoute("RouteMain").attachMatched(this._initialize, this);
         },
+
+        // ADD BEGIN BY XINLEI XU 2025/08/01
+        _initialize: function () {
+            var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
+            var oFilter = new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.EQ, "ZUPLOAD_PURCHASEREQ_" + sLanguage);
+            var oControlBinding = this.byId("idUploadSet").getBinding("items");
+            oControlBinding.filter(oFilter);
+        },
+        // ADD END BY XINLEI XU 2025/08/01
 
         getMediaUrl: function (sUrlString) {
             if (sUrlString) {

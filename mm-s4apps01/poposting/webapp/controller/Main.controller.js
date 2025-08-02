@@ -16,6 +16,12 @@ sap.ui.define([
         },
 
         _initialize: function () {
+            // ADD BEGIN BY XINLEI XU 2025/07/28
+            var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
+            var oFilter = new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.EQ, "ZUPLOAD_PO_" + sLanguage);
+            var oControlBinding = this.byId("idTemplateCollection").getBinding("items");
+            oControlBinding.filter(oFilter);
+            // ADD END BY XINLEI XU 2025/07/28
             this._BusyDialog = new BusyDialog();
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();

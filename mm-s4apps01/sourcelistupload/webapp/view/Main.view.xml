@@ -7,8 +7,9 @@
     <Page >
         <content>
             <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
-                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_SOURCELIST' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
-                    <upload:items>
+                <!-- <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_SOURCELIST' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false"> -->
+                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration' }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                     <upload:items>
                         <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
                     </upload:items>
                 </upload:UploadSet>
@@ -54,7 +55,7 @@
                                 <Text text="{local>Plant}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>SourceListRecord}">
+                        <table:Column width="13rem" label="{i18n>SourceListRecord}">
                             <table:template>
                                 <Text text="{local>SourceListRecord}" wrapping="false"/>
                             </table:template>
@@ -74,22 +75,22 @@
                                 <Text text="{local>Supplier}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>PurchasingOrganization}">
+                        <table:Column width="12rem" label="{i18n>PurchasingOrganization}">
                             <table:template>
                                 <Text text="{local>PurchasingOrganization}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>SupplierIsFixed}">
+                        <table:Column width="10rem" label="{i18n>SupplierIsFixed}">
                             <table:template>
                                 <Text text="{local>SupplierIsFixed}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="8rem" label="{i18n>SourceOfSupplyIsBlocked}">
+                        <table:Column width="10rem" label="{i18n>SourceOfSupplyIsBlocked}">
                             <table:template>
                                 <Text text="{local>SourceOfSupplyIsBlocked}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>MrpSourcingControl}">
+                        <table:Column width="10rem" label="{i18n>MrpSourcingControl}">
                             <table:template>
                                 <Text text="{local>MrpSourcingControl}" wrapping="false"/>
                             </table:template>

@@ -7,7 +7,8 @@
     <Page>
         <content>
             <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
-                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_PO' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                <!-- <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_PO' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false"> -->
+                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration' }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
                     <upload:items>
                         <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
                     </upload:items>
@@ -44,12 +45,12 @@
                                 <Text text="{local>MaterialDocument}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="10rem" label="{i18n>MaterialDocumentYear}">
+                        <table:Column width="12rem" label="{i18n>MaterialDocumentYear}">
                             <table:template>
                                 <Text text="{local>MaterialDocumentYear}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="10rem" label="{i18n>MaterialDocumentItem}">
+                        <table:Column width="12rem" label="{i18n>MaterialDocumentItem}">
                             <table:template>
                                 <Text text="{local>MaterialDocumentItem}" wrapping="false"/>
                             </table:template>

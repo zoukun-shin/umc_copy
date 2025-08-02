@@ -14,27 +14,27 @@
             </OverflowToolbar>
         </table:extension>
         <table:columns>
-            <table:Column width="8rem" label="{i18n>PurchaseOrderType}">
+            <table:Column width="10rem" label="{i18n>PurchaseOrderType}">
                 <table:template>
                     <Text text="{local>PURCHASEORDERTYPE}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="8rem" label="{i18n>PurchasingGroup}">
+            <table:Column width="10rem" label="{i18n>PurchasingGroup}">
                 <table:template>
                     <Text text="{local>PURCHASINGGROUP}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>PurchasingGroupName}">
+            <table:Column width="12rem" label="{i18n>PurchasingGroupName}">
                 <table:template>
                     <Text text="{local>PURCHASINGGROUPNAME}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="8rem" label="{i18n>MRPArea}">
+            <table:Column width="10rem" label="{i18n>MRPArea}">
                 <table:template>
                     <Text text="{local>MRPAREA}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="8rem" label="{i18n>MRPResponsible}">
+            <table:Column width="10rem" label="{i18n>MRPResponsible}">
                 <table:template>
                     <Text text="{local>MRPRESPONSIBLE}" wrapping="false"/>
                 </table:template>
@@ -69,7 +69,7 @@
                     <Text text="{local>POPOITEM}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>AccountAssignmentCategory}">
+            <table:Column width="14rem" label="{i18n>AccountAssignmentCategory}">
                 <table:template>
                     <Text text="{local>ACCOUNTASSIGNMENTCATEGORY}" wrapping="false"/>
                 </table:template>
@@ -79,7 +79,7 @@
                     <Text text="{local>PURCHASEREQUISITION}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>PurchaseRequisitionItem}">
+            <table:Column width="12rem" label="{i18n>PurchaseRequisitionItem}">
                 <table:template>
                     <Text text="{local>PURCHASEREQUISITIONITEM}" wrapping="false"/>
                 </table:template>
@@ -89,12 +89,12 @@
                     <Text text="{local>REQUISITIONERNAME}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>RequirementTracking}">
+            <table:Column width="14rem" label="{i18n>RequirementTracking}">
                 <table:template>
                     <Text text="{local>REQUIREMENTTRACKING}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="15rem" label="{i18n>InternationalArticleNumber}">
+            <table:Column width="12rem" label="{i18n>InternationalArticleNumber}">
                 <table:template>
                     <Text text="{local>INTERNATIONALARTICLENUMBER}" wrapping="false"/>
                 </table:template>
@@ -124,7 +124,7 @@
                     <Text text="{local>SUPPLIERSUBRANGE}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>SupplierSubrangeText}">
+            <table:Column width="12rem" label="{i18n>SupplierSubrangeText}">
                 <table:template>
                     <Text text="{local>SUPPLIERSUBRANGETEXT}" wrapping="false"/>
                 </table:template>
@@ -144,7 +144,7 @@
                     <Text text="{local>PURCHASEORDERITEMTEXT}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>SupplierMaterialNumber}">
+            <table:Column width="12rem" label="{i18n>SupplierMaterialNumber}">
                 <table:template>
                     <Text text="{local>SUPPLIERMATERIALNUMBER}" wrapping="false"/>
                 </table:template>
@@ -179,7 +179,7 @@
                     <Text text="{local>GOODSRECEIPTDURATIONINDAYS}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>LotSizeRoundingQuantity}" hAlign="End">
+            <table:Column width="12rem" label="{i18n>LotSizeRoundingQuantity}" hAlign="End">
                 <table:template>
                     <Text text="{local>LOTSIZEROUNDINGQUANTITY}" wrapping="false"/>
                 </table:template>
@@ -199,7 +199,7 @@
                     <Text text="{local>PURCHASEORDERDATE}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>ScheduleLineDeliveryDate}">
+            <table:Column width="12rem" label="{i18n>ScheduleLineDeliveryDate}">
                 <table:template>
                     <Text text="{local>SCHEDULELINEDELIVERYDATE}" wrapping="false"/>
                 </table:template>
@@ -209,7 +209,7 @@
                     <Text text="{local>ORDERQUANTITY}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>PoNokoru}" hAlign="End">
+            <table:Column width="12rem" label="{i18n>PoNokoru}" hAlign="End">
                 <table:template>
                     <Text text="{local>PONOKORU}" wrapping="false"/>
                 </table:template>
@@ -234,7 +234,7 @@
                     <Text text="{local>MRPDELIVERYDATE}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>MRPElementReschedulingDate}">
+            <table:Column width="14rem" label="{i18n>MRPElementReschedulingDate}">
                 <table:template>
                     <Text text="{local>MRPELEMENTRESCHEDULINGDATE}" wrapping="false"/>
                 </table:template>
@@ -249,7 +249,7 @@
                     <Text text="{local>DELIVERYDATE}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>PossibleProductionDate}">
+            <table:Column width="12rem" label="{i18n>PossibleProductionDate}">
                 <table:template>
                     <Text text="{local>POSSIBLEPRODUCTIONDATE}" wrapping="false"/>
                 </table:template>
@@ -294,7 +294,7 @@
                     <Text text="{local>CREATEDBYUSER}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>CorrespncInternalReference}">
+            <table:Column width="14rem" label="{i18n>CorrespncInternalReference}">
                 <table:template>
                     <Text text="{local>CORRESPNCINTERNALREFERENCE}" wrapping="false"/>
                 </table:template>
@@ -309,12 +309,12 @@
                     <Text text="{local>STORAGELOCATION}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>StorageLocationName}">
+            <table:Column width="12rem" label="{i18n>StorageLocationName}">
                 <table:template>
                     <Text text="{local>STORAGELOCATIONNAME}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>IsCompletelyDelivered}">
+            <table:Column width="12rem" label="{i18n>IsCompletelyDelivered}">
                 <table:template>
                     <Text text="{local>ISCOMPLETELYDELIVERED}" wrapping="false"/>
                 </table:template>
@@ -349,17 +349,17 @@
                     <Text text="{local>SHIPPINGINSTRUCTIONNAME}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>productionmemopageformat}">
+            <table:Column width="14rem" label="{i18n>productionmemopageformat}">
                 <table:template>
                     <Text text="{local>PRODUCTIONMEMOPAGEFORMAT}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>MRPRelevantQuantity}" hAlign="End">
+            <table:Column width="12rem" label="{i18n>MRPRelevantQuantity}" hAlign="End">
                 <table:template>
                     <Text text="{local>MRPRELEVANTQUANTITY}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>CorrespncExternalReference}">
+            <table:Column width="12rem" label="{i18n>CorrespncExternalReference}">
                 <table:template>
                     <Text text="{local>CORRESPNCEXTERNALREFERENCE}" wrapping="false"/>
                 </table:template>

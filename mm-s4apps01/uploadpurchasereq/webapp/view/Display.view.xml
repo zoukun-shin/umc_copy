@@ -68,6 +68,7 @@
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
                             <smartFilterBar:ControlConfiguration key="PolinkBy" visibleInAdvancedArea="true" label="{i18n>PolinkBy}" index="65" />
+                            <smartFilterBar:ControlConfiguration key="OrderId" visible="false" />
                             <!-- ADD END BY XINLEI XU 2025/04/21 CR#4359 -->
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
@@ -121,7 +122,7 @@
                                 <Text text="{Message}" tooltip="{Message}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column id="idColumn" width="8rem" label="{i18n>PrNo}" sortProperty="PrNo" filterProperty="PrNo">
+                        <t:Column id="idColumn" width="10rem" label="{i18n>PrNo}" sortProperty="PrNo" filterProperty="PrNo">
                             <t:customData>
                                 <core:CustomData id="idCustomData" key="p13nData" value='\{"columnKey":"PrNo", "leadingProperty":"PrNo", "sortProperty":"PrNo", "filterProperty": "PrNo"}'/>
                             </t:customData>
@@ -129,7 +130,7 @@
                                 <Text id="idPrNoText" text="{PrNo}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column id="id38Column" width="4rem" label="{i18n>PrItem}" sortProperty="PrItem" filterProperty="PrItem">
+                        <t:Column id="id38Column" width="12rem" label="{i18n>PrItem}" sortProperty="PrItem" filterProperty="PrItem">
                             <t:customData>
                                 <core:CustomData id="id38CustomData" key="p13nData" value='\{"columnKey":"PrItem", "leadingProperty":"PrItem", "sortProperty":"PrItem", "filterProperty": "PrItem"}'/>
                             </t:customData>
@@ -137,7 +138,7 @@
                                 <Text id="idPrItemText" text="{PrItem}" />
                             </t:template>
                         </t:Column>
-                        <t:Column id="id0Column" width="8rem" label="{i18n>PrType}" sortProperty="PrType" filterProperty="PrType">
+                        <t:Column id="id0Column" width="12rem" label="{i18n>PrType}" sortProperty="PrType" filterProperty="PrType">
                             <t:customData>
                                 <core:CustomData id="id0CustomData" key="p13nData" value='\{"columnKey":"PrType", "leadingProperty":"PrType", "additionalProperty":"PrTypeText", "sortProperty":"PrType", "filterProperty": "PrType"}'/>
                             </t:customData>
@@ -153,7 +154,7 @@
                                 <Text id="idOrderTypeText" text="{parts:['OrderType','OrderTypeText'], formatter:'.formatter.additionalText'}" tooltip="{OrderTypeText}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column id="id2Column" width="8rem" label="{i18n>Supplier}" sortProperty="Supplier" filterProperty="Supplier">
+                        <t:Column id="id2Column" width="10rem" label="{i18n>Supplier}" sortProperty="Supplier" filterProperty="Supplier">
                             <t:customData>
                                 <core:CustomData id="id2CustomData" key="p13nData" value='\{"columnKey":"Supplier", "leadingProperty":"Supplier", "sortProperty":"Supplier", "filterProperty": "Supplier"}'/>
                             </t:customData>
@@ -171,7 +172,7 @@
                             </t:template>
                         </t:Column>
                         <!-- ADD END BY XINLEI XU 2025/04/22 CR#4359 -->
-                        <t:Column id="id3Column" width="8rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
+                        <t:Column id="id3Column" width="10rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
                             <t:customData>
                                 <core:CustomData id="id3CustomData" key="p13nData" value='\{"columnKey":"CompanyCode", "leadingProperty":"CompanyCode", "sortProperty":"CompanyCode", "filterProperty": "CompanyCode"}'/>
                             </t:customData>
@@ -179,7 +180,7 @@
                                 <Text id="idCompanyCodeText" text="{CompanyCode}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id4Column" width="8rem" label="{i18n>PurchaseOrg}" sortProperty="PurchaseOrg" filterProperty="PurchaseOrg">
+                        <t:Column id="id4Column" width="12rem" label="{i18n>PurchaseOrg}" sortProperty="PurchaseOrg" filterProperty="PurchaseOrg">
                             <t:customData>
                                 <core:CustomData id="id4CustomData" key="p13nData" value='\{"columnKey":"PurchaseOrg", "leadingProperty":"PurchaseOrg", "sortProperty":"PurchaseOrg", "filterProperty": "PurchaseOrg"}'/>
                             </t:customData>
@@ -187,7 +188,7 @@
                                 <Text id="idPurchaseOrgText" text="{PurchaseOrg}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id5Column" width="8rem" label="{i18n>PurchaseGrp}" sortProperty="PurchaseGrp" filterProperty="PurchaseGrp">
+                        <t:Column id="id5Column" width="10rem" label="{i18n>PurchaseGrp}" sortProperty="PurchaseGrp" filterProperty="PurchaseGrp">
                             <t:customData>
                                 <core:CustomData id="id5CustomData" key="p13nData" value='\{"columnKey":"PurchaseGrp", "leadingProperty":"PurchaseGrp", "sortProperty":"PurchaseGrp", "filterProperty": "PurchaseGrp"}'/>
                             </t:customData>
@@ -196,7 +197,7 @@
                             </t:template>
                         </t:Column>
                         <!-- ADD BEGIN BY XINLEI XU 2025/04/22 CR#4359 -->
-                        <t:Column width="10rem" label="{i18n>PurchasingGroupName}" sortProperty="PurchasingGroupName" filterProperty="PurchasingGroupName">
+                        <t:Column width="12rem" label="{i18n>PurchasingGroupName}" sortProperty="PurchasingGroupName" filterProperty="PurchasingGroupName">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"PurchasingGroupName", "leadingProperty":"PurchasingGroupName", "sortProperty":"PurchasingGroupName", "filterProperty": "PurchasingGroupName"}'/>
                             </t:customData>
@@ -205,7 +206,7 @@
                             </t:template>
                         </t:Column>
                         <!-- ADD END BY XINLEI XU 2025/04/22 CR#4359 -->
-                        <t:Column id="id6Column" width="8rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
+                        <t:Column id="id6Column" width="10rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
                             <t:customData>
                                 <core:CustomData id="id6CustomData" key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'/>
                             </t:customData>
@@ -213,7 +214,7 @@
                                 <Text id="idPlantText" text="{Plant}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id8Column" width="8rem" label="{i18n>ItemCategory}" sortProperty="ItemCategory" filterProperty="ItemCategory">
+                        <t:Column id="id8Column" width="10rem" label="{i18n>ItemCategory}" sortProperty="ItemCategory" filterProperty="ItemCategory">
                             <t:customData>
                                 <core:CustomData id="id8CustomData" key="p13nData" value='\{"columnKey":"ItemCategory", "leadingProperty":"ItemCategory", "sortProperty":"ItemCategory", "filterProperty": "ItemCategory"}'/>
                             </t:customData>
@@ -221,7 +222,7 @@
                                 <Text id="idItemCategoryText" text="{ItemCategory}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id9Column" width="8rem" label="{i18n>AccountType}" sortProperty="AccountType" filterProperty="AccountType">
+                        <t:Column id="id9Column" width="14rem" label="{i18n>AccountType}" sortProperty="AccountType" filterProperty="AccountType">
                             <t:customData>
                                 <core:CustomData id="id9CustomData" key="p13nData" value='\{"columnKey":"AccountType", "leadingProperty":"AccountType", "sortProperty":"AccountType", "filterProperty": "AccountType"}'/>
                             </t:customData>
@@ -229,7 +230,7 @@
                                 <Text id="idAccountTypeText" text="{AccountType}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id10Column" width="8rem" label="{i18n>MatID}" sortProperty="MatID" filterProperty="MatID">
+                        <t:Column id="id10Column" width="10rem" label="{i18n>MatID}" sortProperty="MatID" filterProperty="MatID">
                             <t:customData>
                                 <core:CustomData id="id10CustomData" key="p13nData" value='\{"columnKey":"MatID", "leadingProperty":"MatID", "sortProperty":"MatID", "filterProperty": "MatID"}' />
                             </t:customData>
@@ -237,7 +238,7 @@
                                 <Text id="idMatIDText" text="{MatID}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id11Column" width="8rem" label="{i18n>MatDesc}" sortProperty="MatDesc" filterProperty="MatDesc">
+                        <t:Column id="id11Column" width="10rem" label="{i18n>MatDesc}" sortProperty="MatDesc" filterProperty="MatDesc">
                             <t:customData>
                                 <core:CustomData id="id11CustomData" key="p13nData" value='\{"columnKey":"MatDesc", "leadingProperty":"MatDesc", "sortProperty":"MatDesc", "filterProperty": "MatDesc"}'/>
                             </t:customData>
@@ -245,7 +246,7 @@
                                 <Text id="idMatDescText" text="{MatDesc}" tooltip="{MatDesc}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column id="id12Column" width="8rem" label="{i18n>MaterialGroup}" sortProperty="MaterialGroup" filterProperty="MaterialGroup">
+                        <t:Column id="id12Column" width="10rem" label="{i18n>MaterialGroup}" sortProperty="MaterialGroup" filterProperty="MaterialGroup">
                             <t:customData>
                                 <core:CustomData id="id12CustomData" key="p13nData" value='\{"columnKey":"MaterialGroup", "leadingProperty":"MaterialGroup", "sortProperty":"MaterialGroup", "filterProperty": "MaterialGroup"}'/>
                             </t:customData>
@@ -253,7 +254,7 @@
                                 <Text id="idMaterialGroupText" text="{MaterialGroup}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id13Column" width="8rem" label="{i18n>Quantity}" sortProperty="Quantity" filterProperty="Quantity" hAlign="End">
+                        <t:Column id="id13Column" width="12rem" label="{i18n>Quantity}" sortProperty="Quantity" filterProperty="Quantity" hAlign="End">
                             <t:customData>
                                 <core:CustomData id="id13CustomData" key="p13nData" value='\{"columnKey":"Quantity", "leadingProperty":"Quantity", "sortProperty":"Quantity", "filterProperty": "Quantity"}'/>
                             </t:customData>
@@ -261,7 +262,7 @@
                                 <Text text="{ path:'Quantity', formatter:'.formatter.formatQuantity' }" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column id="id14Column" width="8rem" label="{i18n>Unit}" sortProperty="Unit" filterProperty="Unit">
+                        <t:Column id="id14Column" width="10rem" label="{i18n>Unit}" sortProperty="Unit" filterProperty="Unit">
                             <t:customData>
                                 <core:CustomData id="id14CustomData" key="p13nData" value='\{"columnKey":"Unit", "leadingProperty":"Unit", "sortProperty":"Unit", "filterProperty": "Unit"}'/>
                             </t:customData>
@@ -269,7 +270,7 @@
                                 <Text id="idUnitText" text="{Unit}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id15Column" width="8rem" label="{i18n>Price}" sortProperty="Price" filterProperty="Price" hAlign="End">
+                        <t:Column id="id15Column" width="10rem" label="{i18n>Price}" sortProperty="Price" filterProperty="Price" hAlign="End">
                             <t:customData>
                                 <core:CustomData id="id15CustomData" key="p13nData" value='\{"columnKey":"Price", "leadingProperty":"Price", "sortProperty":"Price", "filterProperty": "Price"}'/>
                             </t:customData>
@@ -277,7 +278,7 @@
                                 <Text text="{ parts:[ 'Price','Currency' ], formatter:'.formatter.formatFloat' }" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column id="id16Column" width="8rem" label="{i18n>UnitPrice}" sortProperty="UnitPrice" filterProperty="UnitPrice" hAlign="End">
+                        <t:Column id="id16Column" width="10rem" label="{i18n>UnitPrice}" sortProperty="UnitPrice" filterProperty="UnitPrice" hAlign="End">
                             <t:customData>
                                 <core:CustomData id="id16CustomData" key="p13nData" value='\{"columnKey":"UnitPrice", "leadingProperty":"UnitPrice", "sortProperty":"UnitPrice", "filterProperty": "UnitPrice"}'/>
                             </t:customData>
@@ -303,7 +304,7 @@
                             </t:template>
                         </t:Column>
                         <!-- ADD END BY XINLEI XU 2025/04/22 CR#4359 -->
-                        <t:Column id="id7Column" width="8rem" label="{i18n>Currency}" sortProperty="Currency" filterProperty="Currency">
+                        <t:Column id="id7Column" width="10rem" label="{i18n>Currency}" sortProperty="Currency" filterProperty="Currency">
                             <t:customData>
                                 <core:CustomData id="id7CustomData" key="p13nData" value='\{"columnKey":"Currency", "leadingProperty":"Currency", "sortProperty":"Currency", "filterProperty": "Currency"}'/>
                             </t:customData>
@@ -311,7 +312,7 @@
                                 <Text id="idCurrencyText" text="{Currency}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id17Column" width="8rem" label="{i18n>DeliveryDate}" sortProperty="DeliveryDate" filterProperty="DeliveryDate">
+                        <t:Column id="id17Column" width="10rem" label="{i18n>DeliveryDate}" sortProperty="DeliveryDate" filterProperty="DeliveryDate">
                             <t:customData>
                                 <core:CustomData id="id17CustomData" key="p13nData" value='\{"columnKey":"DeliveryDate", "leadingProperty":"DeliveryDate", "sortProperty":"DeliveryDate", "filterProperty": "DeliveryDate"}'/>
                             </t:customData>
@@ -320,7 +321,7 @@
                                 <Text id="idDeliveryDateText" text="{ path: 'DeliveryDate', type: 'sap.ui.model.type.Date' }" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id18Column" width="8rem" label="{i18n>Location}" sortProperty="Location" filterProperty="Location">
+                        <t:Column id="id18Column" width="10rem" label="{i18n>Location}" sortProperty="Location" filterProperty="Location">
                             <t:customData>
                                 <core:CustomData id="id18CustomData" key="p13nData" value='\{"columnKey":"Location", "leadingProperty":"Location", "sortProperty":"Location", "filterProperty": "Location"}'/>
                             </t:customData>
@@ -328,7 +329,7 @@
                                 <Text id="idLocationText" text="{Location}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id19Column" width="8rem" label="{i18n>ReturnItem}" sortProperty="ReturnItem" filterProperty="ReturnItem">
+                        <t:Column id="id19Column" width="10rem" label="{i18n>ReturnItem}" sortProperty="ReturnItem" filterProperty="ReturnItem">
                             <t:customData>
                                 <core:CustomData id="id19CustomData" key="p13nData" value='\{"columnKey":"ReturnItem", "leadingProperty":"ReturnItem", "sortProperty":"ReturnItem", "filterProperty": "ReturnItem"}'/>
                             </t:customData>
@@ -336,7 +337,7 @@
                                 <Text id="idReturnItemText" text="{ReturnItem}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id20Column" width="8rem" label="{i18n>Free}" sortProperty="Free" filterProperty="Free">
+                        <t:Column id="id20Column" width="10rem" label="{i18n>Free}" sortProperty="Free" filterProperty="Free">
                             <t:customData>
                                 <core:CustomData id="id20CustomData" key="p13nData" value='\{"columnKey":"Free", "leadingProperty":"Free", "sortProperty":"Free", "filterProperty": "Free"}'/>
                             </t:customData>
@@ -344,7 +345,7 @@
                                 <Text id="idFreeText" text="{Free}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id21Column" width="8rem" label="{i18n>GlAccount}" sortProperty="GlAccount" filterProperty="GlAccount">
+                        <t:Column id="id21Column" width="10rem" label="{i18n>GlAccount}" sortProperty="GlAccount" filterProperty="GlAccount">
                             <t:customData>
                                 <core:CustomData id="id21CustomData" key="p13nData" value='\{"columnKey":"GlAccount", "leadingProperty":"GlAccount", "sortProperty":"GlAccount", "filterProperty": "GlAccount"}'/>
                             </t:customData>
@@ -362,7 +363,7 @@
                             </t:template>
                         </t:Column>
                         <!-- ADD END BY XINLEI XU 2025/04/22 CR#4359 -->
-                        <t:Column id="id22Column" width="8rem" label="{i18n>CostCenter}" sortProperty="CostCenter" filterProperty="CostCenter">
+                        <t:Column id="id22Column" width="10rem" label="{i18n>CostCenter}" sortProperty="CostCenter" filterProperty="CostCenter">
                             <t:customData>
                                 <core:CustomData id="id22CustomData" key="p13nData" value='\{"columnKey":"CostCenter", "leadingProperty":"CostCenter", "sortProperty":"CostCenter", "filterProperty": "CostCenter"}'/>
                             </t:customData>
@@ -380,7 +381,7 @@
                             </t:template>
                         </t:Column>
                         <!-- ADD END BY XINLEI XU 2025/04/22 CR#4359 -->
-                        <t:Column id="id23Column" width="8rem" label="{i18n>WbsElemnt}" sortProperty="WbsElemnt" filterProperty="WbsElemnt">
+                        <t:Column id="id23Column" width="10rem" label="{i18n>WbsElemnt}" sortProperty="WbsElemnt" filterProperty="WbsElemnt">
                             <t:customData>
                                 <core:CustomData id="id23CustomData" key="p13nData" value='\{"columnKey":"WbsElemnt", "leadingProperty":"WbsElemnt", "sortProperty":"WbsElemnt", "filterProperty": "WbsElemnt"}'/>
                             </t:customData>
@@ -388,7 +389,7 @@
                                 <Text id="idWbsElemntText" text="{WbsElemnt}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column width="8rem" label="{i18n>OrderId}" sortProperty="OrderId" filterProperty="OrderId">
+                        <t:Column width="10rem" label="{i18n>OrderId}" sortProperty="OrderId" filterProperty="OrderId">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"OrderId", "leadingProperty":"OrderId", "sortProperty":"OrderId", "filterProperty": "OrderId"}'/>
                             </t:customData>
@@ -396,7 +397,7 @@
                                 <Text text="{OrderId}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id24Column" width="8rem" label="{i18n>AssetNo}" sortProperty="AssetNo" filterProperty="AssetNo">
+                        <t:Column id="id24Column" width="10rem" label="{i18n>AssetNo}" sortProperty="AssetNo" filterProperty="AssetNo">
                             <t:customData>
                                 <core:CustomData id="id24CustomData" key="p13nData" value='\{"columnKey":"AssetNo", "leadingProperty":"AssetNo", "sortProperty":"AssetNo", "filterProperty": "AssetNo"}'/>
                             </t:customData>
@@ -404,7 +405,7 @@
                                 <Text id="idAssetNoText" text="{AssetNo}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id25Column" width="8rem" label="{i18n>Tax}" sortProperty="Tax" filterProperty="Tax">
+                        <t:Column id="id25Column" width="10rem" label="{i18n>Tax}" sortProperty="Tax" filterProperty="Tax">
                             <t:customData>
                                 <core:CustomData id="id25CustomData" key="p13nData" value='\{"columnKey":"Tax", "leadingProperty":"Tax", "sortProperty":"Tax", "filterProperty": "Tax"}'/>
                             </t:customData>
@@ -412,7 +413,7 @@
                                 <Text id="idTaxText" text="{Tax}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id26Column" width="8rem" label="{i18n>ItemText}" sortProperty="ItemText" filterProperty="ItemText">
+                        <t:Column id="id26Column" width="10rem" label="{i18n>ItemText}" sortProperty="ItemText" filterProperty="ItemText">
                             <t:customData>
                                 <core:CustomData id="id26CustomData" key="p13nData" value='\{"columnKey":"ItemText", "leadingProperty":"ItemText", "sortProperty":"ItemText", "filterProperty": "ItemText"}'/>
                             </t:customData>
@@ -420,7 +421,7 @@
                                 <Text id="idItemTextText" text="{ItemText}" tooltip="{ItemText}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column id="id27Column" width="8rem" label="{i18n>PrBy}" sortProperty="PrBy" filterProperty="PrBy">
+                        <t:Column id="id27Column" width="10rem" label="{i18n>PrBy}" sortProperty="PrBy" filterProperty="PrBy">
                             <t:customData>
                                 <core:CustomData id="id27CustomData" key="p13nData" value='\{"columnKey":"PrBy", "leadingProperty":"PrBy", "sortProperty":"PrBy", "filterProperty": "PrBy"}'/>
                             </t:customData>
@@ -428,7 +429,7 @@
                                 <Text id="idPrByText" text="{PrBy}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id28Column" width="8rem" label="{i18n>TrackNo}" sortProperty="TrackNo" filterProperty="TrackNo">
+                        <t:Column id="id28Column" width="14rem" label="{i18n>TrackNo}" sortProperty="TrackNo" filterProperty="TrackNo">
                             <t:customData>
                                 <core:CustomData id="id28CustomData" key="p13nData" value='\{"columnKey":"TrackNo", "leadingProperty":"TrackNo", "sortProperty":"TrackNo", "filterProperty": "TrackNo"}'/>
                             </t:customData>
@@ -436,7 +437,7 @@
                                 <Text id="idTrackNoText" text="{TrackNo}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id29Column" width="8rem" label="{i18n>Ean}" sortProperty="Ean" filterProperty="Ean">
+                        <t:Column id="id29Column" width="10rem" label="{i18n>Ean}" sortProperty="Ean" filterProperty="Ean">
                             <t:customData>
                                 <core:CustomData id="id29CustomData" key="p13nData" value='\{"columnKey":"Ean", "leadingProperty":"Ean", "sortProperty":"Ean", "filterProperty": "Ean"}'/>
                             </t:customData>
@@ -444,7 +445,7 @@
                                 <Text id="idEanText" text="{Ean}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id30Column" width="8rem" label="{i18n>CustomerRec}" sortProperty="CustomerRec" filterProperty="CustomerRec">
+                        <t:Column id="id30Column" width="10rem" label="{i18n>CustomerRec}" sortProperty="CustomerRec" filterProperty="CustomerRec">
                             <t:customData>
                                 <core:CustomData id="id30CustomData" key="p13nData" value='\{"columnKey":"CustomerRec", "leadingProperty":"CustomerRec", "sortProperty":"CustomerRec", "filterProperty": "CustomerRec"}'/>
                             </t:customData>
@@ -452,7 +453,7 @@
                                 <Text id="idCustomerRecText" text="{CustomerRec}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id31Column" width="8rem" label="{i18n>AssetOri}" sortProperty="AssetOri" filterProperty="AssetOri">
+                        <t:Column id="id31Column" width="10rem" label="{i18n>AssetOri}" sortProperty="AssetOri" filterProperty="AssetOri">
                             <t:customData>
                                 <core:CustomData id="id31CustomData" key="p13nData" value='\{"columnKey":"AssetOri", "leadingProperty":"AssetOri", "sortProperty":"AssetOri", "filterProperty": "AssetOri"}'/>
                             </t:customData>
@@ -460,7 +461,7 @@
                                 <Text id="idAssetOriText" text="{AssetOri}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id32Column" width="8rem" label="{i18n>MemoText}" sortProperty="MemoText" filterProperty="MemoText">
+                        <t:Column id="id32Column" width="10rem" label="{i18n>MemoText}" sortProperty="MemoText" filterProperty="MemoText">
                             <t:customData>
                                 <core:CustomData id="id32CustomData" key="p13nData" value='\{"columnKey":"MemoText", "leadingProperty":"MemoText", "sortProperty":"MemoText", "filterProperty": "MemoText"}'/>
                             </t:customData>
@@ -484,7 +485,7 @@
                                 <Text text="{parts:['ApproveStatus','ApproveStatusText'], formatter:'.formatter.additionalText'}" tooltip="{ApproveStatusText}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column id="id34Column" width="8rem" label="{i18n>IsLink}" sortProperty="IsLink" filterProperty="IsLink">
+                        <t:Column id="id34Column" width="10rem" label="{i18n>IsLink}" sortProperty="IsLink" filterProperty="IsLink">
                             <t:customData>
                                 <core:CustomData id="id34CustomData" key="p13nData" value='\{"columnKey":"IsLink", "leadingProperty":"IsLink", "sortProperty":"IsLink", "filterProperty": "IsLink"}'/>
                             </t:customData>
@@ -502,7 +503,7 @@
                             </t:template>
                         </t:Column>
                         <!-- ADD END BY XINLEI XU 2025/04/21 CR#4359 -->
-                        <t:Column id="id35Column" width="8rem" label="{i18n>PurchaseOrder}" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder">
+                        <t:Column id="id35Column" width="10rem" label="{i18n>PurchaseOrder}" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder">
                             <t:customData>
                                 <core:CustomData id="id35CustomData" key="p13nData" value='\{"columnKey":"PurchaseOrder", "leadingProperty":"PurchaseOrder", "sortProperty":"PurchaseOrder", "filterProperty": "PurchaseOrder"}'/>
                             </t:customData>
@@ -510,7 +511,7 @@
                                 <Text id="idPurchaseOrderText" text="{PurchaseOrder}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id36Column" width="6rem" label="{i18n>PurchaseOrderItem}" sortProperty="PurchaseOrderItem" filterProperty="PurchaseOrderItem">
+                        <t:Column id="id36Column" width="12rem" label="{i18n>PurchaseOrderItem}" sortProperty="PurchaseOrderItem" filterProperty="PurchaseOrderItem">
                             <t:customData>
                                 <core:CustomData id="id36CustomData" key="p13nData" value='\{"columnKey":"PurchaseOrderItem", "leadingProperty":"PurchaseOrderItem", "sortProperty":"PurchaseOrderItem", "filterProperty": "PurchaseOrderItem"}'/>
                             </t:customData>
@@ -518,7 +519,7 @@
                                 <Text id="idPurchaseOrderItemText" text="{PurchaseOrderItem}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column width="10rem" label="{i18n>ApplyDepart}" sortProperty="ApplyDepart" filterProperty="ApplyDepart">
+                        <t:Column width="12rem" label="{i18n>ApplyDepart}" sortProperty="ApplyDepart" filterProperty="ApplyDepart">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ApplyDepart", "leadingProperty":"ApplyDepart", "additionalProperty":"ApplyDepartText", "sortProperty":"ApplyDepart", "filterProperty": "ApplyDepart"}'/>
                             </t:customData>
@@ -534,7 +535,7 @@
                                 <Text id="idKyotenText" text="{parts:['Kyoten','KyotenText'], formatter:'.formatter.additionalText'}" tooltip="{KyotenText}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column id="id39Column" width="6rem" label="{i18n>CreatedAt}" sortProperty="CreatedAt" filterProperty="CreatedAt">
+                        <t:Column id="id39Column" width="10rem" label="{i18n>CreatedAt}" sortProperty="CreatedAt" filterProperty="CreatedAt">
                             <t:customData>
                                 <core:CustomData id="id39CustomData" key="p13nData" value='\{"columnKey":"CreatedAt", "leadingProperty":"CreatedAt", "sortProperty":"CreatedAt", "filterProperty": "CreatedAt", "type":"date"}'/>
                             </t:customData>
@@ -542,7 +543,7 @@
                                 <Text id="idCreatedAtText" text="{ path: 'CreatedAt', type: 'sap.ui.model.type.Date' }" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column width="6rem" label="{i18n>ApplyDate}" sortProperty="ApplyDate" filterProperty="ApplyDate">
+                        <t:Column width="10rem" label="{i18n>ApplyDate}" sortProperty="ApplyDate" filterProperty="ApplyDate">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ApplyDate", "leadingProperty":"ApplyDate", "sortProperty":"ApplyDate", "filterProperty": "ApplyDate"}'/>
                             </t:customData>
@@ -551,7 +552,7 @@
                                 <Text text="{ path: 'ApplyDate', type: 'sap.ui.model.type.Date' }" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column width="6rem" label="{i18n>ApplyTime}" sortProperty="ApplyTime" filterProperty="ApplyTime">
+                        <t:Column width="10rem" label="{i18n>ApplyTime}" sortProperty="ApplyTime" filterProperty="ApplyTime">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ApplyTime", "leadingProperty":"ApplyTime", "sortProperty":"ApplyTime", "filterProperty": "ApplyTime"}'/>
                             </t:customData>
@@ -559,7 +560,7 @@
                                 <Text text="{path:'ApplyTime', formatter:'.formatter.time'}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column width="6rem" label="{i18n>IsApprove}" sortProperty="IsApprove" filterProperty="IsApprove">
+                        <t:Column width="10rem" label="{i18n>IsApprove}" sortProperty="IsApprove" filterProperty="IsApprove">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"IsApprove", "leadingProperty":"IsApprove", "sortProperty":"IsApprove", "filterProperty": "IsApprove"}'/>
                             </t:customData>
@@ -567,7 +568,7 @@
                                 <Text text="{IsApprove}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column width="10rem" label="{i18n>SupplierMat}" sortProperty="SupplierMat" filterProperty="SupplierMat">
+                        <t:Column width="12rem" label="{i18n>SupplierMat}" sortProperty="SupplierMat" filterProperty="SupplierMat">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"SupplierMat", "leadingProperty":"SupplierMat", "sortProperty":"SupplierMat", "filterProperty": "SupplierMat"}'/>
                             </t:customData>
@@ -575,7 +576,7 @@
                                 <Text text="{SupplierMat}" tooltip="{SupplierMat}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column width="8rem" label="{i18n>PolinkBy}" sortProperty="PolinkBy" filterProperty="PolinkBy">
+                        <t:Column width="14rem" label="{i18n>PolinkBy}" sortProperty="PolinkBy" filterProperty="PolinkBy">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"PolinkBy", "leadingProperty":"PolinkBy", "sortProperty":"PolinkBy", "filterProperty": "PolinkBy"}'/>
                             </t:customData>

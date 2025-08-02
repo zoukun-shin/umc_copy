@@ -15,12 +15,16 @@ sap.ui.define([
             formatter: formatter,
 
             onInit: function () {
-
-
                 this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
             },
 
             _initialize: function () {
+                // ADD BEGIN BY XINLEI XU 2025/07/23
+                var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
+                var oFilter = new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.EQ, "ZUPLOAD_INVENTORY_" + sLanguage);
+                var oControlBinding = this.byId("idTemplateCollection").getBinding("items");
+                oControlBinding.filter(oFilter);
+                // ADD END BY XINLEI XU 2025/07/23
                 this._BusyDialog = new BusyDialog();
                 this._UserInfo = sap.ushell.Container.getService("UserInfo");
                 var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
