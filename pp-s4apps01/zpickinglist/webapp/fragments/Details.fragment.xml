@@ -113,7 +113,7 @@
     xmlns="sap.m"
     xmlns:layout="sap.ui.layout"
     xmlns:table="sap.ui.table">
-    <Dialog title="{i18n>ShowDetails}">
+    <Dialog title="{i18n>ShowDetails} ({= ${local>/detailSet}.length})">
         <Panel expandable="false" expanded="true" width="auto">
             <table:Table id="idDetailsTable" rows="{local>/detailSet}" selectionMode="Multi" rowMode="Interactive" class="sapUiSizeCompact">
                 <table:extension>

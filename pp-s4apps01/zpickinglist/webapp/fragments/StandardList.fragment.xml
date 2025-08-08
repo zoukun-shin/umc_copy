@@ -15,7 +15,7 @@
                 <Button icon="sap-icon://excel-attachment" text="{i18n>Download}" type="Transparent" press="onExportStandardList" enabled="{= ${local>/StandardList}.length > 0}"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
-        <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto">
+        <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto" threshold="999999999">
             <table:columns>
                 <table:Column width="4rem" label="{i18n>RowNo}" sortProperty="RowNo" filterProperty="RowNo">
                     <table:customData>
