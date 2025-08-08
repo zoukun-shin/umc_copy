@@ -79,8 +79,7 @@
                                 <smartFilterBar:ControlConfiguration index='130' key="LastChangedDate" visibleInAdvancedArea="true" label="{i18n>LastChangedDate}"/>
                                 <smartFilterBar:ControlConfiguration index='140' key="LastChangedByUser" visibleInAdvancedArea="true" label="{i18n>LastChangedByUser}"/>
                                 <smartFilterBar:ControlConfiguration index='150' key="SizeOrDimensionText" visibleInAdvancedArea="true" label="{i18n>SizeOrDimensionText}"/>
-                                <smartFilterBar:ControlConfiguration index='160' key="PostingStatus" visibleInAdvancedArea="true" label="{i18n>PostingStatus}"/>
-                                <smartFilterBar:ControlConfiguration index='170' key="DeleteFlag" visibleInAdvancedArea="true" label="{i18n>DeleteFlag}"/>
+                                <smartFilterBar:ControlConfiguration index='160' key="DeleteFlag" visibleInAdvancedArea="true" label="{i18n>DeleteFlag}"/>
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MaterialName" visible="false"/>

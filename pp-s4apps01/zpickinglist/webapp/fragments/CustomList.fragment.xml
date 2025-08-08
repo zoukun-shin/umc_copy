@@ -220,7 +220,7 @@
                         <Text text="{MaterialGroup}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>PostingStatus}" sortProperty="PostingStatus" filterProperty="PostingStatus">
+                <table:Column width="10rem" label="{i18n>PostingStatus}">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PostingStatus", "leadingProperty":"PostingStatus"}'/>
                     </table:customData>
@@ -228,7 +228,7 @@
                         <Text text="{PostingStatus}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>PostingQuantity}" sortProperty="PostingQuantity" filterProperty="PostingQuantity" hAlign="End">
+                <table:Column width="10rem" label="{i18n>PostingQuantity}" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PostingQuantity", "leadingProperty":"PostingQuantity"}'/>
                     </table:customData>
