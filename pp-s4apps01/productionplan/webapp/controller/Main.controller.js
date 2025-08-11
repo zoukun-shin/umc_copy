@@ -386,7 +386,7 @@ sap.ui.define([
             var oTable = this.byId("ReportTable");
             let sNum = Number(this.byId("zdays").getValue());
             //最后一列
-            sNum = 18 + sNum;   
+            sNum = 18 + sNum;
             var aRows = oTable.getRows();
             var sType = "";
             var sSobmx = "";
@@ -470,7 +470,7 @@ sap.ui.define([
             });
         },
 
-        onWeb2: function (oEvent) {          
+        onWeb2: function (oEvent) {
             //製造指図と受注の割当
             var aPromise = [];
             aPromise.push(this.callAction("", "WEB2", ""));
@@ -548,7 +548,14 @@ sap.ui.define([
         onPost: function (oEvent) {
             var that = this;
             var bEvent = "POST";
-            let postDocs = this.preparePostBody();
+            let result = this.preparePostBody();
+            let postDocs = result.postDocs;
+            let msg = result.msg;
+            if ( msg !== "" ) {
+                MessageBox.error(msg + " " + "計画数＞未処分数。");
+                return;
+            };
+
             this._BusyDialog.open();
             var aPromise = [];
             aPromise.push(this.callAction(postDocs, bEvent, ""));
@@ -589,12 +596,50 @@ sap.ui.define([
                 var sPath = this.byId("ReportTable").getContextByIndex(item).getPath();
                 var oRow = this.getModel().getObject(sPath);
                 delete oRow.__metadata;
-                selectedRows.push(oRow);
+                if (oRow.PlanType === "P" || oRow.PlanType === "W" || oRow.PlanType === "I") {
+                    selectedRows.push(oRow);
+                };
             });
-
             let postDocs = [JSON.stringify(selectedRows)];
-            return postDocs;
+            //判断：是否計画数＞未処分数
+            var oGrouped = {};
+            var msg = "";
+            var days = Number(this.byId("zdays").getValue());
+            selectedRows.forEach(function (row) {
+                var mat = row.Product;
+                if (!oGrouped[mat]) {
+                    oGrouped[mat] = { P: [], W: null };
+                }
+                if (row.PlanType === "P") {
+                    oGrouped[mat].P.push(row);
+                } else if (row.PlanType === "W") {
+                    oGrouped[mat].W = row;
+                }
+            });
+            Object.keys(oGrouped).forEach(function (Product) {
+                var pRow = oGrouped[Product].P;
+                var wRow = oGrouped[Product].W;
+                var total = 0;
+                var unPlan = parseFloat(wRow.Summary) || 0;
+                for (var i = 1; i <= days; i++) {
+                    var sKey = "D" + String(i).padStart(3, "0");
+                    pRow.forEach(function (rowP) {
+                        total += parseFloat(rowP[sKey]) || 0;
+                    });
+                };
+                pRow.forEach(function (rowP) {
+                    total -= rowP.Summary;
+                });
 
+                if( total > unPlan) {
+                    msg += wRow.Product + " / ";
+                };
+            });
+            msg = msg.slice(0, -2);
+            return {
+                postDocs: postDocs,
+                msg: msg
+            };
         },
 
         callAction: function (postData, bEvent, username) {
