@@ -85,7 +85,7 @@
               <Text text="{MRPResponsible}" tooltip="{MRPResponsible}" wrapping="false"/>
             </t:template>
           </t:Column>
-          <t:Column id="Product" label="{i18n>Product}" width="10rem" sortProperty="Product" filterProperty="Product" visible="true" autoResizable="true">
+          <t:Column id="Product" label="{i18n>Product}" width="14rem" sortProperty="Product" filterProperty="Product" visible="true" autoResizable="true">
             <t:customData>
               <core:CustomData key="p13nData" value='\{"columnKey":"Product", "leadingProperty":"Product", "sortProperty":"Product", "filterProperty": "Product"}'/>
             </t:customData>
@@ -93,7 +93,7 @@
               <Text text="{Product}" tooltip="{Product}" wrapping="false"/>
             </t:template>
           </t:Column>
-          <t:Column id="Idnrk" label="{i18n>Idnrk}" width="10rem" sortProperty="Idnrk" filterProperty="Idnrk" visible="true" autoResizable="true">
+          <t:Column id="Idnrk" label="{i18n>Idnrk}" width="14rem" sortProperty="Idnrk" filterProperty="Idnrk" visible="true" autoResizable="true">
             <t:customData>
               <core:CustomData key="p13nData" value='\{"columnKey":"Idnrk", "leadingProperty":"Idnrk", "sortProperty":"Idnrk", "filterProperty": "Idnrk"}'/>
             </t:customData>
