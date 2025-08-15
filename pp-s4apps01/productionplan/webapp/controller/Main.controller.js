@@ -206,7 +206,21 @@ sap.ui.define([
                 oDatefield = '/Date' + oDatenum;
                 oDatevalue.setDate(oDatevalue.getDate() + 1);
                 let weekday = oDatevalue.getDay();
-                let aWeekdays = ["日", "月", "火", "水", "木", "金", "土"];
+                let sLanguage = sap.ui.getCore().getConfiguration().getLanguage();
+                switch (sLanguage.split("-")[0]) {
+                    case "ja":
+                        var aWeekdays = ["日", "月", "火", "水", "木", "金", "土"];
+                        break;
+                    case "zh":
+                        var aWeekdays = ["日", "一", "二", "三", "四", "五", "六"];
+                        break;
+                    case "en":
+                        var aWeekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+                        break;
+                    default:
+                        var aWeekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+                }
+                
                 that._LocalData.setProperty(oDatefield, (oDatevalue.getMonth() + 1) + '-' + oDatevalue.getDate() + aWeekdays[weekday]);
             }
         },
@@ -551,8 +565,8 @@ sap.ui.define([
             let result = this.preparePostBody();
             let postDocs = result.postDocs;
             let msg = result.msg;
-            if ( msg !== "" ) {
-                MessageBox.error(msg + " " + "計画数＞未処分数。");
+            if (msg !== "") {
+                MessageBox.error(msg + " " + this.getResourceBundle().getText("msg001"));
                 return;
             };
 
@@ -631,7 +645,7 @@ sap.ui.define([
                     total -= rowP.Summary;
                 });
 
-                if( total > unPlan) {
+                if (total > unPlan) {
                     msg += wRow.Product + " / ";
                 };
             });

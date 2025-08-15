@@ -29,16 +29,16 @@
               <smartFilterBar:ControlConfiguration index="40" key="Product" visibleInAdvancedArea="true" label="{i18n>Product}" />
             </smartFilterBar:controlConfiguration>
             <VBox id="day">
-              <Label id="dayinput" text="計画期間" labelFor="zdays"/>
+              <Label id="dayinput" text="{i18n>Day}" labelFor="zdays"/>
               <Input id="zdays" class="myLabelStyle" value="{path:'local>/zdays'}" width="3rem" required="true" editable="true" type="Text" change="handleChange"/>
             </VBox>
 
-            <CheckBox id="ch_bom" select ="checkDone1" text="BOM展開"></CheckBox>
-            <CheckBox id="ch_plan" select ="checkDone2" text="計画手配検査"></CheckBox>
-            <CheckBox id="ch_theory" select ="checkDone3" text="理論在庫"></CheckBox>
-            <CheckBox id="ch_ecn" select ="checkDone4" text="ECNチェック"></CheckBox>
-            <CheckBox id="ch_wo" select ="checkDone5" text="W/O No表示"></CheckBox>
-            <CheckBox id="ch_out" select ="checkDone6" text="外注品目除外"></CheckBox>
+            <CheckBox id="ch_bom" select ="checkDone1" text="{i18n>Bom}"></CheckBox>
+            <CheckBox id="ch_plan" select ="checkDone2" text="{i18n>Plan}"></CheckBox>
+            <CheckBox id="ch_theory" select ="checkDone3" text="{i18n>Theory}"></CheckBox>
+            <CheckBox id="ch_ecn" select ="checkDone4" text="{i18n>Ecn}"></CheckBox>
+            <CheckBox id="ch_wo" select ="checkDone5" text="{i18n>Wo}"></CheckBox>
+            <CheckBox id="ch_out" select ="checkDone6" text="{i18n>Out}"></CheckBox>
           </smartFilterBar:SmartFilterBar>
         </f:content>
       </f:DynamicPageHeader>
@@ -74,7 +74,7 @@
               <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'/>
             </t:customData>
             <t:template>
-              <Text text="{Plant}"/>
+              <Text text="{Plant}" tooltip="{Plant}" wrapping="false"/>
             </t:template>
           </t:Column>
           <t:Column id="MRPResponsible" label="{i18n>MRPResponsible}" width="4rem" sortProperty="MRPResponsible" filterProperty="MRPResponsible" visible="true" autoResizable="true">
@@ -82,7 +82,7 @@
               <core:CustomData key="p13nData" value='\{"columnKey":"MRPResponsible", "leadingProperty":"MRPResponsible", "sortProperty":"MRPResponsible", "filterProperty": "MRPResponsible"}'/>
             </t:customData>
             <t:template>
-              <Text text="{MRPResponsible}"/>
+              <Text text="{MRPResponsible}" tooltip="{MRPResponsible}" wrapping="false"/>
             </t:template>
           </t:Column>
           <t:Column id="Product" label="{i18n>Product}" width="10rem" sortProperty="Product" filterProperty="Product" visible="true" autoResizable="true">
@@ -90,7 +90,7 @@
               <core:CustomData key="p13nData" value='\{"columnKey":"Product", "leadingProperty":"Product", "sortProperty":"Product", "filterProperty": "Product"}'/>
             </t:customData>
             <t:template>
-              <Text text="{Product}"/>
+              <Text text="{Product}" tooltip="{Product}" wrapping="false"/>
             </t:template>
           </t:Column>
           <t:Column id="Idnrk" label="{i18n>Idnrk}" width="10rem" sortProperty="Idnrk" filterProperty="Idnrk" visible="true" autoResizable="true">
@@ -98,7 +98,7 @@
               <core:CustomData key="p13nData" value='\{"columnKey":"Idnrk", "leadingProperty":"Idnrk", "sortProperty":"Idnrk", "filterProperty": "Idnrk"}'/>
             </t:customData>
             <t:template>
-              <Text text="{Idnrk}"/>
+              <Text text="{Idnrk}" tooltip="{Idnrk}" wrapping="false"/>
             </t:template>
           </t:Column>
           <t:Column id="Stufe" label="{i18n>Stufe}" width="6rem" sortProperty="Stufe" filterProperty="Stufe" visible="true" autoResizable="true">
@@ -141,12 +141,12 @@
               <Text text="{PlanType}"/>
             </t:template>
           </t:Column>
-          <t:Column id="Project" label="{i18n>Project}" width="6rem" sortProperty="Project" filterProperty="Project" visible="true" autoResizable="true">
+          <t:Column id="Project" label="{i18n>Project}" width="10rem" sortProperty="Project" filterProperty="Project" visible="true" autoResizable="true">
             <t:customData>
               <core:CustomData key="p13nData" value='\{"columnKey":"Project", "leadingProperty":"Project", "sortProperty":"Project", "filterProperty": "Project"}'/>
             </t:customData>
             <t:template>
-              <Text text="{Project}"/>
+              <Text text="{Project}" tooltip="{Project}" wrapping="false"/>
             </t:template>
           </t:Column>
           <t:Column id="ProductionSupervisor" label="{i18n>ProductionSupervisor}" width="4rem" sortProperty="ProductionSupervisor" filterProperty="ProductionSupervisor" visible="false" autoResizable="true">
