@@ -41,7 +41,11 @@ server:
         mountPath: /
         services:
           - urlPath: /sap/opu/odata4/sap/zui_ledplannedorder_o4/srvd/sap/zui_ledplannedorder_o4/0001
-            metadataPath: ./webapp/localService/metadata.xml
-            mockdataPath: ./webapp/localService/data
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001
+            metadataPath: ./webapp/localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml
+            mockdataPath: ./webapp/localService/AuthorityService/data
             generateMockData: true
         annotations: []

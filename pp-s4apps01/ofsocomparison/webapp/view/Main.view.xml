@@ -53,12 +53,10 @@
                                 </smartFilterBar:ControlConfiguration>
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="Plant" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="Customer" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="Material" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="unit_of_measure" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MaterialName" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="MATERIALBYCUSTOMER" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="CREATED_AT" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="created_ats" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Period1" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Period2" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Period3" visible="false"/>
@@ -95,6 +93,42 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="Period34" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Period35" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Period36" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT1" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT2" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT3" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT4" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT5" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT6" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT7" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT8" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT9" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT10" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT11" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT12" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT13" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT14" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT15" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT16" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT17" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT18" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT19" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT20" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT21" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT22" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT23" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT24" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT25" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT26" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT27" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT28" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT29" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT30" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT31" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT32" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT33" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT34" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT35" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodT36" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>

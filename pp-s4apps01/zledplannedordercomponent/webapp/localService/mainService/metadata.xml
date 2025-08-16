@@ -9,32 +9,32 @@
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
     </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation"/>
     </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="SAP__capabilities"/>
     </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation"/>
-    </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
     </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI"/>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
     </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="SAP__HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
     </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
@@ -42,11 +42,11 @@
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
     </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI"/>
     </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation"/>
     </edmx:Reference>
     <edmx:DataServices>
         <Schema Namespace="com.sap.gateway.srvd.zui_ledplannedorder_o4.v0001" Alias="SAP__self">
@@ -125,7 +125,6 @@
                 <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 36 chars according to RFC4122"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/Plant">
-                <Annotation Term="SAP__common.Label" String="プラント"/>
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.ValueListReferences">
@@ -133,27 +132,28 @@
                         <String>../../../../srvd_f4/sap/i_plantstdvh/0001;ps='srvd-zui_ledplannedorder_o4-0001';va='com.sap.gateway.srvd.zui_ledplannedorder_o4.v0001.et-zr_ledplannedordercomponent.plant'/$metadata</String>
                     </Collection>
                 </Annotation>
+                <Annotation Term="SAP__common.Label" String="Plant"/>
                 <Annotation Term="SAP__common.Heading" String="Plnt"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Plant"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/MRPController">
-                <Annotation Term="SAP__common.Label" String="MRP管理者"/>
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Collection>
-                        <String>../../../../srvd_f4/sap/i_mrpcontrollervh/0001;ps='srvd-zui_ledplannedorder_o4-0001';va='com.sap.gateway.srvd.zui_ledplannedorder_o4.v0001.et-zr_ledplannedordercomponent.mrpcontroller'/$metadata</String>
+                        <String>../../../../srvd_f4/sap/zc_mrpcontrollervh/0001;ps='srvd-zui_ledplannedorder_o4-0001';va='com.sap.gateway.srvd.zui_ledplannedorder_o4.v0001.et-zr_ledplannedordercomponent.mrpcontroller'/$metadata</String>
                     </Collection>
                 </Annotation>
+                <Annotation Term="SAP__common.Label" String="MRP Controller"/>
                 <Annotation Term="SAP__common.Heading" String="MRPCn"/>
-                <Annotation Term="SAP__common.QuickInfo" String="MRP Controller"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=DISPO"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/ProductionSupervisor">
-                <Annotation Term="SAP__common.Label" String="製造責任者"/>
+                <Annotation Term="SAP__common.Label" String="Production Supervisor"/>
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Collection>
-                        <String>../../../../srvd_f4/sap/i_plndorderprodnsupervisorvh/0001;ps='srvd-zui_ledplannedorder_o4-0001';va='com.sap.gateway.srvd.zui_ledplannedorder_o4.v0001.et-zr_ledplannedordercomponent.productionsupervisor'/$metadata</String>
+                        <String>../../../../srvd_f4/sap/zc_productionsupervisorvh/0001;ps='srvd-zui_ledplannedorder_o4-0001';va='com.sap.gateway.srvd.zui_ledplannedorder_o4.v0001.et-zr_ledplannedordercomponent.productionsupervisor'/$metadata</String>
                     </Collection>
                 </Annotation>
             </Annotations>
@@ -163,78 +163,97 @@
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Collection>
-                        <String>../../../../srvd_f4/sap/i_productstdvh/0001;ps='srvd-zui_ledplannedorder_o4-0001';va='com.sap.gateway.srvd.zui_ledplannedorder_o4.v0001.et-zr_ledplannedordercomponent.material'/$metadata</String>
+                        <String>../../../../srvd_f4/sap/zi_product_vh/0001;ps='srvd-zui_ledplannedorder_o4-0001';va='com.sap.gateway.srvd.zui_ledplannedorder_o4.v0001.et-zr_ledplannedordercomponent.material'/$metadata</String>
                     </Collection>
                 </Annotation>
                 <Annotation Term="SAP__common.Heading" String="Material"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Material Number"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/MatlCompRequirementDate">
-                <Annotation Term="SAP__common.Label" String="所要日付"/>
                 <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__common.Label" String="Requirements date"/>
                 <Annotation Term="SAP__common.Heading" String="ReqmtsDate"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Requirements date for the component"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BDTER"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/PlannedOrder">
-                <Annotation Term="SAP__common.Label" String="計画手配番号"/>
+                <Annotation Term="SAP__common.Label" String="Planned Order"/>
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Collection>
-                        <String>../../../../srvd_f4/sap/i_plannedorderstdvh/0001;ps='srvd-zui_ledplannedorder_o4-0001';va='com.sap.gateway.srvd.zui_ledplannedorder_o4.v0001.et-zr_ledplannedordercomponent.plannedorder'/$metadata</String>
+                        <String>../../../../srvd_f4/sap/zc_plannedordervh/0001;ps='srvd-zui_ledplannedorder_o4-0001';va='com.sap.gateway.srvd.zui_ledplannedorder_o4.v0001.et-zr_ledplannedordercomponent.plannedorder'/$metadata</String>
                     </Collection>
                 </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/Assembly">
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Label" String="Material"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Material Number"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/BaseUnit">
                 <Annotation Term="SAP__common.IsUnit"/>
                 <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
                 <Annotation Term="SAP__common.Heading" String="BUn"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/PlannedTotalQtyInBaseUnit">
                 <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/BillOfMaterialItemNumber">
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Label" String="Item (SD)"/>
                 <Annotation Term="SAP__common.Heading" String="Item"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Item number of the SD document"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=POSNR"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/UsageProbabilityPercent">
                 <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/AlternativeItemGroup">
                 <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/AlternativeItemStrategy">
                 <Annotation Term="SAP__core.Computed"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/AlternativeItemPriority">
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/Reservation">
                 <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Label" String="Reservation"/>
                 <Annotation Term="SAP__common.Heading" String="Reserv.no."/>
                 <Annotation Term="SAP__common.QuickInfo" String="Number of reservation/dependent requirements"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=RSNUM"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/ReservationItem">
                 <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Label" String="Item no."/>
                 <Annotation Term="SAP__common.Heading" String="Itm"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Item Number of Reservation / Dependent Requirements"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=RSPOS"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/Status">
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Label" String="Message Type"/>
                 <Annotation Term="SAP__common.Heading" String="MT"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MSGTY"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/__EntityControl">
                 <Annotation Term="SAP__core.Computed"/>
@@ -255,8 +274,8 @@
                 <Annotation Term="SAP__common.Label" String="LED Planned Order Component"/>
                 <Annotation Term="SAP__UI.HeaderInfo">
                     <Record>
-                        <PropertyValue Property="TypeName" String="LED生産計画の構成品目提案"/>
-                        <PropertyValue Property="TypeNamePlural" String="LED生産計画の構成品目提案"/>
+                        <PropertyValue Property="TypeName" String="The proposal of the component"/>
+                        <PropertyValue Property="TypeNamePlural" String="Results"/>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__UI.LineItem">
@@ -270,15 +289,13 @@
                             <PropertyValue Property="Value" Path="Message"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="計画手配"/>
                             <PropertyValue Property="Value" Path="PlannedOrder"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="プラント"/>
                             <PropertyValue Property="Value" Path="Plant"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="組立品目"/>
+                            <PropertyValue Property="Label" String="Assembly Material"/>
                             <PropertyValue Property="Value" Path="Assembly"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
@@ -286,7 +303,6 @@
                             <PropertyValue Property="Value" Path="PlannedTotalQtyInBaseUnit"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="所要日付"/>
                             <PropertyValue Property="Value" Path="MatlCompRequirementDate"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
@@ -322,19 +338,15 @@
                             <PropertyValue Property="Value" Path="ConfirmedAvailableQuantity"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="MRP管理者"/>
                             <PropertyValue Property="Value" Path="MRPController"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="製造責任者"/>
                             <PropertyValue Property="Value" Path="ProductionSupervisor"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="入出庫予定"/>
                             <PropertyValue Property="Value" Path="Reservation"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="入出庫予定明細"/>
                             <PropertyValue Property="Value" Path="ReservationItem"/>
                         </Record>
                     </Collection>
@@ -410,6 +422,22 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="DeltaUpdateSupported" Bool="true"/>
+                        <PropertyValue Property="Updatable" Path="__EntityControl/Updatable"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeepUpdateSupport">
+                    <Record>
+                        <PropertyValue Property="ContentIDSupported" Bool="true"/>
+                    </Record>
+                </Annotation>
                 <Annotation Term="SAP__capabilities.InsertRestrictions">
                     <Record>
                         <PropertyValue Property="Insertable" Bool="false"/>
@@ -420,37 +448,12 @@
                         <PropertyValue Property="Deletable" Bool="false"/>
                     </Record>
                 </Annotation>
-                <Annotation Term="SAP__capabilities.UpdateRestrictions">
-                    <Record>
-                        <PropertyValue Property="Updatable" Path="__EntityControl/Updatable"/>
-                        <PropertyValue Property="QueryOptions">
-                            <Record>
-                                <PropertyValue Property="SelectSupported" Bool="true"/>
-                            </Record>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__core.OptimisticConcurrency">
-                    <Collection/>
-                </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.Container">
                 <Annotation Term="SAP__CodeList.UnitsOfMeasure">
                     <Record>
                         <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
                         <PropertyValue Property="CollectionPath" String="UnitsOfMeasure"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__aggregation.ApplySupported">
-                    <Record>
-                        <PropertyValue Property="Transformations">
-                            <Collection>
-                                <String>aggregate</String>
-                                <String>groupby</String>
-                                <String>filter</String>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
@@ -487,26 +490,33 @@
                         <PropertyValue Property="FitToPage" Bool="true"/>
                         <PropertyValue Property="FontName" Bool="true"/>
                         <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
                         <PropertyValue Property="Margin" Bool="true"/>
                         <PropertyValue Property="Padding" Bool="true"/>
-                        <PropertyValue Property="Signature" Bool="true"/>
-                        <PropertyValue Property="HeaderFooter" Bool="true"/>
                         <PropertyValue Property="ResultSizeDefault" Int="20000"/>
                         <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
-                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="TextDirectionLayout" Bool="true"/>
                         <PropertyValue Property="Treeview" Bool="true"/>
+                        <PropertyValue Property="UploadToFileShare" Bool="true"/>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
                 <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
             </Annotations>
+            <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/RequiredQuantity">
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/ConfirmedAvailableQuantity">
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+            </Annotations>
             <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/Message">
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Label" String="Message text"/>
             </Annotations>
-            <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/__EntityControl/Updatable">
-                <Annotation Term="SAP__common.Label" String="Dyn. Method Control"/>
-                <Annotation Term="SAP__common.Heading" String="Dynamic Method Control"/>
-                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Method Property"/>
+            <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType/StatusText">
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.ZR_UPLOAD_PARAMETER/Zzkey">
                 <Annotation Term="SAP__common.Label" String="Zzkey"/>

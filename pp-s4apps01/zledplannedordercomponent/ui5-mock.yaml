@@ -35,17 +35,11 @@ server:
         mountPath: /
         services:
           - urlPath: /sap/opu/odata4/sap/zui_ledplannedorder_o4/srvd/sap/zui_ledplannedorder_o4/0001
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
             generateMockData: true
-            metadataXmlPath: ./webapp/localService/metadata.xml
-            mockdataRootPath: ./webapp/localService/data
-          - urlPath: /sap/opu/odata4/sap/zui_ledplannedorder_o4/srvd/sap/zui_ledplannedorder_o4/0001/
-            metadataPath: ./webapp/localService/metadata.xml
-            mockdataPath: ./webapp/localService/mockdata
+          - urlPath: /sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001
+            metadataPath: ./webapp/localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml
+            mockdataPath: ./webapp/localService/AuthorityService/data
             generateMockData: true
-          - urlPath: /sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/
-            generateMockData: true
-            metadataXmlPath: ./webapp/localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml
-            mockdataRootPath: ./webapp/localService/ZUI_PERMISSION_ACCESS_O4/mockdata
-        annotations:
-          - localPath: ./webapp/annotations/annotation.xml
-            urlPath: annotations/annotation.xml
+        annotations: []

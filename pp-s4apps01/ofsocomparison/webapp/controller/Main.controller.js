@@ -184,44 +184,50 @@ sap.ui.define([
 				oTable.addColumn(new Column({
 					label: "{i18n>Plant}",
 					template: new Text({
-						text: "{local>Plant}"
+						text: "{local>Plant}",
+						wrapping: false
 					}),
-					width: "10rem"
+					width: "6rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>Customer}",
 					template: new Text({
-						text: "{local>Customer}"
+						text: "{local>Customer}",
+						wrapping: false
 					}),
-					width: "10rem"
+					width: "8rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>Material}",
 					template: new Text({
-						text: "{local>Material}"
+						text: "{local>Material}",
+						wrapping: false
 					}),
 					width: "10rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>MaterialName}",
 					template: new Text({
-						text: "{local>MaterialName}"
+						text: "{local>MaterialName}",
+						wrapping: false
 					}),
-					width: "10rem"
+					width: "12rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>MATERIALBYCUSTOMER}",
 					template: new Text({
-						text: "{local>MATERIALBYCUSTOMER}"
+						text: "{local>MATERIALBYCUSTOMER}",
+						wrapping: false
 					}),
 					width: "10rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>CREATED_AT}",
 					template: new Text({
-						text: "{local>CREATED_AT}"
+						text: "{local>CREATED_AT}",
+						wrapping: false
 					}),
-					width: "10rem"
+					width: "8rem"
 				}));
 
 				if (titleVariable.PeriodT1) {
@@ -230,7 +236,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period1}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -240,7 +247,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period2}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -250,7 +258,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period3}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -260,29 +269,30 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period4}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
 				if (titleVariable.PeriodT5) {
-
 					oTable.addColumn(new Column({
 						label: titleVariable.PeriodT5,
 						template: new Text({
 							text: "{local>Period5}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
 				if (titleVariable.PeriodT6) {
-
 					oTable.addColumn(new Column({
 						label: titleVariable.PeriodT6,
 						template: new Text({
 							text: "{local>Period6}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -292,7 +302,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period7}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -302,7 +313,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period8}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -312,7 +324,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period9}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -322,7 +335,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period10}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -332,7 +346,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period11}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -342,7 +357,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period12}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -352,7 +368,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period13}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -362,7 +379,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period14}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -372,7 +390,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period15}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -382,7 +401,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period16}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -392,7 +412,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period17}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -402,16 +423,19 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period18}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
+
 				if (titleVariable.PeriodT19) {
 					oTable.addColumn(new Column({
 						label: titleVariable.PeriodT19,
 						template: new Text({
 							text: "{local>Period19}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -421,7 +445,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period20}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -431,7 +456,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period21}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -441,7 +467,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period22}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -451,7 +478,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period23}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -461,7 +489,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period24}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -471,7 +500,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period25}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -481,7 +511,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period26}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -491,7 +522,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period27}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -501,7 +533,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period28}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -511,7 +544,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period29}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -521,7 +555,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period30}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -531,7 +566,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period31}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -541,7 +577,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period32}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -551,7 +588,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period33}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -561,7 +599,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period34}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -571,7 +610,8 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period35}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 
@@ -581,11 +621,11 @@ sap.ui.define([
 						template: new Text({
 							text: "{local>Period36}"
 						}),
-						width: "10rem"
+						width: "10rem",
+						hAlign: "End"
 					}));
 				}
 			}
-
 		},
 
 		onDataExport: function () {
