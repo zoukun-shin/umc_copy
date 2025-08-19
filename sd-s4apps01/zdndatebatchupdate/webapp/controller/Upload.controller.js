@@ -31,7 +31,17 @@ sap.ui.define([
             // oUploadSet.bindElement(sPath);
 
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
+            this.getRouter().getRoute("RouteMain").attachMatched(this._initialize, this);
         },
+
+        // ADD BEGIN BY XINLEI XU 2025/08/15
+        _initialize: function () {
+            var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
+            var oFilter = new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.EQ, "ZUPLOAD_DNDATEUPDATE_" + sLanguage);
+            var oControlBinding = this.byId("idUploadSet").getBinding("items");
+            oControlBinding.filter(oFilter);
+        },
+        // ADD END BY XINLEI XU 2025/08/15
 
         getMediaUrl: function (sUrlString) {
             if (sUrlString) {

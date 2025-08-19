@@ -18,12 +18,12 @@
         <f:header>
             <f:DynamicPageHeader pinnable="true">
                 <f:content> 
-                    <CheckBox id = 'idCB1' text="{i18n>Indicator1}" width="11rem" select="onSelect"/> 
+                    <CheckBox id = 'idCB1' text="{i18n>Indicator1}" width="12rem" select="onSelect"/> 
                     <CheckBox id = 'idCB2' text="{i18n>Indicator2}" width="11rem" select="onSelect"/> 
-                    <CheckBox id = 'idCB3' text="{i18n>Indicator3}" width="11rem" select="onSelect"/> 
-                    <CheckBox id = 'idCB4' text="{i18n>Indicator4}" width="11rem" select="onSelect"/> 
-                    <CheckBox id = 'idCB5' text="{i18n>Indicator5}" width="11rem" select="onSelect"/> 
-                    <CheckBox id = 'idCB6' text="{i18n>Indicator6}" width="11rem" select="onSelect"/> 
+                    <CheckBox id = 'idCB3' text="{i18n>Indicator3}" width="13rem" select="onSelect"/> 
+                    <CheckBox id = 'idCB4' text="{i18n>Indicator4}" width="12rem" select="onSelect"/> 
+                    <CheckBox id = 'idCB5' text="{i18n>Indicator5}" width="12rem" select="onSelect"/> 
+                    <CheckBox id = 'idCB6' text="{i18n>Indicator6}" width="12rem" select="onSelect"/> 
                 </f:content>  
                 <f:content>
                     <FlexBox fitContainer="true">

@@ -93,7 +93,10 @@
         }
     },
     "sap.ui5": {
-        "flexEnabled": true,
+        "flexEnabled": false,
+        "config": {
+            "fullWidth": true
+        },
         "dependencies": {
             "minUI5Version": "1.120.18",
             "libs": {
@@ -203,6 +206,6 @@
         "service": "sd-s4apps01"
     },
     "sap.platform.cf": {
-      "ui5VersionNumber": "1.120.18"
+        "ui5VersionNumber": "1.120.18"
     }
 }

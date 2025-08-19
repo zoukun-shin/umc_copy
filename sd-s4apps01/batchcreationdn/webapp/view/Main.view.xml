@@ -150,7 +150,7 @@
                     </t:Column>
                     <t:Column
                         id="idColumn"
-                        width="8rem"
+                        width="9rem"
                         label="{/#SalesOrderForDNType/SalesDocument/@sap:label}"
                         sortProperty="SalesDocument"
                         filterProperty="SalesDocument"
@@ -172,7 +172,7 @@
                     </t:Column>
                     <t:Column
                         id="id0Column"
-                        width="8rem"
+                        width="10rem"
                         label="{/#SalesOrderForDNType/SalesDocumentItem/@sap:label}"
                         sortProperty="SalesDocumentItem"
                         filterProperty="SalesDocumentItem"
@@ -194,7 +194,7 @@
                     </t:Column>
                     <t:Column
                         id="id2Column"
-                        width="8rem"
+                        width="10rem"
                         label="{/#SalesOrderForDNType/SalesDocumentType/@sap:label}"
                         sortProperty="SalesDocumentType"
                         filterProperty="SalesDocumentType"
@@ -216,7 +216,7 @@
                     </t:Column>
                     <t:Column
                         id="id1Column"
-                        width="8rem"
+                        width="9rem"
                         label="{/#SalesOrderForDNType/SalesOrganization/@sap:label}"
                         sortProperty="SalesOrganization"
                         filterProperty="SalesOrganization"
