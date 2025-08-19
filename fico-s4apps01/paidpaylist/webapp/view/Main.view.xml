@@ -10,10 +10,10 @@
     xmlns:table="sap.ui.table">
 
     <smartFilterBar:SmartFilterBar id="SFB" useToolbar="false" entitySet="PaidPayReport" persistencyKey="FilterBar">
-		<!--<RadioButtonGroup id="rbg1" columns="4" width="100%" class="sapUiMediumMarginBottom">-->
-		<RadioButton groupName="GroupA" id="Option1" text="{i18n>Option1}" selected="true" select="onButtonSelect"/>
-		<RadioButton groupName="GroupA" id="Option2" text="{i18n>Option2}" select="onButtonSelect"/>
-		<!--</RadioButtonGroup>-->
+		<RadioButtonGroup id="rbg1" columns="4" width="60rem" class="sapUiMediumMarginBottom">
+			<RadioButton groupName="GroupA" id="Option1" text="{i18n>Option1}" selected="true" select="onButtonSelect"/>
+			<RadioButton groupName="GroupA" id="Option2" text="{i18n>Option2}" select="onButtonSelect"/>
+		</RadioButtonGroup>
 		<!--filterChange="check">-->
 		<smartFilterBar:controlConfiguration>
 			<smartFilterBar:ControlConfiguration index="1" id="Company" key="CompanyCode" visibleInAdvancedArea="true" label="{i18n>Bukrs}"

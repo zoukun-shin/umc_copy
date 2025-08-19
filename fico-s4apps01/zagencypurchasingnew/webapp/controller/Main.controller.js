@@ -197,16 +197,18 @@ sap.ui.define([
             try {
                 Promise.all(aPromise).then((aContext) => {
                     MessageToast.show(this.getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
-                    for (const activeContext of aContext) {
-                        var object = activeContext.processLogic;
-                        var result = JSON.parse(object.Zzkey);
-                        result.ITEMS.forEach((element) => {
-                            var sPath = "/Itemdata(PostingDate='" + element.POSTINGDATE + "',CompanyCode='" + element.COMPANYCODE + "',CompanyCodeCurrency='" + element.COMPANYCODECURRENCY + "',TaxCode='" + element.TAXCODE + "')";
-                            that.getModel().setProperty(sPath + "/message", element.MESSAGE);
-                            that.getModel().setProperty(sPath + "/accountingdocument1", element.ACCOUNTINGDOCUMENT1);
-                            that.getModel().setProperty(sPath + "/accountingdocument2", element.ACCOUNTINGDOCUMENT2);
-                        });
-                    }
+                    // DEL BEGIN BY XINLEI XU 2025/08/14
+                    // for (const activeContext of aContext) {
+                    //     var object = activeContext.processLogic;
+                    //     var result = JSON.parse(object.Zzkey);
+                    //     result.ITEMS.forEach((element) => {
+                    //         var sPath = "/Itemdata(PostingDate='" + element.POSTINGDATE + "',CompanyCode='" + element.COMPANYCODE + "',CompanyCodeCurrency='" + element.COMPANYCODECURRENCY + "',TaxCode='" + element.TAXCODE + "')";
+                    //         that.getModel().setProperty(sPath + "/message", element.MESSAGE);
+                    //         that.getModel().setProperty(sPath + "/accountingdocument1", element.ACCOUNTINGDOCUMENT1);
+                    //         that.getModel().setProperty(sPath + "/accountingdocument2", element.ACCOUNTINGDOCUMENT2);
+                    //     });
+                    // }
+                    // // DEL END BY XINLEI XU 2025/08/14
                 }).catch((error) => {
                     MessageBox.error(error);
                 }).finally(() => {
@@ -216,6 +218,35 @@ sap.ui.define([
             } catch (error) {
                 MessageBox.error(error);
             }
-        }
+        },
+
+        onBeforeExport: function (oEvent) {
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
+            this._exportExcel(mExcelSettings, sFileName);
+        },
+
+        _exportExcel: function (mExcelSettings, sFileName) {
+            mExcelSettings.workbook.columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    //  Date
+                    // case "CreatedDate":
+                    // case "LastChangedDate":
+                    //     oColumn.type = sap.ui.export.EdmType.Date;
+                    //     break;
+                    //  Number 分隔符
+                    case "Currency1":
+                    case "Currency2":
+                    case "Currency3":
+                    case "Currency4":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                }
+            });
+            mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
+        },
     });
 });

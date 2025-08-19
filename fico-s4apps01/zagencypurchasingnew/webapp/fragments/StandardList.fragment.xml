@@ -23,7 +23,7 @@
                         <Text text="{Status}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>PostingDate}" sortProperty="PostingDate" filterProperty="PostingDate">
+                <table:Column width="10rem" label="{i18n>PostingDate}" sortProperty="PostingDate" filterProperty="PostingDate">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PostingDate", "leadingProperty":"PostingDate"}'/>
                     </table:customData>
@@ -31,7 +31,7 @@
                         <Text text="{PostingDate}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
+                <table:Column width="11rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode", "leadingProperty":"CompanyCode"}'/>
                     </table:customData>
@@ -47,7 +47,7 @@
                         <Text text="{GLAccount}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>CompanyCode2}" sortProperty="CompanyCode2" filterProperty="CompanyCode2">
+                <table:Column width="12rem" label="{i18n>CompanyCode2}" sortProperty="CompanyCode2" filterProperty="CompanyCode2">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode2", "leadingProperty":"CompanyCode2"}'/>
                     </table:customData>
@@ -71,7 +71,7 @@
                         <Text text="{TaxCode}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>Currency1}" sortProperty="Currency1" filterProperty="Currency1" hAlign="End">
+                <table:Column width="12rem" label="{i18n>Currency1}" sortProperty="Currency1" filterProperty="Currency1" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Currency1", "leadingProperty":"Currency1"}'/>
                     </table:customData>
@@ -79,7 +79,7 @@
                         <Text text="{ parts:[ 'Currency1','CompanyCodeCurrency' ], formatter:'.formatter.formatFloat' }" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>Currency3}" sortProperty="Currency3" filterProperty="Currency3" hAlign="End">
+                <table:Column width="12rem" label="{i18n>Currency3}" sortProperty="Currency3" filterProperty="Currency3" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Currency3", "leadingProperty":"Currency3"}'/>
                     </table:customData>
@@ -87,7 +87,7 @@
                         <Text text="{ parts:[ 'Currency3','CompanyCodeCurrency' ], formatter:'.formatter.formatFloat' }" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>Currency2}" sortProperty="Currency2" filterProperty="Currency2" hAlign="End">
+                <table:Column width="12rem" label="{i18n>Currency2}" sortProperty="Currency2" filterProperty="Currency2" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Currency2", "leadingProperty":"Currency2"}'/>
                     </table:customData>
@@ -95,7 +95,7 @@
                         <Text text="{ parts:[ 'Currency2','CompanyCodeCurrency' ], formatter:'.formatter.formatFloat' }" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>accountingdocument1}" sortProperty="accountingdocument1" filterProperty="accountingdocument1">
+                <table:Column width="14rem" label="{i18n>accountingdocument1}" sortProperty="accountingdocument1" filterProperty="accountingdocument1">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"accountingdocument1", "leadingProperty":"accountingdocument1"}'/>
                     </table:customData>
@@ -103,7 +103,7 @@
                         <Text text="{accountingdocument1}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>accountingdocument2}" sortProperty="accountingdocument2" filterProperty="accountingdocument2">
+                <table:Column width="15rem" label="{i18n>accountingdocument2}" sortProperty="accountingdocument2" filterProperty="accountingdocument2">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"accountingdocument2", "leadingProperty":"accountingdocument2"}'/>
                     </table:customData>
@@ -111,7 +111,7 @@
                         <Text text="{accountingdocument2}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>Currency4}" sortProperty="Currency4" filterProperty="Currency4" hAlign="End">
+                <table:Column width="16rem" label="{i18n>Currency4}" sortProperty="Currency4" filterProperty="Currency4" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Currency4", "leadingProperty":"Currency4"}'/>
                     </table:customData>

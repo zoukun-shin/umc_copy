@@ -7,14 +7,15 @@
     <Page>
         <content>
             <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
-                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'BT', value1 : 'ZUPLOAD_PAIDPAY1', value2 : 'ZUPLOAD_PAIDPAY2' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                <!--<upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'BT', value1 : 'ZUPLOAD_PAIDPAY1', value2 : 'ZUPLOAD_PAIDPAY2' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">-->
+                <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration' }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
                     <upload:items>
                         <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
                     </upload:items>
                 </upload:UploadSet>
             </Panel>
             <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto">
-                <RadioButtonGroup id="rbg1" width="18rem">
+                <RadioButtonGroup id="rbg1" width="40rem">
 			       <RadioButton id="RB1-1" text="{i18n>RadioButton01}" selected="{local>/paidPay1}"/>
 			       <RadioButton id="RB1-2" text="{i18n>RadioButton02}" selected="{local>/paidPay2}"/>
 		        </RadioButtonGroup> 

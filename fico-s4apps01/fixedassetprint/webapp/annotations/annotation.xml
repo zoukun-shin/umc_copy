@@ -18,6 +18,7 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="FixedAssetDescription"/>
+                            <PropertyValue Property="Label" String="{@i18n>description}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="FixedAssetExternalID"/>
@@ -36,41 +37,49 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="AssetAccountDetermination"/>
+                            <PropertyValue Property="Label" String="{@i18n>accountDeterm}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="DepreciationStartDate"/>
+                            <PropertyValue Property="Label" String="{@i18n>depreciationCalculationStartDate}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="DepreciationKeyName"/>
+                            <PropertyValue Property="Label" String="{@i18n>DepreciationKeyName}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="LeasedAssetNote"/>
-                            <PropertyValue Property="Label" String="{@i18n>key}"/>
+                            <PropertyValue Property="Label" String="{@i18n>LeasedAssetNote}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="PlannedUsefulLifeInYears"/>
+                            <PropertyValue Property="Label" String="{@i18n>plannedUsefulLife}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="OriginalAcquisitionAmount"/>
+                            <PropertyValue Property="Label" String="{@i18n>OriginalAcquisitionAmount}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="quantity"/>
+                            <PropertyValue Property="Label" String="{@i18n>quantity}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="InvestmentReason"/>
-                            <PropertyValue Property="Label" String="投資理由"/>
+                            <PropertyValue Property="Label" String="{@i18n>InvestmentReason}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="AssetTypeName"/>
+                            <PropertyValue Property="Label" String="{@i18n>typeName}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="JP_PrptyTxRptSpclDepr"/>
+                            <PropertyValue Property="Label" String="{@i18n>JP_PrptyTxRptSpclDepr}"/>
                         </Record>
                     </Collection>
                 </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.FIXEDASSETPRINTType/AssetAdditionalDescription">
-                <Annotation Term="Common.Label" String="{@i18n>key1}"/>
+                <Annotation Term="Common.Label" String="{@i18n>AssetAdditionalDescription}"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>

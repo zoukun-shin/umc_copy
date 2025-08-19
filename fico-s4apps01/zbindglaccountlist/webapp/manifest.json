@@ -24,7 +24,7 @@
             "ZUI_BDGLACCOUNT_O2_VAN",
             "annotation"
           ],
-          "localUri": "localService/metadata.xml",
+          "localUri": "localService/mainService/metadata.xml",
           "odataVersion": "2.0"
         }
       },
@@ -32,7 +32,7 @@
         "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_BDGLACCOUNT_O2_VAN',Version='0001')/$value/",
         "type": "ODataAnnotation",
         "settings": {
-          "localUri": "localService/ZUI_BDGLACCOUNT_O2_VAN.xml"
+          "localUri": "localService/mainService/ZUI_BDGLACCOUNT_O2_VAN.xml"
         }
       },
       "annotation": {
@@ -43,13 +43,13 @@
         }
       },
       "AuthorityService": {
-          "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
-          "type": "OData",
-          "settings": {
-              "annotations": [],
-              "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
-              "odataVersion": "4.0"
-          }
+        "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
       }
     },
     "crossNavigation": {
@@ -120,14 +120,14 @@
         }
       },
       "Authority": {
-          "dataSource": "AuthorityService",
-          "preload": true,
-          "settings": {
-              "synchronizationMode": "None",
-              "operationMode": "Server",
-              "autoExpandSelect": true,
-              "earlyRequests": true
-          }
+        "dataSource": "AuthorityService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
       },
       "@i18n": {
         "type": "sap.ui.model.resource.ResourceModel",

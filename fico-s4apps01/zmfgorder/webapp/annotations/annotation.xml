@@ -19,69 +19,91 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="YearMonth"/>
+                            <PropertyValue Property="Label" String="{@i18n>YearMonth}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Companycode"/>
+                            <PropertyValue Property="Label" String="{@i18n>Companycode}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CompanycodeText"/>
+                            <PropertyValue Property="Label" String="{@i18n>CompanycodeText}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Plant"/>
+                            <PropertyValue Property="Label" String="{@i18n>Plant}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="PlantText"/>
+                            <PropertyValue Property="Label" String="{@i18n>PlantText}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Product"/>
+                            <PropertyValue Property="Label" String="{@i18n>Product}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ProductDescription"/>
+                            <PropertyValue Property="Label" String="{@i18n>ProductDescription}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="producedproduct"/>
+                            <PropertyValue Property="Label" String="{@i18n>producedproduct}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="MfgOrderConfirmedYieldQty"/>
+                            <PropertyValue Property="Label" String="{@i18n>MfgOrderConfirmedYieldQty}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="BusinessPartner"/>
+                            <PropertyValue Property="Label" String="{@i18n>BusinessPartner}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="BusinessPartnerName"/>
+                            <PropertyValue Property="Label" String="{@i18n>BusinessPartnerName}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ProfitCenter"/>
+                            <PropertyValue Property="Label" String="{@i18n>ProfitCenter}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ProfitCenterLongName"/>
+                            <PropertyValue Property="Label" String="{@i18n>ProfitCenterLongName}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CostCenter"/>
+                            <PropertyValue Property="Label" String="{@i18n>CostCenter}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CostCenterDescription"/>
+                            <PropertyValue Property="Label" String="{@i18n>CostCenterDescription}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ActivityType"/>
+                            <PropertyValue Property="Label" String="{@i18n>ActivityType}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CostCtrActivityTypeName"/>
+                            <PropertyValue Property="Label" String="{@i18n>CostCtrActivityTypeName}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ProductionSupervisor"/>
+                            <PropertyValue Property="Label" String="{@i18n>ProductionSupervisor}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="PlanQtyInCostSourceUnit"/>
+                            <PropertyValue Property="Label" String="{@i18n>PlanQtyInCostSourceUnit}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ActualQtyInCostSourceUnit"/>
+                            <PropertyValue Property="Label" String="{@i18n>ActualQtyInCostSourceUnit}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="UnitOfMeasure"/>
+                            <PropertyValue Property="Label" String="{@i18n>UnitOfMeasure}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="PlanCostRate"/>
+                            <PropertyValue Property="Label" String="{@i18n>PlanCostRate}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CostRateScaleFactor1"/>
@@ -89,6 +111,7 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ActualCostRate"/>
+                            <PropertyValue Property="Label" String="{@i18n>ActualCostRate}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CostRateScaleFactor2"/>
@@ -96,6 +119,7 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="TotalActualCost"/>
+                            <PropertyValue Property="Label" String="{@i18n>TotalActualCost}"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -307,43 +331,55 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="YearMonth"/>
-                            <PropertyValue Property="Label" String="年月"/>
+                            <PropertyValue Property="Label" String="{@i18n>YearMonth}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Companycode"/>
+                            <PropertyValue Property="Label" String="{@i18n>Companycode1}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CompanycodeText"/>
+                            <PropertyValue Property="Label" String="{@i18n>CompanycodeText}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Plant"/>
+                            <PropertyValue Property="Label" String="{@i18n>Plant}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="PlantText"/>
+                            <PropertyValue Property="Label" String="{@i18n>PlantText}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Product"/>
+                            <PropertyValue Property="Label" String="{@i18n>Product}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ProductDescription"/>
+                            <PropertyValue Property="Label" String="{@i18n>ProductDescription}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="SoldToParty"/>
+                            <PropertyValue Property="Label" String="{@i18n>BusinessPartner}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="BusinessPartnerName"/>
+                            <PropertyValue Property="Label" String="{@i18n>BusinessPartnerName}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="SalesPerformanceActualQuantity"/>
+                            <PropertyValue Property="Label" String="{@i18n>SalesPerformanceActualQuantity}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="SalesPerfActualQuantityUnit"/>
+                            <PropertyValue Property="Label" String="{@i18n>SalesPerfActualQuantityUnit}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="SalesPerfActlAmtInDspCurrency"/>
+                            <PropertyValue Property="Label" String="{@i18n>SalesPerfActlAmtInDspCurrency}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="DisplayCurrency"/>
+                            <PropertyValue Property="Label" String="{@i18n>DisplayCurrency}"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -375,14 +411,17 @@
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="YearMonth"/>
+                            <PropertyValue Property="Label" String="{@i18n>YearMonth}"/>
                         </Record>
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Companycode"/>
+                            <PropertyValue Property="Label" String="{@i18n>Companycode}"/>
                         </Record>
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CompanycodeText"/>
+                            <PropertyValue Property="Label" String="{@i18n>CompanycodeText}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="AccountingDocument"/>
@@ -395,49 +434,60 @@
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Plant"/>
+                            <PropertyValue Property="Label" String="{@i18n>Plant}"/>
                         </Record>
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="PlantText"/>
+                            <PropertyValue Property="Label" String="{@i18n>PlantText}"/>
                         </Record>
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Product"/>
+                            <PropertyValue Property="Label" String="{@i18n>Product}"/>
                         </Record>
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ProductDescription"/>
+                            <PropertyValue Property="Label" String="{@i18n>ProductDescription}"/>
                         </Record>
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ProfitCenter"/>
+                            <PropertyValue Property="Label" String="{@i18n>ProfitCenter}"/>
                         </Record>
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ProfitCenterLongName"/>
+                            <PropertyValue Property="Label" String="{@i18n>ProfitCenterLongName}"/>
                         </Record>
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="SoldToParty"/>
+                            <PropertyValue Property="Label" String="{@i18n>BusinessPartner}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="BusinessPartnerName"/>
+                            <PropertyValue Property="Label" String="{@i18n>BusinessPartnerName}"/>
                         </Record>
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Zamount1"/>
+                            <PropertyValue Property="Label" String="{@i18n>Zamount1}"/>
                         </Record>
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Zamount2"/>
+                            <PropertyValue Property="Label" String="{@i18n>Zamount2}"/>
                         </Record>
 
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="DisplayCurrency"/>
+                            <PropertyValue Property="Label" String="{@i18n>DisplayCurrency}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="AccountingDocumentType"/>
-                            <PropertyValue Property="Label" String="{@i18n>key4}"/>
+                            <PropertyValue Property="Label" String="{@i18n>AccountingDocumentType}"/>
                         </Record>
 </Collection>
                 </Annotation>
@@ -462,6 +512,18 @@
                         <PropertyValue Property="Text" String="{@i18n>key2}"/>
                     </Record>
                 </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/Companycode">
+                <Annotation Term="Common.Label" String="{@i18n>Companycode1}"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/Plant">
+                <Annotation Term="Common.Label" String="{@i18n>Plant1}"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/calendaryear">
+                <Annotation Term="Common.Label" String="{@i18n>calendaryear1}"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/calendarMonth">
+                <Annotation Term="Common.Label" String="{@i18n>calendarMonth1}"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>

@@ -329,7 +329,7 @@ sap.ui.define([
             }
             console.log("3333",aTokens);
             if (!aTokens[0]) {
-                MessageBox.error("必須項目を入力ください");
+                MessageBox.error(this._ResourceBundle.getText("msgMandatory"));
                 return;
             }
 
@@ -480,7 +480,7 @@ sap.ui.define([
             aGroupItems.push(afilterSet[0]);
 
             if (!this.getView().byId("idReceiver")._lastValue) {
-                MessageBox.error("必須項目を入力ください");
+                MessageBox.error(this._ResourceBundle.getText("msgMandatory"));
                 return;
             }
 
@@ -535,7 +535,7 @@ sap.ui.define([
 
                 }).catch((error) => {
                     //MessageBox.error(error);
-                    MessageBox.error("必須項目を入力ください");
+                    MessageBox.error(this._ResourceBundle.getText("msgMandatory"));
                 }).finally(() => {
                     this._BusyDialog.close();
                 });

@@ -109,13 +109,13 @@
                 </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.BDGLUploadType/GLAccount">
-                <Annotation Term="Common.Label" String="G/L勘定"/>
+                <Annotation Term="Common.Label" String="{@i18n>glaccount1}"/>
             </Annotations>
             <Annotations Target="SAP__self.BDGLUploadType/FinancialStatement">
                 <Annotation Term="Common.Label" String="{@i18n>financialstatement1}"/>
             </Annotations>
             <Annotations Target="SAP__self.BDGLUploadType/ChartOfAccounts">
-                <Annotation Term="Common.Label" String="勘定コード表"/>
+                <Annotation Term="Common.Label" String="{@i18n>chartofaccounts1}"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>

@@ -333,11 +333,98 @@ sap.ui.define([
             var oSettings = oEvent.getParameter("exportSettings");
             var columns = oSettings.workbook.columns;
 
-            try {
-                // columns.find(cloumn => cloumn.property === "DeliveryDate").type = "Date";
-            } catch (error) {
-                
-            }
+            columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    case "ValuationQuantity": 
+                    case "ActualCost": 
+                    case "MaterialPriceUnitQty":
+                    case "InventoryAmount":
+                    case "ValuationUnitPrice":
+                    case "ValuationAmount":
+                    case "ValuationAfterAmount":
+                    case "ValuationLoss":
+                    case "QuantityMonth1":
+                    case "AmountMonth1":
+                    case "QuantityMonth2":
+                    case "AmountMonth2":
+                    case "QuantityMonth3":
+                    case "AmountMonth3":
+                    case "QuantityMonth4":
+                    case "AmountMonth4":
+                    case "QuantityMonth5":
+                    case "AmountMonth5":
+                    case "QuantityMonth6":
+                    case "AmountMonth6":
+                    case "QuantityMonth7":
+                    case "AmountMonth7":
+                    case "QuantityMonth8":
+                    case "AmountMonth8":
+                    case "QuantityMonth9":
+                    case "AmountMonth9":
+                    case "QuantityMonth10":
+                    case "AmountMonth10":
+                    case "QuantityMonth11":
+                    case "AmountMonth11":
+                    case "QuantityMonth12":
+                    case "AmountMonth12":
+                    case "QuantityMonth13":
+                    case "AmountMonth13":
+                    case "QuantityMonth14":
+                    case "AmountMonth14":
+                    case "QuantityMonth15":
+                    case "AmountMonth15":
+                    case "QuantityMonth16":
+                    case "AmountMonth16":
+                    case "QuantityMonth17":
+                    case "AmountMonth17":
+                    case "QuantityMonth18":
+                    case "AmountMonth18":
+                    case "QuantityMonth19":
+                    case "AmountMonth19":
+                    case "QuantityMonth20":
+                    case "AmountMonth20":
+                    case "QuantityMonth21":
+                    case "AmountMonth21":
+                    case "QuantityMonth22":
+                    case "AmountMonth22":
+                    case "QuantityMonth23":
+                    case "AmountMonth23":
+                    case "QuantityMonth24":
+                    case "AmountMonth24":
+                    case "QuantityMonth25":
+                    case "AmountMonth25":
+                    case "QuantityMonth26":
+                    case "AmountMonth26":
+                    case "QuantityMonth27":
+                    case "AmountMonth27":
+                    case "QuantityMonth28":
+                    case "AmountMonth28":
+                    case "QuantityMonth29":
+                    case "AmountMonth29":
+                    case "QuantityMonth30":
+                    case "AmountMonth30":
+                    case "QuantityMonth31":
+                    case "AmountMonth31":
+                    case "QuantityMonth32":
+                    case "AmountMonth32":
+                    case "QuantityMonth33":
+                    case "AmountMonth33":
+                    case "QuantityMonth34":
+                    case "AmountMonth34":
+                    case "QuantityMonth35":
+                    case "AmountMonth35":
+                    case "QuantityMonth36":
+                    case "AmountMonth36":
+                    case "QuantityMonth37":
+                    case "AmountMonth37":
+                    case "QuantityUnspecified":
+                    case "AmountUnspecified":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        break;
+                    default:
+                        break;
+                }
+            });
         },
     });
 });

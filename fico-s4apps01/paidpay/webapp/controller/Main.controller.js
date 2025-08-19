@@ -21,7 +21,10 @@ sap.ui.define([
             _initialize: function () {
                 this._BusyDialog = new BusyDialog();
                 // bind attachment path
-
+                var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
+                var oFilter = new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.BT, "ZUPLOAD_PAIDPAY1_"  + sLanguage, "ZUPLOAD_PAIDPAY2_"  + sLanguage);
+                var oControlBinding = this.byId("idTemplateCollection").getBinding("items");
+                oControlBinding.filter(oFilter);
             },
 
             onFileChange: function (oEvent) {

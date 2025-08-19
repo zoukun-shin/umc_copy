@@ -42,35 +42,35 @@
                 <Annotation Term="UI.LineItem">
                     <Collection>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="連結勘定"/>
+                            <PropertyValue Property="Label" String="{@i18n&gt;FinancialStatementItem}"/>
                             <PropertyValue Property="Value" Path="FinancialStatementItem"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="連結勘定テキスト"/>
+                            <PropertyValue Property="Label" String="{@i18n&gt;FinancialStatementItemDesc}"/>
                             <PropertyValue Property="Value" Path="FinancialStatementItemDesc"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="G/L勘定"/>
+                            <PropertyValue Property="Label" String="{@i18n&gt;GLAccount}"/>
                             <PropertyValue Property="Value" Path="GLAccount"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="G/L勘定テキスト"/>
+                            <PropertyValue Property="Label" String="{@i18n&gt;GLAccountDesc}"/>
                             <PropertyValue Property="Value" Path="GLAccountDesc"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="開始残高（会社コード通貨）"/>
+                            <PropertyValue Property="Label" String="{@i18n&gt;StartingBalanceAmtInCoCodeCrcy}"/>
                             <PropertyValue Property="Value" Path="StartingBalanceAmtInCoCodeCrcy"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="会社コード通貨の借方残高"/>
+                            <PropertyValue Property="Label" String="{@i18n&gt;DebitAmountInCoCodeCrcy}"/>
                             <PropertyValue Property="Value" Path="DebitAmountInCoCodeCrcy"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="会社コード通貨の貸方残高"/>
+                            <PropertyValue Property="Label" String="{@i18n&gt;CreditAmountInCoCodeCrcy}"/>
                             <PropertyValue Property="Value" Path="CreditAmountInCoCodeCrcy"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Label" String="会社コード期末残高"/>
+                            <PropertyValue Property="Label" String="{@i18n&gt;EndingBalanceAmtInCoCodeCrcy}"/>
                             <PropertyValue Property="Value" Path="EndingBalanceAmtInCoCodeCrcy"/>
                         </Record>
                     </Collection>
