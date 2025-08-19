@@ -49,7 +49,7 @@
                     </table:rowMode>
                    
                     <table:columns>
-                        <table:Column id="idRep05FiscalYearPeriod" width="6em" label="{i18n>FiscalYearPeriod}" sortProperty="FiscalYearPeriod" filterProperty="FiscalYearPeriod" visible="true">
+                        <table:Column id="idRep05FiscalYearPeriod" width="12em" label="{i18n>FiscalYearPeriod}" sortProperty="FiscalYearPeriod" filterProperty="FiscalYearPeriod" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"FiscalYearPeriod",  "leadingProperty":"FiscalYearPeriod", "sortProperty":"FiscalYearPeriod", "filterProperty": "FiscalYearPeriod"}'/>
                             </table:customData>
@@ -67,7 +67,7 @@
                             </table:template>
                         </table:Column>
 
-                        <table:Column id="idRep05RecoverManagementNumber" width="10em" label="{i18n>RecoveryManagementNumber}" sortProperty="RecoveryManagementNumber" filterProperty="RecoveryManagementNumber" visible="true">
+                        <table:Column id="idRep05RecoverManagementNumber" width="15em" label="{i18n>RecoveryManagementNumber}" sortProperty="RecoveryManagementNumber" filterProperty="RecoveryManagementNumber" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryManagementNumber",  "leadingProperty":"RecoveryManagementNumber", "sortProperty":"RecoveryManagementNumber", "filterProperty": "RecoveryManagementNumber"}'/>
                             </table:customData>
@@ -83,7 +83,7 @@
                                 <smartfield:SmartField id="sfRep05MaterialDocument" value="{MaterialDocument}" wrapping="false" editable="false" />
                             </table:template>
                         </table:Column>
-                        <table:Column id="idRep05MaterialDocumentYear" width="6em" label="{i18n>MaterialDocumentYear}" sortProperty="MaterialDocumentYear" filterProperty="MaterialDocumentYear" visible="true">
+                        <table:Column id="idRep05MaterialDocumentYear" width="12em" label="{i18n>MaterialDocumentYear}" sortProperty="MaterialDocumentYear" filterProperty="MaterialDocumentYear" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocumentYear",  "leadingProperty":"MaterialDocumentYear", "sortProperty":"MaterialDocumentYear", "filterProperty": "MaterialDocumentYear"}'/>
                             </table:customData>
@@ -91,7 +91,7 @@
                                 <smartfield:SmartField id="sfRep05MaterialDocumentYear" value="{MaterialDocumentYear}" wrapping="false" editable="false" />
                             </table:template>
                         </table:Column>                        
-                        <table:Column id="idRep05MaterialDocumentItem" width="6em" label="{i18n>MaterialDocumentItem}" sortProperty="MaterialDocumentItem" filterProperty="MaterialDocumentItem" visible="true">
+                        <table:Column id="idRep05MaterialDocumentItem" width="12em" label="{i18n>MaterialDocumentItem}" sortProperty="MaterialDocumentItem" filterProperty="MaterialDocumentItem" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocumentItem",  "leadingProperty":"MaterialDocumentItem", "sortProperty":"MaterialDocumentItem", "filterProperty": "MaterialDocumentItem"}'/>
                             </table:customData>
@@ -155,7 +155,7 @@
                                 <smartfield:SmartField id="sfRep05BillingDocument" value="{BillingDocument}" wrapping="false" />
                             </table:template>
                         </table:Column>
-                        <table:Column id="idRep05BillingDocumentItem" width="6em" label="{i18n>BillingDocumentItem}" sortProperty="BillingDocumentItem" filterProperty="BillingDocumentItem" visible="true">
+                        <table:Column id="idRep05BillingDocumentItem" width="12em" label="{i18n>BillingDocumentItem}" sortProperty="BillingDocumentItem" filterProperty="BillingDocumentItem" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"BillingDocumentItem", "leadingProperty":"BillingDocumentItem", "sortProperty":"BillingDocumentItem", "filterProperty": "BillingDocumentItem"}'/>
                             </table:customData>
@@ -163,7 +163,7 @@
                                 <smartfield:SmartField id="sfRep05BillingDocumentItem" value="{BillingDocumentItem}" wrapping="false" editable="true" />
                             </table:template>
                         </table:Column>
-                        <table:Column id="idRep05BillingDocumentDate" width="10em" label="{i18n>BillingDocumentDate}" sortProperty="BillingDocumentDate" filterProperty="BillingDocumentDate" visible="true">
+                        <table:Column id="idRep05BillingDocumentDate" width="12em" label="{i18n>BillingDocumentDate}" sortProperty="BillingDocumentDate" filterProperty="BillingDocumentDate" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"BillingDocumentDate", "leadingProperty":"BillingDocumentDate", "sortProperty":"BillingDocumentDate", "filterProperty": "BillingDocumentDate"}'/>
                             </table:customData>
@@ -187,7 +187,7 @@
                                 <smartfield:SmartField id="sfRep05ProfitCenter" value="{ProfitCenter}" wrapping="false" editable="true" />
                             </table:template>
                         </table:Column>
-                        <table:Column id="idRep05ConditionType" width="5em" label="{i18n>ConditionType}" sortProperty="ConditionType" filterProperty="ConditionType" visible="true">
+                        <table:Column id="idRep05ConditionType" width="8em" label="{i18n>ConditionType}" sortProperty="ConditionType" filterProperty="ConditionType" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ConditionType", "leadingProperty":"ConditionType", "sortProperty":"ConditionType", "filterProperty": "ConditionType"}'/>
                             </table:customData>
@@ -219,7 +219,7 @@
                                 <Text id="sfRep05BillingQuantity" text="{parts: [{path: 'BillingQuantity'}, {path: 'BillingQuantityUnit'}], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false}}" wrapping="false" />
                             </table:template>
                         </table:Column>
-                        <table:Column id="idRep05BillingQuantityUnit" width="6em" label="{i18n>BillingQuantityUnit}" sortProperty="BillingQuantityUnit" filterProperty="BillingQuantityUnit" visible="true">
+                        <table:Column id="idRep05BillingQuantityUnit" width="12em" label="{i18n>BillingQuantityUnit}" sortProperty="BillingQuantityUnit" filterProperty="BillingQuantityUnit" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"BillingQuantityUnit",  "leadingProperty":"BillingQuantityUnit", "sortProperty":"BillingQuantityUnit", "filterProperty": "BillingQuantityUnit"}'/>
                             </table:customData>
@@ -251,7 +251,7 @@
                                 <smartfield:SmartField id="sfRep05SalesDocument" value="{SalesOrderDocument}" wrapping="false" />
                             </table:template>
                         </table:Column>
-                        <table:Column id="idRep05SalesDocumentItem" width="6em" label="{i18n>SalesDocumentItem}" sortProperty="SalesOrderDocumentItem" filterProperty="SalesOrderDocumentItem" visible="true">
+                        <table:Column id="idRep05SalesDocumentItem" width="12em" label="{i18n>SalesDocumentItem}" sortProperty="SalesOrderDocumentItem" filterProperty="SalesOrderDocumentItem" visible="true">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"SalesOrderDocumentItem", "leadingProperty":"SalesOrderDocumentItem", "sortProperty":"SalesOrderDocumentItem", "filterProperty": "SalesOrderDocumentItem"}'/>
                             </table:customData>

@@ -86,7 +86,7 @@
                                 </table:template>
                             </table:Column>
 
-                            <table:Column id="idFiscalYearMonth" width="6em" label="{i18n>yearMonth}" sortProperty="FiscalYearMonth" filterProperty="FiscalYearMonth" visible="true">
+                            <table:Column id="idFiscalYearMonth" width="12em" label="{i18n>yearMonth}" sortProperty="FiscalYearMonth" filterProperty="FiscalYearMonth" visible="true">
                                 <table:customData>
                                     <core:CustomData key="p13nData" value='\{"columnKey":"FiscalYearMonth",  "leadingProperty":"FiscalYearMonth", "sortProperty":"FiscalYearMonth", "filterProperty": "FiscalYearMonth"}'/>
                                 </table:customData>

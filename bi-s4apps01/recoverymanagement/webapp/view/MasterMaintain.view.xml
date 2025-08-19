@@ -47,7 +47,7 @@
                     </table:template>
                 </table:Column>
 
-                <table:Column id="idRecoverManagementNumber" width="6rem" label="{i18n>recoverManagementNumber}" sortProperty="RecoveryManagementNumber" filterProperty="RecoveryManagementNumber" visible="true">
+                <table:Column id="idRecoverManagementNumber" width="15rem" label="{i18n>recoverManagementNumber}" sortProperty="RecoveryManagementNumber" filterProperty="RecoveryManagementNumber" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryManagementNumber", "leadingProperty":"RecoveryManagementNumber", "sortProperty":"RecoveryManagementNumber", "filterProperty": "RecoveryManagementNumber"}'/>
                     </table:customData>
@@ -103,7 +103,7 @@
                         <smartfield:SmartField id="sfCreatedUser" value="{CreatedBy}" wrapping="false" editable="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column id="idRecoveryNecessaryAmount" width="10rem" label="{i18n>recoveryNecessaryAmount}" sortProperty="RecoveryNecessaryAmount" filterProperty="RecoveryNecessaryAmount" visible="true">
+                <table:Column id="idRecoveryNecessaryAmount" width="15rem" label="{i18n>recoveryNecessaryAmount}" sortProperty="RecoveryNecessaryAmount" filterProperty="RecoveryNecessaryAmount" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryNecessaryAmount", "unit":"Currency", "leadingProperty":"RecoveryNecessaryAmount", "sortProperty":"RecoveryNecessaryAmount", "filterProperty": "RecoveryNecessaryAmount"}'/>
                     </table:customData>
@@ -127,7 +127,7 @@
                         <smartfield:SmartField id="sfRecoveryCurrency" value="{Currency}" wrapping="false" editable="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column id="idRecoverProgress" width="6rem" label="{i18n>recoverProgress}" sortProperty="RecoveryPercentage" filterProperty="RecoveryPercentage" visible="true">
+                <table:Column id="idRecoverProgress" width="10rem" label="{i18n>recoverProgress}" sortProperty="RecoveryPercentage" filterProperty="RecoveryPercentage" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryPercentage", "leadingProperty":"RecoveryPercentage", "sortProperty":"RecoveryPercentage", "filterProperty": "RecoveryPercentage"}'/>
                     </table:customData>

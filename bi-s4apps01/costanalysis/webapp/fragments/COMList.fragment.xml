@@ -9,7 +9,7 @@
     <smartTable:SmartTable entitySet="COSTANALYSISCOM" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="CustomListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 0}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" showFullScreenButton="true">
         <table:Table id="idCustomListTable" selectionMode="MultiToggle" rowMode="Auto">
             <table:columns>
-                <table:Column width="6rem" label="{i18n>YearMonth}" sortProperty="YearMonth" filterProperty="YearMonth">
+                <table:Column width="12rem" label="{i18n>YearMonth}" sortProperty="YearMonth" filterProperty="YearMonth">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"YearMonth", "leadingProperty":"YearMonth"}'/>
                     </table:customData>
@@ -17,7 +17,7 @@
                         <Text text="{YearMonth}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="6rem" label="{i18n>Companycode}" sortProperty="Companycode" filterProperty="Companycode">
+                <table:Column width="8rem" label="{i18n>Companycode}" sortProperty="Companycode" filterProperty="Companycode">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Companycode", "leadingProperty":"Companycode"}'/>
                     </table:customData>
@@ -57,7 +57,7 @@
                         <Text text="{Product}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>ProductDescription}" sortProperty="ProductDescription" filterProperty="ProductDescription">
+                <table:Column width="12rem" label="{i18n>ProductDescription}" sortProperty="ProductDescription" filterProperty="ProductDescription">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ProductDescription", "leadingProperty":"ProductDescription"}'/>
                     </table:customData>
@@ -73,7 +73,7 @@
                         <Text text="{Material}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>MaterialDescription}" sortProperty="MaterialDescription" filterProperty="MaterialDescription">
+                <table:Column width="12rem" label="{i18n>MaterialDescription}" sortProperty="MaterialDescription" filterProperty="MaterialDescription">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDescription", "leadingProperty":"MaterialDescription"}'/>
                     </table:customData>
@@ -89,7 +89,7 @@
                         <Text text="{profitcenter}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>profitcentername}" sortProperty="profitcentername" filterProperty="profitcentername">
+                <table:Column width="12rem" label="{i18n>profitcentername}" sortProperty="profitcentername" filterProperty="profitcentername">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"profitcentername", "leadingProperty":"profitcentername"}'/>
                     </table:customData>
