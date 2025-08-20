@@ -646,7 +646,7 @@ sap.ui.define([
                 });
 
                 if (total > unPlan) {
-                    msg += wRow.Product + " / ";
+                    msg += wRow.Idnrk + " / ";
                 };
             });
             msg = msg.slice(0, -2);
