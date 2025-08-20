@@ -620,7 +620,7 @@ sap.ui.define([
             var msg = "";
             var days = Number(this.byId("zdays").getValue());
             selectedRows.forEach(function (row) {
-                var mat = row.Product;
+                var mat = row.Idnrk;
                 if (!oGrouped[mat]) {
                     oGrouped[mat] = { P: [], W: null };
                 }
@@ -630,9 +630,9 @@ sap.ui.define([
                     oGrouped[mat].W = row;
                 }
             });
-            Object.keys(oGrouped).forEach(function (Product) {
-                var pRow = oGrouped[Product].P;
-                var wRow = oGrouped[Product].W;
+            Object.keys(oGrouped).forEach(function (Idnrk) {
+                var pRow = oGrouped[Idnrk].P;
+                var wRow = oGrouped[Idnrk].W;
                 var total = 0;
                 var unPlan = parseFloat(wRow.Summary) || 0;
                 for (var i = 1; i <= days; i++) {
