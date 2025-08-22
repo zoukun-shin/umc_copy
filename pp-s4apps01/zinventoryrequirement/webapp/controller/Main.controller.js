@@ -178,6 +178,7 @@ sap.ui.define([
                     case "MinimumPurchaseOrderQty":
                     case "SupplierPrice":
                     case "SupplierCertoriginCountry":
+                    case "StandardPrice": // ADD BY XINLEI XU 2025/08/20 本番变更管理No.5
                         bvisible = "{= ${local>/filter/ShowInformation} === 'X'}";
                         break;
                     case "FinalProduct":
