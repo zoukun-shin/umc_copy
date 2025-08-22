@@ -804,15 +804,24 @@ sap.ui.define([
                         var object = boundContext.getObject();
                         var result = JSON.parse(object.Zzkey);
 
-                        if (bEvent === "QUERY") {
+                        // MOVE FROM BY XINLEI XU 2025/08/19 BUG Fixed
+                        // if (bEvent === "QUERY") {
+                        //     var aAuthorityPlantSet = that.getModel("local").getProperty("/authorityCheck/data/PlantSet");
+                        //     if (!aAuthorityPlantSet.some(data => data.Plant === result.HEADER.PLANT)) {
+                        //         MessageBox.error(that.getModel("i18n").getResourceBundle().getText("noAuthorityPlant", [result.HEADER.PLANT]));
+                        //         return;
+                        //     }
+                        // }
+                        // MOVE FROM BY XINLEI XU 2025/08/19
+
+                        if (bEvent === "QUERY" && result.MESSAGEITEMS.length === 0) {
+                            // MOVE TO BY XINLEI XU 2025/08/19 BUG Fixed
                             var aAuthorityPlantSet = that.getModel("local").getProperty("/authorityCheck/data/PlantSet");
                             if (!aAuthorityPlantSet.some(data => data.Plant === result.HEADER.PLANT)) {
                                 MessageBox.error(that.getModel("i18n").getResourceBundle().getText("noAuthorityPlant", [result.HEADER.PLANT]));
                                 return;
                             }
-                        }
-
-                        if (bEvent === "QUERY" && result.MESSAGEITEMS.length === 0) {
+                            // MOVE TO BY XINLEI XU 2025/08/19
                             that.getModel("local").setProperty("/headSet", {
                                 Plant: result.HEADER.PLANT,
                                 Type: result.HEADER.TYPE,
