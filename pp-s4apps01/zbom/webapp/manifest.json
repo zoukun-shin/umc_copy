@@ -139,7 +139,7 @@
           "options": {
             "settings": {
               "contextPath": "/BOM",
-              "variantManagement": "Page",
+              "variantManagement": "Control",
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
