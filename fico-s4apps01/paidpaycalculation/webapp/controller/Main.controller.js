@@ -85,7 +85,7 @@ sap.ui.define([
 				} else {
 					this.getView().getModel("local").setProperty("/showA", false);
 					this.getView().getModel("local").setProperty("/showB", true);
-					
+
 				}
 			},
 
@@ -102,18 +102,16 @@ sap.ui.define([
 						this.getView().getModel("local").setProperty("/showB", true);
 					}, 100);
 				}
-				
+
 			},
 
 			onBeforeRebindTable: function (oEvent, arg1, arg2, arg3, arg4) {
 				var bHasError = false;
 				var sMessage = "";
 				var sBukrs = this.getView().byId("SFBCalculation").getControlByKey("CompanyCode").getValue();
-				let parts = sBukrs.split("(");
-				let part = parts[1].substring(0, 4);
 				var aAuthorityCompanySet = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
 
-				if (!aAuthorityCompanySet.some(data => data.CompanyCode === part)) {
+				if (!aAuthorityCompanySet.some(data => data.CompanyCode === sBukrs)) {
 					bHasError = true;
 					sMessage = part;
 				}
@@ -228,6 +226,230 @@ sap.ui.define([
 					}.bind(this)
 
 				);
+			},
+
+			onBeforeExport: function (oEvent) {
+				var mExcelSettings = oEvent.getParameter("exportSettings");
+				var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
+				this._exportExcel(mExcelSettings, sFileName);
+			},
+
+			_exportExcel: function (mExcelSettings, sFileName) {
+				mExcelSettings.workbook.columns.forEach(function (oColumn) {
+					if (!oColumn || !oColumn.property) {
+						return; 
+					}
+					switch (oColumn.property) {
+						case "Cost01":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ValuationQuantity01":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "Cost02":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ValuationQuantity02":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "Cost03":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ValuationQuantity03":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "Cost04":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ValuationQuantity04":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "Cost05":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ValuationQuantity05":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "Cost06":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ValuationQuantity06":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "Cost07":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ValuationQuantity07":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "Cost08":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ValuationQuantity08":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "Cost09":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ValuationQuantity09":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "Cost10":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ValuationQuantity10":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "PurGrpAmount1":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "PurGrpAmount2":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "PurGrpAmount":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ChargeableAmount1":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ChargeableAmount2":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ChargeableAmount":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "PurGrpTot":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ChargeableTot":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "ChargeableRate":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.scale = 2;
+							oColumn.textAlign = "End";
+							break;
+						case "PreviousStockAmount":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "CurrentStockAmount":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "CurrentStockSemi":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "CurrentStockFin":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "CurrentStockTotal":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "StockChangeAmount":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "PaidMaterialCost":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "CustomerRevenue1":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "CustomerRevenue":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "Revenue1":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "Revenue":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "RevenueRate":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.scale = 2;
+							oColumn.textAlign = "End";
+							break;
+					}
+				});
+				mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
 			}
 		});
 	});
