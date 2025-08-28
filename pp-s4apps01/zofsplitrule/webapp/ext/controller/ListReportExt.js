@@ -96,6 +96,12 @@ sap.ui.define([
                 }));
                 this._BusyDialog.close();
                 this._UploadDialog.open();
+                // ADD BEGIN BY XINLEI XU 2025/08/28
+                var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
+                var oFilter = new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.EQ, "ZUPLOAD_OFSPLITRULE_" + sLanguage);
+                var oControlBinding = sap.ui.getCore().byId("idTemplateCollection").getBinding("items");
+                oControlBinding.filter(oFilter);
+                // ADD END BY XINLEI XU 2025/08/28
             }.bind(this));
         },
 
