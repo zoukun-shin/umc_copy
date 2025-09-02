@@ -81,41 +81,41 @@ sap.ui.define([
                 var sOption1 = this.byId("Option1").getSelected();
                 if (sOption1 === true) {
                     this.getView().getModel("local").setProperty("/showA", true);
-					this.getView().getModel("local").setProperty("/showB", false);
+                    this.getView().getModel("local").setProperty("/showB", false);
                 } else {
                     this.getView().getModel("local").setProperty("/showA", false);
-					this.getView().getModel("local").setProperty("/showB", true);
+                    this.getView().getModel("local").setProperty("/showB", true);
                 }
             },
 
             onAfterRendering: function (oEvent) {
-				var bOption1Selected = this.byId("Option1").getSelected();
-				if (bOption1Selected === true) {
-					setTimeout(() => {
-						this.getView().getModel("local").setProperty("/showA", true);
+                var bOption1Selected = this.byId("Option1").getSelected();
+                if (bOption1Selected === true) {
+                    setTimeout(() => {
+                        this.getView().getModel("local").setProperty("/showA", true);
                         this.getView().getModel("local").setProperty("/showB", false);
-					}, 100);
-				} else {
-					setTimeout(() => {
-						this.getView().getModel("local").setProperty("/showA", false);
+                    }, 100);
+                } else {
+                    setTimeout(() => {
+                        this.getView().getModel("local").setProperty("/showA", false);
                         this.getView().getModel("local").setProperty("/showB", true);
-					}, 100);
-				}
-				
-			},
-            
+                    }, 100);
+                }
+
+            },
+
             onBeforeRebindTable: function (oEvent) {
                 var bHasError = false;
                 var sMessage = "";
                 var sBukrs = this.getView().byId("SFBDocument").getControlByKey("CompanyCode").getValue();
                 let parts = sBukrs.split("(");
-				let part = parts[1].substring(0, 4);
+                let part = parts[1].substring(0, 4);
                 var aAuthorityCompanySet = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
 
-                if (!aAuthorityCompanySet.some(data => data.CompanyCode === part)) {
-                    bHasError = true;
-                    sMessage = part;
-                }
+                 if (!aAuthorityCompanySet.some(data => data.CompanyCode === part)) {
+                     bHasError = true;
+                     sMessage = part;
+                 }
 
                 if (bHasError) {
                     MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("noAuthorityCompanyCode", [sMessage]));
@@ -187,7 +187,7 @@ sap.ui.define([
                         oData.forEach((item) => {
                             let result = JSON.parse(item["processLogic"].Zzkey);
                             that.getView().byId("SFBDocument").search();
-                            
+
                         });
 
                     }
@@ -271,6 +271,7 @@ sap.ui.define([
                 };
 
                 let postDocs = this.preparePostBody();
+                this._BusyDialog.open();
                 this.setBusy(true);
                 var aPromise = [];
                 aPromise.push(this.postAction(postDocs, sType, bEvent, sYear, sMonat));
@@ -280,7 +281,7 @@ sap.ui.define([
                         oData.forEach((item) => {
                             let result = JSON.parse(item["processLogic"].Zzkey);
                             that.getView().byId("SFBDocument").search();
-                            
+
                         });
 
                     } else {
@@ -288,7 +289,7 @@ sap.ui.define([
                         oData.forEach((item) => {
                             let result = JSON.parse(item["processLogic"].Zzkey);
                             that.getView().byId("SFBDocument").search();
-                           
+
                         });
 
                     }
@@ -300,5 +301,101 @@ sap.ui.define([
                 });
 
             },
+
+            onBeforeExport: function (oEvent) {
+                var mExcelSettings = oEvent.getParameter("exportSettings");
+                var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
+                this._exportExcel(mExcelSettings, sFileName);
+            },
+
+            _exportExcel: function (mExcelSettings, sFileName) {
+                mExcelSettings.workbook.columns.forEach(function (oColumn) {
+                    if (!oColumn || !oColumn.property) {
+                        return;
+                    };
+                    switch (oColumn.property) {
+                        case "PurGrpAmount":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "ChargeableAmount":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "ChargeableRate":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.scale = 2;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "PreviousStockAmount":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "CurrentStockAmount":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "CurrentStockSemi":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "CurrentStockFin":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "CurrentStockTotal":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "StockChangeAmount":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "PaidMaterialCost":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "CustomerRevenue":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "Revenue":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "RevenueRate":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.scale = 2;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "AR":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.scale = 2;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "AP":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.scale = 2;
+                            oColumn.textAlign = "End";
+                            break;
+                    }
+                });
+                mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
+            }
         });
     });

@@ -250,6 +250,7 @@ sap.ui.define([
 						case "ValuationQuantity01":
 							oColumn.type = sap.ui.export.EdmType.Number;
 							oColumn.delimiter = true;
+							oColumn.scale = 3;
 							oColumn.textAlign = "End";
 							break;
 						case "Cost02":
@@ -260,6 +261,7 @@ sap.ui.define([
 						case "ValuationQuantity02":
 							oColumn.type = sap.ui.export.EdmType.Number;
 							oColumn.delimiter = true;
+							oColumn.scale = 3;
 							oColumn.textAlign = "End";
 							break;
 						case "Cost03":
@@ -270,6 +272,7 @@ sap.ui.define([
 						case "ValuationQuantity03":
 							oColumn.type = sap.ui.export.EdmType.Number;
 							oColumn.delimiter = true;
+							oColumn.scale = 3;
 							oColumn.textAlign = "End";
 							break;
 						case "Cost04":
@@ -280,6 +283,7 @@ sap.ui.define([
 						case "ValuationQuantity04":
 							oColumn.type = sap.ui.export.EdmType.Number;
 							oColumn.delimiter = true;
+							oColumn.scale = 3;
 							oColumn.textAlign = "End";
 							break;
 						case "Cost05":
@@ -290,6 +294,7 @@ sap.ui.define([
 						case "ValuationQuantity05":
 							oColumn.type = sap.ui.export.EdmType.Number;
 							oColumn.delimiter = true;
+							oColumn.scale = 3;
 							oColumn.textAlign = "End";
 							break;
 						case "Cost06":
@@ -300,6 +305,7 @@ sap.ui.define([
 						case "ValuationQuantity06":
 							oColumn.type = sap.ui.export.EdmType.Number;
 							oColumn.delimiter = true;
+							oColumn.scale = 3;
 							oColumn.textAlign = "End";
 							break;
 						case "Cost07":
@@ -310,6 +316,7 @@ sap.ui.define([
 						case "ValuationQuantity07":
 							oColumn.type = sap.ui.export.EdmType.Number;
 							oColumn.delimiter = true;
+							oColumn.scale = 3;
 							oColumn.textAlign = "End";
 							break;
 						case "Cost08":
@@ -320,6 +327,7 @@ sap.ui.define([
 						case "ValuationQuantity08":
 							oColumn.type = sap.ui.export.EdmType.Number;
 							oColumn.delimiter = true;
+							oColumn.scale = 3;
 							oColumn.textAlign = "End";
 							break;
 						case "Cost09":
@@ -330,6 +338,7 @@ sap.ui.define([
 						case "ValuationQuantity09":
 							oColumn.type = sap.ui.export.EdmType.Number;
 							oColumn.delimiter = true;
+							oColumn.scale = 3;
 							oColumn.textAlign = "End";
 							break;
 						case "Cost10":
@@ -340,8 +349,19 @@ sap.ui.define([
 						case "ValuationQuantity10":
 							oColumn.type = sap.ui.export.EdmType.Number;
 							oColumn.delimiter = true;
+							oColumn.scale = 3;
 							oColumn.textAlign = "End";
 							break;
+						case "MaterialCost2000":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;
+						case "MaterialCost3000":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.textAlign = "End";
+							break;	
 						case "PurGrpAmount1":
 							oColumn.type = sap.ui.export.EdmType.Number;
 							oColumn.delimiter = true;
