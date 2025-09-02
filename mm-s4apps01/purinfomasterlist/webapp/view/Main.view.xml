@@ -465,7 +465,8 @@
 								<Label text="{i18n>UnitPrice_standard}"/>
 							</table:label>
 							<table:template>
-								<Label text="{ parts: [ 'UnitPrice_standard', 'Currency_standard' ],formatter:'.formatter.formatFloat'}" wrapping="false"/>
+								<!-- <Label text="{ parts: [ 'UnitPrice_standard', 'Currency_standard' ],formatter:'.formatter.formatFloat'}" wrapping="false"/> -->
+								<Label text="{ path:'UnitPrice_standard',formatter:'.formatter.formatFloat'}" wrapping="false"/>
 							</table:template>
 						</table:Column>
 						<table:Column id="PriceUnitQty" width="10rem" visible="true" autoResizable="true" sortProperty="PriceUnitQty" filterProperty="PriceUnitQty">

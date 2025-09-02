@@ -112,7 +112,7 @@ sap.ui.define([
                         n = "-" + n.substring(0, n.length - 1);
                     }
                 }
-                if (currency === "JPY" || currency === "TWD") {
+                if (currency === "JPY" || currency === "TWD" || currency == "" || currency == null) {
                     decimal = 3;
                 }
                 var num = Number(n).toFixed(decimal);
