@@ -213,7 +213,14 @@ sap.ui.define([
 
                 oLabel = new Label({ text: "{i18n>" + key + "}" });
                 if (key.substring(0, 3) === "YMD" || key.substring(0, 2) === "YW" || key.substring(0, 2) === "YM") {
-                    oLabel = new Label({ text: key });
+                    // MOD BEGIN BY XINLEI XU 2025/09/03 BUG Fixed 本番变更管理No.32
+                    // oLabel = new Label({ text: key });
+                    if (key.substring(0, 2) === "YM") {
+                        oLabel = new Label({ text: key.substring(0, 8) });
+                    } else {
+                        oLabel = new Label({ text: key });
+                    }
+                    // MOD BEGIN BY XINLEI XU 2025/09/03 BUG Fixed
                     sTextAlign = "End";
                 }
                 if (sTextAlign === "End") {
@@ -351,8 +358,12 @@ sap.ui.define([
                                 oOrderDate = this.getFirstDayOfWeek(field.substring(2, 6), field.substring(6, 8));
                             } else if (field.substring(0, 2) === "YM") {
                                 // 月的第二个工作日
-                                oRequestDate = this.getSecondWorkday(field.substring(2, 6), field.substring(6, 8));
-                                oOrderDate = this.getFirstDayOfWeek(field.substring(2, 6), field.substring(6, 8));
+                                // MOD BEGIN BY XINLEI XU 2025/09/03 BUG Fixed 本番变更管理No.32
+                                // oRequestDate = this.getSecondWorkday(field.substring(2, 6), field.substring(6, 8));
+                                // oOrderDate = this.getSecondWorkday(field.substring(2, 6), field.substring(6, 8));
+                                oRequestDate = new Date(field.substring(8, 12), field.substring(12, 14) - 1, field.substring(14, 16))
+                                oOrderDate = new Date(field.substring(8, 12), field.substring(12, 14) - 1, field.substring(14, 16))
+                                // MOD END BY XINLEI XU 2025/09/03 BUG Fixed
                             }
 
                             // 找 R.BALANCE < 0 的第一列(所以只执行一次)

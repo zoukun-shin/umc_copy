@@ -339,10 +339,11 @@ sap.ui.define([
         getFirstDayOfWeek: function (year, week) {
             // 使用Intl.DateTimeFormat获取周的第一天（ISO 8601规定周一为一周的开始）
             var weekday = new Intl.DateTimeFormat('en', { weekday: 'short' }).format(new Date(year, 0, 1));
-            var firstDayIndex = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'].indexOf(weekday.toLowerCase());
+            var firstDayIndex = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].indexOf(weekday.toLowerCase());
             // 计算该周的第一天
             var date = new Date(year, 0, 1); // 该年的1月1日
-            date.setDate(date.getDate() + (week - 1) * 7 - (date.getDay() - firstDayIndex + 7) % 7);
+            var days = (week - 1) * 7 - (date.getDay() - firstDayIndex + 7) % 7;
+            date.setDate(days);
             return date;
         },
 
@@ -350,7 +351,8 @@ sap.ui.define([
             var date = new Date(year, month - 1, 1);// 月份是从0开始的，所以减1
             var count = 0;
             while (count < 2) {
-                date.setDate(date.getDate() + 1); // 递增日期
+                var days = date.getDate() + 1;
+                date.setDate(days); // 递增日期
                 if (date.getDay() > 0 && date.getDay() < 6) { // 判断是否为工作日（排除周六和周日）
                     count++; // 工作日计数器递增
                 }
@@ -360,7 +362,8 @@ sap.ui.define([
         },
 
         getNDaysBefore: function (date, n) {
-            date.setDate(date.getDate() - n); // 减去n天
+            var days = date.getDate() - n;
+            date.setDate(days); // 减去n天
             return date;
         },
 
