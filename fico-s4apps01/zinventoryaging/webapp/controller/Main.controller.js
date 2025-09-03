@@ -332,7 +332,6 @@ sap.ui.define([
         onBeforeExport: function (oEvent) {
             var oSettings = oEvent.getParameter("exportSettings");
             var columns = oSettings.workbook.columns;
-
             columns.forEach(function (oColumn) {
                 switch (oColumn.property) {
                     case "ValuationQuantity": 
