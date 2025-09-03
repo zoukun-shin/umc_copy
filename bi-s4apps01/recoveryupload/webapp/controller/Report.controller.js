@@ -17,6 +17,102 @@ sap.ui.define([
             this._BusyDialog = new BusyDialog();
         },
 
+        onUploadTypeChange: function (oEvent) {
+            var sUploadType = this.getModel("local").getProperty("/filterUploadType");
+
+            switch (sUploadType) {
+                case "SB":
+                    this.getView().getModel("local").setProperty("/showSBINST", true);
+                    this.getView().getModel("local").setProperty("/showSB", true);
+                    this.getView().getModel("local").setProperty("/showIN", false);
+                    this.getView().getModel("local").setProperty("/showST", false);
+                    this.getView().getModel("local").setProperty("/showSS", false);
+                    this.getView().getModel("local").setProperty("/showINSS", false);
+                    this.getView().getModel("local").setProperty("/showINST", false);
+                    this.getView().getModel("local").setProperty("/showINSTSS", false);
+                    break;
+                case "IN":
+                    this.getView().getModel("local").setProperty("/showSBINST", true);
+                    this.getView().getModel("local").setProperty("/showSB", false);
+                    this.getView().getModel("local").setProperty("/showIN", true);
+                    this.getView().getModel("local").setProperty("/showST", false);
+                    this.getView().getModel("local").setProperty("/showSS", false);
+                    this.getView().getModel("local").setProperty("/showINSS", true);
+                    this.getView().getModel("local").setProperty("/showINST", true);
+                    this.getView().getModel("local").setProperty("/showINSTSS", true);
+                    break;
+                case "ST":
+                    this.getView().getModel("local").setProperty("/showSBINST", true);
+                    this.getView().getModel("local").setProperty("/showSB", false);
+                    this.getView().getModel("local").setProperty("/showIN", false);
+                    this.getView().getModel("local").setProperty("/showST", true);
+                    this.getView().getModel("local").setProperty("/showSS", false);
+                    this.getView().getModel("local").setProperty("/showINSS", false);
+                    this.getView().getModel("local").setProperty("/showINST", true);
+                    this.getView().getModel("local").setProperty("/showINSTSS", true);
+                    break;
+                case "SS":
+                    this.getView().getModel("local").setProperty("/showSBINST", false);
+                    this.getView().getModel("local").setProperty("/showSB", false);
+                    this.getView().getModel("local").setProperty("/showIN", false);
+                    this.getView().getModel("local").setProperty("/showST", false);
+                    this.getView().getModel("local").setProperty("/showSS", true);
+                    this.getView().getModel("local").setProperty("/showINSS", true);
+                    this.getView().getModel("local").setProperty("/showINST", false);
+                    this.getView().getModel("local").setProperty("/showINSTSS", true);
+                    break;
+            }
+        },
+
+        onAfterRendering: function (oEvent) {
+            var sUploadType = this.getModel("local").getProperty("/filterUploadType");
+            if (sUploadType === "SB") {
+                setTimeout(() => {
+                    this.getView().getModel("local").setProperty("/showSBINST", true);
+                    this.getView().getModel("local").setProperty("/showSB", true);
+                    this.getView().getModel("local").setProperty("/showIN", false);
+                    this.getView().getModel("local").setProperty("/showST", false);
+                    this.getView().getModel("local").setProperty("/showSS", false);
+                    this.getView().getModel("local").setProperty("/showINSS", false);
+                    this.getView().getModel("local").setProperty("/showINST", false);
+                    this.getView().getModel("local").setProperty("/showINSTSS", false);
+                }, 100);
+            } else if (sUploadType === "IN") {
+                setTimeout(() => {
+                    this.getView().getModel("local").setProperty("/showSBINST", true);
+                    this.getView().getModel("local").setProperty("/showSB", false);
+                    this.getView().getModel("local").setProperty("/showIN", true);
+                    this.getView().getModel("local").setProperty("/showST", false);
+                    this.getView().getModel("local").setProperty("/showSS", false);
+                    this.getView().getModel("local").setProperty("/showINSS", true);
+                    this.getView().getModel("local").setProperty("/showINST", true);
+                    this.getView().getModel("local").setProperty("/showINSTSS", true);
+                }, 100);
+            } else if (sUploadType === "ST") {
+                setTimeout(() => {
+                    this.getView().getModel("local").setProperty("/showSBINST", true);
+                    this.getView().getModel("local").setProperty("/showSB", false);
+                    this.getView().getModel("local").setProperty("/showIN", false);
+                    this.getView().getModel("local").setProperty("/showST", true);
+                    this.getView().getModel("local").setProperty("/showSS", false);
+                    this.getView().getModel("local").setProperty("/showINSS", false);
+                    this.getView().getModel("local").setProperty("/showINST", true);
+                    this.getView().getModel("local").setProperty("/showINSTSS", true);
+                }, 100);
+            } else if (sUploadType === "SS") {
+                setTimeout(() => {
+                    this.getView().getModel("local").setProperty("/showSBINST", false);
+                    this.getView().getModel("local").setProperty("/showSB", false);
+                    this.getView().getModel("local").setProperty("/showIN", false);
+                    this.getView().getModel("local").setProperty("/showST", false);
+                    this.getView().getModel("local").setProperty("/showSS", true);
+                    this.getView().getModel("local").setProperty("/showINSS", true);
+                    this.getView().getModel("local").setProperty("/showINST", false);
+                    this.getView().getModel("local").setProperty("/showINSTSS", true);
+                }, 100);
+            }
+        },
+
         onBeforeRebindTable: function (oEvent) {
             var aFilters = oEvent.getParameter("bindingParams").filters;
             var oNewFilter,

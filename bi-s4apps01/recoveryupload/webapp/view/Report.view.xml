@@ -14,7 +14,7 @@
             <smartFilterBar:controlConfiguration>
                 <smartFilterBar:ControlConfiguration index='10' key="UploadType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>UploadType}">
                     <smartFilterBar:customControl>
-                        <Select id="idUploadType" width="300px" selectedKey="{local>/filterUploadType}">
+                        <Select id="idUploadType" width="300px" selectedKey="{local>/filterUploadType}" change="onUploadTypeChange">
                             <core:Item key="SB" text="{i18n>UploadType_SB}"/>
                             <core:Item key="IN" text="{i18n>UploadType_IN}"/>
                             <core:Item key="ST" text="{i18n>UploadType_ST}"/>
@@ -74,7 +74,7 @@
                     <Button icon="sap-icon://delete" text="{i18n>Delete}" type="Transparent" press="onDelete" enabled="{= ${local>/authorityCheck/button/Delete}}"/>
                 </OverflowToolbar>
             </smartTable:customToolbar>
-            <table:Table id="idCustomListTable" selectionMode="MultiToggle">
+            <table:Table id="idCustomListTable" selectionMode="MultiToggle" columnResize="onAfterRendering" columnMove="onAfterRendering">
                 <table:rowMode>
                     <rowmodes:Auto minRowCount="12"/>
                 </table:rowMode>
@@ -95,7 +95,7 @@
                             <Text text="{RecoveryManagementNumber}" />
                         </table:template>
                     </table:Column>
-                    <table:Column visible="{= ${local>/filterUploadType} !== 'SS'}" width="10rem" label="{i18n>PurchaseOrder}" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder">
+                    <table:Column visible="{local>/showSBINST}" width="10rem" label="{i18n>PurchaseOrder}" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrder", "leadingProperty":"PurchaseOrder"}'/>
                         </table:customData>
@@ -103,7 +103,7 @@
                             <Text text="{PurchaseOrder}" />
                         </table:template>
                     </table:Column>
-                    <table:Column visible="{= ${local>/filterUploadType} !== 'SS'}" width="10rem" label="{i18n>PurchaseOrderItem}" sortProperty="PurchaseOrderItem" filterProperty="PurchaseOrderItem">
+                    <table:Column visible="{local>/showSBINST}" width="10rem" label="{i18n>PurchaseOrderItem}" sortProperty="PurchaseOrderItem" filterProperty="PurchaseOrderItem">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderItem", "leadingProperty":"PurchaseOrderItem"}'/>
                         </table:customData>
@@ -111,7 +111,7 @@
                             <Text text="{PurchaseOrderItem}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>SpotbuyMaterial}" sortProperty="SpotbuyMaterial" filterProperty="SpotbuyMaterial" visible="{= ${local>/filterUploadType} === 'SB'}">
+                    <table:Column width="10rem" label="{i18n>SpotbuyMaterial}" sortProperty="SpotbuyMaterial" filterProperty="SpotbuyMaterial" visible="{local>/showSB}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"SpotbuyMaterial", "leadingProperty":"SpotbuyMaterial"}'/>
                         </table:customData>
@@ -119,7 +119,7 @@
                             <Text text="{SpotbuyMaterial}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="15rem" label="{i18n>SpotbuyMaterialText}" sortProperty="SpotbuyMaterialText" filterProperty="SpotbuyMaterialText" visible="{= ${local>/filterUploadType} === 'SB'}">
+                    <table:Column width="15rem" label="{i18n>SpotbuyMaterialText}" sortProperty="SpotbuyMaterialText" filterProperty="SpotbuyMaterialText" visible="{local>/showSB}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"SpotbuyMaterialText", "leadingProperty":"SpotbuyMaterialText"}'/>
                         </table:customData>
@@ -127,7 +127,7 @@
                             <Text text="{SpotbuyMaterialText}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>SpotbuyMaterialPrice}" sortProperty="SpotbuyMaterialPrice" filterProperty="SpotbuyMaterialPrice" visible="{= ${local>/filterUploadType} === 'SB'}">
+                    <table:Column width="10rem" label="{i18n>SpotbuyMaterialPrice}" sortProperty="SpotbuyMaterialPrice" filterProperty="SpotbuyMaterialPrice" visible="{local>/showSB}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"SpotbuyMaterialPrice", "leadingProperty":"SpotbuyMaterialPrice"}'/>
                         </table:customData>
@@ -135,7 +135,7 @@
                             <Text text="{SpotbuyMaterialPrice}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>GeneralMaterial}" sortProperty="GeneralMaterial" filterProperty="GeneralMaterial" visible="{= ${local>/filterUploadType} === 'SB'}">
+                    <table:Column width="10rem" label="{i18n>GeneralMaterial}" sortProperty="GeneralMaterial" filterProperty="GeneralMaterial" visible="{local>/showSB}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"GeneralMaterial", "leadingProperty":"GeneralMaterial"}'/>
                         </table:customData>
@@ -143,7 +143,7 @@
                             <Text text="{GeneralMaterial}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="15rem" label="{i18n>GeneralMaterialText}" sortProperty="GeneralMaterialText" filterProperty="GeneralMaterialText" visible="{= ${local>/filterUploadType} === 'SB'}">
+                    <table:Column width="15rem" label="{i18n>GeneralMaterialText}" sortProperty="GeneralMaterialText" filterProperty="GeneralMaterialText" visible="{local>/showSB}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"GeneralMaterialText", "leadingProperty":"GeneralMaterialText"}'/>
                         </table:customData>
@@ -151,7 +151,7 @@
                             <Text text="{GeneralMaterialText}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>GeneralMaterialPrice}" sortProperty="GeneralMaterialPrice" filterProperty="GeneralMaterialPrice" visible="{= ${local>/filterUploadType} === 'SB'}">
+                    <table:Column width="10rem" label="{i18n>GeneralMaterialPrice}" sortProperty="GeneralMaterialPrice" filterProperty="GeneralMaterialPrice" visible="{local>/showSB}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"GeneralMaterialPrice", "leadingProperty":"GeneralMaterialPrice"}'/>
                         </table:customData>
@@ -159,7 +159,7 @@
                             <Text text="{GeneralMaterialPrice}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="15rem" label="{i18n>MaterialQuantity}" sortProperty="MaterialQuantity" filterProperty="MaterialQuantity" visible="{= ${local>/filterUploadType} === 'SB'}">
+                    <table:Column width="15rem" label="{i18n>MaterialQuantity}" sortProperty="MaterialQuantity" filterProperty="MaterialQuantity" visible="{local>/showSB}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"MaterialQuantity", "leadingProperty":"MaterialQuantity"}'/>
                         </table:customData>
@@ -167,7 +167,7 @@
                             <Text text="{MaterialQuantity}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>InitialMaterial}" sortProperty="InitialMaterial" filterProperty="InitialMaterial" visible="{= ${local>/filterUploadType} === 'IN'}">
+                    <table:Column width="10rem" label="{i18n>InitialMaterial}" sortProperty="InitialMaterial" filterProperty="InitialMaterial" visible="{local>/showIN}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"InitialMaterial", "leadingProperty":"InitialMaterial"}'/>
                         </table:customData>
@@ -175,7 +175,7 @@
                             <Text text="{InitialMaterial}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="15rem" label="{i18n>InitialMaterialText}" sortProperty="InitialMaterialText" filterProperty="InitialMaterialText" visible="{= ${local>/filterUploadType} === 'IN'}">
+                    <table:Column width="15rem" label="{i18n>InitialMaterialText}" sortProperty="InitialMaterialText" filterProperty="InitialMaterialText" visible="{local>/showIN}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"InitialMaterialText", "leadingProperty":"InitialMaterialText"}'/>
                         </table:customData>
@@ -183,7 +183,7 @@
                             <Text text="{InitialMaterialText}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>MateriaGroup}" sortProperty="MateriaGroup" filterProperty="MateriaGroup" visible="{= ${local>/filterUploadType} === 'IN'}">
+                    <table:Column width="10rem" label="{i18n>MateriaGroup}" sortProperty="MateriaGroup" filterProperty="MateriaGroup" visible="{local>/showIN}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"MateriaGroup", "leadingProperty":"MateriaGroup"}'/>
                         </table:customData>
@@ -191,7 +191,7 @@
                             <Text text="{MateriaGroup}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>AccountingDocument}" sortProperty="AccountingDocument" filterProperty="AccountingDocument" visible="{= ${local>/filterUploadType} === 'IN'}">
+                    <table:Column width="10rem" label="{i18n>AccountingDocument}" sortProperty="AccountingDocument" filterProperty="AccountingDocument" visible="{local>/showIN}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"AccountingDocument", "leadingProperty":"AccountingDocument"}'/>
                         </table:customData>
@@ -199,7 +199,7 @@
                             <Text text="{AccountingDocument}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>AccountingDocumentItem}" sortProperty="AccountingDocumentItem" filterProperty="AccountingDocumentItem" visible="{= ${local>/filterUploadType} === 'IN'}">
+                    <table:Column width="10rem" label="{i18n>AccountingDocumentItem}" sortProperty="AccountingDocumentItem" filterProperty="AccountingDocumentItem" visible="{local>/showIN}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"AccountingDocumentItem", "leadingProperty":"AccountingDocumentItem"}'/>
                         </table:customData>
@@ -207,7 +207,7 @@
                             <Text text="{AccountingDocumentItem}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>TransportExpenseMaterial}" sortProperty="TransportExpenseMaterial" filterProperty="TransportExpenseMaterial" visible="{= ${local>/filterUploadType} === 'ST'}">
+                    <table:Column width="10rem" label="{i18n>TransportExpenseMaterial}" sortProperty="TransportExpenseMaterial" filterProperty="TransportExpenseMaterial" visible="{local>/showST}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"TransportExpenseMaterial", "leadingProperty":"TransportExpenseMaterial"}'/>
                         </table:customData>
@@ -215,7 +215,7 @@
                             <Text text="{TransportExpenseMaterial}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="15rem" label="{i18n>TransportExpenseMaterialText}" sortProperty="TransportExpenseMaterialText" filterProperty="TransportExpenseMaterialText" visible="{= ${local>/filterUploadType} === 'ST'}">
+                    <table:Column width="15rem" label="{i18n>TransportExpenseMaterialText}" sortProperty="TransportExpenseMaterialText" filterProperty="TransportExpenseMaterialText" visible="{local>/showST}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"TransportExpenseMaterialText", "leadingProperty":"TransportExpenseMaterialText"}'/>
                         </table:customData>
@@ -223,7 +223,7 @@
                             <Text text="{TransportExpenseMaterialText}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>MaterialDocument}" sortProperty="MaterialDocument" filterProperty="MaterialDocument" visible="{= ${local>/filterUploadType} === 'SS'}">
+                    <table:Column width="10rem" label="{i18n>MaterialDocument}" sortProperty="MaterialDocument" filterProperty="MaterialDocument" visible="{local>/showSS}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocument", "leadingProperty":"MaterialDocument"}'/>
                         </table:customData>
@@ -231,7 +231,7 @@
                             <Text text="{MaterialDocument}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>MaterialDocumentItem}" sortProperty="MaterialDocumentItem" filterProperty="MaterialDocumentItem" visible="{= ${local>/filterUploadType} === 'SS'}">
+                    <table:Column width="10rem" label="{i18n>MaterialDocumentItem}" sortProperty="MaterialDocumentItem" filterProperty="MaterialDocumentItem" visible="{local>/showSS}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocumentItem", "leadingProperty":"MaterialDocumentItem"}'/>
                         </table:customData>
@@ -239,7 +239,7 @@
                             <Text text="{MaterialDocumentItem}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>SSMaterial}" sortProperty="SSMaterial" filterProperty="SSMaterial" visible="{= ${local>/filterUploadType} === 'SS'}">
+                    <table:Column width="10rem" label="{i18n>SSMaterial}" sortProperty="SSMaterial" filterProperty="SSMaterial" visible="{local>/showSS}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"SSMaterial", "leadingProperty":"SSMaterial"}'/>
                         </table:customData>
@@ -247,7 +247,7 @@
                             <Text text="{SSMaterial}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="15rem" label="{i18n>SSMaterialText}" sortProperty="SSMaterialText" filterProperty="SSMaterialText" visible="{= ${local>/filterUploadType} === 'SS'}">
+                    <table:Column width="15rem" label="{i18n>SSMaterialText}" sortProperty="SSMaterialText" filterProperty="SSMaterialText" visible="{local>/showSS}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"SSMaterialText", "leadingProperty":"SSMaterialText"}'/>
                         </table:customData>
@@ -255,7 +255,7 @@
                             <Text text="{SSMaterialText}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>GLAccount}" sortProperty="GLAccount" filterProperty="GLAccount" visible="{= ${local>/filterUploadType} === 'IN' || ${local>/filterUploadType} === 'SS'}">
+                    <table:Column width="10rem" label="{i18n>GLAccount}" sortProperty="GLAccount" filterProperty="GLAccount" visible="{local>/showINSS}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"GLAccount", "leadingProperty":"GLAccount"}'/>
                         </table:customData>
@@ -263,7 +263,7 @@
                             <Text text="{GLAccount}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>GLAccountText}" sortProperty="GLAccountText" filterProperty="GLAccountText" visible="{= ${local>/filterUploadType} === 'IN' || ${local>/filterUploadType} === 'SS'}">
+                    <table:Column width="10rem" label="{i18n>GLAccountText}" sortProperty="GLAccountText" filterProperty="GLAccountText" visible="{local>/showINSS}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"GLAccountText", "leadingProperty":"GLAccountText"}'/>
                         </table:customData>
@@ -271,7 +271,7 @@
                             <Text text="{GLAccountText}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>FixedAsset}" sortProperty="FixedAsset" filterProperty="FixedAsset" visible="{= ${local>/filterUploadType} === 'IN'}">
+                    <table:Column width="10rem" label="{i18n>FixedAsset}" sortProperty="FixedAsset" filterProperty="FixedAsset" visible="{local>/showIN}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"FixedAsset", "leadingProperty":"FixedAsset"}'/>
                         </table:customData>
@@ -279,7 +279,7 @@
                             <Text text="{FixedAsset}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>FixedAssetText}" sortProperty="FixedAssetText" filterProperty="FixedAssetText" visible="{= ${local>/filterUploadType} === 'IN'}">
+                    <table:Column width="10rem" label="{i18n>FixedAssetText}" sortProperty="FixedAssetText" filterProperty="FixedAssetText" visible="{local>/showIN}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"FixedAssetText", "leadingProperty":"FixedAssetText"}'/>
                         </table:customData>
@@ -287,7 +287,7 @@
                             <Text text="{FixedAssetText}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>POQuantity}" sortProperty="POQuantity" filterProperty="POQuantity" visible="{= ${local>/filterUploadType} === 'IN' || ${local>/filterUploadType} === 'ST'}">
+                    <table:Column width="10rem" label="{i18n>POQuantity}" sortProperty="POQuantity" filterProperty="POQuantity" visible="{local>/showINST}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"POQuantity", "leadingProperty":"POQuantity"}'/>
                         </table:customData>
@@ -295,7 +295,7 @@
                             <Text text="{POQuantity}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>Quantity}" sortProperty="Quantity" filterProperty="Quantity" visible="{= ${local>/filterUploadType} === 'SS'}">
+                    <table:Column width="10rem" label="{i18n>Quantity}" sortProperty="Quantity" filterProperty="Quantity" visible="{local>/showSS}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"Quantity", "leadingProperty":"Quantity"}'/>
                         </table:customData>
@@ -303,7 +303,7 @@
                             <Text text="{Quantity}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>NetAmount}" sortProperty="NetAmount" filterProperty="NetAmount" visible="{= ${local>/filterUploadType} === 'IN' || ${local>/filterUploadType} === 'ST'}">
+                    <table:Column width="10rem" label="{i18n>NetAmount}" sortProperty="NetAmount" filterProperty="NetAmount" visible="{local>/showINST}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"NetAmount", "leadingProperty":"NetAmount"}'/>
                         </table:customData>
@@ -311,7 +311,7 @@
                             <Text text="{NetAmount}" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>RecoveryNecessaryAmount}" sortProperty="RecoveryNecessaryAmount" filterProperty="RecoveryNecessaryAmount" visible="{= ${local>/filterUploadType} === 'IN' || ${local>/filterUploadType} === 'ST' || ${local>/filterUploadType} === 'SS'}">
+                    <table:Column width="10rem" label="{i18n>RecoveryNecessaryAmount}" sortProperty="RecoveryNecessaryAmount" filterProperty="RecoveryNecessaryAmount" visible="{local>/showINSTSS}">
                         <table:customData>
                             <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryNecessaryAmount", "leadingProperty":"RecoveryNecessaryAmount"}'/>
                         </table:customData>
