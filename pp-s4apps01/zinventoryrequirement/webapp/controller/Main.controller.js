@@ -215,7 +215,7 @@ sap.ui.define([
                 if (key.substring(0, 3) === "YMD" || key.substring(0, 2) === "YW" || key.substring(0, 2) === "YM") {
                     // MOD BEGIN BY XINLEI XU 2025/09/03 BUG Fixed 本番变更管理No.32
                     // oLabel = new Label({ text: key });
-                    if (key.substring(0, 2) === "YM") {
+                    if (key.substring(0, 2) === "YM" && key.substring(0, 3) !== "YMD") {
                         oLabel = new Label({ text: key.substring(0, 8) });
                     } else {
                         oLabel = new Label({ text: key });
