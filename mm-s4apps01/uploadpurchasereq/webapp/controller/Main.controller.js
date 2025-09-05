@@ -4,12 +4,12 @@ sap.ui.define([
     "use strict";
 
     return BaseController.extend("mm.uploadpurchasereq.controller.Main", {
-        
+
         onInit: function () {
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             this.getRouter().getRoute("RouteMain").attachMatched(this._initialize, this);
         },
-        
+
         _initialize: function () {
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();

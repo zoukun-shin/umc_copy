@@ -143,6 +143,13 @@ sap.ui.define([
                         SupplierMat: aSheet1[i]["SupplierMat"] || "",
                         PolinkBy: aSheet1[i]["PolinkBy"] || "",
                     };
+                    // ADD BEGIN BY XINLEI XU 2025/09/05 本番变更管理No.052
+                    if ((oItem.DeliveryDate.includes("/") && oItem.DeliveryDate.includes("-")) || !this.isValidDate(oItem.DeliveryDate)) {
+                        oItem.Type = "E";
+                        oItem.DeliveryDate = "";
+                        oItem.Message = this._ResourceBundle.getText("isValidDate");
+                    }
+                    // ADD END BY XINLEI XU 2025/09/05 本番变更管理No.052
                     aExcelSet.push(oItem);
                 }
                 //权限校验
@@ -155,8 +162,6 @@ sap.ui.define([
                 } else {
                     this.byId("idCheckButton").setEnabled(false);
                 }
-
-
                 this._LocalData.setProperty("/excelSet", aExcelSet)
                 this._BusyDialog.close();
                 this._LocalData.setProperty("/recordCheckSuccessed", false);
@@ -256,11 +261,27 @@ sap.ui.define([
         preparePostBatchBody: function () {
             let aExcelSet = this._LocalData.getProperty("/excelSet");
             let copyExcelSet = [];
+            // ADD BEGIN BY XINLEI XU 2025/09/05 本番变更管理No.052
+            var hasError = aExcelSet.find(element => element.Type === "E");
+            if (hasError) {
+                messages.showError(this._ResourceBundle.getText("hasError"));
+                return;
+            }
+            // ADD END BY XINLEI XU 2025/09/05 本番变更管理No.052
             aExcelSet.forEach(item => {
                 let postDoc = JSON.parse(JSON.stringify(item));
                 postDoc.Type = "";
                 postDoc.Message = "";
-                postDoc.DeliveryDate = postDoc.DeliveryDate.replace(/[-/]/g, "");
+                // MOD BEGIN BY XINLEI XU 2025/09/05 本番变更管理No.052
+                let splitArr = [];
+                // postDoc.DeliveryDate = postDoc.DeliveryDate.replace(/[-/]/g, "");
+                if (postDoc.DeliveryDate.includes("/")) {
+                    splitArr = postDoc.DeliveryDate.split("/");
+                } else if (postDoc.DeliveryDate.includes("-")) {
+                    splitArr = postDoc.DeliveryDate.split("-");
+                }
+                postDoc.DeliveryDate = this._pad2(splitArr[0]) + this._pad2(splitArr[1]) + this._pad2(splitArr[2]);
+                // MOD END BY XINLEI XU 2025/09/05 本番变更管理No.052
                 copyExcelSet.push(postDoc);
             }, this)
             let postDocs = [JSON.stringify(copyExcelSet)];

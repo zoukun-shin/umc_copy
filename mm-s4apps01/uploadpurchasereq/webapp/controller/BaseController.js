@@ -159,5 +159,17 @@ sap.ui.define([
 				}
 			});
 		},
+
+		// ADD BEGIN BY XINLEI XU 2025/09/05 本番变更管理No.052
+		isValidDate: function (dateString) {
+			// 创建一个日期对象
+			const date = new Date(dateString);
+			// 检查日期是否有效
+			return !isNaN(date.getTime());
+		},
+		_pad2: function (n) {
+			return parseInt(n) < 10 ? "0" + parseInt(n) : n;
+		}
+		// ADD END BY XINLEI XU 2025/09/05
 	});
 });
