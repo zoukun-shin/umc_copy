@@ -564,11 +564,11 @@ sap.ui.define([
             var bEvent = "POST";
             let result = this.preparePostBody();
             let postDocs = result.postDocs;
-            // let msg = result.msg;
-            // if (msg !== "") {
-            //     MessageBox.error(msg + " " + this.getResourceBundle().getText("msg001"));
-            //     return;
-            // };
+            let msg = result.msg;
+            if (msg !== "") {
+                MessageBox.error(msg + " " + this.getResourceBundle().getText("msg001"));
+                return;
+            };
 
             this._BusyDialog.open();
             var aPromise = [];
@@ -616,40 +616,40 @@ sap.ui.define([
             });
             let postDocs = [JSON.stringify(selectedRows)];
             //判断：是否計画数＞未処分数
-            // var oGrouped = {};
+            var oGrouped = {};
             var msg = "";
-            // var days = Number(this.byId("zdays").getValue());
-            // selectedRows.forEach(function (row) {
-            //     var mat = row.Idnrk;
-            //     if (!oGrouped[mat]) {
-            //         oGrouped[mat] = { P: [], W: null };
-            //     }
-            //     if (row.PlanType === "P") {
-            //         oGrouped[mat].P.push(row);
-            //     } else if (row.PlanType === "W") {
-            //         oGrouped[mat].W = row;
-            //     }
-            // });
-            // Object.keys(oGrouped).forEach(function (Idnrk) {
-            //     var pRow = oGrouped[Idnrk].P;
-            //     var wRow = oGrouped[Idnrk].W;
-            //     var total = 0;
-            //     var unPlan = parseFloat(wRow.Summary) || 0;
-            //     for (var i = 1; i <= days; i++) {
-            //         var sKey = "D" + String(i).padStart(3, "0");
-            //         pRow.forEach(function (rowP) {
-            //             total += parseFloat(rowP[sKey]) || 0;
-            //         });
-            //     };
-            //     pRow.forEach(function (rowP) {
-            //         total -= rowP.Summary;
-            //     });
+            var days = Number(this.byId("zdays").getValue());
+            selectedRows.forEach(function (row) {
+                var mat = row.Idnrk;
+                if (!oGrouped[mat]) {
+                    oGrouped[mat] = { P: [], W: null };
+                }
+                if (row.PlanType === "P") {
+                    oGrouped[mat].P.push(row);
+                } else if (row.PlanType === "W") {
+                    oGrouped[mat].W = row;
+                }
+            });
+            Object.keys(oGrouped).forEach(function (Idnrk) {
+                var pRow = oGrouped[Idnrk].P;
+                var wRow = oGrouped[Idnrk].W;
+                var total = 0;
+                var unPlan = parseFloat(wRow.Summary) || 0;
+                for (var i = 1; i <= days; i++) {
+                    var sKey = "D" + String(i).padStart(3, "0");
+                    pRow.forEach(function (rowP) {
+                        total += parseFloat(rowP[sKey]) || 0;
+                    });
+                };
+                pRow.forEach(function (rowP) {
+                    total -= rowP.Summary;
+                });
 
-            //     if (total > unPlan) {
-            //         msg += wRow.Idnrk + " / ";
-            //     };
-            // });
-            // msg = msg.slice(0, -2);
+                if (total > unPlan) {
+                    msg += wRow.Idnrk + " / ";
+                };
+            });
+            msg = msg.slice(0, -2);
             return {
                 postDocs: postDocs,
                 msg: msg
