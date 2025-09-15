@@ -144,7 +144,25 @@ sap.ui.define([
                         PolinkBy: aSheet1[i]["PolinkBy"] || "",
                     };
                     // ADD BEGIN BY XINLEI XU 2025/09/05 本番变更管理No.052
-                    if ((oItem.DeliveryDate.includes("/") && oItem.DeliveryDate.includes("-")) || !this.isValidDate(oItem.DeliveryDate)) {
+                    var bError = false;
+                    if ((!oItem.DeliveryDate.includes("/") && !oItem.DeliveryDate.includes("-")) || !this.isValidDate(oItem.DeliveryDate)) {
+                        bError = true;
+                    } else {
+                        var splitArr = [];
+                        if (oItem.DeliveryDate.includes("/")) {
+                            splitArr = oItem.DeliveryDate.split("/");
+                        } else if (oItem.DeliveryDate.includes("-")) {
+                            splitArr = oItem.DeliveryDate.split("-");
+                        }
+                        if (splitArr[0].length !== 4) {
+                            bError = true;
+                        } else if (splitArr[1].length === 0 || splitArr[1].length > 2) {
+                            bError = true;
+                        } else if (splitArr[2].length === 0 || splitArr[2].length > 2) {
+                            bError = true;
+                        }
+                    }
+                    if (bError) {
                         oItem.Type = "E";
                         oItem.DeliveryDate = "";
                         oItem.Message = this._ResourceBundle.getText("isValidDate");
