@@ -110,7 +110,10 @@ sap.ui.define([
         },
 
         onBeforeRebindTable: function (oEvent) {
-            if (this.getModel("local").getProperty("/zYear").length != 0) {
+            // MOD BEGIN BY XINLEI XU 2025/09/19 Bug Fixed
+            // if (this.getModel("local").getProperty("/zYear").length != 0) {
+            if (this.getModel("local").getProperty("/zYear") && this.getModel("local").getProperty("/zYear").length != 0) {
+                // MOD END BY XINLEI XU 2025/09/19 Bug Fixed
                 var sYear = this.getModel("local").getProperty("/zYear").getFullYear();
                 var oYear = { oValue1: sYear, oValue2: null, sOperator: "EQ", sPath: "zYear", _bMultiFilter: false };
                 oEvent.getParameter("bindingParams").filters.push(oYear);
@@ -133,8 +136,7 @@ sap.ui.define([
                         })
                     }
                 }
-            }
-            else {
+            } else {
                 var oMonth = this.byId("sfbRep02SelFiscalMonth2");
                 if (oMonth) {
                     var aMonth = oMonth.getSelectedKeys();
