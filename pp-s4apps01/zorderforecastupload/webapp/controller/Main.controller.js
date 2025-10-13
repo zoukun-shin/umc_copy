@@ -107,7 +107,8 @@ sap.ui.define([
                 });
                 var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                 var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
-                if (sFileName.includes("横")) {
+                // if (sFileName.includes("横")) {
+                if (sFileName.includes(this.getResourceBundle().getText("Include_H"))) { // MOD BY XINLEI XU 2025/10/13
                     // read valid data starting from line 7
                     var num = 0;
                     for (var i = 5; i < aSheetData.length; i++) {
@@ -140,7 +141,8 @@ sap.ui.define([
                             }
                         }
                     }
-                } else if (sFileName.includes("縦")) {
+                    // } else if (sFileName.includes("縦")) {
+                } else if (sFileName.includes(this.getResourceBundle().getText("Include_V"))) { // MOD BY XINLEI XU 2025/10/13
                     for (var i = 5; i < aSheetData.length; i++) {
                         var item = {
                             "Status": "",
