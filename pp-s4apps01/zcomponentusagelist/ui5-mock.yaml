@@ -35,13 +35,13 @@ server:
         mountPath: /
         services:
           - urlPath: /sap/opu/odata/sap/ZUI_COMPONENTUSAGELIST_O2
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
             generateMockData: true
-            metadataXmlPath: ./webapp/localService/metadata.xml
-            mockdataRootPath: ./webapp/localService/data
-          - urlPath: /sap/opu/odata/sap/ZUI_COMPONENTUSAGELIST_O2/
-            metadataPath: ./webapp/localService/metadata.xml
-            mockdataPath: ./webapp/localService/mockdata
+          - urlPath: /sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001
+            metadataPath: ./webapp/localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml
+            mockdataPath: ./webapp/localService/AuthorityService/data
             generateMockData: true
         annotations:
-          - localPath: ./webapp/localService/ZUI_COMPONENTUSAGELIST_O2_VAN.xml
+          - localPath: ./webapp/localService/mainService/ZUI_COMPONENTUSAGELIST_O2_VAN.xml
             urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_COMPONENTUSAGELIST_O2_VAN',Version='0001')/$value/
