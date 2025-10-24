@@ -34,6 +34,7 @@ function (Base) {
                             })
                         });
                     }
+                    this.getView().destroy();
                     this.oErrorMessageDialog.open();
                 }
                 this.getModel("local").setProperty("/authorityCheck", {
@@ -62,6 +63,7 @@ function (Base) {
                         })
                     });
                 }
+                this.getView().destroy();
                 this.oErrorMessageDialog.open();
             }.bind(this));
         },

@@ -33,7 +33,7 @@ sap.ui.define([
             //     }
             // });
 
-            this.ListReportExt.getAuthorityData(this.oModels);
+            this.ListReportExt.getAuthorityData(this.oModels, this._oViews);
         }
     });
 });

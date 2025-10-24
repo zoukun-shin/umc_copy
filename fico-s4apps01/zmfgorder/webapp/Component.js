@@ -11,7 +11,7 @@ sap.ui.define( [
                 manifest: "json"
             },
             onAfterRendering: function () {
-                ListReportExt.init(this.oModels);
+                ListReportExt.init(this.oModels, this._oViews);
             }
         });
     }

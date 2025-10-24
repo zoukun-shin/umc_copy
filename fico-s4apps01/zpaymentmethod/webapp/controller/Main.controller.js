@@ -72,6 +72,7 @@ sap.ui.define([
                             })
                         });
                     }
+                    this.getView().destroy();
                     this.oErrorMessageDialog.open();
                 }
                 this.getOwnerComponent().getModel("local").setProperty("/authorityCheck", {
@@ -100,6 +101,7 @@ sap.ui.define([
                         })
                     });
                 }
+                this.getView().destroy();
                 this.oErrorMessageDialog.open();
             }.bind(this));
         },

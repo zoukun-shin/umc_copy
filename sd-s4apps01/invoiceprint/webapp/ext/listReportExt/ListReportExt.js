@@ -10,7 +10,7 @@ sap.ui.define([
     'use strict';
     var _oFunctions, _ResourceBundle, _oDataModel, _oPrintModel, _UserInfo;
     return {
-        init: function (oModels) {
+        init: function (oModels, oViews) {
             _oFunctions = this;
 
             _UserInfo = sap.ushell.Container.getService("UserInfo");
@@ -19,9 +19,9 @@ sap.ui.define([
             var oAuthorityModel = oModels.Authority;
             var oLocalModel = oModels.local;
             var oI18nModel = oModels.i18n;
-            this._getAuthorityData(oAuthorityModel, oLocalModel, oI18nModel);
+            this._getAuthorityData(oAuthorityModel, oLocalModel, oI18nModel, oViews);
         },
-        _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel) {
+        _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel, oViews) {
             var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
             var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
             var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
@@ -46,6 +46,7 @@ sap.ui.define([
                             })
                         });
                     }
+                    oViews.destroy();
                     this.oErrorMessageDialog.open();
                 }
                 oLocalModel.setProperty("/authorityCheck", {
@@ -73,6 +74,7 @@ sap.ui.define([
                         })
                     });
                 }
+                oViews.destroy();
                 this.oErrorMessageDialog.open();
             }.bind(this));
         },

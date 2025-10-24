@@ -13,7 +13,7 @@ sap.ui.define(
             },
 
             onAfterRendering: function () {
-                ListReportAuthCheck.init(this.oModels);
+                ListReportAuthCheck.init(this.oModels, this._oViews);
             }
         });
     }

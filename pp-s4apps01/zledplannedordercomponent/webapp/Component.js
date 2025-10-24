@@ -13,7 +13,7 @@ sap.ui.define(
             },
 
             onAfterRendering: function () {
-                this.ListReportExt.init(this.oModels);
+                this.ListReportExt.init(this.oModels, this._oViews);
             }
         });
     }

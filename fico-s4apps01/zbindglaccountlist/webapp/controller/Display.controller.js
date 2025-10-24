@@ -54,20 +54,22 @@ sap.ui.define([
 							})
 						});
 					}
+					this.getView().destroy();
 					this.oErrorMessageDialog.open();
 				}
 
 			}.bind(this), function (oError) {
-				// if (!this.oErrorMessageDialog) {
-				// 	this.oErrorMessageDialog = new sap.m.Dialog({
-				// 		type: sap.m.DialogType.Message,
-				// 		state: "Error",
-				// 		content: new sap.m.Text({
-				// 			text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("getAuthorityFailed")
-				// 		})
-				// 	});
-				// }
-				// this.oErrorMessageDialog.open();
+				if (!this.oErrorMessageDialog) {
+					this.oErrorMessageDialog = new sap.m.Dialog({
+						type: sap.m.DialogType.Message,
+						state: "Error",
+						content: new sap.m.Text({
+							text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("getAuthorityFailed")
+						})
+					});
+				}
+				this.getView().destroy();
+				this.oErrorMessageDialog.open();
 			}.bind(this));
 		},
 		onRowActionItemPress: function (oEvent) {

@@ -58,6 +58,7 @@ sap.ui.define([
 							})
 						});
 					}
+					this.getView().destroy();
 					this.oErrorMessageDialog.open();
 				}
 
@@ -71,6 +72,7 @@ sap.ui.define([
 						})
 					});
 				}
+				this.getView().destroy();
 				this.oErrorMessageDialog.open();
 			}.bind(this));
 		},

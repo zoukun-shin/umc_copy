@@ -67,7 +67,7 @@ sap.ui.define([
             // *************************************************
         },
 
-        getAuthorityData: function (oModels) {
+        getAuthorityData: function (oModels, oViews) {
             var oAuthorityModel = oModels.Authority;
             var oLocalModel = oModels.local;
             var oI18nModel = oModels.i18n;
@@ -96,6 +96,7 @@ sap.ui.define([
                             })
                         });
                     }
+                    oViews.destroy();
                     this.oErrorMessageDialog.open();
                 }
                 oLocalModel.setProperty("/authorityCheck", {
@@ -125,6 +126,7 @@ sap.ui.define([
                         })
                     });
                 }
+                oViews.destroy();
                 this.oErrorMessageDialog.open();
             }.bind(this));
         },

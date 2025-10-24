@@ -298,7 +298,11 @@ sap.ui.define([
                         //     sMsg = oError.error.message.value;
                         // }
                         // MessageBox.error(sMsg);
-                        reject(JSON.parse(oErr.responseText));
+                        if (oErr.responseText.includes("?xml")) {
+                            reject(oErr.responseText);
+                        } else {
+                            reject(JSON.parse(oErr.responseText));
+                        }
                     }
                 };
                 if (sModelName) {

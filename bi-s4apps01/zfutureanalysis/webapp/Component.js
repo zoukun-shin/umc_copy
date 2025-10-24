@@ -11,7 +11,7 @@ sap.ui.define(
                 manifest: "json"
             },
             onAfterRendering: function () {
-                this.ListReportAuth.init(this.oModels);
+                this.ListReportAuth.init(this.oModels, this._oViews);
             }
         });
     }

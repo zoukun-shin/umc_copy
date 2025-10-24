@@ -36,6 +36,7 @@ function (BaseController,BusyDialog) {
                             })
                         });
                     }
+                    this.getView().destroy();
                     this.oErrorMessageDialog.open();
                 }
                 this.getOwnerComponent().getModel("local").setProperty("/authorityCheck", {
@@ -62,6 +63,7 @@ function (BaseController,BusyDialog) {
                         })
                     });
                 }
+                this.getView().destroy();
                 this.oErrorMessageDialog.open();
             }.bind(this));
         },

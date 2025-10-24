@@ -1,8 +1,8 @@
 sap.ui.define([
     "sap/fe/core/AppComponent",
     "sd/deliveryreceipt/ext/ListReportExt"
-    ],
-    
+],
+
     function (Component, ListReportExt) {
         "use strict";
 
@@ -12,7 +12,7 @@ sap.ui.define([
                 manifest: "json"
             },
             onAfterRendering: function () {
-                this.ListReportExt.init(this.oModels);
+                this.ListReportExt.init(this.oModels, this._oViews);
             }
         });
     }

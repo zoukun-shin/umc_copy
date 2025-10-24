@@ -4,7 +4,7 @@ sap.ui.define([
 ],
     function (Component, ListReportExt) {
         "use strict";
-   
+
         return Component.extend("mm.poacceptance.Component", {
             ListReportExt: ListReportExt,
 
@@ -12,8 +12,8 @@ sap.ui.define([
                 manifest: "json"
             },
 
-            onAfterRendering: function() {
-                ListReportExt.init(this.oModels);
+            onAfterRendering: function () {
+                ListReportExt.init(this.oModels, this._oViews);
             }
         });
     }

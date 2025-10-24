@@ -14,7 +14,7 @@ sap.ui.define([
         ValueHelpDialog: ValueHelpDialog,
         formatter: formatter,
 
-        init: function (oModels) {
+        init: function (oModels, oViews) {
             _myFunction = sap.ui.require("pp/zmaterialrequisition/ext/controller/ListReportExt");
             _myBusyDialog = new BusyDialog();
             _UserInfo = sap.ushell.Container.getService("UserInfo");
@@ -74,7 +74,7 @@ sap.ui.define([
 
             // Authority Check
             var oAuthorityModel = oModels.Authority;
-            this._getAuthorityData(oAuthorityModel, oLocalModel, oI18nModel);
+            this._getAuthorityData(oAuthorityModel, oLocalModel, oI18nModel, oViews);
         },
 
         _getConfig: function (oDataModel, oLocalModel) {
@@ -98,7 +98,7 @@ sap.ui.define([
             });
         },
 
-        _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel) {
+        _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel, oViews) {
             var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
             var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
             var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
@@ -123,6 +123,7 @@ sap.ui.define([
                             })
                         });
                     }
+                    oViews.destroy();
                     this.oErrorMessageDialog.open();
                 }
                 oLocalModel.setProperty("/authorityCheck", {
@@ -155,6 +156,7 @@ sap.ui.define([
                         })
                     });
                 }
+                oViews.destroy();
                 this.oErrorMessageDialog.open();
             }.bind(this));
         },
