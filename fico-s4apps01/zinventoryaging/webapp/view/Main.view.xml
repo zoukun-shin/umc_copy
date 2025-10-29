@@ -21,7 +21,7 @@
                     <FlexBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="InventoryAging" useToolbar="false" smartVariant="__SVM01" persistencyKey="InventoryAgingSFB" initialized="onsMrilterBarInitialized" search="onSearch">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="CompanyCode" mandatory="mandatory" filterType="single" controlType="dropDownList" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>CompanyCode}"/>
+                                <smartFilterBar:ControlConfiguration index='10' key="CompanyCode" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>CompanyCode}"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="FiscalYear" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>FiscalYear}">
 				                    <smartFilterBar:customControl>
 					                    <!-- <DatePicker id="idFiscalYear" displayFormat="yyyy" /> -->
@@ -32,7 +32,7 @@
                                     <!-- <DatePicker id="idFiscalPeriod" displayFormat="MM" /> -->
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>	
-                                <smartFilterBar:ControlConfiguration index='40' key="Ledger" mandatory="mandatory" filterType="single" controlType="dropDownList" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Ledger}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="Ledger" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Ledger}"/>
                                 <smartFilterBar:ControlConfiguration index='50' key="Product" visibleInAdvancedArea="true" label="{i18n>Product}"/>
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="Plant" visible="false"/>
@@ -41,6 +41,9 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="ProductTypeName" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ProductGroup" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ProductGroupName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductIsCostingRelevant" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Material" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialDescription" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MRPResponsible" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MRPControllerName" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ChargeableSupplyFlag" visible="false"/>
@@ -134,6 +137,19 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="AmountMonth37" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="QuantityUnspecified" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="AmountUnspecified" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Coefficient37" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QuantityMonth38" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth38" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Coefficient38" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QuantityMonth39" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth39" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Coefficient39" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QuantityMonth40" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth40" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Coefficient40" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QuantityMonth41" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth41" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Coefficient41" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
