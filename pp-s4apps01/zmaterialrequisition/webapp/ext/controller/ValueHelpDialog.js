@@ -329,6 +329,7 @@ sap.ui.define([
                 } else {
                     _myBusyDialog.close();
                     this.getModel("local").setProperty(sInputPath + "Name", sText);
+                    this._oInput.setValueState("None");
                 }
             }
             //--------------------------------------------------------------------------------

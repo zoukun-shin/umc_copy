@@ -189,7 +189,7 @@
                         <table:template>
                             <Input value="{local>Material}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
                                 $event, $controller, '/ZC_ProductVH',
-                                ['Material','MaterialDescription','ProductType','StandardPrice','Currency'],['Material','MaterialDescription','ProductType'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ProductVH', length: 40 }" required="true" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== '' &amp;&amp; (${local>/headSet/Type} === '31' || ${local>/headSet/Type} === '50')}">
+                                ['Material','MaterialDescription','ProductType','StandardPrice','Currency'],['Material','MaterialDescription','ProductType'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ProductVH', length: 40 }" required="{= ${local>/headSet/Type} === '31' || ${local>/headSet/Type} === '50' }" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== '' &amp;&amp; (${local>/headSet/Type} === '31' || ${local>/headSet/Type} === '50')}">
                                 <suggestionColumns>
                                     <Column>
                                         <Label text="{i18n>Product}"/>
@@ -257,9 +257,10 @@
                         </table:template>
                     </table:Column>
                     <table:Column width="12rem" label="{i18n>Reason}">
+                        <Label text="{i18n>Reason}" required="true"/>
                         <table:template>
-                            <ComboBox items="{ path: '/ZC_TBC1001', filters : { path: 'ZID', operator: 'EQ', value1: 'ZPP011' }, sorter:{ path: 'Zvalue1' } }" selectedKey="{local>Reason}" filterSecondaryValues= "true" change="handler.handleChange" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== ''}">
-                                <core:ListItem key="{Zvalue1}" text="{Zvalue2}({Zvalue1})" additionalText="{Zvalue1}"/>
+                            <ComboBox required="true" items="{local>/ReasonSet}" selectedKey="{local>Reason}" filterSecondaryValues= "true" change="handler.handleChange" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== ''}">
+                                <core:ListItem key="{local>Zvalue1}" text="{local>Zvalue2}({local>Zvalue1})" additionalText="{local>Zvalue1}"/>
                             </ComboBox>
                         </table:template>
                     </table:Column>

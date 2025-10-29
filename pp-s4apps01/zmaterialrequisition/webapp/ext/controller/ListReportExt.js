@@ -96,6 +96,40 @@ sap.ui.define([
                 }
                 oLocalModel.setProperty("/Config", aConfig);
             });
+
+            // ADD BEGIN BY XINLEI XU 2025/10/28 AMO #5328
+            var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
+            var sSAP_Language = "";
+            switch (sLanguage) {
+                case "EN":
+                    sSAP_Language = "E";
+                    break;
+                case "JA":
+                    sSAP_Language = "J";
+                    break;
+                case "ZH":
+                    sSAP_Language = "1";
+                    break;
+                default:
+                    sSAP_Language = "J";
+                    break;
+            }
+            aFilters = [];
+            aFilters.push(new Filter("ZID", FilterOperator.EQ, "ZPP011"));
+            aFilters.push(new Filter("Zvalue3", FilterOperator.EQ, sSAP_Language));
+            var oContextBinding = oDataModel.bindList("/ZC_TBC1001", undefined, undefined, aFilters, {});
+            oContextBinding.requestContexts().then(function (aContext) {
+                var aReasons = [];
+                for (const boundContext of aContext) {
+                    var object = boundContext.getObject();
+                    aReasons.push({
+                        Zvalue1: object.Zvalue1,
+                        Zvalue2: object.Zvalue2
+                    });
+                }
+                oLocalModel.setProperty("/ReasonSet", aReasons);
+            });
+            // ADD END BY XINLEI XU 2025/10/28 AMO #5328
         },
 
         _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel, oViews) {
@@ -375,6 +409,13 @@ sap.ui.define([
                     sODataPath = this._oControl.mBindingInfos.items.path;
                     sValue = this._oControl.getSelectedKey();
                     if (sInputBindingPath === 'Reason') {
+                        // ADD BEGIN BY XINLEI XU 2025/10/28 AMO #5328 「発生理由」を必須項目に变更
+                        if (sValue) {
+                            this._oControl.setValueState("None");
+                        } else {
+                            this._oControl.setValueState("Error");
+                        }
+                        // ADD END BY XINLEI XU 2025/10/28 AMO #5328
                         if (!sValue) {
                             sValue = this._oControl.getValue();
                         } else if (sValue !== '11') {
@@ -604,45 +645,57 @@ sap.ui.define([
                         this.getModel("local").setProperty(sItemPath + field, 0);
                     }
                 });
-                oContextBinding.requestContexts().then(function (aContext) {
+
+                // MOD BEGIN BY XINLEI XU 2025/10/28 AMO #5328
+                if (sBindFieldName === "Reason") {
                     _myBusyDialog.close();
-                    if (aContext.length > 0) {
+                    var aReasons = this.getModel("local").getProperty("/ReasonSet");
+                    var oReason = aReasons.find(element => element.Zvalue1 === sValue);
+                    if (oReason) {
                         this._oControl.setValueState("None");
-                        if (sBindFieldName === "Reason") {
-                            return;
-                        }
-                        for (const boundContext of aContext) {
-                            var object = boundContext.getObject();
-                            for (const key in object) {
-                                if (!key.includes("@odata")) {
-                                    this.getModel("local").setProperty(sItemPath + key, object[key]);
+                    }
+                } else {
+                    // MOD END BY XINLEI XU 2025/10/28 AMO #5328
+                    oContextBinding.requestContexts().then(function (aContext) {
+                        _myBusyDialog.close();
+                        if (aContext.length > 0) {
+                            this._oControl.setValueState("None");
+                            // if (sBindFieldName === "Reason") { // DEL BY XINLEI XU 2025/10/28 AMO #5328
+                            //     return;
+                            // }
+                            for (const boundContext of aContext) {
+                                var object = boundContext.getObject();
+                                for (const key in object) {
+                                    if (!key.includes("@odata")) {
+                                        this.getModel("local").setProperty(sItemPath + key, object[key]);
+                                    }
                                 }
-                            }
-                            // Calculate amount
-                            if (sBindFieldName === "ManufacturingOrder" || sBindFieldName === "Material") {
-                                var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
-                                if (sValue && object["StandardPrice"]) {
-                                    var iAmount = parseFloat(sValue) * parseFloat(object["StandardPrice"]);
-                                    this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
-                                    var aConfig = this.getModel("local").getProperty("/Config");
-                                    var config = aConfig.find(element => element.Plant === sPlant);
-                                    if (iAmount >= parseFloat(config.Amount)) {
-                                        this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
-                                        // this.getModel("local").setProperty(sItemPath + "Status", "Error");
-                                        $("#" + this._oControl.getParent().getId()).css("background-color", "#f2bfc0");
-                                        $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#f2bfc0");
-                                    } else {
-                                        // this.getModel("local").setProperty(sItemPath + "Status", "None");
-                                        $("#" + this._oControl.getParent().getId()).css("background-color", "#fff");
-                                        $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#fff");
+                                // Calculate amount
+                                if (sBindFieldName === "ManufacturingOrder" || sBindFieldName === "Material") {
+                                    var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
+                                    if (sValue && object["StandardPrice"]) {
+                                        var iAmount = parseFloat(sValue) * parseFloat(object["StandardPrice"]);
+                                        this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
+                                        var aConfig = this.getModel("local").getProperty("/Config");
+                                        var config = aConfig.find(element => element.Plant === sPlant);
+                                        if (iAmount >= parseFloat(config.Amount)) {
+                                            this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
+                                            // this.getModel("local").setProperty(sItemPath + "Status", "Error");
+                                            $("#" + this._oControl.getParent().getId()).css("background-color", "#f2bfc0");
+                                            $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#f2bfc0");
+                                        } else {
+                                            // this.getModel("local").setProperty(sItemPath + "Status", "None");
+                                            $("#" + this._oControl.getParent().getId()).css("background-color", "#fff");
+                                            $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#fff");
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                }.bind(this), function (oError) {
-                    _myBusyDialog.close();
-                }.bind(this));
+                    }.bind(this), function (oError) {
+                        _myBusyDialog.close();
+                    }.bind(this));
+                }
             }
             if (!sValue) {
                 this._oControl.setValueState("None");
@@ -946,7 +999,10 @@ sap.ui.define([
                 if (oRow.oBindingContexts.local) {
                     var oCells = oRow.getCells();
                     oCells.forEach(cell => {
-                        if (cell.sId.includes("input")) {
+                        // MOD BEGIN BY XINLEI XU 2025/10/28 AMO #5328 「発生理由」を必須項目に变更
+                        // if (cell.sId.includes("input")) {
+                        if (cell.sId.includes("input") || cell.sId.includes("box")) {
+                            // MOD END BY XINLEI XU 2025/10/28 AMO #5328
                             aIdListOfRequiredFields.push(cell.sId);
                         }
                     });
