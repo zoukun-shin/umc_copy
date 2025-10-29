@@ -1,0 +1,91 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:table="sap.ui.table" core:require="{ handler: 'fico/zsalespurchaseprice/ext/controller/ListReportExt' }">
+    <Dialog title="{i18n>upload}">
+        <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
+            <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration' }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                <upload:items>
+                    <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
+                </upload:items>
+            </upload:UploadSet>
+        </Panel>
+        <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto">
+            <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="handler.onFileChange" width="40%" class="sapUiSmallMargin"/>
+        </Panel>
+        <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
+            <table:Table rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="8" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:extension>
+                    <OverflowToolbar>
+                        <Text text="{local>/logInfo}"/>
+                        <ToolbarSpacer/>
+                        <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="handler.onClear" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Clear}}"/>
+                        <Button id="idCheckButton" icon="sap-icon://check-availability" type="Transparent" text="{i18n>checkBtn}" press="handler.onCheck" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Check}}"/>
+                        <Button id="idExcuteButton" icon="sap-icon://document" type="Transparent" text="{i18n>excuteBtn}" press="handler.onExcute" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Excute}}"/>
+                        <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="handler.onExport" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/>
+                    </OverflowToolbar>
+                </table:extension>
+                <table:columns>
+                    <table:Column autoResizable="true" width="6rem" label="{i18n>Status}">
+                        <table:template>
+                            <ObjectStatus state="{ path:'local>Status',formatter:'handler.formatter.formatState' }" icon="{ path:'local>Status', formatter:'handler.formatter.formatStateIcon'}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>Message}">
+                        <table:template>
+                            <Text text="{local>Message}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PriceType}">
+                        <table:template>
+                            <Text text="{local>PriceType}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>CompanyCode}">
+                        <table:template>
+                            <Text text="{local>CompanyCode}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>FiscalYear}">
+                        <table:template>
+                            <Text text="{local>FiscalYear}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>Period}">
+                        <table:template>
+                            <Text text="{local>Period}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>Plant}">
+                        <table:template>
+                            <Text text="{local>Plant}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>Material}">
+                        <table:template>
+                            <Text text="{local>Material}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column autoResizable="true" label="{i18n>Price}" hAlign="End">
+                        <table:template>
+                            <Text text="{ path:'local>Price',formatter:'handler.formatter.formatNumber' }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PriceUnit}">
+                        <table:template>
+                            <Text text="{local>PriceUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>Currency}">
+                        <table:template>
+                            <Text text="{local>Currency}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </Panel>
+    </Dialog>
+</core:FragmentDefinition>
