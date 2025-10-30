@@ -187,6 +187,13 @@
             "settings": {
               "contextPath": "/ZC_TFI_1024",
               "variantManagement": "Page",
+              "navigation": {
+                "ZC_TFI_1024": {
+                  "detail": {
+                    "route": "ZC_TFI_1024ObjectPage"
+                  }
+                }
+              },
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
