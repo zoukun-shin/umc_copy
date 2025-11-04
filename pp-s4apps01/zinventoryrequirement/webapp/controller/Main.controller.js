@@ -21,7 +21,7 @@ sap.ui.define([
             this._oTable = this.byId("idListTable");
             this._myBusyDialog = new BusyDialog();
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
-            this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
+            // this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
         },
 
         _initialize: function () {
@@ -115,8 +115,13 @@ sap.ui.define([
 
         onSearch: function () {
             var aFilters = this.byId("idSmartFilterBar").getFilters();
-            var sPeriodEndDate = this.byId("idSmartFilterBar").getControlByKey("PeriodEndDate").getValue().replace(/\D/g, '');
-            var sCurrentDate = this.getCurrentUTCDateTime().substring(0, 8);
+            // MOD BEGIN BY XINLEI XU 2025/11/03 Bug Fixed
+            // var sPeriodEndDate = this.byId("idSmartFilterBar").getControlByKey("PeriodEndDate").getValue().replace(/\D/g, '');
+            // var sCurrentDate = this.getCurrentUTCDateTime().substring(0, 8);
+            var sPeriodEndDate = this.byId("idSmartFilterBar").getControlByKey("PeriodEndDate").getDateValue();
+            var sCurrentDate = new Date();
+            sCurrentDate.setHours(0, 0, 0, 0); // 时分秒清0
+            // MOD END BY XINLEI XU 2025/11/03
             if (sPeriodEndDate < sCurrentDate) {
                 MessageBox.error(this.getModel("i18n").getResourceBundle().getText("PeriodEndDateIsPast"));
                 return;
