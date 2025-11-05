@@ -418,8 +418,43 @@ sap.ui.define([
                     case "AmountMonth36":
                     case "QuantityMonth37":
                     case "AmountMonth37":
+                    case "Coefficient37":
+                    case "QuantityMonth38":
+                    case "AmountMonth38":
+                    case "Coefficient38":
+                    case "QuantityMonth39":
+                    case "AmountMonth39":
+                    case "Coefficient39":  
+                    case "QuantityMonth40":
+                    case "AmountMonth40":
+                    case "Coefficient40":   
+                    case "QuantityMonth41":
+                    case "AmountMonth41":
+                    case "Coefficient41": 
+                    case "QuantityMonth42":
+                    case "AmountMonth42":
+                    case "Coefficient42":
                     case "QuantityUnspecified":
                     case "AmountUnspecified":
+                    case "AmountMonth43":
+                    case "AmountMonth44":
+                    case "AmountMonth45":
+                    case "AmountMonth46":
+                    case "AmountMonth47":
+                    case "AmountMonth48":
+                    case "AmountMonth49":
+                    case "AmountMonth50":
+                    case "AmountMonth51":
+                    case "AmountMonth52":
+                    case "AmountMonth53":
+                    case "AmountMonth54":
+                    case "AmountMonth55":
+                    case "AmountMonth56":
+                    case "AmountMonth57":
+                    case "AmountMonth58":
+                    case "AmountMonth59":
+                    case "AmountMonth60":
+                    case "AmountMonth61":
                         oColumn.type = sap.ui.export.EdmType.Number;
                         break;
                     default:

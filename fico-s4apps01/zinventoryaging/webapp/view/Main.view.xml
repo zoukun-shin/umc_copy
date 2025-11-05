@@ -150,6 +150,28 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="QuantityMonth41" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="AmountMonth41" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Coefficient41" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QuantityMonth42" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth42" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Coefficient42" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth43" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth44" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth45" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth46" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth47" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth48" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth49" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth50" visible="false"/>     
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth51" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth52" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth53" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth54" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth55" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth56" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth57" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth58" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth59" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth60" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountMonth61" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
