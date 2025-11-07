@@ -170,6 +170,18 @@
                                 <Text text="{ path:'local>BillOfMaterialSubItemQuantity',formatter:'.formatter.formatFloat' }" wrapping="false"/>
                             </table:template>
                         </table:Column>
+                        <!-- ADD BEGIN BY XINLEI XU 2025/11/07 VN CR No.5441 -->
+                        <table:Column width="10rem" label="{i18n>DiscontinuationGroup}">
+                            <table:template>
+                                <Text text="{local>DiscontinuationGroup}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="11rem" label="{i18n>FollowUpGroup}">
+                            <table:template>
+                                <Text text="{local>FollowUpGroup}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <!-- ADD END BY XINLEI XU 2025/11/07 VN CR No.5441 -->
                     </table:columns>
                 </table:Table>
             </Panel>

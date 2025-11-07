@@ -133,7 +133,11 @@ sap.ui.define([
                         "ProdOrderIssueLocation": aSheetData[i]["ProdOrderIssueLocation"] === undefined ? "" : aSheetData[i]["ProdOrderIssueLocation"],
                         "BOMItemIsCostingRelevant": aSheetData[i]["BOMItemIsCostingRelevant"] === undefined ? "" : aSheetData[i]["BOMItemIsCostingRelevant"],
                         "BOMSubItemInstallationPoint": aSheetData[i]["BOMSubItemInstallationPoint"] === undefined ? "" : aSheetData[i]["BOMSubItemInstallationPoint"],
-                        "BillOfMaterialSubItemQuantity": aSheetData[i]["BillOfMaterialSubItemQuantity"] === undefined ? "" : aSheetData[i]["BillOfMaterialSubItemQuantity"]
+                        "BillOfMaterialSubItemQuantity": aSheetData[i]["BillOfMaterialSubItemQuantity"] === undefined ? "" : aSheetData[i]["BillOfMaterialSubItemQuantity"],
+                        // ADD BEGIN BY XINLEI XU 2025/11/07 VN CR No.5441
+                        "DiscontinuationGroup": aSheetData[i]["DiscontinuationGroup"] === undefined ? "" : aSheetData[i]["DiscontinuationGroup"],
+                        "FollowUpGroup": aSheetData[i]["FollowUpGroup"] === undefined ? "" : aSheetData[i]["FollowUpGroup"]
+                        // ADD END BY XINLEI XU 2025/11/07 VN CR No.5441
                     };
                     aExcelSet.push(item);
                 }
