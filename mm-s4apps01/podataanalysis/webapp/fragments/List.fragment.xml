@@ -244,6 +244,13 @@
                     <Text text="{local>EXCEPTION1}" wrapping="false"/>
                 </table:template>
             </table:Column>
+            <!-- ADD BEGIN BY XINLEI XU 2025/11/11 VN CR#5239 / TH CR#5281 -->
+            <table:Column width="10rem" label="{i18n>ETA_HK_DATE}">
+                <table:template>
+                    <Text text="{local>ETA_HK_DATE}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <!-- ADD END BY XINLEI XU 2025/11/11 VN CR#5239 / TH CR#5281 -->
             <table:Column width="10rem" label="{i18n>DeliveryDate}">
                 <table:template>
                     <Text text="{local>DELIVERYDATE}" wrapping="false"/>

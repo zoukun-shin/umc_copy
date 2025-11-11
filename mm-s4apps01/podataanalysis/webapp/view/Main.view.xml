@@ -103,6 +103,9 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="productionmemopageformat" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MRPRelevantQuantity" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ProductionOrInspectionMemoTxt" visible="false"/>
+                                <!-- ADD BEGIN BY XINLEI XU 2025/11/11 VN CR#5239 / TH CR#5281 -->
+                                <smartFilterBar:ControlConfiguration index='999' key="ETA_HK_DATE" visible="false"/>
+                                <!-- ADD END BY XINLEI XU 2025/11/11 VN CR#5239 / TH CR#5281 -->
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
