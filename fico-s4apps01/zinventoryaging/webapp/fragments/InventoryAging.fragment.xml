@@ -227,6 +227,14 @@
                         <Text text="{path:'ValuationUnitPrice', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <table:Column width="8rem" label="{i18n>Priority}" sortProperty="Priority" filterProperty="Priority">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Priority", "leadingProperty":"Priority"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Priority}" wrapping="false" />
+                    </table:template>
+                </table:Column>
                 <table:Column width="8rem" label="{i18n>ValuationAmount}" sortProperty="ValuationAmount" filterProperty="ValuationAmount" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ValuationAmount", "leadingProperty":"ValuationAmount"}'/>

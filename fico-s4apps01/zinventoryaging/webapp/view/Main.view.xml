@@ -57,6 +57,7 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="MaterialPriceUnitQty" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="InventoryAmount" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ValuationUnitPrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Priority" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ValuationAmount" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ValuationAfterAmount" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ValuationLoss" visible="false"/>
