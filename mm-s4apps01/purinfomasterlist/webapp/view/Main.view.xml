@@ -95,6 +95,11 @@
 								<smartFilterBar:ControlConfiguration index="999" key="zvalue2" visible="false"/>
 								<smartFilterBar:ControlConfiguration index="999" key="Rate" visible="false"/>
 								<smartFilterBar:ControlConfiguration index="999" key="UserEmail" visible="false"/>
+								<!-- ADD BEGIN BY XINLEI XU 2025/11/23 VN CR#5432 -->
+								<smartFilterBar:ControlConfiguration index="999" key="IncotermsLocation1" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="InvoiceIsGoodsReceiptBased" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="LotSizeRoundingQuantity" visible="false"/>
+								<!-- ADD END BY XINLEI XU 2025/11/23 VN CR#5432 -->
 							</smartFilterBar:controlConfiguration>
 						</smartFilterBar:SmartFilterBar>
 					</FlexBox>
@@ -581,6 +586,19 @@
 								<Label text="{TaxCode}"/>
 							</table:template>
 						</table:Column>
+						<!-- ADD BEGIN BY XINLEI XU 2025/11/23 VN CR#5432 -->
+						<table:Column id="LotSizeRoundingQuantity" width="12rem" visible="true" autoResizable="true" sortProperty="LotSizeRoundingQuantity" filterProperty="LotSizeRoundingQuantity" hAlign="End">
+							<table:customData>
+								<core:CustomData key="p13nData" value='\{"columnKey":"LotSizeRoundingQuantity", "leadingProperty":"LotSizeRoundingQuantity", "sortProperty": "LotSizeRoundingQuantity", "filterProperty": "LotSizeRoundingQuantity"}'/>
+							</table:customData>
+							<table:label>
+								<Label text="{i18n>LotSizeRoundingQuantity}"/>
+							</table:label>
+							<table:template>
+								<Label text="{ path:'LotSizeRoundingQuantity',formatter:'.formatter.formatNumber' }" wrapping="false"/>
+							</table:template>
+						</table:Column>
+						<!-- ADD END BY XINLEI XU 2025/11/23 VN CR#5432 -->
 						<table:Column id="MinimumPurchaseOrderQuantity" width="12rem" visible="true" autoResizable="true" sortProperty="MinimumPurchaseOrderQuantity" filterProperty="MinimumPurchaseOrderQuantity" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"MinimumPurchaseOrderQuantity", "leadingProperty":"MinimumPurchaseOrderQuantity", "sortProperty": "MinimumPurchaseOrderQuantity", "filterProperty": "MinimumPurchaseOrderQuantity"}'/>
@@ -658,6 +676,19 @@
 								<Label text="{IncotermsClassification}"/>
 							</table:template>
 						</table:Column>
+						<!-- ADD BEGIN BY XINLEI XU 2025/11/23 VN CR#5432 -->
+						<table:Column id="IncotermsLocation1" width="12rem" visible="true" autoResizable="true" sortProperty="IncotermsLocation1" filterProperty="IncotermsLocation1">
+							<table:customData>
+								<core:CustomData key="p13nData" value='\{"columnKey":"IncotermsLocation1", "leadingProperty":"IncotermsLocation1", "sortProperty": "IncotermsLocation1", "filterProperty": "IncotermsLocation1"}'/>
+							</table:customData>
+							<table:label>
+								<Label text="{i18n>IncotermsLocation1}"/>
+							</table:label>
+							<table:template>
+								<Label text="{IncotermsLocation1}" wrapping="false"/>
+							</table:template>
+						</table:Column>
+						<!-- ADD END BY XINLEI XU 2025/11/23 VN CR#5432 -->
 						<table:Column id="UMCJPPurchasingPrice" width="12rem" visible="true" autoResizable="true" sortProperty="UMCJPPurchasingPrice" filterProperty="UMCJPPurchasingPrice" hAlign="End">
 							<table:customData>
 								<core:CustomData key="p13nData" value='\{"columnKey":"UMCJPPurchasingPrice", "leadingProperty":"UMCJPPurchasingPrice", "sortProperty": "UMCJPPurchasingPrice", "filterProperty": "UMCJPPurchasingPrice"}'/>
@@ -759,6 +790,19 @@
 								<Label text="{loginflag}"/>
 							</table:template>
 						</table:Column>
+						<!-- ADD BEGIN BY XINLEI XU 2025/11/23 VN CR#5432 -->
+						<table:Column id="InvoiceIsGoodsReceiptBased" width="10rem" visible="true" autoResizable="true" sortProperty="InvoiceIsGoodsReceiptBased" filterProperty="InvoiceIsGoodsReceiptBased">
+							<table:customData>
+								<core:CustomData key="p13nData" value='\{"columnKey":"InvoiceIsGoodsReceiptBased", "leadingProperty":"InvoiceIsGoodsReceiptBased", "sortProperty": "InvoiceIsGoodsReceiptBased", "filterProperty": "InvoiceIsGoodsReceiptBased"}'/>
+							</table:customData>
+							<table:label>
+								<Label text="{i18n>InvoiceIsGoodsReceiptBased}"/>
+							</table:label>
+							<table:template>
+								<Label text="{InvoiceIsGoodsReceiptBased}" wrapping="false"/>
+							</table:template>
+						</table:Column>
+						<!-- ADD END BY XINLEI XU 2025/11/23 VN CR#5432 -->
 					</table:columns>
 				</table:Table>
 			</smartTable:SmartTable>
