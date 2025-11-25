@@ -222,7 +222,7 @@ sap.ui.define([
                     default:
                         var aWeekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
                 }
-                
+
                 that._LocalData.setProperty(oDatefield, (oDatevalue.getMonth() + 1) + '-' + oDatevalue.getDate() + aWeekdays[weekday]);
             }
         },
@@ -330,25 +330,42 @@ sap.ui.define([
         },
 
         onUITableRowsUpdated: function (oEvent) {
-            let oTable = oEvent.getSource();
-            let aRows = oTable.getRows();
+            var that = this;
+            var oTable = this.byId("ReportTable");
+            var aRows = oTable.getRows();
+            var aColumns = oTable.getColumns();
             let sType = "";
             let sSobmx = "";
             let sColor = "";
-
             let s1 = "";
             let sNum = Number(this.byId("zdays").getValue());
-            //最后一列
-            sNum = 18 + sNum;
+            for (var j = 0; j < aColumns.length; j++) {
+                var sColName = aColumns[j].getSortProperty() || aColumns[j].getFilterProperty();
+                if (sColName === "DetSpec") {
+                    if (aColumns[j].getVisible()) {  //VN
+                        var iCell1 = 9;
+                        var iCell2 = 8;
+                        var iStart = 20;
+                        sNum = 19 + sNum;
+                    } else {
+                        var iCell1 = 8;
+                        var iCell2 = 7;
+                        var iStart = 19;
+                        sNum = 18 + sNum;
+                    }
+                    break;
+                }
+            }
+
             aRows.forEach(function (oRow, index) {
-                let c7Cell = oRow.getCells()[8];
+                let c7Cell = oRow.getCells()[iCell1];
                 sType = c7Cell.getText();
                 if (sType === 'I') {
                     $("#" + oRow.getId()).css("background-color", "#FFFDBF");
                 } else if (sType === 'O') {
                     $("#" + oRow.getId()).css("background-color", "#C6F9C1");
                 } else if (sType === 'P') {
-                    let c6Cell = oRow.getCells()[7];
+                    let c6Cell = oRow.getCells()[iCell2];
                     sSobmx = c6Cell.getText();
                     if (sSobmx === '52') {
                         $("#" + oRow.getId()).css("background-color", "#fc794a");
@@ -359,9 +376,8 @@ sap.ui.define([
                     $("#" + oRow.getId()).css("background-color", "");
                 };
 
-
                 if (sType === "W") {
-                    for (let j = 19; j <= sNum; j++) {
+                    for (let j = iStart; j <= sNum; j++) {
                         let cColor = oRow.getCells()[j];
                         let CellId = cColor.getId();
                         let oItems = cColor.getItems();
@@ -385,82 +401,19 @@ sap.ui.define([
                                 $("#" + CellId).parent().parent().css("background-color", "");
                                 break;
                         }
-
                     }
                 } else {
-                    for (let j = 19; j <= sNum; j++) {
+                    for (let j = iStart; j <= sNum; j++) {
                         let cColor = oRow.getCells()[j];
                         let CellId = cColor.getId();
                         $("#" + CellId).parent().parent().css("background-color", "");
-
                     }
                 }
             });
         },
 
         onEdit: function (oEvent) {
-            var oTable = this.byId("ReportTable");
-            let sNum = Number(this.byId("zdays").getValue());
-            //最后一列
-            sNum = 18 + sNum;
-            var aRows = oTable.getRows();
-            var sType = "";
-            var sSobmx = "";
-            if (aRows && aRows.length > 0) {
-                for (var i = 0; i < aRows.length; i++) {
-                    var c7Cell = aRows[i].getCells()[8];
-                    var c6Cell = aRows[i].getCells()[7];
-                    if (c7Cell) {
-                        sType = c7Cell.getText();
-                        sSobmx = c6Cell.getText();
-                        if (sType === "I" || sType === "P") {
-
-                            for (var j = 19; j <= sNum; j++) {
-                                var cEdit = aRows[i].getCells()[j];
-                                var oItems = cEdit.getItems();
-                                if (cEdit) {
-                                    if (sSobmx === "52") {
-                                        oItems[1].setEditable(false); // 动态设置编辑状态
-                                    } else {
-                                        oItems[1].setEditable(true);
-                                    }
-                                }
-
-                            }
-                        };
-                    }
-                }
-            };
-            oTable.attachEvent("rowsUpdated", function () {
-                var aRows = oTable.getRows();
-                if (aRows && aRows.length > 0) {
-                    for (var i = 0; i < aRows.length; i++) {
-                        var c7Cell = aRows[i].getCells()[8];
-                        var c6Cell = aRows[i].getCells()[7];
-                        if (c7Cell) {
-                            var sType = c7Cell.getText();
-                            var sSobmx = c6Cell.getText();
-                            if (sType === "I" || sType === "P") {
-
-                                for (var j = 19; j <= sNum; j++) {
-                                    var cEdit = aRows[i].getCells()[j];
-                                    if (cEdit && cEdit.getItems) {
-                                        var oItems = cEdit.getItems();
-                                        if (oItems && oItems[1]) {
-                                            if (sSobmx === "52") {
-                                                oItems[1].setEditable(false); // 动态设置编辑状态
-                                            } else {
-                                                oItems[1].setEditable(true);
-                                            }
-                                        }
-
-                                    }
-                                }
-                            };
-                        }
-                    }
-                }
-            });
+            this.getModel("local").setProperty("/tab_mode", "edit");
         },
 
         onInputChange: function (oEvent, sProperty) {

@@ -96,6 +96,7 @@
                 <Property Name="Verid" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Production Version" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Mdv01" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="UpperCase" sap:label="Work Center" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="PlanType" Type="Edm.String" Nullable="false" MaxLength="1" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="DetSpec" Type="Edm.String" MaxLength="100"/>
                 <Property Name="Project" Type="Edm.String" MaxLength="20"/>
                 <Property Name="ProductionSupervisor" Type="Edm.String" MaxLength="3" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
                 <Property Name="zday" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative"/>
