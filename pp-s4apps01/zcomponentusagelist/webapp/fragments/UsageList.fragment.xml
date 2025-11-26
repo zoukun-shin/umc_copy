@@ -162,6 +162,22 @@
                         <Text text="{BOMSubItemInstallationPoint}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <table:Column width="12rem" label="{i18n>AlternativeItemGroup}" sortProperty="AlternativeItemGroup" filterProperty="AlternativeItemGroup" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AlternativeItemGroup", "leadingProperty":"AlternativeItemGroup"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AlternativeItemGroup}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>UsageProbabilityPercent}" sortProperty="UsageProbabilityPercent" filterProperty="UsageProbabilityPercent" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"UsageProbabilityPercent", "leadingProperty":"UsageProbabilityPercent"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{UsageProbabilityPercent}" wrapping="false" />
+                    </table:template>
+                </table:Column>
             </table:columns>
         </table:Table>
     </smartTable:SmartTable>

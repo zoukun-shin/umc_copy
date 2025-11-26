@@ -17,10 +17,6 @@
         </f:title>
         <f:header>
             <f:DynamicPageHeader pinnable="true">
-                <!-- <f:content> 
-                    <CheckBox id = 'idCB1' text="{i18n>NoDisplayNonProduct}" width="11rem" select="onSelect"/> 
-                    <CheckBox id = 'idCB2' text="{i18n>DisplayPurchasingInfo}" width="11rem" select="onSelect"/> 
-                </f:content>  -->
                 <f:content>
                     <FlexBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ComponentUsageList" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
@@ -30,8 +26,6 @@
                                 <smartFilterBar:ControlConfiguration index='30' key="SupplierMaterialNumber" visibleInAdvancedArea="true" label="{i18n>SupplierMaterialNumber}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="ProductManufacturerNumber" visibleInAdvancedArea="true" label="{i18n>ProductManufacturerNumber}"/>
                                 <smartFilterBar:ControlConfiguration index='50' key="HighLevelMatValidityStartDate" visibleInAdvancedArea="true" label="{i18n>HighLevelMatValidityStartDate}"/>
-                                <!-- <smartFilterBar:ControlConfiguration index='50' key="NoDisplayNonProduct" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>NoDisplayNonProduct}"/>
-                                <smartFilterBar:ControlConfiguration index='60' key="DisplayPurchasingInfo" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>DisplayPurchasingInfo}"/> -->
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="Material" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialVariant" visible="false"/>
@@ -40,13 +34,15 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="ComponentDescription" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MaterialByCustomer" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MRPResponsible" visible="false"/>
-                                <!-- <smartFilterBar:ControlConfiguration index='999' key="HighLevelMatValidityStartDate" visible="false"/> -->
                                 <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemNumber" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemQuantity" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemUnit" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemStrategy" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemPriority" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="BOMSubItemInstallationPoint" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemGroup" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="UsageProbabilityPercent" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NoDisplayNonProduct" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
