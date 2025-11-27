@@ -158,6 +158,11 @@
                                     <smartForm:GroupElement>
                                         <smartField:SmartField textLabel="{i18n>PolinkBy}" value="{PolinkBy}" />
                                     </smartForm:GroupElement>
+                                    <!-- ADD BEGIN BY XINLEI XU 2025/11/27 TH/VN CR#5481 -->
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>POHeaderText}" value="{POHeaderText}" />
+                                    </smartForm:GroupElement>
+                                    <!-- ADD END BY XINLEI XU 2025/11/27 TH/VN CR#5481 -->
                                 </smartForm:Group>
                             </smartForm:SmartForm>
                         </xuap:ObjectPageSubSection>

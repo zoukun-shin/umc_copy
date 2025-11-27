@@ -70,6 +70,9 @@
                             <smartFilterBar:ControlConfiguration key="PolinkBy" visibleInAdvancedArea="true" label="{i18n>PolinkBy}" index="65" />
                             <smartFilterBar:ControlConfiguration key="OrderId" visible="false" />
                             <!-- ADD END BY XINLEI XU 2025/04/21 CR#4359 -->
+                            <!-- ADD BEGIN BY XINLEI XU 2025/11/27 TH/VN CR#5481 -->
+                            <smartFilterBar:ControlConfiguration key="POHeaderText" visible="false" />
+                            <!-- ADD END BY XINLEI XU 2025/11/27 TH/VN CR#5481 -->
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -584,6 +587,16 @@
                                 <Text text="{PolinkBy}" wrapping="false"/>
                             </t:template>
                         </t:Column>
+                        <!-- ADD BEGIN BY XINLEI XU 2025/11/27 TH/VN CR#5481 -->
+                        <t:Column width="15rem" label="{i18n>POHeaderText}" sortProperty="POHeaderText" filterProperty="POHeaderText">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"POHeaderText", "leadingProperty":"POHeaderText", "sortProperty":"POHeaderText", "filterProperty": "POHeaderText"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{POHeaderText}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <!-- ADD END BY XINLEI XU 2025/11/27 TH/VN CR#5481 -->
                     </t:columns>
                 </t:Table>
             </smartTable:SmartTable>

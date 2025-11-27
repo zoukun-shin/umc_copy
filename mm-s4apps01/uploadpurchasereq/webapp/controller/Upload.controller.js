@@ -142,6 +142,7 @@ sap.ui.define([
                         IsApprove: aSheet1[i]["IsApprove"] || "",
                         SupplierMat: aSheet1[i]["SupplierMat"] || "",
                         PolinkBy: aSheet1[i]["PolinkBy"] || "",
+                        POHeaderText: aSheet1[i]["POHeaderText"] || "" // ADD BY XINLEI XU 2025/11/27 TH/VN CR#5481
                     };
                     // ADD BEGIN BY XINLEI XU 2025/09/05 本番变更管理No.052
                     var bError = false;

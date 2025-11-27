@@ -285,6 +285,13 @@
                             <Text id="idPurchaseOrderItemText" text="{local>PurchaseOrderItem}" wrapping="false"/>
                         </t:template>
                     </t:Column>
+                    <!-- ADD BEGIN BY XINLEI XU 2025/11/27 TH/VN CR#5481 -->
+                    <t:Column width="15rem" label="{i18n>POHeaderText}">
+                        <t:template>
+                            <Text text="{local>POHeaderText}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <!-- ADD END BY XINLEI XU 2025/11/27 TH/VN CR#5481 -->
                 </t:columns>
             </t:Table>
         </Panel>
