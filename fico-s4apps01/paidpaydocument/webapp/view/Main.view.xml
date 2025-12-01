@@ -55,7 +55,50 @@
 							</Select>
 						</smartFilterBar:customControl>
 					</smartFilterBar:ControlConfiguration>
-					
+					<!-- visible -->
+          <smartFilterBar:ControlConfiguration index='999' key="Customer" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Supplier" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="SupplierName" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="ProfitCenter" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ProfitCenterName" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="PurchasingGroup" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="PurchasingGroupName" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="PurGrpAmount" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ChargeableAmount" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="ChargeableRate" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="PreviousStockAmount" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="CurrentStockAmount" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="CurrentStockSemi" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="CurrentStockFin" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="CurrentStockTotal" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="StockChangeAmount" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="PaidMaterialCost" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="CustomerRevenue" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Revenue" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="RevenueRate" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="AP" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="AR" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Currency" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Gjahr1" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Belnr1" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Gjahr2" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Belnr2" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Gjahr3" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Belnr3" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Gjahr4" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Belnr4" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Gjahr5" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Belnr5" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Gjahr6" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Belnr6" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Gjahr7" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Belnr7" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Gjahr8" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Belnr8" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Ztype" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Status" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Message" visible="false"/>
 				</smartFilterBar:controlConfiguration>
 	        </smartFilterBar:SmartFilterBar>
         </f:content>
@@ -63,7 +106,7 @@
 	</f:header>
 
     <f:content>
-	  <smartTable:SmartTable id="smartTable_Doc" entitySet="PaidPayDocument" smartFilterId="SFBDocument" tableType="Table" 
+	  <smartTable:SmartTable id="smartTable_Doc" entitySet="PaidPayDocument" smartVariant="__SVM01" smartFilterId="SFBDocument" tableType="Table" 
         showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" 
         header="{i18n>Result}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
         beforeExport="onBeforeExport" fitContainer="false" height="100%">

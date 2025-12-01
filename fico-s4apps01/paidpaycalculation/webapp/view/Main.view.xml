@@ -62,6 +62,82 @@
 							</ComboBox>
 						</smartFilterBar:customControl>
 					</smartFilterBar:ControlConfiguration>
+          <!-- visible -->
+          <smartFilterBar:ControlConfiguration index='999' key="Product" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="ProductDescription" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="ProfitCenter" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ProfitCenterName" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Customer" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Supplier" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="SupplierName" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="UpperProduct01" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationClass01" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="Cost01" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationQuantity01" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="UpperProduct02" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationClass02" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="Cost02" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationQuantity02" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="UpperProduct03" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationClass03" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="Cost03" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationQuantity03" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="UpperProduct04" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationClass04" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="Cost04" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationQuantity04" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="UpperProduct05" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationClass05" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="Cost05" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationQuantity05" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="UpperProduct06" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationClass06" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="Cost06" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationQuantity06" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="UpperProduct07" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationClass07" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="Cost07" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationQuantity07" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="UpperProduct08" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationClass08" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="Cost08" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationQuantity08" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="UpperProduct09" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationClass09" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="Cost09" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationQuantity09" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="UpperProduct10" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationClass10" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="Cost10" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ValuationQuantity10" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="MaterialCost2000" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="MaterialCost3000" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="PurchasingGroup" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="PurGrpAmount1" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="PurGrpAmount2" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="PurGrpAmount" visible="false"/>
+			    <smartFilterBar:ControlConfiguration index='999' key="ChargeableAmount1" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="ChargeableAmount2" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="ChargeableAmount" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="PurGrpTot" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="ChargeableTot" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="ChargeableRate" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="PreviousStockAmount" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="CurrentStockAmount" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="CurrentStockSemi" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="CurrentStockFin" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="CurrentStockTotal" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="StockChangeAmount" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="PaidMaterialCost" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="CustomerRevenue1" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="CustomerRevenue" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Revenue1" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Revenue" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="RevenueRate" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Ztype" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Currency" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="Unit" visible="false"/>
 				</smartFilterBar:controlConfiguration>
 	        </smartFilterBar:SmartFilterBar>
 	      </f:content>
@@ -70,7 +146,7 @@
     
 	<f:content>
 
-      <smartTable:SmartTable id="smartTable" entitySet="PaidPayCalculation" smartFilterId="SFBCalculation" tableType="Table" 
+      <smartTable:SmartTable id="smartTable" entitySet="PaidPayCalculation" smartFilterId="SFBCalculation" smartVariant="__SVM01" tableType="Table" 
         showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" 
         header="{i18n>Result}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
         beforeExport="onBeforeExport" fitContainer="false" height="100%">

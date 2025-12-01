@@ -8,8 +8,17 @@
 	xmlns:sv="sap.ui.comp.smartvariants" 
     xmlns:mvc="sap.ui.core.mvc" 
     xmlns:table="sap.ui.table">
-
-    <smartFilterBar:SmartFilterBar id="SFB" useToolbar="false" entitySet="PaidPayReport" persistencyKey="FilterBar">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="PaidPayReportSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+    <smartFilterBar:SmartFilterBar id="SFB" useToolbar="false" entitySet="PaidPayReport" smartVariant="__SVM01" persistencyKey="FilterBar">
 		<RadioButtonGroup id="rbg1" columns="4" width="60rem" class="sapUiMediumMarginBottom">
 			<RadioButton groupName="GroupA" id="Option1" text="{i18n>Option1}" selected="true" select="onButtonSelect"/>
 			<RadioButton groupName="GroupA" id="Option2" text="{i18n>Option2}" select="onButtonSelect"/>
@@ -40,10 +49,27 @@
 						<core:Item id = "12" key="12" text="12"/>
 					</Select>
 				</smartFilterBar:customControl>
-			</smartFilterBar:ControlConfiguration>	
+			</smartFilterBar:ControlConfiguration>
+			<!-- visible -->
+			<smartFilterBar:ControlConfiguration index='999' key="ProfitCenter" visible="false"/>
+			<smartFilterBar:ControlConfiguration index='999' key="ProfitCenterName" visible="false"/>
+			<smartFilterBar:ControlConfiguration index='999' key="BusinessPartner" visible="false"/>
+			<smartFilterBar:ControlConfiguration index='999' key="BusinessPartnerName" visible="false"/>
+			<smartFilterBar:ControlConfiguration index='999' key="PurchasingGroup" visible="false"/>
+			<smartFilterBar:ControlConfiguration index='999' key="PurchasingGroupName" visible="false"/>
+			<smartFilterBar:ControlConfiguration index='999' key="PreStockAmt" visible="false"/>
+			<smartFilterBar:ControlConfiguration index='999' key="BegPurGrpAmt" visible="false"/>
+			<smartFilterBar:ControlConfiguration index='999' key="BegChgMaterialAmt" visible="false"/>
+			<smartFilterBar:ControlConfiguration index='999' key="BegCustomerRev" visible="false"/>
+			<smartFilterBar:ControlConfiguration index='999' key="BegRev" visible="false"/>
+			<smartFilterBar:ControlConfiguration index='999' key="Currency" visible="false"/>
+			<smartFilterBar:ControlConfiguration index='999' key="Ztype" visible="false"/>
+			
 		</smartFilterBar:controlConfiguration>
 	</smartFilterBar:SmartFilterBar>
-    
+		</f:DynamicPageHeader>
+    </f:header>
+	<f:content>
     <smartTable:SmartTable id="smartTable" smartVariant="__SVM01" persistencyKey="smartTable" entitySet="PaidPayReport"
 		smartFilterId="SFB" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="false" 
 		showRowCount="true" placeToolbarInTable="true" header="{i18n>Result}" enableAutoBinding="false" beforeExport="onBeforeExport"
@@ -234,5 +260,7 @@
 				</table:Column>
             </table:columns>
 		</table:Table>
-	</smartTable:SmartTable>				
+	</smartTable:SmartTable>
+	</f:content>
+	</f:DynamicPage>				
 </mvc:View>
