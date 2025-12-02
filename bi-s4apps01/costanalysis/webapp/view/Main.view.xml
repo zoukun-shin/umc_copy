@@ -26,8 +26,8 @@
                         <!--部品費逆ザヤ防止分析-->
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar1" entitySet="COSTANALYSISCOM" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" visible="{= ${local>/selectIndex} === 0}" search="onSearch">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="Companycode" label="{i18n>Companycode}" mandatory="mandatory" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
-                                <!-- <smartFilterBar:ControlConfiguration index='20' key="zYear" label="{i18n>zYear}" mandatory="mandatory" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/> -->
+                                <smartFilterBar:ControlConfiguration index='10' key="Companycode" label="{i18n>Companycode}" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true"/>
+                                <!-- <smartFilterBar:ControlConfiguration index='20' key="zYear" label="{i18n>zYear}" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true"/> -->
                                 <smartFilterBar:ControlConfiguration index='20' key="zYear" label="{i18n>zYear}" visibleInAdvancedArea="true">
                                     <smartFilterBar:customControl>
                                         <DatePicker valueFormat="yyyy" displayFormat="yyyy" value="{
@@ -39,7 +39,7 @@
                                         }"/>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
-                                <!-- <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" mandatory="mandatory" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/> -->
+                                <!-- <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true"/> -->
                                 <!-- <smartFilterBar:ControlConfiguration index='30' key="zMonth" label="{i18n>zMonth}" visibleInAdvancedArea="true">
                                     <smartFilterBar:customControl>
                                         <DatePicker valueFormat="MM" displayFormat="MM" value="{
@@ -71,17 +71,43 @@
                                         </MultiComboBox>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='40' key="Product" label="{i18n>Product}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
-                                <smartFilterBar:ControlConfiguration index='50' key="Customer" label="{i18n>Customer}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
-                                <smartFilterBar:ControlConfiguration index='60' key="Material" label="{i18n>Material}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="Product" label="{i18n>Product}" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="Customer" label="{i18n>Customer}" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="Material" label="{i18n>Material}" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true"/>
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="YearMonth" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Plant" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PlantText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CompanycodeText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductDescription" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialDescription" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="EstimatedPrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="FinalPostingDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="FinalPrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="FinalSupplier" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="FinalSupplierName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="FixedSupplier" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="FixedSupplierName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="FinalPurchaseOrder" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="profitcenter" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="profitcentername" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillingQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillingQuantityUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MovingAveragePrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="StandardPrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Quantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="sales_d_no" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="quo_version" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="sales_number" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Currency" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                         <!--加工費逆ザヤ防止分析-->
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar2" entitySet="COSTANALYSISPROCESS" useToolbar="false" smartVariant="__SVM01" persistencyKey="CustomListSFB" visible="{= ${local>/selectIndex} === 1}" search="onSearch">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="Companycode" mandatory="mandatory" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true" label="{i18n>Companycode}"/>
+                                <smartFilterBar:ControlConfiguration index='10' key="Companycode" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Companycode}"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="zYear" label="{i18n>zYear}" visibleInAdvancedArea="true">
                                     <smartFilterBar:customControl>
                                         <DatePicker valueFormat="yyyy" displayFormat="yyyy" value="{
@@ -124,11 +150,31 @@
                                         </MultiComboBox>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='40' key="Product" label="{i18n>Product}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
-                                <smartFilterBar:ControlConfiguration index='50' key="Customer" label="{i18n>Customer}" filterType="single" displayBehaviour="descriptionAndId" visibleInAdvancedArea="true"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="Product" label="{i18n>Product}" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="Customer" label="{i18n>Customer}" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true"/>
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
-                                <!-- <smartFilterBar:Contrd. -->
+                                <smartFilterBar:ControlConfiguration index='999' key="YearMonth" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Plant" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PlantText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CompanycodeText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductDescription" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="EstimatedPrice_SMT" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="EstimatedPrice_AI" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="EstimatedPrice_FAT" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ActualPrice_SMT" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ActualPrice_AI" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ActualPrice_FAT" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Currency" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="profitcenter" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="profitcentername" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillingQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillingQuantityUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="sales_number" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="quo_version" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="sales_d_no" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="yieldqty" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>

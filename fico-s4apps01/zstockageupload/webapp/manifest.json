@@ -187,13 +187,6 @@
             "settings": {
               "contextPath": "/STOCKAGEUPLOAD",
               "variantManagement": "Page",
-              "navigation": {
-                "STOCKAGEUPLOAD": {
-                  "detail": {
-                    "route": "STOCKAGEUPLOADObjectPage"
-                  }
-                }
-              },
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {

@@ -5,6 +5,9 @@
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
         <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
     </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/HTML5.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="HTML5"/>
+    </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata4/sap/zui_bindglupload_o4/srvd/sap/zui_bindglupload_o4/0001/$metadata">
         <edmx:Include Namespace="com.sap.gateway.srvd.zui_bindglupload_o4.v0001" Alias="SAP__self"/>
     </edmx:Reference>
@@ -64,8 +67,12 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="{@i18n>chartofaccounts}"/>
                             <PropertyValue Property="Value" Path="ChartOfAccounts"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="8rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
-                    
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="{@i18n>glaccount}"/>
                             <PropertyValue Property="Value" Path="GLAccount"/>
@@ -77,6 +84,11 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="{@i18n>financialstatement}"/>
                             <PropertyValue Property="Value" Path="FinancialStatement"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="{@i18n>financialstatementitemtext}"/>

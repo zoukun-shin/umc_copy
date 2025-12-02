@@ -1,6 +1,4 @@
-<mvc:View
-    controllerName="sd.salesdocumentreport.controller.Main"
-    displayBlock="true"
+<mvc:View controllerName="sd.salesdocumentreport.controller.Main" displayBlock="true"
     xmlns:core="sap.ui.core"
     xmlns="sap.m"
     xmlns:f="sap.f"
@@ -13,878 +11,325 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartField="sap.ui.comp.smartfield"
     xmlns:smartform="sap.ui.comp.smartform"
-    xmlns:table="sap.ui.table"
-    height="100%"
-    core:require="{ CustomeDecimal: 'sd/salesdocumentreport/controller/CustomDecimal' }"
-    busyIndicatorDelay="0"
->
+    xmlns:table="sap.ui.table" height="100%" core:require="{ CustomeDecimal: 'sd/salesdocumentreport/controller/CustomDecimal' }" busyIndicatorDelay="0">
     <f:DynamicPage id="idDynamicPage">
         <f:title>
             <f:DynamicPageTitle id="idDynamicPageTitle">
                 <f:heading>
-                    <sv:SmartVariantManagement
-                        id="__SVM01"
-                        showShare="true"
-                        persistencyKey="SalesReportSVM"
-                        showExecuteOnSelection="true"
-                        entitySet="SalesReport"
-                    />
+                    <sv:SmartVariantManagement id="__SVM01" showShare="true" persistencyKey="SalesReportSVM" showExecuteOnSelection="true" entitySet="SalesReport" />
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
         <f:header>
             <f:DynamicPageHeader id="idDynamicPageHeader">
                 <f:content>
-                    <smartFilterBar:SmartFilterBar
-                        id="idSmartFilterBar"
-                        useToolbar="false"
-                        entitySet="SalesReport"
-                        persistencyKey="SalesReportSFB"
-                        search="onSearch"
-                        class="sapUiResponsiveMargin"
-                        smartVariant="__SVM01"
-                    >
+                    <smartFilterBar:SmartFilterBar id="idSmartFilterBar" useToolbar="false" entitySet="SalesReport" persistencyKey="SalesReportSFB" search="onSearch" class="sapUiResponsiveMargin" smartVariant="__SVM01">
                         <smartFilterBar:controlConfiguration>
                             <!-- Sales Organization Bar -->
-                            <smartFilterBar:ControlConfiguration
-                                index="1"
-                                id="SalesOrganizationBar"
-                                key="SalesOrganization"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>SalesOrganization}"
-                                mandatory="mandatory"
-                            >
+                            <smartFilterBar:ControlConfiguration index="1" id="SalesOrganizationBar" key="SalesOrganization" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}" mandatory="mandatory">
                                 <!-- 可以添加默认聚合内容，如果有需要 -->
                             </smartFilterBar:ControlConfiguration>
-
                             <!-- Customer Bar -->
-                            <smartFilterBar:ControlConfiguration
-                                index="3"
-                                id="CustomerBar"
-                                key="Customer"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>CustomerBar}"
-                            >
+                            <smartFilterBar:ControlConfiguration index="3" id="CustomerBar" key="Customer" visibleInAdvancedArea="true" label="{i18n>CustomerBar}">
                                 <!-- 可以添加默认聚合内容，如果有需要 -->
                             </smartFilterBar:ControlConfiguration>
-
                             <!-- Product Bar -->
-                            <smartFilterBar:ControlConfiguration
-                                index="4"
-                                id="ProductBar"
-                                key="Product"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>ProductBar}"
-                            >
+                            <smartFilterBar:ControlConfiguration index="4" id="ProductBar" key="Product" visibleInAdvancedArea="true" label="{i18n>ProductBar}">
                                 <!-- 可以添加默认聚合内容，如果有需要 -->
                             </smartFilterBar:ControlConfiguration>
-
                             <!-- Plantype Bar with custom Select control -->
-                            <smartFilterBar:ControlConfiguration
-                                index="5"
-                                id="plantypeBar"
-                                key="plantype"
-                                visibleInAdvancedArea="true"
-                                visible="false"
-                                label="{i18n>plantype}"
-                            >
+                            <smartFilterBar:ControlConfiguration index="5" id="plantypeBar" key="plantype" visibleInAdvancedArea="true" visible="false" label="{i18n>plantype}">
                                 <smartFilterBar:customControl>
-                                    <Select
-                                        id="idplantype"
-                                        selectedKey=""
-                                        required="true"
-                                    >
-                                        <core:Item
-                                            id="A"
-                                            key="A"
-                                            text="A"
-                                        />
-                                        <core:Item
-                                            id="B"
-                                            key="B"
-                                            text="B"
-                                        />
+                                    <Select id="idplantype" selectedKey="" required="true">
+                                        <core:Item id="A" key="A" text="A" />
+                                        <core:Item id="B" key="B" text="B" />
                                     </Select>
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
-
-                            <smartFilterBar:ControlConfiguration
-                                index="3"
-                                key="DateRange"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>DateRange}"
-                                mandatory="mandatory"
-                                visible="true"
-                            >
+                            <smartFilterBar:ControlConfiguration index="3" key="DateRange" visibleInAdvancedArea="true" label="{i18n>DateRange}" mandatory="mandatory" visible="true">
                                 <smartFilterBar:customControl>
-                                    <DateRangeSelection
-                                        id="idDateRangeSelection"
-                                        valueFormat="yyyyMM"
-                                        displayFormat="yyyyMM"
-                                    />
+                                    <DateRangeSelection id="idDateRangeSelection" valueFormat="yyyyMM" displayFormat="yyyyMM" />
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
                             <!-- ConditionCurrency Bar -->
-                            <smartFilterBar:ControlConfiguration
-                                index="1"
-                                id="ConditionCurrencyBar"
-                                key="ConditionCurrency"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>ConditionCurrency}"
-                                mandatory="mandatory"
-                            >
+                            <smartFilterBar:ControlConfiguration index="1" id="ConditionCurrencyBar" key="ConditionCurrency" visibleInAdvancedArea="true" label="{i18n>ConditionCurrency}" mandatory="mandatory">
                             </smartFilterBar:ControlConfiguration>
-                              <smartFilterBar:ControlConfiguration
-                                    index="66"
-                                    id="SalesPlanVersion0"
-                                    key="SalesPlanVersion0"
-                                    visibleInAdvancedArea="true"
-                                    label="{i18n>SalesPlanVersion0Bar}"
-                            
-                            >
-                            
+                            <smartFilterBar:ControlConfiguration index="66" id="SalesPlanVersion0" key="SalesPlanVersion0" visibleInAdvancedArea="true" label="{i18n>SalesPlanVersion0Bar}">
                             </smartFilterBar:ControlConfiguration>
-                                <smartFilterBar:ControlConfiguration
-                                    index="77"
-                                    id="SalesPlanVersion1"
-                                    key="SalesPlanVersion1"
-                                    visibleInAdvancedArea="true"
-                                    label="{i18n>SalesPlanVersion1Bar}"
-                                     
-                                    
-                            >
-                            
+                            <smartFilterBar:ControlConfiguration index="77" id="SalesPlanVersion1" key="SalesPlanVersion1" visibleInAdvancedArea="true" label="{i18n>SalesPlanVersion1Bar}">
                             </smartFilterBar:ControlConfiguration>
-                                <smartFilterBar:ControlConfiguration
-                                    index="88"
-                                    id="SalesPlanVersion2"
-                                    key="SalesPlanVersion2"
-                                    visibleInAdvancedArea="true"
-                                    label="{i18n>SalesPlanVersion2Bar}"
-                            >
-                            
+                            <smartFilterBar:ControlConfiguration index="88" id="SalesPlanVersion2" key="SalesPlanVersion2" visibleInAdvancedArea="true" label="{i18n>SalesPlanVersion2Bar}">
                             </smartFilterBar:ControlConfiguration>
-                                  <smartFilterBar:ControlConfiguration
-                                    index="99"
-                                    id="SalesPlanVersion3"
-                                    key="SalesPlanVersion3"
-                                    visibleInAdvancedArea="true"
-                                    label="{i18n>SalesPlanVersion3Bar}"
-                            >
-                            
+                            <smartFilterBar:ControlConfiguration index="99" id="SalesPlanVersion3" key="SalesPlanVersion3" visibleInAdvancedArea="true" label="{i18n>SalesPlanVersion3Bar}">
                             </smartFilterBar:ControlConfiguration>
                             <!-- 隐藏的 ControlConfigurations -->
-                            <smartFilterBar:ControlConfiguration
-                                id="ConditionRateValueConfig"
-                                key="ConditionRateValue"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="ContributionProfitConfig"
-                                key="ContributionProfit"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="ContributionProfitTotalConfig"
-                                key="ContributionProfitTotal"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="CreatedByUserConfig"
-                                key="CreatedByUser"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="MatlAccountAssignmentGroupConfig"
-                                key="MatlAccountAssignmentGroup"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="ProductGroupConfig"
-                                key="ProductGroup"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="MaterialCost2000Config"
-                                key="MaterialCost2000"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="ManufacturingcostConfig"
-                                key="Manufacturingcost"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="CustomerNameConfig"
-                                key="CustomerName"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="GrossProfitConfig"
-                                key="GrossProfit"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="PlantNameConfig"
-                                key="PlantName"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="GrossProfitTotalConfig"
-                                key="GrossProfitTotal"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="salesplanamountindspcrcyConfig"
-                                key="salesplanamountindspcrcy"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="ProfitCenterConfig"
-                                key="ProfitCenter"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="SalesAmountConfig"
-                                key="SalesAmount"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="SalesOfficeConfig"
-                                key="SalesOffice"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="SalesGroupConfig"
-                                key="SalesGroup"
-                                visible="false"
-                                index="99"
-                            />
-                            <smartFilterBar:ControlConfiguration
-                                id="ProductNameConfig"
-                                key="ProductName"
-                                visible="false"
-                                index="99"
-                            />
+                            <smartFilterBar:ControlConfiguration id="ConditionRateValueConfig" key="ConditionRateValue" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="ContributionProfitConfig" key="ContributionProfit" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="ContributionProfitTotalConfig" key="ContributionProfitTotal" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="CreatedByUserConfig" key="CreatedByUser" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="MatlAccountAssignmentGroupConfig" key="MatlAccountAssignmentGroup" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="ProductGroupConfig" key="ProductGroup" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="MaterialCost2000Config" key="MaterialCost2000" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="ManufacturingcostConfig" key="Manufacturingcost" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="CustomerNameConfig" key="CustomerName" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="GrossProfitConfig" key="GrossProfit" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="PlantNameConfig" key="PlantName" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="GrossProfitTotalConfig" key="GrossProfitTotal" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="salesplanamountindspcrcyConfig" key="salesplanamountindspcrcy" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="ProfitCenterConfig" key="ProfitCenter" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="SalesAmountConfig" key="SalesAmount" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="SalesOfficeConfig" key="SalesOffice" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="SalesGroupConfig" key="SalesGroup" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration id="ProductNameConfig" key="ProductName" visible="false" index="99" />
+                            <smartFilterBar:ControlConfiguration key="AccountDetnProductGroup" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="ConditionRateValue_n" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="CustomerAccountAssignmentGroup" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="FirstSalesSpecProductGroup" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="SecondSalesSpecProductGroup" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="ThirdSalesSpecProductGroup" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="DisplayCurrency1" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="DisplayCurrency2" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="DisplayCurrency3" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="currency" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="currency1" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="GLAccount1" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="GLAccount2" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="GLAccount3" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="GLAccountName1" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="GLAccountName2" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="GLAccountName3" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="SalesPlanUnit_c" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="materialcost2000_n" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="materialcost2000per_n" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="Manufacturingcost_n" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="Manufacturingcostper_n" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="ConditionRateValue_n" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="salesplanamountindspcrcy_n" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="SalesAmount_n" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="ContributionProfitTotal_n" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="GrossProfitTotal_n" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="Manufacturingcost_n" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="YearDate" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="CompanyCode" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="SalesPlanUnit" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="SplitRange" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="ConditionRateValueUnit" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="Plant" visible="false"/>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <!-- <smartTable:SmartTable
-                id="smartTable_Sales"
-                smartVariant="__SVM01"
-                persistencyKey="SalesReportST"
-                entitySet="SalesReport"
-                smartFilterId="idSmartFilterBar"
-                tableType="Table"
-                enableExport="true"
-                useVariantManagement="true"
-                useTablePersonalisation="false"
-                showRowCount="true"
-                placeToolbarInTable="true"
-                header="{i18n>Result}"
-                enableAutoBinding="false"
-                beforeExport="onBeforeExport"
-                beforeRebindTable="onBeforeRebindTable"
-                requestAtLeastFields="RequirementDate,YearDate"
-            > -->
-            <table:Table
-                id="Table_Calc"
-                rows="{local>/SalesReport}"
-                selectionMode="None"
-                selectionBehavior="Row"
-                rowMode="Auto"
-                rowsUpdated="onRowsUpdated"
-            >
+            <!-- <smartTable:SmartTable id="smartTable_Sales" smartVariant="__SVM01" persistencyKey="SalesReportST" entitySet="SalesReport" smartFilterId="idSmartFilterBar" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="false" showRowCount="true" placeToolbarInTable="true" header="{i18n>Result}" enableAutoBinding="false" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" requestAtLeastFields="RequirementDate,YearDate"> -->
+            <table:Table id="Table_Calc" rows="{local>/SalesReport}" selectionMode="None" selectionBehavior="Row" rowMode="Auto" rowsUpdated="onRowsUpdated">
                 <t:rowMode>
                     <rm:Auto id="idAuto" />
                 </t:rowMode>
                 <t:extension>
                     <OverflowToolbar id="idOverflowToolbar">
-                        <Title
-                            text="販売計画 ({= ${local>/SalesReport}.length})"
-                            visible="{= ${local>/SalesReport}.length > 0}"
-                        />
+                        <Title text="{i18n>tableTitle} ({= ${local>/SalesReport}.length})" visible="{= ${local>/SalesReport}.length > 0}" />
                         <ToolbarSpacer id="idToolbarSpacer" />
-                        <Button
-                            icon="sap-icon://excel-attachment"
-                            type="Transparent"
-                            press="onExport"
-                            text="{i18n>onExport}"
-                            visible="{= ${local>/SalesReport}.length > 0}"
-                            enabled="{= ${local>/authorityCheck/button/Export}}"
-                        />
-                        <Button
-                            icon="sap-icon://excel-attachment"
-                            type="Transparent"
-                            press="onExportBI"
-                            text="{i18n>onBIExport}"
-                            visible="{= ${local>/SalesReport}.length > 0}"
-                            enabled="{= ${local>/authorityCheck/button/BITransfer}}"
-                        />
+                        <Button icon="sap-icon://excel-attachment" type="Transparent" press="onExport" text="{i18n>onExport}" visible="{= ${local>/SalesReport}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}" />
+                        <Button icon="sap-icon://excel-attachment" type="Transparent" press="onExportBI" text="{i18n>onBIExport}" visible="{= ${local>/SalesReport}.length > 0}" enabled="{= ${local>/authorityCheck/button/BITransfer}}" />
                     </OverflowToolbar>
                 </t:extension>
-
                 <table:columns>
-                    <table:Column
-                        width="10rem"
-                        sortProperty="SalesOrganization"
-                        label="{i18n>SalesOrganization}"
-                    >
+                    <table:Column width="10rem" sortProperty="SalesOrganization" label="{i18n>SalesOrganization}">
                         <table:template>
-                            <Text
-                                text="{local>SalesOrganization}"
-                                tooltip="{local>SalesOrganization}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>SalesOrganization}" tooltip="{local>SalesOrganization}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="Customer"
-                        label="{i18n>Customer}"
-                    >
+                    <table:Column width="10rem" sortProperty="Customer" label="{i18n>Customer}">
                         <table:template>
-                            <Text
-                                text="{local>Customer}"
-                                tooltip="{local>Customer}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>Customer}" tooltip="{local>Customer}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <!-- <table:Column
-                        width="10rem"
-                        sortProperty="YearDate"
-                        label="{i18n>YearDate}"
-                    >
+                    <!-- <table:Column width="10rem" sortProperty="YearDate" label="{i18n>YearDate}">
                         <table:template>
-                            <Text
-                                text="{local>YearDate}"
-                                tooltip="{local>YearDate}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>YearDate}" tooltip="{local>YearDate}" wrapping="false" />
                         </table:template>
                     </table:Column> -->
-                    <table:Column
-                        width="10rem"
-                        sortProperty="CustomerName"
-                        label="{i18n>CustomerName}"
-                    >
+                    <table:Column width="10rem" sortProperty="CustomerName" label="{i18n>CustomerName}">
                         <table:template>
-                            <Text
-                                text="{local>CustomerName}"
-                                tooltip="{local>CustomerName}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>CustomerName}" tooltip="{local>CustomerName}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="CustomerAccountAssignmentGroup"
-                        label="{i18n>CustomerAccountAssignmentGroup}"
-                    >
+                    <table:Column width="18rem" sortProperty="CustomerAccountAssignmentGroup" label="{i18n>CustomerAccountAssignmentGroup}">
                         <table:template>
-                            <Text
-                                text="{local>CustomerAccountAssignmentGroup}"
-                                tooltip="{local>CustomerAccountAssignmentGroup}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>CustomerAccountAssignmentGroup}" tooltip="{local>CustomerAccountAssignmentGroup}" wrapping="false" />
                         </table:template>
                     </table:Column>
-                    <table:Column
-                        width="10rem"
-                        sortProperty="ProfitCenter"
-                        label="{i18n>ProfitCenter}"
-                    >
+                    <table:Column width="10rem" sortProperty="ProfitCenter" label="{i18n>ProfitCenter}">
                         <table:template>
-                            <Text
-                                text="{local>ProfitCenter}"
-                                tooltip="{local>ProfitCenter}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>ProfitCenter}" tooltip="{local>ProfitCenter}" wrapping="false" />
                         </table:template>
                     </table:Column>
-                    <table:Column
-                        width="10rem"
-                        sortProperty="PlantName"
-                        label="{i18n>PlantName}"
-                    >
+                    <table:Column width="10rem" sortProperty="PlantName" label="{i18n>PlantName}">
                         <table:template>
-                            <Text
-                                text="{local>PlantName}"
-                                tooltip="{local>PlantName}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>PlantName}" tooltip="{local>PlantName}" wrapping="false" />
                         </table:template>
                     </table:Column>
-                    <table:Column
-                        width="10rem"
-                        sortProperty="SalesOffice"
-                        label="{i18n>SalesOffice}"
-                    >
+                    <table:Column width="10rem" sortProperty="SalesOffice" label="{i18n>SalesOffice}">
                         <table:template>
-                            <Text
-                                text="{local>SalesOffice}"
-                                tooltip="{local>SalesOffice}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>SalesOffice}" tooltip="{local>SalesOffice}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="SalesGroup"
-                        label="{i18n>SalesGroup}"
-                    >
+                    <table:Column width="10rem" sortProperty="SalesGroup" label="{i18n>SalesGroup}">
                         <table:template>
-                            <Text
-                                text="{local>SalesGroup}"
-                                tooltip="{local>SalesGroup}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>SalesGroup}" tooltip="{local>SalesGroup}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="CreatedByUser"
-                        label="{i18n>CreatedByUser}"
-                    >
+                    <table:Column width="10rem" sortProperty="CreatedByUser" label="{i18n>CreatedByUser}">
                         <table:template>
-                            <Text
-                                text="{local>CreatedByUser}"
-                                tooltip="{local>CreatedByUser}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>CreatedByUser}" tooltip="{local>CreatedByUser}" wrapping="false" />
                         </table:template>
                     </table:Column>
-                    <table:Column
-                        width="10rem"
-                        sortProperty="MatlAccountAssignmentGroup"
-                        label="{i18n>MatlAccountAssignmentGroup}"
-                        visible="false"
-                    >
+                    <table:Column width="10rem" sortProperty="MatlAccountAssignmentGroup" label="{i18n>MatlAccountAssignmentGroup}" visible="false">
                         <table:template>
-                            <Text
-                                text="{local>MatlAccountAssignmentGroup}"
-                                tooltip="{local>MatlAccountAssignmentGroup}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>MatlAccountAssignmentGroup}" tooltip="{local>MatlAccountAssignmentGroup}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="ProductGroup"
-                        label="{i18n>ProductGroup}"
-                    >
+                    <table:Column width="10rem" sortProperty="ProductGroup" label="{i18n>ProductGroup}">
                         <table:template>
-                            <Text
-                                text="{local>ProductGroup}"
-                                tooltip="{local>ProductGroup}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>ProductGroup}" tooltip="{local>ProductGroup}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="FirstSalesSpecProductGroup"
-                        label="{i18n>FirstSalesSpecProductGroup}"
-                    >
+                    <table:Column width="10rem" sortProperty="FirstSalesSpecProductGroup" label="{i18n>FirstSalesSpecProductGroup}">
                         <table:template>
-                            <Text
-                                text="{local>FirstSalesSpecProductGroup}"
-                                tooltip="{local>FirstSalesSpecProductGroup}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>FirstSalesSpecProductGroup}" tooltip="{local>FirstSalesSpecProductGroup}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="SecondSalesSpecProductGroup"
-                        label="{i18n>SecondSalesSpecProductGroup}"
-                    >
+                    <table:Column width="10rem" sortProperty="SecondSalesSpecProductGroup" label="{i18n>SecondSalesSpecProductGroup}">
                         <table:template>
-                            <Text
-                                text="{local>SecondSalesSpecProductGroup}"
-                                tooltip="{local>SecondSalesSpecProductGroup}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>SecondSalesSpecProductGroup}" tooltip="{local>SecondSalesSpecProductGroup}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="ThirdSalesSpecProductGroup"
-                        label="{i18n>ThirdSalesSpecProductGroup}"
-                    >
+                    <table:Column width="10rem" sortProperty="ThirdSalesSpecProductGroup" label="{i18n>ThirdSalesSpecProductGroup}">
                         <table:template>
-                            <Text
-                                text="{local>ThirdSalesSpecProductGroup}"
-                                tooltip="{local>ThirdSalesSpecProductGroup}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>ThirdSalesSpecProductGroup}" tooltip="{local>ThirdSalesSpecProductGroup}" wrapping="false" />
                         </table:template>
                     </table:Column>
-                    <table:Column
-                        width="10rem"
-                        sortProperty="AccountDetnProductGroup"
-                        label="{i18n>AccountDetnProductGroup}"
-                    >
+                    <table:Column width="18rem" sortProperty="AccountDetnProductGroup" label="{i18n>AccountDetnProductGroup}">
                         <table:template>
-                            <Text
-                                text="{local>AccountDetnProductGroup}"
-                                tooltip="{local>AccountDetnProductGroup}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>AccountDetnProductGroup}" tooltip="{local>AccountDetnProductGroup}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <!-- <table:Column
-                        width="10rem"
-                        sortProperty="plantype"
-                        label="{i18n>plantype}"
-                    >
+                    <!-- <table:Column width="10rem" sortProperty="plantype" label="{i18n>plantype}">
                         <table:template>
-                            <Text
-                                text="{local>plantype}"
-                                tooltip="{local>plantype}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>plantype}" tooltip="{local>plantype}" wrapping="false" />
                         </table:template>
                     </table:Column> -->
-                    <table:Column
-                        width="10rem"
-                        sortProperty="Product"
-                        label="{i18n>Product}"
-                    >
+                    <table:Column width="10rem" sortProperty="Product" label="{i18n>Product}">
                         <table:template>
-                            <Text
-                                text="{local>Product}"
-                                tooltip="{local>Product}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>Product}" tooltip="{local>Product}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="ProductName"
-                        label="{i18n>ProductName}"
-                    >
+                    <table:Column width="10rem" sortProperty="ProductName" label="{i18n>ProductName}">
                         <table:template>
-                            <Text
-                                text="{local>ProductName}"
-                                tooltip="{local>ProductName}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>ProductName}" tooltip="{local>ProductName}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
                     <!-- 
-                    <table:Column
-                        width="10rem"
-                        sortProperty="ConditionRateValue"
-                        label="{i18n>ConditionRateValue}"
-                    >
+                    <table:Column width="10rem" sortProperty="ConditionRateValue" label="{i18n>ConditionRateValue}">
                         <table:template>
-                            <Text
-                                text="{local>ConditionRateValue}"
-                                tooltip="{local>ConditionRateValue}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>ConditionRateValue}" tooltip="{local>ConditionRateValue}" wrapping="false" />
                         </table:template>
                     </table:Column> -->
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="materialcost2000_n"
-                        label="{i18n>materialcost2000_n}"
-                    >
+                    <table:Column width="10rem" sortProperty="materialcost2000_n" label="{i18n>materialcost2000_n}">
                         <table:template>
-                            <Text
-                                text="{local>materialcost2000_n}"
-                                tooltip="{local>materialcost2000_n}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>materialcost2000_n}" tooltip="{local>materialcost2000_n}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <!-- <table:Column
-                        width="10rem"
-                        sortProperty="ContributionProfit"
-                        label="{i18n>ContributionProfit}"
-                    >
+                    <!-- <table:Column width="10rem" sortProperty="ContributionProfit" label="{i18n>ContributionProfit}">
                         <table:template>
-                            <Text
-                                text="{local>ContributionProfit}"
-                                tooltip="{local>ContributionProfit}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>ContributionProfit}" tooltip="{local>ContributionProfit}" wrapping="false" />
                         </table:template>
                     </table:Column> -->
-                    <table:Column
-                        width="10rem"
-                        sortProperty="Manufacturingcost_n"
-                        label="{i18n>Manufacturingcost_n}"
-                    >
+                    <table:Column width="10rem" sortProperty="Manufacturingcost_n" label="{i18n>Manufacturingcost_n}">
                         <table:template>
-                            <Text
-                                text="{local>Manufacturingcost_n}"
-                                tooltip="{local>Manufacturingcost_n}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>Manufacturingcost_n}" tooltip="{local>Manufacturingcost_n}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="GLAccount1"
-                        label="{i18n>GLAccount1}"
-                        visible="false"
-                    >
+                    <table:Column width="10rem" sortProperty="GLAccount1" label="{i18n>GLAccount1}" visible="false">
                         <table:template>
-                            <Text
-                                text="{local>GLAccount1}"
-                                tooltip="{local>GLAccount1}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>GLAccount1}" tooltip="{local>GLAccount1}" wrapping="false" />
                         </table:template>
                     </table:Column>
-                    <table:Column
-                        width="10rem"
-                        sortProperty="GLAccountName1"
-                        label="{i18n>GLAccountName1}"
-                        visible="false"
-                    >
+                    <table:Column width="10rem" sortProperty="GLAccountName1" label="{i18n>GLAccountName1}" visible="false">
                         <table:template>
-                            <Text
-                                text="{local>GLAccountName1}"
-                                tooltip="{local>GLAccountName1}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>GLAccountName1}" tooltip="{local>GLAccountName1}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="GLAccount2"
-                        label="{i18n>GLAccount2}"
-                        visible="false"
-                    >
+                    <table:Column width="10rem" sortProperty="GLAccount2" label="{i18n>GLAccount2}" visible="false">
                         <table:template>
-                            <Text
-                                text="{local>GLAccount2}"
-                                tooltip="{local>GLAccount2}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>GLAccount2}" tooltip="{local>GLAccount2}" wrapping="false" />
                         </table:template>
                     </table:Column>
-                    <table:Column
-                        width="10rem"
-                        sortProperty="GLAccountName2"
-                        label="{i18n>GLAccountName2}"
-                        visible="false"
-                    >
+                    <table:Column width="10rem" sortProperty="GLAccountName2" label="{i18n>GLAccountName2}" visible="false">
                         <table:template>
-                            <Text
-                                text="{local>GLAccountName2}"
-                                tooltip="{local>GLAccountName2}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>GLAccountName2}" tooltip="{local>GLAccountName2}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="GLAccount3"
-                        label="{i18n>GLAccount3}"
-                        visible="false"
-                    >
+                    <table:Column width="10rem" sortProperty="GLAccount3" label="{i18n>GLAccount3}" visible="false">
                         <table:template>
-                            <Text
-                                text="{local>GLAccount3}"
-                                tooltip="{local>GLAccount3}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>GLAccount3}" tooltip="{local>GLAccount3}" wrapping="false" />
                         </table:template>
                     </table:Column>
-                    <table:Column
-                        width="10rem"
-                        sortProperty="GLAccountName3"
-                        label="{i18n>GLAccountName3}"
-                        visible="false"
-                    >
+                    <table:Column width="10rem" sortProperty="GLAccountName3" label="{i18n>GLAccountName3}" visible="false">
                         <table:template>
-                            <Text
-                                text="{local>GLAccountName3}"
-                                tooltip="{local>GLAccountName3}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>GLAccountName3}" tooltip="{local>GLAccountName3}" wrapping="false" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        width="10rem"
-                        sortProperty="DisplayCurrency1"
-                        label="{i18n>DisplayCurrency1}"
-                        visible="false"
-                    >
+                    <table:Column width="10rem" sortProperty="DisplayCurrency1" label="{i18n>DisplayCurrency1}" visible="false">
                         <table:template>
-                            <Text
-                                text="{local>DisplayCurrency1}"
-                                tooltip="{local>DisplayCurrency1}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>DisplayCurrency1}" tooltip="{local>DisplayCurrency1}" wrapping="false" />
                         </table:template>
                     </table:Column>
-                    <table:Column
-                        width="10rem"
-                        sortProperty="currency"
-                        label="{i18n>currency}"
-                        visible="false"
-                    >
+                    <table:Column width="10rem" sortProperty="currency" label="{i18n>currency}" visible="false">
                         <table:template>
-                            <Text
-                                text="{local>currency}"
-                                tooltip="{local>currency}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>currency}" tooltip="{local>currency}" wrapping="false" />
                         </table:template>
                     </table:Column>
-                    <table:Column
-                        width="10rem"
-                        sortProperty="currency1"
-                        label="{i18n>currency1}"
-                        visible="false"
-                    >
+                    <table:Column width="10rem" sortProperty="currency1" label="{i18n>currency1}" visible="false">
                         <table:template>
-                            <Text
-                                text="{local>currency1}"
-                                tooltip="{local>currency1}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>currency1}" tooltip="{local>currency1}" wrapping="false" />
                         </table:template>
                     </table:Column>
-                    <table:Column
-                        width="10rem"
-                        sortProperty="Companycode"
-                        label="{i18n>Companycode}"
-                        visible="false"
-                    >
+                    <table:Column width="10rem" sortProperty="Companycode" label="{i18n>Companycode}" visible="false">
                         <table:template>
-                            <Text
-                                text="{local>Companycode}"
-                                tooltip="{local>Companycode}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>Companycode}" tooltip="{local>Companycode}" wrapping="false" />
                         </table:template>
                     </table:Column>
-                    <!-- <table:Column
-                        width="10rem"
-                        sortProperty="SalesAmount"
-                        label="{i18n>SalesAmount}"
-                    >
+                    <!-- <table:Column width="10rem" sortProperty="SalesAmount" label="{i18n>SalesAmount}">
                         <table:template>
-                            <Text
-                                text="{local>SalesAmount}"
-                                tooltip="{local>SalesAmount}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>SalesAmount}" tooltip="{local>SalesAmount}" wrapping="false" />
                         </table:template>
                     </table:Column> -->
-
-                    <!-- <table:Column
-                        width="10rem"
-                        sortProperty="GrossProfit"
-                        label="{i18n>GrossProfit}"
-                    >
+                    <!-- <table:Column width="10rem" sortProperty="GrossProfit" label="{i18n>GrossProfit}">
                         <table:template>
-                            <Text
-                                text="{local>GrossProfit}"
-                                tooltip="{local>GrossProfit}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>GrossProfit}" tooltip="{local>GrossProfit}" wrapping="false" />
                         </table:template>
                     </table:Column> -->
-
-                    <!-- <table:Column
-                        width="10rem"
-                        sortProperty="ContributionProfitTotal"
-                        label="{i18n>ContributionProfitTotal}"
-                    >
+                    <!-- <table:Column width="10rem" sortProperty="ContributionProfitTotal" label="{i18n>ContributionProfitTotal}">
                         <table:template>
-                            <Text
-                                text="{local>ContributionProfitTotal}"
-                                tooltip="{local>ContributionProfitTotal}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>ContributionProfitTotal}" tooltip="{local>ContributionProfitTotal}" wrapping="false" />
                         </table:template>
                     </table:Column> -->
-
-                    <!-- <table:Column
-                        width="10rem"
-                        sortProperty="GrossProfitTotal"
-                        label="{i18n>GrossProfitTotal}"
-                    >
+                    <!-- <table:Column width="10rem" sortProperty="GrossProfitTotal" label="{i18n>GrossProfitTotal}">
                         <table:template>
-                            <Text
-                                text="{local>GrossProfitTotal}"
-                                tooltip="{local>GrossProfitTotal}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>GrossProfitTotal}" tooltip="{local>GrossProfitTotal}" wrapping="false" />
                         </table:template>
                     </table:Column> -->
                     <!-- 
-                    <table:Column
-                        width="10rem"
-                        sortProperty="salesplanamountindspcrcy"
-                        label="{i18n>salesplanamountindspcrcy}"
-                    >
+                    <table:Column width="10rem" sortProperty="salesplanamountindspcrcy" label="{i18n>salesplanamountindspcrcy}">
                         <table:template>
-                            <Text
-                                text="{local>salesplanamountindspcrcy}"
-                                tooltip="{local>salesplanamountindspcrcy}"
-                                wrapping="false"
-                            />
+                            <Text text="{local>salesplanamountindspcrcy}" tooltip="{local>salesplanamountindspcrcy}" wrapping="false" />
                         </table:template>
                     </table:Column> -->
-
-                    <!-- <table:Column
-                        id="SalesOrganization"
-                        width="6rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="SalesOrganization"
-                        filterProperty="SalesOrganization"
-                    >
+                    <!-- <table:Column id="SalesOrganization" width="6rem" visible="true" autoResizable="true" sortProperty="SalesOrganization" filterProperty="SalesOrganization">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"SalesOrganization", "leadingProperty":"SalesOrganization", "sortProperty": "SalesOrganization", "filterProperty": "SalesOrganization"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"SalesOrganization", "leadingProperty":"SalesOrganization", "sortProperty": "SalesOrganization", "filterProperty": "SalesOrganization"}'
                             />
                         </table:customData>
                         <table:label>
@@ -894,19 +339,9 @@
                             <Label text="{SalesOrganization}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="Customer"
-                        width="7rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="Customer"
-                        filterProperty="Customer"
-                    >
+                    <table:Column id="Customer" width="7rem" visible="true" autoResizable="true" sortProperty="Customer" filterProperty="Customer">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"Customer", "leadingProperty":"Customer", "sortProperty": "Customer", "filterProperty": "Customer"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "leadingProperty":"Customer", "sortProperty": "Customer", "filterProperty": "Customer"}'
                             />
                         </table:customData>
                         <table:label>
@@ -916,19 +351,9 @@
                             <Label text="{Customer}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="CustomerName"
-                        width="6rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="CustomerName"
-                        filterProperty="CustomerName"
-                    >
+                    <table:Column id="CustomerName" width="6rem" visible="true" autoResizable="true" sortProperty="CustomerName" filterProperty="CustomerName">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName", "sortProperty": "CustomerName", "filterProperty": "CustomerName"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName", "sortProperty": "CustomerName", "filterProperty": "CustomerName"}'
                             />
                         </table:customData>
                         <table:label>
@@ -938,19 +363,9 @@
                             <Label text="{CustomerName}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="ProfitCenter"
-                        width="7rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="ProfitCenter"
-                        filterProperty="ProfitCenter"
-                    >
+                    <table:Column id="ProfitCenter" width="7rem" visible="true" autoResizable="true" sortProperty="ProfitCenter" filterProperty="ProfitCenter">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"ProfitCenter", "leadingProperty":"ProfitCenter", "sortProperty": "ProfitCenter", "filterProperty": "ProfitCenter"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenter", "leadingProperty":"ProfitCenter", "sortProperty": "ProfitCenter", "filterProperty": "ProfitCenter"}'
                             />
                         </table:customData>
                         <table:label>
@@ -960,19 +375,9 @@
                             <Label text="{ProfitCenter}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="PlantName"
-                        width="5rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="PlantName"
-                        filterProperty="PlantName"
-                    >
+                    <table:Column id="PlantName" width="5rem" visible="true" autoResizable="true" sortProperty="PlantName" filterProperty="PlantName">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"PlantName", "leadingProperty":"PlantName", "sortProperty": "PlantName", "filterProperty": "PlantName"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"PlantName", "leadingProperty":"PlantName", "sortProperty": "PlantName", "filterProperty": "PlantName"}'
                             />
                         </table:customData>
                         <table:label>
@@ -982,19 +387,9 @@
                             <Label text="{PlantName}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="SalesOffice"
-                        width="5rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="SalesOffice"
-                        filterProperty="SalesOffice"
-                    >
+                    <table:Column id="SalesOffice" width="5rem" visible="true" autoResizable="true" sortProperty="SalesOffice" filterProperty="SalesOffice">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"SalesOffice", "leadingProperty":"SalesOffice", "sortProperty": "SalesOffice", "filterProperty": "SalesOffice"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"SalesOffice", "leadingProperty":"SalesOffice", "sortProperty": "SalesOffice", "filterProperty": "SalesOffice"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1004,19 +399,9 @@
                             <Label text="{SalesOffice}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="SalesGroup"
-                        width="5rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="SalesGroup"
-                        filterProperty="SalesGroup"
-                    >
+                    <table:Column id="SalesGroup" width="5rem" visible="true" autoResizable="true" sortProperty="SalesGroup" filterProperty="SalesGroup">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"SalesGroup", "leadingProperty":"SalesGroup", "sortProperty": "SalesGroup", "filterProperty": "SalesGroup"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"SalesGroup", "leadingProperty":"SalesGroup", "sortProperty": "SalesGroup", "filterProperty": "SalesGroup"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1026,19 +411,9 @@
                             <Label text="{SalesGroup}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="CreatedByUser"
-                        width="5rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="CreatedByUser"
-                        filterProperty="CreatedByUser"
-                    >
+                    <table:Column id="CreatedByUser" width="5rem" visible="true" autoResizable="true" sortProperty="CreatedByUser" filterProperty="CreatedByUser">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"CreatedByUser", "leadingProperty":"CreatedByUser", "sortProperty": "CreatedByUser", "filterProperty": "CreatedByUser"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"CreatedByUser", "leadingProperty":"CreatedByUser", "sortProperty": "CreatedByUser", "filterProperty": "CreatedByUser"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1048,19 +423,9 @@
                             <Label text="{CreatedByUser}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="MatlAccountAssignmentGroup"
-                        width="6rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="MatlAccountAssignmentGroup"
-                        filterProperty="MatlAccountAssignmentGroup"
-                    >
+                    <table:Column id="MatlAccountAssignmentGroup" width="6rem" visible="true" autoResizable="true" sortProperty="MatlAccountAssignmentGroup" filterProperty="MatlAccountAssignmentGroup">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"MatlAccountAssignmentGroup", "leadingProperty":"MatlAccountAssignmentGroup", "sortProperty": "MatlAccountAssignmentGroup", "filterProperty": "MatlAccountAssignmentGroup"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"MatlAccountAssignmentGroup", "leadingProperty":"MatlAccountAssignmentGroup", "sortProperty": "MatlAccountAssignmentGroup", "filterProperty": "MatlAccountAssignmentGroup"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1070,19 +435,9 @@
                             <Label text="{MatlAccountAssignmentGroup}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="ProductGroup"
-                        width="7rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="ProductGroup"
-                        filterProperty="ProductGroup"
-                    >
+                    <table:Column id="ProductGroup" width="7rem" visible="true" autoResizable="true" sortProperty="ProductGroup" filterProperty="ProductGroup">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"ProductGroup", "leadingProperty":"ProductGroup", "sortProperty": "ProductGroup", "filterProperty": "ProductGroup"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"ProductGroup", "leadingProperty":"ProductGroup", "sortProperty": "ProductGroup", "filterProperty": "ProductGroup"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1092,19 +447,9 @@
                             <Label text="{ProductGroup}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="Product"
-                        width="4rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="Product"
-                        filterProperty="Product"
-                    >
+                    <table:Column id="Product" width="4rem" visible="true" autoResizable="true" sortProperty="Product" filterProperty="Product">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"Product", "leadingProperty":"Product", "sortProperty": "Product", "filterProperty": "Product"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"Product", "leadingProperty":"Product", "sortProperty": "Product", "filterProperty": "Product"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1114,19 +459,9 @@
                             <Label text="{Product}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="ProductName"
-                        width="5rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="ProductName"
-                        filterProperty="ProductName"
-                    >
+                    <table:Column id="ProductName" width="5rem" visible="true" autoResizable="true" sortProperty="ProductName" filterProperty="ProductName">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"ProductName", "leadingProperty":"ProductName", "sortProperty": "ProductName", "filterProperty": "ProductName"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"ProductName", "leadingProperty":"ProductName", "sortProperty": "ProductName", "filterProperty": "ProductName"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1136,19 +471,9 @@
                             <Label text="{ProductName}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="ConditionRateValue"
-                        width="5rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="ConditionRateValue"
-                        filterProperty="ConditionRateValue"
-                    >
+                    <table:Column id="ConditionRateValue" width="5rem" visible="true" autoResizable="true" sortProperty="ConditionRateValue" filterProperty="ConditionRateValue">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"ConditionRateValue", "leadingProperty":"ConditionRateValue", "sortProperty": "ConditionRateValue", "filterProperty": "ConditionRateValue"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue", "leadingProperty":"ConditionRateValue", "sortProperty": "ConditionRateValue", "filterProperty": "ConditionRateValue"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1158,19 +483,9 @@
                             <Label text="{ConditionRateValue}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="MaterialCost2000"
-                        width="5rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="MaterialCost2000"
-                        filterProperty="MaterialCost2000"
-                    >
+                    <table:Column id="MaterialCost2000" width="5rem" visible="true" autoResizable="true" sortProperty="MaterialCost2000" filterProperty="MaterialCost2000">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"MaterialCost2000", "leadingProperty":"MaterialCost2000", "sortProperty": "MaterialCost2000", "filterProperty": "MaterialCost2000"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"MaterialCost2000", "leadingProperty":"MaterialCost2000", "sortProperty": "MaterialCost2000", "filterProperty": "MaterialCost2000"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1180,19 +495,9 @@
                             <Label text="{MaterialCost2000}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="ContributionProfit"
-                        width="8rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="ContributionProfit"
-                        filterProperty="ContributionProfit"
-                    >
+                    <table:Column id="ContributionProfit" width="8rem" visible="true" autoResizable="true" sortProperty="ContributionProfit" filterProperty="ContributionProfit">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"ContributionProfit", "leadingProperty":"ContributionProfit", "sortProperty": "ContributionProfit", "filterProperty": "ContributionProfit"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"ContributionProfit", "leadingProperty":"ContributionProfit", "sortProperty": "ContributionProfit", "filterProperty": "ContributionProfit"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1202,19 +507,9 @@
                             <Label text="{ContributionProfit}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="Manufacturingcost"
-                        width="5rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="Manufacturingcost"
-                        filterProperty="Manufacturingcost"
-                    >
+                    <table:Column id="Manufacturingcost" width="5rem" visible="true" autoResizable="true" sortProperty="Manufacturingcost" filterProperty="Manufacturingcost">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"MaterialCoManufacturingcostst2000", "leadingProperty":"Manufacturingcost", "sortProperty": "Manufacturingcost", "filterProperty": "Manufacturingcost"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"MaterialCoManufacturingcostst2000", "leadingProperty":"Manufacturingcost", "sortProperty": "Manufacturingcost", "filterProperty": "Manufacturingcost"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1224,19 +519,9 @@
                             <Label text="{Manufacturingcost}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="GrossProfit"
-                        width="10rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="GrossProfit"
-                        filterProperty="GrossProfit"
-                    >
+                    <table:Column id="GrossProfit" width="10rem" visible="true" autoResizable="true" sortProperty="GrossProfit" filterProperty="GrossProfit">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"GrossProfit", "leadingProperty":"GrossProfit", "sortProperty": "GrossProfit", "filterProperty": "GrossProfit"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"GrossProfit", "leadingProperty":"GrossProfit", "sortProperty": "GrossProfit", "filterProperty": "GrossProfit"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1246,19 +531,9 @@
                             <Label text="{GrossProfit}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="salesplanamountindspcrcy"
-                        width="5rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="salesplanamountindspcrcy"
-                        filterProperty="salesplanamountindspcrcy"
-                    >
+                    <table:Column id="salesplanamountindspcrcy" width="5rem" visible="true" autoResizable="true" sortProperty="salesplanamountindspcrcy" filterProperty="salesplanamountindspcrcy">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"salesplanamountindspcrcy", "leadingProperty":"salesplanamountindspcrcy", "sortProperty": "salesplanamountindspcrcy", "filterProperty": "salesplanamountindspcrcy"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"salesplanamountindspcrcy", "leadingProperty":"salesplanamountindspcrcy", "sortProperty": "salesplanamountindspcrcy", "filterProperty": "salesplanamountindspcrcy"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1268,19 +543,9 @@
                             <Label text="{salesplanamountindspcrcy}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="SalesAmount"
-                        width="4rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="SalesAmount"
-                        filterProperty="SalesAmount"
-                    >
+                    <table:Column id="SalesAmount" width="4rem" visible="true" autoResizable="true" sortProperty="SalesAmount" filterProperty="SalesAmount">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"SalesAmount", "leadingProperty":"SalesAmount", "sortProperty": "SalesAmount", "filterProperty": "SalesAmount"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"SalesAmount", "leadingProperty":"SalesAmount", "sortProperty": "SalesAmount", "filterProperty": "SalesAmount"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1290,19 +555,9 @@
                             <Label text="{SalesAmount}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="ContributionProfitTotal"
-                        width="7rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="ContributionProfitTotal"
-                        filterProperty="ContributionProfitTotal"
-                    >
+                    <table:Column id="ContributionProfitTotal" width="7rem" visible="true" autoResizable="true" sortProperty="ContributionProfitTotal" filterProperty="ContributionProfitTotal">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"ContributionProfitTotal", "leadingProperty":"ContributionProfitTotal", "sortProperty": "ContributionProfitTotal", "filterProperty": "ContributionProfitTotal"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"ContributionProfitTotal", "leadingProperty":"ContributionProfitTotal", "sortProperty": "ContributionProfitTotal", "filterProperty": "ContributionProfitTotal"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1312,19 +567,9 @@
                             <Label text="{ContributionProfitTotal}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="GrossProfitTotal"
-                        width="7rem"
-                        visible="true"
-                        autoResizable="true"
-                        sortProperty="GrossProfitTotal"
-                        filterProperty="GrossProfitTotal"
-                    >
+                    <table:Column id="GrossProfitTotal" width="7rem" visible="true" autoResizable="true" sortProperty="GrossProfitTotal" filterProperty="GrossProfitTotal">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"GrossProfitTotal", "leadingProperty":"GrossProfitTotal", "sortProperty": "GrossProfitTotal", "filterProperty": "GrossProfitTotal"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"GrossProfitTotal", "leadingProperty":"GrossProfitTotal", "sortProperty": "GrossProfitTotal", "filterProperty": "GrossProfitTotal"}'
                             />
                         </table:customData>
                         <table:label>
@@ -1334,26 +579,15 @@
                             <Label text="{GrossProfitTotal}" />
                         </table:template>
                     </table:Column>
-
-                    <table:Column
-                        id="ConditionRateValue01"
-                        label="{local>/ConditionRateValue01}"
-                        width="5rem"
-                        sortProperty="ConditionRateValue01"
-                        filterProperty="ConditionRateValue01"
-                        autoResizable="true"
-                    >
+                    <table:Column id="ConditionRateValue01" label="{local>/ConditionRateValue01}" width="5rem" sortProperty="ConditionRateValue01" filterProperty="ConditionRateValue01" autoResizable="true">
                         <table:customData>
-                            <core:CustomData
-                                key="p13nData"
-                                value='\{"columnKey":"ConditionRateValue01", "leadingProperty":"ConditionRateValue01", "sortProperty":"ConditionRateValue01", "filterProperty": "ConditionRateValue01"}'
+                            <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue01", "leadingProperty":"ConditionRateValue01", "sortProperty":"ConditionRateValue01", "filterProperty": "ConditionRateValue01"}'
                             />
                         </table:customData>
                         <table:template>
                             <Label text="{ConditionRateValue01}}" />
                         </table:template>
                     </table:Column> -->
-
                     <!-- <t:Column id="D002" label="{local>/ConditionRateValue02}" width="5rem" sortProperty="ConditionRateValue02" filterProperty="ConditionRateValue02" visible="{= ${local>/zdays} >= 2 ? true : false }" autoResizable="true">
                     <t:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue02", "leadingProperty":"ConditionRateValue02", "sortProperty":"ConditionRateValue02", "filterProperty": "ConditionRateValue02"}'/>
@@ -1475,7 +709,6 @@
                       </VBox>
                     </t:template>
                 </t:Column> -->
-
                     <!-- <t:Column id="D013" label="{local>/Date013}" width="5rem" sortProperty="D013" filterProperty="D013" visible="{= ${local>/zdays} >= 13 ? true : false }" autoResizable="true">
                     <t:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"D013", "leadingProperty":"D013", "sortProperty":"D013", "filterProperty": "D013"}'/>

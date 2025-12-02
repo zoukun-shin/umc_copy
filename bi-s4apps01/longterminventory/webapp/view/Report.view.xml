@@ -23,7 +23,7 @@
                     <FlexBox fitContainer="true">
                         <smartfilterbar:SmartFilterBar id="reportFilter" entitySet="ZI_BI006_REPORT" smartVariant="__SVM01" persistencyKey="report02FilterPersistent" useToolbar="false">
                             <smartfilterbar:controlConfiguration>
-                                <smartfilterbar:ControlConfiguration id="sfbConfigCompanyCode" key="CompanyCode" label="{i18n>company}" />
+                                <smartfilterbar:ControlConfiguration id="sfbConfigCompanyCode" key="CompanyCode" label="{i18n>company}" displayBehaviour="idAndDescription"/>
                                 <smartfilterbar:ControlConfiguration id="sfbConfigFiscalYear" key="FiscalYear" label="{i18n>fiscalYear}" mandatory="mandatory">
                                     <smartfilterbar:customControl>
                                         <DatePicker id="sfbDPFiscalYear" displayFormat="yyyy" valueFormat="yyyy" required="true" />
@@ -49,9 +49,18 @@
                                         </MultiComboBox>
                                     </smartfilterbar:customControl>
                                 </smartfilterbar:ControlConfiguration>
-                                <smartfilterbar:ControlConfiguration id="sfbConfigPlant" key="Plant" label="{i18n>plant}" />
-                                <smartfilterbar:ControlConfiguration id="sfbConfigProduct" key="Product" label="{i18n>product}" />
-                                <smartfilterbar:ControlConfiguration id="sfbConfigCustomer" key="Customer" label="{i18n>businessPartner}" />
+                                <smartfilterbar:ControlConfiguration id="sfbConfigPlant" key="Plant" label="{i18n>plant}" displayBehaviour="idAndDescription"/>
+                                <smartfilterbar:ControlConfiguration id="sfbConfigProduct" key="Product" label="{i18n>product}" displayBehaviour="idAndDescription"/>
+                                <smartfilterbar:ControlConfiguration id="sfbConfigCustomer" key="Customer" label="{i18n>businessPartner}" displayBehaviour="idAndDescription"/>
+                                <!-- visible -->
+                                <smartfilterbar:ControlConfiguration key="ActualPrice" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="Age" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="InventoryAmount" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="ProductType" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="ProfitCenter" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="Qty" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="Type" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="FiscalYearMonth" visible="false"/>
                             </smartfilterbar:controlConfiguration>
                         </smartfilterbar:SmartFilterBar>
                     </FlexBox>

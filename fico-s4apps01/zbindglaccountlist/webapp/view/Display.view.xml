@@ -1,6 +1,4 @@
-<mvc:View
-    controllerName="fico.zbindglaccountlist.controller.Display"
-    displayBlock="true"
+<mvc:View controllerName="fico.zbindglaccountlist.controller.Display" displayBlock="true"
     xmlns:core="sap.ui.core"
     xmlns="sap.m"
     xmlns:f="sap.f"
@@ -10,21 +8,12 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
     xmlns:smartTable="sap.ui.comp.smarttable"
-    xmlns:sv="sap.ui.comp.smartvariants"
-    height="100%"
-    busyIndicatorDelay="0"
->
+    xmlns:sv="sap.ui.comp.smartvariants" height="100%" busyIndicatorDelay="0">
     <f:DynamicPage id="idDynamicPage">
         <f:title>
             <f:DynamicPageTitle id="idDynamicPageTitle">
                 <f:heading>
-                    <sv:SmartVariantManagement
-                        id="idSmartVariantManagement"
-                        showShare="true"
-                        persistencyKey="uploadPurchaseReqFilter"
-                        showExecuteOnSelection="true"
-                        entitySet="ZC_BDGLACCOUNT"
-                    />
+                    <sv:SmartVariantManagement id="idSmartVariantManagement" showShare="true" persistencyKey="uploadPurchaseReqFilter" showExecuteOnSelection="true" entitySet="ZC_BDGLACCOUNT" />
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
@@ -32,90 +21,30 @@
             <f:DynamicPageHeader id="idDynamicPageHeader">
                 <f:content>
                     <!--数据查询-->
-                    <smartFilterBar:SmartFilterBar
-                        id="idSmartFilterBar"
-                        smartVariant="idSmartVariantManagement"
-                        persistencyKey="uploadPurchaseReq"
-                        entitySet="ZC_BDGLACCOUNT"
-                        useToolbar="false"
-                        class="sapUiResponsiveMargin"
-                    >
+                    <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="uploadPurchaseReq" entitySet="ZC_BDGLACCOUNT" useToolbar="false" class="sapUiResponsiveMargin">
                         <smartFilterBar:controlConfiguration>
-                           <!-- <smartFilterBar:ControlConfiguration
-                                id="idGLAccount"
-                                key="GLAccount"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>GLAccount}"
-                                mandatory="notMandatory"
-                                index="3"
-                                visible="true"
-                            >
- 
-                            </smartFilterBar:ControlConfiguration>  -->
-                         <smartFilterBar:ControlConfiguration
-                                id="idSumStatus"
-                                key="SumStatus"
-                                visibleInAdvancedArea="true"
-                                label="{i18n>SumStatus}"
-                                mandatory="notMandatory"
-                                index="41"
-                            > 
+                            <smartFilterBar:ControlConfiguration index="1" key="Ledger" visibleInAdvancedArea="true" displayBehaviour="idAndDescription" label="{i18n>Ledger}"/>
+                            <smartFilterBar:ControlConfiguration index="2" key="Companycode" visibleInAdvancedArea="true" displayBehaviour="idAndDescription" label="{i18n>CompanyCode}"/>
+                            <smartFilterBar:ControlConfiguration index="3" key="calendaryear" visibleInAdvancedArea="true" label="{i18n>calendaryear}"/>
+                            <smartFilterBar:ControlConfiguration index="4" key="calendarMonth" visibleInAdvancedArea="true" label="{i18n>calendarMonth}"/>
+                            <smartFilterBar:ControlConfiguration id="idSumStatus" key="SumStatus" visibleInAdvancedArea="true" label="{i18n>SumStatus}" mandatory="notMandatory" index="41">
                                 <smartFilterBar:customControl>
-                                <CheckBox id="idCheckbox"  />
+                                    <CheckBox id="idCheckbox" />
                                 </smartFilterBar:customControl>
-                            </smartFilterBar:ControlConfiguration> 
- 
+                            </smartFilterBar:ControlConfiguration>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <smartTable:SmartTable
-                id="idSmartTable"
-                entitySet="ZC_BDGLACCOUNT"
-                smartFilterId="idSmartFilterBar"
-                smartVariant="idSmartVariantManagement"
-                persistencyKey="uploadPurchaseReqTable"
-                header="{i18n>tableHeaderTitle}"
-                placeToolbarInTable="true"
-                beforeRebindTable="onBeforeRebindTable"
-            >
-                 <smartTable:customToolbar>
- 
+            <smartTable:SmartTable id="idSmartTable" entitySet="ZC_BDGLACCOUNT" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="uploadPurchaseReqTable" header="{i18n>Results}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable">
+                <smartTable:customToolbar>
                 </smartTable:customToolbar>
-                <t:Table
-                    id="idPurchaseReqTable"
-                    rowActionCount="1"
-                    rowsUpdated="onUITableRowsUpdated" 
-                >
+                <t:Table id="idPurchaseReqTable" rowActionCount="1" rowsUpdated="onUITableRowsUpdated">
                     <t:rowMode>
                         <rm:Auto id="idAuto" />
                     </t:rowMode>
-
-                    <!-- <t:columns>
-                        <t:Column
-                            width="4rem"
-                            label="{i18n>GLAccount}"
-                            sortProperty="GLAccount"
-                            filterProperty="GLAccount"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"GLAccount", "leadingProperty":"GLAccount", "sortProperty":"GLAccount, "filterProperty": "GLAccount"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{GLAccount}"
-                                />
-                            </t:template>
-                        </t:Column>
-
-                        </t:columns> -->
-
- 
                 </t:Table>
             </smartTable:SmartTable>
         </f:content>

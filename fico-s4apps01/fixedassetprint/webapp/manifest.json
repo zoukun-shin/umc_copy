@@ -169,13 +169,6 @@
             "settings": {
               "contextPath": "/FIXEDASSETPRINT",
               "variantManagement": "Page",
-              "navigation": {
-                "FIXEDASSETPRINT": {
-                  "detail": {
-                    "route": "FIXEDASSETPRINTObjectPage"
-                  }
-                }
-              },
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {

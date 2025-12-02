@@ -65,6 +65,20 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="zymonth10" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="zymonth11" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="zymonth12" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="zpercent1" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="zpercent2" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="zpercent3" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="zpercent4" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="zpercent5" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="zpercent6" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="zpercent7" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="zpercent8" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="zpercent9" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="zpercent10" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="zpercent11" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="zpercent12" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="currency" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>

@@ -5,6 +5,9 @@
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
         <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
     </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/HTML5.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="HTML5"/>
+    </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata4/sap/zui_stockageupload_o4/srvd/sap/zui_stockageupload/0001/$metadata">
         <edmx:Include Namespace="com.sap.gateway.srvd.zui_stockageupload.v0001" Alias="SAP__self"/>
     </edmx:Reference>
@@ -70,21 +73,46 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="InventoryType"/>
                             <PropertyValue Property="Label" String="{@i18n>inventorytype}"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="8rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Ledger"/>
                             <PropertyValue Property="Label" String="{@i18n>ledger}"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="6rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CalendarYear"/>
                             <PropertyValue Property="Label" String="{@i18n>calendarYear}"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="6rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CalendarMonth"/>
                             <PropertyValue Property="Label" String="{@i18n>calendarMonth}"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="6rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CompanyCode"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CompanyCodeName"/>
@@ -93,6 +121,11 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="{@i18n>plant}"/>
                             <PropertyValue Property="Value" Path="Plant"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="6rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="PlantName"/>
@@ -107,12 +140,17 @@
                             <PropertyValue Property="Label" String="{@i18n>productDescription}"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="BaseUnit"/>
-                            <PropertyValue Property="Label" String="{@i18n>baseUnitOfMeasure}"/>
-                        </Record>
-                        <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="{@i18n>qty}"/>
                             <PropertyValue Property="Value" Path="Qty"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="BaseUnit"/>
+                            <PropertyValue Property="Label" String="{@i18n>baseUnitOfMeasure}"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="6rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Label" String="{@i18n>age}"/>

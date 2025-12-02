@@ -5,6 +5,9 @@
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
         <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
     </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/HTML5.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="HTML5"/>
+    </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata4/sap/zui_fixedassetprint/srvd/sap/zui_fixedassetprint/0001/$metadata">
         <edmx:Include Namespace="com.sap.gateway.srvd.zui_fixedassetprint.v0001" Alias="SAP__self"/>
     </edmx:Reference>
@@ -34,14 +37,29 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="AssetCapitalizationDate"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="AssetAccountDetermination"/>
                             <PropertyValue Property="Label" String="{@i18n>accountDeterm}"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="14rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="DepreciationStartDate"/>
                             <PropertyValue Property="Label" String="{@i18n>depreciationCalculationStartDate}"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="12rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="DepreciationKeyName"/>
@@ -54,6 +72,11 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="PlannedUsefulLifeInYears"/>
                             <PropertyValue Property="Label" String="{@i18n>plannedUsefulLife}"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="8rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="OriginalAcquisitionAmount"/>
@@ -66,14 +89,29 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="InvestmentReason"/>
                             <PropertyValue Property="Label" String="{@i18n>InvestmentReason}"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="15rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="AssetTypeName"/>
                             <PropertyValue Property="Label" String="{@i18n>typeName}"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="15rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="JP_PrptyTxRptSpclDepr"/>
                             <PropertyValue Property="Label" String="{@i18n>JP_PrptyTxRptSpclDepr}"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="15rem"/>
+                                </Record>
+                            </Annotation>
                         </Record>
                     </Collection>
                 </Annotation>

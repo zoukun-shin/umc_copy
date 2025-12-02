@@ -84,6 +84,9 @@
   },
   "sap.ui5": {
     "flexEnabled": false,
+    "config": {
+      "fullWidth": true
+    },
     "dependencies": {
       "minUI5Version": "1.120.38",
       "libs": {

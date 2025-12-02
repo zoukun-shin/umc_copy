@@ -8,22 +8,57 @@
     xmlns:f="sap.f"
     xmlns:sv="sap.ui.comp.smartvariants"
     xmlns:core="sap.ui.core" displayBlock="true" busyIndicatorDelay="0">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="Report1SVM" showShare="true" showExecuteOnSelection="true" entitySet="ZC_BI003_REPORT_001"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartfilterbar:SmartFilterBar id="docFilter" smartVariant="__SVM01" persistencyKey="Report1SFB" entitySet="ZC_BI003_REPORT_001" useToolbar="false">
+                            <smartfilterbar:controlConfiguration>
+                                <smartfilterbar:ControlConfiguration id="sfbRep01ConfigRecoveryType" key="RecoveryType" label="{i18n>recoverType}" displayBehaviour="idAndDescription"/>
+                                <smartfilterbar:ControlConfiguration id="sfbRep01ConfigCompanyCode" key="CompanyCode" label="{i18n>company}" displayBehaviour="idAndDescription"/>
+                                <smartfilterbar:ControlConfiguration id="sfbRep01ConfigCustomer" key="Customer" label="{i18n>customer}" displayBehaviour="idAndDescription"/>
+                                <smartfilterbar:ControlConfiguration id="sfbRep01ConfigRecoveryManagementNumber" key="RecoveryManagementNumber" label="{i18n>RecoveryManagementNumber}" />
+                                <smartfilterbar:ControlConfiguration id="sfbRep01ConfigRecoveryYear" key="RecoveryYear" label="{i18n>year}">
+                                    <smartfilterbar:customControl>
+                                        <DatePicker id="sfbRep01DPRecoveryYear" displayFormat="yyyy" valueFormat="yyyy" />
+                                    </smartfilterbar:customControl>
+                                </smartfilterbar:ControlConfiguration>
+                                <!-- visible -->
+                                <smartfilterbar:ControlConfiguration key="CreatedBy" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="CreatedDate" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="CreatedName" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="Currency" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="CustomerName" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="Machine" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="RecoveryPercentage" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="RecoveryAlready" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="RecoveryStatus" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="CompanyName" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="RecoverStatusDescription" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="RecoverTypeDescription" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="RecoveryNecessaryAmount" visible="false"/>
+                            </smartfilterbar:controlConfiguration>
+                        </smartfilterbar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <!-- BUG -->
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
 
-    <smartfilterbar:SmartFilterBar id="docFilter" smartVariant="__SVM01" persistencyKey="docFilterPersistent" entitySet="ZC_BI003_REPORT_001" useToolbar="false">
-        <smartfilterbar:controlConfiguration>
-            <smartfilterbar:ControlConfiguration id="sfbRep01ConfigRecoveryType" key="RecoveryType" label="{i18n>recoverType}" />
-            <smartfilterbar:ControlConfiguration id="sfbRep01ConfigCompanyCode" key="CompanyCode" label="{i18n>company}" />
-            <smartfilterbar:ControlConfiguration id="sfbRep01ConfigCustomer" key="Customer" label="{i18n>customer}" />
-            <smartfilterbar:ControlConfiguration id="sfbRep01ConfigRecoveryManagementNumber" key="RecoveryManagementNumber" label="{i18n>RecoveryManagementNumber}" />
-            <smartfilterbar:ControlConfiguration id="sfbRep01ConfigRecoveryYear" key="RecoveryYear" label="{i18n>year}">
-                <smartfilterbar:customControl>
-                    <DatePicker id="sfbRep01DPRecoveryYear" displayFormat="yyyy" valueFormat="yyyy" />
-                </smartfilterbar:customControl>
-            </smartfilterbar:ControlConfiguration>
-        </smartfilterbar:controlConfiguration>
-    </smartfilterbar:SmartFilterBar>
-
-    <smarttable:SmartTable id="table1" header="{i18n>title1}" smartVariant="__SVM01" entitySet="ZC_BI003_REPORT_001" beforeRebindTable="onBeforeRebindTable" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" smartFilterId="docFilter" tableType="Table">
+    <smarttable:SmartTable id="table1" class="smartTablePadding" header="{i18n>title1}" smartVariant="__SVM01" entitySet="ZC_BI003_REPORT_001" beforeRebindTable="onBeforeRebindTable" persistencyKey="Report1SMT" enableAutoBinding="false" showRowCount="true" smartFilterId="docFilter" tableType="Table" ignoredFields="CreatedName,CustomerName,CompanyName,RecoverStatusDescription,RecoverTypeDescription" requestAtLeastFields="CreatedName,CustomerName,CompanyName,RecoverStatusDescription,RecoverTypeDescription">
         <smarttable:customToolbar>
             <OverflowToolbar id="overFlowToolbar">
                 <ToolbarSpacer id="toolbarSpacer" />
@@ -32,13 +67,12 @@
                 <Button id="btnSave" text="{i18n>save}" type="Transparent" press="onSave" enabled="{= ${local>/authorityCheck/button/Report1_Save}}"/>
             </OverflowToolbar>
         </smarttable:customToolbar>
-
         <table:Table id="tableMaster" threshold="20" fixedColumnCount="4" selectionMode="Single">
             <table:rowMode>
                 <rowmodes:Auto id="idAuto" minRowCount="15"></rowmodes:Auto>
             </table:rowMode>
             <table:columns>
-                <table:Column id="idrecoverType" width="10rem" label="{i18n>recoverType}" sortProperty="RecoveryType" filterProperty="RecoveryType" visible="true">
+                <table:Column id="idrecoverType" width="13rem" label="{i18n>recoverType}" sortProperty="RecoveryType" filterProperty="RecoveryType" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryType", "additionalProperty":"RecoverTypeDescription", "leadingProperty":"RecoveryType", "sortProperty":"RecoveryType", "filterProperty": "RecoveryType"}'/>
                     </table:customData>
@@ -46,7 +80,6 @@
                         <smartfield:SmartField id="sfRecoveryType" value="{RecoveryType}" wrapping="false" editable="false" />
                     </table:template>
                 </table:Column>
-
                 <table:Column id="idRecoverManagementNumber" width="15rem" label="{i18n>recoverManagementNumber}" sortProperty="RecoveryManagementNumber" filterProperty="RecoveryManagementNumber" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryManagementNumber", "leadingProperty":"RecoveryManagementNumber", "sortProperty":"RecoveryManagementNumber", "filterProperty": "RecoveryManagementNumber"}'/>
@@ -103,7 +136,7 @@
                         <smartfield:SmartField id="sfCreatedUser" value="{CreatedBy}" wrapping="false" editable="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column id="idRecoveryNecessaryAmount" width="15rem" label="{i18n>recoveryNecessaryAmount}" sortProperty="RecoveryNecessaryAmount" filterProperty="RecoveryNecessaryAmount" visible="true">
+                <table:Column id="idRecoveryNecessaryAmount" width="15rem" label="{i18n>recoveryNecessaryAmount}" sortProperty="RecoveryNecessaryAmount" filterProperty="RecoveryNecessaryAmount" visible="true" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryNecessaryAmount", "unit":"Currency", "leadingProperty":"RecoveryNecessaryAmount", "sortProperty":"RecoveryNecessaryAmount", "filterProperty": "RecoveryNecessaryAmount"}'/>
                     </table:customData>
@@ -111,7 +144,7 @@
                         <Text id="sfRecoveryNecessaryAmount" text="{parts: [{path: 'RecoveryNecessaryAmount'}, {path: 'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column id="idRecoveryAlready" width="10rem" label="{i18n>recoveryAlready}" sortProperty="RecoveryAlready" filterProperty="RecoveryAlready" visible="true">
+                <table:Column id="idRecoveryAlready" width="10rem" label="{i18n>recoveryAlready}" sortProperty="RecoveryAlready" filterProperty="RecoveryAlready" visible="true" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryAlready", "unit":"Currency", "leadingProperty":"RecoveryAlready", "sortProperty":"RecoveryAlready", "filterProperty": "RecoveryAlready"}'/>
                     </table:customData>
@@ -127,7 +160,7 @@
                         <smartfield:SmartField id="sfRecoveryCurrency" value="{Currency}" wrapping="false" editable="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column id="idRecoverProgress" width="10rem" label="{i18n>recoverProgress}" sortProperty="RecoveryPercentage" filterProperty="RecoveryPercentage" visible="true">
+                <table:Column id="idRecoverProgress" width="10rem" label="{i18n>recoverProgress}" sortProperty="RecoveryPercentage" filterProperty="RecoveryPercentage" visible="true" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryPercentage", "leadingProperty":"RecoveryPercentage", "sortProperty":"RecoveryPercentage", "filterProperty": "RecoveryPercentage"}'/>
                     </table:customData>
@@ -135,7 +168,7 @@
                         <Text id="idRecoveryPercentage" text="{parts:['RecoveryPercentage'], formatter:'.formatter.formatPercentage'}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column id="idrecoverStatus" width="10rem" label="{i18n>recoverStatus}" sortProperty="RecoveryStatus" filterProperty="RecoveryStatus" visible="true">
+                <table:Column id="idrecoverStatus" width="14rem" label="{i18n>recoverStatus}" sortProperty="RecoveryStatus" filterProperty="RecoveryStatus" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryStatus", "leadingProperty":"RecoveryStatus", "sortProperty":"RecoveryStatus", "filterProperty": "RecoveryStatus"}'/>
                     </table:customData>

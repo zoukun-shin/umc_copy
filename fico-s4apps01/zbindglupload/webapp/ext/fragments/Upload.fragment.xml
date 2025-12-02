@@ -7,7 +7,8 @@
     xmlns:table="sap.ui.table" core:require="{ handler: 'fico/zbindglupload/ext/controller/ListReportExt' }">
     <Dialog title="{i18n>upload}">
         <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
-            <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_BDGL' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+            <!-- <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_BDGL' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false"> -->
+            <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration' }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
                 <upload:items>
                     <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
                 </upload:items>
@@ -54,12 +55,12 @@
                             <Text text="{local>GLAccountName}" wrapping="false"/>
                         </table:template>
                     </table:Column>
-                    <table:Column width="6rem" label="{i18n>FinancialStatementItem}">
+                    <table:Column width="15rem" label="{i18n>FinancialStatementItem}">
                         <table:template>
                             <Text text="{local>FinancialStatementItem}" wrapping="false"/>
                         </table:template>
                     </table:Column>
-                    <table:Column width="15rem" label="{i18n>FinancialStatementItemText}">
+                    <table:Column width="20rem" label="{i18n>FinancialStatementItemText}">
                         <table:template>
                             <Text text="{local>FinancialStatementItemText}" wrapping="false"/>
                         </table:template>

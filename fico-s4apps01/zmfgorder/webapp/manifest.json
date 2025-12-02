@@ -150,13 +150,6 @@
             "settings": {
               "contextPath": "/MFGORDER1",
               "variantManagement": "Page",
-              "navigation": {
-                "MFGORDER1": {
-                  "detail": {
-                    "route": "MFGORDER1ObjectPage"
-                  }
-                }
-              },
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
