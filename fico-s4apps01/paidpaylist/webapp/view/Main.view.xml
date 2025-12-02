@@ -7,8 +7,8 @@
     xmlns:smartTable="sap.ui.comp.smarttable"
 	xmlns:sv="sap.ui.comp.smartvariants" 
     xmlns:mvc="sap.ui.core.mvc" 
-    xmlns:table="sap.ui.table">
-    <f:DynamicPage headerExpanded="true">
+    xmlns:table="sap.ui.table" height="100%">
+	<f:DynamicPage headerExpanded="true">
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
@@ -71,9 +71,9 @@
     </f:header>
 	<f:content>
     <smartTable:SmartTable id="smartTable" smartVariant="__SVM01" persistencyKey="smartTable" entitySet="PaidPayReport"
-		smartFilterId="SFB" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="false" 
+		smartFilterId="SFB" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="true" 
 		showRowCount="true" placeToolbarInTable="true" header="{i18n>Result}" enableAutoBinding="false" beforeExport="onBeforeExport"
-		beforeRebindTable="onBeforeRebindTable">
+		beforeRebindTable="onBeforeRebindTable" fitContainer="true" height="100%">
 
 		<table:Table id="Table" selectionMode="None" selectionBehavior="Row" > 
 			<table:columns>
