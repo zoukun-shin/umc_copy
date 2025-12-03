@@ -124,6 +124,7 @@ sap.ui.define([
                         element['SCHEDULELINEDELIVERYDATE'] = element['SCHEDULELINEDELIVERYDATE'].replace(/-/g, "/");
                         element['MRPDELIVERYDATE'] = element['MRPDELIVERYDATE'].replace(/-/g, "/");
                         element['MRPELEMENTRESCHEDULINGDATE'] = element['MRPELEMENTRESCHEDULINGDATE'].replace(/-/g, "/");
+                        element['ETA_HK_DATE'] = element['ETA_HK_DATE'].replace(/-/g, "/"); // ADD BY XINLEI XU 2025/12/03 VN CR#5239 / TH CR#5281
                         element['DELIVERYDATE'] = element['DELIVERYDATE'].replace(/-/g, "/");
                         element['POSSIBLEPRODUCTIONDATE'] = element['POSSIBLEPRODUCTIONDATE'].replace(/-/g, "/");
                     }
