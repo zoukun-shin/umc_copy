@@ -38,7 +38,7 @@
       "mbt"
     ],
     "ui5parser": {
-      "ui5version": "1.120.18"
+      "ui5version": "1.120.38"
     },
     "ui5linter": {
         "eventNamingPattern": ""

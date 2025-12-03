@@ -80,7 +80,7 @@
       "fullWidth": true
     },
     "dependencies": {
-      "minUI5Version": "1.120.18",
+      "minUI5Version": "1.120.38",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {}
@@ -161,6 +161,6 @@
     "service": "fico-s4apps01"
   },
   "sap.platform.cf": {
-    "ui5VersionNumber": "1.120.18"
+    "ui5VersionNumber": "1.120.38"
   }
 }

@@ -182,6 +182,6 @@
         "service": "pp-s4apps01"
     },
     "sap.platform.cf": {
-        "ui5VersionNumber": "1.120.18"
+        "ui5VersionNumber": "1.120.38"
     }
 }
