@@ -171,7 +171,7 @@
       </f:DynamicPageHeader>
     </f:header>
     <f:content>
-      <smartTable:SmartTable id="smartTable" entitySet="ProductionPlan" smartFilterId="smartFilterBar" tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" fitContainer="false" height="100%">
+      <smartTable:SmartTable id="smartTable" entitySet="ProductionPlan" smartFilterId="smartFilterBar" tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" fitContainer="false" height="100%" ignoredFields="Delete_mc,Update_mc,Status,Message,Expand,Theory,ECN,exOut,PlanCheck,WO">
         <smartTable:customToolbar>
           <OverflowToolbar width="100%">
             <ToolbarSpacer/>
