@@ -22,7 +22,7 @@
                             <Text text="{local>SalesOrderItem}" wrapping="false"/>
                         </table:template>
                     </table:Column>
-                    <table:Column width="8rem" label="{i18n>RequestedQuantityInBaseUnit}" hAlign="End">
+                    <table:Column width="10rem" label="{i18n>RequestedQuantityInBaseUnit}" hAlign="End">
                         <table:template>
                             <Text text="{ path:'local>RequestedQuantityInBaseUnit',formatter:'.formatter.formatFloat' } {local>BaseUnit}" wrapping="false"/>
                         </table:template>

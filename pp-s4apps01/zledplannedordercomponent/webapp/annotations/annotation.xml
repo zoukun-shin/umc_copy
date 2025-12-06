@@ -7,7 +7,7 @@
     </edmx:Reference>
     <edmx:DataServices>
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
-            <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType">
+            <!-- <Annotations Target="SAP__self.ZR_LEDPLANNEDORDERCOMPONENTType">
                 <Annotation Term="UI.FieldGroup" Qualifier="GeneratedGroup">
                     <Record Type="UI.FieldGroupType">
                         <PropertyValue Property="Data">
@@ -174,7 +174,7 @@
                         </Record>
                     </Collection>
                 </Annotation>
-            </Annotations>
+            </Annotations> -->
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>
