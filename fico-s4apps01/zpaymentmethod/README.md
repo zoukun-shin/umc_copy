@@ -12,7 +12,7 @@
 |**Application Title**<br>支払方法変更|
 |**Namespace**<br>fico|
 |**UI5 Theme**<br>sap_horizon|
-|**UI5 Version**<br>1.124.6|
+|**UI5 Version**<br>1.120.38|
 |**Enable Code Assist Libraries**<br>False|
 |**Enable TypeScript**<br>False|
 |**Add Eslint configuration**<br>False|

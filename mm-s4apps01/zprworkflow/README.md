@@ -12,7 +12,7 @@
 |**Application Title**<br>購買申請承認|
 |**Namespace**<br>mm|
 |**UI5 Theme**<br>sap_horizon|
-|**UI5 Version**<br>1.124.9|
+|**UI5 Version**<br>1.120.38|
 |**Enable Code Assist Libraries**<br>False|
 |**Enable TypeScript**<br>False|
 |**Add Eslint configuration**<br>False|
