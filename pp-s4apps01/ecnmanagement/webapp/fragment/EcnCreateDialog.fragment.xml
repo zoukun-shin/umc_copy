@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" >
+	<Dialog id="idEcnCreateDialog" title="{i18n>DialogTitle}" contentWidth="20rem" contentHeight="4rem" draggable="true">
+		<FlexBox id="idFlexBox" direction="Column" alignItems="Center" justifyContent="Center" alignContent="Center">
+			<HBox alignItems="Center" justifyContent="Center">
+				<VBox>
+					<Label text="{i18n>ChangeNumberT}:"/>
+                    <Input id="idChangeNumber" />
+				</VBox>
+			</HBox>
+		</FlexBox>
+		<beginButton>
+			<Button text="{i18n>bConfirm}" press="onDialogConfirm"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>bCancel}" press="onDialogClose"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,24 @@
+{
+  "generationParameters": {
+    "generationDate": "Wed Nov 12 2025 14:01:01 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_ECN_MANAGEMENT_O2",
+    "appName": "ecnmanagement",
+    "appTitle": "ECN Management",
+    "appDescription": "ECN Management",
+    "appNamespace": "pp",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.38",
+    "enableCodeAssist": false,
+    "enableEslint": false,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.19.5",
+    "template": "Basic V2",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}

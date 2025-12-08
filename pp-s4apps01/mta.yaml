@@ -135,6 +135,10 @@ modules:
       - ppzumespostingdatemgt.zip
       name: ppzumespostingdatemgt
       target-path: resources/
+    - artifacts:
+      - ppecnmanagement.zip
+      name: ppecnmanagement
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -342,6 +346,15 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
+- name: ppecnmanagement
+  type: html5
+  path: ecnmanagement
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: pp-s4apps01-uaa
   type: org.cloudfoundry.managed-service
@@ -376,3 +389,5 @@ resources:
     service-plan: app-host
 parameters:
   deploy_mode: html5-repo
+  enable-parallel-deployments: true
+

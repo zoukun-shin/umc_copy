@@ -1,0 +1,434 @@
+<mvc:View controllerName="pp.ecnmanagement.controller.Detail" displayBlock="true"
+	xmlns="sap.m"
+    xmlns:plugins="sap.m.plugins"
+	xmlns:t="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:uxap="sap.uxap"
+	xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:form="sap.ui.layout.form"
+    xmlns:rowmodes="sap.ui.table.rowmodes"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    core:require="{ handler: 'pp/ecnmanagement/controller/ValueHelpDialog' }">
+    <uxap:ObjectPageLayout id="idObjectPageLayout" upperCaseAnchorBar="false" showHeaderContent="false" showFooter="true">
+        <uxap:sections>
+            <uxap:ObjectPageSection id="idObjectPageSection"  title="Header" titleUppercase="false">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection title="{i18n>Header}">
+                        <uxap:blocks>
+                            <smartForm:SmartForm id="idSmartFormHead"
+                                title="{Name}" validationMode="Async" 
+                                editable="{local>/viewEditable}" 
+                                app:defaultCheckBoxDisplayBehaviour="YesNo"
+                                app:defaultDropDownDisplayBehaviour="idAndDescription" 
+                                editTogglable="true" 
+                                editToggled="onSmartFormEditToggled">
+                                <!-- <smartForm:layout>
+                                    <smartForm:ColumnLayout columnsM="2" columnsL="3" columnsXL="6" />
+                                </smartForm:layout> -->
+                                <smartForm:layout>
+                                    <smartForm:Layout labelSpanM="6" labelSpanL="6" labelSpanXL="6"/>
+                                </smartForm:layout>
+                                <smartForm:Group>
+                                    <smartForm:layoutData>
+                                        <l:GridData span="L4 M4 S4" />
+                                    </smartForm:layoutData>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>ChangeNumberSF}" value="{ChangeNumber}" editableChanged="onEditableChanged" editable="false"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>ChangeNumberDescSF}" value="{ChangeNumberDesc}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>EcoTypeSF}" value="{EcoType}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                                <smartForm:Group>
+                                    <smartForm:layoutData>  
+                                        <l:GridData span="L4 M4 S4" />
+                                    </smartForm:layoutData>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>DeleteFlagSF}" value="{DeleteFlag}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>ReasonForChangeSF}" value="{ReasonForChange}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                     <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>AttachedDocumentsSF}" value="{AttachedDocuments}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                                <smartForm:Group>
+                                    <smartForm:layoutData>
+                                        <l:GridData span="L4 M4 S4" />
+                                    </smartForm:layoutData>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>ValidFromDateSF}" value="{ValidFromDate}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>ChangeNumberStatusSF}" value="{ChangeNumberStatus}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                                <smartForm:Group title="Request">
+                                    <smartForm:layoutData>
+                                        <l:GridData span="L4 M4 S4" linebreak="true"/>
+                                    </smartForm:layoutData>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>RequestedByCustomerSF}" value="{RequestedByCustomer}" change="onInputChange" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>RequestedByJpSF}" value="{RequestedByJp}" change="onInputChange" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>RequestedByCnSF}" value="{RequestedByCn}" change="onInputChange" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>RequestedByHkSF}" value="{RequestedByHk}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>RequestedByVnSF}" value="{RequestedByVn}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>RequestedByOtherSF}" value="{RequestedByOther}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField visible="{RequestedByOther}" value="{RequestedByOtherText}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                                <smartForm:Group  title="Stock of FG/Semi-FG">
+                                    <smartForm:layoutData>
+                                        <l:GridData span="L4 M4 S4"/>
+                                    </smartForm:layoutData>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>StockOfSfgSmtSF}" value="{StockOfSfgSmt}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>StockOfSfgFatSF}" value="{StockOfSfgFat}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>StockOfNcgSmtSF}" value="{StockOfNcgSmt}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>StockOfNcgFatSF}" value="{StockOfNcgFat}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>StockOfFgSF}" value="{StockOfFg}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                                <smartForm:Group  title="Process of FG/Semi-FG">
+                                    <smartForm:layoutData>
+                                        <l:GridData span="L4 M4 S4"/>
+                                    </smartForm:layoutData>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>OldNewNotTogetherSF}" value="{OldNewNotTogether}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>OldStockDeliverySF}" value="{OldStockDelivery}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>ReworkSfgSF}" value="{ReworkSfg}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>ReworkFgSF}" value="{ReworkFg}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>OtherSF}" value="{Other}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                                <smartForm:Group >
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>CreatedByUserSF}" value="{CreatedByUser}" editable="false"/>
+                                    </smartForm:GroupElement>
+                                     <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>CreatedAtSF}" value="{CreatedAt}" editable="false"/>
+                                    </smartForm:GroupElement>
+                                     <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>ChangedByUserSF}" value="{ChangedByUser}" editable="false"/>
+                                    </smartForm:GroupElement>
+                                     <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>LastChangedAtSF}" value="{LastChangedAt}" editable="false"/>
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                            </smartForm:SmartForm>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                    
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection titleUppercase="false" title="{i18n>ObjectTypeTitle}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                            <t:Table
+                                id="idObjectTypeTable"
+                                rows="{local>/to_Item}"
+                                selectionMode="None">
+                                <t:rowMode >
+                                    <rowmodes:Fixed rowCount="2" />
+                                </t:rowMode>
+                                <t:Column width="10%" label="{i18n>ObjectTypeSF}">
+                                    <t:template>
+                                        <Text text="{local>ObjectTypeText}({local>ObjectType})" wrapping="false" tooltip="{local>ObjectTypeText}({local>ObjectType})"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column width="5%" label="{i18n>ObjectTypeActiveSF}">
+                                    <t:template>
+                                        <CheckBox selected="{local>ObjectTypeActive}" editable="false"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column width="5%" label="{i18n>ObjectFlagSF}">
+                                    <t:template>
+                                        <CheckBox selected="{local>ObjectFlag}" editable="false"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column width="5%" label="{i18n>ObjectLockFlagSF}">
+                                    <t:template>
+                                        <CheckBox selected="{local>ObjectLockFlag}" editable="{local>/viewEditable}"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column width="10%" label="{i18n>CreatedByUserSF}">
+                                    <t:template>
+                                        <Text text="{local>CreatedByUser}" tooltip="{local>CreatedByUser}" wrapping="false" />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column width="10%" label="{i18n>CreatedAtSF}" >
+                                    <t:template>
+                                        <Text text="{path:'local>CreatedAt',type:'sap.ui.model.type.DateTime'}" wrapping="false" />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column width="10%" label="{i18n>ChangedByUserSF}">
+                                    <t:template>
+                                        <Text text="{local>ChangedByUser}" tooltip="{local>ChangedByUser}" wrapping="false" />
+                                    </t:template>
+                                </t:Column>
+                                <t:Column width="10%" label="{i18n>LastChangedAtSF}">
+                                    <t:template>
+                                        <Text text="{path:'local>LastChangedAt',type:'sap.ui.model.type.DateTime'}" wrapping="false" />
+                                    </t:template>
+                                </t:Column>
+                            </t:Table>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection titleUppercase="false" title="{i18n>ObjectMaterialTitle}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <t:Table
+                            id="idObjectMaterialTable"
+                            rows="{local>/to_Material}"
+                            selectionMode="Multi"
+                            enableSelectAll="false">
+                            <t:extension>
+                                <OverflowToolbar id="idObjectMaterialTableToolbar">
+                                    <content>
+                                        <ToolbarSpacer />
+                                        <Button text="{i18n>Assign}" press=".onAssign($event,'idObjectMaterialTable')" visible="{= ${local>/detailMode} === 'change'}"
+                                            enabled="{local>/viewEditable}"/>
+                                        <Button text="{i18n>AssignCancel}" press=".onAssignCancel($event,'idObjectMaterialTable')" visible="{= ${local>/detailMode} === 'change'}"
+                                            enabled="{local>/viewEditable}"/>
+                                        <Button icon="sap-icon://add" tooltip="{i18n>AddLine}" press=".onAddLine($event,'material')" enabled="{local>/viewEditable}"/>
+                                        <Button icon="sap-icon://less" tooltip="{i18n>Delete}" press="onDeleteLine" enabled="{local>/viewEditable}"/>
+                                        <!-- <Button>
+                                            <dependents>
+                                                <plugins:PasteProvider pasteFor="idObjectMaterialTable" />
+                                            </dependents>
+                                        </Button> -->
+                                    </content>
+                                </OverflowToolbar>
+                            </t:extension>
+                            <t:rowMode >
+                                <!-- <rowmodes:Fixed rowCount="2" /> -->
+                                <rowmodes:Auto />
+                            </t:rowMode>
+                            <t:Column width="10rem" label="{i18n>ObjectTypeSF}">
+                                <t:template>
+                                    <Text text="{local>ObjectTypeText}({local>ObjectType})" wrapping="false" tooltip="{local>ObjectTypeText}({local>ObjectType})"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="12rem" label="{i18n>MaterialSF}" >
+                                <t:template>
+                                    <Input value="{local>Material}" showValueHelp="true"  editable="{= ${local>/viewEditable} &amp;&amp; ${local>isDraft}}"
+                                    valueHelpRequest="handler.onValueHelpRequested(
+                                        $event, $controller, '/ZR_ProductPlantVH',
+                                        ['Product','ProductDescription','Plant'])"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="12rem" label="{i18n>ObjectDescriptionSF}">
+                                <t:template>
+                                    <Input value="{local>ObjectDescription}" tooltip="{local>ObjectDescription}" editable="{local>/viewEditable}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="6rem" label="{i18n>RevlevSF}">
+                                <t:template>
+                                    <Text text="{local>Revlev}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="12rem" label="{i18n>MaterialDescriptionSF}">
+                                <t:template>
+                                    <Text text="{local>MaterialDescription}" tooltip="{local>MaterialDescription}" wrapping="false"/>
+                                </t:template>
+                            </t:Column>
+                                <t:Column width="8rem" label="{i18n>AlternativeDateIdSF}" >
+                                <t:template>
+                                    <Text text="{local>AlternativeDateId}" wrapping="false"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="8rem" label="{i18n>ObjectVaildFromSF}">
+                                <t:template>
+                                    <Text text="{local>ObjectVaildFrom}" wrapping="false"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="4rem" label="{i18n>ObjectMaterialLockSF}">
+                                <t:template>
+                                    <CheckBox selected="{local>ObjectMaterialLock}" editable="{local>/viewEditable}"/>
+                                </t:template>
+                            </t:Column>
+                        </t:Table>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection titleUppercase="false" title="{i18n>ObjectBomTitle}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <t:Table
+                            id="idObjectBomTable"
+                            rows="{local>/to_Bom}"
+                            selectionMode="Multi"
+                            enableSelectAll="false">
+                            <t:rowMode >
+                                <rowmodes:Auto />
+                            </t:rowMode>
+                            <t:extension>
+                                <OverflowToolbar id="idObjectBomTableToolbar">
+                                    <content>
+                                        <ToolbarSpacer />
+                                        <Button text="{i18n>Assign}" press=".onAssign($event,'idObjectBomTable')" visible="{= ${local>/detailMode} === 'change'}"
+                                            enabled="{local>/viewEditable}"/>
+                                        <Button text="{i18n>AssignCancel}" press=".onAssignCancel($event,'idObjectBomTable')" visible="{= ${local>/detailMode} === 'change'}"
+                                            enabled="{local>/viewEditable}"/>
+                                        <Button icon="sap-icon://add" tooltip="{i18n>AddLine}" press=".onAddLine($event,'bom')" enabled="{local>/viewEditable}"/>
+                                        <Button icon="sap-icon://less" tooltip="{i18n>Delete}" press=".onDeleteLine($event,'bom')" enabled="{local>/viewEditable}"/>
+                                        <!-- <Button>
+                                            <dependents>
+                                                <plugins:PasteProvider pasteFor="idObjectBomTable" />
+                                            </dependents>
+                                        </Button> -->
+                                    </content>
+                                </OverflowToolbar>
+                            </t:extension>
+                            <t:Column width="10rem" label="{i18n>ObjectTypeSF}">
+                                <t:template>
+                                    <Text text="{local>ObjectTypeText}({local>ObjectType})" wrapping="false" tooltip="{local>ObjectTypeText}({local>ObjectType})"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="12rem" label="{i18n>MaterialSF}">
+                                <t:template>
+                                    <Input value="{local>Material}" showValueHelp="true"  editable="{= ${local>/viewEditable} &amp;&amp; ${local>isDraft}}"
+                                    valueHelpRequest="handler.onValueHelpRequested(
+                                        $event, $controller, '/ZR_MaterialBomVH',
+                                        ['Material','ProductName','Plant','BomUsage','AlternativeBom'])"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="6rem" label="{i18n>PlantSF}">
+                                <t:template>
+                                    <Input value="{local>Plant}" editable="{= ${local>/viewEditable} &amp;&amp; ${local>isDraft}}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="8rem" label="{i18n>BomUsageSF}">
+                                <t:template>
+                                    <Input value="{local>BomUsage}" editable="{= ${local>/viewEditable} &amp;&amp; ${local>isDraft}}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="12rem" label="{i18n>ObjectDescriptionSF}">
+                                <t:template>
+                                    <Input value="{local>ObjectDescription}" editable="{local>/viewEditable}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="12rem" label="{i18n>MaterialDescriptionSF}">
+                                <t:template>
+                                    <Text text="{local>MaterialDescription}" tooltip="{local>MaterialDescription}" wrapping="false"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="8rem" label="{i18n>AlternativeDateIdSF}" >
+                                <t:template>
+                                    <Text text="{local>AlternativeDateId}" tooltip="{AlternativeDateId}" wrapping="false"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="8rem" label="{i18n>ObjectVaildFromSF}">
+                                <t:template>
+                                    <Text text="{local>ObjectVaildFrom}" wrapping="false"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="4rem" label="{i18n>ObjectMaterialLockSF}">
+                                <t:template>
+                                    <CheckBox selected="{local>ObjectMaterialLock}" editable="{local>/viewEditable}"/>
+                                </t:template>
+                            </t:Column>
+                        </t:Table>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection titleUppercase="false" title="{i18n>ObjectAltDateTitle}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <t:Table
+                            id="idObjectAltDateTable"
+                            rows="{local>/to_AltDate}"
+                            selectionMode="Multi"
+                            enableSelectAll="false">
+                            <t:rowMode >
+                                <rowmodes:Auto />
+                            </t:rowMode>
+                            <t:extension>
+                                <OverflowToolbar id="idObjectAltDateTableToolbar">
+                                    <content>
+                                        <ToolbarSpacer />
+                                        <Button icon="sap-icon://add" tooltip="{i18n>AddLine}" press=".onAddLine($event,'altDate')" enabled="{local>/viewEditable}"/>
+                                        <Button icon="sap-icon://less" tooltip="{i18n>Delete}" press=".onDeleteLine($event,'altDate')" enabled="{local>/viewEditable}"/>
+                                        <!-- <Button>
+                                            <dependents>
+                                                <plugins:PasteProvider pasteFor="idObjectAltDateTable" />
+                                            </dependents>
+                                        </Button> -->
+                                    </content>
+                                </OverflowToolbar>
+                            </t:extension>
+                            <t:Column width="10rem" label="{i18n>AlternativeDateIdSF}">
+                                <t:template>
+                                    <Input value="{local>AlternativeDateId}" editable="{= ${local>/viewEditable} &amp;&amp; ${local>isDraft}}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="12rem" label="{i18n>ObjectVaildFromSF}">
+                                <t:template>
+                                    <DatePicker value="{path:'local>ObjectVaildFrom',type:'sap.ui.model.type.Date',formatOptions: {style: 'medium',strictParsing: true}}"
+                                        editable="{local>/viewEditable}"/>
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="6rem" label="{i18n>AssignFlagSF}">
+                                <t:template>
+                                    <CheckBox selected="{local>AssignFlag}" enabled="false"/>
+                                </t:template>
+                            </t:Column>
+                        </t:Table>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+        <uxap:footer>
+            <OverflowToolbar id="otbFooter">
+                <Button
+                    id = "idButton"
+                    icon="sap-icon://alert"
+                    text="{= ${message>/}.length }"
+                    visible="{= ${message>/}.length > 0}"
+                    type="Emphasized"
+                    press="onMessagePopoverPress" />
+                <ToolbarSpacer/>
+                <Button type="Transparent" text="{i18n>SaveToS4}" press="onSaveToS4"/>
+                <Button type="Transparent" enabled="{local>/btPrint}" text="{i18n>Save}" press="onCheckRecords"/>
+                <Button type="Transparent" text="{i18n>Cancel}" press="onCancel"/>
+            </OverflowToolbar>
+        </uxap:footer>
+    </uxap:ObjectPageLayout>
+</mvc:View>

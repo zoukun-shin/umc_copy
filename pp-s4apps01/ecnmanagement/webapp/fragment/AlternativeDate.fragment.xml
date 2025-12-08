@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+        contentWidth="28rem"
+        contentHeight="12rem"
+        draggable="true"
+        resizable="true"
+		noDataText="No Data Found"
+		title="{i18n>ObjectAltDateTitle}"
+		confirm=".onAssignDialogClose"
+		cancel=".onAssignDialogClose"
+		items="{
+			path : 'local>/to_AltDate',
+			sorter : {
+				path : 'ObjectVaildFrom',
+				descending : false
+			}
+		}">
+        <columns>
+            <Column width="12em">
+				<header>
+					<Text text="{i18n>AlternativeDateIdSF}" />
+				</header>
+			</Column>
+            <Column width="12em">
+				<header>
+					<Text text="{i18n>ObjectVaildFromSF}" />
+				</header>
+			</Column>
+		</columns>
+		<ColumnListItem>
+			<cells>
+				<Text text="{local>AlternativeDateId}" />
+				<Text text="{path:'local>ObjectVaildFrom',type:'sap.ui.model.type.Date',formatOptions: {style: 'medium',strictParsing: true}}" />
+			</cells>
+		</ColumnListItem>
+		
+	</TableSelectDialog>
+</core:FragmentDefinition>
