@@ -49,6 +49,113 @@ sap.ui.define([
         },
 
         _initialize: function () {
+            let sLanguage = sap.ui.getCore().getConfiguration().getLanguage();
+            switch (sLanguage.split("-")[0]) {
+                case "ja":
+                    //PeriodType
+                    var oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD003");
+                    var oControlBinding = this.byId("idPeriodType").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //AcceptPeriod
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD004");
+                    oControlBinding = this.byId("idAcceptPeriod").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //FinishStatus
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD006");
+                    oControlBinding = this.byId("idFinishStatus").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //ProcessStatus
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD008");
+                    oControlBinding = this.byId("ProcessStatusC").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //ReasonCategory
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD009");
+                    oControlBinding = this.byId("ReasonCategoryC").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //Reason
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD010");
+                    oControlBinding = this.byId("ReasonC").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    break;
+                case "zh":
+                    //PeriodType
+                    var oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD030");
+                    var oControlBinding = this.byId("idPeriodType").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //AcceptPeriod
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD031");
+                    oControlBinding = this.byId("idAcceptPeriod").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //FinishStatus
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD033");
+                    oControlBinding = this.byId("idFinishStatus").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //ProcessStatus
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD034");
+                    oControlBinding = this.byId("ProcessStatusC").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //ReasonCategory
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD035");
+                    oControlBinding = this.byId("ReasonCategoryC").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //Reason
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD036");
+                    oControlBinding = this.byId("ReasonC").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    break;
+                case "en":
+                    //PeriodType
+                    var oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD024");
+                    var oControlBinding = this.byId("idPeriodType").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //AcceptPeriod
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD025");
+                    oControlBinding = this.byId("idAcceptPeriod").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //FinishStatus
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD026");
+                    oControlBinding = this.byId("idFinishStatus").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //ProcessStatus
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD027");
+                    oControlBinding = this.byId("ProcessStatusC").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //ReasonCategory
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD028");
+                    oControlBinding = this.byId("ReasonCategoryC").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //Reason
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD029");
+                    oControlBinding = this.byId("ReasonC").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    break;
+                default:
+                    //PeriodType
+                    var oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD024");
+                    var oControlBinding = this.byId("idPeriodType").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //AcceptPeriod
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD025");
+                    oControlBinding = this.byId("idAcceptPeriod").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //FinishStatus
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD026");
+                    oControlBinding = this.byId("idFinishStatus").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //ProcessStatus
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD027");
+                    oControlBinding = this.byId("ProcessStatusC").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //ReasonCategory
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD028");
+                    oControlBinding = this.byId("ReasonCategoryC").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    //Reason
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD029");
+                    oControlBinding = this.byId("ReasonC").getBinding("items");
+                    oControlBinding.filter(oFilter);
+                    break;
+            };
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();

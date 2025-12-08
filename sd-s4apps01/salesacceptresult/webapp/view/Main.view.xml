@@ -20,7 +20,7 @@
 					<smartFilterBar:ControlConfiguration index="20" key="PeriodType" visibleInAdvancedArea="true" label="{i18n>PeriodType}" displayBehaviour="idAndDescription">
 						<smartFilterBar:customControl>
 							<ComboBox id="idPeriodType" showSecondaryValues="true"
-								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' },filters:[{path: 'ZID',operator:'EQ',value1:'ZSD003'}] }">
+								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
 								<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
 							</ComboBox>
 					    </smartFilterBar:customControl>
@@ -30,10 +30,10 @@
 							<DatePicker id="idAcceptYear" displayFormat="yyyy" />
 						</smartFilterBar:customControl>
 					</smartFilterBar:ControlConfiguration>
-					<smartFilterBar:ControlConfiguration index="30" key="AcceptPeriod" visibleInAdvancedArea="true" label="{i18n>AcceptPeriod}" displayBehaviour="idAndDescription">
+					<smartFilterBar:ControlConfiguration index="30" key="AcceptPeriod" change="onChangeLang" visibleInAdvancedArea="true" label="{i18n>AcceptPeriod}" displayBehaviour="idAndDescription">
 						<smartFilterBar:customControl>
 							<ComboBox id="idAcceptPeriod" showSecondaryValues="true"
-								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' },filters:[{path: 'ZID',operator:'EQ',value1:'ZSD004'}] }">
+								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
 								<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
 							</ComboBox>
 					    </smartFilterBar:customControl>
@@ -41,11 +41,51 @@
           <smartFilterBar:ControlConfiguration index="40" key="FinishStatus" visibleInAdvancedArea="true" label="{i18n>FinishStatus}" displayBehaviour="idAndDescription">
 						<smartFilterBar:customControl>
 							<ComboBox id="idFinishStatus" showSecondaryValues="true"
-								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' },filters:[{path: 'ZID',operator:'EQ',value1:'ZSD006'}] }">
+								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
 								<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
 							</ComboBox>
 					    </smartFilterBar:customControl>
 				    </smartFilterBar:ControlConfiguration>
+            <!-- visible -->
+            <smartFilterBar:ControlConfiguration index='999' key="SalesOrganization" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="SalesDocument" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentItem" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="BillingDocument" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="CustomerPO" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="ProcessStatus" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodFrom" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodTo" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentType" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentTypeText" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="Product" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentItemText" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="PostingDate" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="AcceptDate" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="AcceptQty" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="BillingQuantity" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="AcceptPrice" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="ConditionRateValue" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="ConditionCurrency" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="ConditionQuantity" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="AccceptAmount" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="NetAmount" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="AccceptTaxAmount" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="TaxAmount" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="Currency" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="AccountingExchangeRate" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="ExchangeRateDate" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="OutsideData" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="Remarks" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="ReasonCategory" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="Reason" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="PeriodTypeText" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodText" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodFromText" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodToText" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="Layer" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="unit" visible="false"/>
+            <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
 			    </smartFilterBar:controlConfiguration>
 			</smartFilterBar:SmartFilterBar>
           </f:content>
@@ -78,8 +118,9 @@
 
       <smartTable:SmartTable id="smartTable" entitySet="SalesAcceptanceResult" smartFilterId="smartFilterBar" tableType="Table"
 				showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}"
-				enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-				beforeExport="onBeforeExport" requestAtLeastFields="CustomerName,PeriodTypeText,AcceptPeriodText,AcceptPeriodFromText,AcceptPeriodToText,AcceptPeriod,AcceptPeriodFrom,AcceptPeriodTo" fitContainer="false" height="100%">
+				enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" fitContainer="false" height="100%"
+				beforeExport="onBeforeExport" requestAtLeastFields="CustomerName,PeriodTypeText,AcceptPeriodText,AcceptPeriodFromText,AcceptPeriodToText,AcceptPeriod,AcceptPeriodFrom,AcceptPeriodTo" 
+        ignoredFields="Delete_mc,Update_mc,UserEmail,CustomerName,AcceptPeriodFrom,AcceptPeriodFromText,PeriodTypeText,AcceptPeriodToText,Layer,PeriodType,Reason,ReasonCategory,ProcessStatus,AcceptPeriodText,AcceptPeriodTo,Remarks" >
         <smartTable:customToolbar>
 			<OverflowToolbar width="100%">
 			  <ToolbarSpacer/>
@@ -302,7 +343,7 @@
                  <Text id="ProcessStatusT" text="{ProcessStatus}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible1'}"/>
                  <ComboBox id="ProcessStatusC" showSecondaryValues="true" selectedKey="{ProcessStatus}" required="true"
 										filterSecondaryValues="true" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible2'}" change="onChange($event,'ProcessStatus')"
-										items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' }, filters:[{path: 'ZID',operator:'EQ',value1:'ZSD008'}] }">
+										items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
 										<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
                   </ComboBox>
                 </VBox>
@@ -317,7 +358,7 @@
                  <Text id="ReasonCategoryT" text="{ReasonCategory}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible1'}"/>
                  <ComboBox id="ReasonCategoryC" showSecondaryValues="true" selectedKey="{ReasonCategory}" required="true"
 										filterSecondaryValues="true" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible2'}" change="onChange($event,'ReasonCategory')"
-										items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' }, filters:[{path: 'ZID',operator:'EQ',value1:'ZSD009'}] }">
+										items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
 										<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
                   </ComboBox>
                 </VBox>
