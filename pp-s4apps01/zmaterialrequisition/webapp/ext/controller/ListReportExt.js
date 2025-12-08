@@ -383,6 +383,25 @@ sap.ui.define([
             this.getModel("local").setProperty("/itemSet", items);
         },
 
+        // ADD BEGIN BY XINLEI XU 2025/12/08 TH CM#5265 / VN CM#5264
+        onCopyLine: function (oEvent) {
+            var oTable = oEvent.getSource().getParent().getParent();
+            var aSelectedIndices = oTable.getSelectedIndices();
+            if (aSelectedIndices.length === 0) {
+                return;
+            }
+            var items = this.getModel("local").getProperty("/itemSet");
+            for (var index = 0; index < aSelectedIndices.length; index++) {
+                var oCopyRow = JSON.parse(JSON.stringify(items[aSelectedIndices[index]]));
+                items.push(oCopyRow);
+            }
+            items.forEach((line, index) => {
+                line.ItemNo = (index + 1) * 10;
+            });
+            this.getModel("local").setProperty("/itemSet", items);
+        },
+        // ADD END BY XINLEI XU 2025/12/08 TH CM#5265 / VN CM#5264
+
         handleChange: function (oEvent) {
             var aFieldName = [];
             var sValue, sInputBindingPath, sODataPath, oContextBinding;
