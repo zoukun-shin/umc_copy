@@ -143,6 +143,10 @@ modules:
       - ppzalterandmainmater.zip
       name: ppzalterandmainmater
       target-path: resources/
+    - artifacts:
+      - ppzshippingplanupload.zip
+      name: ppzshippingplanupload
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -362,6 +366,15 @@ modules:
 - name: ppzalterandmainmater
   type: html5
   path: zalterandmainmater
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzshippingplanupload
+  type: html5
+  path: zshippingplanupload
   build-parameters:
     build-result: dist
     builder: custom

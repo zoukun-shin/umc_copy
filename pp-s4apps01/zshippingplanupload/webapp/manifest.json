@@ -1,0 +1,202 @@
+{
+  "_version": "1.60.0",
+  "sap.app": {
+    "id": "pp.zshippingplanupload",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.20.0",
+      "toolsId": "a9797f4d-81cc-41a4-8560-6decd2cad4b6"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/zui_shippingplan_o4/srvd/sap/zui_shippingplan_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "zui_dtimp_conf_o4": {
+        "uri": "/sap/opu/odata4/sap/zui_dtimp_conf_o4/srvd/sap/zui_dtimp_conf_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/zui_dtimp_conf_o4/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "PrintService": {
+        "uri": "/sap/opu/odata4/sap/zui_prt_record_o4/srvd/sap/zui_prt_record_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PRT_RECORD_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "AuthorityService": {
+        "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "zshippingplanupload-display": {
+          "semanticObject": "zshippingplanupload",
+          "action": "display",
+          "title": "{{zshippingplanupload-display.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "config": {
+      "fullWidth": true
+    },
+    "dependencies": {
+      "minUI5Version": "1.120.38",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "pp.zshippingplanupload.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      },
+      "Attach": {
+        "dataSource": "zui_dtimp_conf_o4",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "Print": {
+        "dataSource": "PrintService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "Authority": {
+        "dataSource": "AuthorityService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "pp.zshippingplanupload.view",
+        "async": true,
+        "viewPath": "pp.zshippingplanupload.view"
+      },
+      "routes": [
+        {
+          "name": "Main",
+          "pattern": ":?query:",
+          "target": [
+            "TargetMain"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetMain": {
+          "id": "Main",
+          "name": "Main"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "pp.zshippingplanupload.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "pp-s4apps01"
+  },
+  "sap.platform.cf": {
+    "ui5VersionNumber": "1.120.38"
+  }
+}
