@@ -1,0 +1,92 @@
+<mvc:View controllerName="pp.zalterandmainmater.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="AlterMainMaterSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="AlterMainMater" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="Material" mandatory="mandatory" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="MRPController" visibleInAdvancedArea="true" label="{i18n>MRPController}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="ValidityStartDate" visibleInAdvancedArea="true" label="{i18n>ValidityStartDate}">
+                                    <smartFilterBar:customControl>
+                                        <DatePicker valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd" value="{
+                                            'path':'local>/ValidityStartDateValue',
+                                            'type':'sap.ui.model.type.Date',
+                                            'formatOptions': {
+                                                'UTC': true
+                                            }
+                                        }"/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='50' key="ValidityEndDate" visibleInAdvancedArea="true" label="{i18n>ValidityEndDate}">
+                                    <smartFilterBar:customControl>
+                                        <DatePicker valueFormat="yyyy-MM-dd" displayFormat="yyyy/MM/dd" value="{
+                                            'path':'local>/ValidityEndDateValue',
+                                            'type':'sap.ui.model.type.Date',
+                                            'formatOptions': {
+                                                'UTC': true
+                                            }
+                                        }"/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="Customer" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="FinishedGoods" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SemiFinishedGoods" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialVariant" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AlternativeMaterial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MainMaterial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SubDetailedSpec" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MainDetailedSpec" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SubCustomerPartNumber" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MainCustomerPartNumber" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SubMFRPN" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MainMFRPN" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Subitems" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SortSequence" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMStatus" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AlternativeGroup" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Priority" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Strategy" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="UsageProbability" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AlternativeItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MainItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Alternative2Main" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Main2Alternative" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+                <f:content>
+                    <CheckBox id='idCB1' text="{i18n>Alternative2Main}" width="24rem" select="onSelect"/>
+                    <CheckBox id='idCB2' text="{i18n>Main2Alternative}" width="24rem" select="onSelect"/>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="pp.zalterandmainmater.fragments.UsageList" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
