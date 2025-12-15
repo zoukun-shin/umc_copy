@@ -13,7 +13,7 @@
   <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{localModel>/busy}" fitContent="true">
     <f:header>
         <f:DynamicPageHeader pinnable="true">
-          <Button text="前画面" press="onNavBack" type="Emphasized"/>
+          <Button text="{i18n>previous}" press="onNavBack" type="Emphasized"/>
           <f:content>
             <smartFilterBar:SmartFilterBar id="smartFilterBar" useToolbar="false" entitySet="SalesAcceptanceResult" smartVariant="__SVM01" persistencyKey="SFB_Head" search="onSearch">
 			    <smartFilterBar:controlConfiguration>
@@ -21,7 +21,7 @@
 					<smartFilterBar:ControlConfiguration index="20" key="PeriodType" visibleInAdvancedArea="true" label="{i18n>PeriodType}" displayBehaviour="idAndDescription">
 						<smartFilterBar:customControl>
 							<ComboBox id="idPeriodType" showSecondaryValues="true"
-								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' },filters:[{path: 'ZID',operator:'EQ',value1:'ZSD003'}] }">
+								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
 								<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
 							</ComboBox>
 					    </smartFilterBar:customControl>
@@ -34,7 +34,7 @@
 					<smartFilterBar:ControlConfiguration index="30" key="AcceptPeriod" visibleInAdvancedArea="true" label="{i18n>AcceptPeriod}" displayBehaviour="idAndDescription">
 						<smartFilterBar:customControl>
 							<ComboBox id="idAcceptPeriod" showSecondaryValues="true"
-								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' },filters:[{path: 'ZID',operator:'EQ',value1:'ZSD004'}] }">
+								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
 								<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
 							</ComboBox>
 					    </smartFilterBar:customControl>
@@ -42,7 +42,7 @@
           <smartFilterBar:ControlConfiguration index="40" key="FinishStatus" visibleInAdvancedArea="true" label="{i18n>FinishStatus}" displayBehaviour="idAndDescription">
 						<smartFilterBar:customControl>
 							<ComboBox id="idFinishStatus" showSecondaryValues="true"
-								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' },filters:[{path: 'ZID',operator:'EQ',value1:'ZSD006'}] }">
+								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
 								<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
 							</ComboBox>
 					    </smartFilterBar:customControl>

@@ -79,27 +79,27 @@ sap.ui.define([
                     break;
                 case "zh":
                     //PeriodType
-                    var oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD030");
+                    var oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD031");
                     var oControlBinding = this.byId("idPeriodType").getBinding("items");
                     oControlBinding.filter(oFilter);
                     //AcceptPeriod
-                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD031");
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD032");
                     oControlBinding = this.byId("idAcceptPeriod").getBinding("items");
                     oControlBinding.filter(oFilter);
                     //FinishStatus
-                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD033");
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD034");
                     oControlBinding = this.byId("idFinishStatus").getBinding("items");
                     oControlBinding.filter(oFilter);
                     //ProcessStatus
-                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD034");
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD035");
                     oControlBinding = this.byId("ProcessStatusC").getBinding("items");
                     oControlBinding.filter(oFilter);
                     //ReasonCategory
-                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD035");
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD036");
                     oControlBinding = this.byId("ReasonCategoryC").getBinding("items");
                     oControlBinding.filter(oFilter);
                     //Reason
-                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD036");
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD037");
                     oControlBinding = this.byId("ReasonC").getBinding("items");
                     oControlBinding.filter(oFilter);
                     break;
@@ -113,19 +113,19 @@ sap.ui.define([
                     oControlBinding = this.byId("idAcceptPeriod").getBinding("items");
                     oControlBinding.filter(oFilter);
                     //FinishStatus
-                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD026");
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD027");
                     oControlBinding = this.byId("idFinishStatus").getBinding("items");
                     oControlBinding.filter(oFilter);
                     //ProcessStatus
-                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD027");
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD028");
                     oControlBinding = this.byId("ProcessStatusC").getBinding("items");
                     oControlBinding.filter(oFilter);
                     //ReasonCategory
-                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD028");
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD029");
                     oControlBinding = this.byId("ReasonCategoryC").getBinding("items");
                     oControlBinding.filter(oFilter);
                     //Reason
-                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD029");
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD030");
                     oControlBinding = this.byId("ReasonC").getBinding("items");
                     oControlBinding.filter(oFilter);
                     break;
@@ -139,19 +139,19 @@ sap.ui.define([
                     oControlBinding = this.byId("idAcceptPeriod").getBinding("items");
                     oControlBinding.filter(oFilter);
                     //FinishStatus
-                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD026");
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD027");
                     oControlBinding = this.byId("idFinishStatus").getBinding("items");
                     oControlBinding.filter(oFilter);
                     //ProcessStatus
-                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD027");
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD028");
                     oControlBinding = this.byId("ProcessStatusC").getBinding("items");
                     oControlBinding.filter(oFilter);
                     //ReasonCategory
-                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD028");
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD029");
                     oControlBinding = this.byId("ReasonCategoryC").getBinding("items");
                     oControlBinding.filter(oFilter);
                     //Reason
-                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD029");
+                    oFilter = new sap.ui.model.Filter("ZID", sap.ui.model.FilterOperator.EQ, "ZSD030");
                     oControlBinding = this.byId("ReasonC").getBinding("items");
                     oControlBinding.filter(oFilter);
                     break;
