@@ -449,6 +449,11 @@ sap.ui.define([
                             this._oControl.setEditable(true);
                         }
                         if (sInputBindingPath === '/headSet/Plant') {
+                            // ADD BEGIN BY XINLEI XU 2025/12/15 TH CR No.5314
+                            var oFilter = new sap.ui.model.Filter("Zvalue4", sap.ui.model.FilterOperator.Contains, sValue);
+                            var oControlBinding = sap.ui.getCore().byId("idType").getBinding("items");
+                            oControlBinding.filter(oFilter);
+                            // ADD BEGIN BY XINLEI XU 2025/12/15
                             var aAuthorityPlantSet = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
                             if (sValue) {
                                 if (!aAuthorityPlantSet.some(data => data.Plant === sValue)) {
@@ -514,14 +519,14 @@ sap.ui.define([
                         value1: sPlant
                     }));
                     break;
-                case "/ZC_CustomerCompanyVH":
+                case "/ZC_CustomerCompanyByPlantVH":
                     aFilters.push(new Filter({
                         path: "Customer",
                         operator: FilterOperator.EQ,
                         value1: _myFunction._isNumeric(sValue) ? sValue.padStart(10, '0') : sValue
                     }));
                     aFilters.push(new Filter({
-                        path: "CompanyCode",
+                        path: "Plant",
                         operator: FilterOperator.EQ,
                         value1: sPlant
                     }));
@@ -604,7 +609,7 @@ sap.ui.define([
                 aFieldName.forEach(field => {
                     this.getModel("local").setProperty("/headSet/" + field, "");
                 });
-                if (sODataPath === "/ZC_CostCenterVH" || sODataPath === "/ZC_CustomerCompanyVH" ||
+                if (sODataPath === "/ZC_CostCenterVH" || sODataPath === "/ZC_CustomerCompanyByPlantVH" ||
                     sODataPath === "/ZC_ApplicationReceiverVH") {
                     oContextBinding.requestContexts().then(function (aContext) {
                         _myBusyDialog.close();
@@ -616,7 +621,7 @@ sap.ui.define([
                             if (sODataPath === "/ZC_CostCenterVH" && object["CostCenter"] === sValue) {
                                 this._oControl.setValueState("None");
                             }
-                            if (sODataPath === "/ZC_CustomerCompanyVH" && object["Customer"] === sValue) {
+                            if (sODataPath === "/ZC_CustomerCompanyByPlantVH" && object["Customer"] === sValue) {
                                 this._oControl.setValueState("None");
                             }
                             if (sODataPath === "/ZC_ApplicationReceiverVH" && object["Receiver"] === sValue) {

@@ -9,10 +9,10 @@
                 <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>Plant}:" required="true"/>
                     <ComboBox id="idPlant" items="{ path: '/ZC_PlantVH' }" selectedKey="{local>/headSet/Plant}" filterSecondaryValues= "true" required="true" change="handler.handleChange" editable="{= ${local>/mode} === 'create'}" width="13rem">
-                        <core:ListItem key="{Plant}" text="{PlantName}({Plant})" additionalText="{Plant}"/>
+                        <core:ListItem key="{Plant}" text="{Plant}({PlantName})" additionalText="{Plant}"/>
                     </ComboBox>
                     <Label text="{i18n>Type}:" required="true"/>
-                    <ComboBox id="idType" items="{ path: '/ZC_ApplicationTypeVH' }" selectedKey="{local>/headSet/Type}" filterSecondaryValues= "true" required="true" change="handler.handleChange" editable="{= ${local>/mode} === 'create'}" width="13rem">
+                    <ComboBox id="idType" items="{ path: '/ZC_ApplicationTypeVH' }" selectedKey="{local>/headSet/Type}" filterSecondaryValues= "true" required="true" change="handler.handleChange" editable="{= ${local>/mode} === 'create'  &amp;&amp; ${local>/headSet/Plant} !== ''}" width="13rem">
                         <core:ListItem key="{Zvalue1}" text="{Zvalue2}({Zvalue1})" additionalText="{Zvalue1}"/>
                     </ComboBox>
                 </VBox>
@@ -75,7 +75,7 @@
                 <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>Customer}:" required="true"/>
                     <Input id="idCustomer" value="{local>/headSet/Customer}" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
-                        $event, $controller, '/ZC_CustomerCompanyVH', ['Customer','CustomerName','CompanyCode'])" showSuggestion="true" suggest="handler.handleSuggest" suggestionRows="{ path: '/ZC_CustomerCompanyVH', length: 10 }" required="true" width="13rem">
+                        $event, $controller, '/ZC_CustomerCompanyByPlantVH', ['Customer','CustomerName','Plant'])" showSuggestion="true" suggest="handler.handleSuggest" suggestionRows="{ path: '/ZC_CustomerCompanyByPlantVH', length: 10 }" required="true" width="13rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>Customer}"/>
@@ -84,14 +84,14 @@
                                 <Label text="{i18n>CustomerName}"/>
                             </Column>
                             <Column>
-                                <Label text="{i18n>CompanyCode}"/>
+                                <Label text="{i18n>Plant}"/>
                             </Column>
                         </suggestionColumns>
                         <suggestionRows>
                             <ColumnListItem>
                                 <Label text="{Customer}" />
                                 <Label text="{CustomerName}" />
-                                <Label text="{CompanyCode}" />
+                                <Label text="{Plant}" />
                             </ColumnListItem>
                         </suggestionRows>
                     </Input>
@@ -128,7 +128,7 @@
                 </VBox>
                 <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>LineWarehouseStatus}:"/>
-                    <CheckBox selected="{local>/headSet/LineWarehouseStatus}" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== ''}"/>
+                    <CheckBox selected="{local>/headSet/LineWarehouseStatus}" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== '' &amp;&amp; ${local>/headSet/Type} !== '40'}"/>
                 </VBox>
             </HBox>
         </Panel>

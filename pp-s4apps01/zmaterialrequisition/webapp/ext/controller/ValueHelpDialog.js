@@ -40,10 +40,19 @@ sap.ui.define([
 
                 var aFilters = [];
                 var headSet = that.getModel("local").getProperty("/headSet");
-                if (sPath === "/ZC_CostCenterVH" || sPath === "/ZC_CustomerCompanyVH") {
+                if (sPath === "/ZC_CostCenterVH") {
                     if (headSet.Plant) {
                         aFilters.push(new Filter({
                             path: "CompanyCode",
+                            operator: FilterOperator.EQ,
+                            value1: headSet.Plant
+                        }));
+                    }
+                }
+                if (sPath === "/ZC_ProductVH" || sPath === "/I_StorageLocationStdVH" || sPath === "/ZC_CustomerCompanyByPlantVH") {
+                    if (headSet.Plant) {
+                        aFilters.push(new Filter({
+                            path: "Plant",
                             operator: FilterOperator.EQ,
                             value1: headSet.Plant
                         }));
@@ -125,6 +134,7 @@ sap.ui.define([
                         oTable.bindAggregation("rows", {
                             path: sPath,
                             filters: aFilters,
+                            parameters: { $count: true },
                             events: {
                                 dataReceived: function () {
                                     oDialog.update();
@@ -181,7 +191,7 @@ sap.ui.define([
                 }));
             }
             var headSet = this.getModel("local").getProperty("/headSet");
-            if (this._sValueHelpPath === "/ZC_CostCenterVH" || this._sValueHelpPath === "/ZC_CustomerCompanyVH") {
+            if (this._sValueHelpPath === "/ZC_CostCenterVH") {
                 if (headSet.Plant) {
                     aFilters.push(new Filter({
                         path: "CompanyCode",
@@ -190,7 +200,10 @@ sap.ui.define([
                     }));
                 }
             }
-            if (this._sValueHelpPath === "/ZC_ApplicationReceiverVH" || this._sValueHelpPath === "/ZC_ProductVH") {
+            if (this._sValueHelpPath === "/ZC_CustomerCompanyByPlantVH" ||
+                this._sValueHelpPath === "/ZC_ApplicationReceiverVH" ||
+                this._sValueHelpPath === "/ZC_ProductVH" ||
+                this._sValueHelpPath === "/I_StorageLocationStdVH") {
                 if (headSet.Plant) {
                     aFilters.push(new Filter({
                         path: "Plant",
@@ -322,6 +335,8 @@ sap.ui.define([
                                     }
                                 }
                             }
+                        } else {
+                            this._oInput.setValueState("Error");
                         }
                     }.bind(this), function (oError) {
                         _myBusyDialog.close();

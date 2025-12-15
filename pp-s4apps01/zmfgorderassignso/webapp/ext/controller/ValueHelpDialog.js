@@ -57,6 +57,7 @@ sap.ui.define([
                         // Bind rows to the ODataModel and add columns
                         oTable.bindAggregation("rows", {
                             path: sPath,
+                            parameters: { $count: true },
                             events: {
                                 dataReceived: function () {
                                     oDialog.update();

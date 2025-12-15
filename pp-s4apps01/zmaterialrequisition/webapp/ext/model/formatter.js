@@ -93,10 +93,27 @@ sap.ui.define([
         },
 
         formatOrderStatus: function (value) {
+            var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
+            var sStatusText1 = "",
+                sStatusText2 = "";
+            switch (sLanguage) {
+                case "EN":
+                    sStatusText1 = "Finished";
+                    sStatusText2 = "Unfinished";
+                    break;
+                case "ZH":
+                    sStatusText1 = "完了";
+                    sStatusText2 = "未完了";
+                    break;
+                default:
+                    sStatusText1 = "完了";
+                    sStatusText2 = "未完了";
+                    break;
+            }
             if (value) {
-                return "完了";
+                return sStatusText1;
             } else {
-                return "未完了";
+                return sStatusText2;
             }
         },
     };
