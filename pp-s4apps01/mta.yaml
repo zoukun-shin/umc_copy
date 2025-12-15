@@ -147,6 +147,10 @@ modules:
       - ppzshippingplanupload.zip
       name: ppzshippingplanupload
       target-path: resources/
+    - artifacts: 
+      - ppfglabel.zip
+      name: ppfglabel
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -375,6 +379,15 @@ modules:
 - name: ppzshippingplanupload
   type: html5
   path: zshippingplanupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppfglabel
+  type: html5
+  path: fglabel
   build-parameters:
     build-result: dist
     builder: custom

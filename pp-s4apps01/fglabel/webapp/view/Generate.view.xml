@@ -1,0 +1,240 @@
+<mvc:View controllerName="pp.fglabel.controller.Generate"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns:unified="sap.ui.unified"
+    xmlns:table="sap.ui.table">
+    <Panel expandable="true" expanded="true" width="auto">
+        <HBox>
+            <VBox class="sapUiSmallMarginEnd">
+                <Label text="{i18n>Plant}:" required="true"/>
+                <ComboBox id="idPlantG" items="{ path: '/ZC_PlantVH' }" selectedKey="{local>/PlantG}" filterSecondaryValues= "true" required="true" selectionChange=".onPlantSelectionChange" editable="true" width="13rem">
+                    <core:ListItem key="{Plant}" text="{PlantName}({Plant})" additionalText="{Plant}"/>
+                </ComboBox>
+                <Label text="{i18n>SalesDocument}:" />
+                <Input value="{local>/headSetG/SalesDocument}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+                <Label text="{i18n>Gen_Qty}:" required="true"/>
+                <Input id="idGen_QtyG" value="{local>/headSetG/Gen_Qty}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd">
+                <Label text="{i18n>WO_Order}:" required="true"/>
+                <Input id="idWO_OrderG" value="{local>/WO_OrderG}" editable="true" suggestionItemSelected="true" change=".handleChange" showValueHelp="true" 
+                    valueHelpRequest=".ValueHelpDialog.onValueHelpRequested($event, $controller, '/ZC_WO_ORDERVH', 
+                    ['ManufacturingOrder','Plant','ManufacturingOrderType','Material','MfgOrderPlannedStartDate','MRPController'],
+                    ['ManufacturingOrder','Plant','ManufacturingOrderType','Material','MfgOrderPlannedStartDate','MRPController'])"
+                    required="true">                    
+                </Input>
+                <Label text="{i18n>PurchaseOrderByCustomer}:"/>
+                <Input value="{local>/headSetG/PurchaseOrderByCustomer}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+                <Label text="{i18n>Packing_Qty}:" required="true"/>
+                <Input id="idPacking_QtyG" value="{local>/headSetG/Packing_Qty}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd">
+                <Label text="{i18n>Product}:" />
+                <Input value="{local>/headSetG/Product}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>                    
+                <Label text="{i18n>WO_Qty}:"/>
+                <Input value="{ path: 'local>/headSetG/WO_Qty', formatter: '.formatter.formatNumber'}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+                <Label text="{i18n>History}:"/>
+                <Input value="{local>/headSetG/History}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd">
+                <Label text="{i18n>Customer}:" />
+                <Input value="{local>/headSetG/Customer}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>                    
+                <Label text="{i18n>WO_Start_Date}:"/>
+                <DatePicker width="13rem" editable="{= ${local>/tab_modeG} === 'edit'}" value="{
+                            'path':'local>/headSetG/WO_Start_Date',
+                            'type':'sap.ui.model.type.Date',
+                            'formatOptions': {
+                            'pattern': 'yyyy/MM/dd',
+                            'UTC': true } 
+                        }"/>
+                <Label text="{i18n>Actual_Date}:"/>
+                <DatePicker width="13rem" editable="{= ${local>/tab_modeG} === 'edit'}" value="{
+                            'path':'local>/headSetG/Actual_Date',
+                            'type':'sap.ui.model.type.Date',
+                            'formatOptions': {
+                            'pattern': 'yyyy/MM/dd',
+                            'UTC': true } 
+                        }"/>
+            </VBox>
+        </HBox>
+    </Panel>
+    <Panel expandable="false" expanded="true" width="auto">
+        <table:Table id="idGenerateTable" rows="{local>/itemSetG}" rowsUpdated="handler.onUITableRowsUpdated" selectionMode="Multi" fixedColumnCount="3" rowMode="Interactive" class="sapUiSizeCompact">
+            <table:extension>
+                <OverflowToolbar>
+                <ToolbarSpacer/>
+                    <Button id="idFind1Btn" icon="sap-icon://search" type="Transparent" text="{i18n>FindBtn}" press=".onFind1"/>
+                    <Button id="idSaveBtn" icon="sap-icon://save" type="Transparent" text="{i18n>SaveBtn}" press=".onSave"/>
+                    <Button id="idClearBtn" icon="sap-icon://clear-filter" type="Transparent" text="{i18n>ClearBtn}" press=".onClear" />
+                    <Button id="idPrint1ENBtn" icon="sap-icon://print" type="Transparent" text="{i18n>Prt1ENBtn}" press=".onPrintEN"/>
+                    <Button id="idPrint2VNBtn" icon="sap-icon://print" type="Transparent" text="{i18n>Prt2VNBtn}" press=".onPrintVN"/>
+                </OverflowToolbar>
+            </table:extension>
+            <table:columns>
+                <table:Column width="5rem" label="{i18n>ItemNo}">
+                    <table:template>
+                        <Text text="{local>ItemNo}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Plant}">
+                    <table:template>
+                        <Text text="{local>Plant}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>Barcode_Text}">
+                    <table:template>
+                        <Text text="{local>Barcode_Text}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>Product}">
+                    <table:template>
+                        <Text text="{local>Product}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>ProductName}">
+                    <table:template>
+                        <Text text="{local>ProductName}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>WO_Order}">
+                    <table:template>
+                        <Text text="{local>WO_Order}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>WO_Qty}">
+                    <table:template>
+                        <Text text="{ path: 'local>WO_Qty', formatter: '.formatter.formatNumber'}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Gen_Qty}">
+                    <table:template>
+                        <Text text="{ path: 'local>Gen_Qty', formatter: '.formatter.formatNumber'}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Packing_Qty}">
+                    <table:template>
+                        <Text text="{ path: 'local>Packing_Qty', formatter: '.formatter.formatNumber'}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Box_Qty_Sum}">
+                    <table:template>
+                        <Text text="{local>Box_Qty_Sum}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Barcode_Qty}">
+                    <table:template>
+                        <Text text="{ path: 'local>Barcode_Qty', formatter: '.formatter.formatNumber'}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Customer}">
+                    <table:template>
+                        <Text text="{local>Customer}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>CustomerName}">
+                    <table:template>
+                        <Text text="{local>CustomerName}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>SalesDocument}">
+                    <table:template>
+                        <Text text="{local>SalesDocument}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>PurchaseOrderByCustomer}">
+                    <table:template>
+                        <Text text="{local>PurchaseOrderByCustomer}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>WO_Start_Date}">
+                    <table:template>
+                        <Text text="{local>WO_Start_Date}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="5rem" label="{i18n>WO_Unit}">
+                    <table:template>
+                        <Text text="{local>WO_Unit}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>WO_Sloc}">
+                    <table:template>
+                        <Text text="{local>WO_Sloc}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="5rem" label="{i18n>Base_Unit}">
+                    <table:template>
+                        <Text text="{local>Base_Unit}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>History}">
+                    <table:template>
+                        <Text text="{local>History}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Actual_Date}">
+                    <table:template>
+                        <Text text="{local>Actual_Date}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="5rem" label="{i18n>Delete_Flag}">
+                    <table:template>
+                        <Text text="{local>Delete_Flag}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="5rem" label="{i18n>Print_Count}">
+                    <table:template>
+                        <Text text="{local>Print_Count}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Print_Date}">
+                    <table:template>
+                        <Text text="{local>Print_Date}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>Print_Time}">
+                    <table:template>
+                        <Text text="{local>Print_Time}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Print_User}">
+                    <table:template>
+                        <Text text="{local>Print_User}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Create_Date}">
+                    <table:template>
+                        <Text text="{local>Create_Date}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>Create_Time}">
+                    <table:template>
+                        <Text text="{local>Create_Time}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Create_User}">
+                    <table:template>
+                        <Text text="{local>Create_User}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Change_Date}">
+                    <table:template>
+                        <Text text="{local>Change_Date}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>Change_Time}">
+                    <table:template>
+                        <Text text="{local>Change_Time}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>Change_User}">
+                    <table:template>
+                        <Text text="{local>Change_User}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </Panel>
+</mvc:View>

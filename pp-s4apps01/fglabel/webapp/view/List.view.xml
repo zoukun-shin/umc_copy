@@ -1,0 +1,400 @@
+<mvc:View controllerName="pp.fglabel.controller.List" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:plugins="sap.ui.table.plugins"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable" height="100%" busyIndicatorDelay="0">
+    <f:DynamicPage >
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="FGLabelListSVM" showShare="true" showExecuteOnSelection="true" entitySet="FGLabel"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="FGLabel" useToolbar="false" liveMode="false" smartVariant="__SVM01" persistencyKey="ListSFB" search="onSearch">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                            <smartFilterBar:ControlConfiguration index='20' key="Barcode" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Barcode}"/>
+                            <smartFilterBar:ControlConfiguration index='30' key="WO_Order" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>WO_Order}"/>
+                            <smartFilterBar:ControlConfiguration index='40' key="Product" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Product}"/>
+                            <smartFilterBar:ControlConfiguration index='50' key="WO_Start_Date" visibleInAdvancedArea="true" label="{i18n>WO_Start_Date}" >
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection id="dateRange" valueFormat="yyyy/MM/dd" displayFormat="yyyy/MM/dd" change=".onDateRangeChange" />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration index='60' key="WO_Sloc" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>WO_Sloc}"/>
+                            <smartFilterBar:ControlConfiguration index='70' key="Create_User" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Create_User}"/>
+                            <smartFilterBar:ControlConfiguration index='80' key="Print_Count" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Print_Count}">
+                                <smartFilterBar:customControl>
+                                    <ComboBox id="cbCount" selectedKey="{/Count}">
+                                        <items>
+                                            <core:Item key="1" text="" />
+                                            <core:Item key="2" text="{i18n>No}" />
+                                            <core:Item key="3" text="{i18n>Yes}" />
+                                        </items>
+                                    </ComboBox>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration index='80' key="Father_Barcode" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Father_Barcode}"/>
+                            <smartFilterBar:ControlConfiguration index='90' key="Delete_Flag" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Delete_Flag}">
+                                <smartFilterBar:customControl>
+                                    <ComboBox id="cbDelete" selectedKey="{/Delete}">
+                                        <items>
+                                            <core:Item key="1" text="" />
+                                            <core:Item key="2" text="{i18n>No}" />
+                                            <core:Item key="3" text="{i18n>Yes}" />
+                                        </items>
+                                    </ComboBox>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <!-- visible -->
+                            <smartFilterBar:ControlConfiguration index='999' key="Delete_mc" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Update_mc" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Barcode_Text" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="ProductName" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="WO_Qty" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Gen_Qty" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Packing_Qty" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Box_Qty" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Box_Qty_Sum" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Barcode_Qty" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Father_Barcode" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Customer" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="SalesDocument" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderByCustomer" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="WO_Unit" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Base_Unit" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="History" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Actual_Date" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Print_Date" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Print_Time" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Print_User" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Create_Date" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Create_Time" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Create_User" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Change_Date" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Change_Time" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Change_User" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Message" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable id="idsmartTable" entitySet="FGLabel" smartFilterId="idSmartFilterBar" smartVariant="__SVM01" tableType="Table" persistencyKey="smartTable" header="{i18n>Results}" 
+                        placeToolbarInTable="true" showRowCount="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" ignoredFields="Box_Qty_Sum">
+                <smartTable:customToolbar>
+                    <OverflowToolbar design="Transparent">
+                    <ToolbarSpacer/>
+                    <Button id="idDeleteBtn" icon="sap-icon://delete" type="Transparent" text="{i18n>Delete}" press=".onDelete" />
+                    <Button id="idResetBtn" icon="sap-icon://reset" type="Transparent" text="{i18n>Reset}" press=".onReset" />
+                    <Button id="idPrintENBtn" icon="sap-icon://print" type="Transparent" text="{i18n>PrtENBtn}" press=".onPrintEN" />
+                    <Button id="idPrintVNBtn" icon="sap-icon://print" type="Transparent" text="{i18n>PrtVNBtn}" press=".onPrintVN" />
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+                <table:Table id="ReportTable">
+                    <table:dependents>
+						<plugins:MultiSelectionPlugin
+							id="idMultiSelectionPlugin"
+							limit="0"
+							enableNotification="true"
+							showHeaderSelector="true"
+							selectionMode="MultiToggle"
+							selectionChange="onSelectionChange"/>
+					</table:dependents>
+                    <table:rowMode>
+                        <rm:Auto id="idAuto" />
+                    </table:rowMode>
+                    <table:columns>
+                        <table:Column id="idMessage" width="14rem" label="{i18n>Message}" visible="false" sortProperty="Message" filterProperty="Message">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Message", "leadingProperty":"Message"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Message}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Plant}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Barcode}" sortProperty="Barcode" filterProperty="Barcode">
+                            <table:customData>
+                                 <core:CustomData key="p13nData" value='\{"columnKey":"Barcode", "leadingProperty":"Barcode"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Barcode}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Product}" sortProperty="Product" filterProperty="Product">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Product", "leadingProperty":"Product"}'/>
+                            </table:customData>
+                            <table:template>
+                                 <Text text="{Product}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="14rem" label="{i18n>ProductName}" sortProperty="ProductName" filterProperty="ProductName">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ProductName", "leadingProperty":"ProductName"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ProductName}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>WO_Order}" sortProperty="WO_Order" filterProperty="WO_Order">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"WO_Order", "leadingProperty":"WO_Order"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{WO_Order}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>WO_Qty}" sortProperty="WO_Qty" filterProperty="WO_Qty">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"WO_Qty", "leadingProperty":"WO_Qty"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ parts:[ 'WO_Qty' ], formatter:'.formatter.formatNumber' }" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>Gen_Qty}" sortProperty="Gen_Qty" filterProperty="Gen_Qty">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Gen_Qty", "leadingProperty":"Gen_Qty"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ parts:[ 'Gen_Qty' ], formatter:'.formatter.formatNumber' }" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>Packing_Qty}" sortProperty="Packing_Qty" filterProperty="Packing_Qty">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Packing_Qty", "leadingProperty":"Packing_Qty"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ parts:[ 'Packing_Qty' ], formatter:'.formatter.formatNumber' }" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>Box_Qty}" sortProperty="Box_Qty" filterProperty="Box_Qty">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Box_Qty", "leadingProperty":"Box_Qty"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Box_Qty}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <!-- <table:Column width="8rem" label="{i18n>Box_Qty_Sum}" sortProperty="Box_Qty_Sum" filterProperty="Box_Qty_Sum">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Box_Qty_Sum", "leadingProperty":"Box_Qty_Sum"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ Box_Qty_Sum }" wrapping="false" />
+                            </table:template>
+                        </table:Column> -->
+                        <table:Column width="8rem" label="{i18n>Barcode_Qty}" sortProperty="Barcode_Qty" filterProperty="Barcode_Qty">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Barcode_Qty", "leadingProperty":"Barcode_Qty"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ parts:[ 'Barcode_Qty' ], formatter:'.formatter.formatNumber' }" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Father_Barcode}" sortProperty="Father_Barcode" filterProperty="Father_Barcode">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Father_Barcode", "leadingProperty":"Father_Barcode"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Father_Barcode}" wrapping="false" />
+                             </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Customer}" sortProperty="Customer" filterProperty="Customer">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "leadingProperty":"Customer"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Customer}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="14rem" label="{i18n>CustomerName}" sortProperty="CustomerName" filterProperty="CustomerName">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{CustomerName}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>SalesDocument}" sortProperty="SalesDocument" filterProperty="SalesDocument">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocument", "leadingProperty":"SalesDocument"}'/>
+                            </table:customData>
+                            <table:template>
+                               <Text text="{SalesDocument}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>PurchaseOrderByCustomer}" sortProperty="PurchaseOrderByCustomer" filterProperty="PurchaseOrderByCustomer">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderByCustomer", "leadingProperty":"PurchaseOrderByCustomer"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{PurchaseOrderByCustomer}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>WO_Start_Date}" sortProperty="WO_Start_Date" filterProperty="WO_Start_Date">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"WO_Start_Date", "leadingProperty":"WO_Start_Date"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'WO_Start_Date', formatter:'.formatter.formatDate'}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>WO_Unit}" sortProperty="WO_Unit" filterProperty="WO_Unit">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"WO_Unit", "leadingProperty":"WO_Unit"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{WO_Unit}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>WO_Sloc}" sortProperty="WO_Sloc" filterProperty="WO_Sloc">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"WO_Sloc", "leadingProperty":"WO_Sloc"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{WO_Sloc}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="4rem" label="{i18n>Base_Unit}" sortProperty="Base_Unit" filterProperty="Base_Unit">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Base_Unit", "leadingProperty":"Base_Unit"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Base_Unit}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="12rem" label="{i18n>History}" sortProperty="History" filterProperty="History">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"History", "leadingProperty":"History"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{History}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Actual_Date}" sortProperty="Actual_Date" filterProperty="Actual_Date">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Actual_Date", "leadingProperty":"Actual_Date"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'Actual_Date', formatter:'.formatter.formatDate'}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>Delete_Flag}" sortProperty="Delete_Flag" filterProperty="Delete_Flag">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Delete_Flag", "leadingProperty":"Delete_Flag"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Delete_Flag}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="6rem" label="{i18n>Print_Count}" sortProperty="Print_Count" filterProperty="Print_Count">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Print_Count", "leadingProperty":"Print_Count"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Print_Count}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Print_Date}" sortProperty="Print_Date" filterProperty="Print_Date">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Print_Date", "leadingProperty":"Print_Date"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'Print_Date', formatter:'.formatter.formatDate'}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>Print_Time}" sortProperty="Print_Time" filterProperty="Print_Time">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Print_Time", "leadingProperty":"Print_Time"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'Print_Time', formatter:'.formatter.formatTime'}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Print_User}" sortProperty="Print_User" filterProperty="Print_User">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Print_User", "leadingProperty":"Print_User"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Print_User}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Create_Date}" sortProperty="Create_Date" filterProperty="Create_Date">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Create_Date", "leadingProperty":"Create_Date"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'Create_Date', formatter:'.formatter.formatDate'}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>Create_Time}" sortProperty="Create_Time" filterProperty="Create_Time">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Create_Time", "leadingProperty":"Create_Time"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'Create_Time', formatter:'.formatter.formatTime'}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Create_User}" sortProperty="Create_User" filterProperty="Create_User">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Create_User", "leadingProperty":"Create_User"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Create_User}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Change_Date}" sortProperty="Change_Date" filterProperty="Change_Date">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Change_Date", "leadingProperty":"Change_Date"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'Change_Date', formatter:'.formatter.formatDate'}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>Change_Time}" sortProperty="Change_Time" filterProperty="Change_Time">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Change_Time", "leadingProperty":"Change_Time"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'Change_Time', formatter:'.formatter.formatTime'}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Change_User}" sortProperty="Change_User" filterProperty="Change_User">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Change_User", "leadingProperty":"Change_User"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Change_User}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                    </table:columns>
+                </table:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
