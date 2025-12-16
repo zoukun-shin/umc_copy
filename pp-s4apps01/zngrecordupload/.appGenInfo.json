@@ -1,0 +1,24 @@
+{
+  "generationParameters": {
+    "generationDate": "Thu Dec 11 2025 06:44:14 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "https://my412552.s4hana.cloud.sap/sap/opu/odata4/sap/zui_ng_record_upload_o4/srvd/sap/zui_ng_record_upload_o4/0001/",
+    "appName": "zngrecordupload",
+    "appTitle": "Mass Upload NG Record",
+    "appDescription": "Mass Upload NG Record",
+    "appNamespace": "pp",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.38",
+    "enableCodeAssist": false,
+    "enableEslint": false,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.20.0",
+    "template": "Basic V4",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}

@@ -151,6 +151,10 @@ modules:
       - ppfglabel.zip
       name: ppfglabel
       target-path: resources/
+    - artifacts:
+      - ppzngrecordupload.zip
+      name: ppzngrecordupload
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -388,6 +392,15 @@ modules:
 - name: ppfglabel
   type: html5
   path: fglabel
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzngrecordupload
+  type: html5
+  path: zngrecordupload
   build-parameters:
     build-result: dist
     builder: custom
