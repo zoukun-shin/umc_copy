@@ -3,14 +3,17 @@ sap.ui.define([
     "sap/m/MessageBox",
     "sap/ui/core/Fragment",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
-], function (BusyDialog, MessageBox, Fragment, Filter, FilterOperator) {
+    "sap/ui/model/FilterOperator",
+    "../../lib/xml-js",
+    "sap/m/MessageToast"
+], function (BusyDialog, MessageBox, Fragment, Filter, FilterOperator,xml,MessageToast) {
     'use strict';
 
-    var _UserInfo;
+    var _oFunctions, _ResourceBundle, _oDataModel, _oPrintModel, _UserInfo;
     return {
 
         init: function (oModels, oViews) {
+            _oFunctions = this;
             _UserInfo = sap.ushell.Container.getService("UserInfo");
 
             // Authority Check
@@ -21,58 +24,271 @@ sap.ui.define([
         },
 
         _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel, oViews) {
-            var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
-            var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
-            var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
-                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+            // var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
+            // var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
+            // var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
+            //     "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+            // });
+            // oContextBinding.requestObject().then(function (context) {
+            //     var aAccessBtns = [],
+            //         aAllAccessBtns = [];
+            //     if (context._AssignRole && context._AssignRole.length > 0) {
+            //         context._AssignRole.forEach(role => {
+            //             aAccessBtns.push(role._UserRoleAccessBtn);
+            //         });
+            //         aAllAccessBtns = aAccessBtns.flat();
+            //     }
+            //     if (!aAllAccessBtns.some(btn => btn.AccessId === "zecn-View")) {
+            //         if (!this.oErrorMessageDialog) {
+            //             this.oErrorMessageDialog = new sap.m.Dialog({
+            //                 type: sap.m.DialogType.Message,
+            //                 state: "Error",
+            //                 content: new sap.m.Text({
+            //                     text: oI18nModel.getResourceBundle().getText("noAuthorityView", [sUser])
+            //                 })
+            //             });
+            //         }
+            //         oViews.destroy();
+            //         this.oErrorMessageDialog.open();
+            //     }
+            //     oLocalModel.setProperty("/authorityCheck", {
+            //         button: {
+            //             View: aAllAccessBtns.some(btn => btn.AccessId === "zecn-View")
+            //         },
+            //         data: {
+            //             PlantSet: context._AssignPlant,
+            //             CompanySet: context._AssignCompany,
+            //             SalesOrgSet: context._AssignSalesOrg,
+            //             PurchOrgSet: context._AssignPurchOrg,
+            //             RoleSet: context._AssignRole
+            //         }
+            //     });
+            // }.bind(this), function (oError) {
+            //     if (!this.oErrorMessageDialog) {
+            //         this.oErrorMessageDialog = new sap.m.Dialog({
+            //             type: sap.m.DialogType.Message,
+            //             state: "Error",
+            //             content: new sap.m.Text({
+            //                 text: oI18nModel.getResourceBundle().getText("getAuthorityFailed")
+            //             })
+            //         });
+            //     }
+            //     oViews.destroy();
+            //     this.oErrorMessageDialog.open();
+            // }.bind(this));
+        },
+
+        printAction: function (oEvent) {
+            var oBusyDialog = new BusyDialog();
+            _oDataModel = this.getModel();
+            _oPrintModel = this.getModel("Print");
+            _ResourceBundle = this.getModel("i18n").getResourceBundle();
+
+            oBusyDialog.open();
+            var aSelectedContexts = this.getSelectedContexts();
+
+            if (aSelectedContexts.length > 0) {
+                var oSelectedLine = aSelectedContexts[0].getObject();
+            } 
+
+            var aFilters = [];
+            aFilters.push(new Filter({
+                path: "ECNNo",
+                operator: FilterOperator.EQ,
+                value1: oSelectedLine.ECNNo
+            }));
+            aFilters.push(new Filter({
+                path: "Plant",
+                operator: FilterOperator.EQ,
+                value1: oSelectedLine.Plant
+            }));
+            //Material 和 TopLayerMaterial 相同
+            aFilters.push(new Filter({
+                path: "Material",
+                operator: FilterOperator.EQ,
+                value1: oSelectedLine.Material
+            }));
+            var oContextBinding = _oDataModel.bindList("/ECN", undefined, undefined, aFilters, {});
+            
+            //获取行项目数据
+            var aPrintItem = [];
+            var oItemPromise =  oContextBinding.requestContexts();
+            oItemPromise.then(function(aContext){
+                for (const boundContext of aContext) {
+                    var object = boundContext.getObject();
+                    aPrintItem.push({
+                        Seq: object.seq,
+                        BeforAfter: object.changediff,
+                        PartNo: object.Component,
+                        Specification: object.DetSpecification,
+                        ChangeContent: object.ChangeContent,
+                        RefNo: object.BOMSubItemInstallationPoint,
+                        Quantity: object.Quantity,
+                        Unit: object.Unit,
+                        Loc: object.BomItemSorter,
+                        Stock: object.Stock,
+                        Manage: object.Manage,
+                        ECNCreateAt: object.ECNCreateAt
+                    });
+                }
             });
-            oContextBinding.requestObject().then(function (context) {
-                var aAccessBtns = [],
-                    aAllAccessBtns = [];
-                if (context._AssignRole && context._AssignRole.length > 0) {
-                    context._AssignRole.forEach(role => {
-                        aAccessBtns.push(role._UserRoleAccessBtn);
-                    });
-                    aAllAccessBtns = aAccessBtns.flat();
-                }
-                if (!aAllAccessBtns.some(btn => btn.AccessId === "zecn-View")) {
-                    if (!this.oErrorMessageDialog) {
-                        this.oErrorMessageDialog = new sap.m.Dialog({
-                            type: sap.m.DialogType.Message,
-                            state: "Error",
-                            content: new sap.m.Text({
-                                text: oI18nModel.getResourceBundle().getText("noAuthorityView", [sUser])
-                            })
-                        });
+
+            var aFilters = [];
+            aFilters.push(new Filter({
+                path: "ChangeNumber",
+                operator: FilterOperator.EQ,
+                value1: oSelectedLine.ECNNo
+            }));
+            aFilters.push(new Filter({
+                path: "Plant",
+                operator: FilterOperator.EQ,
+                value1: oSelectedLine.Plant
+            }));
+            //Material 和 TopLayerMaterial 相同
+            aFilters.push(new Filter({
+                path: "Material",
+                operator: FilterOperator.EQ,
+                value1: oSelectedLine.Material
+            }));
+            aFilters.push(new Filter({
+                path: "BillOfMaterialVariant",
+                operator: FilterOperator.EQ,
+                value1: oSelectedLine.BillOfMaterialVariant
+            }));
+            //获取抬头数据
+            var pdfContent;
+            var oHeadContextBinding = _oDataModel.bindList("/EcnPrint", undefined, undefined, aFilters, {});
+            var oHeadPromise = oHeadContextBinding.requestContexts(0,1);
+            oHeadPromise.then(function(aContext){
+                if (aContext.length > 0) {
+                    var object = aContext[0].getObject();
+                    pdfContent = {PrintData:{
+                        ChangeNumber: object.ChangeNumber,
+                        Material: object.Material,
+                        Plant: object.Plant,
+                        // CreatedDate: object.CreatedDate,
+                        BomHistory: object.BomHistory,
+                        Customer: object.Customer,
+                        CustomerName: object.CustomerName,
+                        ReqByCustomer: object.ReqByCustomer,
+                        ReqByJp: object.ReqByCustomer,
+                        ReqByHk: object.ReqByHk,
+                        ReqByCn: object.ReqByCn,
+                        ReqByVn: object.ReqByVn,
+                        ReqByOther: object.ReqByOther,
+                        ReqByOtherText: object.ReqByOtherText,
+                        BomRev: object.BomRev,
+                        EcoTypeDesc: object.EcoTypeDesc,
+                        StockOfSfgSmt: object.StockOfSfgSmt,
+                        UnitSfgSmt: object.UnitSfgSmt,
+                        StockOfSfgFat: object.StockOfSfgFat,
+                        UnitSfgFat: object.UnitSfgFat,
+                        StockOfNcgSmt: object.StockOfNcgSmt,
+                        UnitNcgSmt: object.UnitNcgSmt,
+                        StockOfNcgFat: object.StockOfNcgFat,
+                        UnitNcgFat: object.UnitNcgFat,
+                        StockOfFg: object.StockOfFg,
+                        UnitFg: object.UnitFg,
+                        OldNewNotTogether: object.OldNewNotTogether,
+                        OldStockDelivery: object.OldStockDelivery,
+                        ReworkSfg: object.ReworkSfg,
+                        ReworkFg: object.ReworkFg,
+                        Other: object.Other,
+                        ReasonForChange: object.ReasonForChange,
+                        AttachedDocuments: object.AttachedDocuments,
+                        CreatedByUser: object.CreatedByUser,
+                        to_Items:{
+                            results: aPrintItem
+                        }
+                    }};
+                    if ( pdfContent.PrintData.UnitSfgSmt ) {
+                        pdfContent.PrintData.StockOfSfgSmt = pdfContent.PrintData.StockOfSfgSmt + " " + pdfContent.PrintData.UnitSfgSmt;
                     }
-                    oViews.destroy();
-                    this.oErrorMessageDialog.open();
-                }
-                oLocalModel.setProperty("/authorityCheck", {
-                    button: {
-                        View: aAllAccessBtns.some(btn => btn.AccessId === "zecn-View")
-                    },
-                    data: {
-                        PlantSet: context._AssignPlant,
-                        CompanySet: context._AssignCompany,
-                        SalesOrgSet: context._AssignSalesOrg,
-                        PurchOrgSet: context._AssignPurchOrg,
-                        RoleSet: context._AssignRole
+                    if ( pdfContent.PrintData.UnitSfgFat ) {
+                        pdfContent.PrintData.StockOfSfgFat = pdfContent.PrintData.StockOfSfgFat + " " + pdfContent.PrintData.UnitSfgFat;
                     }
+                    if ( pdfContent.PrintData.UnitNcgSmt ) {
+                        pdfContent.PrintData.StockOfNcgSmt = pdfContent.PrintData.StockOfNcgSmt + " " + pdfContent.PrintData.UnitNcgSmt;
+                    }
+                    if ( pdfContent.PrintData.UnitNcgFat ) {
+                        pdfContent.PrintData.StockOfNcgFat = pdfContent.PrintData.StockOfNcgFat + " " + pdfContent.PrintData.UnitNcgFat;
+                    }
+                    if ( pdfContent.PrintData.UnitFg ) {
+                        pdfContent.PrintData.StockOfFg = pdfContent.PrintData.StockOfFg + " " + pdfContent.PrintData.UnitFg;
+                    }
+                }
+                
+            });
+
+            Promise.all([oItemPromise,oHeadPromise]).then(async function(){
+                _oFunctions.wait(1000);
+                if (pdfContent) {
+                    pdfContent.PrintData.to_Items = { results: aPrintItem };
+                    pdfContent.PrintData.CreatedDate = aPrintItem[0]?.ECNCreateAt;
+                    pdfContent.PrintData.CreatedDateFooter = aPrintItem[0]?.ECNCreateAt;
+                    switch (pdfContent.PrintData.Plant) {
+                        case "3000":
+                            _oFunctions.getPDF(pdfContent,"YY1_PP008_VN");break;
+                        case "4000":
+                            _oFunctions.getPDF(pdfContent,"YY1_PP008_TH");break;
+                    }
+                }
+                oBusyDialog.close();
+            });
+        },
+        getPDF: function (pdfContent,template) {
+            var oBusyDialog = new BusyDialog();
+            var aRecordCreated = [];
+            var sFileName = _ResourceBundle.getText("appTitle") + new Date().getTime();
+            var promise = new Promise((resolve, reject) => {
+                var createPrintRecord = _oPrintModel.bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord(...)");
+                createPrintRecord.setParameter("TemplateID", template);
+                createPrintRecord.setParameter("IsExternalProvidedData", true);
+                var oXMLData = json2xml(pdfContent, {
+                    compact: true,
+                    ignoreComment: true,
+                    spaces: 4
                 });
-            }.bind(this), function (oError) {
-                if (!this.oErrorMessageDialog) {
-                    this.oErrorMessageDialog = new sap.m.Dialog({
-                        type: sap.m.DialogType.Message,
-                        state: "Error",
-                        content: new sap.m.Text({
-                            text: oI18nModel.getResourceBundle().getText("getAuthorityFailed")
-                        })
-                    });
-                }
-                oViews.destroy();
-                this.oErrorMessageDialog.open();
-            }.bind(this));
-        }
+                // var pdfData =  btoa(unescape(encodeURIComponent(oXMLData)));
+                var pdfData = btoa(unescape(encodeURIComponent("<?xml version=\"1.0\" encoding=\"UTF-8\"?><form>" + oXMLData + "</form>")));
+                createPrintRecord.setParameter("ExternalProvidedData", pdfData);
+                // var uuidx16 = context.getObject().Uuid.replace(/-/g, '');
+                createPrintRecord.setParameter("ProvidedKeys", "");
+                createPrintRecord.setParameter("ResultIsActiveEntity", true);
+                createPrintRecord.setParameter("FileName", sFileName);
+                createPrintRecord.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
+                    resolve(createPrintRecord);
+                }).catch((oError) => {
+                    reject(oError);
+                });
+            });
+            aRecordCreated.push(promise);
+
+            oBusyDialog.open();
+            try {
+                Promise.all(aRecordCreated).then((aContext) => {
+                    oBusyDialog.close();
+                    var sURL;
+                    for (const activeContext of aContext) {
+                        var boundContext = activeContext.getBoundContext();
+                        var object = boundContext.getObject();
+                        var sPath = _oPrintModel.getKeyPredicate("/PrintRecord", object);
+                        sURL = activeContext.getModel("Print").getServiceUrl() + "PrintRecord" + sPath + '/PDFContent';
+                        sap.m.URLHelper.redirect(sURL, true);
+                    }
+                    MessageToast.show("Print Success");
+                }).finally(() => {
+                    oBusyDialog.close();
+                });;
+            } catch (error) {
+                MessageToast.show(error);
+                oBusyDialog.close();
+            }
+        },
+        // 定义等待函数
+		wait: function(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		},
+
     };
 });
