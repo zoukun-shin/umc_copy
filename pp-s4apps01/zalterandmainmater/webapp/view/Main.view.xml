@@ -47,11 +47,13 @@
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
                                 <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="ItemNo" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Customer" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="FinishedGoods" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="SemiFinishedGoods" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialVariant" visible="false"/>
+                                 <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialVariantUsage" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="AlternativeMaterial" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MainMaterial" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="SubDetailedSpec" visible="false"/>
@@ -72,14 +74,15 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="AlternativeItem" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MainItem" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Alternative2Main" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="Main2Alternative" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
                 </f:content>
                 <f:content>
-                    <CheckBox id='idCB1' text="{i18n>Alternative2Main}" width="24rem" select="onSelect"/>
-                    <CheckBox id='idCB2' text="{i18n>Main2Alternative}" width="24rem" select="onSelect"/>
+                    <RadioButtonGroup id="idRBG1" columns="2" width="100%" select="onSelect" >
+                        <RadioButton id="idRB1-1" text="{i18n>Alternative2Main}" selected="true" />
+                        <RadioButton id="idRB1-2" text="{i18n>Main2Alternative}" />
+                    </RadioButtonGroup>
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>

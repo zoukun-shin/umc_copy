@@ -13,7 +13,7 @@ sap.ui.define([
         _initialize: function () {
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-            // sEmail = 'xinlei.xu@sh.shin-china.com';
+            sEmail = 'xinlei.xu@sh.shin-china.com';
             var oContextBinding = this.getView().getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -102,25 +102,20 @@ sap.ui.define([
             });
             filters.push(oValidityEndDate);
 
-            var sAlternative2Main = this.byId("idCB1").getSelected();
-            if (sAlternative2Main === true) {
-                var oAlternative2Main = new sap.ui.model.Filter({
-                    path: "Alternative2Main",
-                    operator: "EQ",
-                    value1: sAlternative2Main
-                });
-                filters.push(oAlternative2Main);
-            };
+            var iSelectedIndex = this.byId("idRBG1").getSelectedIndex();
 
-            var sMain2Alternative = this.byId("idCB2").getSelected();
-            if (sMain2Alternative === true) {
-                var oMain2Alternative = new sap.ui.model.Filter({
-                    path: "Main2Alternative",
-                    operator: "EQ",
-                    value1: sMain2Alternative
-                });
-                filters.push(oMain2Alternative);
+            if (iSelectedIndex === 0) {
+                var sAlternative2Main = true;
+            }else{
+                sAlternative2Main = false;
             }
+
+            var oAlternative2Main = new sap.ui.model.Filter({
+                path: "Alternative2Main",
+                operator: "EQ",
+                value1: sAlternative2Main
+            });
+             filters.push(oAlternative2Main);
         },
 
         onBeforeExport: function (oEvent) {

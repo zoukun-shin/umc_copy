@@ -10,7 +10,7 @@
         showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" 
         persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="Material,MRPController,Alternative2Main,Main2Alternative">
+        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="Material,MRPController,Alternative2Main">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
@@ -18,6 +18,14 @@
         </smartTable:customToolbar>
        <table:Table id="idTable" selectionMode="None" rowMode="Auto">
             <table:columns>
+                <table:Column width="6rem" label="{i18n>ItemNo}" sortProperty="ItemNo" filterProperty="ItemNo">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ItemNo", "leadingProperty":"ItemNo"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ItemNo}" />
+                    </table:template>
+                </table:Column>
                 <table:Column width="6rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant"}'/>
@@ -64,6 +72,14 @@
                     </table:customData>
                     <table:template>
                         <Text text="{BillOfMaterialVariant}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>BillOfMaterialVariantUsage}" sortProperty="BillOfMaterialVariantUsage" filterProperty="BillOfMaterialVariantUsage">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialVariantUsage", "leadingProperty":"BillOfMaterialVariantUsage"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BillOfMaterialVariantUsage}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="15rem" label="{i18n>AlternativeMaterial}" sortProperty="AlternativeMaterial" filterProperty="AlternativeMaterial">
@@ -114,7 +130,7 @@
                         <Text text="{MainCustomerPartNumber}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>SubMFRPN}" sortProperty="SubMFRPN" filterProperty="SubMFRPN" hAlign="End">
+                <table:Column width="15rem" label="{i18n>SubMFRPN}" sortProperty="SubMFRPN" filterProperty="SubMFRPN">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"SubMFRPN", "leadingProperty":"SubMFRPN"}'/>
                     </table:customData>
@@ -138,7 +154,7 @@
                         <Text text="{Subitems}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>BOMQty}" sortProperty="BOMQty" filterProperty="BOMQty">
+                <table:Column width="15rem" label="{i18n>BOMQty}" sortProperty="BOMQty" filterProperty="BOMQty" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BOMQty", "leadingProperty":"BOMQty"}'/>
                     </table:customData>
