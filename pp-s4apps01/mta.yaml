@@ -147,13 +147,17 @@ modules:
       - ppzshippingplanupload.zip
       name: ppzshippingplanupload
       target-path: resources/
-    - artifacts: 
+    - artifacts:
       - ppfglabel.zip
       name: ppfglabel
       target-path: resources/
     - artifacts:
       - ppzngrecordupload.zip
       name: ppzngrecordupload
+      target-path: resources/
+    - artifacts:
+      - ppzmodelpoint.zip
+      name: ppzmodelpoint
       target-path: resources/
 - name: ppzbomupload
   type: html5
@@ -401,6 +405,15 @@ modules:
 - name: ppzngrecordupload
   type: html5
   path: zngrecordupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzmodelpoint
+  type: html5
+  path: zmodelpoint
   build-parameters:
     build-result: dist
     builder: custom
