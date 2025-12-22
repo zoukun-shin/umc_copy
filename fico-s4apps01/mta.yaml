@@ -103,6 +103,10 @@ modules:
       - ficozsalespurchaseprice.zip
       name: ficozsalespurchaseprice
       target-path: resources/
+    - artifacts:
+      - ficocostingresult.zip
+      name: ficocostingresult
+      target-path: resources/
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -110,7 +114,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
-      - npm run build:cf
+    - npm run build:cf
     supported-platforms: []
 - name: ficopaidpaycalculation
   type: html5
@@ -232,6 +236,15 @@ modules:
 - name: ficozsalespurchaseprice
   type: html5
   path: zsalespurchaseprice
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficocostingresult
+  type: html5
+  path: costingresult
   build-parameters:
     build-result: dist
     builder: custom
