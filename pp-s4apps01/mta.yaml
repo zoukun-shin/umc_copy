@@ -163,6 +163,10 @@ modules:
       - ppzngmanangement.zip
       name: ppzngmanangement
       target-path: resources/
+    - artifacts:
+      - ppadjshippingplan.zip
+      name: ppadjshippingplan
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -427,6 +431,15 @@ modules:
 - name: ppzngmanangement
   type: html5
   path: zngmanangement
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppadjshippingplan
+  type: html5
+  path: adjshippingplan
   build-parameters:
     build-result: dist
     builder: custom

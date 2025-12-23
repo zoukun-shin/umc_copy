@@ -1,0 +1,290 @@
+<mvc:View
+    controllerName="pp.adjshippingplan.controller.Main"
+    displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:t="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    core:require="{ CustomeDecimal: 'pp/adjshippingplan/controller/CustomDecimal' }"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+    <f:DynamicPage id="idDynamicPage">
+        <f:title>
+            <f:DynamicPageTitle id="idDynamicPageTitle">
+                <f:heading>
+                    <sv:SmartVariantManagement
+                        id="idSmartVariantManagement"
+                        showShare="true"
+                        persistencyKey="AdjustShippingPlanSVM"
+                        showExecuteOnSelection="true"
+                        entitySet="AdjustShippingPlan"
+                    />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="idDynamicPageHeader">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar
+                        id="idSmartFilterBar"
+                        smartVariant="idSmartVariantManagement"
+                        persistencyKey="AdjustShippingPlanSVM"
+                        entitySet="AdjustShippingPlan"
+                        useToolbar="false"
+                        class="sapUiResponsiveMargin"
+                        search="onSearch"
+                    >
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="Plant"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>Plant}"
+                                mandatory="mandatory"
+                                index="1"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="MRPResponsible"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>MRPResponsible}"
+                                mandatory="notMandatory"
+                                index="3"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="Material"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>Material}"
+                                mandatory="notMandatory"
+                                index="5"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="ShippingPlanDate"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>ShippingPlanDate}"
+                                mandatory="mandatory"
+                                index="6"
+                                visible="true"
+                            >
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection
+                                        id="idDateRangeSelection"
+                                        valueFormat="yyyy/MM/dd"
+                                        displayFormat="yyyy/MM/dd"
+                                        change="onDateRangeChange"
+                                    />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="Customer"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>Customer}"
+                                mandatory="mandatory"
+                                index="7"
+                            />
+                            <!-- visible -->
+                            <!-- <smartFilterBar:ControlConfiguration key="UUID" visible="false" /> -->
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                    <CheckBox id="idFgOnly" text="{i18n>FgOnly}" class="sapUiMediumMarginBegin"/>
+                    <RadioButtonGroup id="idProcessMode" columns="2" class="sapUiMediumMarginBegin">
+                        <RadioButton text="{i18n>ReportKey}"/>
+                        <RadioButton text="{i18n>AdjustKey}"/>
+                    </RadioButtonGroup>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <t:Table
+                id="reportTable1"
+                rows="{local>/AdjustShippingPlan}"
+                selectionMode="Multi"
+                class="sapUiSizeCompact"
+                rowsUpdated="onRowsUpdated"
+                enableSelectAll="false"
+            >
+                <t:rowMode>
+                    <rm:Auto id="idAuto" />
+                </t:rowMode>
+                <t:extension>
+                    <OverflowToolbar id="idOverflowToolbar">
+                        <Title
+                            text="Line Items ({= ${local>/AdjustShippingPlan}.length})"
+                            visible="{= ${local>/AdjustShippingPlan}.length > 0}"
+                        />
+                        <ToolbarSpacer id="idToolbarSpacer" />
+                        <Button
+                            id="idCreatePIR"
+                            icon="sap-icon://create"
+                            type="Transparent"
+                            text="{i18n>btnCreatePIR}"
+                            press="onCreatePIR"
+                            enabled="{= ${local>/AdjustShippingPlan}.length > 0 &amp;&amp; ${local>/authorityCheck/button/Create}}"
+                        />
+                        <!-- <Button
+                            icon="sap-icon://excel-attachment"
+                            type="Transparent"
+                            press="onExport"
+                            enabled="{= ${local>/AdjustShippingPlan}.length > 0 &amp;&amp; ${local>/authorityCheck/button/Export}}"
+                        /> -->
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column
+                        width="8rem"
+                        sortProperty="Type"
+                        label="{i18n>Status}"
+                    >
+                        <t:template>
+                            <ObjectStatus
+                                state="{
+                                    path: 'local>Type',
+                                    formatter: '.formatter.setState'
+                                }"
+                                icon="{
+                                    path: 'local>Type',
+                                    formatter: '.formatter.setStateIcon'
+                                }"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="12rem"
+                        sortProperty="Message"
+                        label="{i18n>Message}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>Message}"
+                                tooltip="{local>Message}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        sortProperty="Plant"
+                        label="{i18n>Plant}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>Plant}"
+                                tooltip="{local>Plant}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        sortProperty="MRPResponsible"
+                        label="{i18n>MRPResponsible}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>MRPResponsible}"
+                                tooltip="{local>MRPResponsible}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        sortProperty="Customer"
+                        label="{i18n>Customer}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>Customer}"
+                                tooltip="{local>Customer}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        sortProperty="Material"
+                        label="{i18n>Material}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>Material}"
+                                tooltip="{local>Material}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        sortProperty="MaterialByCustomer"
+                        label="{i18n>MaterialByCustomer}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>MaterialByCustomer}"
+                                tooltip="{local>MaterialByCustomer}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <!-- <t:Column
+                        width="10rem"
+                        sortProperty="LineType"
+                        label="{i18n>LineType}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>LineType}"
+                                tooltip="{local>LineType}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column> -->
+                    <t:Column
+                        width="10rem"
+                        sortProperty="LineTypeText"
+                        label="{i18n>LineTypeText}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>LineTypeText}"
+                                tooltip="{local>LineTypeText}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        sortProperty="Unit"
+                        label="{i18n>Unit}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>Unit}"
+                                tooltip="{local>Unit}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        sortProperty="TotalQuantity"
+                        label="{i18n>TotalQuantity}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>TotalQuantity}"
+                                tooltip="{local>TotalQuantity}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
