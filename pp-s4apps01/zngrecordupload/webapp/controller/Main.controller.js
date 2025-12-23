@@ -27,7 +27,6 @@ sap.ui.define([
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-            sEmail = "xinlei.xu@sh.shin-china.com";
             var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -102,7 +101,7 @@ sap.ui.define([
                 var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                 var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
                 // read valid data starting from line 14
-                for (var i = 5; i < aSheetData.length; i++) {
+                for (var i = 10; i < aSheetData.length; i++) {
                     var item = {
                         "Status": "",
                         "Message": "",
