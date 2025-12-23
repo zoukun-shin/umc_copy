@@ -170,7 +170,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzproductionversionupload
@@ -180,7 +179,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzroutingupload
@@ -190,7 +188,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzofsplitrule
@@ -200,7 +197,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzmaterialrequisition
@@ -210,7 +206,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzbom
@@ -220,7 +215,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzemailmasterupload
@@ -230,7 +224,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzroutinglist
@@ -240,7 +233,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzorderforecastupload
@@ -250,7 +242,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzproductionorderrelease
@@ -260,7 +251,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzpickinglist
@@ -270,7 +260,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzledversioninfo
@@ -280,7 +269,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzmfgorderassignso
@@ -290,7 +278,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzcomponentusagelist
@@ -300,7 +287,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppofpartition
@@ -310,7 +296,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzmfgorderinfo
@@ -320,7 +305,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzledplannedordercomponent
@@ -330,7 +314,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppofsocomparison
@@ -340,7 +323,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppoflist
@@ -350,7 +332,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppproductionplan
@@ -360,7 +341,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzinventoryrequirement
@@ -370,7 +350,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzecn
@@ -380,7 +359,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzumespostingdatemgt
@@ -390,7 +368,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppecnmanagement
@@ -400,7 +377,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzalterandmainmater
@@ -410,7 +386,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzshippingplanupload
@@ -420,7 +395,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppfglabel
@@ -430,7 +404,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzngrecordupload
@@ -440,17 +413,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-- name: ppzngmanangement
-  type: html5
-  path: zngmanangement
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ppzmodelpoint
