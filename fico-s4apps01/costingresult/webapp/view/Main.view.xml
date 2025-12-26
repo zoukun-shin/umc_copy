@@ -61,6 +61,8 @@
                             <smartFilterBar:ControlConfiguration index='999' key="cc_204" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="cc_205" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="cc_209" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -68,7 +70,7 @@
         </f:header>
         <f:content>
             <smartTable:SmartTable id="idsmartTable" entitySet="CostingResult" smartFilterId="idSmartFilterBar" smartVariant="__SVM01" tableType="Table" persistencyKey="smartTable" header="{i18n>Results}" 
-                        placeToolbarInTable="true" showRowCount="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport">
+                        placeToolbarInTable="true" showRowCount="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" ignoredFields="CostRunID,UserEmail">
                 <table:Table id="idStandardListTable" rowMode="Auto" >
                     <table:columns>
                         <table:Column width="6rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">

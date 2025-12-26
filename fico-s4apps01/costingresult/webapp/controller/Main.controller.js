@@ -113,17 +113,134 @@ sap.ui.define([
             };
         },
         onBeforeExport: function (oEvent) {
+            var oSmartTable = this.byId("idsmartTable");
+            var oTable = oSmartTable.getTable();
+            var oFirstContext = oTable.getBinding("rows").getContexts()[0];
+            var sCurrency = oFirstContext.getObject().cc_waers;
+            if (sCurrency === "JPY" || sCurrency === "VND") {
+                var iScale = 0;
+            } else {
+                var iScale = 2;
+            }
             var mExcelSettings = oEvent.getParameter("exportSettings");
             var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
-            this._exportExcel(mExcelSettings, sFileName);
+            this._exportExcel(mExcelSettings, sFileName, iScale);
         },
 
-        _exportExcel: function (mExcelSettings, sFileName) {
+        _exportExcel: function (mExcelSettings, sFileName, iScale) {
             mExcelSettings.workbook.columns.forEach(function (oColumn) {
                 switch (oColumn.property) {
                     //  Date
                     case "CostDate":
                         oColumn.type = sap.ui.export.EdmType.Date;
+                        break;
+                    case "fc_total":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "fc_101":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "fc_102":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "fc_201":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "fc_202":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "fc_203":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "fc_204":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "fc_205":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "fc_209":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "cc_total":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = iScale;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "cc_101":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = iScale;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "cc_102":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = iScale;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "cc_201":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = iScale;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "cc_202":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = iScale;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "cc_203":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = iScale;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "cc_204":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = iScale;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "cc_205":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = iScale;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "cc_209":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = iScale;
+                        oColumn.textAlign = "End";
                         break;
                 }
             });
