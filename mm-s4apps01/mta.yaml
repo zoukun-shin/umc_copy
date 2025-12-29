@@ -47,14 +47,6 @@ modules:
       - mmsourcelistupload.zip
       name: mmsourcelistupload
       target-path: resources/
-    # - artifacts:
-    #   - mmpurinforecordupload.zip
-    #   name: mmpurinforecordupload
-    #   target-path: resources/
-    # - artifacts:
-    #   - mmpurinforecordchange.zip
-    #   name: mmpurinforecordchange
-    #   target-path: resources/
     - artifacts:
       - mmpochange.zip
       name: mmpochange
@@ -83,14 +75,18 @@ modules:
       - mmpoposting.zip
       name: mmpoposting
       target-path: resources/
-    - artifacts:  
+    - artifacts:
       - mmpurinfomasterlist.zip
       name: mmpurinfomasterlist
       target-path: resources/
     - artifacts:
       - mmzprworkflow.zip
       name: mmzprworkflow
-      target-path: resources/     
+      target-path: resources/
+    - artifacts:
+      - mmmasspostofscrap.zip
+      name: mmmasspostofscrap
+      target-path: resources/
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -100,24 +96,6 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
-# - name: mmpurinforecordupload
-#   type: html5
-#   path: purinforecordupload
-#   build-parameters:
-#     build-result: dist
-#     builder: custom
-#     commands:
-#     - npm run build:cf
-#     supported-platforms: []
-# - name: mmpurinforecordchange
-#   type: html5
-#   path: purinforecordchange
-#   build-parameters:
-#     build-result: dist
-#     builder: custom
-#     commands:
-#     - npm run build:cf
-#     supported-platforms: []
 - name: mmpochange
   type: html5
   path: pochange
@@ -199,6 +177,15 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
+- name: mmmasspostofscrap
+  type: html5
+  path: masspostofscrap
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: mm-s4apps01-uaa
   type: org.cloudfoundry.managed-service
@@ -233,3 +220,4 @@ resources:
     service-plan: app-host
 parameters:
   deploy_mode: html5-repo
+  enable-parallel-deployments: true
