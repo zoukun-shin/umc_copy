@@ -1,0 +1,76 @@
+<mvc:View controllerName="pp.modelshortage.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable" height="100%">
+    <f:DynamicPage>
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="ModelShortageSVM" showShare="true" showExecuteOnSelection="true" entitySet="ModelShortage"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ModelShortage" useToolbar="false" liveMode="false" smartVariant="__SVM01" persistencyKey="HeaderSFB" search="onSearch">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                            <smartFilterBar:ControlConfiguration index="20" key="MRPResponsible" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}"/>
+                            <smartFilterBar:ControlConfiguration index="30" key="OrderDate" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>OrderDate}">
+                                    <smartFilterBar:customControl>
+                                        <DateRangeSelection id="idDate" valueFormat="yyyy/MM/dd" displayFormat="yyyy/MM/dd" />
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration index='40' key="Material" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                            <smartFilterBar:ControlConfiguration index='50' key="MaterialType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MaterialType}"/>
+                            <smartFilterBar:ControlConfiguration index='60' key="DisplayUnit" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>DisplayUnit}">
+                                <smartFilterBar:customControl>
+                                    <ComboBox id="cbDisplayUnit" selectedKey="{local>/filter/Unit}">
+                                        <items>
+                                            <core:Item key="1" text="{i18n>Daily}" />
+                                            <core:Item key="2" text="{i18n>Weekly}" />
+                                        </items>
+                                    </ComboBox>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration index='70' key="DisplayUnassigned" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>DisplayUnassigned}">
+                                <smartFilterBar:customControl>
+                                    <ComboBox id="cbDisplayUnassigned" selectedKey="{local>/filter/Unassigned}">
+                                        <items>
+                                            <core:Item key="1" text="{i18n>No}"/>
+                                            <core:Item key="2" text="{i18n>Yes}"/>
+                                        </items>
+                                    </ComboBox>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <!-- visible -->
+                            <smartFilterBar:ControlConfiguration index='999' key="BaseUnit" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="DynamicData" visible="false"/>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <table:Table id="idTable" rows="{local>/resultSet}" rowMode="Interactive" class="sapUiSizeCompact"> 
+                <table:extension>
+                    <OverflowToolbar>
+                        <Text text="{i18n>Results}" visible="{= ${local>/resultSet}.length === 0}"/>
+                        <Text text="{i18n>Results}({= ${local>/resultSet}.length})" visible="{= ${local>/resultSet}.length > 0}"/>
+                        <ToolbarSpacer/>
+                        <Button icon="sap-icon://excel-attachment" type="Ghost" text="{i18n>Download}" press=".onExport" visible="{= ${local>/resultSet}.length > 0}" />
+                    </OverflowToolbar>
+                </table:extension>        
+            </table:Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
