@@ -109,14 +109,14 @@
                                 <ObjectStatus state="{ path: 'Type', formatter: '.formatter.setState' }" icon="{ path: 'Type', formatter: '.formatter.setStateIcon' }" />
                             </t:template>
                         </t:Column>
-                        <t:Column width="5rem" label="{i18n>Result}" sortProperty="ResultText">
+                        <!-- <t:Column width="5rem" label="{i18n>Result}" sortProperty="ResultText">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ResultText", "leadingProperty":"ResultText", "sortProperty":"ResultText", "filterProperty": "ResultText"}'/>
                             </t:customData>
                             <t:template>
                                 <Text text="{ path: 'Type', formatter: '.formatter.setResult' }" />
                             </t:template>
-                        </t:Column>
+                        </t:Column> -->
                         <t:Column width="12rem" label="{i18n>Message}" sortProperty="Message" filterProperty="Message">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Message", "leadingProperty":"Message", "sortProperty":"Message", "filterProperty": "Message"}'/>

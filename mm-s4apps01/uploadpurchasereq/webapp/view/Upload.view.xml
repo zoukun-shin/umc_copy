@@ -47,14 +47,14 @@
                                 }" />
                         </t:template>
                     </t:Column>
-                    <t:Column id="id37Column" width="5rem" sortProperty="Result" label="{i18n>Result}">
+                    <!-- <t:Column id="id37Column" width="5rem" sortProperty="Result" label="{i18n>Result}">
                         <t:template>
                             <Text id="idTypeText" text="{
                                     path: 'local>Type',
                                     formatter: '.formatter.setResult'
                                 }" />
                         </t:template>
-                    </t:Column>
+                    </t:Column> -->
                     <t:Column id="id38Column" width="14rem" sortProperty="Message" label="{i18n>Message}">
                         <t:template>
                             <Text id="idMessageText" text="{local>Message}" tooltip="{local>Message}" wrapping="false" />
