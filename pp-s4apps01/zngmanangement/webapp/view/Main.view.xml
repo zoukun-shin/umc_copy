@@ -19,7 +19,8 @@
                     <FlexBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="NG_Report" useToolbar="false" smartVariant="__SVM01" persistencyKey="NG_ReportSFB" search="onSearch">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <!-- mandatory="mandatory" -->
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="NG_No" visibleInAdvancedArea="true" label="{i18n>NG_No}"/>
                                 <smartFilterBar:ControlConfiguration index='30' key="MoveType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MoveType}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="MaterialType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MaterialType}"/>
@@ -47,8 +48,10 @@
                                 <smartFilterBar:ControlConfiguration index='260' key="IQC_PostBy" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>IQC_PostBy}"/>
                                 <smartFilterBar:ControlConfiguration index='270' key="IQC_PostAt" visibleInAdvancedArea="true" label="{i18n>IQC_PostAt}"/>
                                 <smartFilterBar:ControlConfiguration index='280' key="IQC_PostMaterialDocument" visibleInAdvancedArea="true" label="{i18n>IQC_PostMaterialDocument}"/>
+                                <smartFilterBar:ControlConfiguration index='290' key="ItemDeleteFlag" visibleInAdvancedArea="true" label="{i18n>DeleteFlag}"/>
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="NG_ItemNo" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="HeaderDeleteFlag" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="HeaderCreatedBy" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="HeaderCreatedAt" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="HeaderLastChangedBy" visible="false"/>
@@ -70,6 +73,17 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="IQC_LastChangedAt" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Status" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Message" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PlantName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MoveTypeText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialTypeText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="LocationFromName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="LocationTo1Name" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="LocationTo2Name" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AssemblyName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="WorkCenterText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="FactorText" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>

@@ -3,9 +3,10 @@
     xmlns:core="sap.ui.core"
     xmlns:layout="sap.ui.layout"
     xmlns:m="sap.m"
+    xmlns:f="sap.ui.layout.form"
     xmlns:smartForm="sap.ui.comp.smartform"
-    xmlns:smartField="sap.ui.comp.smartfield" controllerName="pp.zngmanangement.controller.Detail" height="100%">
-    <ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="true" showFooter="{local>/Control/showFooter}" showTitleInHeaderContent="true" upperCaseAnchorBar="false">
+    xmlns:smartField="sap.ui.comp.smartfield" controllerName="pp.zngmanangement.controller.Detail" height="100%" core:require="{ handler: 'pp/zngmanangement/controller/ValueHelpDialog' }">
+    <ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="true" showFooter="true" showTitleInHeaderContent="true" upperCaseAnchorBar="false">
         <headerTitle>
             <ObjectPageDynamicHeaderTitle>
                 <expandedHeading>
@@ -17,83 +18,112 @@
                     </m:FlexBox>
                 </snappedHeading>
                 <actions>
-                    <m:Button id="idButtonEdit" type="Emphasized" text="{i18n>Edit}" press="onEdit"/>
-                    <m:Button id="idButtonDelete" type="Transparent" text="{i18n>Delete}" press="onPressFunction('DELETE')"/>
+                    <m:Button id="idButtonEdit" type="Emphasized" text="{i18n>Edit}" press="onEdit" enabled="{= ${local>/authorityCheck/button/Edit}}" visible="{= ${local>/NG_Header/DeleteFlag} === false}"/>
+                    <m:Button id="idButtonDelete" type="Transparent" text="{i18n>Delete}" press="onPressFunction('DeleteNG')" enabled="{= ${local>/authorityCheck/button/DeleteNG}}" visible="{= ${local>/NG_Header/DeleteFlag} === false}"/>
                 </actions>
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>
         <sections>
             <ObjectPageSection id="idNG_Header" titleUppercase="false" title="{i18n>NG_Header}">
+                <heading>
+                    <m:MessageStrip id="idMessageStrip" text="{i18n>DeletedStatus}" type="Error" visible="false"/>
+                </heading>
                 <ObjectPageSubSection id="idNG_Header_SS" title="{i18n>NG_Header}" titleUppercase="false">
                     <blocks>
-                        <smartForm:SmartForm id="idNG_Header_SF" editable="true" validationMode="Async">
-                            <smartForm:layout>
-                                <smartForm:ColumnLayout columnsM="2" columnsL="3" columnsXL="4"/>
-                            </smartForm:layout>
-                            <smartForm:Group title="SmartFields with High importance">
-                                <smartForm:GroupElement>
-                                    <smartField:SmartField id="idPlant" textLabel="{i18n>Plant}" value="{Plant}" importance="High" mandatory="true" editable="true" change="onSmartFieldInputChange" maxLength="4">
-                                        <smartField:configuration>
-                                            <smartField:Configuration displayBehaviour="idAndDescription" />
-                                        </smartField:configuration>
-                                    </smartField:SmartField>
-                                </smartForm:GroupElement>
-                                <smartForm:GroupElement>
-                                    <smartField:SmartField textLabel="{i18n>MoveType}" value="{MoveType}" importance="High" mandatory="true" editable="{local>/Control/editable}" change="onSmartFieldInputChange" maxLength="2">
-                                        <smartField:configuration>
-                                            <smartField:Configuration displayBehaviour="idAndDescription" />
-                                        </smartField:configuration>
-                                    </smartField:SmartField>
-                                </smartForm:GroupElement>
-                                <smartForm:GroupElement>
-                                    <smartField:SmartField textLabel="{i18n>MaterialType}" value="{MaterialType}" importance="High" mandatory="true" editable="{local>/Control/editable}" change="onSmartFieldInputChange" maxLength="2">
-                                        <smartField:configuration>
-                                            <smartField:Configuration displayBehaviour="idAndDescription" />
-                                        </smartField:configuration>
-                                    </smartField:SmartField>
-                                </smartForm:GroupElement>
-                            </smartForm:Group>
-                            <smartForm:Group title="SmartFields with Medium importance">
-                                <smartForm:GroupElement>
-                                    <smartField:SmartField textLabel="{i18n>LocationFrom}" value="{LocationFrom}" importance="Medium" mandatory="true" editable="{local>/Control/editable}" change="onSmartFieldInputChange" maxLength="4">
-                                        <smartField:configuration>
-                                            <smartField:Configuration displayBehaviour="idAndDescription" />
-                                        </smartField:configuration>
-                                    </smartField:SmartField>
-                                    <smartField:SmartField textLabel="{i18n>LocationFromName}" value="{LocationFromName}" importance="High" />
-                                </smartForm:GroupElement>
-                                <smartForm:GroupElement>
-                                    <smartField:SmartField textLabel="{i18n>LocationTo1}" value="{LocationTo1}" importance="Medium" mandatory="true" editable="{local>/Control/editable}" change="onSmartFieldInputChange" maxLength="4">
-                                        <smartField:configuration>
-                                            <smartField:Configuration displayBehaviour="idAndDescription" />
-                                        </smartField:configuration>
-                                    </smartField:SmartField>
-                                    <smartField:SmartField textLabel="{i18n>LocationTo1Name}" value="{LocationTo1Name}" importance="High" />
-                                </smartForm:GroupElement>
-                                <smartForm:GroupElement>
-                                    <smartField:SmartField textLabel="{i18n>LocationTo2}" value="{LocationTo2}" importance="Medium" mandatory="true" editable="{local>/Control/editable}" change="onSmartFieldInputChange" maxLength="4">
-                                        <smartField:configuration>
-                                            <smartField:Configuration displayBehaviour="idAndDescription" />
-                                        </smartField:configuration>
-                                    </smartField:SmartField>
-                                    <smartField:SmartField textLabel="{i18n>LocationTo2Name}" value="{LocationTo2Name}" importance="High" />
-                                </smartForm:GroupElement>
-                            </smartForm:Group>
-                            <smartForm:Group title="SmartFields with Low importance">
-                                <smartForm:GroupElement>
-                                    <smartField:SmartField textLabel="{i18n>CreatedBy}" value="{CreatedBy}" importance="Medium"/>
-                                </smartForm:GroupElement>
-                                <smartForm:GroupElement>
-                                    <smartField:SmartField textLabel="{i18n>CreatedAt}" value="{CreatedAt}" importance="Medium"/>
-                                </smartForm:GroupElement>
-                                <smartForm:GroupElement>
-                                    <smartField:SmartField textLabel="{i18n>LastChangedBy}" value="{LastChangedBy}" importance="Medium"/>
-                                </smartForm:GroupElement>
-                                <smartForm:GroupElement>
-                                    <smartField:SmartField textLabel="{i18n>LastChangedAt}" value="{LastChangedAt}" importance="Medium"/>
-                                </smartForm:GroupElement>
-                            </smartForm:Group>
-                        </smartForm:SmartForm>
+                        <f:SimpleForm id="idNG_Header_SF" editable="true" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="4">
+                            <f:content>
+                                <core:Title text="{i18n>General}" />
+                                <m:Label text="{i18n>Plant}" required="true"/>
+                                <m:Text text="{ parts:[ 'local>/NG_Header/Plant','local>/NG_Header/PlantName'], formatter:'.formatter.formatCodeName' }"/>
+
+                                <m:Label text="{i18n>MoveType}" required="true"/>
+                                <m:Select id="idMoveType" items="{ path: 'local>/MoveTypeVH', sorter: { path: 'MoveType' } }" selectedKey="{local>/NG_Header/MoveType}" showSecondaryValues="true" change="onMoveTypeChange" editable="{local>/Control/editable}">
+                                    <m:items>
+                                        <core:Item key="{local>MoveType}" text="{local>MoveType} ({local>MoveTypeText})" />
+                                    </m:items>
+                                </m:Select>
+
+                                <m:Label text="{i18n>MaterialType}" required="true"/>
+                                <m:Select id="idMaterialType" items="{ path: 'local>/MaterialTypeVH', sorter: { path: 'MaterialType' } }" selectedKey="{local>/NG_Header/MaterialType}" showSecondaryValues="true" editable="{local>/Control/editable}">
+                                    <m:items>
+                                        <core:Item key="{local>MaterialType}" text="{local>MaterialType} ({local>MaterialTypeText})" />
+                                    </m:items>
+                                </m:Select>
+
+                                <m:Label text="{i18n>LocationFrom}" required="true"/>
+                                <m:Text text="{ parts:[ 'local>/NG_Header/LocationFrom','local>/NG_Header/LocationFromName'], formatter:'.formatter.formatCodeName' }" visible="{= ${local>/Control/editable} === false}"/>
+                                <m:Input value="{local>/NG_Header/LocationFrom}" visible="{local>/Control/editable}" required="true" maxLength="4" change="onInputChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
+                                $event, $controller, '/I_StorageLocationStdVH', ['StorageLocation', 'StorageLocationName'], ['StorageLocation', 'StorageLocationName'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }">
+                                    <m:suggestionColumns>
+                                        <m:Column>
+                                            <m:Label text="{i18n>StorageLocation}"/>
+                                        </m:Column>
+                                        <m:Column>
+                                            <m:Label text="{i18n>StorageLocationName}"/>
+                                        </m:Column>
+                                    </m:suggestionColumns>
+                                    <m:suggestionRows>
+                                        <m:ColumnListItem>
+                                            <m:Label text="{StorageLocation}" />
+                                            <m:Label text="{StorageLocationName}" />
+                                        </m:ColumnListItem>
+                                    </m:suggestionRows>
+                                </m:Input>
+
+                                <m:Label text="{i18n>LocationTo1}" required="true" />
+                                <m:Text text="{ parts:[ 'local>/NG_Header/LocationTo1','local>/NG_Header/LocationTo1Name'], formatter:'.formatter.formatCodeName' }" visible="{= ${local>/Control/editable} === false}"/>
+                                <m:Input value="{local>/NG_Header/LocationTo1}" visible="{local>/Control/editable}" required="true" maxLength="4" change="onInputChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
+                                $event, $controller, '/I_StorageLocationStdVH', ['StorageLocation', 'StorageLocationName'], ['StorageLocation', 'StorageLocationName'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }">
+                                    <m:suggestionColumns>
+                                        <m:Column>
+                                            <m:Label text="{i18n>StorageLocation}"/>
+                                        </m:Column>
+                                        <m:Column>
+                                            <m:Label text="{i18n>StorageLocationName}"/>
+                                        </m:Column>
+                                    </m:suggestionColumns>
+                                    <m:suggestionRows>
+                                        <m:ColumnListItem>
+                                            <m:Label text="{StorageLocation}" />
+                                            <m:Label text="{StorageLocationName}" />
+                                        </m:ColumnListItem>
+                                    </m:suggestionRows>
+                                </m:Input>
+
+                                <m:Label id="idLocationTo2Label" text="{i18n>LocationTo2}" />
+                                <m:Text id="idLocationTo2Text" text="{ parts:[ 'local>/NG_Header/LocationTo2','local>/NG_Header/LocationTo2Name'], formatter:'.formatter.formatCodeName' }" visible="{= ${local>/Control/editable} === false}"/>
+                                <m:Input id="idLocationTo2Input" value="{local>/NG_Header/LocationTo2}" visible="{= ${local>/Control/editable} &amp;&amp; ${local>/NG_Header/MoveType} === '2'}" maxLength="4" change="onInputChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
+                                $event, $controller, '/I_StorageLocationStdVH', ['StorageLocation', 'StorageLocationName'], ['StorageLocation', 'StorageLocationName'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }">
+                                    <m:suggestionColumns>
+                                        <m:Column>
+                                            <m:Label text="{i18n>StorageLocation}"/>
+                                        </m:Column>
+                                        <m:Column>
+                                            <m:Label text="{i18n>StorageLocationName}"/>
+                                        </m:Column>
+                                    </m:suggestionColumns>
+                                    <m:suggestionRows>
+                                        <m:ColumnListItem>
+                                            <m:Label text="{StorageLocation}" />
+                                            <m:Label text="{StorageLocationName}" />
+                                        </m:ColumnListItem>
+                                    </m:suggestionRows>
+                                </m:Input>
+
+                                <core:Title text="{i18n>Administrative}" />
+                                <m:Label text="{i18n>CreatedBy}" />
+                                <m:Text text="{ parts:[ 'local>/NG_Header/CreatedBy','local>/NG_Header/CreatedByName'], formatter:'.formatter.formatCodeName' }"/>
+
+                                <m:Label text="{i18n>CreatedAt}" />
+                                <m:Text text="{ path: 'local>/NG_Header/CreatedAt', 'type':'sap.ui.model.type.Date' }"/>
+
+                                <m:Label text="{i18n>LastChangedBy}" />
+                                <m:Text text="{ parts:[ 'local>/NG_Header/LastChangedBy','local>/NG_Header/LastChangedByName'], formatter:'.formatter.formatCodeName' }"/>
+
+                                <m:Label text="{i18n>LastChangedAt}" />
+                                <m:Text text="{ path: 'local>/NG_Header/LastChangedAt', 'type':'sap.ui.model.type.Date' }"/>
+                            </f:content>
+                        </f:SimpleForm>
                     </blocks>
                 </ObjectPageSubSection>
             </ObjectPageSection>
@@ -118,8 +148,8 @@
             <m:OverflowToolbar>
                 <m:Button type="Emphasized" icon="sap-icon://alert" text="{= ${message>/}.length }" visible="{= ${message>/}.length > 0}" press="onMessagePopoverPress" />
                 <m:ToolbarSpacer/>
-                <m:Button type="Emphasized" text="{i18n>Save}" press="onPressFunction('SAVE')"/>
-                <m:Button type="Transparent" text="{i18n>Cancel}" press="onCancel"/>
+                <m:Button type="Emphasized" text="{i18n>Save}" press="onPressFunction('Save')" enabled="{= ${local>/authorityCheck/button/Save}}" visible="{local>/Control/showFooter}"/>
+                <m:Button type="Transparent" text="{i18n>Cancel}" press="onCancel" visible="{local>/Control/showFooter}"/>
             </m:OverflowToolbar>
         </footer>
     </ObjectPageLayout>

@@ -6,27 +6,27 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <table:Table id="idNG_Item_IQCTable" rows="{local>/NG_Item}" selectionMode="Multi" rowMode="Interactive" class="sapUiSizeCompact">
+    <table:Table id="idNG_Item_IQCTable" rows="{local>/NG_Header/to_NG_Item/results}" rowSelectionChange="rowSelectionChange" selectionBehavior="Row" fixedColumnCount="2" selectionMode="Multi" rowMode="Interactive" class="sapUiSizeCompact">
         <table:extension>
             <OverflowToolbar>
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://clear-all" type="Ghost" text="{i18n>ClearLine}" press="onNG_ItemIQC($event,'CLEAR')" />
+                <Button id="idNGItemIQCClearBtn" icon="sap-icon://clear-all" type="Ghost" text="{i18n>ClearLine}" press="onNG_ItemIQC($event,'CLEAR')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === true ? false : true}"/>
             </OverflowToolbar>
         </table:extension>
         <table:columns>
-            <table:Column width="8rem" label="{i18n>NG_ItemNo}">
+            <table:Column width="3.5rem" label="{i18n>DeleteFlag}">
+                <table:template>
+                    <Button icon="{ path: 'local>DeleteFlag', formatter:'.formatter.formatDeleteFlagButton'}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="7rem" label="{i18n>NG_ItemNo}">
                 <table:template>
                     <Text text="{local>NG_ItemNo}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>NG_Material}">
+            <table:Column width="20rem" label="{i18n>NG_Material}">
                 <table:template>
-                    <Text text="{local>Material}" wrapping="false"/>
-                </table:template>
-            </table:Column>
-            <table:Column width="10rem" label="{i18n>NG_MaterialName}">
-                <table:template>
-                    <Text text="{local>MaterialName}" wrapping="false"/>
+                    <Text text="{ parts:[ 'local>Material','local>MaterialName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
                 </table:template>
             </table:Column>
             <table:Column width="10rem" label="{i18n>Quantity}" hAlign="End">
@@ -34,7 +34,8 @@
                     <Text text="{local>Quantity} {local>BaseUnit}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="15rem" label="{i18n>IQC_NG_Quantity}" hAlign="End">
+            <table:Column width="15rem" hAlign="End">
+                <Label text="{i18n>IQC_NG_Quantity}" required="true"/>
                 <table:template>
                     <Input value="{ path: 'local>IQC_NG_Quantity',
                                     type: 'sap.ui.model.type.Float',
@@ -43,10 +44,11 @@
                                         groupingSeparator: ',',
                                         decimalSeparator: '.'
                                     } 
-                                  }" description="{local>BaseUnit}" fieldWidth="80%" editable="{local>/Control/editable}"/>
+                                  }" description="{local>BaseUnit}" fieldWidth="80%" required="true" editable="{= ${local>/Control/editable} &amp;&amp; ${local>Move1PostStatus} === 'P' &amp;&amp; ${local>IQC_PostStatus} === ''}"/>
                 </table:template>
             </table:Column>
-            <table:Column width="15rem" label="{i18n>IQC_OK_Quantity}" hAlign="End">
+            <table:Column width="15rem" hAlign="End">
+                <Label text="{i18n>IQC_OK_Quantity}" required="true"/>
                 <table:template>
                     <Input value="{ path: 'local>IQC_OK_Quantity',
                                     type: 'sap.ui.model.type.Float',
@@ -55,37 +57,38 @@
                                         groupingSeparator: ',',
                                         decimalSeparator: '.'
                                     } 
-                                  }" description="{local>BaseUnit}" fieldWidth="80%" editable="{local>/Control/editable}"/>
+                                  }" description="{local>BaseUnit}" fieldWidth="80%" required="true" editable="{= ${local>/Control/editable} &amp;&amp; ${local>Move1PostStatus} === 'P' &amp;&amp; ${local>IQC_PostStatus} === ''}"/>
                 </table:template>
             </table:Column>
-            <table:Column width="15rem" label="{i18n>IQC_ApprovedBy}">
+            <table:Column width="15rem">
+                <Label text="{i18n>IQC_ApprovedBy}" required="true"/>
                 <table:template>
-                    <Input value="{local>IQC_ApprovedBy}" editable="{local>/Control/editable}"/>
+                    <Input value="{local>IQC_ApprovedBy}" required="true" editable="{= ${local>/Control/editable} &amp;&amp; ${local>Move1PostStatus} === 'P' &amp;&amp; ${local>IQC_PostStatus} === ''}"/>
                 </table:template>
             </table:Column>
             <table:Column width="20rem" label="{i18n>IQC_Remark}">
                 <table:template>
-                    <Input value="{local>IQC_Remark}" editable="{local>/Control/editable}"/>
+                    <Input value="{local>IQC_Remark}" editable="{= ${local>/Control/editable} &amp;&amp; ${local>Move1PostStatus} === 'P' &amp;&amp; ${local>IQC_PostStatus} === ''}"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>IQC_CreatedBy}" visible="{= ${local>/Operation} !== 'Create'}">
+            <table:Column width="15rem" label="{i18n>IQC_CreatedBy}" visible="{= ${local>/Operation} !== 'Create'}">
                 <table:template>
-                    <Text text="{local>IQC_CreatedBy}" wrapping="false"/>
+                    <Text text="{ parts:[ 'local>IQC_CreatedBy','local>IQC_CreatedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>IQC_CreatedAt}" visible="{= ${local>/Operation} !== 'Create'}">
+            <table:Column width="15rem" label="{i18n>IQC_CreatedAt}" visible="{= ${local>/Operation} !== 'Create'}">
                 <table:template>
-                    <Text text="{local>IQC_CreatedAt}" wrapping="false"/>
+                    <Text text="{ path: 'local>IQC_CreatedAt', 'type':'sap.ui.model.type.Date' }" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>IQC_LastChangedBy}" visible="{= ${local>/Operation} !== 'Create'}">
+            <table:Column width="15rem" label="{i18n>IQC_LastChangedBy}" visible="{= ${local>/Operation} !== 'Create'}">
                 <table:template>
-                    <Text text="{local>IQC_LastChangedBy}" wrapping="false"/>
+                    <Text text="{ parts:[ 'local>IQC_LastChangedBy','local>IQC_LastChangedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>IQC_LastChangedAt}" visible="{= ${local>/Operation} !== 'Create'}">
+            <table:Column width="15rem" label="{i18n>IQC_LastChangedAt}" visible="{= ${local>/Operation} !== 'Create'}">
                 <table:template>
-                    <Text text="{local>IQC_LastChangedAt}" wrapping="false"/>
+                    <Text text="{ path: 'local>IQC_LastChangedAt', 'type':'sap.ui.model.type.Date' }" wrapping="false"/>
                 </table:template>
             </table:Column>
         </table:columns>

@@ -17,15 +17,24 @@ sap.ui.define([
         // Create local Model
         createLocalModel: function () {
             var oModel = new JSONModel({
+                NG_Header: {
+                    NG_No: "",
+                    Plant: "",
+                    PlantName: "",
+                    to_NG_Item: {
+                        results: []
+                    }
+                },
                 Control: {
+                    requiredSelection: false,
+                    enabled: false,
                     editable: false,
                     showFooter: false
                 },
-                NG_Header: {
-                    Plant: ""
-                },
-                NG_Item: [],
-                NG_ItemIQC: []
+                MessageItems: [],
+                OperationLogs: [],
+                MoveTypeVH: [],
+                MaterialTypeVH: []
             });
             return oModel;
         },

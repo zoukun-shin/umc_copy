@@ -1,0 +1,88 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Dialog draggable="true">
+        <content>
+            <table:Table rows="{local>/OperationLogs}" rowSelectionChange="rowSelectionChange" selectionBehavior="Row" fixedColumnCount="2" selectionMode="Single" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:columns>
+                    <table:Column width="3.5rem" label="{i18n>Seq}">
+                        <table:template>
+                            <Text text="{local>Seq}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PostType}">
+                        <table:template>
+                            <Text text="{ parts:[ 'local>PostType','local>PostTypeText'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="5rem" label="{i18n>Status}">
+                        <table:template>
+                            <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="{ path:'local>Status', formatter:'.formatter.formatStateIcon'}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="40rem" label="{i18n>Message}">
+                        <table:template>
+                            <Text text="{local>Message}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>PostBy}">
+                        <table:template>
+                            <Text text="{ parts:[ 'local>PostBy','local>PostByName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>PostAt}">
+                        <table:template>
+                            <Text text="{ path: 'local>PostAt', 'type':'sap.ui.model.type.Date' }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>MaterialDocument}">
+                        <table:template>
+                            <Text text="{local>MaterialDocument}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- <table:Column width="8rem" label="{i18n>LocationFrom}">
+                        <table:template>
+                            <Text text="{local>LocationFrom}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>LocationTo1}">
+                        <table:template>
+                            <Text text="{local>LocationTo1}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>LocationTo2}">
+                        <table:template>
+                            <Text text="{local>LocationTo2}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>NG_Material}">
+                        <table:template>
+                            <Text text="{local>Material}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>NG_MaterialName}">
+                        <table:template>
+                            <Text text="{local>MaterialName}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>Quantity}" hAlign="End">
+                        <table:template>
+                            <Text text="{local>Quantity} {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>IQC_NG_Quantity}" hAlign="End">
+                        <table:template>
+                            <Text text="{local>IQC_NG_Quantity} {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>IQC_OK_Quantity}" hAlign="End">
+                        <table:template>
+                            <Text text="{local>IQC_OK_Quantity} {local>BaseUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column> -->
+                </table:columns>
+            </table:Table>
+        </content>
+    </Dialog>
+</core:FragmentDefinition>

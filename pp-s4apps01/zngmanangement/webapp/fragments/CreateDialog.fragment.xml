@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core" core:require="{ handler: 'pp/zngmanangement/controller/ValueHelpDialog' }">
+    <Dialog title="{i18n>Create}">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <Label text="{i18n>Plant}" labelFor="idSubmitPlant"/>
+                <Input id="idSubmitPlant" value="{local>/NG_Header/Plant}" required="true" maxLength="4" showValueHelp="true" width="100%" valueHelpRequest="handler.onValueHelpRequested(
+                $event, $controller, '/I_Plant', ['Plant', 'PlantName'], ['Plant', 'PlantName'])" liveChange="onPlantLiveChange" change="onInputChange" showSuggestion="true" suggestionRows="{ path: '/I_Plant', length: 4 }">
+                    <suggestionColumns>
+                        <Column>
+                            <Label text="{i18n>Plant}"/>
+                        </Column>
+                        <Column>
+                            <Label text="{i18n>PlantName}"/>
+                        </Column>
+                    </suggestionColumns>
+                    <suggestionRows>
+                        <ColumnListItem>
+                            <Label text="{Plant}" />
+                            <Label text="{PlantName}" />
+                        </ColumnListItem>
+                    </suggestionRows>
+                </Input>
+            </VBox>
+        </content>
+    </Dialog>
+</core:FragmentDefinition>

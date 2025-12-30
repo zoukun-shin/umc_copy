@@ -139,14 +139,14 @@
       "routes": [
         {
           "name": "Main",
-          "pattern": "",
+          "pattern": ":?sap-iapp-state:",
           "target": [
             "Main"
           ]
         },
         {
           "name": "Detail",
-          "pattern": "Detail/{NG_No}",
+          "pattern": "Detail('{NG_No}'):?sap-iapp-state:",
           "target": [
             "Detail"
           ]

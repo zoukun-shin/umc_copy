@@ -7,13 +7,15 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/Input",
-    "sap/m/BusyDialog"
-], function (Label, FilterGroupItem, SearchField, UIColumn, Text, Filter, FilterOperator, Input, BusyDialog) {
+    "sap/m/BusyDialog",
+    "sap/ui/core/Messaging"
+], function (Label, FilterGroupItem, SearchField, UIColumn, Text, Filter, FilterOperator, Input, BusyDialog, Messaging) {
     "use strict";
 
     return {
 
         onValueHelpRequested: function (oEvent, that, sPath, aVHFields, aFilterFields) {
+            Messaging.removeAllMessages();
             that._oInput = oEvent.getSource();
             that._aVHFields = aVHFields;
             that._sValueHelpPath = sPath;
@@ -49,7 +51,7 @@ sap.ui.define([
                         }));
                     }
                 }
-                if (sPath === "/ZC_ProductVH" || sPath === "/ZC_WorkCenterVH" || sPath === "/ZC_CustomerCompanyByPlant") {
+                if (sPath === "/I_StorageLocationStdVH" || sPath === "/ZC_ProductVH" || sPath === "/ZC_WorkCenterVH" || sPath === "/ZC_CustomerCompanyByPlant") {
                     if (headSet.Plant) {
                         aFilters.push(new Filter({
                             path: "Plant",
@@ -101,18 +103,26 @@ sap.ui.define([
                                 }
                             }
                         });
+                        var sWidth = "";
                         that._aVHFields.forEach(fieldName => {
-                            if (fieldName !== "UUID") {
-                                var oColumn = new UIColumn({
-                                    width: fieldName === "MailAddress" ? "15rem" : "10rem",
-                                    label: new Label({ text: "{i18n>" + fieldName + "}" }),
-                                    template: new Text({ wrapping: false, text: "{" + fieldName + "}" })
-                                });
-                                oColumn.data({
-                                    fieldName: fieldName
-                                });
-                                oTable.addColumn(oColumn);
+                            switch (fieldName) {
+                                case "PlantName":
+                                case "StorageLocationName":
+                                    sWidth = "20rem";
+                                    break;
+                                default:
+                                    sWidth = "10rem";
+                                    break;
                             }
+                            var oColumn = new UIColumn({
+                                width: sWidth,
+                                label: new Label({ text: "{i18n>" + fieldName + "}" }),
+                                template: new Text({ wrapping: false, text: "{" + fieldName + "}" })
+                            });
+                            oColumn.data({
+                                fieldName: fieldName
+                            });
+                            oTable.addColumn(oColumn);
                         });
                     }
                     oDialog.update();
@@ -160,7 +170,8 @@ sap.ui.define([
                     }));
                 }
             }
-            if (this._sValueHelpPath === "/ZC_ProductVH" ||
+            if (this._sValueHelpPath === "/I_StorageLocationStdVH" ||
+                this._sValueHelpPath === "/ZC_ProductVH" ||
                 this._sValueHelpPath === "/ZC_WorkCenterVH" ||
                 this._sValueHelpPath === "/ZC_CustomerCompanyByPlant") {
                 if (headSet.Plant) {
@@ -170,6 +181,15 @@ sap.ui.define([
                         value1: headSet.Plant
                     }));
                 }
+            }
+
+            // Fixed bug
+            if (this._sValueHelpPath === "/I_Plant") {
+                aFilters.push(new Filter({
+                    path: "Plant",
+                    operator: FilterOperator.NE,
+                    value1: "XyxY"
+                }));
             }
 
             var oFilter = new Filter({
@@ -194,8 +214,6 @@ sap.ui.define([
             }
             //--------------------------------------------------------------------------------
             var sInputPath = this._oInput.mBindingInfos.value.parts[0].path;
-            var _myBusyDialog = new BusyDialog();
-            _myBusyDialog.open();
             if (sInputPath.includes("/")) {
                 // head bind
                 this.getModel("local").setProperty(sInputPath, sKey);
@@ -204,8 +222,14 @@ sap.ui.define([
                 } else {
                     this.getModel("local").setProperty(sInputPath + "Name", "");
                 }
+
                 var sODataPath;
                 var sPlant = this.getModel("local").getProperty("/NG_Header/Plant");
+
+                if (this._oSubmitDialog && this._oSubmitDialog.getButtons().length > 0) {
+                    this._oSubmitDialog.getButtons()[0].setEnabled(sPlant.length > 0);
+                }
+
                 switch (sInputPath) {
                     case "/ItemEdit/ProductionOrder":
                         sODataPath = "/ZC_ManufacturingOrderProductVH" + "(ManufacturingOrder='" + sKey + "',Item='" + sText + "',ProductionPlant='" + sPlant + "')";
@@ -224,47 +248,52 @@ sap.ui.define([
                         sODataPath = "/ZC_CustomerCompanyByPlant(Customer='" + sCustomer + "',Plant='" + sPlant + "')";
                         break;
                     default:
+                        this._oInput.setValueState("None");
                         break;
                 }
-                this._CallODataV2("READ", sODataPath).then(function (context) {
-                    _myBusyDialog.close();
-                    if (context) {
-                        this._oInput.setValueState("None");
-                        switch (sInputPath) {
-                            case "/ItemEdit/ProductionOrder":
-                                this.getModel("local").setProperty("/ItemEdit/Material", context["Product"]);
-                                this.getModel("local").setProperty("/ItemEdit/MaterialName", context["ProductDescription"]);
-                                this.getModel("local").setProperty("/ItemEdit/Assembly", context["Assembly"]);
-                                this.getModel("local").setProperty("/ItemEdit/WorkCenter", context["WorkCenter"]);
-                                this.getModel("local").setProperty("/ItemEdit/WorkCenterText", context["WorkCenterText"]);
-                                this.getModel("local").setProperty("/ItemEdit/BaseUnit", context["BaseUnit"]);
-                                break;
-                            case "/ItemEdit/Material":
-                                this.getModel("local").setProperty("/ItemEdit/Material", context["Material"]);
-                                this.getModel("local").setProperty("/ItemEdit/MaterialName", context["MaterialDescription"]);
-                                this.getModel("local").setProperty("/ItemEdit/BaseUnit", context["BaseUnit"]);
-                                break;
-                            case "/ItemEdit/WorkCenter":
-                                this.getModel("local").setProperty("/ItemEdit/WorkCenter", context["WorkCenter"]);
-                                this.getModel("local").setProperty("/ItemEdit/WorkCenterText", context["WorkCenterText"]);
-                                break;
-                            case "/ItemEdit/Factor":
-                                this.getModel("local").setProperty("/ItemEdit/Factor", context["Factor"]);
-                                this.getModel("local").setProperty("/ItemEdit/FactorText", context["FactorText"]);
-                                break;
-                            case "/ItemEdit/Customer":
-                                this.getModel("local").setProperty("/ItemEdit/Customer", context["Customer"]);
-                                this.getModel("local").setProperty("/ItemEdit/CustomerName", context["CustomerName"]);
-                                break;
-                            default:
-                                break;
+                if (sODataPath) {
+                    var _myBusyDialog = new BusyDialog();
+                    _myBusyDialog.open();
+                    this._CallODataV2("READ", sODataPath).then(function (context) {
+                        _myBusyDialog.close();
+                        if (context) {
+                            this._oInput.setValueState("None");
+                            switch (sInputPath) {
+                                case "/ItemEdit/ProductionOrder":
+                                    this.getModel("local").setProperty("/ItemEdit/Material", context["Product"]);
+                                    this.getModel("local").setProperty("/ItemEdit/MaterialName", context["ProductDescription"]);
+                                    this.getModel("local").setProperty("/ItemEdit/Assembly", context["Assembly"]);
+                                    this.getModel("local").setProperty("/ItemEdit/WorkCenter", context["WorkCenter"]);
+                                    this.getModel("local").setProperty("/ItemEdit/WorkCenterText", context["WorkCenterText"]);
+                                    this.getModel("local").setProperty("/ItemEdit/BaseUnit", context["BaseUnit"]);
+                                    break;
+                                case "/ItemEdit/Material":
+                                    this.getModel("local").setProperty("/ItemEdit/Material", context["Material"]);
+                                    this.getModel("local").setProperty("/ItemEdit/MaterialName", context["MaterialDescription"]);
+                                    this.getModel("local").setProperty("/ItemEdit/BaseUnit", context["BaseUnit"]);
+                                    break;
+                                case "/ItemEdit/WorkCenter":
+                                    this.getModel("local").setProperty("/ItemEdit/WorkCenter", context["WorkCenter"]);
+                                    this.getModel("local").setProperty("/ItemEdit/WorkCenterText", context["WorkCenterText"]);
+                                    break;
+                                case "/ItemEdit/Factor":
+                                    this.getModel("local").setProperty("/ItemEdit/Factor", context["Factor"]);
+                                    this.getModel("local").setProperty("/ItemEdit/FactorText", context["FactorText"]);
+                                    break;
+                                case "/ItemEdit/Customer":
+                                    this.getModel("local").setProperty("/ItemEdit/Customer", context["Customer"]);
+                                    this.getModel("local").setProperty("/ItemEdit/CustomerName", context["CustomerName"]);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        } else {
+                            this._oInput.setValueState("Error");
                         }
-                    } else {
-                        this._oInput.setValueState("Error");
-                    }
-                }.bind(this), function (oError) {
-                    _myBusyDialog.close();
-                }.bind(this));
+                    }.bind(this), function (oError) {
+                        _myBusyDialog.close();
+                    }.bind(this));
+                }
             }
             //--------------------------------------------------------------------------------
             this._oVHD.close();

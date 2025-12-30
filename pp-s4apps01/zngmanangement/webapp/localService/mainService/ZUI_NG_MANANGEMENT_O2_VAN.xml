@@ -29,6 +29,77 @@
     </edmx:Reference>
     <edmx:DataServices>
         <Schema Namespace="zui_ng_manangement_o2_van.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/BPAddrCityName">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/BPAddrStreetName">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/CustomerAccountGroup">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/AuthorizationGroup">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/IsBusinessPurposeCompleted">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/BusinessPartnerType">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataControllerSet">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController1">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController2">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController3">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController4">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController5">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController6">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController7">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController8">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController9">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController10">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/IsCompetitor">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.I_StorageLocationStdVHType">
                 <Annotation Term="UI.LineItem">
                     <Collection>
@@ -43,6 +114,62 @@
                         </Record>
                     </Collection>
                 </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/AuthorizationGroup">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/SupplierAccountGroup">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/IsBusinessPurposeCompleted">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataControllerSet">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController1">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController2">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController3">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController4">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController5">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController6">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController7">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController8">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController9">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController10">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_CustomerCompanyByPlantType">
                 <Annotation Term="UI.LineItem">
@@ -83,6 +210,9 @@
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_ManufacturingOrderProductVHType/WorkCenter">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.ZC_ManufacturingOrderProductVHType/WorkCenterText">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/Delete_mc">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
@@ -100,6 +230,15 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="LocationFromName"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_ItemType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CustomerName"/>
                         </Record>
                     </Collection>
                 </Annotation>

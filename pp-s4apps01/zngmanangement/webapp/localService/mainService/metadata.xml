@@ -42,6 +42,48 @@
     </edmx:Reference>
     <edmx:DataServices m:DataServiceVersion="2.0">
         <Schema Namespace="cds_zui_ng_manangement_o2" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="I_ConfignDeprecationCodeType" sap:label="Configuration Deprecation Code" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ConfigurationDeprecationCode"/>
+                </Key>
+                <Property Name="ConfigurationDeprecationCode" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:text="ConfigurationDeprecationCode_Text" sap:label="Validity" sap:quickinfo="Deprecated Entries"/>
+                <Property Name="ConfigurationDeprecationCode_Text" Type="Edm.String" MaxLength="60" sap:label="Validity Text" sap:quickinfo="Value Help: Flag Obsolete Entries" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
+            <EntityType Name="I_Customer_VHType" sap:label="Customer" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Customer"/>
+                </Key>
+                <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="BPCustomerName" sap:label="Customer" sap:quickinfo="Customer Number"/>
+                <Property Name="OrganizationBPName1" Type="Edm.String" MaxLength="35" sap:label="Customer Name 1" sap:quickinfo="Name"/>
+                <Property Name="BusinessPartnerName1" Type="Edm.String" MaxLength="40" sap:label="Business Partner Name 1" sap:quickinfo="Name 1"/>
+                <Property Name="OrganizationBPName2" Type="Edm.String" MaxLength="35" sap:label="Customer Name 2" sap:quickinfo="Name 2"/>
+                <Property Name="BusinessPartnerName2" Type="Edm.String" MaxLength="40" sap:label="Business Partner Name 2" sap:quickinfo="Name 2"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country/Region" sap:quickinfo="Country/Region Key"/>
+                <Property Name="CityName" Type="Edm.String" MaxLength="35" sap:label="City"/>
+                <Property Name="BPAddrCityName" Type="Edm.String" MaxLength="40" sap:label="Business Partner Address City" sap:quickinfo="City"/>
+                <Property Name="StreetName" Type="Edm.String" MaxLength="35" sap:label="Street" sap:quickinfo="Street and House Number"/>
+                <Property Name="BPAddrStreetName" Type="Edm.String" MaxLength="60" sap:label="Business Partner Address Street" sap:quickinfo="Street"/>
+                <Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Postal Code"/>
+                <Property Name="CustomerName" Type="Edm.String" MaxLength="80" sap:label="Customer Name" sap:quickinfo="Name of Customer"/>
+                <Property Name="BPCustomerName" Type="Edm.String" MaxLength="81" sap:label="Business Partner Customer Name" sap:quickinfo="Customer Name"/>
+                <Property Name="CustomerAccountGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Account Group" sap:quickinfo="Customer Account Group"/>
+                <Property Name="AuthorizationGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Authorization" sap:quickinfo="Authorization Group"/>
+                <Property Name="IsBusinessPurposeCompleted" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Purpose Complete Flag" sap:quickinfo="Business Purpose Completed Flag"/>
+                <Property Name="IsCompetitor" Type="Edm.Boolean" sap:label="Competitors" sap:quickinfo="Indicator: Competitor"/>
+                <Property Name="BusinessPartner" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Business Partner" sap:quickinfo="Business Partner Number"/>
+                <Property Name="BusinessPartnerType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Business Partner Type"/>
+                <Property Name="DataControllerSet" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Data Ctrlr. Set" sap:quickinfo="BP: Data Controller Set Flag"/>
+                <Property Name="DataController1" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController2" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController3" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController4" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController5" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController6" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController7" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController8" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController9" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController10" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+            </EntityType>
             <EntityType Name="I_MaterialDocumentHeader_2Type" sap:label="Material Document Header" sap:value-list="true" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="MaterialDocumentYear"/>
@@ -64,15 +106,15 @@
                 <Property Name="ManualPrintIsTriggered" Type="Edm.Boolean" sap:label="Print Active" sap:quickinfo="Print via Output Control"/>
                 <Property Name="CtrlPostgForExtWhseMgmtSyst" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="External WMS Control" sap:quickinfo="Control Posting for External WMS"/>
             </EntityType>
-            <EntityType Name="I_PlantType" sap:label="Plant" sap:value-list="true" sap:content-version="1">
+            <EntityType Name="I_PlantType" sap:label="Plant" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Plant"/>
                 </Key>
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="PlantName" sap:label="Plant"/>
                 <Property Name="PlantName" Type="Edm.String" MaxLength="30" sap:label="Plant Name"/>
                 <Property Name="ValuationArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Area"/>
-                <Property Name="PlantCustomer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer No Plant" sap:quickinfo="Customer Number of Plant"/>
-                <Property Name="PlantSupplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Sppl. No. Plnt" sap:quickinfo="Supplier Number of Plant"/>
+                <Property Name="PlantCustomer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer No Plant" sap:quickinfo="Customer Number of Plant" sap:value-list="standard"/>
+                <Property Name="PlantSupplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Sppl. No. Plnt" sap:quickinfo="Supplier Number of Plant" sap:value-list="standard"/>
                 <Property Name="FactoryCalendar" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Factory Calendar" sap:quickinfo="Factory calendar key"/>
                 <Property Name="DefaultPurchasingOrganization" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Purch. Organization" sap:quickinfo="Purchasing Organization"/>
                 <Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sls Organization ICB" sap:quickinfo="Sales Organization for Intercompany Billing"/>
@@ -84,19 +126,51 @@
                 <Property Name="IsMarkedForArchiving" Type="Edm.Boolean" sap:label="Archiving Flag" sap:quickinfo="Central archiving marker for master record"/>
                 <Property Name="BusinessPlace" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Business Place"/>
             </EntityType>
+            <EntityType Name="I_PlantStdVHType" sap:label="Plant by Name" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="PlantName" sap:label="Plant"/>
+                <Property Name="PlantName" Type="Edm.String" MaxLength="30" sap:label="Plant Name"/>
+            </EntityType>
             <EntityType Name="I_StorageLocationStdVHType" sap:label="Storage Location" sap:value-list="true" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Plant"/>
                     <PropertyRef Name="StorageLocation"/>
                 </Key>
-                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="PlantName" sap:label="Plant"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="PlantName" sap:label="Plant" sap:value-list="standard"/>
                 <Property Name="StorageLocation" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="StorageLocationName" sap:label="Storage Location"/>
                 <Property Name="StorageLocationName" Type="Edm.String" MaxLength="16" sap:label="Storage Loc. Name" sap:quickinfo="Storage Location Name"/>
-                <Property Name="ConfigDeprecationCode" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:text="ConfignDeprecationCodeName" sap:label="Validity" sap:quickinfo="Deprecated Entries"/>
+                <Property Name="ConfigDeprecationCode" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:text="ConfignDeprecationCodeName" sap:label="Validity" sap:quickinfo="Deprecated Entries" sap:value-list="fixed-values"/>
                 <Property Name="ConfignDeprecationCodeName" Type="Edm.String" MaxLength="60" sap:label="Validity Text" sap:quickinfo="Value Help: Flag Obsolete Entries"/>
                 <Property Name="PlantName" Type="Edm.String" MaxLength="30" sap:label="Plant Name"/>
                 <Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sls Organization ICB" sap:quickinfo="Sales Organization for Intercompany Billing"/>
                 <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
+            </EntityType>
+            <EntityType Name="I_Supplier_VHType" sap:label="Supplier" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Supplier"/>
+                </Key>
+                <Property Name="Supplier" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="BPSupplierName" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
+                <Property Name="SupplierName" Type="Edm.String" MaxLength="35" sap:label="Supplier Name1" sap:quickinfo="Supplier Name"/>
+                <Property Name="BusinessPartnerName1" Type="Edm.String" MaxLength="40" sap:label="Business Partner Name1"/>
+                <Property Name="BPSupplierName" Type="Edm.String" MaxLength="81" sap:label="Business Partner Supplier Name" sap:quickinfo="Supplier Name"/>
+                <Property Name="AuthorizationGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Authorization" sap:quickinfo="Authorization Group"/>
+                <Property Name="SupplierAccountGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Account Group" sap:quickinfo="Supplier Account Group"/>
+                <Property Name="IsBusinessPurposeCompleted" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Purpose Completed" sap:quickinfo="Business Purpose Completed Flag"/>
+                <Property Name="BusinessPartner" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Business Partner" sap:quickinfo="Business Partner Number"/>
+                <Property Name="BusinessPartnerType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Business Partner Type"/>
+                <Property Name="DataControllerSet" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Data Ctrlr. Set" sap:quickinfo="BP: Data Controller Set Flag"/>
+                <Property Name="DataController1" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController2" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController3" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController4" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController5" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController6" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController7" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController8" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController9" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController10" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
             </EntityType>
             <EntityType Name="ZC_CustomerCompanyByPlantType" sap:label="Customer By Plant" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -136,6 +210,7 @@
                 <Property Name="OrderIsClosed" Type="Edm.String" MaxLength="1"/>
                 <Property Name="Assembly" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Pegged Requirement" sap:quickinfo="Higher-Level Assembly Material"/>
                 <Property Name="WorkCenter" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Work Center"/>
+                <Property Name="WorkCenterText" Type="Edm.String" MaxLength="40" sap:label="Work Center Text"/>
             </EntityType>
             <EntityType Name="ZC_NG_FACTORVHType" sap:label="NG Factor Value Help" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -157,17 +232,20 @@
                 <Property Name="LocationFrom" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="LocationFrom" sap:label="Storage Location" sap:value-list="standard"/>
                 <Property Name="LocationTo1" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="LocationTo1Name" sap:label="Storage Location" sap:value-list="standard"/>
                 <Property Name="LocationTo2" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="LocationTo2Name" sap:label="Storage Location" sap:value-list="standard"/>
+                <Property Name="DeleteFlag" Type="Edm.Boolean" sap:label="Flag" sap:quickinfo="Xflag"/>
                 <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="CreatedAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="LastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Last Changed By User" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="LastChangedAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="LocalLastChangedAtS" Type="Edm.String" MaxLength="24"/>
                 <Property Name="PlantName" Type="Edm.String" MaxLength="30" sap:label="Plant Name" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="LocationFromName" Type="Edm.String" MaxLength="16" sap:label="Storage Loc. Name" sap:quickinfo="Storage Location Name" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="LocationTo1Name" Type="Edm.String" MaxLength="16" sap:label="Storage Loc. Name" sap:quickinfo="Storage Location Name" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="LocationTo2Name" Type="Edm.String" MaxLength="16" sap:label="Storage Loc. Name" sap:quickinfo="Storage Location Name" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="CreatedByName" Type="Edm.String" MaxLength="80" sap:label="Full Name" sap:quickinfo="User Description" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="LastChangedByName" Type="Edm.String" MaxLength="80" sap:label="Full Name" sap:quickinfo="User Description" sap:creatable="false" sap:updatable="false"/>
                 <NavigationProperty Name="to_NG_Item" Relationship="cds_zui_ng_manangement_o2.assoc_5EEAA1EB8C8A5D4B4A2D84E83C1FBF01" FromRole="FromRole_assoc_5EEAA1EB8C8A5D4B4A2D84E83C1FBF01" ToRole="ToRole_assoc_5EEAA1EB8C8A5D4B4A2D84E83C1FBF01"/>
-                <NavigationProperty Name="to_NG_Item_IQC" Relationship="cds_zui_ng_manangement_o2.assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26" FromRole="FromRole_assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26" ToRole="ToRole_assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26"/>
             </EntityType>
             <EntityType Name="NG_ItemType" sap:label="NG Record Item" sap:content-version="1">
                 <Key>
@@ -190,6 +268,7 @@
                 <Property Name="CounterMeasure" Type="Edm.String" MaxLength="100"/>
                 <Property Name="RootCause" Type="Edm.String" MaxLength="100"/>
                 <Property Name="Factor" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="NG Factor" sap:heading=""/>
+                <Property Name="DeleteFlag" Type="Edm.Boolean" sap:label="Flag" sap:quickinfo="Xflag"/>
                 <Property Name="ItemCreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User"/>
                 <Property Name="ItemCreatedAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="ItemLastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Last Changed By User"/>
@@ -199,8 +278,31 @@
                 <Property Name="Move1PostBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User"/>
                 <Property Name="Move1PostAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
+                <Property Name="LocalLastChangedAtS" Type="Edm.String" MaxLength="24"/>
+                <Property Name="IQC_NG_Quantity" Type="Edm.Decimal" Precision="13" Scale="2" sap:unit="BaseUnit"/>
+                <Property Name="IQC_OK_Quantity" Type="Edm.Decimal" Precision="13" Scale="2" sap:unit="BaseUnit"/>
+                <Property Name="IQC_ApprovedBy" Type="Edm.String" MaxLength="20"/>
+                <Property Name="IQC_Remark" Type="Edm.String" MaxLength="100"/>
+                <Property Name="IQC_CreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User"/>
+                <Property Name="IQC_CreatedAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="IQC_LastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Last Changed By User"/>
+                <Property Name="IQC_LastChangedAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="IQC_PostStatus" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="NG Post Status" sap:heading=""/>
+                <Property Name="IQC_PostMaterialDocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Material Document" sap:quickinfo="Number of Material Document"/>
+                <Property Name="IQC_PostBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User"/>
+                <Property Name="IQC_PostAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="MaterialName" Type="Edm.String" MaxLength="40" sap:label="Product Description" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="AssemblyName" Type="Edm.String" MaxLength="40" sap:label="Product Description" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="CustomerName" Type="Edm.String" MaxLength="80" sap:label="Customer Name" sap:quickinfo="Name of Customer" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="WorkCenterText" Type="Edm.String" MaxLength="40" sap:label="Work Center Text" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="FactorText" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ItemCreatedByName" Type="Edm.String" MaxLength="80" sap:label="Full Name" sap:quickinfo="User Description" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ItemLastChangedByName" Type="Edm.String" MaxLength="80" sap:label="Full Name" sap:quickinfo="User Description" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Move1PostByName" Type="Edm.String" MaxLength="80" sap:label="Full Name" sap:quickinfo="User Description" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="IQC_CreatedByName" Type="Edm.String" MaxLength="80" sap:label="Full Name" sap:quickinfo="User Description" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="IQC_LastChangedByName" Type="Edm.String" MaxLength="80" sap:label="Full Name" sap:quickinfo="User Description" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="IQC_PostByName" Type="Edm.String" MaxLength="80" sap:label="Full Name" sap:quickinfo="User Description" sap:creatable="false" sap:updatable="false"/>
                 <NavigationProperty Name="to_NG_Header" Relationship="cds_zui_ng_manangement_o2.assoc_5EEAA1EB8C8A5D4B4A2D84E83C1FBF01" FromRole="ToRole_assoc_5EEAA1EB8C8A5D4B4A2D84E83C1FBF01" ToRole="FromRole_assoc_5EEAA1EB8C8A5D4B4A2D84E83C1FBF01"/>
-                <NavigationProperty Name="to_NG_Post_History" Relationship="cds_zui_ng_manangement_o2.assoc_65CA6A0114D9ADC929072011068C6452" FromRole="FromRole_assoc_65CA6A0114D9ADC929072011068C6452" ToRole="ToRole_assoc_65CA6A0114D9ADC929072011068C6452"/>
             </EntityType>
             <EntityType Name="NG_Item_IQCType" sap:label="NG Record Item - IQC" sap:content-version="1">
                 <Key>
@@ -225,7 +327,10 @@
                 <Property Name="IQC_PostBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User"/>
                 <Property Name="IQC_PostAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
-                <NavigationProperty Name="to_NG_Header" Relationship="cds_zui_ng_manangement_o2.assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26" FromRole="ToRole_assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26" ToRole="FromRole_assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26"/>
+                <Property Name="MaterialName" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
+                <Property Name="IQC_CreatedByName" Type="Edm.String" MaxLength="80" sap:label="Full Name" sap:quickinfo="User Description"/>
+                <Property Name="IQC_LastChangedByName" Type="Edm.String" MaxLength="80" sap:label="Full Name" sap:quickinfo="User Description"/>
+                <Property Name="IQC_PostByName" Type="Edm.String" MaxLength="80" sap:label="Full Name" sap:quickinfo="User Description"/>
             </EntityType>
             <EntityType Name="ZC_NG_MATERIALTYPEVHType" sap:label="NG Material Type Value Help" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -276,7 +381,10 @@
                 <Property Name="LastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Last Changed By User"/>
                 <Property Name="LastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time"/>
                 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Local Instance Last Change Date Time"/>
-                <NavigationProperty Name="to_NG_Item" Relationship="cds_zui_ng_manangement_o2.assoc_65CA6A0114D9ADC929072011068C6452" FromRole="ToRole_assoc_65CA6A0114D9ADC929072011068C6452" ToRole="FromRole_assoc_65CA6A0114D9ADC929072011068C6452"/>
+                <Property Name="PostTypeText" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
+                <Property Name="MaterialName" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
+                <Property Name="PostByName" Type="Edm.String" MaxLength="80" sap:label="Description" sap:quickinfo="User Description"/>
+                <NavigationProperty Name="to_NG_Report" Relationship="cds_zui_ng_manangement_o2.assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D" FromRole="ToRole_assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D" ToRole="FromRole_assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D"/>
             </EntityType>
             <EntityType Name="NG_ReportType" sap:label="NG Report" sap:content-version="1">
                 <Key>
@@ -291,6 +399,7 @@
                 <Property Name="LocationFrom" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location" sap:value-list="standard"/>
                 <Property Name="LocationTo1" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location" sap:value-list="standard"/>
                 <Property Name="LocationTo2" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location" sap:value-list="standard"/>
+                <Property Name="HeaderDeleteFlag" Type="Edm.Boolean" sap:label="Flag" sap:quickinfo="Xflag"/>
                 <Property Name="HeaderCreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User"/>
                 <Property Name="HeaderCreatedAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="HeaderLastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Last Changed By User"/>
@@ -310,6 +419,7 @@
                 <Property Name="CounterMeasure" Type="Edm.String" MaxLength="100"/>
                 <Property Name="RootCause" Type="Edm.String" MaxLength="100"/>
                 <Property Name="Factor" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="NG Factor" sap:heading="" sap:value-list="fixed-values"/>
+                <Property Name="ItemDeleteFlag" Type="Edm.Boolean" sap:label="Flag" sap:quickinfo="Xflag"/>
                 <Property Name="ItemCreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="Created By User"/>
                 <Property Name="ItemCreatedAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval"/>
                 <Property Name="ItemLastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Changed By" sap:quickinfo="Last Changed By User"/>
@@ -333,6 +443,24 @@
                 <Property Name="IQC_PostAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval"/>
                 <Property Name="Status" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Message Type" sap:quickinfo="Message type: S Success, E Error, W Warning, I Info, A Abort"/>
                 <Property Name="Message" Type="Edm.String"/>
+                <Property Name="PlantName" Type="Edm.String" MaxLength="30" sap:label="Plant Name"/>
+                <Property Name="MoveTypeText" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
+                <Property Name="MaterialTypeText" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
+                <Property Name="LocationFromName" Type="Edm.String" MaxLength="16" sap:label="Storage Loc. Name" sap:quickinfo="Storage Location Name"/>
+                <Property Name="LocationTo1Name" Type="Edm.String" MaxLength="16" sap:label="Storage Loc. Name" sap:quickinfo="Storage Location Name"/>
+                <Property Name="LocationTo2Name" Type="Edm.String" MaxLength="16" sap:label="Storage Loc. Name" sap:quickinfo="Storage Location Name"/>
+                <Property Name="MaterialName" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
+                <Property Name="AssemblyName" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
+                <Property Name="CustomerName" Type="Edm.String" MaxLength="80" sap:label="Name of Customer"/>
+                <Property Name="WorkCenterText" Type="Edm.String" MaxLength="40" sap:label="Work Center Text"/>
+                <Property Name="FactorText" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
+                <Property Name="ItemCreatedByName" Type="Edm.String" MaxLength="80" sap:label="Description" sap:quickinfo="User Description"/>
+                <Property Name="ItemLastChangedByName" Type="Edm.String" MaxLength="80" sap:label="Description" sap:quickinfo="User Description"/>
+                <Property Name="Move1PostByName" Type="Edm.String" MaxLength="80" sap:label="Description" sap:quickinfo="User Description"/>
+                <Property Name="IQC_CreatedByName" Type="Edm.String" MaxLength="80" sap:label="Description" sap:quickinfo="User Description"/>
+                <Property Name="IQC_LastChangedByName" Type="Edm.String" MaxLength="80" sap:label="Description" sap:quickinfo="User Description"/>
+                <Property Name="IQC_PostByName" Type="Edm.String" MaxLength="80" sap:label="Description" sap:quickinfo="User Description"/>
+                <NavigationProperty Name="to_NG_Post_History" Relationship="cds_zui_ng_manangement_o2.assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D" FromRole="FromRole_assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D" ToRole="ToRole_assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D"/>
             </EntityType>
             <EntityType Name="ZC_ProductVHType" sap:label="Product Value Help" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -492,6 +620,11 @@
                 <Property Name="FIELD_VALUE" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="DESCRIPTION" Type="Edm.String"/>
             </EntityType>
+            <ComplexType Name="ZR_UPLOAD_PARAMETER">
+                <Property Name="Event" Type="Edm.String" MaxLength="20"/>
+                <Property Name="RecordUUID" Type="Edm.String" MaxLength="36" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                <Property Name="Zzkey" Type="Edm.String" sap:label="Zzkey" sap:quickinfo="String Type"/>
+            </ComplexType>
             <ComplexType Name="SAP__FitToPage">
                 <Property Name="ErrorRecoveryBehavior" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Error behavior" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="IsEnabled" Type="Edm.Boolean" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
@@ -505,16 +638,18 @@
             <ComplexType Name="SAP__HeaderFooterField">
                 <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </ComplexType>
-            <Association Name="assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26" sap:content-version="1">
-                <End Type="cds_zui_ng_manangement_o2.NG_HeaderType" Multiplicity="1" Role="FromRole_assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26">
+            <Association Name="assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D" sap:content-version="1">
+                <End Type="cds_zui_ng_manangement_o2.NG_ReportType" Multiplicity="1" Role="FromRole_assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D">
                     <OnDelete Action="Cascade"/>
                 </End>
-                <End Type="cds_zui_ng_manangement_o2.NG_Item_IQCType" Multiplicity="*" Role="ToRole_assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26"/>
+                <End Type="cds_zui_ng_manangement_o2.NG_Post_HistoryType" Multiplicity="*" Role="ToRole_assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D"/>
                 <ReferentialConstraint>
-                    <Principal Role="FromRole_assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26">
+                    <Principal Role="FromRole_assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D">
+                        <PropertyRef Name="NG_ItemNo"/>
                         <PropertyRef Name="NG_No"/>
                     </Principal>
-                    <Dependent Role="ToRole_assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26">
+                    <Dependent Role="ToRole_assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D">
+                        <PropertyRef Name="NG_ItemNo"/>
                         <PropertyRef Name="NG_No"/>
                     </Dependent>
                 </ReferentialConstraint>
@@ -529,22 +664,6 @@
                         <PropertyRef Name="NG_No"/>
                     </Principal>
                     <Dependent Role="ToRole_assoc_5EEAA1EB8C8A5D4B4A2D84E83C1FBF01">
-                        <PropertyRef Name="NG_No"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="assoc_65CA6A0114D9ADC929072011068C6452" sap:content-version="1">
-                <End Type="cds_zui_ng_manangement_o2.NG_ItemType" Multiplicity="1" Role="FromRole_assoc_65CA6A0114D9ADC929072011068C6452">
-                    <OnDelete Action="Cascade"/>
-                </End>
-                <End Type="cds_zui_ng_manangement_o2.NG_Post_HistoryType" Multiplicity="*" Role="ToRole_assoc_65CA6A0114D9ADC929072011068C6452"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_assoc_65CA6A0114D9ADC929072011068C6452">
-                        <PropertyRef Name="NG_ItemNo"/>
-                        <PropertyRef Name="NG_No"/>
-                    </Principal>
-                    <Dependent Role="ToRole_assoc_65CA6A0114D9ADC929072011068C6452">
-                        <PropertyRef Name="NG_ItemNo"/>
                         <PropertyRef Name="NG_No"/>
                     </Dependent>
                 </ReferentialConstraint>
@@ -658,9 +777,13 @@
                 </ReferentialConstraint>
             </Association>
             <EntityContainer Name="cds_zui_ng_manangement_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
+                <EntitySet Name="I_ConfignDeprecationCode" EntityType="cds_zui_ng_manangement_o2.I_ConfignDeprecationCodeType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_Customer_VH" EntityType="cds_zui_ng_manangement_o2.I_Customer_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_MaterialDocumentHeader_2" EntityType="cds_zui_ng_manangement_o2.I_MaterialDocumentHeader_2Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_Plant" EntityType="cds_zui_ng_manangement_o2.I_PlantType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_PlantStdVH" EntityType="cds_zui_ng_manangement_o2.I_PlantStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_StorageLocationStdVH" EntityType="cds_zui_ng_manangement_o2.I_StorageLocationStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_Supplier_VH" EntityType="cds_zui_ng_manangement_o2.I_Supplier_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="ZC_CustomerCompanyByPlant" EntityType="cds_zui_ng_manangement_o2.ZC_CustomerCompanyByPlantType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ZC_ManufacturingOrderProductVH" EntityType="cds_zui_ng_manangement_o2.ZC_ManufacturingOrderProductVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="ZC_NG_FACTORVH" EntityType="cds_zui_ng_manangement_o2.ZC_NG_FACTORVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
@@ -687,17 +810,13 @@
                 <EntitySet Name="SAP__UnitsOfMeasure" EntityType="cds_zui_ng_manangement_o2.SAP__UnitOfMeasure" sap:content-version="1"/>
                 <EntitySet Name="SAP__MyDocumentDescriptions" EntityType="cds_zui_ng_manangement_o2.SAP__DocumentDescription" sap:content-version="1"/>
                 <EntitySet Name="SAP__FileShareSet" EntityType="cds_zui_ng_manangement_o2.SAP__FileShare" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <AssociationSet Name="assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26" Association="cds_zui_ng_manangement_o2.assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="NG_Header" Role="FromRole_assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26"/>
-                    <End EntitySet="NG_Item_IQC" Role="ToRole_assoc_7FBBE8EBDE86D8508C7F3B6D850BCE26"/>
-                </AssociationSet>
                 <AssociationSet Name="assoc_5EEAA1EB8C8A5D4B4A2D84E83C1FBF01" Association="cds_zui_ng_manangement_o2.assoc_5EEAA1EB8C8A5D4B4A2D84E83C1FBF01" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="NG_Header" Role="FromRole_assoc_5EEAA1EB8C8A5D4B4A2D84E83C1FBF01"/>
                     <End EntitySet="NG_Item" Role="ToRole_assoc_5EEAA1EB8C8A5D4B4A2D84E83C1FBF01"/>
                 </AssociationSet>
-                <AssociationSet Name="assoc_65CA6A0114D9ADC929072011068C6452" Association="cds_zui_ng_manangement_o2.assoc_65CA6A0114D9ADC929072011068C6452" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="NG_Item" Role="FromRole_assoc_65CA6A0114D9ADC929072011068C6452"/>
-                    <End EntitySet="NG_Post_History" Role="ToRole_assoc_65CA6A0114D9ADC929072011068C6452"/>
+                <AssociationSet Name="assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D" Association="cds_zui_ng_manangement_o2.assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="NG_Report" Role="FromRole_assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D"/>
+                    <End EntitySet="NG_Post_History" Role="ToRole_assoc_BF52A3EE4ECA8C2B1DE8B93018C7E08D"/>
                 </AssociationSet>
                 <AssociationSet Name="to_HierarchySet" Association="cds_zui_ng_manangement_o2.to_Hierarchy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_Hierarchy"/>
@@ -735,8 +854,137 @@
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_coverpage"/>
                     <End EntitySet="SAP__CoverPageSet" Role="ToRole_to_coverpage"/>
                 </AssociationSet>
+                <FunctionImport Name="processLogic" ReturnType="cds_zui_ng_manangement_o2.ZR_UPLOAD_PARAMETER" m:HttpMethod="POST">
+                    <Parameter Name="Event" Type="Edm.String" Mode="In" MaxLength="20" Nullable="true"/>
+                    <Parameter Name="Zzkey" Type="Edm.String" Mode="In" Nullable="true" sap:label="Zzkey" sap:quickinfo="String Type"/>
+                    <Parameter Name="RecordUUID" Type="Edm.String" Mode="In" MaxLength="36" Nullable="true" sap:label="UUID" sap:quickinfo="16 byte UUID in 36 chars according to RFC4122"/>
+                </FunctionImport>
             </EntityContainer>
             <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_PlantType/PlantCustomer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Customer No Plant"/>
+                        <PropertyValue Property="CollectionPath" String="I_Customer_VH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="PlantCustomer"/>
+                                    <PropertyValue Property="ValueListProperty" String="Customer"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="OrganizationBPName1"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartnerName1"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="OrganizationBPName2"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartnerName2"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Country"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CityName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="StreetName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PostalCode"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CustomerName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BPCustomerName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartner"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_PlantType/PlantSupplier" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Sppl. No. Plnt"/>
+                        <PropertyValue Property="CollectionPath" String="I_Supplier_VH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="PlantSupplier"/>
+                                    <PropertyValue Property="ValueListProperty" String="Supplier"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="SupplierName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartnerName1"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BPSupplierName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartner"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartnerType"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_StorageLocationStdVHType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Plant"/>
+                        <PropertyValue Property="CollectionPath" String="I_PlantStdVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Plant"/>
+                                    <PropertyValue Property="ValueListProperty" String="Plant"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PlantName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_StorageLocationStdVHType/ConfigDeprecationCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Validity"/>
+                        <PropertyValue Property="CollectionPath" String="I_ConfignDeprecationCode"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ConfigDeprecationCode"/>
+                                    <PropertyValue Property="ValueListProperty" String="ConfigurationDeprecationCode"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ConfigurationDeprecationCode_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues"/>
+                <Annotation Term="SAP__CodeList.IsConfigurationDeprecationCode"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueListForValidation" String=""/>
                 <Annotation Term="Common.ValueList">
@@ -797,7 +1045,7 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/MoveType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -819,7 +1067,7 @@
                     </Record>
                 </Annotation>
                 <Annotation Term="Common.ValueListWithFixedValues"/>
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/MaterialType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -841,7 +1089,7 @@
                     </Record>
                 </Annotation>
                 <Annotation Term="Common.ValueListWithFixedValues"/>
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/LocationFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -882,7 +1130,7 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/LocationTo1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -923,7 +1171,7 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/LocationTo2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -964,7 +1212,7 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/NG_No" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -1007,6 +1255,9 @@
                                     <PropertyValue Property="ValueListProperty" String="LocationTo2"/>
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="DeleteFlag"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
                                     <PropertyValue Property="ValueListProperty" String="CreatedBy"/>
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
@@ -1022,7 +1273,16 @@
                                     <PropertyValue Property="ValueListProperty" String="LocalLastChangedAt"/>
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="LocalLastChangedAtS"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
                                     <PropertyValue Property="ValueListProperty" String="PlantName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CreatedByName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="LastChangedByName"/>
                                 </Record>
                             </Collection>
                         </PropertyValue>
@@ -1581,18 +1841,45 @@
             <Annotations Target="cds_zui_ng_manangement_o2.cds_zui_ng_manangement_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
             </Annotations>
-            <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.ChangedBy" Path="LastChangedBy"/>
-                <Annotation Term="Common.CreatedBy" Path="CreatedBy"/>
-            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/to_NG_Item" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.Composition"/>
             </Annotations>
-            <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/to_NG_Item_IQC" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/to_NG_Post_History" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.Composition"/>
             </Annotations>
-            <Annotations Target="cds_zui_ng_manangement_o2.NG_ItemType/to_NG_Post_History" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.Composition"/>
+            <Annotations Target="cds_zui_ng_manangement_o2.cds_zui_ng_manangement_o2_Entities/I_ConfignDeprecationCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.cds_zui_ng_manangement_o2_Entities/I_Customer_VH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.cds_zui_ng_manangement_o2_Entities/I_MaterialDocumentHeader_2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
@@ -1628,7 +1915,41 @@
                     </Record>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.cds_zui_ng_manangement_o2_Entities/I_PlantStdVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.cds_zui_ng_manangement_o2_Entities/I_StorageLocationStdVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.cds_zui_ng_manangement_o2_Entities/I_Supplier_VH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
                         <PropertyValue Property="Deletable" Bool="false"/>
@@ -1672,14 +1993,6 @@
                             <Collection>
                                 <Record>
                                     <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_NG_Item"/>
-                                    <PropertyValue Property="InsertRestrictions">
-                                        <Record>
-                                            <PropertyValue Property="Insertable" Bool="false"/>
-                                        </Record>
-                                    </PropertyValue>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_NG_Item_IQC"/>
                                     <PropertyValue Property="InsertRestrictions">
                                         <Record>
                                             <PropertyValue Property="Insertable" Bool="false"/>
@@ -1732,14 +2045,6 @@
                                         </Record>
                                     </PropertyValue>
                                 </Record>
-                                <Record>
-                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_NG_Post_History"/>
-                                    <PropertyValue Property="InsertRestrictions">
-                                        <Record>
-                                            <PropertyValue Property="Insertable" Bool="false"/>
-                                        </Record>
-                                    </PropertyValue>
-                                </Record>
                             </Collection>
                         </PropertyValue>
                     </Record>
@@ -1759,22 +2064,6 @@
                 <Annotation Term="Capabilities.InsertRestrictions">
                     <Record>
                         <PropertyValue Property="Insertable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.NavigationRestrictions">
-                    <Record>
-                        <PropertyValue Property="RestrictedProperties">
-                            <Collection>
-                                <Record>
-                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_NG_Header"/>
-                                    <PropertyValue Property="InsertRestrictions">
-                                        <Record>
-                                            <PropertyValue Property="Insertable" Bool="false"/>
-                                        </Record>
-                                    </PropertyValue>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="Capabilities.UpdateRestrictions">
@@ -1811,7 +2100,7 @@
                         <PropertyValue Property="RestrictedProperties">
                             <Collection>
                                 <Record>
-                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_NG_Item"/>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_NG_Report"/>
                                     <PropertyValue Property="InsertRestrictions">
                                         <Record>
                                             <PropertyValue Property="Insertable" Bool="false"/>
@@ -1886,6 +2175,22 @@
                 <Annotation Term="Capabilities.InsertRestrictions">
                     <Record>
                         <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_NG_Post_History"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="Capabilities.SortRestrictions">
@@ -2039,7 +2344,13 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            <Annotations Target="cds_zui_ng_manangement_o2.I_StorageLocationStdVHType/ConfigDeprecationCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/DeleteFlag" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/LocalLastChangedAtS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_ConfignDeprecationCodeType/ConfigurationDeprecationCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__CodeList.IsConfigurationDeprecationCode"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.I_PlantType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -2110,11 +2421,23 @@
             <Annotations Target="cds_zui_ng_manangement_o2.NG_Post_HistoryType/CreatedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_USER&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController6" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/ProductionOrder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AUFNR&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_Item_IQCType/MaterialName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/LastChangedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_USER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/OrganizationBPName2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=NAME2_GP&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_ItemType/IQC_CreatedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_USER&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.I_MaterialDocumentHeader_2Type/PostingDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUDAT&amp;origin=JG5_100"/>
@@ -2134,6 +2457,9 @@
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_ManufacturingOrderProductVHType/MaterialDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/MoveTypeText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VAL_TEXT&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/BaseUnit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS&amp;origin=JG5_100"/>
             </Annotations>
@@ -2145,6 +2471,9 @@
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/LocationTo1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LGORT_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController7" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.I_PlantType/IsMarkedForArchiving" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ACHVM_X&amp;origin=JG5_100"/>
@@ -2173,17 +2502,35 @@
             <Annotations Target="cds_zui_ng_manangement_o2.NG_Post_HistoryType/CreatedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_TSTMPL&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController8" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.I_StorageLocationStdVHType/StorageLocation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LGORT_D&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_Post_HistoryType/PostBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_USER&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/Country" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LAND1_GP&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/SupplierAccountGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KTOKK&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_ManufacturingOrderProductVHType/Assembly" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BAUGR&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/PostalCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PSTLZ&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController4" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/IQC_PostMaterialDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MBLNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController3" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_Item_IQCType/IQC_LastChangedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_USER&amp;origin=JG5_100"/>
@@ -2203,14 +2550,23 @@
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_ProductVHType/ProductType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTTYPE&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController4" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/LocationTo2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LGORT_D&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ItemType/WorkCenter" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ARBPL&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController10" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.I_MaterialDocumentHeader_2Type/DocumentDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BLDAT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController3" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ItemType/ItemLastChangedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_USER&amp;origin=JG5_100"/>
@@ -2218,11 +2574,26 @@
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ItemType/LocalLastChangedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LOCINST_LASTCHANGE_TSTMPL&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_ItemType/AssemblyName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/MaterialName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_Post_HistoryType/LocalLastChangedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LOCINST_LASTCHANGE_TSTMPL&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/OrganizationBPName1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=NAME1_GP&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController6" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_Post_HistoryType/PostAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_TSTMPL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/Status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BAPI_MTYPE&amp;origin=JG5_100"/>
@@ -2236,6 +2607,12 @@
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_ManufacturingOrderProductVHType/Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_ConfignDeprecationCodeType/ConfigurationDeprecationCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CONFIG_DEPRECATION_CODE&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/Supplier" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LIFNR&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/LocationTo2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LGORT_D&amp;origin=JG5_100"/>
             </Annotations>
@@ -2245,11 +2622,35 @@
             <Annotations Target="cds_zui_ng_manangement_o2.I_MaterialDocumentHeader_2Type/AccountingDocumentType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BLART&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/AuthorizationGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BRGRU&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/BusinessPartnerName1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AD_NAME1&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.I_MaterialDocumentHeader_2Type/MaterialDocumentHeaderText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKTXT&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/BusinessPartnerName1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AD_NAME1&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController7" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataControllerSet" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_XDCSET&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController8" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_PlantStdVHType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/ItemLastChangedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_USER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/AssemblyName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
@@ -2257,14 +2658,23 @@
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_ProductVHType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_Post_HistoryType/MaterialName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_Post_HistoryType/LocationFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LGORT_D&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ItemType/Material" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_ItemType/IQC_LastChangedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_USER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.I_PlantType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_ManufacturingOrderProductVHType/RequiredQuantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BDMNG&amp;origin=JG5_100"/>
@@ -2293,8 +2703,17 @@
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_CustomerCompanyByPlantType/Customer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KUNNR&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataControllerSet" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_XDCSET&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/AuthorizationGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BRGRU&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/HeaderCreatedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_USER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController5" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/Move1PostMaterialDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MBLNR&amp;origin=JG5_100"/>
@@ -2314,6 +2733,9 @@
             <Annotations Target="cds_zui_ng_manangement_o2.I_PlantType/AddressID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ADRNR&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/FactorText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VAL_TEXT&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/LocationFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LGORT_D&amp;origin=JG5_100"/>
             </Annotations>
@@ -2331,6 +2753,9 @@
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_NG_FACTORVHType/FactorText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VAL_TEXT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/CustomerAccountGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KTOKD&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/ItemCreatedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_USER&amp;origin=JG5_100"/>
@@ -2353,6 +2778,15 @@
             <Annotations Target="cds_zui_ng_manangement_o2.I_PlantType/ValuationArea" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BWKEY&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/BPAddrCityName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AD_CITY1&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/BusinessPartner" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_PARTNER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_Item_IQCType/IQC_CreatedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_USER&amp;origin=JG5_100"/>
             </Annotations>
@@ -2367,6 +2801,9 @@
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_ManufacturingOrderProductVHType/Product" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTNUMBER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/StreetName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=STRAS_GP&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_ManufacturingOrderProductVHType/GoodsMovementType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BWART&amp;origin=JG5_100"/>
@@ -2383,10 +2820,22 @@
             <Annotations Target="cds_zui_ng_manangement_o2.I_PlantType/PlantCategory" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VLFKZ&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_Post_HistoryType/PostTypeText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VAL_TEXT&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.I_PlantType/Division" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=SPAIV&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ItemType/Move1PostBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_USER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/BusinessPartnerType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_BPKIND&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/IsBusinessPurposeCompleted" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CVP_XBLCK&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_ItemType/IQC_PostBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_USER&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.I_PlantType/FactoryCalendar" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -2395,14 +2844,35 @@
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_NG_MATERIALTYPEVHType/MaterialTypeText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VAL_TEXT&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/MaterialTypeText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VAL_TEXT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/IsBusinessPurposeCompleted" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CVP_XBLCK&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/Move1PostBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_CREATION_USER&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.I_PlantType/SalesOrganization" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VKOIV&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController9" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/LocationTo1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LGORT_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/BusinessPartner" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_PARTNER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/BPAddrStreetName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AD_STREET&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_ItemType/FactorText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VAL_TEXT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/BusinessPartnerType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_BPKIND&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_ProductVHType/MaterialDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
@@ -2413,11 +2883,20 @@
             <Annotations Target="cds_zui_ng_manangement_o2.NG_Post_HistoryType/LastChangedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_USER&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.I_MaterialDocumentHeader_2Type/ReferenceDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=XBLNR1&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController10" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_ManufacturingOrderProductVHType/ManufacturingOrderType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AUFART&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/Customer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KUNNR&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_Item_IQCType/LocalLastChangedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LOCINST_LASTCHANGE_TSTMPL&amp;origin=JG5_100"/>
@@ -2440,6 +2919,18 @@
             <Annotations Target="cds_zui_ng_manangement_o2.NG_Post_HistoryType/MaterialDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MBLNR&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/CityName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ORT01_GP&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/SupplierName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=NAME1_GP&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_ItemType/MaterialName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.NG_ItemType/IQC_PostMaterialDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MBLNR&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_Post_HistoryType/LocationTo2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LGORT_D&amp;origin=JG5_100"/>
             </Annotations>
@@ -2458,8 +2949,14 @@
             <Annotations Target="cds_zui_ng_manangement_o2.NG_ReportType/WorkCenter" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ARBPL&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Customer_VHType/DataController5" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.NG_HeaderType/LocationFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LGORT_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ng_manangement_o2.I_Supplier_VHType/DataController9" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ng_manangement_o2.ZC_ProductVHType/BaseUnit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS&amp;origin=JG5_100"/>

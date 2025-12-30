@@ -6,24 +6,42 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="NG_Report" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="false" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="HeaderCreatedBy,HeaderCreatedAt,HeaderLastChangedBy,HeaderLastChangedAt,HeaderLocalLastChangedAt,BaseUnit,ItemLocalLastChangedAt,IQC_LastChangedBy,IQC_LastChangedAt" ignoredFields="HeaderCreatedBy,HeaderCreatedAt,HeaderLastChangedBy,HeaderLastChangedAt,HeaderLocalLastChangedAt,BaseUnit,ItemLocalLastChangedAt,IQC_LastChangedBy,IQC_LastChangedAt">
+    <smartTable:SmartTable id="idSmartTable" entitySet="NG_Report" smartFilterId="idSmartFilterBar" smartVariant="__SVM01" tableType="Table" width="100%" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="true" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="HeaderDeleteFlag,HeaderCreatedBy,HeaderCreatedAt,HeaderLastChangedBy,HeaderLastChangedAt,HeaderLocalLastChangedAt,BaseUnit,ItemLocalLastChangedAt,IQC_LastChangedBy,IQC_LastChangedAt,PlantName,LocationFromName,LocationTo1Name,LocationTo2Name,MaterialName,AssemblyName,WorkCenterText,MaterialTypeText,MoveTypeText,FactorText,ItemCreatedByName,ItemLastChangedByName,Move1PostByName,IQC_CreatedByName,IQC_LastChangedByName,IQC_PostByName" ignoredFields="HeaderDeleteFlag,HeaderCreatedBy,HeaderCreatedAt,HeaderLastChangedBy,HeaderLastChangedAt,HeaderLocalLastChangedAt,BaseUnit,ItemLocalLastChangedAt,IQC_LastChangedBy,IQC_LastChangedAt,PlantName,LocationFromName,LocationTo1Name,LocationTo2Name,MaterialName,AssemblyName,WorkCenterText,MaterialTypeText,MoveTypeText,FactorText,ItemCreatedByName,ItemLastChangedByName,Move1PostByName,IQC_CreatedByName,IQC_LastChangedByName,IQC_PostByName">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://create-form" text="{i18n>Create}" type="Transparent" press="onPressBtn('CREATE')" enabled="{= ${local>/authorityCheck/button/Create}}"/>
+                <Button icon="sap-icon://create-form" text="{i18n>Create}" type="Transparent" press="onPressBtn('Create')" enabled="{= ${local>/authorityCheck/button/Create}}"/>
+                <Button icon="sap-icon://delete" text="{i18n>Delete}" type="Transparent" press="onPressBtn('DeleteItem')" enabled="{= ${local>/authorityCheck/button/DeleteItem} &amp;&amp; ${local>/Control/requiredSelection}}"/>
+                <Button icon="sap-icon://paper-plane" text="{i18n>Move1Post}" type="Transparent" press="onPressBtn('Move1Post')" enabled="{= ${local>/authorityCheck/button/Move1Post} &amp;&amp; ${local>/Control/requiredSelection}}"/>
+                <Button icon="sap-icon://reset" text="{i18n>Move1Cancel}" type="Transparent" press="onPressBtn('Move1Cancel')" enabled="{= ${local>/authorityCheck/button/Move1Cancel} &amp;&amp; ${local>/Control/requiredSelection}}"/>
+                <Button icon="sap-icon://paper-plane" text="{i18n>Move2Post}" type="Transparent" press="onPressBtn('Move2Post')" enabled="{= ${local>/authorityCheck/button/Move2Post} &amp;&amp; ${local>/Control/requiredSelection}}"/>
+                <Button icon="sap-icon://reset" text="{i18n>Move2Cancel}" type="Transparent" press="onPressBtn('Move2Cancel')" enabled="{= ${local>/authorityCheck/button/Move2Cancel} &amp;&amp; ${local>/Control/requiredSelection}}"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
-        <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto" threshold="999999999">
+        <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto" rowSelectionChange="rowSelectionChange" rowActionCount="1" fixedColumnCount="1" threshold="999999999">
+            <table:rowActionTemplate>
+                <table:RowAction>
+                    <table:RowActionItem type="Navigation" press="onRowActionPress" icon="sap-icon://feeder-arrow" />
+                </table:RowAction>
+            </table:rowActionTemplate>
             <table:columns>
-                <table:Column width="10rem" label="{i18n>Status}" sortProperty="Status" filterProperty="Status">
+                <table:Column width="3.5rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"to_NG_Post_History", "leadingProperty":"to_NG_Post_History"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Button icon="sap-icon://comment" press="onShowOperationLog"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="5rem" label="{i18n>Status}" sortProperty="Status" filterProperty="Status">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Status", "leadingProperty":"Status"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{Status}" wrapping="false" />
+                        <ObjectStatus state="{ path:'Status',formatter:'.formatter.formatState' }" icon="{ path:'Status', formatter:'.formatter.formatStateIcon'}"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>Message}" sortProperty="Message" filterProperty="Message">
+                <table:Column width="20rem" label="{i18n>Message}" sortProperty="Message" filterProperty="Message">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Message", "leadingProperty":"Message"}'/>
                     </table:customData>
@@ -39,7 +57,7 @@
                         <Text text="{NG_No}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
+                <table:Column width="8rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant"}'/>
                     </table:customData>
@@ -47,7 +65,7 @@
                         <Text text="{Plant}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>LocationFrom}" sortProperty="LocationFrom" filterProperty="LocationFrom">
+                <table:Column width="8rem" label="{i18n>LocationFrom}" sortProperty="LocationFrom" filterProperty="LocationFrom">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"LocationFrom", "leadingProperty":"LocationFrom"}'/>
                     </table:customData>
@@ -55,7 +73,7 @@
                         <Text text="{LocationFrom}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>LocationTo1}" sortProperty="LocationTo1" filterProperty="LocationTo1">
+                <table:Column width="8rem" label="{i18n>LocationTo1}" sortProperty="LocationTo1" filterProperty="LocationTo1">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"LocationTo1", "leadingProperty":"LocationTo1"}'/>
                     </table:customData>
@@ -63,7 +81,7 @@
                         <Text text="{LocationTo1}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>LocationTo2}" sortProperty="LocationTo2" filterProperty="LocationTo2">
+                <table:Column width="8rem" label="{i18n>LocationTo2}" sortProperty="LocationTo2" filterProperty="LocationTo2">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"LocationTo2", "leadingProperty":"LocationTo2"}'/>
                     </table:customData>
@@ -76,7 +94,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"MaterialType", "leadingProperty":"MaterialType"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{MaterialType}" wrapping="false" />
+                        <Text text="{ parts:[ 'MaterialType','MaterialTypeText'], formatter:'.formatter.formatCodeName' }" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>NG_ItemNo}" sortProperty="NG_ItemNo" filterProperty="NG_ItemNo">
@@ -95,7 +113,7 @@
                         <Text text="{ProductionOrder}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material">
+                <table:Column width="10rem" label="{i18n>NG_Material}" sortProperty="Material" filterProperty="Material">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Material", "leadingProperty":"Material"}'/>
                     </table:customData>
@@ -103,7 +121,7 @@
                         <Text text="{Material}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>MaterialName}" sortProperty="MaterialName" filterProperty="MaterialName">
+                <table:Column width="15rem" label="{i18n>NG_MaterialName}" sortProperty="MaterialName" filterProperty="MaterialName">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"MaterialName", "leadingProperty":"MaterialName"}'/>
                     </table:customData>
@@ -140,7 +158,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"MoveType", "leadingProperty":"MoveType"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{MoveType}" wrapping="false" />
+                        <Text text="{ parts:[ 'MoveType','MoveTypeText'], formatter:'.formatter.formatCodeName' }" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>NG_Position}" sortProperty="NG_Position" filterProperty="NG_Position">
@@ -156,7 +174,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"Factor", "leadingProperty":"Factor"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{Factor}" wrapping="false" />
+                        <Text text="{ parts:[ 'Factor','FactorText'], formatter:'.formatter.formatCodeName' }" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>Shift}" sortProperty="Shift" filterProperty="Shift">
@@ -172,7 +190,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"FoundDate", "leadingProperty":"FoundDate"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{FoundDate}" wrapping="false" />
+                        <Text text="{ path: 'FoundDate', 'type':'sap.ui.model.type.Date' }" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>Customer}" sortProperty="Customer" filterProperty="Customer">
@@ -215,20 +233,20 @@
                         <Text text="{CounterMeasure}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>IQC_NG_Quantity}" sortProperty="IQC_NG_Quantity" filterProperty="IQC_NG_Quantity">
+                <table:Column width="10rem" label="{i18n>IQC_NG_Quantity}" sortProperty="IQC_NG_Quantity" filterProperty="IQC_NG_Quantity" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"IQC_NG_Quantity", "leadingProperty":"IQC_NG_Quantity"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{IQC_NG_Quantity}" wrapping="false" />
+                        <Text text="{IQC_NG_Quantity} {BaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>IQC_OK_Quantity}" sortProperty="IQC_OK_Quantity" filterProperty="IQC_OK_Quantity">
+                <table:Column width="10rem" label="{i18n>IQC_OK_Quantity}" sortProperty="IQC_OK_Quantity" filterProperty="IQC_OK_Quantity" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"IQC_OK_Quantity", "leadingProperty":"IQC_OK_Quantity"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{IQC_OK_Quantity}" wrapping="false" />
+                        <Text text="{IQC_OK_Quantity} {BaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>IQC_Remark}" sortProperty="IQC_Remark" filterProperty="IQC_Remark">
@@ -239,12 +257,12 @@
                         <Text text="{IQC_Remark}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>IQC_CreatedBy}" sortProperty="IQC_CreatedBy" filterProperty="IQC_CreatedBy">
+                <table:Column width="13rem" label="{i18n>IQC_CreatedBy}" sortProperty="IQC_CreatedBy" filterProperty="IQC_CreatedBy">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"IQC_CreatedBy", "leadingProperty":"IQC_CreatedBy"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{IQC_CreatedBy}" wrapping="false" />
+                        <Text text="{ parts:[ 'IQC_CreatedBy','IQC_CreatedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>IQC_CreatedAt}" sortProperty="IQC_CreatedAt" filterProperty="IQC_CreatedAt">
@@ -252,10 +270,10 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"IQC_CreatedAt", "leadingProperty":"IQC_CreatedAt"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{IQC_CreatedAt}" wrapping="false" />
+                        <Text text="{ path: 'IQC_CreatedAt', 'type':'sap.ui.model.type.Date' }" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>IQC_ApprovedBy}" sortProperty="IQC_ApprovedBy" filterProperty="IQC_ApprovedBy">
+                <table:Column width="13rem" label="{i18n>IQC_ApprovedBy}" sortProperty="IQC_ApprovedBy" filterProperty="IQC_ApprovedBy">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"IQC_ApprovedBy", "leadingProperty":"IQC_ApprovedBy"}'/>
                     </table:customData>
@@ -276,18 +294,18 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"Move1PostAt", "leadingProperty":"Move1PostAt"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{Move1PostAt}" wrapping="false" />
+                        <Text text="{ path: 'Move1PostAt', 'type':'sap.ui.model.type.Date' }" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>Move1PostBy}" sortProperty="Move1PostBy" filterProperty="Move1PostBy">
+                <table:Column width="13rem" label="{i18n>Move1PostBy}" sortProperty="Move1PostBy" filterProperty="Move1PostBy">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Move1PostBy", "leadingProperty":"Move1PostBy"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{Move1PostBy}" wrapping="false" />
+                        <Text text="{ parts:[ 'Move1PostBy','Move1PostByName'], formatter:'.formatter.formatCodeName' }" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>Move1PostMaterialDocument}" sortProperty="Move1PostMaterialDocument" filterProperty="Move1PostMaterialDocument">
+                <table:Column width="13rem" label="{i18n>Move1PostMaterialDocument}" sortProperty="Move1PostMaterialDocument" filterProperty="Move1PostMaterialDocument">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Move1PostMaterialDocument", "leadingProperty":"Move1PostMaterialDocument"}'/>
                     </table:customData>
@@ -295,7 +313,7 @@
                         <Text text="{Move1PostMaterialDocument}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>IQC_PostStatus}" sortProperty="IQC_PostStatus" filterProperty="IQC_PostStatus">
+                <table:Column width="13rem" label="{i18n>IQC_PostStatus}" sortProperty="IQC_PostStatus" filterProperty="IQC_PostStatus">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"IQC_PostStatus", "leadingProperty":"IQC_PostStatus"}'/>
                     </table:customData>
@@ -303,23 +321,23 @@
                         <Text text="{IQC_PostStatus}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>IQC_PostAt}" sortProperty="IQC_PostAt" filterProperty="IQC_PostAt">
+                <table:Column width="13rem" label="{i18n>IQC_PostAt}" sortProperty="IQC_PostAt" filterProperty="IQC_PostAt">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"IQC_PostAt", "leadingProperty":"IQC_PostAt"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{IQC_PostAt}" wrapping="false" />
+                        <Text text="{ path: 'IQC_PostAt', 'type':'sap.ui.model.type.Date' }" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>IQC_PostBy}" sortProperty="IQC_PostBy" filterProperty="IQC_PostBy">
+                <table:Column width="13rem" label="{i18n>IQC_PostBy}" sortProperty="IQC_PostBy" filterProperty="IQC_PostBy">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"IQC_PostBy", "leadingProperty":"IQC_PostBy"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{IQC_PostBy}" wrapping="false" />
+                        <Text text="{ parts:[ 'IQC_PostBy','IQC_PostByName'], formatter:'.formatter.formatCodeName' }" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>IQC_PostMaterialDocument}" sortProperty="IQC_PostMaterialDocument" filterProperty="IQC_PostMaterialDocument">
+                <table:Column width="13rem" label="{i18n>IQC_PostMaterialDocument}" sortProperty="IQC_PostMaterialDocument" filterProperty="IQC_PostMaterialDocument">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"IQC_PostMaterialDocument", "leadingProperty":"IQC_PostMaterialDocument"}'/>
                     </table:customData>
@@ -327,36 +345,44 @@
                         <Text text="{IQC_PostMaterialDocument}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>ItemCreatedBy}" sortProperty="ItemCreatedBy" filterProperty="ItemCreatedBy">
+                <table:Column width="13rem" label="{i18n>ItemCreatedBy}" sortProperty="ItemCreatedBy" filterProperty="ItemCreatedBy">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ItemCreatedBy", "leadingProperty":"ItemCreatedBy"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ItemCreatedBy}" wrapping="false" />
+                        <Text text="{ parts:[ 'ItemCreatedBy','ItemCreatedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>ItemCreatedAt}" sortProperty="ItemCreatedAt" filterProperty="ItemCreatedAt">
+                <table:Column width="13rem" label="{i18n>ItemCreatedAt}" sortProperty="ItemCreatedAt" filterProperty="ItemCreatedAt">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ItemCreatedAt", "leadingProperty":"ItemCreatedAt"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ItemCreatedAt}" wrapping="false" />
+                        <Text text="{ path: 'ItemCreatedAt', 'type':'sap.ui.model.type.Date' }" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>ItemLastChangedBy}" sortProperty="ItemLastChangedBy" filterProperty="ItemLastChangedBy">
+                <table:Column width="13rem" label="{i18n>ItemLastChangedBy}" sortProperty="ItemLastChangedBy" filterProperty="ItemLastChangedBy">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ItemLastChangedBy", "leadingProperty":"ItemLastChangedBy"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ItemLastChangedBy}" wrapping="false" />
+                        <Text text="{ parts:[ 'ItemLastChangedBy','ItemLastChangedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>ItemLastChangedAt}" sortProperty="ItemLastChangedAt" filterProperty="ItemLastChangedAt">
+                <table:Column width="13rem" label="{i18n>ItemLastChangedAt}" sortProperty="ItemLastChangedAt" filterProperty="ItemLastChangedAt">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ItemLastChangedAt", "leadingProperty":"ItemLastChangedAt"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ItemLastChangedAt}" wrapping="false" />
+                        <Text text="{ path:'ItemLastChangedAt', 'type':'sap.ui.model.type.Date' }" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>DeleteFlag}" sortProperty="ItemDeleteFlag" filterProperty="ItemDeleteFlag">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ItemDeleteFlag", "leadingProperty":"ItemDeleteFlag"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ItemDeleteFlag}" wrapping="false" />
                     </table:template>
                 </table:Column>
             </table:columns>

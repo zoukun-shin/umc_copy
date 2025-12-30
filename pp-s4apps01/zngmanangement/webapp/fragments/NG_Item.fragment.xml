@@ -6,18 +6,23 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <table:Table id="idNG_ItemTable" rows="{local>/NG_Item}" selectionMode="Single" rowMode="Interactive" class="sapUiSizeCompact">
+    <table:Table id="idNG_ItemTable" rows="{local>/NG_Header/to_NG_Item/results}" rowSelectionChange="rowSelectionChange" selectionBehavior="Row" fixedColumnCount="2" selectionMode="Single" rowMode="Interactive" class="sapUiSizeCompact">
         <table:extension>
             <OverflowToolbar>
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://copy" type="Ghost" text="{i18n>CopyLine}" press="onNG_Item($event,'COPY')" enabled="{local>/Control/editable}"/>
-                <Button icon="sap-icon://add" type="Ghost" text="{i18n>AddLine}" press="onNG_Item($event,'ADD')" enabled="{local>/Control/editable}"/>
-                <Button icon="sap-icon://edit" type="Ghost" text="{i18n>EditLine}" press="onNG_Item($event,'EDIT')" enabled="{local>/Control/editable}"/>
-                <Button icon="sap-icon://delete" type="Ghost" text="{i18n>DeleteLine}" press="onNG_Item($event,'DELETE')" enabled="{local>/Control/editable}"/>
+                <Button icon="sap-icon://copy" type="Ghost" text="{i18n>CopyLine}" press="onNG_Item($event,'COPY')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === true ? false : true}"/>
+                <Button icon="sap-icon://add" type="Ghost" text="{i18n>AddLine}" press="onNG_Item($event,'ADD')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === true ? false : true}"/>
+                <Button icon="sap-icon://edit" type="Ghost" text="{i18n>EditLine}" press="onNG_Item($event,'EDIT')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === true ? false : true}"/>
+                <Button icon="sap-icon://delete" type="Ghost" text="{i18n>DeleteLine}" press="onNG_Item($event,'DELETE')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === true ? false : true}"/>
             </OverflowToolbar>
         </table:extension>
         <table:columns>
-            <table:Column width="8rem" label="{i18n>NG_ItemNo}">
+            <table:Column width="3.5rem" label="{i18n>DeleteFlag}">
+                <table:template>
+                    <Button icon="{ path: 'local>DeleteFlag', formatter:'.formatter.formatDeleteFlagButton'}" />
+                </table:template>
+            </table:Column>
+            <table:Column width="7rem" label="{i18n>NG_ItemNo}">
                 <table:template>
                     <Text text="{local>NG_ItemNo}" wrapping="false"/>
                 </table:template>
@@ -27,19 +32,14 @@
                     <Text text="{local>ProductionOrder}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>NG_Material}">
+            <table:Column width="20rem" label="{i18n>NG_Material}">
                 <table:template>
-                    <Text text="{local>Material}" wrapping="false"/>
+                    <Text text="{ parts:[ 'local>Material','local>MaterialName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>NG_MaterialName}">
+            <table:Column width="15rem" label="{i18n>NG_WorkCenter}">
                 <table:template>
-                    <Text text="{local>MaterialName}" wrapping="false"/>
-                </table:template>
-            </table:Column>
-            <table:Column width="10rem" label="{i18n>NG_WorkCenter}">
-                <table:template>
-                    <Text text="{local>WorkCenter} {local>WorkCenterText}" wrapping="false"/>
+                    <Text text="{ parts:[ 'local>WorkCenter','local>WorkCenterText'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
                 </table:template>
             </table:Column>
             <table:Column width="10rem" label="{i18n>NG_Position}">
@@ -49,7 +49,7 @@
             </table:Column>
             <table:Column width="10rem" label="{i18n>Factor}">
                 <table:template>
-                    <Text text="{local>Factor} {local>FactorText}" wrapping="false"/>
+                    <Text text="{ parts:[ 'local>Factor','local>FactorText'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
                 </table:template>
             </table:Column>
             <table:Column width="10rem" label="{i18n>Quantity}" hAlign="End">
@@ -67,14 +67,9 @@
                     <Text text="{ 'path':'local>FoundDate', 'type':'sap.ui.model.type.Date' }" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>Customer}">
+            <table:Column width="15rem" label="{i18n>Customer}">
                 <table:template>
-                    <Text text="{local>Customer}" wrapping="false"/>
-                </table:template>
-            </table:Column>
-            <table:Column width="10rem" label="{i18n>CustomerName}">
-                <table:template>
-                    <Text text="{local>CustomerName}" wrapping="false"/>
+                    <Text text="{ parts:[ 'local>Customer','local>CustomerName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
                 </table:template>
             </table:Column>
             <table:Column width="10rem" label="{i18n>Symptom}">
@@ -92,24 +87,24 @@
                     <Text text="{local>CounterMeasure}" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>ItemCreatedBy}" visible="{= ${local>/Operation} !== 'Create'}">
+            <table:Column width="15rem" label="{i18n>ItemCreatedBy}" visible="{= ${local>/Operation} !== 'Create'}">
                 <table:template>
-                    <Text text="{local>ItemCreatedBy}" wrapping="false"/>
+                    <Text text="{ parts:[ 'local>ItemCreatedBy','local>ItemCreatedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>ItemCreatedAt}" visible="{= ${local>/Operation} !== 'Create'}">
+            <table:Column width="15rem" label="{i18n>ItemCreatedAt}" visible="{= ${local>/Operation} !== 'Create'}">
                 <table:template>
-                    <Text text="{local>ItemCreatedAt}" wrapping="false"/>
+                    <Text text="{ path: 'local>ItemCreatedAt', 'type':'sap.ui.model.type.Date' }" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>ItemLastChangedBy}" visible="{= ${local>/Operation} !== 'Create'}">
+            <table:Column width="15rem" label="{i18n>ItemLastChangedBy}" visible="{= ${local>/Operation} !== 'Create'}">
                 <table:template>
-                    <Text text="{local>ItemLastChangedBy}" wrapping="false"/>
+                    <Text text="{ parts:[ 'local>ItemLastChangedBy','local>ItemLastChangedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
                 </table:template>
             </table:Column>
-            <table:Column width="10rem" label="{i18n>ItemLastChangedAt}" visible="{= ${local>/Operation} !== 'Create'}">
+            <table:Column width="15rem" label="{i18n>ItemLastChangedAt}" visible="{= ${local>/Operation} !== 'Create'}">
                 <table:template>
-                    <Text text="{local>ItemLastChangedAt}" wrapping="false"/>
+                    <Text text="{ path: 'local>ItemLastChangedAt', 'type':'sap.ui.model.type.Date' }" wrapping="false"/>
                 </table:template>
             </table:Column>
         </table:columns>

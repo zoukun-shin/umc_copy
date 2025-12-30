@@ -105,6 +105,22 @@ sap.ui.define([
                 }
                 return n1;
             }
-        }
+        },
+
+        formatCodeName: function (sCode, sName) {
+            if (sName) {
+                return sCode + " (" + sName + ")"
+            } else {
+                return sCode;
+            }
+        },
+
+        formatDeleteFlagButton: function (bDeleteFlag) {
+            if (bDeleteFlag) {
+                return "sap-icon://delete";
+            } else {
+                return "";
+            }
+        },
     };
 });
