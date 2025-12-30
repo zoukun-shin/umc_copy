@@ -87,6 +87,10 @@ modules:
       - sdsalesacceptresult.zip
       name: sdsalesacceptresult
       target-path: resources/
+    - artifacts:
+      - sdzsalesorderupdate.zip
+      name: sdzsalesorderupdate
+      target-path: resources/
 - name: sdsalesacceptance
   type: html5
   path: salesacceptance
@@ -180,6 +184,15 @@ modules:
 - name: sdsalesacceptresult
   type: html5
   path: salesacceptresult
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sdzsalesorderupdate
+  type: html5
+  path: zsalesorderupdate
   build-parameters:
     build-result: dist
     builder: custom

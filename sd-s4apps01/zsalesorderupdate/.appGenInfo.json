@@ -1,0 +1,24 @@
+{
+  "generationParameters": {
+    "generationDate": "Tue Dec 09 2025 07:47:44 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "https://my412552-api.s4hana.cloud.sap/sap/opu/odata4/sap/zui_salesorderbatchupdate_o4/srvd/sap/zui_salesorderbatchupdate_o4/0001/",
+    "appName": "zsalesorderupdate",
+    "appTitle": "Sales order update",
+    "appDescription": "Sales order update",
+    "appNamespace": "sd",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.136.11",
+    "enableCodeAssist": false,
+    "enableEslint": false,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.20.0",
+    "template": "Basic V4",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}
