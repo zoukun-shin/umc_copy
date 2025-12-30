@@ -107,6 +107,10 @@ modules:
       - ficocostingresult.zip
       name: ficocostingresult
       target-path: resources/
+    - artifacts:
+      - ficogeneralledger.zip
+      name: ficogeneralledger
+      target-path: resources/
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -245,6 +249,15 @@ modules:
 - name: ficocostingresult
   type: html5
   path: costingresult
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficogeneralledger
+  type: html5
+  path: generalledger
   build-parameters:
     build-result: dist
     builder: custom
