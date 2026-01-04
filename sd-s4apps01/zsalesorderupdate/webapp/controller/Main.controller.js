@@ -134,11 +134,7 @@ sap.ui.define([
 
         onExcute: function () {
             //this._callOData("EXCUTE");
-            this._callOData("EXCUTE").then(() => {
-                this.onExport(); // Automatically export after execution
-            }).catch((error) => {
-                MessageBox.error(error);
-            });
+            this._callOData("EXCUTE");
         },
 
         // onExport: function () {
@@ -160,6 +156,7 @@ sap.ui.define([
                 }
                 aPromise.push(this._callODataAction(bEvent, aGroupItems));
             }
+
             try {
                 this._BusyDialog.open();
                 Promise.all(aPromise).then((aContext) => {
@@ -189,6 +186,9 @@ sap.ui.define([
                     this.getModel("local").setProperty("/excelSet", aExcelSet);
                     this.getModel("local").setProperty("/logInfo", this.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
                     MessageToast.show(this.getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
+                    if (bEvent === "EXCUTE") {
+                        this.onExport(); // Automatically export after execution
+                    }
                 }).catch((error) => {
                     MessageBox.error(error);
                 }).finally(() => {
