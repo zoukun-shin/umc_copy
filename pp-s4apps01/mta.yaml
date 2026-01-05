@@ -171,6 +171,10 @@ modules:
       - ppmodelshortage.zip
       name: ppmodelshortage
       target-path: resources/
+    - artifacts:
+      - ppcapacityload.zip
+      name: ppcapacityload
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -453,6 +457,15 @@ modules:
 - name: ppmodelshortage
   type: html5
   path: modelshortage
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppcapacityload
+  type: html5
+  path: capacityload
   build-parameters:
     build-result: dist
     builder: custom

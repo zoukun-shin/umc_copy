@@ -1,0 +1,12 @@
+/* Enter your custom styles here */
+/* 为整个列（包括标题和内容单元格）设置背景色 */
+.highlight-column-critical .sapUiTableHeaderCell,
+.highlight-column-critical .sapUiTableCell {
+    background-color: #ffe6e6 !important; /* 浅红色背景 */
+    color: #a10000 !important; /* 深红色文字 */
+}
+.highlight-column-warning .sapUiTableHeaderCell,
+.highlight-column-warning .sapUiTableCell {
+    background-color: #fff0cc !important; /* 浅黄色背景 */
+    color: #5c3f00 !important; /* 深棕色文字 */
+}
