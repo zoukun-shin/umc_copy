@@ -104,7 +104,12 @@
                             <table:template>
                                 <Text text="{local>BegRev}" wrapping="false"/>
                             </table:template>
-                        </table:Column>                     
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>Currency}">
+                            <table:template>
+                                <Text text="{local>Currency}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>       
                     </table:columns>
                 </table:Table>
             </Panel>

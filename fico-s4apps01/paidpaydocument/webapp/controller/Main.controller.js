@@ -305,12 +305,21 @@ sap.ui.define([
             },
 
             onBeforeExport: function (oEvent) {
+                var oSmartTable = this.byId("smartTable_Doc");
+				var oTable = oSmartTable.getTable();
+				var oFirstContext = oTable.getBinding("rows").getContexts()[0];
+				var sCurrency = oFirstContext.getObject().Currency;
+				if (sCurrency === "JPY" || sCurrency === "VND") {
+					var iScale = 0;
+				} else {
+					var iScale = 2;
+				}
                 var mExcelSettings = oEvent.getParameter("exportSettings");
                 var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
-                this._exportExcel(mExcelSettings, sFileName);
+                this._exportExcel(mExcelSettings, sFileName, iScale);
             },
 
-            _exportExcel: function (mExcelSettings, sFileName) {
+            _exportExcel: function (mExcelSettings, sFileName, iScale) {
                 mExcelSettings.workbook.columns.forEach(function (oColumn) {
                     if (!oColumn || !oColumn.property) {
                         return;
@@ -319,11 +328,13 @@ sap.ui.define([
                         case "PurGrpAmount":
                             oColumn.type = sap.ui.export.EdmType.Number;
                             oColumn.delimiter = true;
+                            oColumn.scale = iScale;
                             oColumn.textAlign = "End";
                             break;
                         case "ChargeableAmount":
                             oColumn.type = sap.ui.export.EdmType.Number;
                             oColumn.delimiter = true;
+                            oColumn.scale = iScale;
                             oColumn.textAlign = "End";
                             break;
                         case "ChargeableRate":
@@ -335,46 +346,55 @@ sap.ui.define([
                         case "PreviousStockAmount":
                             oColumn.type = sap.ui.export.EdmType.Number;
                             oColumn.delimiter = true;
+                            oColumn.scale = iScale;
                             oColumn.textAlign = "End";
                             break;
                         case "CurrentStockAmount":
                             oColumn.type = sap.ui.export.EdmType.Number;
                             oColumn.delimiter = true;
+                            oColumn.scale = iScale;
                             oColumn.textAlign = "End";
                             break;
                         case "CurrentStockSemi":
                             oColumn.type = sap.ui.export.EdmType.Number;
                             oColumn.delimiter = true;
+                            oColumn.scale = iScale;
                             oColumn.textAlign = "End";
                             break;
                         case "CurrentStockFin":
                             oColumn.type = sap.ui.export.EdmType.Number;
                             oColumn.delimiter = true;
+                            oColumn.scale = iScale;
                             oColumn.textAlign = "End";
                             break;
                         case "CurrentStockTotal":
                             oColumn.type = sap.ui.export.EdmType.Number;
                             oColumn.delimiter = true;
+                            oColumn.scale = iScale;
                             oColumn.textAlign = "End";
                             break;
                         case "StockChangeAmount":
                             oColumn.type = sap.ui.export.EdmType.Number;
                             oColumn.delimiter = true;
+                            oColumn.scale = iScale;
                             oColumn.textAlign = "End";
                             break;
                         case "PaidMaterialCost":
                             oColumn.type = sap.ui.export.EdmType.Number;
                             oColumn.delimiter = true;
+                            oColumn.scale = iScale;
                             oColumn.textAlign = "End";
                             break;
                         case "CustomerRevenue":
                             oColumn.type = sap.ui.export.EdmType.Number;
                             oColumn.delimiter = true;
+                            oColumn.scale = iScale;
                             oColumn.textAlign = "End";
                             break;
                         case "Revenue":
                             oColumn.type = sap.ui.export.EdmType.Number;
                             oColumn.delimiter = true;
+                            oColumn.scale = iScale;
                             oColumn.textAlign = "End";
                             break;
                         case "RevenueRate":
@@ -386,13 +406,13 @@ sap.ui.define([
                         case "AR":
                             oColumn.type = sap.ui.export.EdmType.Number;
                             oColumn.delimiter = true;
-                            oColumn.scale = 2;
+                            oColumn.scale = iScale;
                             oColumn.textAlign = "End";
                             break;
                         case "AP":
                             oColumn.type = sap.ui.export.EdmType.Number;
                             oColumn.delimiter = true;
-                            oColumn.scale = 2;
+                            oColumn.scale = iScale;
                             oColumn.textAlign = "End";
                             break;
                     }

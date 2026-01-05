@@ -62,8 +62,8 @@ sap.ui.define([
                             "BegPurGrpAmt": aSheetData[i]["BeginningPurchasingGroupAmount"] === undefined ? "" : aSheetData[i]["BeginningPurchasingGroupAmount"], //期首購買グループ仕入れ金額
                             "BegChgMaterialAmt": aSheetData[i]["BeginningChargeableMaterialAmount"] === undefined ? "" : aSheetData[i]["BeginningChargeableMaterialAmount"], //期首有償支給品仕入れ金額
                             "BegCustomerRev": aSheetData[i]["BeginningCustomerRevenue"] === undefined ? "" : aSheetData[i]["BeginningCustomerRevenue"],    //期首得意先の総売上高
-                            "BegRev": aSheetData[i]["BeginningRevenue"] === undefined ? "" : aSheetData[i]["BeginningRevenue"] //期首会社レベルの総売上高
-
+                            "BegRev": aSheetData[i]["BeginningRevenue"] === undefined ? "" : aSheetData[i]["BeginningRevenue"], //期首会社レベルの総売上高
+                            "Currency": aSheetData[i]["Currency"] === undefined ? "" : aSheetData[i]["Currency"],
                         };
                         aExcelSet.push(item);
                     }
