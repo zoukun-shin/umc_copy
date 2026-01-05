@@ -127,6 +127,29 @@ sap.ui.define([
                         "RootCause": aSheetData[i]["RootCause"] === undefined ? "" : aSheetData[i]["RootCause"],
                         "CounterMeasure": aSheetData[i]["CounterMeasure"] === undefined ? "" : aSheetData[i]["CounterMeasure"]
                     };
+                    var bError = false;
+                    if ((!item.FoundDate.includes("/") && !item.FoundDate.includes("-")) || !this._isValidDate(item.FoundDate)) {
+                        bError = true;
+                    } else {
+                        var splitArr = [];
+                        if (item.FoundDate.includes("/")) {
+                            splitArr = item.FoundDate.split("/");
+                        } else if (item.FoundDate.includes("-")) {
+                            splitArr = item.FoundDate.split("-");
+                        }
+                        if (splitArr[0].length !== 4) {
+                            bError = true;
+                        } else if (splitArr[1].length === 0 || splitArr[1].length > 2) {
+                            bError = true;
+                        } else if (splitArr[2].length === 0 || splitArr[2].length > 2) {
+                            bError = true;
+                        }
+                    }
+                    if (bError) {
+                        item.Status = "E";
+                        item.FoundDate = "";
+                        item.Message = this.getResourceBundle().getText("isValidDate");
+                    }
                     aExcelSet.push(item);
                 }
                 this.getModel("local").setProperty("/excelSet", aExcelSet);
@@ -156,6 +179,11 @@ sap.ui.define([
         _callOData: function (bEvent) {
             var aPromise = [];
             var aExcelSet = this.getModel("local").getProperty("/excelSet");
+            var obj = aExcelSet.find(element => element.Status === 'E');
+            if (obj) {
+                MessageBox.error(this.getResourceBundle().getText("isValidDate"));
+                return;
+            }
             aPromise.push(this._callODataAction(bEvent, aExcelSet));
             try {
                 this._BusyDialog.open();
@@ -216,6 +244,11 @@ sap.ui.define([
                     reject(error);
                 });
             });
+        },
+
+        _isValidDate: function (dateString) {
+            const date = new Date(dateString);
+            return !isNaN(date.getTime());
         }
     });
 });
