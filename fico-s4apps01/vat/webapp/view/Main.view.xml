@@ -1,0 +1,205 @@
+<mvc:View controllerName="fico.vat.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:plugins="sap.ui.table.plugins"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable" height="100%">
+    <f:DynamicPage>
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="VATSVM" showShare="true" showExecuteOnSelection="true" entitySet="VAT"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="VAT" useToolbar="false" liveMode="false" smartVariant="__SVM01" persistencyKey="HeaderSFB" search="onSearch">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration index='10' key="CompanyCode" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>CompanyCode}"/>
+                            <smartFilterBar:ControlConfiguration index='20' key="GLAccount" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>GLAccount}"/>
+                            <smartFilterBar:ControlConfiguration index='30' key="PostingDate" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>PostingDate}" >
+                                    <smartFilterBar:customControl>
+                                        <DateRangeSelection id="idDate" 
+                                            valueFormat="yyyy/MM/dd" 
+                                            displayFormat="yyyy/MM/dd" />
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                            <!-- visible -->
+                            <smartFilterBar:ControlConfiguration index='999' key="AccountingDocument" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Customer" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Supplier" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="GLAccountName" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="DocumentType" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="InvoiceDate" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="TaxID" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="HeadOffice" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="BranchCode" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="SupplierName" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Invoice" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="OriginalCurrency" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="OriginalAmount" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="BaseAmount" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="TaxAmount" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable id="idsmartTable" entitySet="VAT" smartFilterId="idSmartFilterBar" smartVariant="__SVM01" tableType="Table" persistencyKey="smartTable" header="{i18n>Results}" 
+                        placeToolbarInTable="true" showRowCount="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" requestAtLeastFields="CompanyCode,PostingDate"  ignoredFields="CompanyCode,PostingDate,UserEmail">
+                <table:Table id="idStandardListTable" rowMode="Auto" >
+                    <table:columns>
+                        <table:Column width="10rem" label="{i18n>GLAccount}" sortProperty="GLAccount" filterProperty="GLAccount">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"GLAccount", "leadingProperty":"GLAccount"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{GLAccount}" wrapping="false" tooltip="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="14rem" label="{i18n>GLAccountName}" sortProperty="GLAccountName" filterProperty="GLAccountName">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"GLAccountName", "leadingProperty":"GLAccountName"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{GLAccountName}" wrapping="false" tooltip="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>AccountingDocument}" sortProperty="AccountingDocument" filterProperty="AccountingDocument">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AccountingDocument", "leadingProperty":"AccountingDocument"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{AccountingDocument}" wrapping="false" tooltip="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>DocumentType}" sortProperty="DocumentType" filterProperty="DocumentType">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DocumentType", "leadingProperty":"DocumentType"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{DocumentType}" wrapping="false" tooltip="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>InvoiceDate}" sortProperty="InvoiceDate" filterProperty="InvoiceDate">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"InvoiceDate", "leadingProperty":"InvoiceDate"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{InvoiceDate}" wrapping="false" tooltip="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>TaxID}" sortProperty="TaxID" filterProperty="TaxID">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"TaxID", "leadingProperty":"TaxID"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{TaxID}" wrapping="false" tooltip="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>HeadOffice}" sortProperty="HeadOffice" filterProperty="HeadOffice">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"HeadOffice", "leadingProperty":"HeadOffice"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{HeadOffice}" wrapping="false" tooltip="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>BranchCode}" sortProperty="BranchCode" filterProperty="BranchCode">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BranchCode", "leadingProperty":"BranchCode"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{BranchCode}" wrapping="false" tooltip="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Customer}" sortProperty="Customer" filterProperty="Customer">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "leadingProperty":"Customer"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Customer}" wrapping="false" tooltip="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="14rem" label="{i18n>CustomerName}" sortProperty="CustomerName" filterProperty="CustomerName">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{CustomerName}" wrapping="false" tooltip="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Supplier}" sortProperty="Supplier" filterProperty="Supplier">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Supplier", "leadingProperty":"Supplier"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Supplier}" wrapping="false" tooltip="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="14rem" label="{i18n>SupplierName}" sortProperty="SupplierName" filterProperty="SupplierName">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SupplierName", "leadingProperty":"SupplierName"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{SupplierName}" wrapping="false" tooltip="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Invoice}" sortProperty="Invoice" filterProperty="Invoice">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Invoice", "leadingProperty":"Invoice"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Invoice}" wrapping="false" tooltip="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="18rem" label="{i18n>OriginalCurrency}" sortProperty="OriginalCurrency" filterProperty="OriginalCurrency">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"OriginalCurrency", "leadingProperty":"OriginalCurrency"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{OriginalCurrency}" wrapping="false" tooltip="true"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="20rem" label="{i18n>OriginalAmount}" sortProperty="OriginalAmount" filterProperty="OriginalAmount">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"OriginalAmount", "leadingProperty":"OriginalAmount"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'OriginalAmount', formatter:'.formatter.formatNumber'}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>BaseAmount}" sortProperty="BaseAmount" filterProperty="BaseAmount">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BaseAmount", "leadingProperty":"BaseAmount"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'BaseAmount', formatter:'.formatter.formatNumber'}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>TaxAmount}" sortProperty="TaxAmount" filterProperty="TaxAmount">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"TaxAmount", "leadingProperty":"TaxAmount"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'TaxAmount', formatter:'.formatter.formatNumber'}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                    </table:columns>
+                </table:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
