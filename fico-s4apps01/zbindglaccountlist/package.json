@@ -8,10 +8,6 @@
     "sapui5"
   ],
   "main": "webapp/index.html",
-  "dependencies": {
-    "exceljs": "^4.4.0",
-    "xlsx": "^0.18.5"
-  },
   "devDependencies": {
     "@sap-ux/ui5-middleware-fe-mockserver": "2",
     "@sap/ui5-builder-webide-extension": "^1.1.9",
