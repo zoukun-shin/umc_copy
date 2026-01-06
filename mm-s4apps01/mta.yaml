@@ -87,6 +87,10 @@ modules:
       - mmmasspostofscrap.zip
       name: mmmasspostofscrap
       target-path: resources/
+    - artifacts:
+      - mmparkedinvoice.zip
+      name: mmparkedinvoice
+      target-path: resources/ 
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -186,6 +190,15 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
+- name: mmparkedinvoice
+  type: html5
+  path: parkedinvoice
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []    
 resources:
 - name: mm-s4apps01-uaa
   type: org.cloudfoundry.managed-service

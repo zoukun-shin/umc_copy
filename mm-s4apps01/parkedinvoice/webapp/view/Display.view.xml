@@ -1,0 +1,556 @@
+<mvc:View controllerName="mm.parkedinvoice.controller.Display" displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:t="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants" height="100%" busyIndicatorDelay="0">
+    <f:DynamicPage id="idDynamicPage">
+        <f:title>
+            <f:DynamicPageTitle id="idDynamicPageTitle">
+                <f:heading>
+                    <sv:SmartVariantManagement id="idSmartVariantManagement" showShare="true" persistencyKey="parkedInvoiceFilter" showExecuteOnSelection="true" entitySet="ParkedInvoice" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="idDynamicPageHeader">
+                <f:content>
+                    <!--数据查询-->
+                    <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="ParkedInvoice" entitySet="ParkedInvoice" useToolbar="false" class="sapUiResponsiveMargin">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration"  key="PurchaseOrder"    visibleInAdvancedArea="true" label="{i18n>PurchaseOrder}" mandatory="notMandatory" index="2" />
+                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration"  key="Supplier"         visibleInAdvancedArea="true" label="{i18n>Supplier}" mandatory="notMandatory" index="3" />
+                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration"  key="PurchasingOrganization" visibleInAdvancedArea="true" label="{i18n>PurchasingOrganization}" mandatory="notMandatory" index="4" />
+                            <smartFilterBar:ControlConfiguration id="id4ControlConfiguration"  key="PurchasingGroup"   visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}" mandatory="notMandatory" index="5" />
+                            <smartFilterBar:ControlConfiguration id="id5ControlConfiguration"  key="Material"         visibleInAdvancedArea="true" label="{i18n>Material}" mandatory="notMandatory" index="6" />
+                            <smartFilterBar:ControlConfiguration id="id6ControlConfiguration"  key="Plant"            visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="notMandatory" index="7" />
+                            <smartFilterBar:ControlConfiguration id="id7ControlConfiguration"  key="MaterialGroup"    visibleInAdvancedArea="true" label="{i18n>MaterialGroup}" mandatory="notMandatory" index="8" />
+                            <smartFilterBar:ControlConfiguration id="id8ControlConfiguration"  key="PostingDate"      visibleInAdvancedArea="true" label="{i18n>PostingDate}" mandatory="notMandatory" index="9" />
+                            <smartFilterBar:ControlConfiguration id="idC9ontrolConfiguration"  key="MaterialDocumentHeaderText" visibleInAdvancedArea="true" label="{i18n>MaterialDocumentHeaderText}" mandatory="notMandatory" index="10" />
+                            <smartFilterBar:ControlConfiguration id="idC10ontrolConfiguration" key="InvoiceStatus" visibleInAdvancedArea="true" label="{i18n>InvoiceStatus}" mandatory="notMandatory" index="10" />
+                            <!-- visible -->
+                            <smartFilterBar:ControlConfiguration key="UserEmail" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="MaterialDocument" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="MaterialDocumentItem" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="MaterialDocumentYear" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="DocumentCurrency" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="GrnUnitPrice" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="NotParkedAmount" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="FiscalYear" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="SupplierInvoice" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="SupplierInvoiceItem" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="TaxCode" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="CompanyCode" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="PurchaseOrderItem" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="ScheduleLineDeliveryDate" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="ConditionRate" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="Currency" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="NetOrderPrice" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="DocumentDate" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="CreationDate" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="MENGE" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="PurchaseOrderCategory" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="PurchaseOrderType" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="Vendor" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="PurchaseOrderDate" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="AccountAssignmentCategory" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="PurchaseOrderItemText" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="RequirementTracking" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="OrderQuantity" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="PurchaseOrderQuantityUnit" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="NetPriceAmount" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="NetPriceQuantity" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="RequisitionerName" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="AddressSearchTerm1" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="GLAccount" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="ChartOfAccounts" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="Reference" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="Confirm1" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="CreationTime" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="DocumentHeaderText" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="BillOfLading" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="ParkedQuantity" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="ParkedAmount" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="PostedQuantity" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="PostedAmount" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="TransactionCurrency" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="AccountingDocument" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="FiscalYearRef" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="INVOICERECEIVEDBYFI" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="Country" visible="false"/>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable id="idSmartTable" entitySet="ParkedInvoice" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="parkedInvoiceTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="UserEmail" ignoredFields="UserEmail">
+                <smartTable:customToolbar>
+                    <OverflowToolbar >
+                        <ToolbarSpacer />
+                        <Button type="Emphasized" text="{i18n>Mark}"   press="onMark"    visible="true" enabled="true" />
+                        <Button type="Reject"  text="{i18n>Cancel}" press="onCancel"  visible="true" enabled="true" />
+                        <Button type="Accept" text="{i18n>Post}"   press="onPost"    visible="true" enabled="true" />
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+                <t:Table id="idParkedInvoiceTable" selectionMode="MultiToggle" selectionBehavior="Row" rowActionCount="1" rowsUpdated="onUITableRowsUpdated">
+                    <t:columns>
+                        <t:Column width="10rem" label="{i18n>MaterialDocumentHeaderText}" sortProperty="MaterialDocumentHeaderText" filterProperty="MaterialDocumentHeaderText">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocumentHeaderText", "leadingProperty":"MaterialDocumentHeaderText", "sortProperty":"MaterialDocumentHeaderText", "filterProperty": "MaterialDocumentHeaderText"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{MaterialDocumentHeaderText}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>MaterialDocumentYear}" sortProperty="MaterialDocumentYear" filterProperty="MaterialDocumentYear">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocumentYear", "leadingProperty":"MaterialDocumentYear", "sortProperty":"MaterialDocumentYear", "filterProperty": "MaterialDocumentYear"}'/>
+                                </t:customData>
+                            <t:template>
+                                <Text text="{MaterialDocumentYear}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>MaterialDocument}" sortProperty="MaterialDocument" filterProperty="MaterialDocument">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocument", "leadingProperty":"MaterialDocument", "sortProperty":"MaterialDocument", "filterProperty": "MaterialDocument"}'/>
+                                </t:customData>
+                            <t:template>
+                                <Text text="{MaterialDocument}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>MaterialDocumentItem}" sortProperty="MaterialDocumentItem" filterProperty="MaterialDocumentItem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocumentItem", "leadingProperty":"MaterialDocumentItem", "sortProperty":"MaterialDocumentItem", "filterProperty": "MaterialDocumentItem"}'/>
+                                </t:customData>
+                            <t:template>
+                                <Text text="{MaterialDocumentItem}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>DocumentCurrency}" sortProperty="DocumentCurrency" filterProperty="DocumentCurrency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DocumentCurrency", "leadingProperty":"DocumentCurrency", "sortProperty":"DocumentCurrency", "filterProperty": "DocumentCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{DocumentCurrency}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>GrnUnitPrice}" sortProperty="GrnUnitPrice" filterProperty="GrnUnitPrice">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"GrnUnitPrice", "leadingProperty":"GrnUnitPrice", "sortProperty":"GrnUnitPrice", "filterProperty": "GrnUnitPrice"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{GrnUnitPrice}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>NotParkedAmount}" sortProperty="NotParkedAmount" filterProperty="NotParkedAmount">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"NotParkedAmount", "leadingProperty":"NotParkedAmount", "sortProperty":"NotParkedAmount", "filterProperty": "NotParkedAmount"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{NotParkedAmount}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>Supplier}" sortProperty="Supplier" filterProperty="Supplier">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Supplier", "leadingProperty":"Supplier", "sortProperty":"Supplier", "filterProperty": "Supplier"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Supplier}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>FiscalYear}" sortProperty="FiscalYear" filterProperty="FiscalYear">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"FiscalYear", "leadingProperty":"FiscalYear", "sortProperty":"FiscalYear", "filterProperty": "FiscalYear"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{FiscalYear}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>SupplierInvoice}" sortProperty="SupplierInvoice" filterProperty="SupplierInvoice">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SupplierInvoice", "leadingProperty":"SupplierInvoice", "sortProperty":"SupplierInvoice", "filterProperty": "SupplierInvoice"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{SupplierInvoice}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>SupplierInvoiceItem}" sortProperty="SupplierInvoiceItem" filterProperty="SupplierInvoiceItem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SupplierInvoiceItem", "leadingProperty":"SupplierInvoiceItem", "sortProperty":"SupplierInvoiceItem", "filterProperty": "SupplierInvoiceItem"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{SupplierInvoiceItem}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>TaxCode}" sortProperty="TaxCode" filterProperty="TaxCode">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"TaxCode", "leadingProperty":"TaxCode", "sortProperty":"TaxCode", "filterProperty": "TaxCode"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{TaxCode}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode", "leadingProperty":"CompanyCode", "sortProperty":"CompanyCode", "filterProperty": "CompanyCode"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{CompanyCode}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>PostingDate}" sortProperty="PostingDate" filterProperty="PostingDate">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PostingDate", "leadingProperty":"PostingDate", "sortProperty":"PostingDate", "filterProperty": "PostingDate"}'/>          
+                                </t:customData>
+                            <t:template>
+                                <Text text="{PostingDate}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>PurchaseOrder}" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrder", "leadingProperty":"PurchaseOrder", "sortProperty":"PurchaseOrder", "filterProperty": "PurchaseOrder"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PurchaseOrder}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>PurchaseOrderItem}" sortProperty="PurchaseOrderItem" filterProperty="PurchaseOrderItem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderItem", "leadingProperty":"PurchaseOrderItem", "sortProperty":"PurchaseOrderItem", "filterProperty": "PurchaseOrderItem"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PurchaseOrderItem}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>ScheduleLineDeliveryDate}" sortProperty="ScheduleLineDeliveryDate" filterProperty="ScheduleLineDeliveryDate">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ScheduleLineDeliveryDate", "leadingProperty":"ScheduleLineDeliveryDate", "sortProperty":"ScheduleLineDeliveryDate", "filterProperty": "ScheduleLineDeliveryDate"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ScheduleLineDeliveryDate}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>ConditionRate}" sortProperty="ConditionRate" filterProperty="ConditionRate">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRate", "leadingProperty":"ConditionRate", "sortProperty":"ConditionRate", "filterProperty": "ConditionRate"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ConditionRate}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>Currency}" sortProperty="Currency" filterProperty="Currency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Currency", "leadingProperty":"Currency", "sortProperty":"Currency", "filterProperty": "Currency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Currency}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>NetOrderPrice}" sortProperty="NetOrderPrice" filterProperty="NetOrderPrice">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"NetOrderPrice", "leadingProperty":"NetOrderPrice", "sortProperty":"NetOrderPrice", "filterProperty": "NetOrderPrice"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{NetOrderPrice}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>DocumentDate}" sortProperty="DocumentDate" filterProperty="DocumentDate">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DocumentDate", "leadingProperty":"DocumentDate", "sortProperty":"DocumentDate", "filterProperty": "DocumentDate"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{DocumentDate}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>CreationDate}" sortProperty="CreationDate" filterProperty="CreationDate">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CreationDate", "leadingProperty":"CreationDate", "sortProperty":"CreationDate", "filterProperty": "CreationDate"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{CreationDate}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>MENGE}" sortProperty="MENGE" filterProperty="MENGE">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"MENGE", "leadingProperty":"MENGE", "sortProperty":"MENGE", "filterProperty": "MENGE"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{MENGE}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>PurchaseOrderCategory}" sortProperty="PurchaseOrderCategory" filterProperty="PurchaseOrderCategory">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderCategory", "leadingProperty":"PurchaseOrderCategory", "sortProperty":"PurchaseOrderCategory", "filterProperty": "PurchaseOrderCategory"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PurchaseOrderCategory}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>PurchaseOrderType}" sortProperty="PurchaseOrderType" filterProperty="PurchaseOrderType">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderType", "leadingProperty":"PurchaseOrderType", "sortProperty":"PurchaseOrderType", "filterProperty": "PurchaseOrderType"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PurchaseOrderType}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>Vendor}" sortProperty="Vendor" filterProperty="Vendor">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Vendor", "leadingProperty":"Vendor", "sortProperty":"Vendor", "filterProperty": "Vendor"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Vendor}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>PurchasingOrganization}" sortProperty="PurchasingOrganization" filterProperty="PurchasingOrganization">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PurchasingOrganization", "leadingProperty":"PurchasingOrganization", "sortProperty":"PurchasingOrganization", "filterProperty": "PurchasingOrganization"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PurchasingOrganization}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>PurchasingGroup}" sortProperty="PurchasingGroup" filterProperty="PurchasingGroup">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PurchasingGroup", "leadingProperty":"PurchasingGroup", "sortProperty":"PurchasingGroup", "filterProperty": "PurchasingGroup"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PurchasingGroup}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>PurchaseOrderDate}" sortProperty="PurchaseOrderDate" filterProperty="PurchaseOrderDate">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderDate", "leadingProperty":"PurchaseOrderDate", "sortProperty":"PurchaseOrderDate", "filterProperty": "PurchaseOrderDate"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PurchaseOrderDate}" wrapping="false" />
+                            </t:template>
+                            </t:Column>
+                        <t:Column width="10rem" label="{i18n>AccountAssignmentCategory}" sortProperty="AccountAssignmentCategory" filterProperty="AccountAssignmentCategory">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AccountAssignmentCategory", "leadingProperty":"AccountAssignmentCategory", "sortProperty":"AccountAssignmentCategory", "filterProperty": "AccountAssignmentCategory"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AccountAssignmentCategory}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Material", "leadingProperty":"Material", "sortProperty":"Material", "filterProperty": "Material"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Material}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>PurchaseOrderItemText}" sortProperty="PurchaseOrderItemText" filterProperty="PurchaseOrderItemText">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderItemText", "leadingProperty":"PurchaseOrderItemText", "sortProperty":"PurchaseOrderItemText", "filterProperty": "PurchaseOrderItemText"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PurchaseOrderItemText}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Plant}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>RequirementTracking}" sortProperty="RequirementTracking" filterProperty="RequirementTracking">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"RequirementTracking", "leadingProperty":"RequirementTracking", "sortProperty":"RequirementTracking", "filterProperty": "RequirementTracking"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{RequirementTracking}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>MaterialGroup}" sortProperty="MaterialGroup" filterProperty="MaterialGroup">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"MaterialGroup", "leadingProperty":"MaterialGroup", "sortProperty":"MaterialGroup", "filterProperty": "MaterialGroup"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{MaterialGroup}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>OrderQuantity}" sortProperty="OrderQuantity" filterProperty="OrderQuantity">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"OrderQuantity", "leadingProperty":"OrderQuantity", "sortProperty":"OrderQuantity", "filterProperty": "OrderQuantity"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{OrderQuantity}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>PurchaseOrderQuantityUnit}" sortProperty="PurchaseOrderQuantityUnit" filterProperty="PurchaseOrderQuantityUnit">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderQuantityUnit", "leadingProperty":"PurchaseOrderQuantityUnit", "sortProperty":"PurchaseOrderQuantityUnit", "filterProperty": "PurchaseOrderQuantityUnit"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PurchaseOrderQuantityUnit}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>NetPriceAmount}" sortProperty="NetPriceAmount" filterProperty="NetPriceAmount">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"NetPriceAmount", "leadingProperty":"NetPriceAmount", "sortProperty":"NetPriceAmount", "filterProperty": "NetPriceAmount"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{NetPriceAmount}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>NetPriceQuantity}" sortProperty="NetPriceQuantity" filterProperty="NetPriceQuantity">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"NetPriceQuantity", "leadingProperty":"NetPriceQuantity", "sortProperty":"NetPriceQuantity", "filterProperty": "NetPriceQuantity"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{NetPriceQuantity}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>RequisitionerName}" sortProperty="RequisitionerName" filterProperty="RequisitionerName">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"RequisitionerName", "leadingProperty":"RequisitionerName", "sortProperty":"RequisitionerName", "filterProperty": "RequisitionerName"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{RequisitionerName}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>AddressSearchTerm1}" sortProperty="AddressSearchTerm1" filterProperty="AddressSearchTerm1">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AddressSearchTerm1", "leadingProperty":"AddressSearchTerm1", "sortProperty":"AddressSearchTerm1", "filterProperty": "AddressSearchTerm1"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AddressSearchTerm1}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>GLAccount}" sortProperty="GLAccount" filterProperty="GLAccount">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"GLAccount", "leadingProperty":"GLAccount", "sortProperty":"GLAccount", "filterProperty": "GLAccount"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{GLAccount}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>ChartOfAccounts}" sortProperty="ChartOfAccounts" filterProperty="ChartOfAccounts">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ChartOfAccounts", "leadingProperty":"ChartOfAccounts", "sortProperty":"ChartOfAccounts", "filterProperty": "ChartOfAccounts"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ChartOfAccounts}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>Reference}" sortProperty="Reference" filterProperty="Reference">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Reference", "leadingProperty":"Reference", "sortProperty":"Reference", "filterProperty": "Reference"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Reference}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>Confirm1}" sortProperty="Confirm1" filterProperty="Confirm1">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Confirm1", "leadingProperty":"Confirm1", "sortProperty":"Confirm1", "filterProperty": "Confirm1"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Confirm1}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>CreationTime}" sortProperty="CreationTime" filterProperty="CreationTime">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CreationTime", "leadingProperty":"CreationTime", "sortProperty":"CreationTime", "filterProperty": "CreationTime"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{CreationTime}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>DocumentHeaderText}" sortProperty="DocumentHeaderText" filterProperty="DocumentHeaderText">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DocumentHeaderText", "leadingProperty":"DocumentHeaderText", "sortProperty":"DocumentHeaderText", "filterProperty": "DocumentHeaderText"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{DocumentHeaderText}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>BillOfLading}" sortProperty="BillOfLading" filterProperty="BillOfLading">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillOfLading", "leadingProperty":"BillOfLading", "sortProperty":"BillOfLading", "filterProperty": "BillOfLading"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BillOfLading}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>ParkedQuantity}" sortProperty="ParkedQuantity" filterProperty="ParkedQuantity">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ParkedQuantity", "leadingProperty":"ParkedQuantity", "sortProperty":"ParkedQuantity", "filterProperty": "ParkedQuantity"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ParkedQuantity}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>ParkedAmount}" sortProperty="ParkedAmount" filterProperty="ParkedAmount">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ParkedAmount", "leadingProperty":"ParkedAmount", "sortProperty":"ParkedAmount", "filterProperty": "ParkedAmount"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ParkedAmount}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>PostedQuantity}" sortProperty="PostedQuantity" filterProperty="PostedQuantity">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PostedQuantity", "leadingProperty":"PostedQuantity", "sortProperty":"PostedQuantity", "filterProperty": "PostedQuantity"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PostedQuantity}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>PostedAmount}" sortProperty="PostedAmount" filterProperty="PostedAmount">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PostedAmount", "leadingProperty":"PostedAmount", "sortProperty":"PostedAmount", "filterProperty": "PostedAmount"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PostedAmount}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>TransactionCurrency}" sortProperty="TransactionCurrency" filterProperty="TransactionCurrency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"TransactionCurrency", "leadingProperty":"TransactionCurrency", "sortProperty":"TransactionCurrency", "filterProperty": "TransactionCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{TransactionCurrency}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>AccountingDocument}" sortProperty="AccountingDocument" filterProperty="AccountingDocument">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AccountingDocument", "leadingProperty":"AccountingDocument", "sortProperty":"AccountingDocument", "filterProperty": "AccountingDocument"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AccountingDocument}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>FiscalYearRef}" sortProperty="FiscalYearRef" filterProperty="FiscalYearRef">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"FiscalYearRef", "leadingProperty":"FiscalYearRef", "sortProperty":"FiscalYearRef", "filterProperty": "FiscalYearRef"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{FiscalYearRef}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>INVOICERECEIVEDBYFI}" sortProperty="INVOICERECEIVEDBYFI" filterProperty="INVOICERECEIVEDBYFI">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"INVOICERECEIVEDBYFI", "leadingProperty":"INVOICERECEIVEDBYFI", "sortProperty":"INVOICERECEIVEDBYFI", "filterProperty": "INVOICERECEIVEDBYFI"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{INVOICERECEIVEDBYFI}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
