@@ -46,27 +46,84 @@ sap.ui.define([
                 MessageBox.error(this.getResourceBundle().getText("msg007"));
                 return;
             };
+            that._LocalData.setProperty("/headSet", "");
+            that._LocalData.setProperty("/itemSetM", []);
             MessageBox.confirm(this.getModel("i18n").getResourceBundle().getText("info005"), {
                 actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
                 emphasizedAction: MessageBox.Action.OK,
                 onClose: function (sAction) {
                     if (sAction === MessageBox.Action.OK) {
                         that._BusyDialog.open();
-                        var header = {
-                            Plant: sPlant,
-                            Barcode: sBarcode,
-                            UserEmail: that._UserInfo.getEmail() === undefined ? "" : that._UserInfo.getEmail(),
-                        };
                         that._CallODataV2("ACTION", "/processLogic", [], {
-                            "Zzkey": JSON.stringify(header),
+                            "Zzkey": "",
                             "Event": "REFRESH",
                             "Plant": sPlant,
-                            "Barcode": sBarcode
+                            "Barcode": sBarcode,
+                            UserEmail: that._UserInfo.getEmail() === undefined ? "" : that._UserInfo.getEmail(),
                         }, {}).then(function (oResponse) {
                             var result = JSON.parse(oResponse.processLogic.Zzkey);
-                            if (result.MSGTYP === 'S') {
-                                MessageBox.success(result.MESSAGE);
-                            }
+                            that._LocalData.setProperty("/headSet", {
+                                Barcode: result.BARCODE,
+                                Barcode_Qty: result.BARCODE_QTY,
+                                WO_Order: result.WO_ORDER,
+                                Product: result.PRODUCT,
+                                Customer: result.CUSTOMER,
+                                SalesDocument: result.SALESDOCUMENT,
+                                PurchaseOrderByCustomer: result.PURCHASEORDERBYCUSTOMER,
+                                WO_Qty: result.WO_QTY,
+                                WO_Start_Date: new Date(result.WO_START_DATE),
+                                Gen_Qty: result.GEN_QTY,
+                                Packing_Qty: result.PACKING_QTY,
+                                History: result.HISTORY,
+                                Actual_Date: new Date(result.ACTUAL_DATE),
+                            });
+                            var items = that._LocalData.getProperty("/itemSetM") || [];
+                            result.ITEMS.forEach(element => {
+                                items.push({
+                                    Plant: element.PLANT,
+                                    Barcode: element.BARCODE,
+                                    Product: element.PRODUCT,
+                                    ProductName: element.PRODUCTNAME,
+                                    WO_Order: element.WO_ORDER,
+                                    WO_Qty: element.WO_QTY,
+                                    Gen_Qty: element.GEN_QTY,
+                                    Packing_Qty: element.PACKING_QTY,
+                                    Box_Qty_Sum: element.BOX_QTY_SUM,
+                                    Barcode_Qty: element.BARCODE_QTY,
+                                    Father_Barcode: element.FATHER_BARCODE,
+                                    Customer: element.CUSTOMER,
+                                    CustomerName: element.CUSTOMERNAME,
+                                    SalesDocument: element.SALESDOCUMENT,
+                                    PurchaseOrderByCustomer: element.PURCHASEORDERBYCUSTOMER,
+                                    OldMaterial: element.OLDMATERIAL,
+                                    CustomerMaterial: element.CUSTOMERMATERIAL,
+                                    WO_Start_Date: element.WO_START_DATE,
+                                    WO_Unit: element.WO_UNIT,
+                                    WO_Sloc: element.WO_SLOC,
+                                    Base_Unit: element.BASE_UNIT,
+                                    History: element.HISTORY,
+                                    Actual_Date: element.ACTUAL_DATE,
+                                    Delete_Flag: element.DELETE_FLAG,
+                                    Print_Count: element.PRINT_COUNT,
+                                    Print_Date: element.PRINT_DATE,
+                                    Print_Time: element.PRINT_TIME,
+                                    Print_User: element.PRINT_USER,
+                                    Create_Date: element.CREATE_DATE,
+                                    Create_Time: element.CREATE_TIME,
+                                    Create_User: element.CREATE_USER,
+                                    Change_Date: element.CHANGE_DATE,
+                                    Change_Time: element.CHANGE_TIME,
+                                    Change_User: element.CHANGE_USER,
+                                })
+                            });
+                            if (items) {
+                                items.forEach(function (oItem, index) {
+                                    oItem.ItemNo = String(index + 1);
+                                });
+                                that._LocalData.setProperty("/itemSetM", items);
+                            };
+                            that.getModel().resetChanges();
+                            that.getModel().refresh(true);
                             that._BusyDialog.close();
                         }, function (oError) {
                             MessageBox.error(oError.message);
@@ -137,7 +194,8 @@ sap.ui.define([
                 MessageBox.error(this.getResourceBundle().getText("msg009"));
                 return;
             };
-
+            that._LocalData.setProperty("/headSet", "");
+            that._LocalData.setProperty("/itemSetM", []);
             MessageBox.confirm(this.getModel("i18n").getResourceBundle().getText("info004"), {
                 actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
                 emphasizedAction: MessageBox.Action.OK,
@@ -157,44 +215,51 @@ sap.ui.define([
                             "Event": "SPLIT1"
                         }, {}).then(function (oResponse) {
                             var result = JSON.parse(oResponse.processLogic.Zzkey);
-                            var items = that._LocalData.getProperty("/itemSetM") || [];
-                            result.ITEMS.forEach(element => {
-                                items.push({
-                                    Plant: element.PLANT,
-                                    Barcode: element.BARCODE,
-                                    Father_Barcode: element.FATHER_BARCODE,
-                                    Product: element.PRODUCT,
-                                    ProductName: element.PRODUCTNAME,
-                                    WO_Order: element.WO_ORDER,
-                                    WO_Qty: element.WO_QTY,
-                                    Gen_Qty: element.GEN_QTY,
-                                    Packing_Qty: element.PACKING_QTY,
-                                    Box_Qty_Sum: element.BOX_QTY_SUM,
-                                    Barcode_Qty: element.BARCODE_QTY,
-                                    Customer: element.CUSTOMER,
-                                    CustomerName: element.CUSTOMERNAME,
-                                    SalesDocument: element.SALESDOCUMENT,
-                                    PurchaseOrderByCustomer: element.PURCHASEORDERBYCUSTOMER,
-                                    WO_Start_Date: element.WO_START_DATE,
-                                    WO_Unit: element.WO_UNIT,
-                                    WO_Sloc: element.WO_SLOC,
-                                    Base_Unit: element.BASE_UNIT,
-                                    History: element.HISTORY,
-                                    Actual_Date: element.AUTUAL_DATE,
-                                    Delete_Flag: element.DELETEFLAG,
-                                    Create_Date: element.CREATE_DATE,
-                                    Create_Time: element.CREATE_TIME,
-                                    Create_User: element.CREATE_USER,
-                                    Change_Date: element.CHANGE_DATE,
-                                    Change_Time: element.CHANGE_TIME,
-                                    Change_User: element.CHANGE_USER,
-                                })
-                            });
-                            items.forEach(function (oItem, index) {
-                                oItem.ItemNo = String(index + 1);
-                            });
-                            that._LocalData.setProperty("/itemSetM", items);
-                            that._LocalData.refresh(true);
+                            if (result.MSGTYP === 'E') {
+                                MessageBox.error(result.MSG);
+                            } else {
+                                var items = that._LocalData.getProperty("/itemSetM") || [];
+                                result.ITEMS.forEach(element => {
+                                    items.push({
+                                        Plant: element.PLANT,
+                                        Barcode: element.BARCODE,
+                                        Father_Barcode: element.FATHER_BARCODE,
+                                        Product: element.PRODUCT,
+                                        ProductName: element.PRODUCTNAME,
+                                        WO_Order: element.WO_ORDER,
+                                        WO_Qty: element.WO_QTY,
+                                        Gen_Qty: element.GEN_QTY,
+                                        Packing_Qty: element.PACKING_QTY,
+                                        Box_Qty_Sum: element.BOX_QTY_SUM,
+                                        Barcode_Qty: element.BARCODE_QTY,
+                                        Customer: element.CUSTOMER,
+                                        CustomerName: element.CUSTOMERNAME,
+                                        SalesDocument: element.SALESDOCUMENT,
+                                        PurchaseOrderByCustomer: element.PURCHASEORDERBYCUSTOMER,
+                                        OldMaterial: element.OLDMATERIAL,
+                                        CustomerMaterial: element.CUSTOMERMATERIAL,
+                                        WO_Start_Date: element.WO_START_DATE,
+                                        WO_Unit: element.WO_UNIT,
+                                        WO_Sloc: element.WO_SLOC,
+                                        Base_Unit: element.BASE_UNIT,
+                                        History: element.HISTORY,
+                                        Actual_Date: element.ACTUAL_DATE,
+                                        Delete_Flag: element.DELETE_FLAG,
+                                        Create_Date: element.CREATE_DATE,
+                                        Create_Time: element.CREATE_TIME,
+                                        Create_User: element.CREATE_USER,
+                                        Change_Date: element.CHANGE_DATE,
+                                        Change_Time: element.CHANGE_TIME,
+                                        Change_User: element.CHANGE_USER,
+                                    })
+                                });
+                                items.forEach(function (oItem, index) {
+                                    oItem.ItemNo = String(index + 1);
+                                });
+                                that._LocalData.setProperty("/itemSetM", items);
+                            }
+                            that.getModel().resetChanges();
+                            that.getModel().refresh();
                             that._BusyDialog.close();
                         }, function (oError) {
                             MessageBox.error(oError.message);
@@ -216,13 +281,14 @@ sap.ui.define([
                 MessageBox.error(this.getResourceBundle().getText("msg009"));
                 return;
             };
-
+            that._LocalData.setProperty("/headSet", "");
+            that._LocalData.setProperty("/itemSetM", []);
             MessageBox.confirm(this.getModel("i18n").getResourceBundle().getText("info004"), {
                 actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
                 emphasizedAction: MessageBox.Action.OK,
                 onClose: function (sAction) {
                     if (sAction === MessageBox.Action.OK) {
-                        that._myBusyDialog.open();
+                        that._BusyDialog.open();
                         var sPlant = that.getView().getModel("local").getProperty("/Plant");
                         var sBarcode = that.byId("idBarcode").getValue();
                         var header = {
@@ -236,45 +302,50 @@ sap.ui.define([
                             "Event": "SPLIT2"
                         }, {}).then(function (oResponse) {
                             var result = JSON.parse(oResponse.processLogic.Zzkey);
-                            var items = that._LocalData.getProperty("/itemSetM") || [];
-                            result.ITEMS.forEach(element => {
-                                items.push({
-                                    Plant: element.PLANT,
-                                    Barcode: element.BARCODE,
-                                    Father_Barcode: element.FATHER_BARCODE,
-                                    Product: element.PRODUCT,
-                                    ProductName: element.PRODUCTNAME,
-                                    WO_Order: element.WO_ORDER,
-                                    WO_Qty: element.WO_QTY,
-                                    Gen_Qty: element.GEN_QTY,
-                                    Packing_Qty: element.PACKING_QTY,
-                                    Box_Qty_Sum: element.BOX_QTY_SUM,
-                                    Barcode_Qty: element.BARCODE_QTY,
-                                    Customer: element.CUSTOMER,
-                                    CustomerName: element.CUSTOMERNAME,
-                                    SalesDocument: element.SALESDOCUMENT,
-                                    PurchaseOrderByCustomer: element.PURCHASEORDERBYCUSTOMER,
-                                    WO_Start_Date: element.WO_START_DATE,
-                                    WO_Unit: element.WO_UNIT,
-                                    WO_Sloc: element.WO_SLOC,
-                                    Base_Unit: element.BASE_UNIT,
-                                    History: element.HISTORY,
-                                    Actual_Date: element.AUTUAL_DATE,
-                                    Delete_Flag: element.DELETEFLAG,
-                                    Create_Date: element.CREATE_DATE,
-                                    Create_Time: element.CREATE_TIME,
-                                    Create_User: element.CREATE_USER,
-                                    Change_Date: element.CHANGE_DATE,
-                                    Change_Time: element.CHANGE_TIME,
-                                    Change_User: element.CHANGE_USER,
-                                })
-                            });
-                            items.forEach(function (oItem, index) {
-                                oItem.ItemNo = String(index + 1);
-                            });
-                            that._LocalData.setProperty("/itemSetM", items);
-                            that._LocalData.refresh(true);
-                            that._myBusyDialog.close();
+                            if (result.MSGTYP === 'E') {
+                                MessageBox.error(result.MSG);
+                            } else {
+                                var items = that._LocalData.getProperty("/itemSetM") || [];
+                                result.ITEMS.forEach(element => {
+                                    items.push({
+                                        Plant: element.PLANT,
+                                        Barcode: element.BARCODE,
+                                        Father_Barcode: element.FATHER_BARCODE,
+                                        Product: element.PRODUCT,
+                                        ProductName: element.PRODUCTNAME,
+                                        WO_Order: element.WO_ORDER,
+                                        WO_Qty: element.WO_QTY,
+                                        Gen_Qty: element.GEN_QTY,
+                                        Packing_Qty: element.PACKING_QTY,
+                                        Box_Qty_Sum: element.BOX_QTY_SUM,
+                                        Barcode_Qty: element.BARCODE_QTY,
+                                        Customer: element.CUSTOMER,
+                                        CustomerName: element.CUSTOMERNAME,
+                                        SalesDocument: element.SALESDOCUMENT,
+                                        PurchaseOrderByCustomer: element.PURCHASEORDERBYCUSTOMER,
+                                        WO_Start_Date: element.WO_START_DATE,
+                                        WO_Unit: element.WO_UNIT,
+                                        WO_Sloc: element.WO_SLOC,
+                                        Base_Unit: element.BASE_UNIT,
+                                        History: element.HISTORY,
+                                        Actual_Date: element.ACTUAL_DATE,
+                                        Delete_Flag: element.DELETE_FLAG,
+                                        Create_Date: element.CREATE_DATE,
+                                        Create_Time: element.CREATE_TIME,
+                                        Create_User: element.CREATE_USER,
+                                        Change_Date: element.CHANGE_DATE,
+                                        Change_Time: element.CHANGE_TIME,
+                                        Change_User: element.CHANGE_USER,
+                                    })
+                                });
+                                items.forEach(function (oItem, index) {
+                                    oItem.ItemNo = String(index + 1);
+                                });
+                                that._LocalData.setProperty("/itemSetM", items);
+                            }
+                            that.getModel().resetChanges();
+                            that.getModel().refresh();
+                            that._BusyDialog.close();
                         }, function (oError) {
                             MessageBox.error(oError.message);
                         });
@@ -283,11 +354,18 @@ sap.ui.define([
             });
         },
 
+        onClear: function (oEvent) {
+            this._LocalData.setProperty("/headSet", "");
+            this._LocalData.setProperty("/Barcode", "");
+            this._LocalData.setProperty("/New_Qty", "");
+            this._LocalData.setProperty("/itemSetM", []);
+        },
+
         onPrintEN: function (oEvent) {
             var that = this;
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
             _oPrintModel = this.getModel("Print");
-            var aItems = this.getModel("local").getProperty("/itemSetG");
+            var aItems = this.getModel("local").getProperty("/itemSetM");
             _oFunctions.onCustomAction(aItems, "PRINTEN");
         },
 
@@ -295,19 +373,29 @@ sap.ui.define([
             var that = this;
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
             _oPrintModel = this.getModel("Print");
-            var aItems = this.getModel("local").getProperty("/itemSet");
+            var aItems = this.getModel("local").getProperty("/itemSetM");
             _oFunctions.onCustomAction(aItems, "PRINTVN");
         },
 
         onCustomAction: function (aSelectedContexts, sActionName) {
-            var aPromise = [];
-            aPromise.push(_oFunctions.printAction(aSelectedContexts, sActionName));
-            Promise.all(aPromise).then(function (records) {
-                records.forEach(record => {
-                    var pdfContent = _oFunctions.porcessPrintContent(record);
-                    _oFunctions.getPDF(pdfContent, sActionName);
+            _oFunctions.printAction(aSelectedContexts, sActionName)
+                .then(function (records) {
+                    //按 Template 分组
+                    const mTemplateGroup = {};
+                    records.forEach(item => {
+                        const sTemplate = item.PRINTTEMPLATE;
+                        if (!mTemplateGroup[sTemplate]) {
+                            mTemplateGroup[sTemplate] = [];
+                        }
+                        mTemplateGroup[sTemplate].push(item);
+                    });
+                    //每个模板单独生成 PDF
+                    Object.keys(mTemplateGroup).forEach(sTemplateID => {
+                        const aItems = mTemplateGroup[sTemplateID];
+                        const pdfContent = _oFunctions.porcessPrintContent(aItems);
+                        _oFunctions.getPDF(aItems, pdfContent, sTemplateID);
+                    });
                 });
-            });
         },
 
         printAction: function (items, sActionName) {
@@ -353,25 +441,21 @@ sap.ui.define([
                 History: item.HISTORY,
                 PurchaseOrderByCustomer: item.PURCHASEORDERBYCUSTOMER,
                 CurrentDate: item.CURRENTDATE,
+                Customer_Material: item.CUSTOMER_MATERIAL,
             }));
             pdfContent = {
                 PrintData: FGPrint
             };
             return pdfContent;
         },
-        getPDF: function (pdfContent, sActionName) {
+        getPDF: function (record, pdfContent, sTemplate) {
             var that = this;
-            if (sActionName === "PRINTEN") {
-                var sTempalte = "YY1_FGPRT_EN";
-            } else {
-                var sTempalte = "YY1_FGPRT_VN";
-            };
             var oBusyDialog = new BusyDialog();
             var aRecordCreated = [];
-            var sFileName = _ResourceBundle.getText("appTitle") + new Date().getTime();
+            var sFileName = _ResourceBundle.getText("appTitle") + this.getCurrentDateTime() + sTemplate;
             var promise = new Promise((resolve, reject) => {
                 var createPrintRecord = _oPrintModel.bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord(...)");
-                createPrintRecord.setParameter("TemplateID", sTempalte);
+                createPrintRecord.setParameter("TemplateID", sTemplate);
                 createPrintRecord.setParameter("IsExternalProvidedData", true);
                 var oXMLData = json2xml(pdfContent, {
                     compact: true,
@@ -405,14 +489,34 @@ sap.ui.define([
                         sURL = activeContext.getModel("Print").getServiceUrl() + "PrintRecord" + sPath + '/PDFContent';
                         sap.m.URLHelper.redirect(sURL, true);
                     }
+                    that._updatePrintInfo(record);
                     MessageToast.show("Print Success");
                 }).finally(() => {
                     oBusyDialog.close();
-                });;
+                });
             } catch (error) {
                 MessageToast.show(error);
                 oBusyDialog.close();
             }
         },
+        _updatePrintInfo: function (record) {
+            var aRows = this._LocalData.getProperty("/itemSetM");
+            record.forEach(oRecord => {
+                let oRow = aRows.find(o =>
+                    o.Plant === oRecord.PLANT &&
+                    o.Barcode === oRecord.BARCODE
+                );
+
+                if (oRow) {
+                    oRow.Print_Count = oRecord.PRINT_COUNT; 
+                    oRow.Print_Date = oRecord.PRINT_DATE;
+                    oRow.Print_Time = oRecord.PRINT_TIME;
+                    oRow.Print_User = oRecord.PRINT_USER;
+                }
+            });
+            this._LocalData.setProperty("/itemSetM", aRows);
+            this.getModel().resetChanges();
+            this.getModel().refresh(true);
+        }
     });
 });

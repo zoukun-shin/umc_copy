@@ -15,6 +15,15 @@ sap.ui.define([
         },
 
         // format Date
+        formatDateTxt: function (value) {
+            if (value) {
+                return value
+                    ? value.slice(0, 4) + "/" + value.slice(4, 6) + "/" + value.slice(6, 8)
+                    : "";
+            }
+        },
+
+        // format Date
         formatDate: function (value) {
             if (value) {
                 var oDateFormat = DateFormat.getTimeInstance({
@@ -91,19 +100,5 @@ sap.ui.define([
                 return n;
             }
         },
-
-        formatDescription: function (key, text) {
-            var sDesc;
-            if (key && text) {
-                sDesc = text + "(" + key + ")";
-            } else if (key) {
-                sDesc = key;
-            } else if (text) {
-                sDesc = text;
-            } else {
-                sDesc = "";
-            }
-            return sDesc;
-        }
     };
 });

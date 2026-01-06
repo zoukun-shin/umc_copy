@@ -13,10 +13,8 @@
                 <ComboBox id="idPlantG" items="{ path: '/ZC_PlantVH' }" selectedKey="{local>/PlantG}" filterSecondaryValues= "true" required="true" selectionChange=".onPlantSelectionChange" editable="true" width="13rem">
                     <core:ListItem key="{Plant}" text="{PlantName}({Plant})" additionalText="{Plant}"/>
                 </ComboBox>
-                <Label text="{i18n>SalesDocument}:" />
-                <Input value="{local>/headSetG/SalesDocument}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
-                <Label text="{i18n>Gen_Qty}:" required="true"/>
-                <Input id="idGen_QtyG" value="{local>/headSetG/Gen_Qty}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+                <Label text="{i18n>WO_Qty}:"/>
+                <Input value="{ path: 'local>/headSetG/WO_Qty', formatter: '.formatter.formatNumber'}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
             </VBox>
             <VBox class="sapUiSmallMarginEnd">
                 <Label text="{i18n>WO_Order}:" required="true"/>
@@ -24,24 +22,8 @@
                     valueHelpRequest=".ValueHelpDialog.onValueHelpRequested($event, $controller, '/ZC_WO_ORDERVH', 
                     ['ManufacturingOrder','Plant','ManufacturingOrderType','Material','MfgOrderPlannedStartDate','MRPController'],
                     ['ManufacturingOrder','Plant','ManufacturingOrderType','Material','MfgOrderPlannedStartDate','MRPController'])"
-                    required="true">                    
+                    required="true">
                 </Input>
-                <Label text="{i18n>PurchaseOrderByCustomer}:"/>
-                <Input value="{local>/headSetG/PurchaseOrderByCustomer}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
-                <Label text="{i18n>Packing_Qty}:" required="true"/>
-                <Input id="idPacking_QtyG" value="{local>/headSetG/Packing_Qty}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
-            </VBox>
-            <VBox class="sapUiSmallMarginEnd">
-                <Label text="{i18n>Product}:" />
-                <Input value="{local>/headSetG/Product}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>                    
-                <Label text="{i18n>WO_Qty}:"/>
-                <Input value="{ path: 'local>/headSetG/WO_Qty', formatter: '.formatter.formatNumber'}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
-                <Label text="{i18n>History}:"/>
-                <Input value="{local>/headSetG/History}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
-            </VBox>
-            <VBox class="sapUiSmallMarginEnd">
-                <Label text="{i18n>Customer}:" />
-                <Input value="{local>/headSetG/Customer}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>                    
                 <Label text="{i18n>WO_Start_Date}:"/>
                 <DatePicker width="13rem" editable="{= ${local>/tab_modeG} === 'edit'}" value="{
                             'path':'local>/headSetG/WO_Start_Date',
@@ -50,6 +32,28 @@
                             'pattern': 'yyyy/MM/dd',
                             'UTC': true } 
                         }"/>
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd">
+                <Label text="{i18n>Product}:" />
+                <Input value="{local>/headSetG/Product}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+                <Label text="{i18n>Gen_Qty}:" required="true"/>
+                <Input id="idGen_QtyG" value="{local>/headSetG/Gen_Qty}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd">
+                <Label text="{i18n>Customer}:" />
+                <Input value="{local>/headSetG/Customer}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+                <Label text="{i18n>Packing_Qty}:" required="true"/>
+                <Input id="idPacking_QtyG" value="{local>/headSetG/Packing_Qty}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd">
+                <Label text="{i18n>SalesDocument}:" />
+                <Input value="{local>/headSetG/SalesDocument}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+                <Label text="{i18n>History}:"/>
+                <Input value="{local>/headSetG/History}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+            </VBox>
+            <VBox class="sapUiSmallMarginEnd">
+                <Label text="{i18n>PurchaseOrderByCustomer}:"/>
+                <Input value="{local>/headSetG/PurchaseOrderByCustomer}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
                 <Label text="{i18n>Actual_Date}:"/>
                 <DatePicker width="13rem" editable="{= ${local>/tab_modeG} === 'edit'}" value="{
                             'path':'local>/headSetG/Actual_Date',
@@ -66,11 +70,11 @@
             <table:extension>
                 <OverflowToolbar>
                 <ToolbarSpacer/>
-                    <Button id="idFind1Btn" icon="sap-icon://search" type="Transparent" text="{i18n>FindBtn}" press=".onFind1"/>
-                    <Button id="idSaveBtn" icon="sap-icon://save" type="Transparent" text="{i18n>SaveBtn}" press=".onSave"/>
-                    <Button id="idClearBtn" icon="sap-icon://clear-filter" type="Transparent" text="{i18n>ClearBtn}" press=".onClear" />
-                    <Button id="idPrint1ENBtn" icon="sap-icon://print" type="Transparent" text="{i18n>Prt1ENBtn}" press=".onPrintEN"/>
-                    <Button id="idPrint2VNBtn" icon="sap-icon://print" type="Transparent" text="{i18n>Prt2VNBtn}" press=".onPrintVN"/>
+                    <Button id="idFind1Btn" icon="sap-icon://search" type="Transparent" text="{i18n>FindBtn}" press=".onFind1" enabled="{= ${local>/authorityCheck/button/Find1}}"/>
+                    <Button id="idSaveBtn" icon="sap-icon://save" type="Transparent" text="{i18n>SaveBtn}" press=".onSave" enabled="{= ${local>/authorityCheck/button/Generate}}"/>
+                    <Button id="idClear1Btn" icon="sap-icon://clear-filter" type="Transparent" text="{i18n>ClearBtn}" press=".onClear" enabled="{= ${local>/authorityCheck/button/Clear1}}"/>
+                    <Button id="idPrint1ENBtn" icon="sap-icon://print" type="Transparent" text="{i18n>PrtENBtn}" press=".onPrintEN" enabled="{= ${local>/authorityCheck/button/Print1EN}}"/>
+                    <Button id="idPrint1VNBtn" icon="sap-icon://print" type="Transparent" text="{i18n>PrtVNBtn}" press=".onPrintVN" enabled="{= ${local>/authorityCheck/button/Print1VN}}"/>
                 </OverflowToolbar>
             </table:extension>
             <table:columns>
@@ -89,6 +93,11 @@
                         <Text text="{local>Barcode_Text}" wrapping="false"/>
                     </table:template>
                 </table:Column>
+                <table:Column width="10rem" label="{i18n>Barcode_Qty}">
+                    <table:template>
+                        <Text text="{ path: 'local>Barcode_Qty', formatter: '.formatter.formatNumber'}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
                 <table:Column width="12rem" label="{i18n>Product}">
                     <table:template>
                         <Text text="{local>Product}" wrapping="false"/>
@@ -101,7 +110,7 @@
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>WO_Order}">
                     <table:template>
-                        <Text text="{local>WO_Order}" wrapping="false"/>
+                        <Text text="{local>WO_Order1}" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>WO_Qty}">
@@ -124,9 +133,9 @@
                         <Text text="{local>Box_Qty_Sum}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>Barcode_Qty}">
+                <table:Column width="10rem" label="{i18n>Father_Barcode}">
                     <table:template>
-                        <Text text="{ path: 'local>Barcode_Qty', formatter: '.formatter.formatNumber'}" wrapping="false"/>
+                        <Text text="{local>Father_Barcode}" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>Customer}">
@@ -149,12 +158,22 @@
                         <Text text="{local>PurchaseOrderByCustomer}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>WO_Start_Date}">
+                <table:Column width="10rem" label="{i18n>OldMaterial}">
                     <table:template>
-                        <Text text="{local>WO_Start_Date}" wrapping="false"/>
+                        <Text text="{local>OldMaterial}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="5rem" label="{i18n>WO_Unit}">
+                <table:Column width="10rem" label="{i18n>CustomerMaterial}">
+                    <table:template>
+                        <Text text="{local>CustomerMaterial}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>WO_Start_Date}">
+                    <table:template>
+                        <Text text="{path:'local>WO_Start_Date', formatter:'.formatter.formatDateTxt'}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>WO_Unit}">
                     <table:template>
                         <Text text="{local>WO_Unit}" wrapping="false"/>
                     </table:template>
@@ -164,7 +183,7 @@
                         <Text text="{local>WO_Sloc}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="5rem" label="{i18n>Base_Unit}">
+                <table:Column width="8rem" label="{i18n>Base_Unit}">
                     <table:template>
                         <Text text="{local>Base_Unit}" wrapping="false"/>
                     </table:template>
@@ -176,10 +195,10 @@
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>Actual_Date}">
                     <table:template>
-                        <Text text="{local>Actual_Date}" wrapping="false"/>
+                        <Text text="{path:'local>Actual_Date', formatter:'.formatter.formatDate'}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="5rem" label="{i18n>Delete_Flag}">
+                <table:Column width="6rem" label="{i18n>Delete_Flag}">
                     <table:template>
                         <Text text="{local>Delete_Flag}" wrapping="false"/>
                     </table:template>
@@ -191,7 +210,7 @@
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>Print_Date}">
                     <table:template>
-                        <Text text="{local>Print_Date}" wrapping="false"/>
+                        <Text text="{path:'local>Print_Date', formatter:'.formatter.formatDate'}" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>Print_Time}">
@@ -206,7 +225,7 @@
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>Create_Date}">
                     <table:template>
-                        <Text text="{local>Create_Date}" wrapping="false"/>
+                        <Text text="{path:'local>Create_Date', formatter:'.formatter.formatDate'}" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>Create_Time}">
@@ -221,7 +240,7 @@
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>Change_Date}">
                     <table:template>
-                        <Text text="{local>Change_Date}" wrapping="false"/>
+                        <Text text="{path:'local>Change_Date', formatter:'.formatter.formatDate'}" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>Change_Time}">

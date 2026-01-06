@@ -62,6 +62,15 @@
             <Annotations Target="cds_zui_fglabel_o2.ZC_ManufacturingOrderProductVHType/OrderIsClosed">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
+            <Annotations Target="cds_zui_fglabel_o2.ZC_ManufacturingOrderProductVHType/Assembly">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_fglabel_o2.ZC_ManufacturingOrderProductVHType/WorkCenter">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_fglabel_o2.ZC_ManufacturingOrderProductVHType/WorkCenterText">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
             <Annotations Target="cds_zui_fglabel_o2.ZC_PlantVHType/PlantName">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>

@@ -90,6 +90,9 @@
                 <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
                 <Property Name="OrderIsClosed" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Assembly" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Pegged Requirement" sap:quickinfo="Higher-Level Assembly Material"/>
+                <Property Name="WorkCenter" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Work Center"/>
+                <Property Name="WorkCenterText" Type="Edm.String" MaxLength="40" sap:label="Work Center Text"/>
             </EntityType>
             <EntityType Name="ZC_PlantVHType" sap:label="Plant Value Help - Down List" sap:content-version="1">
                 <Key>
@@ -116,7 +119,7 @@
                 </Key>
                 <Property Name="Delete_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Update_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:filter-restriction="single-value" sap:label="Plant" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
                 <Property Name="Barcode" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Barcode_Text" Type="Edm.String" MaxLength="30"/>
                 <Property Name="Product" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:value-list="standard"/>
@@ -133,6 +136,8 @@
                 <Property Name="CustomerName" Type="Edm.String" MaxLength="80"/>
                 <Property Name="SalesDocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="SD Document" sap:quickinfo="Sales and Distribution Document Number"/>
                 <Property Name="PurchaseOrderByCustomer" Type="Edm.String" MaxLength="35" sap:label="Customer Reference"/>
+                <Property Name="OldMaterial" Type="Edm.String" MaxLength="40"/>
+                <Property Name="CustomerMaterial" Type="Edm.String" MaxLength="60"/>
                 <Property Name="WO_Start_Date" Type="Edm.String" MaxLength="8"/>
                 <Property Name="WO_Unit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
                 <Property Name="WO_Sloc" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location" sap:value-list="standard"/>
@@ -145,7 +150,7 @@
                 <Property Name="Print_Time" Type="Edm.String" MaxLength="8"/>
                 <Property Name="Print_User" Type="Edm.String" MaxLength="80"/>
                 <Property Name="Create_Date" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
-                <Property Name="Create_Time" Type="Edm.Time" Precision="0"/>
+                <Property Name="Create_Time" Type="Edm.String" MaxLength="8"/>
                 <Property Name="Create_User" Type="Edm.String" MaxLength="80"/>
                 <Property Name="Change_Date" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="Change_Time" Type="Edm.String" MaxLength="8"/>
@@ -649,6 +654,14 @@
                                 <PropertyPath>Update_mc</PropertyPath>
                             </Collection>
                         </PropertyValue>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Plant"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
                     </Record>
                 </Annotation>
                 <Annotation Term="Capabilities.InsertRestrictions">
@@ -816,6 +829,9 @@
             <Annotations Target="cds_zui_fglabel_o2.FGLabelType/Customer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
+            <Annotations Target="cds_zui_fglabel_o2.FGLabelType/CustomerMaterial" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
             <Annotations Target="cds_zui_fglabel_o2.FGLabelType/CustomerName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
@@ -832,6 +848,9 @@
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_fglabel_o2.FGLabelType/Message" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_fglabel_o2.FGLabelType/OldMaterial" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_fglabel_o2.FGLabelType/Packing_Qty" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -940,6 +959,9 @@
             </Annotations>
             <Annotations Target="cds_zui_fglabel_o2.ZR_ProductPlantVHType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_fglabel_o2.ZC_ManufacturingOrderProductVHType/Assembly" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BAUGR&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_fglabel_o2.FGLabelType/WO_Unit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS&amp;origin=JG5_100"/>

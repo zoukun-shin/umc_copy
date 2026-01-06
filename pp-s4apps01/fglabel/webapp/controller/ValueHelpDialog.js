@@ -85,6 +85,7 @@ sap.ui.define([
                         oTable.bindAggregation("rows", {
                             path: sPath,
                             filters: aFilters,
+                            parameters: { $count: true },
                             events: {
                                 dataReceived: function () {
                                     oDialog.update();

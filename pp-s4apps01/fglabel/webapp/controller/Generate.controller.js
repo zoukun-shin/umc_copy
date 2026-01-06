@@ -27,7 +27,7 @@ sap.ui.define([
                 this._UserInfo = sap.ushell.Container.getService("UserInfo").getUser();
             };
         },
-
+        
         onPlantSelectionChange: function (oEvent) {
             const oCombo = oEvent.getSource();
             const sKey = oCombo.getSelectedKey();
@@ -52,7 +52,7 @@ sap.ui.define([
                 MessageBox.error(this.getResourceBundle().getText("msg002"));
                 return;
             };
-
+            that._BusyDialog.open();
             that._CallODataV2("ACTION", "/processLogic", [], {
                 "Zzkey": "",
                 "Event": "FIND1",
@@ -62,7 +62,6 @@ sap.ui.define([
                 var result = JSON.parse(oResponse.processLogic.Zzkey);
                 if (result.MSGTYP === 'E') {
                     MessageBox.error(result.MESSAGE);
-                    return;
                 } else {
                     that._LocalData.setProperty("/tab_modeG", "edit");
                     that._LocalData.setProperty("/headSetG", {
@@ -73,9 +72,66 @@ sap.ui.define([
                         WO_Qty: result.WO_QTY,
                         WO_Start_Date: new Date(result.WO_START_DATE),
                     });
-                }
+                    var items = that._LocalData.getProperty("/itemSetG") || [];
+                    //比较画面是否已存在
+                    let mExistKeys = new Set(
+                        items.map(o =>
+                            o.Plant + "|" + o.Barcode_Text
+                        )
+                    );
+                    let bExists = result.ITEMS.some(o =>
+                        mExistKeys.has(o.PLANT + "|" + o.BARCODE_TEXT)
+                    );
+                    if (!bExists) {
+                        result.ITEMS.forEach(element => {
+                            items.push({
+                                Plant: element.PLANT,
+                                Barcode_Text: element.BARCODE_TEXT,
+                                Product: element.PRODUCT,
+                                ProductName: element.PRODUCTNAME,
+                                WO_Order: element.WO_ORDER,
+                                WO_Qty: element.WO_QTY,
+                                Gen_Qty: element.GEN_QTY,
+                                Packing_Qty: element.PACKING_QTY,
+                                Box_Qty_Sum: element.BOX_QTY_SUM,
+                                Barcode_Qty: element.BARCODE_QTY,
+                                Father_Barcode: element.FATHER_BARCODE,
+                                Customer: element.CUSTOMER,
+                                CustomerName: element.CUSTOMERNAME,
+                                SalesDocument: element.SALESDOCUMENT,
+                                PurchaseOrderByCustomer: element.PURCHASEORDERBYCUSTOMER,
+                                OldMaterial: element.OLDMATERIAL,
+                                CustomerMaterial: element.CUSTOMERMATERIAL,
+                                WO_Start_Date: element.WO_START_DATE,
+                                WO_Unit: element.WO_UNIT,
+                                WO_Sloc: element.WO_SLOC,
+                                Base_Unit: element.BASE_UNIT,
+                                History: element.HISTORY,
+                                Actual_Date: element.ACTUAL_DATE,
+                                Delete_Flag: element.DELETE_FLAG,
+                                Print_Count: element.PRINT_COUNT,
+                                Print_Date: element.PRINT_DATE,
+                                Print_Time: element.PRINT_TIME,
+                                Print_User: element.PRINT_USER,
+                                Create_Date: element.CREATE_DATE,
+                                Create_Time: element.CREATE_TIME,
+                                Create_User: element.CREATE_USER,
+                                Change_Date: element.CHANGE_DATE,
+                                Change_Time: element.CHANGE_TIME,
+                                Change_User: element.CHANGE_USER,
+                            })
+                        });
+                        if (items) {
+                            items.forEach(function (oItem, index) {
+                                oItem.ItemNo = String(index + 1);
+                            });
+                            that._LocalData.setProperty("/itemSetG", items);
+                        };
+                    }
+                };
                 that.getModel().resetChanges();
-                that.getModel().refresh();
+                that.getModel().refresh(true);
+                that._BusyDialog.close();
             }, function (oError) {
                 MessageBox.error(oError.message);
             });
@@ -136,6 +192,8 @@ sap.ui.define([
                                     CustomerName: element.CUSTOMERNAME,
                                     SalesDocument: element.SALESDOCUMENT,
                                     PurchaseOrderByCustomer: element.PURCHASEORDERBYCUSTOMER,
+                                    OldMaterial: element.OLDMATERIAL,
+                                    CustomerMaterial: element.CUSTOMERMATERIAL,
                                     WO_Start_Date: element.WO_START_DATE,
                                     WO_Unit: element.WO_UNIT,
                                     WO_Sloc: element.WO_SLOC,
@@ -165,7 +223,7 @@ sap.ui.define([
             this._LocalData.setProperty("/headSetG", "");
             this._LocalData.setProperty("/WO_OrderG", "");
         },
-        
+
         onPrintEN: function (oEvent) {
             var that = this;
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
@@ -183,14 +241,24 @@ sap.ui.define([
         },
 
         onCustomAction: function (aSelectedContexts, sActionName) {
-            var aPromise = [];
-            aPromise.push(_oFunctions.printAction(aSelectedContexts, sActionName));
-            Promise.all(aPromise).then(function (records) {
-                records.forEach(record => {
-                    var pdfContent = _oFunctions.porcessPrintContent(record);
-                    _oFunctions.getPDF(pdfContent, sActionName);
+            _oFunctions.printAction(aSelectedContexts, sActionName)
+                .then(function (records) {
+                    //按 Template 分组
+                    const mTemplateGroup = {};
+                    records.forEach(item => {
+                        const sTemplate = item.PRINTTEMPLATE;
+                        if (!mTemplateGroup[sTemplate]) {
+                            mTemplateGroup[sTemplate] = [];
+                        }
+                        mTemplateGroup[sTemplate].push(item);
+                    });
+                    //每个模板单独生成 PDF
+                    Object.keys(mTemplateGroup).forEach(sTemplateID => {
+                        const aItems = mTemplateGroup[sTemplateID];
+                        const pdfContent = _oFunctions.porcessPrintContent(aItems);
+                        _oFunctions.getPDF(aItems, pdfContent, sTemplateID);
+                    });
                 });
-            });
         },
 
         printAction: function (items, sActionName) {
@@ -236,25 +304,21 @@ sap.ui.define([
                 History: item.HISTORY,
                 PurchaseOrderByCustomer: item.PURCHASEORDERBYCUSTOMER,
                 CurrentDate: item.CURRENTDATE,
+                Customer_Material: item.CUSTOMER_MATERIAL,
             }));
             pdfContent = {
                 PrintData: FGPrint
             };
             return pdfContent;
         },
-        getPDF: function (pdfContent, sActionName) {
+        getPDF: function (record, pdfContent, sTemplate) {
             var that = this;
-            if (sActionName === "PRINTEN"){
-                var sTempalte = "YY1_FGPRT_EN";
-            }else {
-                var sTempalte = "YY1_FGPRT_VN";
-            };
             var oBusyDialog = new BusyDialog();
             var aRecordCreated = [];
-            var sFileName = _ResourceBundle.getText("appTitle") + new Date().getTime();
+            var sFileName = _ResourceBundle.getText("appTitle") + this.getCurrentDateTime() + sTemplate;
             var promise = new Promise((resolve, reject) => {
                 var createPrintRecord = _oPrintModel.bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord(...)");
-                createPrintRecord.setParameter("TemplateID", sTempalte);
+                createPrintRecord.setParameter("TemplateID", sTemplate);
                 createPrintRecord.setParameter("IsExternalProvidedData", true);
                 var oXMLData = json2xml(pdfContent, {
                     compact: true,
@@ -288,6 +352,7 @@ sap.ui.define([
                         sURL = activeContext.getModel("Print").getServiceUrl() + "PrintRecord" + sPath + '/PDFContent';
                         sap.m.URLHelper.redirect(sURL, true);
                     }
+                    that._updatePrintInfo(record);
                     MessageToast.show("Print Success");
                 }).finally(() => {
                     oBusyDialog.close();
@@ -297,5 +362,24 @@ sap.ui.define([
                 oBusyDialog.close();
             }
         },
+        _updatePrintInfo: function (record) {
+            var aRows = this._LocalData.getProperty("/itemSetG");
+            record.forEach(oRecord => {
+                let oRow = aRows.find(o =>
+                    o.Plant === oRecord.PLANT &&
+                    o.Barcode_Text.substring(0, 10) === oRecord.BARCODE
+                );
+
+                if (oRow) {
+                    oRow.Print_Count = oRecord.PRINT_COUNT;
+                    oRow.Print_Date = oRecord.PRINT_DATE;
+                    oRow.Print_Time = oRecord.PRINT_TIME;
+                    oRow.Print_User = oRecord.PRINT_USER;
+                }
+            });
+            this._LocalData.setProperty("/itemSetG", aRows);
+            this.getModel().resetChanges();
+            this.getModel().refresh(true);
+        }
     });
 });
