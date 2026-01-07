@@ -37,7 +37,7 @@
                                         <l:GridData span="L4 M4 S4" />
                                     </smartForm:layoutData>
                                     <smartForm:GroupElement>
-                                        <smartField:SmartField textLabel="{i18n>ChangeNumberSF}" value="{ChangeNumber}" editableChanged="onEditableChanged" editable="false"/>
+                                        <smartField:SmartField textLabel="{i18n>ChangeNumberSF}" value="{ChangeNumber}" editableChanged="onChangeNumberEditableChanged" editable="false"/>
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement>
                                         <smartField:SmartField textLabel="{i18n>ChangeNumberDescSF}" value="{ChangeNumberDesc}" change="onInputChange"/>
@@ -274,9 +274,9 @@
                                     <Text text="{local>AlternativeDateId}" wrapping="false"/>
                                 </t:template>
                             </t:Column>
-                            <t:Column width="8rem" label="{i18n>ObjectVaildFromSF}">
+                            <t:Column width="8rem" label="{i18n>ObjectValidFromSF}">
                                 <t:template>
-                                    <Text text="{local>ObjectVaildFrom}" wrapping="false"/>
+                                    <Text text="{local>ObjectValidFrom}" wrapping="false"/>
                                 </t:template>
                             </t:Column>
                             <t:Column width="4rem" label="{i18n>ObjectMaterialLockSF}">
@@ -355,9 +355,9 @@
                                     <Text text="{local>AlternativeDateId}" tooltip="{AlternativeDateId}" wrapping="false"/>
                                 </t:template>
                             </t:Column>
-                            <t:Column width="8rem" label="{i18n>ObjectVaildFromSF}">
+                            <t:Column width="8rem" label="{i18n>ObjectValidFromSF}">
                                 <t:template>
-                                    <Text text="{local>ObjectVaildFrom}" wrapping="false"/>
+                                    <Text text="{local>ObjectValidFrom}" wrapping="false"/>
                                 </t:template>
                             </t:Column>
                             <t:Column width="4rem" label="{i18n>ObjectMaterialLockSF}">
@@ -399,9 +399,9 @@
                                     <Input value="{local>AlternativeDateId}" editable="{= ${local>/viewEditable} &amp;&amp; ${local>isDraft}}"/>
                                 </t:template>
                             </t:Column>
-                            <t:Column width="12rem" label="{i18n>ObjectVaildFromSF}">
+                            <t:Column width="12rem" label="{i18n>ObjectValidFromSF}">
                                 <t:template>
-                                    <DatePicker value="{path:'local>ObjectVaildFrom',type:'sap.ui.model.type.Date',formatOptions: {style: 'medium',strictParsing: true}}"
+                                    <DatePicker value="{path:'local>ObjectValidFrom',type:'sap.ui.model.type.Date',formatOptions: {style: 'medium',strictParsing: true}}"
                                         editable="{local>/viewEditable}"/>
                                 </t:template>
                             </t:Column>
@@ -425,7 +425,7 @@
                     type="Emphasized"
                     press="onMessagePopoverPress" />
                 <ToolbarSpacer/>
-                <Button type="Transparent" text="{i18n>SaveToS4}" press="onSaveToS4"/>
+                <!-- <Button type="Transparent" text="{i18n>SaveToS4}" press="onSaveToS4"/> -->
                 <Button type="Transparent" enabled="{local>/btPrint}" text="{i18n>Save}" press="onCheckRecords"/>
                 <Button type="Transparent" text="{i18n>Cancel}" press="onCancel"/>
             </OverflowToolbar>

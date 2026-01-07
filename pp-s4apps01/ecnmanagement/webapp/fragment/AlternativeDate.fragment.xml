@@ -13,7 +13,7 @@
 		items="{
 			path : 'local>/to_AltDate',
 			sorter : {
-				path : 'ObjectVaildFrom',
+				path : 'ObjectValidFrom',
 				descending : false
 			}
 		}">
@@ -25,14 +25,14 @@
 			</Column>
             <Column width="12em">
 				<header>
-					<Text text="{i18n>ObjectVaildFromSF}" />
+					<Text text="{i18n>ObjectValidFromSF}" />
 				</header>
 			</Column>
 		</columns>
 		<ColumnListItem>
 			<cells>
 				<Text text="{local>AlternativeDateId}" />
-				<Text text="{path:'local>ObjectVaildFrom',type:'sap.ui.model.type.Date',formatOptions: {style: 'medium',strictParsing: true}}" />
+				<Text text="{path:'local>ObjectValidFrom',type:'sap.ui.model.type.Date',formatOptions: {style: 'medium',strictParsing: true}}" />
 			</cells>
 		</ColumnListItem>
 		

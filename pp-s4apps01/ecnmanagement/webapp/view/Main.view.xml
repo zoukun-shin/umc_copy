@@ -42,7 +42,16 @@
                             <smartFilterBar:ControlConfiguration key="CompanyCode" visibleInAdvancedArea="true" label="{i18n>CompanyCodeF}" mandatory="notMandatory" index="1" />
                             <smartFilterBar:ControlConfiguration key="Plant" visibleInAdvancedArea="true" label="{i18n>PlantF}" mandatory="notMandatory" index="3" />
                             <smartFilterBar:ControlConfiguration key="ChangeNumber" visibleInAdvancedArea="true" label="{i18n>ChangeNumberT}" mandatory="notMandatory" index="5" />
-                            <smartFilterBar:ControlConfiguration key="ValidFromDate" visibleInAdvancedArea="true" label="{i18n>ValidFromDateT}" mandatory="notMandatory" index="7" />
+                            <smartFilterBar:ControlConfiguration key="ValidFromDate" visibleInAdvancedArea="true" label="{i18n>ValidFromDateT}" mandatory="notMandatory" index="7" >
+                                <smartFilterBar:customControl>
+                                    <DatePicker
+                                        id="idDatePickerValidFromDate"
+                                        valueFormat="yyyy/MM/dd"
+                                        displayFormat="yyyy/MM/dd"
+                                        change="onDatePickerChange"
+                                    />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
                             <smartFilterBar:ControlConfiguration key="ChangeNumberStatusT" visibleInAdvancedArea="true" label="{i18n>ChangeNumberStatusT}" mandatory="notMandatory" index="9" />
                             <smartFilterBar:ControlConfiguration key="EcoType" visibleInAdvancedArea="true" label="{i18n>EcoTypeT}" mandatory="notMandatory" index="11" />
                             <smartFilterBar:ControlConfiguration key="DeleteFlag" visibleInAdvancedArea="true" label="{i18n>DeleteFlagT}" mandatory="notMandatory" index="12" >
@@ -608,13 +617,13 @@
                         </t:template>
                     </t:Column>
                     <t:Column  width="8rem"
-                        label="{i18n>ObjectVaildFromT}"
-                        sortProperty="ObjectVaildFrom"
-                        filterProperty="ObjectVaildFrom"
-                        customData:p13nData='\{"columnKey":"ObjectVaildFrom", "leadingProperty":"ObjectVaildFrom", "sortProperty":"ObjectVaildFrom", "filterProperty": "ObjectVaildFrom"}'
+                        label="{i18n>ObjectValidFromT}"
+                        sortProperty="ObjectValidFrom"
+                        filterProperty="ObjectValidFrom"
+                        customData:p13nData='\{"columnKey":"ObjectValidFrom", "leadingProperty":"ObjectValidFrom", "sortProperty":"ObjectValidFrom", "filterProperty": "ObjectValidFrom"}'
                     >
                         <t:template>
-                            <Text text="{ObjectVaildFrom}" />
+                            <Text text="{ObjectValidFrom}" />
                         </t:template>
                     </t:Column>
                     <t:Column  width="8rem"

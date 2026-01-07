@@ -1,18 +1,84 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" >
-	<Dialog id="idEcnCreateDialog" title="{i18n>DialogTitle}" contentWidth="20rem" contentHeight="4rem" draggable="true">
-		<FlexBox id="idFlexBox" direction="Column" alignItems="Center" justifyContent="Center" alignContent="Center">
-			<HBox alignItems="Center" justifyContent="Center">
-				<VBox>
-					<Label text="{i18n>ChangeNumberT}:"/>
-                    <Input id="idChangeNumber" />
-				</VBox>
-			</HBox>
-		</FlexBox>
-		<beginButton>
-			<Button text="{i18n>bConfirm}" press="onDialogConfirm"/>
-		</beginButton>
-		<endButton>
-			<Button text="{i18n>bCancel}" press="onDialogClose"/>
-		</endButton>
-	</Dialog>
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartfield="sap.ui.comp.smartfield"
+>
+    <Dialog
+        id="idEcnCreateDialog"
+        title="{i18n>DialogTitle}"
+        contentWidth="20rem"
+        contentHeight="12rem"
+        draggable="true"
+    >
+        <FlexBox
+            id="idFlexBox"
+            direction="Column"
+            alignItems="Center"
+            justifyContent="Center"
+            alignContent="Center"
+        >
+            <VBox
+                alignItems="Start"
+                justifyContent="Center"
+            >
+                <VBox>
+                    <Label
+                        id="idChangeNumberLabel"
+                        text="{i18n>ChangeNumberT}:"
+                        required="true"
+					/>
+                    <Input
+                        id="idChangeNumber"
+						ariaLabelledBy="idChangeNumberLabel"
+                        maxLength="12"
+                        change="onDialogChange"
+                    />
+                </VBox>
+                <VBox>
+                    <Label
+                        id="idCompanyCodeLabel"
+                        text="{i18n>CompanyCodeT}:"
+                    />
+                    <smartfield:SmartField
+                        id="idCompanyCode"
+						ariaLabelledBy="idCompanyCodeLabel"
+                        entitySet="EcnReport"
+                        mandatory="true"
+                        value="{CompanyCode}"
+                        innerControlsCreated="onInnerControlsCreated"
+						change="onDialogChange"
+                        editable="true"
+                    />
+                </VBox>
+                <VBox>
+                    <Label
+                        id="idPlantLabel"
+                        text="{i18n>PlantT}:"
+                        required="true"
+                    />
+                    <smartfield:SmartField
+                        id="idPlant"
+						ariaLabelledBy="idPlantLabel"
+                        entitySet="EcnReport"
+                        value="{Plant}"
+                        innerControlsCreated="onInnerControlsCreated"
+						change="onDialogChange"
+                        editable="true"
+                    />
+                </VBox>
+            </VBox>
+        </FlexBox>
+        <beginButton>
+            <Button
+                text="{i18n>bConfirm}"
+                press="onDialogConfirm"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                text="{i18n>bCancel}"
+                press="onDialogClose"
+            />
+        </endButton>
+    </Dialog>
 </core:FragmentDefinition>

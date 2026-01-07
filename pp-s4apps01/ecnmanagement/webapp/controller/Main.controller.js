@@ -16,6 +16,69 @@ sap.ui.define([
 			this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			this._BusyDialog = new sap.m.BusyDialog();
 
+			this._UserInfo = sap.ushell.Container.getService("UserInfo");
+            this.getRouter().getRoute("RouteMain").attachMatched(this._initialize, this);
+
+        },
+
+		_initialize: function () {
+            var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+			sEmail = "xinlei.xu@sh.shin-china.com";
+            var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
+                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+            });
+            oContextBinding.requestObject().then(function (context) {
+                var aAccessBtns = [],
+                    aAllAccessBtns = [];
+                if (context._AssignRole && context._AssignRole.length > 0) {
+                    context._AssignRole.forEach(role => {
+                        aAccessBtns.push(role._UserRoleAccessBtn);
+                    });
+                    aAllAccessBtns = aAccessBtns.flat();
+                }
+                // if (!aAllAccessBtns.some(btn => btn.AccessId === "ofpartition-View")) {
+                //     if (!this.oErrorMessageDialog) {
+                //         this.oErrorMessageDialog = new sap.m.Dialog({
+                //             type: sap.m.DialogType.Message,
+                //             state: "Error",
+                //             content: new sap.m.Text({
+                //                 text: this.getModel("i18n").getResourceBundle().getText("noAuthorityView", [sUser])
+                //             })
+                //         });
+                //     }
+                //     this.getView().destroy();
+                //     this.oErrorMessageDialog.open();
+                // }
+                this.getModel("local").setProperty("/authorityCheck", {
+                    button: {
+                        View: aAllAccessBtns.some(btn => btn.AccessId === "ofpartition-View"),
+                        Check: aAllAccessBtns.some(btn => btn.AccessId === "ofpartition-Check"),
+                        Create: aAllAccessBtns.some(btn => btn.AccessId === "ofpartition-Create"),
+                        Excute: aAllAccessBtns.some(btn => btn.AccessId === "ofpartition-Excute"),
+                        Export: aAllAccessBtns.some(btn => btn.AccessId === "ofpartition-Export"),
+                    },
+                    data: {
+                        PlantSet: context._AssignPlant,
+                        CompanySet: context._AssignCompany,
+                        SalesOrgSet: context._AssignSalesOrg,
+                        PurchOrgSet: context._AssignPurchOrg,
+                        RoleSet: context._AssignRole
+                    }
+                });
+            }.bind(this), function (oError) {
+                // if (!this.oErrorMessageDialog) {
+                //     this.oErrorMessageDialog = new sap.m.Dialog({
+                //         type: sap.m.DialogType.Message,
+                //         state: "Error",
+                //         content: new sap.m.Text({
+                //             text: this.getModel("i18n").getResourceBundle().getText("getAuthorityFailed")
+                //         })
+                //     });
+                // }
+                // this.getView().destroy();
+                // this.oErrorMessageDialog.open();
+            }.bind(this));
         },
 
 		onBeforeRebindTable: function (oEvent) {
@@ -91,6 +154,12 @@ sap.ui.define([
 					aNewFilter.push(new Filter("DeleteFlag", "EQ", false)); break;
 			}
 
+			// 获取处理范围
+			var oValidFromDate = this.byId("idDatePickerValidFromDate");
+			if (oValidFromDate.getDateValue()) {
+				aNewFilter.push(new Filter("ShippingPlanDate", "BT", formatter.odataDate(oValidFromDate.getDateValue())));
+			}
+
 			oNewFilter = new Filter({
 				filters:aNewFilter,
 				and:true
@@ -107,7 +176,8 @@ sap.ui.define([
 			var oItem, oCtx;
 			oItem = oEvent.getSource();
 			oCtx = oItem.getBindingContext();
-			
+
+			this._LocalData.setProperty("/routeFormMain",true);
 			this.getRouter().navTo("Detail",{changeNumber:oCtx.getProperty("ChangeNumber")});
 
 			this._oDataModel.resetChanges();
@@ -138,15 +208,41 @@ sap.ui.define([
         },
 
         onDialogConfirm: async function() {
-            let sChangeNumber = this.byId("idChangeNumber").getValue();
+			let oChangeNumber = this.byId("idChangeNumber");
+			let oCompanyCode = this.byId("idCompanyCode");
+			let oPlant = this.byId("idPlant");
+            let sChangeNumber = oChangeNumber.getValue();
+			let sCompanyCode = oCompanyCode.getValue();
+			let sPlant = oPlant.getValue();
 
+			this.checkDialogRequired(oChangeNumber);
+			this.checkDialogRequired(oCompanyCode);
+			this.checkDialogRequired(oPlant);
+
+			this.checkDialogAuth(oChangeNumber);
+			this.checkDialogAuth(oCompanyCode);
+			this.checkDialogAuth(oPlant);
+
+			let isError = false;
+			isError = this.checkDialogFieldError();
+			if (isError) {
+				return;
+			}
+			
 			let sPath = "/" + this._oDataModel.createKey("EcnManagement",{ChangeNumber:sChangeNumber});
 			try {
 				await this.readOdataV2(sPath);
 				//如果取到值，证明要创建changenumber已经存在，报错
 				messages.showError("Change Number already exists.");
 			} catch (error) {
-				this.getRouter().navTo("Detail",{changeNumber:sChangeNumber});
+				this.getRouter().navTo("Detail",{
+					changeNumber:sChangeNumber,
+					queryParameter:{
+						companyCode:sCompanyCode,
+						plant:sPlant
+					}
+				});
+				this._LocalData.setProperty("/routeFormMain",true);
 			}
         },
 
@@ -167,5 +263,60 @@ sap.ui.define([
 				that.getOwnerComponent().getModel().read(sPath, mParameters);
 			});
 		},
+
+		onInnerControlsCreated: function(oEvent) {
+            var oInnerInput = oEvent.getParameter("0"); 
+            var sPath = "local>/" + oInnerInput.getBinding("value").getPath();
+            oInnerInput.bindValue(sPath);
+        },
+
+		onDialogChange: function(oEvent) {
+			let oControl = oEvent.getSource();
+			this.checkDialogRequired(oControl);
+			this.checkDialogAuth(oControl);
+		},
+		checkDialogRequired: function(oControl) {
+			if (oControl.getValue()){
+				oControl.setValueState("None");
+			} else {
+				let sLabel = this.byId(oControl.getAriaLabelledBy()[0])?.getText()
+				sLabel = sLabel.replace(":","");
+				oControl.setValueState("Error");
+				oControl.setValueStateText(this._ResourceBundle.getText("msg01",[sLabel]));
+			}
+		},
+		checkDialogAuth: function(oControl) {
+			let sValue = oControl.getValue();
+			let sPath = oControl.getBindingPath("value");
+			let sProperty = "";
+			let aRecords = [];
+			if (sPath === "Plant"){
+				sProperty = "Plant";
+				aRecords = this._LocalData.getProperty("/authorityCheck/data/PlantSet");
+			}
+			if (sPath === "CompanyCode"){
+				sProperty = "CompanyCode";
+				aRecords = this._LocalData.getProperty("/authorityCheck/data/CompanySet");
+			}
+			if (sPath === "Plant" || sPath === "CompanyCode"){
+				if ( aRecords.findIndex(e => e[sProperty] === sValue) < 0) {
+					oControl.setValueState("Error");
+					oControl.setValueStateText(this._ResourceBundle.getText("msg09"));
+				} else {
+					oControl.setValueState("None");
+				}
+			}
+		},
+		checkDialogFieldError: function() {
+			if ( this.byId("idChangeNumber").getValueState() ===  "Error") {
+				return true;
+			}
+			if ( this.byId("idCompanyCode").getValueState() ===  "Error") {
+				return true;
+			}
+			if ( this.byId("idPlant").getValueState() ===  "Error") {
+				return true;
+			}
+		}
     });
 });

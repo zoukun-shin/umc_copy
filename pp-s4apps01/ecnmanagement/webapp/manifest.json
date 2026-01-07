@@ -35,6 +35,15 @@
           "odataVersion": "2.0"
         }
       },
+      "AuthorityService": {
+          "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
+          "type": "OData",
+          "settings": {
+              "annotations": [],
+              "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+              "odataVersion": "4.0"
+          }
+      },
       "annotation0": {
         "type": "ODataAnnotation",
         "uri": "annotations/annotation0.xml",
@@ -44,16 +53,16 @@
       }
     },
     "crossNavigation": {
-        "inbounds": {
-            "oflist-display": {
-                "semanticObject": "ecnmanagement",
-                "action": "display",
-                "signature": {
-                    "parameters": {},
-                    "additionalParameters": "allowed"
-                }
-            }
+      "inbounds": {
+        "oflist-display": {
+          "semanticObject": "ecnmanagement",
+          "action": "display",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
         }
+      }
     }
   },
   "sap.ui": {
@@ -103,6 +112,16 @@
         "settings": {
           "defaultBindingMode": "TwoWay"
         }
+      },
+      "Authority": {
+          "dataSource": "AuthorityService",
+          "preload": true,
+          "settings": {
+              "synchronizationMode": "None",
+              "operationMode": "Server",
+              "autoExpandSelect": true,
+              "earlyRequests": true
+          }
       }
     },
     "resources": {
@@ -134,7 +153,7 @@
         },
         {
           "name": "Detail",
-          "pattern": "Detail/{changeNumber}",
+          "pattern": "Detail/{changeNumber}/:?queryParameter:",
           "target": "Detail"
         }
       ],
@@ -163,6 +182,6 @@
     "service": "pp-s4apps01"
   },
   "sap.platform.cf": {
-      "ui5VersionNumber": "1.120.38"
+    "ui5VersionNumber": "1.120.38"
   }
 }

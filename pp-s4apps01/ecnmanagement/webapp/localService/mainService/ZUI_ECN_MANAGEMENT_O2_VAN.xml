@@ -35,6 +35,9 @@
             <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/Update_mc">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/to_AltDate_oc">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/to_Bom_oc">
                 <Annotation Term="UI.Hidden"/>
             </Annotations>

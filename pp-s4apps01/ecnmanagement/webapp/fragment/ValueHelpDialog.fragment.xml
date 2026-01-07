@@ -4,7 +4,7 @@
     xmlns:core="sap.ui.core" core:require="{ handler: 'pp/ecnmanagement/controller/ValueHelpDialog' }">
     <ValueHelpDialog ok="handler.onValueHelpOkPress" cancel="handler.onValueHelpCancelPress" afterClose="handler.onValueHelpAfterClose" supportMultiselect="false" supportRanges="false">
         <filterBar>
-            <fb:FilterBar advancedMode="true" search="handler.onFilterBarSearch" isRunningInValueHelpDialog="true">
+            <fb:FilterBar useToolbar="false" search="handler.onFilterBarSearch" isRunningInValueHelpDialog="true">
                 <fb:filterGroupItems/>
             </fb:FilterBar>
         </filterBar>

@@ -55,9 +55,17 @@ sap.ui.define([
 		},
 
 		_onRouteMatched: function (oEvent) {
+			let isRouteFormMainView = this._LocalData.getProperty("/routeFormMain");
+			if (!isRouteFormMainView) {
+				//权限校验在Main页面，所以不能通过url访问详细页面
+				this.getRouter().navTo("RouteMain");
+				return;
+			}
+			this._LocalData.setProperty("/routeFormMain",false);
+
 			Messaging.removeAllMessages();
 			this.resetControlState();
-			this._oDataModel.resetChanges(true);
+			this._oDataModel.resetChanges();
             let oArgs = oEvent.getParameter("arguments");
 			this.DetermineProcessingMode(oArgs);
 		},
@@ -183,6 +191,8 @@ sap.ui.define([
 			var oHeadContext = this.createEntryWithPromise("/EcnManagement", 
 				{ 
 					ChangeNumber: oArgs.changeNumber,
+					CompanyCode: oArgs["?queryParameter"].companyCode,
+					Plant: oArgs["?queryParameter"].plant,
 					UnitSfgSmt: 'PC',
 					UnitSfgFat: 'PC',
 					UnitNcgSmt: 'PC',
@@ -269,11 +279,15 @@ sap.ui.define([
 			switch(sMode) {
 				//新建
 				case "create":
-					this.postAction("processLogic","create",this.getCreateData());
+					//之前自建表保存和S4单据数据保存分两步，现在合并一步
+					// this.postAction("processLogic","create",this.getCreateData());
+					this.postAction("processLogic","post",this.getCreateData());
 					break;
 				//修改
 				case "change":
-					this.postAction("processLogic","change",this.getChangeData());
+					//之前自建表保存和S4单据数据保存分两步，现在合并一步
+					// this.postAction("processLogic","change",this.getChangeData());
+					this.postAction("processLogic","post",this.getChangeData());
 					break;
 			}
 		},
@@ -413,7 +427,7 @@ sap.ui.define([
 				aSelectedIndex.forEach( function(selected) {
 					let sPath = oTable.getRows()[selected].getBindingContext("local").sPath
 					this._LocalData.setProperty(sPath + "/AlternativeDateId",oContext.getObject().AlternativeDateId);
-					this._LocalData.setProperty(sPath + "/ObjectVaildFrom",oContext.getObject().ObjectVaildFrom);
+					this._LocalData.setProperty(sPath + "/ObjectValidFrom",oContext.getObject().ObjectValidFrom);
 				}.bind(this));
 
 				let sMessage = this._ResourceBundle.getText("msg02",[oContext.getObject().AlternativeDateId]);
@@ -430,7 +444,7 @@ sap.ui.define([
 			aSelectedIndex.forEach( function(selected) {
 				let sPath = oTable.getRows()[selected].getBindingContext("local").sPath
 				this._LocalData.setProperty(sPath + "/AlternativeDateId","");
-				this._LocalData.setProperty(sPath + "/ObjectVaildFrom","");
+				this._LocalData.setProperty(sPath + "/ObjectValidFrom","");
 			}.bind(this));
 			let sMessage = this._ResourceBundle.getText("msg04");
 			MessageToast.show(sMessage);
@@ -459,6 +473,10 @@ sap.ui.define([
 		onEditableChanged: function(oEvent) {
 			// let isEditable = this._LocalData.getProperty("/viewEditable");
 			// oEvent.getSource().setEditable(false);
+		},
+
+		onChangeNumberEditableChanged: function(oEvent) {
+			oEvent.getSource().setEditable(false);
 		},
 
 		onInputChange: function (oEvent,sModel) {
@@ -538,6 +556,9 @@ sap.ui.define([
 					Zzkey: JSON.stringify(postData),
 				},
 				success: function (oData) {
+					let sPath = this.getEntitykey(this.byId("idSmartFormHead").getBindingContext().getObject());
+					this.readOdataV2(sPath);
+					this._BusyDialog.close();
 					switch(sEvent){
 						case "create":
 							Messaging.addMessages(
@@ -547,6 +568,7 @@ sap.ui.define([
 									processor: that._LocalData
 								})
 							);
+							this.onSaveToS4();
 							break;
 						case "change":
 							Messaging.addMessages(
@@ -556,14 +578,12 @@ sap.ui.define([
 									processor: that._LocalData
 								})
 							);
+							this.onSaveToS4();
 							break;
 						case "post":
+							this._LocalData.setProperty("/viewEditable",false);
 							break;
 					}
-					
-					let sPath = this.getEntitykey(this.byId("idSmartFormHead").getBindingContext().getObject());
-					this.readOdataV2(sPath);
-					this._BusyDialog.close();
 				}.bind(this),
 				error: function (oError) {
 					
@@ -682,8 +702,8 @@ sap.ui.define([
 				if (!item.AlternativeDateId) {
 					that.addRquiredFieldMessage(sItemPath,index,"AlternativeDateId","AlternativeDateIdSF");
 				}
-				if (!item.ObjectVaildFrom) {
-					that.addRquiredFieldMessage(sItemPath,index,"ObjectVaildFrom","ObjectVaildFromSF");
+				if (!item.ObjectValidFrom) {
+					that.addRquiredFieldMessage(sItemPath,index,"ObjectValidFrom","ObjectValidFromSF");
 				}
 			});
 
