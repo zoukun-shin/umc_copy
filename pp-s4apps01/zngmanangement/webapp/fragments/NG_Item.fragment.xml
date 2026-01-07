@@ -10,10 +10,10 @@
         <table:extension>
             <OverflowToolbar>
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://copy" type="Ghost" text="{i18n>CopyLine}" press="onNG_Item($event,'COPY')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === true ? false : true}"/>
-                <Button icon="sap-icon://add" type="Ghost" text="{i18n>AddLine}" press="onNG_Item($event,'ADD')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === true ? false : true}"/>
-                <Button icon="sap-icon://edit" type="Ghost" text="{i18n>EditLine}" press="onNG_Item($event,'EDIT')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === true ? false : true}"/>
-                <Button icon="sap-icon://delete" type="Ghost" text="{i18n>DeleteLine}" press="onNG_Item($event,'DELETE')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === true ? false : true}"/>
+                <Button icon="sap-icon://copy" type="Ghost" text="{i18n>CopyLine}" press="onNG_Item($event,'COPY')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === 'X' ? false : true}"/>
+                <Button icon="sap-icon://add" type="Ghost" text="{i18n>AddLine}" press="onNG_Item($event,'ADD')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === 'X' ? false : true}"/>
+                <Button icon="sap-icon://edit" type="Ghost" text="{i18n>EditLine}" press="onNG_Item($event,'EDIT')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === 'X' ? false : true}"/>
+                <Button icon="sap-icon://delete" type="Ghost" text="{i18n>DeleteLine}" press="onNG_Item($event,'DELETE')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === 'X' ? false : true}"/>
             </OverflowToolbar>
         </table:extension>
         <table:columns>
@@ -85,6 +85,11 @@
             <table:Column width="10rem" label="{i18n>CounterMeasure}">
                 <table:template>
                     <Text text="{local>CounterMeasure}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>Move1PostStatus}">
+                <table:template>
+                    <Text text="{local>Move1PostStatus}" wrapping="false"/>
                 </table:template>
             </table:Column>
             <table:Column width="15rem" label="{i18n>ItemCreatedBy}" visible="{= ${local>/Operation} !== 'Create'}">

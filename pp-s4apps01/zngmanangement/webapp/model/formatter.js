@@ -122,5 +122,13 @@ sap.ui.define([
                 return "";
             }
         },
+
+        formatBoolean: function (bDeleteFlag) {
+            if (bDeleteFlag) {
+                return "X";
+            } else {
+                return "";
+            }
+        },
     };
 });

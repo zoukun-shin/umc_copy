@@ -60,9 +60,19 @@ sap.ui.define([
                 var sPlant = this.getModel("local").getProperty("/NG_Header/Plant");
                 if (sPlant) {
                     // Create View Control
+                    this.byId("idMessageStrip").setVisible(false);
                     this.byId("idButtonEdit").setVisible(false);
                     this.byId("idButtonDelete").setVisible(false);
+                    this.byId("idMoveType").setEditable(true);
+                    this.byId("idMaterialType").setEditable(true);
+                    this.byId("idLocationFromText").setVisible(false);
+                    this.byId("idLocationFromInput").setVisible(true);
+                    this.byId("idLocationTo1Text").setVisible(false);
+                    this.byId("idLocationTo1Input").setVisible(true);
+                    this.byId("idLocationTo2Text").setVisible(true);
+                    this.byId("idLocationTo2Input").setVisible(false);
                     this.getModel("local").setProperty("/Control/editable", true);
+                    this.getModel("local").setProperty("/Control/enabled", true);
                     this.getModel("local").setProperty("/Control/showFooter", true);
                     if (oMainBusyDialog) {
                         oMainBusyDialog.close();
@@ -82,6 +92,15 @@ sap.ui.define([
                 this._refreshData(oMainBusyDialog);
 
                 // Display View Control
+                this.byId("idMessageStrip").setVisible(false);
+                this.byId("idMoveType").setEditable(false);
+                this.byId("idMaterialType").setEditable(false);
+                this.byId("idLocationFromText").setVisible(true);
+                this.byId("idLocationFromInput").setVisible(false);
+                this.byId("idLocationTo1Text").setVisible(true);
+                this.byId("idLocationTo1Input").setVisible(false);
+                this.byId("idLocationTo2Text").setVisible(true);
+                this.byId("idLocationTo2Input").setVisible(false);
                 this.getModel("local").setProperty("/Control/editable", false);
                 this.getModel("local").setProperty("/Control/showFooter", false);
             }
@@ -92,7 +111,6 @@ sap.ui.define([
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-            sEmail = "xinlei.xu@sh.shin-china.com";
             var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -155,7 +173,33 @@ sap.ui.define([
         },
 
         onEdit: function () {
+            var sMoveType = this.getModel("local").getProperty("/NG_Header/MoveType");
+            var bItemNotPosted = this.getModel("local").getProperty("/Control/itemNotPosted");
             // View Control
+            if (bItemNotPosted) {
+                this.byId("idMoveType").setEditable(true);
+                this.byId("idMaterialType").setEditable(true);
+                this.byId("idLocationFromText").setVisible(false);
+                this.byId("idLocationFromInput").setVisible(true);
+                this.byId("idLocationTo1Text").setVisible(false);
+                this.byId("idLocationTo1Input").setVisible(true);
+                if (sMoveType === "2") {
+                    this.byId("idLocationTo2Text").setVisible(false);
+                    this.byId("idLocationTo2Input").setVisible(true);
+                } else {
+                    this.byId("idLocationTo2Text").setVisible(true);
+                    this.byId("idLocationTo2Input").setVisible(false);
+                }
+            } else {
+                this.byId("idMoveType").setEditable(false);
+                this.byId("idMaterialType").setEditable(false);
+                this.byId("idLocationFromText").setVisible(true);
+                this.byId("idLocationFromInput").setVisible(false);
+                this.byId("idLocationTo1Text").setVisible(true);
+                this.byId("idLocationTo1Input").setVisible(false);
+                this.byId("idLocationTo2Text").setVisible(true);
+                this.byId("idLocationTo2Input").setVisible(false);
+            }
             this.byId("idButtonEdit").setVisible(false);
             this.getModel("local").setProperty("/Control/editable", true);
             this.getModel("local").setProperty("/Control/showFooter", true);
@@ -167,18 +211,23 @@ sap.ui.define([
                 var sPlant = this.getModel("local").getProperty("/NG_Header/Plant");
                 var sPlantName = this.getModel("local").getProperty("/NG_Header/PlantName");
                 this.getModel("local").setProperty("/NG_Header", { NG_No: "INITIAL", Plant: sPlant, PlantName: sPlantName, to_NG_Item: { results: [] } });
-                // View Control
-                this.getModel("local").setProperty("/Control/showFooter", true);
             } else {
                 var oBusyDialog = new BusyDialog();
                 oBusyDialog.open();
                 this._refreshData(oBusyDialog);
-                // View Control
-                this.getModel("local").setProperty("/Control/showFooter", false);
             }
             // View Control
+            this.byId("idMoveType").setEditable(false);
+            this.byId("idMaterialType").setEditable(false);
             this.byId("idButtonEdit").setVisible(true);
+            this.byId("idLocationFromText").setVisible(true);
+            this.byId("idLocationFromInput").setVisible(false);
+            this.byId("idLocationTo1Text").setVisible(true);
+            this.byId("idLocationTo1Input").setVisible(false);
+            this.byId("idLocationTo2Text").setVisible(true);
+            this.byId("idLocationTo2Input").setVisible(false);
             this.getModel("local").setProperty("/Control/editable", false);
+            this.getModel("local").setProperty("/Control/showFooter", false);
             this._resetControlState();
         },
 
@@ -257,10 +306,12 @@ sap.ui.define([
                 this.getModel("local").setProperty("/NG_Header/LocationTo2", "");
                 this.getModel("local").setProperty("/NG_Header/LocationTo2Name", "");
                 this.byId("idLocationTo2Text").setVisible(true);
+                this.byId("idLocationTo2Input").setVisible(false);
                 this.byId("idLocationTo2Label").setRequired(false);
                 this.byId("idLocationTo2Input").setRequired(false);
             } else if (sSelectedKey === "2") { // Two Step
                 this.byId("idLocationTo2Text").setVisible(false);
+                this.byId("idLocationTo2Input").setVisible(true);
                 this.byId("idLocationTo2Label").setRequired(true);
                 this.byId("idLocationTo2Input").setRequired(true);
             }
@@ -279,9 +330,8 @@ sap.ui.define([
             var aSelectedIndices = oEvent.getSource().getSelectedIndices();
             if (aSelectedIndices.length > 0) {
                 var aNG_Item = this.getModel("local").getProperty("/NG_Header/to_NG_Item/results");
-                var aRowIndices = oEvent.getParameter("rowIndices");
-                aRowIndices.forEach((index) => {
-                    if (aNG_Item[index].DeleteFlag) {
+                aSelectedIndices.forEach((index) => {
+                    if (aNG_Item[index].DeleteFlag === "X" || aNG_Item[index].Move1PostStatus === "P") {
                         bEnabled = false;
                     }
                 });
@@ -312,16 +362,20 @@ sap.ui.define([
                     CounterMeasure: "",
                     RootCause: "",
                     Factor: "",
+                    Move1PostStatus: "",
                     IQC_NG_Quantity: "",
                     IQC_OK_Quantity: "",
                     IQC_ApprovedBy: "",
-                    IQC_Remark: ""
+                    IQC_Remark: "",
+                    IQC_PostStatus: ""
                 };
                 aNG_Item.push(item);
                 aNG_Item.forEach((line, index) => {
                     line.NG_ItemNo = index + 1;
                 });
                 this.getModel("local").setProperty("/NG_Header/to_NG_Item/results", aNG_Item);
+                this.getModel("local").setProperty("/ItemEdit", aNG_Item[aNG_Item.length - 1]);
+                this.showEditItemDialog();
             } else {
                 var oTable = this.byId("idNG_ItemTable");
                 var aSelectedIndices = oTable.getSelectedIndices();
@@ -333,21 +387,19 @@ sap.ui.define([
                         var newItem = {};
                         var copyItem = aNG_Item[aSelectedIndices[0]];
                         for (const key in copyItem) {
-                            if (!key.includes("NG_ItemNo") &&
-                                !key.includes("DeleteFlag") &&
-                                !key.includes("ItemCreatedBy") &&
-                                !key.includes("ItemCreatedAt") &&
-                                !key.includes("ItemLastChangedBy") &&
-                                !key.includes("ItemLastChangedAt") &&
-                                !key.includes("IQC_NG_Quantity") &&
-                                !key.includes("IQC_OK_Quantity") &&
-                                !key.includes("IQC_ApprovedBy") &&
-                                !key.includes("IQC_Remark") &&
-                                !key.includes("IQC_CreatedBy") &&
-                                !key.includes("IQC_CreatedAt") &&
-                                !key.includes("IQC_LastChangedBy") &&
-                                !key.includes("IQC_LastChangedAt")) {
-                                newItem[key] = copyItem[key];
+                            newItem[key] = copyItem[key];
+                            newItem["BaseUnit"] = "PC";
+                            if (key.includes("__metadata") &&
+                                key.includes("NG_ItemNo") &&
+                                key.includes("DeleteFlag") &&
+                                key.includes("CreatedBy") &&
+                                key.includes("CreatedAt") &&
+                                key.includes("LastChangedBy") &&
+                                key.includes("LastChangedAt") &&
+                                key.includes("Move1") &&
+                                key.includes("IQC") &&
+                                key.includes("LocalLastChangedAt")) {
+                                newItem[key] = "";
                             }
                         }
                         aNG_Item.push(newItem);
@@ -374,7 +426,7 @@ sap.ui.define([
                         do {
                             if (aNG_Item[aSelectedIndices[iLen]]["ItemCreatedBy"]) {
                                 // 数据库数据，先打删除标记
-                                aNG_Item[aSelectedIndices[iLen]]["DeleteFlag"] = true;
+                                aNG_Item[aSelectedIndices[iLen]]["DeleteFlag"] = "X";
                                 aNG_Item[aSelectedIndices[iLen]]["DeleteFlagButton"] = "sap-icon://delete";
                             } else {
                                 // 非数据库数据，直接删除
@@ -400,7 +452,7 @@ sap.ui.define([
                     }
                     for (var i = 0; i < aSelectedIndices.length; i++) {
                         aNG_Item.forEach((line, index) => {
-                            if (index === aSelectedIndices[i] && line.DeleteFlag === false) {
+                            if (index === aSelectedIndices[i] && line.DeleteFlag === "X") {
                                 line.IQC_NG_Quantity = "";
                                 line.IQC_OK_Quantity = "";
                                 line.IQC_ApprovedBy = "";
@@ -590,7 +642,9 @@ sap.ui.define([
             var oMainBusyDialog = new BusyDialog();
             oMainBusyDialog.open();
             // Update web url
-            window.location.href = window.location.href.replace("INITIAL", oResult.NG_NO);
+            var sURL = window.location.href;
+            var sNewURL = sURL.replace("INITIAL", oResult.NG_NO);
+            window.history.replaceState(null, null, sNewURL);
             this.getModel("local").setProperty("/NG_No", oResult.NG_NO);
             this.byId("idNG_ItemTable").clearSelection();
             this.byId("idNG_Item_IQCTable").clearSelection();
@@ -599,6 +653,14 @@ sap.ui.define([
             if (sEvent === "Save") {
                 this.byId("idButtonEdit").setVisible(true);
                 this.byId("idButtonDelete").setVisible(true);
+                this.byId("idMoveType").setEditable(false);
+                this.byId("idMaterialType").setEditable(false);
+                this.byId("idLocationFromText").setVisible(true);
+                this.byId("idLocationFromInput").setVisible(false);
+                this.byId("idLocationTo1Text").setVisible(true);
+                this.byId("idLocationTo1Input").setVisible(false);
+                this.byId("idLocationTo2Text").setVisible(true);
+                this.byId("idLocationTo2Input").setVisible(false);
             } else if (sEvent === "DeleteNG") {
                 this.byId("idButtonEdit").setVisible(false);
                 this.byId("idButtonDelete").setVisible(false);
@@ -616,9 +678,23 @@ sap.ui.define([
                     return a.NG_ItemNo - b.NG_ItemNo;
                 });
                 this.getModel("local").setProperty("/NG_Header", oResponse);
-                this.byId("idMessageStrip").setVisible(oResponse.DeleteFlag);
-                this.byId("idButtonEdit").setVisible(oResponse.DeleteFlag === false);
-                this.byId("idButtonDelete").setVisible(oResponse.DeleteFlag === false);
+
+                var obj = oResponse.to_NG_Item.results.find(element => element.Move1PostStatus === 'P');
+                if (obj) {
+                    this.getModel("local").setProperty("/Control/itemNotPosted", false);
+                } else {
+                    this.getModel("local").setProperty("/Control/itemNotPosted", true);
+                }
+                if (this.byId("idNG_ItemTable")) {
+                    this.byId("idNG_ItemTable").clearSelection();
+                }
+                if (this.byId("idNG_Item_IQCTable")) {
+                    this.byId("idNG_Item_IQCTable").clearSelection();
+                }
+
+                this.byId("idMessageStrip").setVisible(oResponse.DeleteFlag === "X" ? true : false);
+                this.byId("idButtonEdit").setVisible(oResponse.DeleteFlag === "");
+                this.byId("idButtonDelete").setVisible(oResponse.DeleteFlag === "");
                 if (oMainBusyDialog) {
                     oMainBusyDialog.close();
                 }

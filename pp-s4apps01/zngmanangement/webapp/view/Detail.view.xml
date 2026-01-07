@@ -37,22 +37,22 @@
                                 <m:Text text="{ parts:[ 'local>/NG_Header/Plant','local>/NG_Header/PlantName'], formatter:'.formatter.formatCodeName' }"/>
 
                                 <m:Label text="{i18n>MoveType}" required="true"/>
-                                <m:Select id="idMoveType" items="{ path: 'local>/MoveTypeVH', sorter: { path: 'MoveType' } }" selectedKey="{local>/NG_Header/MoveType}" showSecondaryValues="true" change="onMoveTypeChange" editable="{local>/Control/editable}">
+                                <m:Select id="idMoveType" items="{ path: 'local>/MoveTypeVH', sorter: { path: 'MoveType' } }" selectedKey="{local>/NG_Header/MoveType}" showSecondaryValues="true" change="onMoveTypeChange">
                                     <m:items>
                                         <core:Item key="{local>MoveType}" text="{local>MoveType} ({local>MoveTypeText})" />
                                     </m:items>
                                 </m:Select>
 
                                 <m:Label text="{i18n>MaterialType}" required="true"/>
-                                <m:Select id="idMaterialType" items="{ path: 'local>/MaterialTypeVH', sorter: { path: 'MaterialType' } }" selectedKey="{local>/NG_Header/MaterialType}" showSecondaryValues="true" editable="{local>/Control/editable}">
+                                <m:Select id="idMaterialType" items="{ path: 'local>/MaterialTypeVH', sorter: { path: 'MaterialType' } }" selectedKey="{local>/NG_Header/MaterialType}" showSecondaryValues="true">
                                     <m:items>
                                         <core:Item key="{local>MaterialType}" text="{local>MaterialType} ({local>MaterialTypeText})" />
                                     </m:items>
                                 </m:Select>
 
                                 <m:Label text="{i18n>LocationFrom}" required="true"/>
-                                <m:Text text="{ parts:[ 'local>/NG_Header/LocationFrom','local>/NG_Header/LocationFromName'], formatter:'.formatter.formatCodeName' }" visible="{= ${local>/Control/editable} === false}"/>
-                                <m:Input value="{local>/NG_Header/LocationFrom}" visible="{local>/Control/editable}" required="true" maxLength="4" change="onInputChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
+                                <m:Text id="idLocationFromText" text="{ parts:[ 'local>/NG_Header/LocationFrom','local>/NG_Header/LocationFromName'], formatter:'.formatter.formatCodeName' }"/>
+                                <m:Input id="idLocationFromInput" value="{local>/NG_Header/LocationFrom}" required="true" maxLength="4" change="onInputChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
                                 $event, $controller, '/I_StorageLocationStdVH', ['StorageLocation', 'StorageLocationName'], ['StorageLocation', 'StorageLocationName'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }">
                                     <m:suggestionColumns>
                                         <m:Column>
@@ -71,8 +71,8 @@
                                 </m:Input>
 
                                 <m:Label text="{i18n>LocationTo1}" required="true" />
-                                <m:Text text="{ parts:[ 'local>/NG_Header/LocationTo1','local>/NG_Header/LocationTo1Name'], formatter:'.formatter.formatCodeName' }" visible="{= ${local>/Control/editable} === false}"/>
-                                <m:Input value="{local>/NG_Header/LocationTo1}" visible="{local>/Control/editable}" required="true" maxLength="4" change="onInputChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
+                                <m:Text id="idLocationTo1Text" text="{ parts:[ 'local>/NG_Header/LocationTo1','local>/NG_Header/LocationTo1Name'], formatter:'.formatter.formatCodeName' }" />
+                                <m:Input id="idLocationTo1Input" value="{local>/NG_Header/LocationTo1}" required="true" maxLength="4" change="onInputChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
                                 $event, $controller, '/I_StorageLocationStdVH', ['StorageLocation', 'StorageLocationName'], ['StorageLocation', 'StorageLocationName'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }">
                                     <m:suggestionColumns>
                                         <m:Column>
@@ -91,8 +91,8 @@
                                 </m:Input>
 
                                 <m:Label id="idLocationTo2Label" text="{i18n>LocationTo2}" />
-                                <m:Text id="idLocationTo2Text" text="{ parts:[ 'local>/NG_Header/LocationTo2','local>/NG_Header/LocationTo2Name'], formatter:'.formatter.formatCodeName' }" visible="{= ${local>/Control/editable} === false}"/>
-                                <m:Input id="idLocationTo2Input" value="{local>/NG_Header/LocationTo2}" visible="{= ${local>/Control/editable} &amp;&amp; ${local>/NG_Header/MoveType} === '2'}" maxLength="4" change="onInputChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
+                                <m:Text id="idLocationTo2Text" text="{ parts:[ 'local>/NG_Header/LocationTo2','local>/NG_Header/LocationTo2Name'], formatter:'.formatter.formatCodeName' }" />
+                                <m:Input id="idLocationTo2Input" value="{local>/NG_Header/LocationTo2}" maxLength="4" change="onInputChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
                                 $event, $controller, '/I_StorageLocationStdVH', ['StorageLocation', 'StorageLocationName'], ['StorageLocation', 'StorageLocationName'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }">
                                     <m:suggestionColumns>
                                         <m:Column>

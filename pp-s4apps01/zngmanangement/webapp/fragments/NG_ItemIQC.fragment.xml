@@ -10,7 +10,7 @@
         <table:extension>
             <OverflowToolbar>
                 <ToolbarSpacer/>
-                <Button id="idNGItemIQCClearBtn" icon="sap-icon://clear-all" type="Ghost" text="{i18n>ClearLine}" press="onNG_ItemIQC($event,'CLEAR')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === true ? false : true}"/>
+                <Button id="idNGItemIQCClearBtn" icon="sap-icon://clear-all" type="Ghost" text="{i18n>ClearLine}" press="onNG_ItemIQC($event,'CLEAR')" enabled="{= ${local>/Control/editable} &amp;&amp; ${local>/Control/enabled}}" visible="{= ${local>/NG_Header/DeleteFlag} === 'X' ? false : true}"/>
             </OverflowToolbar>
         </table:extension>
         <table:columns>
@@ -69,6 +69,11 @@
             <table:Column width="20rem" label="{i18n>IQC_Remark}">
                 <table:template>
                     <Input value="{local>IQC_Remark}" editable="{= ${local>/Control/editable} &amp;&amp; ${local>Move1PostStatus} === 'P' &amp;&amp; ${local>IQC_PostStatus} === ''}"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>IQC_PostStatus}">
+                <table:template>
+                    <Text text="{local>IQC_PostStatus}" wrapping="false"/>
                 </table:template>
             </table:Column>
             <table:Column width="15rem" label="{i18n>IQC_CreatedBy}" visible="{= ${local>/Operation} !== 'Create'}">

@@ -29,7 +29,8 @@ sap.ui.define([
                     requiredSelection: false,
                     enabled: false,
                     editable: false,
-                    showFooter: false
+                    showFooter: false,
+                    itemNotPosted: true
                 },
                 MessageItems: [],
                 OperationLogs: [],
