@@ -122,7 +122,7 @@ sap.ui.define([
                         "NG_Position": aSheetData[i]["NGPosition"] === undefined ? "" : aSheetData[i]["NGPosition"],
                         "Factor": aSheetData[i]["Factor"] === undefined ? "" : aSheetData[i]["Factor"],
                         "Quantity": aSheetData[i]["Quantity"] === undefined ? "" : aSheetData[i]["Quantity"],
-                        "FoundDate": aSheetData[i]["DateNGFound"] === undefined ? "" : this.conversionDate(aSheetData[i]["DateNGFound"]),
+                        "FoundDate": aSheetData[i]["DateNGFound"] === undefined ? "" : aSheetData[i]["DateNGFound"].toString(),
                         "Symptom": aSheetData[i]["Symptom"] === undefined ? "" : aSheetData[i]["Symptom"],
                         "RootCause": aSheetData[i]["RootCause"] === undefined ? "" : aSheetData[i]["RootCause"],
                         "CounterMeasure": aSheetData[i]["CounterMeasure"] === undefined ? "" : aSheetData[i]["CounterMeasure"]
@@ -137,11 +137,15 @@ sap.ui.define([
                         } else if (item.FoundDate.includes("-")) {
                             splitArr = item.FoundDate.split("-");
                         }
-                        if (splitArr[0].length !== 4) {
-                            bError = true;
-                        } else if (splitArr[1].length === 0 || splitArr[1].length > 2) {
-                            bError = true;
-                        } else if (splitArr[2].length === 0 || splitArr[2].length > 2) {
+                        if (splitArr.length === 3) {
+                            if (splitArr[0].length !== 4) {
+                                bError = true;
+                            } else if (splitArr[1].length === 0 || splitArr[1].length > 2) {
+                                bError = true;
+                            } else if (splitArr[2].length === 0 || splitArr[2].length > 2) {
+                                bError = true;
+                            }
+                        } else {
                             bError = true;
                         }
                     }
@@ -149,6 +153,8 @@ sap.ui.define([
                         item.Status = "E";
                         item.FoundDate = "";
                         item.Message = this.getResourceBundle().getText("isValidDate");
+                    } else {
+                        item.FoundDate = this.conversionDate(item.FoundDate);
                     }
                     aExcelSet.push(item);
                 }
