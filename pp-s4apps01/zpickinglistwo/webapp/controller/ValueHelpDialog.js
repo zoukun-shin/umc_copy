@@ -22,7 +22,7 @@ sap.ui.define([
             }
             that._oBasicSearchField = new SearchField();
             that.loadFragment({
-                name: "pp.zpickinglist.fragments.ValueHelpDialog"
+                name: "pp.zpickinglistwo.fragments.ValueHelpDialog"
             }).then(function (oDialog) {
                 var oFilterBar = oDialog.getFilterBar();
                 that._oVHD = oDialog;
@@ -170,8 +170,6 @@ sap.ui.define([
                     var sPath = "/ZC_MaterialStockVH(Material='" + sMaterial + "',Plant='" + sPlant + "',StorageLocation='" + aTokens[0].getProperty("key") + "')";
                     var oVHRow = this.getModel().getProperty(sPath);
                     this.getModel().setProperty(sInputPath + "Stock", oVHRow["StockQuantity"]);
-                    this.getModel().setProperty(sItemPath + "/M_CARD_Quantity", oVHRow["M_CARD_Quantity"]);
-                    this.getModel().setProperty(sItemPath + "/M_CARD", oVHRow["M_CARD"]);
                 }
             }
             //----------------------------Custom Logic----------------------------------------

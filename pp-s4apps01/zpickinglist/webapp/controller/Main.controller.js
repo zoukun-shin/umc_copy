@@ -180,6 +180,7 @@ sap.ui.define([
 
         onSearch: function (oEvent) {
             this.getModel().resetChanges();
+            this._resetControlState();
 
             // ADD BEGIN BY XINLEI XU 2025/04/16 导出性能优化
             var iSelectIndex = this.getModel("local").getProperty("/selectIndex");
@@ -217,6 +218,29 @@ sap.ui.define([
                 this.getModel().setUseBatch(true);
             }.bind(this);
             // ADD END BY XINLEI XU 2025/04/16 导出性能优化
+        },
+
+        _resetControlState: function () {
+            var oTable;
+            var iSelectIndex = this.getModel("local").getProperty("/selectIndex");
+            if (iSelectIndex === 0) {
+                oTable = this.byId("idStandardListTable");
+            } else {
+                oTable = this.byId("idCustomListTable");
+            }
+            var aRows = oTable.getRows();
+            aRows.forEach(function (oRow) {
+                var aCells = oRow.getCells();
+                aCells.forEach(function (oCell) {
+                    var sControlId = oCell.getId();
+                    if (sControlId.includes('input')) {
+                        if (oCell.setValueState && oCell.setValueStateText) {
+                            oCell.setValueState("None");
+                            oCell.setValueStateText("");
+                        }
+                    }
+                });
+            });
         },
 
         onPressBtn: function (sEvent) {
@@ -490,7 +514,8 @@ sap.ui.define([
                 default:
                     break;
             }
-            this._oControl.setValueState("Error");
+            // this._oControl.setValueState("Error");
+            this.getModel().setProperty(sRowBindingPath + "/StorageLocationFromState", "Error");
             sPath = sODataPath + "('" + sValue + "')";
 
             //----------------------------Custom Logic----------------------------------------
@@ -500,14 +525,21 @@ sap.ui.define([
                 sPath = sODataPath + "(Material='" + sMaterial + "',Plant='" + sPlant + "',StorageLocation='" + sValue + "')";
             }
             var sBindFieldName = sInputBindingPath;
-            this._CallODataV2("READ", sPath, [], {}, {}).then(function (oResponse) {
-                this._oControl.setValueState("None");
-                if (sODataPath === "/ZC_MaterialStockVH") {
-                    this.getModel().setProperty(sRowBindingPath + "/" + sBindFieldName, oResponse["StorageLocation"]);
-                    this.getModel().setProperty(sRowBindingPath + "/" + sBindFieldName + "Name", oResponse["StorageLocationName"]);
-                    this.getModel().setProperty(sRowBindingPath + "/" + sBindFieldName + "Stock", oResponse["StockQuantity"]);
-                    this.getModel().setProperty(sRowBindingPath + "/M_CARD_Quantity", oResponse["M_CARD_Quantity"]);
-                    this.getModel().setProperty(sRowBindingPath + "/M_CARD", oResponse["M_CARD"]);
+            var aFilters = [];
+            aFilters.push(new Filter("Material", FilterOperator.EQ, sMaterial));
+            aFilters.push(new Filter("Plant", FilterOperator.EQ, sPlant));
+            aFilters.push(new Filter("StorageLocation", FilterOperator.EQ, sValue));
+            this._CallODataV2("READ", sODataPath, aFilters, {}, {}).then(function (oResponse) {
+                if (oResponse.results.length > 0) {
+                    // this._oControl.setValueState("None");
+                    this.getModel().setProperty(sRowBindingPath + "/StorageLocationFromState", "None");
+                    if (sODataPath === "/ZC_MaterialStockVH") {
+                        this.getModel().setProperty(sRowBindingPath + "/" + sBindFieldName, oResponse.results[0]["StorageLocation"]);
+                        this.getModel().setProperty(sRowBindingPath + "/" + sBindFieldName + "Name", oResponse.results[0]["StorageLocationName"]);
+                        this.getModel().setProperty(sRowBindingPath + "/" + sBindFieldName + "Stock", oResponse.results[0]["StockQuantity"]);
+                        this.getModel().setProperty(sRowBindingPath + "/M_CARD_Quantity", oResponse.results[0]["M_CARD_Quantity"]);
+                        this.getModel().setProperty(sRowBindingPath + "/M_CARD", oResponse.results[0]["M_CARD"]);
+                    }
                 }
             }.bind(this), function (oError) {
                 if (sODataPath === "/ZC_MaterialStockVH") {
@@ -518,7 +550,8 @@ sap.ui.define([
             //----------------------------Custom Logic----------------------------------------
 
             if (!sValue) {
-                this._oControl.setValueState("None");
+                // this._oControl.setValueState("None");
+                this.getModel().setProperty(sRowBindingPath + "/StorageLocationFromState", "None");
             }
         },
 

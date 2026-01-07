@@ -129,8 +129,8 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"StorageLocationFrom", "leadingProperty":"StorageLocationFrom"}'/>
                     </table:customData>
                     <table:template>
-                        <Input value="{StorageLocationFrom}" change="handleChange" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ${PostingStatus} === '未転記'}" showValueHelp="true" valueHelpRequest=".ValueHelpDialog.onValueHelpRequested(
-                        $event, $controller, '/ZC_MaterialStockVH', ['Plant','StorageLocation','StorageLocationName','StockQuantity','M_CARD_Quantity'], ['Plant','StorageLocation','StorageLocationName'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_MaterialStockVH', length: 4 }">
+                        <Input value="{StorageLocationFrom}" change="handleChange" valueState="{StorageLocationFromState}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ${PostingStatus} === '未転記'}" showValueHelp="true" valueHelpRequest=".ValueHelpDialog.onValueHelpRequested(
+                        $event, $controller, '/ZC_MaterialStockVH', ['Plant','StorageLocation','StorageLocationName','StockQuantity','M_CARD_Quantity'], ['Plant','StorageLocation','StorageLocationName'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_MaterialStockVH', length: 4 }" maxLength="4">
                             <suggestionColumns>
                                 <Column>
                                     <Label text="{i18n>StorageLocation}"/>

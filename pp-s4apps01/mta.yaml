@@ -175,6 +175,10 @@ modules:
       - ppcapacityload.zip
       name: ppcapacityload
       target-path: resources/
+    - artifacts:
+      - ppzpickinglistwo.zip
+      name: ppzpickinglistwo
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -466,6 +470,15 @@ modules:
 - name: ppcapacityload
   type: html5
   path: capacityload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzpickinglistwo
+  type: html5
+  path: zpickinglistwo
   build-parameters:
     build-result: dist
     builder: custom
