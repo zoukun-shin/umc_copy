@@ -20,8 +20,10 @@
         "uri": "/sap/opu/odata/sap/ZUI_OFSOCOMPARISON_O2/",
         "type": "OData",
         "settings": {
-          "annotations": [],
-          "localUri": "localService/metadata.xml",
+          "annotations": [
+            "ZUI_OFSOCOMPARISON_O2_VAN"
+          ],
+          "localUri": "localService/mainService/metadata.xml",
           "odataVersion": "2.0"
         }
       },
@@ -32,6 +34,13 @@
           "annotations": [],
           "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
           "odataVersion": "4.0"
+        }
+      },
+      "ZUI_OFSOCOMPARISON_O2_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_OFSOCOMPARISON_O2_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/mainService/ZUI_OFSOCOMPARISON_O2_VAN.xml"
         }
       }
     },

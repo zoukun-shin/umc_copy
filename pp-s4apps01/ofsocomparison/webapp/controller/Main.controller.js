@@ -1,5 +1,6 @@
 sap.ui.define([
 	"./Base",
+	"sap/m/Label",
 	"sap/ui/table/Column",
 	"sap/m/Text",
 	"sap/m/MessageBox",
@@ -9,7 +10,7 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator",
 	"pp/ofsocomparison/model/formatter",
 	'sap/ui/export/Spreadsheet',
-], function (Base, Column, Text, MessageBox, BusyDialog, MessageToast, Filter, FilterOperator, formatter, Spreadsheet) {
+], function (Base, Label, Column, Text, MessageBox, BusyDialog, MessageToast, Filter, FilterOperator, formatter, Spreadsheet) {
 	"use strict";
 
 	return Base.extend("pp.ofsocomparison.controller.Main", {
@@ -122,6 +123,12 @@ sap.ui.define([
 			aFilters.push(new Filter("UserEmail", FilterOperator.EQ, sEmail));
 			// ADD END BY XINLEI XU 2025/03/17
 
+			//TH add start 20260106 CR5313
+			var sDisplayUnit = this.getModel("local").getProperty("/Unit");
+			aFilters.push(new Filter("DisplayUnit", FilterOperator.EQ, sDisplayUnit));
+			var sVersion = this.byId("Version").getValue();
+			aFilters.push(new Filter("Version", FilterOperator.EQ, sVersion));
+			//TH add end 20260106 CR5313
 			var oFilterData = oSearchBar.getFilterData();
 			this.getTableContent(aFilters, oFilterData, oTable);
 		},
@@ -135,26 +142,52 @@ sap.ui.define([
 
 
 			// Promise.all([this.readData(aFilters)]).then((results) => {
-			this._BusyDialog.open();
-			Promise.all([this.readData(aFilters)]).then((results) => {
-				if (results[0].results.length > 0) {
-					that.getModel("local").setProperty("/data", results[0].results);
-					that.buildListResultUITable(oTable, results[0].results[0]);
+			//TH add start 20260106 CR5313
+			var sDisplayUnit = this.getModel("local").getProperty("/Unit");
+			if (sDisplayUnit === '01') {
+				//TH add end 20260106 CR5313	
+				this._BusyDialog.open();
+				Promise.all([this.readData(aFilters)]).then((results) => {
+					if (results[0].results.length > 0) {
+						that.getModel("local").setProperty("/data", results[0].results);
+						that.buildListResultUITable(oTable, results[0].results[0]);
+						this._BusyDialog.close();
+					} else {
+						this._BusyDialog.close();
+						MessageBox.error(this.getModel("i18n").getResourceBundle().getText("NoData"));
+						that.getModel("local").setProperty("/data", results[0].results);
+						that.buildListResultUITable(oTable, results[0].results[0]);
+
+
+
+					}
+				}).catch((error) => {
+					MessageBox.error(error);
+				}).finally(() => {
 					this._BusyDialog.close();
-				} else {
+				});
+				//TH add start 20260106 CR5313
+			} else {
+				this._BusyDialog.open();
+				Promise.all([this.readData(aFilters)]).then((results) => {
+					var aResults = [];
+					if (results[0]) {
+						aResults = JSON.parse(results[0].results[0].DynamicData);
+					};
+					if (aResults.length > 0) {
+						this.getModel("local").setProperty("/data", aResults);
+						this._renderingColumns(aResults[0], oTable);
+					} else {
+						MessageBox.error(this.getModel("i18n").getResourceBundle().getText("NoData"));
+					}
+
+				}).catch((error) => {
+					MessageBox.error(error);
+				}).finally(() => {
 					this._BusyDialog.close();
-					MessageBox.error("対象データが無いです。");
-					that.getModel("local").setProperty("/data", results[0].results);
-					that.buildListResultUITable(oTable, results[0].results[0]);
-
-
-
-				}
-			}).catch((error) => {
-				MessageBox.error(error);
-			}).finally(() => {
-				this._BusyDialog.close();
-			});
+				});
+				//TH add end 20260106 CR5313	
+			}
 		},
 
 		readData(aFilters) {
@@ -219,6 +252,14 @@ sap.ui.define([
 					label: "{i18n>MATERIALBYCUSTOMER}",
 					template: new Text({
 						text: "{local>MATERIALBYCUSTOMER}",
+						wrapping: false
+					}),
+					width: "10rem"
+				}));
+				oTable.addColumn(new Column({
+					label: "{i18n>Version}",
+					template: new Text({
+						text: "{local>Version}",
 						wrapping: false
 					}),
 					width: "10rem"
@@ -652,22 +693,42 @@ sap.ui.define([
 			oSheet = new Spreadsheet(oSettings);
 			oSheet.build()
 				.finally(oSheet.destroy);
-		}
+		},
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		_renderingColumns: function (object, oTable) {
+			var that = this;
+			oTable.removeAllColumns();
+			var oColumn, oLabel, oTemplate, sTextAlign, bvisible;
+			for (const key in object) {
+				if (key !== "CreatedAts") {
+					bvisible = true;
+				} else {
+					bvisible = false;
+				};
+				sTextAlign = "Begin"
+				if (key.substring(0, 1) === "W") {
+					oLabel = new Label({ text: key.substring(1, 9) });
+					oTemplate = new Text({
+						text: "{local>" + key + "}",
+						wrapping: false
+					});
+				} else {
+					oLabel = new Label({ text: "{i18n>" + key + "}" });
+					oTemplate = new Text({
+						text: "{local>" + key + "}",
+						wrapping: false
+					});
+				};
+				oColumn = new Column({
+					width: "10rem",
+					label: oLabel,
+					hAlign: sTextAlign,
+					visible: bvisible,
+					template: oTemplate
+				});
+				oTable.addColumn(oColumn);
+			}
+		},
 
 	});
 });

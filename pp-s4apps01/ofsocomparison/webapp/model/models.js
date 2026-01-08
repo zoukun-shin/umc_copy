@@ -21,6 +21,7 @@ function (JSONModel, Device) {
                 dateValue: new Date(),
                 LatestOF: '01',
                 Contents: '01',
+                Unit: '01',
                 data: []
             });
             return oModel;

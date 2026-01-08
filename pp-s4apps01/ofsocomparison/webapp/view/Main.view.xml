@@ -51,6 +51,16 @@
                                         </Select>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='90' key="DisplayUnit" visibleInAdvancedArea="true" label="{i18n>DisplayUnit}">
+                                    <smartFilterBar:customControl>
+                                        <Select id="idDisplayUnit" selectedKey="{local>/Unit}" change="onSelectModeChange">
+                                            <items>
+                                                <core:Item key="01" text="{i18n>Monthly}" />
+                                                <core:Item key="02" text="{i18n>Weekly}" />
+                                            </items>
+                                        </Select>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="unit_of_measure" visible="false"/>
@@ -130,6 +140,10 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="PeriodT35" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="PeriodT36" visible="false"/>
                             </smartFilterBar:controlConfiguration>
+                            <VBox id="Version1">
+                                <Label id="Version2" text="{i18n>Version}" labelFor="Version3"/>
+                                <Input id="Version" class="myLabelStyle" value="{path:'local>/Version'}" width="6rem" editable="true" type="Text" change="handleChange"/>
+                            </VBox>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
                 </f:content>
