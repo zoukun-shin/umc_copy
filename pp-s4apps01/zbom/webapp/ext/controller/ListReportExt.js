@@ -157,13 +157,13 @@ sap.ui.define([
             var BomPrint = {
                 //Head
                 Document: aAllData[0].Document,
-                ValidfromDate: HeaderValidityStartDate,
+                ValidfromDate: aAllData[0].ValidfromDate,
                 History: aAllData[0].History,
                 Revision: aAllData[0].Revision,
                 Model: aAllData[0].Model,
                 Formula: aAllData[0].Formula,
                 Description: aAllData[0].Description,
-                Costomer: aAllData[0].Costomer,
+                Customer: aAllData[0].Customer,
                 //Date: 
                 to_Item: {
                     results: []
