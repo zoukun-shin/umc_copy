@@ -115,6 +115,10 @@ modules:
       - ficovat.zip
       name: ficovat
       target-path: resources/
+    - artifacts:
+      - ficocustomerlineitem.zip
+      name: ficocustomerlineitem
+      target-path: resources/
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -271,6 +275,15 @@ modules:
 - name: ficovat
   type: html5
   path: vat
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficocustomerlineitem
+  type: html5
+  path: customerlineitem
   build-parameters:
     build-result: dist
     builder: custom
