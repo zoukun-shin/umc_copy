@@ -7,8 +7,8 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
     <smartTable:SmartTable entitySet="AlterMainMater" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
-        showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" 
-        persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" 
+        showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" 
+        persistencyKey="AlterMainMaterST" header="{i18n>Results}" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
         beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="Material,MRPController,Alternative2Main">
         <smartTable:customToolbar>
@@ -34,7 +34,7 @@
                         <Text text="{Plant}" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>Customer}" sortProperty="Customer" filterProperty="Customer">
+                <table:Column width="8rem" label="{i18n>Customer}" sortProperty="Customer" filterProperty="Customer">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "leadingProperty":"Customer"}'/>
                     </table:customData>
@@ -42,7 +42,7 @@
                         <Text text="{Customer}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>CustomerName}" sortProperty="CustomerName" filterProperty="CustomerName">
+                <table:Column width="25rem" label="{i18n>CustomerName}" sortProperty="CustomerName" filterProperty="CustomerName">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName"}'/>
                     </table:customData>
@@ -66,7 +66,7 @@
                         <Text text="{SemiFinishedGoods}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>BillOfMaterialVariant}" sortProperty="BillOfMaterialVariant" filterProperty="BillOfMaterialVariant">
+                <table:Column width="8rem" label="{i18n>BillOfMaterialVariant}" sortProperty="BillOfMaterialVariant" filterProperty="BillOfMaterialVariant">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialVariant", "leadingProperty":"BillOfMaterialVariant"}'/>
                     </table:customData>
@@ -74,7 +74,7 @@
                         <Text text="{BillOfMaterialVariant}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>BillOfMaterialVariantUsage}" sortProperty="BillOfMaterialVariantUsage" filterProperty="BillOfMaterialVariantUsage">
+                <table:Column width="8rem" label="{i18n>BillOfMaterialVariantUsage}" sortProperty="BillOfMaterialVariantUsage" filterProperty="BillOfMaterialVariantUsage">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialVariantUsage", "leadingProperty":"BillOfMaterialVariantUsage"}'/>
                     </table:customData>
@@ -98,7 +98,7 @@
                         <Text text="{MainMaterial}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>SubDetailedSpec}" sortProperty="SubDetailedSpec" filterProperty="SubDetailedSpec">
+                <table:Column width="25rem" label="{i18n>SubDetailedSpec}" sortProperty="SubDetailedSpec" filterProperty="SubDetailedSpec">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"SubDetailedSpec", "leadingProperty":"SubDetailedSpec"}'/>
                     </table:customData>
@@ -106,7 +106,7 @@
                         <Text text="{SubDetailedSpec}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>MainDetailedSpec}" sortProperty="MainDetailedSpec" filterProperty="MainDetailedSpec">
+                <table:Column width="25rem" label="{i18n>MainDetailedSpec}" sortProperty="MainDetailedSpec" filterProperty="MainDetailedSpec">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"MainDetailedSpec", "leadingProperty":"MainDetailedSpec"}'/>
                     </table:customData>
@@ -146,7 +146,7 @@
                         <Text text="{MainMFRPN}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>Subitems}" sortProperty="Subitems" filterProperty="Subitems">
+                <table:Column width="25rem" label="{i18n>Subitems}" sortProperty="Subitems" filterProperty="Subitems">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Subitems", "leadingProperty":"Subitems"}'/>
                     </table:customData>
@@ -154,7 +154,7 @@
                         <Text text="{Subitems}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>BOMQty}" sortProperty="BOMQty" filterProperty="BOMQty" hAlign="End">
+                <table:Column width="8rem" label="{i18n>BOMQty}" sortProperty="BOMQty" filterProperty="BOMQty" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BOMQty", "leadingProperty":"BOMQty"}'/>
                     </table:customData>
@@ -162,7 +162,7 @@
                         <Text text="{BOMQty}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>BOMUnit}" sortProperty="BOMUnit" filterProperty="BOMUnit">
+                <table:Column width="6rem" label="{i18n>BOMUnit}" sortProperty="BOMUnit" filterProperty="BOMUnit">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BOMUnit", "leadingProperty":"BOMUnit"}'/>
                     </table:customData>
@@ -170,7 +170,7 @@
                         <Text text="{BOMUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>SortSequence}" sortProperty="SortSequence" filterProperty="SortSequence">
+                <table:Column width="8rem" label="{i18n>SortSequence}" sortProperty="SortSequence" filterProperty="SortSequence">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"SortSequence", "leadingProperty":"SortSequence"}'/>
                     </table:customData>
@@ -178,7 +178,7 @@
                         <Text text="{SortSequence}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>BOMStatus}" sortProperty="BOMStatus" filterProperty="BOMStatus">
+                <table:Column width="8rem" label="{i18n>BOMStatus}" sortProperty="BOMStatus" filterProperty="BOMStatus">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BOMStatus", "leadingProperty":"BOMStatus"}'/>
                     </table:customData>
@@ -186,7 +186,7 @@
                         <Text text="{BOMStatus}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>AlternativeGroup}" sortProperty="AlternativeGroup" filterProperty="AlternativeGroup">
+                <table:Column width="8rem" label="{i18n>AlternativeGroup}" sortProperty="AlternativeGroup" filterProperty="AlternativeGroup">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"AlternativeGroup", "leadingProperty":"AlternativeGroup"}'/>
                     </table:customData>
@@ -194,7 +194,7 @@
                         <Text text="{AlternativeGroup}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>Priority}" sortProperty="Priority" filterProperty="Priority">
+                <table:Column width="8rem" label="{i18n>Priority}" sortProperty="Priority" filterProperty="Priority">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Priority", "leadingProperty":"Priority"}'/>
                     </table:customData>
@@ -202,7 +202,7 @@
                         <Text text="{Priority}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>Strategy}" sortProperty="Strategy" filterProperty="Strategy">
+                <table:Column width="8rem" label="{i18n>Strategy}" sortProperty="Strategy" filterProperty="Strategy">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Strategy", "leadingProperty":"Strategy"}'/>
                     </table:customData>
@@ -210,7 +210,7 @@
                         <Text text="{Strategy}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>UsageProbability}" sortProperty="UsageProbability" filterProperty="UsageProbability">
+                <table:Column width="12rem" label="{i18n>UsageProbability}" sortProperty="UsageProbability" filterProperty="UsageProbability">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"UsageProbability", "leadingProperty":"UsageProbability"}'/>
                     </table:customData>
@@ -218,7 +218,7 @@
                         <Text text="{UsageProbability}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>ValidityStartDate}" sortProperty="ValidityStartDate" filterProperty="ValidityStartDate">
+                <table:Column width="10rem" label="{i18n>ValidityStartDate}" sortProperty="ValidityStartDate" filterProperty="ValidityStartDate">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ValidityStartDate", "leadingProperty":"ValidityStartDate"}'/>
                     </table:customData>
@@ -226,7 +226,7 @@
                         <Text text="{path:'ValidityStartDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}"  wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>ValidityEndDate}" sortProperty="ValidityEndDate" filterProperty="ValidityEndDate">
+                <table:Column width="10rem" label="{i18n>ValidityEndDate}" sortProperty="ValidityEndDate" filterProperty="ValidityEndDate">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ValidityEndDate", "leadingProperty":"ValidityEndDate"}'/>
                     </table:customData>
@@ -234,7 +234,7 @@
                         <Text text="{path:'ValidityEndDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}"  wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>AlternativeItem}" sortProperty="AlternativeItem" filterProperty="AlternativeItem">
+                <table:Column width="8rem" label="{i18n>AlternativeItem}" sortProperty="AlternativeItem" filterProperty="AlternativeItem">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"AlternativeItem", "leadingProperty":"AlternativeItem"}'/>
                     </table:customData>
@@ -242,7 +242,7 @@
                         <Text text="{AlternativeItem}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>MainItem}" sortProperty="MainItem" filterProperty="MainItem">
+                <table:Column width="8rem" label="{i18n>MainItem}" sortProperty="MainItem" filterProperty="MainItem">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"MainItem", "leadingProperty":"MainItem"}'/>
                     </table:customData>
