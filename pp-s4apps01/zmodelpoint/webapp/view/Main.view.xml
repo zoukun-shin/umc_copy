@@ -37,7 +37,7 @@
         </f:header>
         <f:content>
             <FlexBox fitContainer="true">
-                <core:Fragment fragmentName="pp.zmodelpoint.fragments.UsageList" type="XML"/>
+                <core:Fragment fragmentName="pp.zmodelpoint.fragments.ModelPoint" type="XML"/>
             </FlexBox>
         </f:content>
     </f:DynamicPage>
