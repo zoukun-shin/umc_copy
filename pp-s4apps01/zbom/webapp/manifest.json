@@ -117,6 +117,10 @@
         "type": "sap.ui.model.resource.ResourceModel",
         "uri": "i18n/i18n.properties"
       },
+      "local": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true
+      },
       "Print": {
         "dataSource": "PrintService",
         "preload": true,
@@ -168,7 +172,7 @@
                     "ListReportExt": {
                       "press": "pp.zbom.ext.controller.ListReportExt.onPrint",
                       "visible": true,
-                      "enabled": true,
+                      "enabled": "{local>/authorityCheck/button/Print}",
                       "requiresSelection": true,
                       "text": "Print"
                     }

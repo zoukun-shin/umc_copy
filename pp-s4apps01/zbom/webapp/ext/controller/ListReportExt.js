@@ -59,7 +59,8 @@ sap.ui.define([
                 }
                 oLocalModel.setProperty("/authorityCheck", {
                     button: {
-                        View: aAllAccessBtns.some(btn => btn.AccessId === "zbom-View")
+                        View: aAllAccessBtns.some(btn => btn.AccessId === "zbom-View"),
+                        Print: aAllAccessBtns.some(btn => btn.AccessId === "zbom-Print"),
                     },
                     data: {
                         PlantSet: context._AssignPlant,
