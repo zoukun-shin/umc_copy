@@ -1,0 +1,292 @@
+<mvc:View controllerName="fico.zvendorlineitemreport.controller.Main" displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:t="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants" height="100%" busyIndicatorDelay="0">
+    <f:DynamicPage id="idDynamicPage">
+        <f:title>
+            <f:DynamicPageTitle id="idDynamicPageTitle">
+                <f:heading>
+                    <sv:SmartVariantManagement id="idSmartVariantManagement" showShare="true" persistencyKey="DocumentFilter" showExecuteOnSelection="true" entitySet="VendorLineItem" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="idDynamicPageHeader">
+                <f:content>
+                    <!--数据查询-->
+                    <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="Document" entitySet="VendorLineItem" useToolbar="false" class="sapUiResponsiveMargin">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration id="idControlConfiguration"  key="Supplier"       visibleInAdvancedArea="true" label="{i18n>Supplier_filter}" mandatory="notMandatory" index="1"  />
+                            <smartFilterBar:ControlConfiguration id="id0ControlConfiguration" key="CompanyCode"    visibleInAdvancedArea="true" label="{i18n>CompanyCode}"     mandatory="mandatory"    index="5"  />
+                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration" key="Status"         filterType="single" visibleInAdvancedArea="true" label="{i18n>Status}"          mandatory="notMandatory" index="10" />
+                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration" key="ClearingDate"   filterType="single" visibleInAdvancedArea="true" label="{i18n>ClearingDate}"    mandatory="notMandatory" index="15" />
+                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration" key="OpenOnKeyDate"  filterType="single" visibleInAdvancedArea="true" label="{i18n>OpenOnKeyDate}"   mandatory="notMandatory" index="20" />
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable id="idSmartTable" entitySet="VendorLineItem" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="DocumentTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="" ignoredFields="">
+                <smartTable:customToolbar>
+                    <OverflowToolbar>
+                        <Text text="{i18n>Results}" visible="{= ${local>/data}.length === 0}"/>
+                        <Text text="{i18n>Results}({= ${local>/data}.length})" visible="{= ${local>/data}.length > 0}"/>
+                        
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+                <t:Table id="idDocumentTable" rows="{local>/data}" rowActionCount="1" rowsUpdated="onUITableRowsUpdated">
+                    <t:columns>
+                        <t:Column width="10rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode", "leadingProperty":"CompanyCode", "sortProperty":"CompanyCode", "filterProperty": "CompanyCode"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{CompanyCode}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>FiscalYear}" sortProperty="FiscalYear" filterProperty="FiscalYear">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"FiscalYear", "leadingProperty":"FiscalYear", "sortProperty":"FiscalYear", "filterProperty": "FiscalYear"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{FiscalYear}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>AccountingDocument}" sortProperty="AccountingDocument" filterProperty="AccountingDocument">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AccountingDocument", "leadingProperty":"AccountingDocument", "sortProperty":"AccountingDocument", "filterProperty": "AccountingDocument"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AccountingDocument}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>LedgerGLLineItem}" sortProperty="LedgerGLLineItem" filterProperty="LedgerGLLineItem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"LedgerGLLineItem", "leadingProperty":"LedgerGLLineItem", "sortProperty":"LedgerGLLineItem", "filterProperty": "LedgerGLLineItem"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{LedgerGLLineItem}" wrapping="false" />
+                            </t:template>
+                         </t:Column>
+                        <t:Column width="10rem" label="{i18n>ChartOfAccounts}" sortProperty="ChartOfAccounts" filterProperty="ChartOfAccounts">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ChartOfAccounts", "leadingProperty":"ChartOfAccounts", "sortProperty":"ChartOfAccounts", "filterProperty": "ChartOfAccounts"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ChartOfAccounts}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>FiscalPeriod}" sortProperty="FiscalPeriod" filterProperty="FiscalPeriod">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"FiscalPeriod", "leadingProperty":"FiscalPeriod", "sortProperty":"FiscalPeriod", "filterProperty": "FiscalPeriod"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{FiscalPeriod}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>Supplier}" width="4rem" sortProperty="Supplier" filterProperty="Supplier" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Supplier", "leadingProperty":"Supplier", "sortProperty":"Supplier", "filterProperty": "Supplier"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Supplier}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>Status}" width="4rem" sortProperty="Status" filterProperty="Status" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Status", "leadingProperty":"Status", "sortProperty":"Status", "filterProperty": "Status"}'/>
+                            </t:customData>
+                            <t:template>
+                                <ObjectStatus state="{ path:'Status',formatter:'.formatter.formatState' }" icon="{ path:'Status', formatter:'.formatter.formatStateIcon'}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>PostingDate}" width="4rem" sortProperty="PostingDate" filterProperty="PostingDate" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PostingDate", "leadingProperty":"PostingDate", "sortProperty":"PostingDate", "filterProperty": "PostingDate"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PostingDate}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>NetDueDate}" width="4rem" sortProperty="NetDueDate" filterProperty="NetDueDate" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"NetDueDate", "leadingProperty":"NetDueDate", "sortProperty":"NetDueDate", "filterProperty": "NetDueDate"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{NetDueDate}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>AlternativeGLAccount}" width="4rem" sortProperty="AlternativeGLAccount" filterProperty="AlternativeGLAccount" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AlternativeGLAccount", "leadingProperty":"AlternativeGLAccount", "sortProperty":"AlternativeGLAccount", "filterProperty": "AlternativeGLAccount"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AlternativeGLAccount}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>AccountingDocumentType}" width="4rem" sortProperty="AccountingDocumentType" filterProperty="AccountingDocumentType" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AccountingDocumentType", "leadingProperty":"AccountingDocumentType", "sortProperty":"AccountingDocumentType", "filterProperty": "AccountingDocumentType"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AccountingDocumentType}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>DebitCreditCode}" width="4rem" sortProperty="DebitCreditCode" filterProperty="DebitCreditCode" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DebitCreditCode", "leadingProperty":"DebitCreditCode", "sortProperty":"DebitCreditCode", "filterProperty": "DebitCreditCode"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{DebitCreditCode}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>TransactionCurrency}" width="4rem" sortProperty="TransactionCurrency" filterProperty="TransactionCurrency" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"TransactionCurrency", "leadingProperty":"TransactionCurrency", "sortProperty":"TransactionCurrency", "filterProperty": "TransactionCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{TransactionCurrency}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>AmountInFunctionalCurrency}" width="4rem" sortProperty="AmountInFunctionalCurrency" filterProperty="AmountInFunctionalCurrency" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AmountInFunctionalCurrency", "leadingProperty":"AmountInFunctionalCurrency", "sortProperty":"AmountInFunctionalCurrency", "filterProperty": "AmountInFunctionalCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AmountInFunctionalCurrency}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>DebitAmountinFunctionalCurr}" width="4rem" sortProperty="DebitAmountinFunctionalCurr" filterProperty="DebitAmountinFunctionalCurr" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DebitAmountinFunctionalCurr", "leadingProperty":"DebitAmountinFunctionalCurr", "sortProperty":"DebitAmountinFunctionalCurr", "filterProperty": "DebitAmountinFunctionalCurr"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{DebitAmountinFunctionalCurr}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>CreditAmountinFunctionalCur}" width="4rem" sortProperty="CreditAmountinFunctionalCur" filterProperty="CreditAmountinFunctionalCur" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CreditAmountinFunctionalCur", "leadingProperty":"CreditAmountinFunctionalCur", "sortProperty":"CreditAmountinFunctionalCur", "filterProperty": "CreditAmountinFunctionalCur"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{CreditAmountinFunctionalCur}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>FunctionalCurrency}" width="4rem" sortProperty="FunctionalCurrency" filterProperty="FunctionalCurrency" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"FunctionalCurrency", "leadingProperty":"FunctionalCurrency", "sortProperty":"FunctionalCurrency", "filterProperty": "FunctionalCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{FunctionalCurrency}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>AmountInCompanyCodeCurrency}" width="4rem" sortProperty="AmountInCompanyCodeCurrency" filterProperty="AmountInCompanyCodeCurrency" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AmountInCompanyCodeCurrency", "leadingProperty":"AmountInCompanyCodeCurrency", "sortProperty":"AmountInCompanyCodeCurrency", "filterProperty": "AmountInCompanyCodeCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AmountInCompanyCodeCurrency}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>CompanyCodeCurrency}" width="4rem" sortProperty="CompanyCodeCurrency" filterProperty="CompanyCodeCurrency" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCodeCurrency", "leadingProperty":"CompanyCodeCurrency", "sortProperty":"CompanyCodeCurrency", "filterProperty": "CompanyCodeCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{CompanyCodeCurrency}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>DocumentItemText}" width="4rem" sortProperty="DocumentItemText" filterProperty="DocumentItemText" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DocumentItemText", "leadingProperty":"DocumentItemText", "sortProperty":"DocumentItemText", "filterProperty": "DocumentItemText"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{DocumentItemText}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>AssignmentReference}" width="4rem" sortProperty="AssignmentReference" filterProperty="AssignmentReference" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AssignmentReference", "leadingProperty":"AssignmentReference", "sortProperty":"AssignmentReference", "filterProperty": "AssignmentReference"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AssignmentReference}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>ProfitCenter}" width="4rem" sortProperty="ProfitCenter" filterProperty="ProfitCenter" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenter", "leadingProperty":"ProfitCenter", "sortProperty":"ProfitCenter", "filterProperty": "ProfitCenter"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ProfitCenter}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>ClearingAccountingDocument}" width="4rem" sortProperty="ClearingAccountingDocument" filterProperty="ClearingAccountingDocument" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ClearingAccountingDocument", "leadingProperty":"ClearingAccountingDocument", "sortProperty":"ClearingAccountingDocument", "filterProperty": "ClearingAccountingDocument"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ClearingAccountingDocument}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>ClearingDate}" width="4rem" sortProperty="ClearingDate" filterProperty="ClearingDate" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ClearingDate", "leadingProperty":"ClearingDate", "sortProperty":"ClearingDate", "filterProperty": "ClearingDate"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ClearingDate}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>OpenOnKeyDate}" width="4rem" sortProperty="OpenOnKeyDate" filterProperty="OpenOnKeyDate" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"OpenOnKeyDate", "leadingProperty":"OpenOnKeyDate", "sortProperty":"OpenOnKeyDate", "filterProperty": "OpenOnKeyDate"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{OpenOnKeyDate}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>OffsettingAcctNo}" width="4rem" sortProperty="OffsettingAcctNo" filterProperty="OffsettingAcctNo" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"OffsettingAcctNo", "leadingProperty":"OffsettingAcctNo", "sortProperty":"OffsettingAcctNo", "filterProperty": "OffsettingAcctNo"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{OffsettingAcctNo}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>OffsettingAccount}" width="4rem" sortProperty="OffsettingAccount" filterProperty="OffsettingAccount" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"OffsettingAccount", "leadingProperty":"OffsettingAccount", "sortProperty":"OffsettingAccount", "filterProperty": "OffsettingAccount"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{OffsettingAccount}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>POVendorCode}" width="4rem" sortProperty="POVendorCode" filterProperty="POVendorCode" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"POVendorCode", "leadingProperty":"POVendorCode", "sortProperty":"POVendorCode", "filterProperty": "POVendorCode"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{POVendorCode}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column  label="{i18n>POVendorName}" width="4rem" sortProperty="POVendorName" filterProperty="POVendorName" autoResizable="true" >
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"POVendorName", "leadingProperty":"POVendorName", "sortProperty":"POVendorName", "filterProperty": "POVendorName"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{POVendorName}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

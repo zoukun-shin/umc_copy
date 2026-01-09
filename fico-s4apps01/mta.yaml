@@ -119,6 +119,10 @@ modules:
       - ficocustomerlineitem.zip
       name: ficocustomerlineitem
       target-path: resources/
+    - artifacts:
+      - ficozvendorlineitemreport.zip
+      name: ficozvendorlineitemreport
+      target-path: resources/
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -284,6 +288,15 @@ modules:
 - name: ficocustomerlineitem
   type: html5
   path: customerlineitem
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozvendorlineitemreport
+  type: html5
+  path: zvendorlineitemreport
   build-parameters:
     build-result: dist
     builder: custom
