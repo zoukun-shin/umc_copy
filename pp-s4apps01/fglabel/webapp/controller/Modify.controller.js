@@ -365,7 +365,7 @@ sap.ui.define([
             var that = this;
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
             _oPrintModel = this.getModel("Print");
-            var aItems = this.getModel("local").getProperty("/itemSetM");
+            var aItems = this.preparePostBody();
             _oFunctions.onCustomAction(aItems, "PRINTEN");
         },
 
@@ -373,8 +373,19 @@ sap.ui.define([
             var that = this;
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
             _oPrintModel = this.getModel("Print");
-            var aItems = this.getModel("local").getProperty("/itemSetM");
+            var aItems = this.preparePostBody();
             _oFunctions.onCustomAction(aItems, "PRINTVN");
+        },
+
+        preparePostBody: function () {
+            var listItems = this.byId("idModifyTable").getSelectedIndices();
+            var items = this._LocalData.getProperty("/itemSetM");
+            var selectedRows = [];
+            listItems.forEach((item) => {
+                var oRow = items[item];
+                selectedRows.push(oRow);
+            });
+            return selectedRows;
         },
 
         onCustomAction: function (aSelectedContexts, sActionName) {

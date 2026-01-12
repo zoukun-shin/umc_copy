@@ -25,6 +25,11 @@ sap.ui.define([
             if (sap.ushell && sap.ushell.Container) {
                 this._UserInfo = sap.ushell.Container.getService("UserInfo").getUser();
             };
+            this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
+        },
+
+        _initialize: function () {
+
         },
 
         onBeforeRebindTable: function (oEvent) {
@@ -118,8 +123,7 @@ sap.ui.define([
                         that._CallODataV2("ACTION", "/processLogic", [], {
                             "Zzkey": postDocs,
                             "Event": "DELETE",
-                            //"UserEmail": that._UserInfo.getEmail() === undefined ? "" : that._UserInfo.getEmail()
-                            "UserEmail": "xinlei.xu@sh.shin-china.com"
+                            "UserEmail": that._UserInfo.getEmail() === undefined ? "" : that._UserInfo.getEmail()
                         }, {}).then(function (oResponse) {
                             that.byId("idMessage").setVisible(true);
                             var result = JSON.parse(oResponse.processLogic.Zzkey);
@@ -143,6 +147,17 @@ sap.ui.define([
             });
         },
 
+        onAfterRendering: function (oEvent) {
+            var sVisible = this.byId("idMessage").getVisible();
+            if (sVisible) {
+                setTimeout(() => {
+                    this.byId("idMessage").setVisible(true);
+                }, 100);
+            } else {
+                this.byId("idMessage").setVisible(false);
+            }
+        },
+
         onReset: function (oEvent) {
             var that = this;
             var postDocs = this.preparePostBody();
@@ -161,8 +176,7 @@ sap.ui.define([
                         that._CallODataV2("ACTION", "/processLogic", [], {
                             "Zzkey": postDocs,
                             "Event": "RESET",
-                            //"UserEmail": that._UserInfo.getEmail() === undefined ? "" : that._UserInfo.getEmail()
-                            "UserEmail": "xinlei.xu@sh.shin-china.com"
+                            "UserEmail": that._UserInfo.getEmail() === undefined ? "" : that._UserInfo.getEmail()
                         }, {}).then(function (oResponse) {
                             that.byId("idMessage").setVisible(true);
                             var result = JSON.parse(oResponse.processLogic.Zzkey);

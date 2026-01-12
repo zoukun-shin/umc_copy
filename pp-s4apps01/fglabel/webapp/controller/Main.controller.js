@@ -25,7 +25,7 @@ sap.ui.define([
                     });
                     aAllAccessBtns = aAccessBtns.flat();
                 }
-                if (!aAllAccessBtns.some(btn => btn.AccessId === "fglabel-reportView")) {
+                if (!aAllAccessBtns.some(btn => btn.AccessId === "fglabel-View")) {
                     if (!this.oErrorMessageDialog) {
                         this.oErrorMessageDialog = new sap.m.Dialog({
                             type: sap.m.DialogType.Message,

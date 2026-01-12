@@ -98,7 +98,7 @@
         </f:header>
         <f:content>
             <smartTable:SmartTable id="idsmartTable" entitySet="FGLabel" smartFilterId="idSmartFilterBar" smartVariant="__SVM01" tableType="Table" persistencyKey="smartTable" header="{i18n>Results}" 
-                        placeToolbarInTable="true" showRowCount="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" ignoredFields="Box_Qty_Sum">
+                        placeToolbarInTable="true" showRowCount="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" ignoredFields="Box_Qty_Sum,Barcode_Text,UserEmail">
                 <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
                     <ToolbarSpacer/>
@@ -108,7 +108,7 @@
                     <Button id="idPrint2VNBtn" icon="sap-icon://print" type="Transparent" text="{i18n>PrtVNBtn}" press=".onPrintVN" enabled="{= ${local>/authorityCheck/button/Print2VN}}"/>
                     </OverflowToolbar>
                 </smartTable:customToolbar>
-                <table:Table id="ReportTable">
+                <table:Table id="ReportTable" columnResize="onAfterRendering" columnMove="onAfterRendering">
                     <table:dependents>
 						<plugins:MultiSelectionPlugin
 							id="idMultiSelectionPlugin"

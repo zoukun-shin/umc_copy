@@ -66,7 +66,7 @@
         </HBox>
     </Panel>
     <Panel expandable="false" expanded="true" width="auto">
-        <table:Table id="idGenerateTable" rows="{local>/itemSetG}" rowsUpdated="handler.onUITableRowsUpdated" selectionMode="Multi" fixedColumnCount="3" rowMode="Interactive" class="sapUiSizeCompact">
+        <table:Table id="idGenerateTable" rows="{local>/itemSetG}" rowsUpdated="handler.onUITableRowsUpdated" selectionMode="MultiToggle" fixedColumnCount="3" rowMode="Interactive" class="sapUiSizeCompact">
             <table:extension>
                 <OverflowToolbar>
                 <ToolbarSpacer/>

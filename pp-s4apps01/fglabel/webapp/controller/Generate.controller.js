@@ -27,7 +27,7 @@ sap.ui.define([
                 this._UserInfo = sap.ushell.Container.getService("UserInfo").getUser();
             };
         },
-        
+
         onPlantSelectionChange: function (oEvent) {
             const oCombo = oEvent.getSource();
             const sKey = oCombo.getSelectedKey();
@@ -228,7 +228,7 @@ sap.ui.define([
             var that = this;
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
             _oPrintModel = this.getModel("Print");
-            var aItems = this.getModel("local").getProperty("/itemSetG");
+            var aItems = this.preparePostBody();
             _oFunctions.onCustomAction(aItems, "PRINTEN");
         },
 
@@ -236,8 +236,19 @@ sap.ui.define([
             var that = this;
             _ResourceBundle = this.getModel("i18n").getResourceBundle();
             _oPrintModel = this.getModel("Print");
-            var aItems = this.getModel("local").getProperty("/itemSetG");
+            var aItems = this.preparePostBody();
             _oFunctions.onCustomAction(aItems, "PRINTVN");
+        },
+
+        preparePostBody: function () {
+            var listItems = this.byId("idGenerateTable").getSelectedIndices();
+            var items = this._LocalData.getProperty("/itemSetG");
+            var selectedRows = [];
+            listItems.forEach((item) => {
+                var oRow = items[item];
+                selectedRows.push(oRow);
+            });
+            return selectedRows;
         },
 
         onCustomAction: function (aSelectedContexts, sActionName) {
