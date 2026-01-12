@@ -132,7 +132,48 @@ sap.ui.define([
                 return n;
             }
         },
+        // format Float, always 2 decimals + thousandths
+        formatFloat2: function (n, currency) {
+            if (n) {
+                if (parseFloat(n) === 0 && currency === "") {
+                    return "";
+                }
 
+                var sign = "";
+                var decimal = 2; // 固定两位小数
+
+                // 处理尾负号：123-
+                if (typeof n === "string") {
+                    var bNegative = n.endsWith("-");
+                    if (bNegative) {
+                        n = "-" + n.substring(0, n.length - 1);
+                    }
+                }
+
+                var num = Number(n).toFixed(decimal);
+
+                // 处理负数
+                if (num < 0) {
+                    num = num.substring(1);
+                    sign = "-";
+                }
+
+                // 千分位
+                var re = /\d{1,3}(?=(\d{3})+$)/g;
+                var n1 = num.toString().replace(/^(\d+)((\.\d+)?)$/, function (s, s1, s2) {
+                    return s1.replace(re, "$&,") + s2;
+                });
+
+                if (sign === "-") {
+                    n1 = sign + n1;
+                }
+
+                return n1;
+            } else {
+                return n;
+            }
+        },
+        
         formatOrderStatus: function (value) {
             if (value) {
                 return "完了";

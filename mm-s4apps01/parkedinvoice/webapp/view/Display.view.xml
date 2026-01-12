@@ -23,16 +23,17 @@
                     <!--数据查询-->
                     <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="ParkedInvoice" entitySet="ParkedInvoice" useToolbar="false" class="sapUiResponsiveMargin">
                         <smartFilterBar:controlConfiguration>
-                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration"  key="PurchaseOrder"    visibleInAdvancedArea="true" label="{i18n>PurchaseOrder}" mandatory="notMandatory" index="2" />
-                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration"  key="Supplier"         visibleInAdvancedArea="true" label="{i18n>Supplier}" mandatory="notMandatory" index="3" />
+                            <smartFilterBar:ControlConfiguration id="id0ControlConfiguration"  key="PurchaseOrder"    visibleInAdvancedArea="true" label="{i18n>PurchaseOrder}" mandatory="notMandatory" index="1" />
+                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration"  key="PurchaseOrderItem"    visibleInAdvancedArea="true" label="{i18n>PurchaseOrderItem_filter}" mandatory="notMandatory" index="2" />
+                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration"  key="Supplier"         visibleInAdvancedArea="true" label="{i18n>Supplier_filter}" mandatory="mandatory" index="3" />
                             <smartFilterBar:ControlConfiguration id="id3ControlConfiguration"  key="PurchasingOrganization" visibleInAdvancedArea="true" label="{i18n>PurchasingOrganization}" mandatory="notMandatory" index="4" />
                             <smartFilterBar:ControlConfiguration id="id4ControlConfiguration"  key="PurchasingGroup"   visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}" mandatory="notMandatory" index="5" />
                             <smartFilterBar:ControlConfiguration id="id5ControlConfiguration"  key="Material"         visibleInAdvancedArea="true" label="{i18n>Material}" mandatory="notMandatory" index="6" />
-                            <smartFilterBar:ControlConfiguration id="id6ControlConfiguration"  key="Plant"            visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="notMandatory" index="7" />
+                            <smartFilterBar:ControlConfiguration id="id6ControlConfiguration"  key="Plant"            visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="mandatory" index="7" />
                             <smartFilterBar:ControlConfiguration id="id7ControlConfiguration"  key="MaterialGroup"    visibleInAdvancedArea="true" label="{i18n>MaterialGroup}" mandatory="notMandatory" index="8" />
-                            <smartFilterBar:ControlConfiguration id="id8ControlConfiguration"  key="PostingDate"      visibleInAdvancedArea="true" label="{i18n>PostingDate}" mandatory="notMandatory" index="9" />
+                            <smartFilterBar:ControlConfiguration id="id8ControlConfiguration"  key="PostingDate"      visibleInAdvancedArea="true" label="{i18n>PostingDate}" mandatory="mandatory" index="9" />
                             <smartFilterBar:ControlConfiguration id="idC9ontrolConfiguration"  key="MaterialDocumentHeaderText" visibleInAdvancedArea="true" label="{i18n>MaterialDocumentHeaderText}" mandatory="notMandatory" index="10" />
-                            <smartFilterBar:ControlConfiguration id="idC10ontrolConfiguration" key="InvoiceStatus" visibleInAdvancedArea="true" label="{i18n>InvoiceStatus}" mandatory="notMandatory" index="10" />
+                            <smartFilterBar:ControlConfiguration id="idC10ontrolConfiguration" key="InvoiceStatus" visibleInAdvancedArea="true" label="{i18n>InvoiceStatus}" mandatory="notMandatory" index="11" />
                             <!-- visible -->
                             <smartFilterBar:ControlConfiguration key="UserEmail" visible="false"/>
                             <smartFilterBar:ControlConfiguration key="MaterialDocument" visible="false"/>
@@ -88,7 +89,7 @@
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>
-        <f:content>
+                <f:content>
             <smartTable:SmartTable id="idSmartTable" entitySet="ParkedInvoice" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="parkedInvoiceTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="UserEmail" ignoredFields="UserEmail">
                 <smartTable:customToolbar>
                     <OverflowToolbar >
@@ -108,36 +109,20 @@
                                 <Text text="{MaterialDocumentHeaderText}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column width="10rem" label="{i18n>MaterialDocumentYear}" sortProperty="MaterialDocumentYear" filterProperty="MaterialDocumentYear">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocumentYear", "leadingProperty":"MaterialDocumentYear", "sortProperty":"MaterialDocumentYear", "filterProperty": "MaterialDocumentYear"}'/>
-                                </t:customData>
-                            <t:template>
-                                <Text text="{MaterialDocumentYear}" wrapping="false" />
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="10rem" label="{i18n>MaterialDocument}" sortProperty="MaterialDocument" filterProperty="MaterialDocument">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocument", "leadingProperty":"MaterialDocument", "sortProperty":"MaterialDocument", "filterProperty": "MaterialDocument"}'/>
-                                </t:customData>
-                            <t:template>
-                                <Text text="{MaterialDocument}" wrapping="false" />
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="10rem" label="{i18n>MaterialDocumentItem}" sortProperty="MaterialDocumentItem" filterProperty="MaterialDocumentItem">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocumentItem", "leadingProperty":"MaterialDocumentItem", "sortProperty":"MaterialDocumentItem", "filterProperty": "MaterialDocumentItem"}'/>
-                                </t:customData>
-                            <t:template>
-                                <Text text="{MaterialDocumentItem}" wrapping="false" />
-                            </t:template>
-                        </t:Column>
                         <t:Column width="10rem" label="{i18n>DocumentCurrency}" sortProperty="DocumentCurrency" filterProperty="DocumentCurrency">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"DocumentCurrency", "leadingProperty":"DocumentCurrency", "sortProperty":"DocumentCurrency", "filterProperty": "DocumentCurrency"}'/>
                             </t:customData>
                             <t:template>
                                 <Text text="{DocumentCurrency}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>NotParkedQuantity}" sortProperty="NotParkedQuantity" filterProperty="NotParkedQuantity">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"NotParkedQuantity", "leadingProperty":"NotParkedQuantity", "sortProperty":"NotParkedQuantity", "filterProperty": "NotParkedQuantity"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Label text="{ parts: [ 'NotParkedQuantity' ],formatter:'.formatter.formatFloat2'}" wrapping="false"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>GrnUnitPrice}" sortProperty="GrnUnitPrice" filterProperty="GrnUnitPrice">
@@ -162,6 +147,30 @@
                             </t:customData>
                             <t:template>
                                 <Text text="{Supplier}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>MaterialDocumentYear}" sortProperty="MaterialDocumentYear" filterProperty="MaterialDocumentYear">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocumentYear", "leadingProperty":"MaterialDocumentYear", "sortProperty":"MaterialDocumentYear", "filterProperty": "MaterialDocumentYear"}'/>
+                                </t:customData>
+                            <t:template>
+                                <Text text="{MaterialDocumentYear}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>MaterialDocument}" sortProperty="MaterialDocument" filterProperty="MaterialDocument">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocument", "leadingProperty":"MaterialDocument", "sortProperty":"MaterialDocument", "filterProperty": "MaterialDocument"}'/>
+                                </t:customData>
+                            <t:template>
+                                <Text text="{MaterialDocument}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>MaterialDocumentItem}" sortProperty="MaterialDocumentItem" filterProperty="MaterialDocumentItem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocumentItem", "leadingProperty":"MaterialDocumentItem", "sortProperty":"MaterialDocumentItem", "filterProperty": "MaterialDocumentItem"}'/>
+                                </t:customData>
+                            <t:template>
+                                <Text text="{MaterialDocumentItem}" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>FiscalYear}" sortProperty="FiscalYear" filterProperty="FiscalYear">
@@ -209,7 +218,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"PostingDate", "leadingProperty":"PostingDate", "sortProperty":"PostingDate", "filterProperty": "PostingDate"}'/>          
                                 </t:customData>
                             <t:template>
-                                <Text text="{PostingDate}" wrapping="false" />
+                                <Text text="{ path: 'PostingDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>PurchaseOrder}" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder">
@@ -233,7 +242,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ScheduleLineDeliveryDate", "leadingProperty":"ScheduleLineDeliveryDate", "sortProperty":"ScheduleLineDeliveryDate", "filterProperty": "ScheduleLineDeliveryDate"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{ScheduleLineDeliveryDate}" wrapping="false" />
+                                <Text text="{ path: 'ScheduleLineDeliveryDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>ConditionRate}" sortProperty="ConditionRate" filterProperty="ConditionRate">
@@ -265,7 +274,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"DocumentDate", "leadingProperty":"DocumentDate", "sortProperty":"DocumentDate", "filterProperty": "DocumentDate"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{DocumentDate}" wrapping="false" />
+                                <Text text="{ path: 'DocumentDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>CreationDate}" sortProperty="CreationDate" filterProperty="CreationDate">
@@ -273,7 +282,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CreationDate", "leadingProperty":"CreationDate", "sortProperty":"CreationDate", "filterProperty": "CreationDate"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{CreationDate}" wrapping="false" />
+                                <Text text="{ path: 'CreationDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>MENGE}" sortProperty="MENGE" filterProperty="MENGE">
@@ -281,7 +290,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"MENGE", "leadingProperty":"MENGE", "sortProperty":"MENGE", "filterProperty": "MENGE"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{MENGE}" wrapping="false" />
+                                <Label text="{ parts: [ 'MENGE' ],formatter:'.formatter.formatFloat2'}" wrapping="false"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>PurchaseOrderCategory}" sortProperty="PurchaseOrderCategory" filterProperty="PurchaseOrderCategory">
@@ -329,7 +338,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderDate", "leadingProperty":"PurchaseOrderDate", "sortProperty":"PurchaseOrderDate", "filterProperty": "PurchaseOrderDate"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{PurchaseOrderDate}" wrapping="false" />
+                                <Text text="{ path: 'PurchaseOrderDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                             </t:Column>
                         <t:Column width="10rem" label="{i18n>AccountAssignmentCategory}" sortProperty="AccountAssignmentCategory" filterProperty="AccountAssignmentCategory">
@@ -385,7 +394,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"OrderQuantity", "leadingProperty":"OrderQuantity", "sortProperty":"OrderQuantity", "filterProperty": "OrderQuantity"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{OrderQuantity}" wrapping="false" />
+                                <Label text="{ parts: [ 'OrderQuantity' ],formatter:'.formatter.formatFloat2'}" wrapping="false"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>PurchaseOrderQuantityUnit}" sortProperty="PurchaseOrderQuantityUnit" filterProperty="PurchaseOrderQuantityUnit">
@@ -409,7 +418,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"NetPriceQuantity", "leadingProperty":"NetPriceQuantity", "sortProperty":"NetPriceQuantity", "filterProperty": "NetPriceQuantity"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{NetPriceQuantity}" wrapping="false" />
+                                <Label text="{ parts: [ 'NetPriceQuantity' ],formatter:'.formatter.formatFloat2'}" wrapping="false"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>RequisitionerName}" sortProperty="RequisitionerName" filterProperty="RequisitionerName">
@@ -426,6 +435,14 @@
                             </t:customData>
                             <t:template>
                                 <Text text="{AddressSearchTerm1}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>Country}" sortProperty="Country" filterProperty="Country">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Country", "leadingProperty":"Country", "sortProperty":"Country", "filterProperty": "Country"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Country}" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>GLAccount}" sortProperty="GLAccount" filterProperty="GLAccount">
@@ -465,7 +482,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CreationTime", "leadingProperty":"CreationTime", "sortProperty":"CreationTime", "filterProperty": "CreationTime"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{CreationTime}" wrapping="false" />
+                                <Text text="{ path: 'CreationTime', formatter: '.formatter.formatTime' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>DocumentHeaderText}" sortProperty="DocumentHeaderText" filterProperty="DocumentHeaderText">
@@ -489,7 +506,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ParkedQuantity", "leadingProperty":"ParkedQuantity", "sortProperty":"ParkedQuantity", "filterProperty": "ParkedQuantity"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{ParkedQuantity}" wrapping="false" />
+                                <Label text="{ parts: [ 'ParkedQuantity' ],formatter:'.formatter.formatFloat2'}" wrapping="false"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>ParkedAmount}" sortProperty="ParkedAmount" filterProperty="ParkedAmount">
@@ -505,7 +522,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"PostedQuantity", "leadingProperty":"PostedQuantity", "sortProperty":"PostedQuantity", "filterProperty": "PostedQuantity"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{PostedQuantity}" wrapping="false" />
+                                <Label text="{ parts: [ 'PostedQuantity' ],formatter:'.formatter.formatFloat2'}" wrapping="false"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>PostedAmount}" sortProperty="PostedAmount" filterProperty="PostedAmount">
