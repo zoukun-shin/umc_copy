@@ -55,7 +55,7 @@ sap.ui.define([
                 }
                 this.getModel("local").setProperty("/authorityCheck", {
                     button: {
-                        View: aAllAccessBtns.some(btn => btn.AccessId === "costingresult-View"),
+                        View: aAllAccessBtns.some(btn => btn.AccessId === "customerlineitem-View"),
                     },
                     data: {
                         PlantSet: context._AssignPlant,
