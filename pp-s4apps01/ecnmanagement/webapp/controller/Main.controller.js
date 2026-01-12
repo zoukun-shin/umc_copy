@@ -24,7 +24,7 @@ sap.ui.define([
 		_initialize: function () {
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-			sEmail = "xinlei.xu@sh.shin-china.com";
+			// sEmail = "xinlei.xu@sh.shin-china.com";
             var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -37,26 +37,23 @@ sap.ui.define([
                     });
                     aAllAccessBtns = aAccessBtns.flat();
                 }
-                // if (!aAllAccessBtns.some(btn => btn.AccessId === "ofpartition-View")) {
-                //     if (!this.oErrorMessageDialog) {
-                //         this.oErrorMessageDialog = new sap.m.Dialog({
-                //             type: sap.m.DialogType.Message,
-                //             state: "Error",
-                //             content: new sap.m.Text({
-                //                 text: this.getModel("i18n").getResourceBundle().getText("noAuthorityView", [sUser])
-                //             })
-                //         });
-                //     }
-                //     this.getView().destroy();
-                //     this.oErrorMessageDialog.open();
-                // }
+                if (!aAllAccessBtns.some(btn => btn.AccessId === "ecnmanagement-View")) {
+                    if (!this.oErrorMessageDialog) {
+                        this.oErrorMessageDialog = new sap.m.Dialog({
+                            type: sap.m.DialogType.Message,
+                            state: "Error",
+                            content: new sap.m.Text({
+                                text: this.getModel("i18n").getResourceBundle().getText("noAuthorityView", [sUser])
+                            })
+                        });
+                    }
+                    this.getView().destroy();
+                    this.oErrorMessageDialog.open();
+                }
                 this.getModel("local").setProperty("/authorityCheck", {
                     button: {
-                        View: aAllAccessBtns.some(btn => btn.AccessId === "ofpartition-View"),
-                        Check: aAllAccessBtns.some(btn => btn.AccessId === "ofpartition-Check"),
-                        Create: aAllAccessBtns.some(btn => btn.AccessId === "ofpartition-Create"),
-                        Excute: aAllAccessBtns.some(btn => btn.AccessId === "ofpartition-Excute"),
-                        Export: aAllAccessBtns.some(btn => btn.AccessId === "ofpartition-Export"),
+                        View: aAllAccessBtns.some(btn => btn.AccessId === "ecnmanagement-View"),
+                        Create: aAllAccessBtns.some(btn => btn.AccessId === "ecnmanagement-Create"),
                     },
                     data: {
                         PlantSet: context._AssignPlant,
@@ -67,17 +64,17 @@ sap.ui.define([
                     }
                 });
             }.bind(this), function (oError) {
-                // if (!this.oErrorMessageDialog) {
-                //     this.oErrorMessageDialog = new sap.m.Dialog({
-                //         type: sap.m.DialogType.Message,
-                //         state: "Error",
-                //         content: new sap.m.Text({
-                //             text: this.getModel("i18n").getResourceBundle().getText("getAuthorityFailed")
-                //         })
-                //     });
-                // }
-                // this.getView().destroy();
-                // this.oErrorMessageDialog.open();
+                if (!this.oErrorMessageDialog) {
+                    this.oErrorMessageDialog = new sap.m.Dialog({
+                        type: sap.m.DialogType.Message,
+                        state: "Error",
+                        content: new sap.m.Text({
+                            text: this.getModel("i18n").getResourceBundle().getText("getAuthorityFailed")
+                        })
+                    });
+                }
+                this.getView().destroy();
+                this.oErrorMessageDialog.open();
             }.bind(this));
         },
 

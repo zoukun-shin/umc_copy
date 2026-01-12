@@ -117,6 +117,7 @@
                             id="idCreateButton"
                             text="{i18n>Create}"
                             press="onCreateButtonPress"
+                            enabled="{= ${local>/authorityCheck/button/Create}}"
                         />
                     </OverflowToolbar>
                 </smartTable:customToolbar>
