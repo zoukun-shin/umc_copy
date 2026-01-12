@@ -74,6 +74,11 @@ sap.ui.define([
                     cellDates: true,
                     dateNF: 'yyyy/mm/dd;@'
                 });
+				let sCustomerLabel = this._ResourceBundle.getText("Customer");
+				let sPlantLabel = this._ResourceBundle.getText("Plant");
+				let sMaterialLabel = this._ResourceBundle.getText("Material");
+				let sMaterialByCustomerLabel = this._ResourceBundle.getText("MaterialByCustomer");
+				let sMaterialNameLabel = this._ResourceBundle.getText("MaterialName");
                 // 获取sheet1单元格的内容
                 var oSheet1 = oWB.Sheets[oWB.SheetNames[0]];
                 // 将单元格的内容转换成数组的形式（自动将第一行作为抬头）
@@ -83,11 +88,11 @@ sap.ui.define([
                     oItem = {
                         Type: "",
                         Message: "",
-                        Customer: aSheet1[i]["得意先"] || "",
-                        Plant: aSheet1[i]["プラント"] || "",
-                        Material: aSheet1[i]["品目"] || "",
-						MaterialByCustomer: aSheet1[i]["得意先品目"] || "",
-						MaterialName: aSheet1[i]["品目テキスト"] || "",
+                        Customer: aSheet1[i][sCustomerLabel] || "",
+                        Plant: aSheet1[i][sPlantLabel] || "",
+                        Material: aSheet1[i][sMaterialLabel] || "",
+						MaterialByCustomer: aSheet1[i][sMaterialByCustomerLabel] || "",
+						MaterialName: aSheet1[i][sMaterialNameLabel] || "",
                     };
                     const regex = /^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
                     Object.keys(aSheet1[i]).forEach(function (key) {
