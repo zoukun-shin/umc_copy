@@ -91,7 +91,7 @@
                             <!-- <smartFilterBar:ControlConfiguration key="UUID" visible="false" /> -->
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
-                    <CheckBox id="idFgOnly" text="{i18n>FgOnly}" class="sapUiMediumMarginBegin"/>
+                    <CheckBox id="idFgOnly" text="{i18n>FgOnly}" selected="true" class="sapUiMediumMarginBegin"/>
                     <RadioButtonGroup id="idProcessMode" columns="2" class="sapUiMediumMarginBegin">
                         <RadioButton text="{i18n>ReportKey}"/>
                         <RadioButton text="{i18n>AdjustKey}"/>
@@ -124,7 +124,7 @@
                             type="Transparent"
                             text="{i18n>btnCreatePIR}"
                             press="onCreatePIR"
-                            enabled="{= ${local>/AdjustShippingPlan}.length > 0 &amp;&amp; ${local>/authorityCheck/button/Create}}"
+                            enabled="{= ${local>/AdjustShippingPlan}.length > 0 &amp;&amp; ${local>/authorityCheck/button/Edit}}"
                         />
                         <!-- <Button
                             icon="sap-icon://excel-attachment"

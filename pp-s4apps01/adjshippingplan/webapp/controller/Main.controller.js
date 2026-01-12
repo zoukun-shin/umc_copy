@@ -1,12 +1,12 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "./BaseController",
     "../model/formatter",
 	"./messages",
 	"sap/ui/model/Filter",
 	"sap/m/MessageBox",
 	"sap/ui/export/Spreadsheet",
 	"sap/m/BusyDialog",
-], (Controller,
+], (BaseController,
     formatter,
 	messages,
 	Filter,
@@ -15,7 +15,7 @@ sap.ui.define([
 	BusyDialog) => {
     "use strict";
 
-    return Controller.extend("pp.adjshippingplan.controller.Main", {
+    return BaseController.extend("pp.adjshippingplan.controller.Main", {
 		formatter: formatter,
         onInit() {
             this._BusyDialog = new BusyDialog();
@@ -24,6 +24,65 @@ sap.ui.define([
 			this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			this.aHttpRequest = [];
 			this.dataFinished = true;
+
+			this._UserInfo = sap.ushell.Container.getService("UserInfo");
+            this.getRouter().getRoute("RouteMain").attachMatched(this._initialize, this);
+        },
+		_initialize: function () {
+            var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+			// sEmail = "xinlei.xu@sh.shin-china.com";
+            var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
+                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+            });
+            oContextBinding.requestObject().then(function (context) {
+                var aAccessBtns = [],
+                    aAllAccessBtns = [];
+                if (context._AssignRole && context._AssignRole.length > 0) {
+                    context._AssignRole.forEach(role => {
+                        aAccessBtns.push(role._UserRoleAccessBtn);
+                    });
+                    aAllAccessBtns = aAccessBtns.flat();
+                }
+                if (!aAllAccessBtns.some(btn => btn.AccessId === "adjshippingplan-View")) {
+                    if (!this.oErrorMessageDialog) {
+                        this.oErrorMessageDialog = new sap.m.Dialog({
+                            type: sap.m.DialogType.Message,
+                            state: "Error",
+                            content: new sap.m.Text({
+                                text: this.getModel("i18n").getResourceBundle().getText("noAuthorityView", [sUser])
+                            })
+                        });
+                    }
+                    this.getView().destroy();
+                    this.oErrorMessageDialog.open();
+                }
+                this.getModel("local").setProperty("/authorityCheck", {
+                    button: {
+                        View: aAllAccessBtns.some(btn => btn.AccessId === "adjshippingplan-View"),
+                        Edit: aAllAccessBtns.some(btn => btn.AccessId === "adjshippingplan-Edit"),
+                    },
+                    data: {
+                        PlantSet: context._AssignPlant,
+                        CompanySet: context._AssignCompany,
+                        SalesOrgSet: context._AssignSalesOrg,
+                        PurchOrgSet: context._AssignPurchOrg,
+                        RoleSet: context._AssignRole
+                    }
+                });
+            }.bind(this), function (oError) {
+                if (!this.oErrorMessageDialog) {
+                    this.oErrorMessageDialog = new sap.m.Dialog({
+                        type: sap.m.DialogType.Message,
+                        state: "Error",
+                        content: new sap.m.Text({
+                            text: this.getModel("i18n").getResourceBundle().getText("getAuthorityFailed")
+                        })
+                    });
+                }
+                this.getView().destroy();
+                this.oErrorMessageDialog.open();
+            }.bind(this));
         },
         onSearch: function (oEvent) {
 			this.errorPopup = false;
@@ -235,8 +294,15 @@ sap.ui.define([
 				result[key].PlanDates[dateKey] = item.Quantity;
 			});
 
+			let sMode = this.byId("idProcessMode").getSelectedIndex();
+			let isEditable;
 			// 将对象转化为数组形式，并将ReqDates展开为列
 			return Object.values(result).map(item => {
+				if (sMode === 0) {
+					isEditable = false;
+				} else {
+					isEditable = item.Editable;
+				}
 				return {
 					Customer: item.Customer,
 					Plant: item.Plant,
@@ -248,7 +314,7 @@ sap.ui.define([
 					Customer: item.Customer,
 					MaterialByCustomer: item.MaterialByCustomer,
 					TotalQuantity: item.TotalQuantity,
-					Editable: item.Editable,
+					Editable: isEditable,
 					...item.PlanDates // 展开动态生成的日期列
 				};
 			});
@@ -518,7 +584,7 @@ sap.ui.define([
 				return;
 			}
 
-			var sMode = this.byId("idProcessMode").getSelectedIndex()
+			var sMode = this.byId("idProcessMode").getSelectedIndex();
 			// 调用核心算法，计算最大允许的截止日期
 			var oMaxEndDate = this._calculateMaxEndDate(oStartDate,sMode);
 			
