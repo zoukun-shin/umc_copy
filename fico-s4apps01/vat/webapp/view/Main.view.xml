@@ -66,7 +66,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"GLAccount", "leadingProperty":"GLAccount"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{GLAccount}" wrapping="false" tooltip="true"/>
+                                <Text text="{GLAccount}" wrapping="false" tooltip="{GLAccount}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="14rem" label="{i18n>GLAccountName}" sortProperty="GLAccountName" filterProperty="GLAccountName">
@@ -74,7 +74,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"GLAccountName", "leadingProperty":"GLAccountName"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{GLAccountName}" wrapping="false" tooltip="true"/>
+                                <Text text="{GLAccountName}" wrapping="false" tooltip="{GLAccountName}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>AccountingDocument}" sortProperty="AccountingDocument" filterProperty="AccountingDocument">
@@ -82,7 +82,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"AccountingDocument", "leadingProperty":"AccountingDocument"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{AccountingDocument}" wrapping="false" tooltip="true"/>
+                                <Text text="{AccountingDocument}" wrapping="false" tooltip="{AccountingDocument}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>DocumentType}" sortProperty="DocumentType" filterProperty="DocumentType">
@@ -90,7 +90,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"DocumentType", "leadingProperty":"DocumentType"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{DocumentType}" wrapping="false" tooltip="true"/>
+                                <Text text="{DocumentType}" wrapping="false" tooltip="{DocumentType}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>InvoiceDate}" sortProperty="InvoiceDate" filterProperty="InvoiceDate">
@@ -98,7 +98,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"InvoiceDate", "leadingProperty":"InvoiceDate"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{InvoiceDate}" wrapping="false" tooltip="true"/>
+                                <Text text="{path:'InvoiceDate', formatter:'.formatter.formatDate'}" wrapping="false"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>TaxID}" sortProperty="TaxID" filterProperty="TaxID">
@@ -106,7 +106,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"TaxID", "leadingProperty":"TaxID"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{TaxID}" wrapping="false" tooltip="true"/>
+                                <Text text="{TaxID}" wrapping="false" tooltip="{TaxID}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>HeadOffice}" sortProperty="HeadOffice" filterProperty="HeadOffice">
@@ -114,7 +114,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"HeadOffice", "leadingProperty":"HeadOffice"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{HeadOffice}" wrapping="false" tooltip="true"/>
+                                <Text text="{HeadOffice}" wrapping="false" tooltip="{HeadOffice}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>BranchCode}" sortProperty="BranchCode" filterProperty="BranchCode">
@@ -122,7 +122,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"BranchCode", "leadingProperty":"BranchCode"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{BranchCode}" wrapping="false" tooltip="true"/>
+                                <Text text="{BranchCode}" wrapping="false" tooltip="{BranchCode}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>Customer}" sortProperty="Customer" filterProperty="Customer">
@@ -130,7 +130,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "leadingProperty":"Customer"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{Customer}" wrapping="false" tooltip="true"/>
+                                <Text text="{Customer}" wrapping="false" tooltip="{Customer}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="14rem" label="{i18n>CustomerName}" sortProperty="CustomerName" filterProperty="CustomerName">
@@ -138,7 +138,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{CustomerName}" wrapping="false" tooltip="true"/>
+                                <Text text="{CustomerName}" wrapping="false" tooltip="{CustomerName}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>Supplier}" sortProperty="Supplier" filterProperty="Supplier">
@@ -146,7 +146,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Supplier", "leadingProperty":"Supplier"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{Supplier}" wrapping="false" tooltip="true"/>
+                                <Text text="{Supplier}" wrapping="false" tooltip="{Supplier}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="14rem" label="{i18n>SupplierName}" sortProperty="SupplierName" filterProperty="SupplierName">
@@ -154,7 +154,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"SupplierName", "leadingProperty":"SupplierName"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{SupplierName}" wrapping="false" tooltip="true"/>
+                                <Text text="{SupplierName}" wrapping="false" tooltip="{SupplierName}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>Invoice}" sortProperty="Invoice" filterProperty="Invoice">
@@ -162,7 +162,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Invoice", "leadingProperty":"Invoice"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{Invoice}" wrapping="false" tooltip="true"/>
+                                <Text text="{Invoice}" wrapping="false" tooltip="{Invoice}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="18rem" label="{i18n>OriginalCurrency}" sortProperty="OriginalCurrency" filterProperty="OriginalCurrency">
@@ -170,7 +170,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"OriginalCurrency", "leadingProperty":"OriginalCurrency"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{OriginalCurrency}" wrapping="false" tooltip="true"/>
+                                <Text text="{OriginalCurrency}" wrapping="false" tooltip="{OriginalCurrency}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="20rem" label="{i18n>OriginalAmount}" sortProperty="OriginalAmount" filterProperty="OriginalAmount">
