@@ -217,7 +217,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ClearingDate", "leadingProperty":"ClearingDate", "sortProperty":"ClearingDate", "filterProperty": "ClearingDate"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{ClearingDate}" wrapping="false" />
+                                <Text text="{ path: 'ClearingDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>NetDueDate}" sortProperty="NetDueDate" filterProperty="NetDueDate">
@@ -225,7 +225,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"NetDueDate", "leadingProperty":"NetDueDate", "sortProperty":"NetDueDate", "filterProperty": "NetDueDate"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{NetDueDate}" wrapping="false" />
+                                <Text text="{ path: 'NetDueDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                     </t:columns>

@@ -113,7 +113,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"PostingDate", "leadingProperty":"PostingDate", "sortProperty":"PostingDate", "filterProperty": "PostingDate"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{PostingDate}" wrapping="false" />
+                                <Text text="{ path: 'PostingDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column  label="{i18n>NetDueDate}" width="4rem" sortProperty="NetDueDate" filterProperty="NetDueDate" autoResizable="true" >
@@ -121,7 +121,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"NetDueDate", "leadingProperty":"NetDueDate", "sortProperty":"NetDueDate", "filterProperty": "NetDueDate"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{NetDueDate}" wrapping="false" />
+                                <Text text="{ path: 'NetDueDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column  label="{i18n>AlternativeGLAccount}" width="4rem" sortProperty="AlternativeGLAccount" filterProperty="AlternativeGLAccount" autoResizable="true" >
@@ -241,7 +241,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ClearingDate", "leadingProperty":"ClearingDate", "sortProperty":"ClearingDate", "filterProperty": "ClearingDate"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{ClearingDate}" wrapping="false" />
+                                <Text text="{ path: 'ClearingDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column  label="{i18n>OpenOnKeyDate}" width="4rem" sortProperty="OpenOnKeyDate" filterProperty="OpenOnKeyDate" autoResizable="true" >
@@ -249,7 +249,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"OpenOnKeyDate", "leadingProperty":"OpenOnKeyDate", "sortProperty":"OpenOnKeyDate", "filterProperty": "OpenOnKeyDate"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{OpenOnKeyDate}" wrapping="false" />
+                                <Text text="{ path: 'OpenOnKeyDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column  label="{i18n>OffsettingAcctNo}" width="4rem" sortProperty="OffsettingAcctNo" filterProperty="OffsettingAcctNo" autoResizable="true" >
