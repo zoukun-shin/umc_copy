@@ -26,8 +26,7 @@ sap.ui.define([
 
         _initialize: function () {
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
-            //var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-            var sEmail = "xinlei.xu@sh.shin-china.com"
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
             var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -109,8 +108,7 @@ sap.ui.define([
                         filters.push(oYearMonth);
                     }
                 };
-                //let sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-                let sEmail = "xinlei.xu@sh.shin-china.com"
+                let sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
                 filters.push(new sap.ui.model.Filter("UserEmail", "EQ", sEmail));
             };
         },
