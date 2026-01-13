@@ -1,0 +1,24 @@
+{
+  "generationParameters": {
+    "generationDate": "Wed Dec 24 2025 06:42:08 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_BALANCE_SHEET_O2",
+    "appName": "zbalancesheet",
+    "appTitle": "Balance Sheet",
+    "appDescription": "Balance Sheet",
+    "appNamespace": "fico",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.38",
+    "enableCodeAssist": false,
+    "enableEslint": false,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.20.0",
+    "template": "Basic V2",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}

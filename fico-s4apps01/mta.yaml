@@ -123,6 +123,14 @@ modules:
       - ficozvendorlineitemreport.zip
       name: ficozvendorlineitemreport
       target-path: resources/
+    - artifacts:
+      - ficozcosttransfer.zip
+      name: ficozcosttransfer
+      target-path: resources/
+    - artifacts:
+      - ficozbalancesheet.zip
+      name: ficozbalancesheet
+      target-path: resources/
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -258,6 +266,15 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
+- name: ficozcosttransfer
+  type: html5
+  path: zcosttransfer
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
 - name: ficocostingresult
   type: html5
   path: costingresult
@@ -270,6 +287,15 @@ modules:
 - name: ficogeneralledger
   type: html5
   path: generalledger
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozbalancesheet
+  type: html5
+  path: zbalancesheet
   build-parameters:
     build-result: dist
     builder: custom
