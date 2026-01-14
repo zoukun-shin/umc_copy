@@ -75,7 +75,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.120.38",
       "libs": {
@@ -136,6 +136,13 @@
           "target": [
             "Main"
           ]
+        },
+        {
+          "name": "Detail",
+          "pattern": "Detail('{uuid}'):?sap-iapp-state:",
+          "target": [
+            "Detail"
+          ]
         }
       ],
       "targets": {
@@ -145,6 +152,12 @@
           "clearControlAggregation": false,
           "viewId": "Main",
           "viewName": "Main"
+        },
+        "Detail": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewName": "Detail"
         }
       }
     },

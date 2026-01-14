@@ -11,6 +11,15 @@ sap.ui.define([
             if (value === "E") {
                 return "Error";
             }
+            if (value === "P") {
+                return "In Process";
+            }
+            if (value === "F") {
+                return "Finished";
+            }
+            if (value === "C") {
+                return "Finished";
+            }
             return "None";
         },
 

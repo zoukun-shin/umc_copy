@@ -2,6 +2,7 @@
     xmlns:core="sap.ui.core"
     xmlns="sap.m"
     xmlns:f="sap.f"
+    
     xmlns:unified="sap.ui.unified"
     xmlns:t="sap.ui.table"
     xmlns:rm="sap.ui.table.rowmodes"
@@ -24,18 +25,18 @@
                     <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="deliveryDocument" entitySet="JobResult" useToolbar="false" class="sapUiResponsiveMargin">
                         <smartFilterBar:controlConfiguration>
                             <smartFilterBar:ControlConfiguration id="idControlConfiguration" key="job_status" visibleInAdvancedArea="true" label="{i18n>job_status}" mandatory="notMandatory" index="1" />
-                            <smartFilterBar:ControlConfiguration id="id0ControlConfiguration" key="job_name" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>job_name}" mandatory="notMandatory" index="5" />
-                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration" key="schedule_begin" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>schedule_begin}" mandatory="notMandatory" index="10" />
-                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration" key="schedule_end" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>schedule_end}" mandatory="notMandatory" index="15" />
-                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration" key="schedule_user" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>schedule_user}" mandatory="notMandatory" index="20" />
-                            <smartFilterBar:ControlConfiguration id="id4ControlConfiguration" key="invno" visibleInAdvancedArea="true" label="{i18n>invno}" mandatory="notMandatory" index="25" />
+                            <smartFilterBar:ControlConfiguration id="id0ControlConfiguration" key="job_name"  visibleInAdvancedArea="true" label="{i18n>job_name}" mandatory="notMandatory" index="5" />
+                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration" key="schedule_begin" visibleInAdvancedArea="true" label="{i18n>schedule_begin}" mandatory="notMandatory" index="10" />
+                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration" key="schedule_end"  visibleInAdvancedArea="true" label="{i18n>schedule_end}" mandatory="notMandatory" index="15" />
+                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration" key="schedule_user"  visibleInAdvancedArea="true" label="{i18n>schedule_user}" mandatory="notMandatory" index="20" />
+                            
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <smartTable:SmartTable id="idSmartTable" entitySet="JobResult" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="deliveryDocumentTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="" ignoredFields="">
+            <smartTable:SmartTable id="idSmartTable" entitySet="JobResult" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="deliveryDocumentTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="uuid" ignoredFields="">
                 <smartTable:customToolbar>
                     <OverflowToolbar >
                         <ToolbarSpacer />
@@ -43,6 +44,11 @@
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <t:Table id="idDeliveryDocumentTable" rowActionCount="1" rowsUpdated="onUITableRowsUpdated">
+                    <t:rowActionTemplate>
+                        <t:RowAction>
+                            <t:RowActionItem type="Navigation" press="onRowActionPress" icon="sap-icon://feeder-arrow" />
+                        </t:RowAction>
+                    </t:rowActionTemplate>
                     <t:columns>
                         <t:Column width="10rem" label="{i18n>job_status}" sortProperty="job_status" filterProperty="job_status">
                             <t:customData>
@@ -82,38 +88,6 @@
                             </t:customData>    
                         <t:template>
                                 <Text text="{schedule_user}" wrapping="false" />
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="10rem" label="{i18n>job_result}" sortProperty="job_result" filterProperty="job_result">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"job_result", "leadingProperty":"job_result", "sortProperty":"job_result", "filterProperty": "job_result"}'/>
-                            </t:customData>    
-                        <t:template>
-                                <Text text="{job_result}" wrapping="false" />
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="10rem" label="{i18n>job_text}" sortProperty="job_text" filterProperty="job_text">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"job_text", "leadingProperty":"job_text", "sortProperty":"job_text", "filterProperty": "job_text"}'/>
-                            </t:customData>    
-                        <t:template>
-                                <Text text="{job_text}" wrapping="false" />
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="10rem" label="{i18n>invno}" sortProperty="invno" filterProperty="invno">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"invno", "leadingProperty":"invno", "sortProperty":"invno", "filterProperty": "invno"}'/>
-                            </t:customData>    
-                        <t:template>
-                                <Text text="{invno}" wrapping="false" />
-                            </t:template>
-                        </t:Column>
-                        <t:Column width="10rem" label="{i18n>posting_date}" sortProperty="posting_date" filterProperty="posting_date">
-                            <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"posting_date", "leadingProperty":"posting_date", "sortProperty":"posting_date", "filterProperty": "posting_date"}'/>
-                            </t:customData>    
-                        <t:template>
-                                <Text text="{posting_date}" wrapping="false" />
                             </t:template>
                         </t:Column>
                     </t:columns>

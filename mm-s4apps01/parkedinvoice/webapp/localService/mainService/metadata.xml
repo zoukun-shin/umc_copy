@@ -42,6 +42,163 @@
     </edmx:Reference>
     <edmx:DataServices m:DataServiceVersion="2.0">
         <Schema Namespace="cds_zui_parkedinvoicereport_o2" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="I_PlantStdVHType" sap:label="Plant by Name" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="PlantName" sap:label="Plant"/>
+                <Property Name="PlantName" Type="Edm.String" MaxLength="30" sap:label="Plant Name"/>
+            </EntityType>
+            <EntityType Name="I_PurchasingGroupType" sap:label="Purchasing Group" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PurchasingGroup"/>
+                </Key>
+                <Property Name="PurchasingGroup" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:text="PurchasingGroupName" sap:label="Purchasing Group"/>
+                <Property Name="PurchasingGroupName" Type="Edm.String" MaxLength="18" sap:label="Purchasing Grp. Name" sap:quickinfo="Purchasing Group Name"/>
+                <Property Name="PurchasingGroupPhoneNumber" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Tel.No. Purch. Group" sap:quickinfo="Telephone number of purchasing group (buyer group)"/>
+                <Property Name="FaxNumber" Type="Edm.String" MaxLength="31" sap:label="Fax Number" sap:quickinfo="Fax number of purchasing (buyer) group"/>
+                <Property Name="PhoneNumber" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Telephone" sap:quickinfo="Telephone No.: Dialing Code and Number"/>
+                <Property Name="PhoneNumberExtension" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Extension" sap:quickinfo="Telephone no.: Extension"/>
+                <Property Name="EmailAddress" Type="Edm.String" MaxLength="241" sap:label="Email Address"/>
+            </EntityType>
+            <EntityType Name="I_Supplier_VHType" sap:label="Supplier" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Supplier"/>
+                </Key>
+                <Property Name="Supplier" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="BPSupplierName" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
+                <Property Name="SupplierName" Type="Edm.String" MaxLength="35" sap:label="Supplier Name1" sap:quickinfo="Supplier Name"/>
+                <Property Name="BusinessPartnerName1" Type="Edm.String" MaxLength="40" sap:label="Business Partner Name1"/>
+                <Property Name="BPSupplierName" Type="Edm.String" MaxLength="81" sap:label="Business Partner Supplier Name" sap:quickinfo="Supplier Name"/>
+                <Property Name="AuthorizationGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Authorization" sap:quickinfo="Authorization Group"/>
+                <Property Name="SupplierAccountGroup" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Account Group" sap:quickinfo="Supplier Account Group"/>
+                <Property Name="IsBusinessPurposeCompleted" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Purpose Completed" sap:quickinfo="Business Purpose Completed Flag"/>
+                <Property Name="BusinessPartner" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Business Partner" sap:quickinfo="Business Partner Number"/>
+                <Property Name="BusinessPartnerType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Business Partner Type"/>
+                <Property Name="DataControllerSet" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Data Ctrlr. Set" sap:quickinfo="BP: Data Controller Set Flag"/>
+                <Property Name="DataController1" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController2" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController3" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController4" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController5" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController6" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController7" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController8" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController9" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+                <Property Name="DataController10" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Data Controller" sap:quickinfo="BP: Data Controller (Internal Use Only)"/>
+            </EntityType>
+            <EntityType Name="ZC_INVSTATUSVHType" sap:label="Position Value Help" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="value_low"/>
+                </Key>
+                <Property Name="value_low" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="text" sap:label="Lower Value" sap:quickinfo="Values for Domains: Single Value/Lower Limit"/>
+                <Property Name="text" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
+            </EntityType>
+            <EntityType Name="JOB_HeaderType" sap:label="NG Record Header" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="uuid"/>
+                </Key>
+                <Property Name="uuid" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
+                <Property Name="job_name" Type="Edm.String" MaxLength="32"/>
+                <NavigationProperty Name="to_JOB_Item" Relationship="cds_zui_parkedinvoicereport_o2.assoc_1C46361C008B4A0549220B2DAB9571A6" FromRole="FromRole_assoc_1C46361C008B4A0549220B2DAB9571A6" ToRole="ToRole_assoc_1C46361C008B4A0549220B2DAB9571A6"/>
+            </EntityType>
+            <EntityType Name="JOB_ItemType" sap:label="Parkedinvjob item" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="invno"/>
+                    <PropertyRef Name="uuid"/>
+                </Key>
+                <Property Name="invno" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="uuid" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
+                <NavigationProperty Name="to_JOB_Header" Relationship="cds_zui_parkedinvoicereport_o2.assoc_1C46361C008B4A0549220B2DAB9571A6" FromRole="ToRole_assoc_1C46361C008B4A0549220B2DAB9571A6" ToRole="FromRole_assoc_1C46361C008B4A0549220B2DAB9571A6"/>
+            </EntityType>
+            <EntityType Name="ZC_PurchaseOrderAPIType" sap:label="Purchase Order API" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PurchaseOrder"/>
+                </Key>
+                <Property Name="PurchaseOrder" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchase Order" sap:quickinfo="Purchase Order Number"/>
+                <Property Name="PurchaseOrderType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Purchasing Doc. Type" sap:quickinfo="Purchasing Document Type"/>
+                <Property Name="PurchaseOrderSubtype" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Control indicator" sap:quickinfo="Control indicator for purchasing document type"/>
+                <Property Name="PurchasingDocumentOrigin" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status" sap:quickinfo="Status of Purchasing Document"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Created By" sap:quickinfo="User of person who created a purchasing document"/>
+                <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Created On" sap:quickinfo="Creation Date of Purchasing Document"/>
+                <Property Name="PurchaseOrderDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Purchase Order Date"/>
+                <Property Name="Language" Type="Edm.String" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="CorrespncExternalReference" Type="Edm.String" MaxLength="12" sap:label="Your Reference"/>
+                <Property Name="CorrespncInternalReference" Type="Edm.String" MaxLength="12" sap:label="Our Reference"/>
+                <Property Name="PurchasingDocumentDeletionCode" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Deletion Code" sap:quickinfo="Purchase Order Deletion Code"/>
+                <Property Name="ReleaseIsNotCompleted" Type="Edm.Boolean" sap:label="Subject to Release" sap:quickinfo="Release Not Yet Completely Effected"/>
+                <Property Name="PurchasingCompletenessStatus" Type="Edm.Boolean" sap:label="Incomplete" sap:quickinfo="Purchase order not yet complete"/>
+                <Property Name="PurchasingProcessingStatus" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Proc. State" sap:quickinfo="Purchasing Document Processing State"/>
+                <Property Name="PurgReleaseSequenceStatus" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Release Status"/>
+                <Property Name="ReleaseCode" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Release indicator" sap:quickinfo="Release Indicator: Purchasing Document"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
+                <Property Name="PurchasingOrganization" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Purch. Organization" sap:quickinfo="Purchasing Organization"/>
+                <Property Name="PurchasingGroup" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Purchasing Group"/>
+                <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier"/>
+                <Property Name="ManualSupplierAddressID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Address Number"/>
+                <Property Name="SupplierRespSalesPersonName" Type="Edm.String" MaxLength="30" sap:label="Salesperson" sap:quickinfo="Responsible Salesperson at Supplier's Office"/>
+                <Property Name="SupplierPhoneNumber" Type="Edm.String" MaxLength="16" sap:label="Supplier Phone" sap:quickinfo="Supplier's Phone Number"/>
+                <Property Name="SupplyingSupplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Goods Supplier"/>
+                <Property Name="SupplyingPlant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Supplying Plant" sap:quickinfo="Supplying (issuing) plant in case of stock transport order"/>
+                <Property Name="InvoicingParty" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Invoicing Party" sap:quickinfo="Different Invoicing Party"/>
+                <Property Name="Customer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number"/>
+                <Property Name="SupplierQuotationExternalID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Quotation" sap:quickinfo="Quotation Number"/>
+                <Property Name="PaymentTerms" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Payment Terms" sap:quickinfo="Terms of Payment Key"/>
+                <Property Name="CashDiscount1Days" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="Days 1" sap:quickinfo="Cash Discount Days 1"/>
+                <Property Name="CashDiscount2Days" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="Days 2" sap:quickinfo="Cash Discount Days 2"/>
+                <Property Name="NetPaymentDays" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="Days Net" sap:quickinfo="Net Payment Terms Period"/>
+                <Property Name="CashDiscount1Percent" Type="Edm.Decimal" Precision="5" Scale="3" sap:label="CD Percentage 1" sap:quickinfo="Cash Discount Percentage 1"/>
+                <Property Name="CashDiscount2Percent" Type="Edm.Decimal" Precision="5" Scale="3" sap:label="CD Percentage 2" sap:quickinfo="Cash Discount Percentage 2"/>
+                <Property Name="DownPaymentType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Down Payment" sap:quickinfo="Down Payment Indicator"/>
+                <Property Name="DownPaymentPercentageOfTotAmt" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="Down Payment %" sap:quickinfo="Down Payment Percentage"/>
+                <Property Name="DownPaymentAmount" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="DocumentCurrency" sap:variable-scale="true" sap:label="Down Payment Amount" sap:quickinfo="Down Payment Amount in Document Currency"/>
+                <Property Name="DownPaymentDueDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Due Date for DP" sap:quickinfo="Due Date for Down Payment"/>
+                <Property Name="IncotermsClassification" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Incoterms" sap:quickinfo="Incoterms (Part 1)"/>
+                <Property Name="IncotermsTransferLocation" Type="Edm.String" MaxLength="28" sap:label="Incoterms (Part 2)"/>
+                <Property Name="IncotermsVersion" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Incoterms Version"/>
+                <Property Name="IncotermsLocation1" Type="Edm.String" MaxLength="70" sap:label="Incoterms Location 1"/>
+                <Property Name="IncotermsLocation2" Type="Edm.String" MaxLength="70" sap:label="Incoterms Location 2"/>
+                <Property Name="IsIntrastatReportingRelevant" Type="Edm.Boolean" sap:label="Intrastat Relevance" sap:quickinfo="Relevant for Intrastat Reporting"/>
+                <Property Name="IsIntrastatReportingExcluded" Type="Edm.Boolean" sap:label="Intrastat Exclusion" sap:quickinfo="Exclude from Intrastat Reporting"/>
+                <Property Name="PricingDocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Doc. Condition No." sap:quickinfo="Number of the Document Condition"/>
+                <Property Name="PricingProcedure" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Procedure" sap:quickinfo="Procedure (Pricing, Output Control, Acct. Det., Costing,...)"/>
+                <Property Name="DocumentCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
+                <Property Name="ValidityStartDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Validity Per. Start" sap:quickinfo="Start of Validity Period"/>
+                <Property Name="ValidityEndDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Validity Period End" sap:quickinfo="End of Validity Period"/>
+                <Property Name="ExchangeRate" Type="Edm.Decimal" Precision="9" Scale="5" sap:label="Exchange Rate"/>
+                <Property Name="ExchangeRateIsFixed" Type="Edm.Boolean" sap:label="Fixed Exchange Rate" sap:quickinfo="Indicator for Fixed Exchange Rate"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7" sap:label="Last Changed" sap:quickinfo="Change Time Stamp"/>
+                <Property Name="TaxReturnCountry" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Reporting C/R" sap:quickinfo="Country/Region for Tax Report"/>
+                <Property Name="VATRegistration" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="VAT Registration No." sap:quickinfo="VAT Registration Number"/>
+                <Property Name="VATRegistrationCountry" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Ctry/Rgn Sls Tax No." sap:quickinfo="Country/Region of Sales Tax ID Number"/>
+                <Property Name="PurgReasonForDocCancellation" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Reason for Canc." sap:quickinfo="Reason for Cancellation"/>
+                <Property Name="PurgReleaseTimeTotalAmount" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="DocumentCurrency" sap:variable-scale="true" sap:label="Tot. val. rel." sap:quickinfo="Total value at time of release"/>
+                <Property Name="PurgAggrgdProdCmplncSuplrSts" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Supplier Check Sts" sap:quickinfo="Product Compliance Supplier Check Status (All Items)"/>
+                <Property Name="PurgAggrgdProdMarketabilitySts" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Prod. Marktablty Sts" sap:quickinfo="Product Marketability Status (All Items)"/>
+                <Property Name="PurgAggrgdSftyDataSheetStatus" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Sfty Data Sheet Sts" sap:quickinfo="Safety Data Sheet Status (All Items)"/>
+                <Property Name="PurgProdCmplncTotDngrsGoodsSts" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Dangerous Goods Sts" sap:quickinfo="Dangerous Goods Status (All Items)"/>
+                <Property Name="WorkflowTaskResult" Type="Edm.String" MaxLength="255" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZI_PRODUCT_VHType" sap:label="Product Value Help" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Product"/>
+                </Key>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="ProductName" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
+            </EntityType>
+            <EntityType Name="JobResultType" sap:label="Parked Invoice Job Result" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="uuid"/>
+                </Key>
+                <Property Name="uuid" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
+                <Property Name="job_status" Type="Edm.String" MaxLength="1"/>
+                <Property Name="job_name" Type="Edm.String" MaxLength="32"/>
+                <Property Name="schedule_begin" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time"/>
+                <Property Name="schedule_end" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time"/>
+                <Property Name="schedule_user" Type="Edm.String" MaxLength="30"/>
+                <Property Name="job_result" Type="Edm.String" MaxLength="1"/>
+                <Property Name="job_text" Type="Edm.String" MaxLength="120"/>
+                <Property Name="posting_date" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+            </EntityType>
             <EntityType Name="ParkedInvoiceType" sap:label="Parked Invoice Report" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="MaterialDocument"/>
@@ -55,34 +212,35 @@
                 <Property Name="MaterialDocumentYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Material Doc. Year" sap:quickinfo="Material Document Year" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="MaterialDocumentHeaderText" Type="Edm.String" MaxLength="25" sap:label="Document Header Text"/>
                 <Property Name="DocumentCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="GmUnitPrice" Type="Edm.Decimal" Precision="23" Scale="5"/>
-                <Property Name="NotParkedAmount" Type="Edm.Decimal" Precision="23" Scale="5"/>
-                <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
-                <Property Name="FiscalYear" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
+                <Property Name="NotParkedQuantity" Type="Edm.Decimal" Precision="23" Scale="6" sap:unit="PurchaseOrderQuantityUnit"/>
+                <Property Name="GrnUnitPrice" Type="Edm.Decimal" Precision="23" Scale="6"/>
+                <Property Name="NotParkedAmount" Type="Edm.Decimal" Precision="23" Scale="2"/>
+                <Property Name="Supplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier" sap:value-list="standard"/>
+                <Property Name="FiscalYear" Type="Edm.String" MaxLength="4"/>
                 <Property Name="SupplierInvoice" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
-                <Property Name="SupplierInvoiceItem" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Number of Line Item Within Accounting Document"/>
+                <Property Name="SupplierInvoiceItem" Type="Edm.String" MaxLength="5"/>
                 <Property Name="TaxCode" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Tax Code" sap:quickinfo="Tax on Sales/Purchases Code"/>
                 <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
-                <Property Name="PostingDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
-                <Property Name="PurchaseOrder" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number"/>
+                <Property Name="PostingDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:filter-restriction="interval"/>
+                <Property Name="PurchaseOrder" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number" sap:value-list="standard"/>
                 <Property Name="PurchaseOrderItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document"/>
                 <Property Name="ScheduleLineDeliveryDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="ConditionRate" Type="Edm.String" MaxLength="1"/>
                 <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="NetOrderPrice" Type="Edm.Decimal" Precision="23" Scale="5"/>
+                <Property Name="NetOrderPrice" Type="Edm.Decimal" Precision="23" Scale="6"/>
                 <Property Name="DocumentDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
-                <Property Name="MENGE" Type="Edm.String" MaxLength="1"/>
+                <Property Name="MENGE" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="PurchaseOrderQuantityUnit"/>
                 <Property Name="PurchaseOrderCategory" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Purch. Doc. Category" sap:quickinfo="Purchasing Document Category"/>
                 <Property Name="PurchaseOrderType" Type="Edm.String" MaxLength="4"/>
                 <Property Name="Vendor" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Supplier" sap:quickinfo="Account Number of Supplier"/>
                 <Property Name="PurchasingOrganization" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Purch. Organization" sap:quickinfo="Purchasing Organization"/>
-                <Property Name="PurchasingGroup" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Purchasing Group"/>
+                <Property Name="PurchasingGroup" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Purchasing Group" sap:value-list="standard"/>
                 <Property Name="PurchaseOrderDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Purchase Order Date"/>
                 <Property Name="AccountAssignmentCategory" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Acct Assignment Cat." sap:quickinfo="Account Assignment Category"/>
-                <Property Name="Material" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="Material" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:value-list="standard"/>
                 <Property Name="PurchaseOrderItemText" Type="Edm.String" MaxLength="40" sap:label="Short Text"/>
-                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:value-list="standard"/>
                 <Property Name="RequirementTracking" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Req. Tracking Number" sap:quickinfo="Requirement Tracking Number"/>
                 <Property Name="MaterialGroup" Type="Edm.String" MaxLength="9"/>
                 <Property Name="OrderQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="PurchaseOrderQuantityUnit"/>
@@ -90,7 +248,7 @@
                 <Property Name="NetPriceAmount" Type="Edm.Decimal" Precision="11" Scale="3" sap:unit="DocumentCurrency" sap:variable-scale="true"/>
                 <Property Name="NetPriceQuantity" Type="Edm.Decimal" Precision="5" Scale="0"/>
                 <Property Name="RequisitionerName" Type="Edm.String" MaxLength="12" sap:label="Requisitioner" sap:quickinfo="Name of requisitioner/requester"/>
-                <Property Name="AddressSearchTerm1" Type="Edm.String" MaxLength="1"/>
+                <Property Name="AddressSearchTerm1" Type="Edm.String" MaxLength="20"/>
                 <Property Name="Country" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country/Region Key"/>
                 <Property Name="GLAccount" Type="Edm.String" MaxLength="10"/>
                 <Property Name="ChartOfAccounts" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Chart of Accounts"/>
@@ -107,6 +265,8 @@
                 <Property Name="AccountingDocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document"/>
                 <Property Name="FiscalYearRef" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year"/>
                 <Property Name="INVOICERECEIVEDBYFI" Type="Edm.String" MaxLength="1"/>
+                <Property Name="UserEmail" Type="Edm.String" MaxLength="241"/>
+                <Property Name="InvoiceStatus" Type="Edm.String" MaxLength="1" sap:value-list="fixed-values"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -243,8 +403,10 @@
                 <Property Name="DESCRIPTION" Type="Edm.String"/>
             </EntityType>
             <ComplexType Name="ZD_PARAFORFGLABEL">
+                <Property Name="Barcode" Type="Edm.String" MaxLength="10"/>
                 <Property Name="Event" Type="Edm.String" MaxLength="20"/>
                 <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:label="Plant"/>
+                <Property Name="UserEmail" Type="Edm.String" MaxLength="80"/>
                 <Property Name="Username" Type="Edm.String" MaxLength="40"/>
                 <Property Name="WO_Order" Type="Edm.String" MaxLength="12" sap:label="Order" sap:quickinfo="Order Number"/>
                 <Property Name="Zzkey" Type="Edm.String" sap:label="Zzkey" sap:quickinfo="String Type"/>
@@ -262,6 +424,20 @@
             <ComplexType Name="SAP__HeaderFooterField">
                 <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </ComplexType>
+            <Association Name="assoc_1C46361C008B4A0549220B2DAB9571A6" sap:content-version="1">
+                <End Type="cds_zui_parkedinvoicereport_o2.JOB_HeaderType" Multiplicity="1" Role="FromRole_assoc_1C46361C008B4A0549220B2DAB9571A6">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <End Type="cds_zui_parkedinvoicereport_o2.JOB_ItemType" Multiplicity="*" Role="ToRole_assoc_1C46361C008B4A0549220B2DAB9571A6"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_assoc_1C46361C008B4A0549220B2DAB9571A6">
+                        <PropertyRef Name="uuid"/>
+                    </Principal>
+                    <Dependent Role="ToRole_assoc_1C46361C008B4A0549220B2DAB9571A6">
+                        <PropertyRef Name="uuid"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
             <Association Name="to_format" sap:content-version="1">
                 <End Type="cds_zui_parkedinvoicereport_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_format"/>
                 <End Type="cds_zui_parkedinvoicereport_o2.SAP__Format" Multiplicity="1" Role="ToRole_to_format"/>
@@ -371,6 +547,15 @@
                 </ReferentialConstraint>
             </Association>
             <EntityContainer Name="cds_zui_parkedinvoicereport_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
+                <EntitySet Name="I_PlantStdVH" EntityType="cds_zui_parkedinvoicereport_o2.I_PlantStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_PurchasingGroup" EntityType="cds_zui_parkedinvoicereport_o2.I_PurchasingGroupType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_Supplier_VH" EntityType="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZC_INVSTATUSVH" EntityType="cds_zui_parkedinvoicereport_o2.ZC_INVSTATUSVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="JOB_Header" EntityType="cds_zui_parkedinvoicereport_o2.JOB_HeaderType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="JOB_Item" EntityType="cds_zui_parkedinvoicereport_o2.JOB_ItemType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_PurchaseOrderAPI" EntityType="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZI_PRODUCT_VH" EntityType="cds_zui_parkedinvoicereport_o2.ZI_PRODUCT_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="JobResult" EntityType="cds_zui_parkedinvoicereport_o2.JobResultType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ParkedInvoice" EntityType="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType" sap:content-version="1" sap:deletable-path="Delete_mc" sap:updatable-path="Update_mc"/>
                 <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_parkedinvoicereport_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zui_parkedinvoicereport_o2.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
@@ -385,6 +570,10 @@
                 <EntitySet Name="SAP__UnitsOfMeasure" EntityType="cds_zui_parkedinvoicereport_o2.SAP__UnitOfMeasure" sap:content-version="1"/>
                 <EntitySet Name="SAP__MyDocumentDescriptions" EntityType="cds_zui_parkedinvoicereport_o2.SAP__DocumentDescription" sap:content-version="1"/>
                 <EntitySet Name="SAP__FileShareSet" EntityType="cds_zui_parkedinvoicereport_o2.SAP__FileShare" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_1C46361C008B4A0549220B2DAB9571A6" Association="cds_zui_parkedinvoicereport_o2.assoc_1C46361C008B4A0549220B2DAB9571A6" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="JOB_Header" Role="FromRole_assoc_1C46361C008B4A0549220B2DAB9571A6"/>
+                    <End EntitySet="JOB_Item" Role="ToRole_assoc_1C46361C008B4A0549220B2DAB9571A6"/>
+                </AssociationSet>
                 <AssociationSet Name="to_HierarchySet" Association="cds_zui_parkedinvoicereport_o2.to_Hierarchy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_Hierarchy"/>
                     <End EntitySet="SAP__HierarchySet" Role="ToRole_to_Hierarchy"/>
@@ -427,11 +616,487 @@
                     <Parameter Name="Username" Type="Edm.String" Mode="In" MaxLength="40" Nullable="true"/>
                     <Parameter Name="Plant" Type="Edm.String" Mode="In" MaxLength="4" Nullable="true" sap:label="Plant" sap:quickinfo="Plant"/>
                     <Parameter Name="WO_Order" Type="Edm.String" Mode="In" MaxLength="12" Nullable="true" sap:label="Order" sap:quickinfo="Order Number"/>
+                    <Parameter Name="Barcode" Type="Edm.String" Mode="In" MaxLength="10" Nullable="true"/>
+                    <Parameter Name="UserEmail" Type="Edm.String" Mode="In" MaxLength="80" Nullable="true"/>
                 </FunctionImport>
             </EntityContainer>
             <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/Supplier" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Supplier"/>
+                        <PropertyValue Property="CollectionPath" String="I_Supplier_VH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Supplier"/>
+                                    <PropertyValue Property="ValueListProperty" String="Supplier"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="SupplierName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartnerName1"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BPSupplierName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartner"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="BusinessPartnerType"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PurchaseOrder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Purchasing Document"/>
+                        <PropertyValue Property="CollectionPath" String="ZC_PurchaseOrderAPI"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="PurchaseOrder"/>
+                                    <PropertyValue Property="ValueListProperty" String="PurchaseOrder"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurchaseOrderType"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurchaseOrderSubtype"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurchasingDocumentOrigin"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CreatedByUser"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CreationDate"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurchaseOrderDate"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Language"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CorrespncExternalReference"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CorrespncInternalReference"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurchasingDocumentDeletionCode"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ReleaseIsNotCompleted"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurchasingCompletenessStatus"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurchasingProcessingStatus"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurgReleaseSequenceStatus"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ReleaseCode"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CompanyCode"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurchasingOrganization"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurchasingGroup"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Supplier"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ManualSupplierAddressID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="SupplierRespSalesPersonName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="SupplierPhoneNumber"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="SupplyingSupplier"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="SupplyingPlant"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="InvoicingParty"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Customer"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="SupplierQuotationExternalID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PaymentTerms"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CashDiscount1Days"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CashDiscount2Days"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="NetPaymentDays"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CashDiscount1Percent"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CashDiscount2Percent"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="DownPaymentType"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="DownPaymentPercentageOfTotAmt"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="DownPaymentAmount"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="DownPaymentDueDate"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="IncotermsClassification"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="IncotermsTransferLocation"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="IncotermsVersion"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="IncotermsLocation1"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="IncotermsLocation2"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="IsIntrastatReportingRelevant"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="IsIntrastatReportingExcluded"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PricingDocument"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PricingProcedure"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="DocumentCurrency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ValidityStartDate"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ValidityEndDate"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ExchangeRate"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ExchangeRateIsFixed"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="LastChangeDateTime"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="TaxReturnCountry"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="VATRegistration"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="VATRegistrationCountry"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurgReasonForDocCancellation"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurgReleaseTimeTotalAmount"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurgAggrgdProdCmplncSuplrSts"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurgAggrgdProdMarketabilitySts"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurgAggrgdSftyDataSheetStatus"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurgProdCmplncTotDngrsGoodsSts"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="WorkflowTaskResult"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PurchasingGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Purchasing Group"/>
+                        <PropertyValue Property="CollectionPath" String="I_PurchasingGroup"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="PurchasingGroup"/>
+                                    <PropertyValue Property="ValueListProperty" String="PurchasingGroup"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurchasingGroupName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PurchasingGroupPhoneNumber"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="FaxNumber"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PhoneNumber"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PhoneNumberExtension"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="EmailAddress"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/Material" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Material"/>
+                        <PropertyValue Property="CollectionPath" String="ZI_PRODUCT_VH"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Material"/>
+                                    <PropertyValue Property="ValueListProperty" String="Product"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ProductName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Plant"/>
+                        <PropertyValue Property="CollectionPath" String="I_PlantStdVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Plant"/>
+                                    <PropertyValue Property="ValueListProperty" String="Plant"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PlantName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/InvoiceStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String=""/>
+                        <PropertyValue Property="CollectionPath" String="ZC_INVSTATUSVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="InvoiceStatus"/>
+                                    <PropertyValue Property="ValueListProperty" String="value_low"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.cds_zui_parkedinvoicereport_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.JOB_HeaderType/to_JOB_Item" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Composition"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.cds_zui_parkedinvoicereport_o2_Entities/I_PlantStdVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.cds_zui_parkedinvoicereport_o2_Entities/I_PurchasingGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.cds_zui_parkedinvoicereport_o2_Entities/I_Supplier_VH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.cds_zui_parkedinvoicereport_o2_Entities/JOB_Header" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_JOB_Item"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.cds_zui_parkedinvoicereport_o2_Entities/JOB_Item" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="to_JOB_Header"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="false"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.cds_zui_parkedinvoicereport_o2_Entities/JobResult" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.cds_zui_parkedinvoicereport_o2_Entities/ParkedInvoice" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
@@ -445,6 +1110,14 @@
                             <Collection>
                                 <PropertyPath>Delete_mc</PropertyPath>
                                 <PropertyPath>Update_mc</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="PostingDate"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
                             </Collection>
                         </PropertyValue>
                     </Record>
@@ -470,6 +1143,75 @@
                 <Annotation Term="Capabilities.UpdateRestrictions">
                     <Record>
                         <PropertyValue Property="Updatable" Path="Update_mc"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.cds_zui_parkedinvoicereport_o2_Entities/ZC_INVSTATUSVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.cds_zui_parkedinvoicereport_o2_Entities/ZC_PurchaseOrderAPI" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonFilterableProperties">
+                            <Collection>
+                                <PropertyPath>WorkflowTaskResult</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>WorkflowTaskResult</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.cds_zui_parkedinvoicereport_o2_Entities/ZI_PRODUCT_VH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
                     </Record>
                 </Annotation>
             </Annotations>
@@ -527,16 +1269,13 @@
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/GLAccount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/GmUnitPrice" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/GrnUnitPrice" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/INVOICERECEIVEDBYFI" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/MENGE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/Material" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/MaterialDocumentHeaderText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -557,6 +1296,9 @@
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/NotParkedAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/NotParkedQuantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/OrderQuantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
@@ -566,9 +1308,6 @@
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/ParkedQuantity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PostedAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
@@ -576,9 +1315,6 @@
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PostingDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PurchaseOrder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PurchaseOrderCategory" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -599,9 +1335,6 @@
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PurchaseOrderType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PurchasingGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PurchasingOrganization" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
@@ -617,9 +1350,6 @@
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/ScheduleLineDeliveryDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/Supplier" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/SupplierInvoice" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
@@ -632,8 +1362,19 @@
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/TransactionCurrency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/UserEmail" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/Vendor" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_PurchasingGroupType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SAPObjectNodeType">
+                    <Record>
+                        <PropertyValue Property="Name" String="PurchasingGroup"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__ODM.entityName" String="PurchasingGroup"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.cds_zui_parkedinvoicereport_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">
@@ -682,11 +1423,20 @@
                     </Record>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/DataController6" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/SupplierRespSalesPersonName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=EVERK&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/ChartOfAccounts" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KTOPL&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/DocumentHeaderText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKTXT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PurchasingOrganization" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=EKORG&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/Material" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
@@ -694,23 +1444,77 @@
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/RequirementTracking" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BEDNR&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_PurchasingGroupType/PhoneNumber" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AD_TLNMBR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/CashDiscount2Days" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=DZBD2T&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PurchasingOrganization" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=EKORG&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/DocumentCurrency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/SupplyingPlant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=RESWK&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PricingDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KNUMV&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/RequisitionerName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AFNAM&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/InvoicingParty" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LIFRE&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/CorrespncExternalReference" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=IHREZ&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/ValidityEndDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KDATE&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/AccountingDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BELNR_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PricingProcedure" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KALSM_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/IncotermsTransferLocation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=INCO2&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/TaxReturnCountry" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LAND1_STML&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/DataController8" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/ReleaseIsNotCompleted" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=FRGRL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/CashDiscount2Percent" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=DZBD2P&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/MaterialDocumentHeaderText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKTXT&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/FiscalYear" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=GJAHR&amp;origin=JG5_100"/>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PaymentTerms" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=FARP_DZTERM&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/SupplierAccountGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KTOKK&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/DownPaymentDueDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ME_DPDDAT&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/MaterialDocumentYear" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MJAHR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PurchasingGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKGRP&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/TransactionCurrency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS&amp;origin=JG5_100"/>
@@ -721,35 +1525,152 @@
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/TaxCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MWSKZ&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/DataController4" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/DataController10" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/DataController3" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/Supplier" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LIFNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PurchasingCompletenessStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEMER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_INVSTATUSVHType/value_low" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=DOMVALUE_L&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/CashDiscount1Percent" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=DZBD1P&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/SupplierPhoneNumber" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=TELFNR0&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/IncotermsLocation2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=INCO3_L&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_PurchasingGroupType/PurchasingGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=EKGRP&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_PurchasingGroupType/PhoneNumberExtension" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AD_TLXTNS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.processLogic/WO_Order" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AUFNR&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/Supplier" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LIFNR&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/Vendor" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LIFNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/BusinessPartnerName1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AD_NAME1&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/DataController7" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZI_PRODUCT_VHType/Product" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/DownPaymentType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ME_DPTYP&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_PlantStdVHType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PurgAggrgdProdCmplncSuplrSts" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MMPUR_PC_TOTAL_STATUS_PCS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/IncotermsClassification" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=INCO1&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/FiscalYearRef" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=GJAHR&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PurgReasonForDocCancellation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABSGR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/LastChangeDateTime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CHANGEDATETIME&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PurchasingDocumentOrigin" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ESTAK&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/DataController2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/Language" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=SPRAS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/Customer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KUNNR&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PurchaseOrderItemText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=TXZ01&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/ValidityStartDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KDATB&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PurgReleaseTimeTotalAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=RLWRT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/CreatedByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MMPUR_ERNAM&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PurchaseOrderType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ESART&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/DataControllerSet" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_XDCSET&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/AuthorizationGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BRGRU&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/DataController5" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/SupplierInvoice" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BELNR_D&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.JobResultType/schedule_begin" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_TSTMPL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PurgAggrgdSftyDataSheetStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MMPUR_PC_TOTAL_STATUS_SDS&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/MaterialDocumentItem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MBLPO&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/SupplyingSupplier" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LLIEF&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/ManualSupplierAddressID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AD_ADDRNUM&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PurchaseOrderQuantityUnit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BSTME&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/ExchangeRateIsFixed" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KUFIX&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/VATRegistration" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=STCEG&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/IncotermsVersion" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=INCOV&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_INVSTATUSVHType/text" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VAL_TEXT&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PurchaseOrder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=EBELN&amp;origin=JG5_100"/>
@@ -757,20 +1678,80 @@
             <Annotations Target="cds_zui_parkedinvoicereport_o2.processLogic/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/DownPaymentPercentageOfTotAmt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ME_DPPCNT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.JobResultType/schedule_end" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_TSTMPL&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/DocumentCurrency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/SupplierInvoiceItem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUZEI&amp;origin=JG5_100"/>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PurchaseOrderSubtype" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BSAKZ&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/DataController1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PurgReleaseSequenceStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=FRGZU&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_PurchasingGroupType/EmailAddress" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AD_SMTPADR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/CreationDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MMPUR_ERDAT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/BusinessPartnerType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_BPKIND&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/IsIntrastatReportingRelevant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=INTRA_REL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/IsIntrastatReportingExcluded" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=INTRA_EXCL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/VATRegistrationCountry" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=STCEG_L&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/IsBusinessPurposeCompleted" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CVP_XBLCK&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/IncotermsLocation1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=INCO2_L&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/Country" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LAND1&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/BusinessPartner" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_PARTNER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZI_PRODUCT_VHType/ProductName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ZD_PARAFORFGLABEL/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_PurchasingGroupType/FaxNumber" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=EKTFX&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/DownPaymentAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ME_DPAMNT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/CashDiscount1Days" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=DZBD1T&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/NetPaymentDays" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=DZBD3T&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ZD_PARAFORFGLABEL/WO_Order" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AUFNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/SupplierQuotationExternalID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ANGNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PurgProdCmplncTotDngrsGoodsSts" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MMPUR_PC_TOTAL_STATUS_DG&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/AccountAssignmentCategory" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KNTTP&amp;origin=JG5_100"/>
@@ -778,17 +1759,35 @@
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PurchasingGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=EKGRP&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/SupplierName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=NAME1_GP&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/MaterialDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MBLNR&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=EWERK&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/CorrespncInternalReference" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=UNSEZ&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PurchaseOrderDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BEDAT&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PurchaseOrderDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BEDAT&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/ReleaseCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=FRGKE&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.ParkedInvoiceType/PurchaseOrderCategory" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BSTYP&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.ZC_PurchaseOrderAPIType/PurgAggrgdProdMarketabilitySts" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MMPUR_PC_TOTAL_STATUS_PMA&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_parkedinvoicereport_o2.I_Supplier_VHType/DataController9" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_parkedinvoicereport_o2.SAP__Currency/CurrencyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.Text" Path="Text"/>

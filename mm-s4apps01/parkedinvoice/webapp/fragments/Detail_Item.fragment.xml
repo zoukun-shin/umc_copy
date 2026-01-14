@@ -1,0 +1,42 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <table:Table id="idNG_ItemTable" rows="{local>/JOB_Header/to_JOB_Item/results}" rowSelectionChange="rowSelectionChange" selectionBehavior="Row" fixedColumnCount="2" selectionMode="Single" rowMode="Interactive" class="sapUiSizeCompact">
+        <table:extension>
+            <OverflowToolbar>
+            </OverflowToolbar>
+        </table:extension>
+        <table:columns>
+            <table:Column width="7rem" label="{i18n>job_result}">
+                <table:template>
+                    <Text text="{ parts:[ 'local>job_result'], formatter:'.formatter.formatState' }" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="35rem" label="{i18n>job_text}">
+                <table:template>
+                    <Text text="{local>job_text}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="7rem" label="{i18n>job_status}">
+                <table:template>
+                    <Text text="{ parts:[ 'local>job_status'], formatter:'.formatter.formatState' }" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>invno}">
+                <table:template>
+                    <Text text="{local>invno}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>posting_date}">
+                <table:template>
+                    <Text text="{ path: 'local>posting_date', 'type':'sap.ui.model.type.Date' }" wrapping="false"/>
+                </table:template>
+            </table:Column>
+        </table:columns>
+    </table:Table>
+</core:FragmentDefinition>

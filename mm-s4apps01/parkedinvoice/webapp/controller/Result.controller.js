@@ -36,7 +36,15 @@ sap.ui.define([
 		},
 
 		onBeforeRebindTable: function (oEvent) {
-		}
+		},
+
+		onRowActionPress: function (oEvent) {
+            var oContext = oEvent.getParameter("row").getBindingContext();
+            var oRow = this.getModel().getObject(oContext.getPath());
+            this._BusyDialog.open();
+            this.getModel("local").setProperty("/BusyDialog", this._BusyDialog);
+            this.getRouter("Detail").navTo("Detail", { uuid: oRow.uuid }, false);
+        },
 		
 	});
 });

@@ -30,11 +30,24 @@ function (JSONModel, Device) {
 			return localData;
 		},
 		// 创建本地模型
-		createLocalModel : function() {
-			var oModel = new JSONModel(this._initialLocalData());
-			oModel.setSizeLimit(9999);
-			return oModel;
-		},
+		// createLocalModel : function() {
+		// 	var oModel = new JSONModel(this._initialLocalData());
+		// 	oModel.setSizeLimit(9999);
+		// 	return oModel;
+		// },
+
+		createLocalModel: function () {
+            var oModel = new JSONModel({
+                JOB_Header: {
+                    uuid: "", 
+                    job_name: "",                  
+                    to_JOB_Item: {
+                        results: []
+                    }
+                }
+            });
+            return oModel;
+        },
     };
 
 });

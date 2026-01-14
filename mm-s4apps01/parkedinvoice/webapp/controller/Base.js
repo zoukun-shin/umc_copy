@@ -9,7 +9,7 @@ sap.ui.define([
 ], function (Controller, UIComponent, History, MessageBox, Fragment, Filter, FilterOperator) {
     "use strict";
 
-    return Controller.extend("pp.fglabel.controller.Base", {
+    return Controller.extend("mm.parkedinvoice.controller.Base", {
 
         /**
          * Convenience method for accessing the router in every controller of the application.
@@ -77,19 +77,19 @@ sap.ui.define([
          * @param {*} len the desired number of characters
          * @param {*} radix the number of allowable values for each character
          * EXAMPLES:
-         * No arguments  - returns RFC4122, version 4 ID
-         *   >>> getUuid()   
-         *   "92329D39-6F5C-4520-ABFC-AAB64544E172"
-         * One argument  - returns ID of the specified length
-         *   >>> getUuid(15)    // 15 character ID (default base=62)
-         *   "VcydxgltxrVZSTV" 
+         * No arguments  - returns RFC4122, version 4 ID
+         *   >>> getUuid()   
+         *   "92329D39-6F5C-4520-ABFC-AAB64544E172"
+         * One argument  - returns ID of the specified length
+         *   >>> getUuid(15)    // 15 character ID (default base=62)
+         *   "VcydxgltxrVZSTV" 
          * Two arguments - returns ID of the specified length, and radix. (Radix must be <= 62)
-         *   >>> getUuid(8, 2)  // 8 character ID (base=2)
-         *   "01001010"
-         *   >>> getUuid(8, 10) // 8 character ID (base=10)
-         *   "47473046"
-         *   >>> getUuid(8, 16) // 8 character ID (base=16)
-         *   "098F4D35"
+         *   >>> getUuid(8, 2)  // 8 character ID (base=2)
+         *   "01001010"
+         *   >>> getUuid(8, 10) // 8 character ID (base=10)
+         *   "47473046"
+         *   >>> getUuid(8, 16) // 8 character ID (base=16)
+         *   "098F4D35"
          */
         getUuid: function (len, radix) {
             var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split("");
@@ -107,7 +107,7 @@ sap.ui.define([
                 // rfc4122 requires these characters
                 uuid[8] = uuid[13] = uuid[18] = uuid[23] = "-";
                 uuid[14] = "4";
-                // Fill in random data.  At i==19 set the high bits of clock sequence as
+                // Fill in random data.  At i==19 set the high bits of clock sequence as
                 // per rfc4122, sec. 4.1.5
                 for (i = 0; i < 36; i++) {
                     if (!uuid[i]) {
@@ -131,16 +131,6 @@ sap.ui.define([
                 this._pad2(date.getHours()) +
                 this._pad2(date.getMinutes()) +
                 this._pad2(date.getSeconds());
-            return sTime;
-        },
-        getCurrentUTCDateTime: function () {
-            var date = new Date();
-            var sTime = date.getUTCFullYear().toString() +
-                this._pad2(date.getUTCMonth() + 1) +
-                this._pad2(date.getUTCDate()) +
-                this._pad2(date.getUTCHours()) +
-                this._pad2(date.getUTCMinutes()) +
-                this._pad2(date.getUTCSeconds());
             return sTime;
         },
         _pad2: function (n) {
@@ -289,11 +279,22 @@ sap.ui.define([
                     },
                     error: function (oErr) {
                         oBusyDialog.close();
-                        reject(JSON.parse(oErr.responseText));
+                        if (oErr.responseText.includes("?xml")) {
+                            reject(oErr.responseText);
+                        } else {
+                            var oError = JSON.parse(oErr.responseText);
+                            var sMsg;
+                            if (oError.error.innererror.errordetails.length > 0) {
+                                sMsg = oError.error.innererror.errordetails[0].message;
+                            } else {
+                                sMsg = oError.error.message.value;
+                            }
+                            reject(sMsg);
+                        }
                     }
                 };
                 switch (sMethod) {
-                    case "FIND":
+                    case "READ":
                         that.getModel().read(sPath, mParameters);
                         break;
                     case "CREATE":
@@ -326,6 +327,6 @@ sap.ui.define([
                 }
                 return result;
             }, []);
-        },
+        }
     })
 });
