@@ -279,11 +279,11 @@
                                     <Text text="{local>ObjectValidFrom}" wrapping="false"/>
                                 </t:template>
                             </t:Column>
-                            <t:Column width="4rem" label="{i18n>ObjectMaterialLockSF}">
+                            <!-- <t:Column width="4rem" label="{i18n>ObjectMaterialLockSF}">
                                 <t:template>
                                     <CheckBox selected="{local>ObjectMaterialLock}" editable="{local>/viewEditable}"/>
                                 </t:template>
-                            </t:Column>
+                            </t:Column> -->
                         </t:Table>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>
@@ -360,11 +360,11 @@
                                     <Text text="{local>ObjectValidFrom}" wrapping="false"/>
                                 </t:template>
                             </t:Column>
-                            <t:Column width="4rem" label="{i18n>ObjectMaterialLockSF}">
+                            <!-- <t:Column width="4rem" label="{i18n>ObjectMaterialLockSF}">
                                 <t:template>
                                     <CheckBox selected="{local>ObjectMaterialLock}" editable="{local>/viewEditable}"/>
                                 </t:template>
-                            </t:Column>
+                            </t:Column> -->
                         </t:Table>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>
