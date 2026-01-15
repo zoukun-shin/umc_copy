@@ -2,9 +2,11 @@ sap.ui.define([
     "./Base",
     "../model/formatter",
     "sap/m/BusyDialog",
-    "sap/ui/core/Messaging"
+    "sap/ui/core/Messaging",
+    "sap/ui/export/Spreadsheet",
+    "sap/ui/export/library"
 
-], function (Base, formatter, BusyDialog, Messaging) {
+], function (Base, formatter, BusyDialog, Messaging, Spreadsheet, exportLibrary ) {
     "use strict";
 
     return Base.extend("mm.parkedinvoice.controller.Detail", {
@@ -23,7 +25,6 @@ sap.ui.define([
 
         _initialize: function (oEvent) {
             Messaging.removeAllMessages();
-            this._authorityCheck();
             var oMainBusyDialog = this.getModel("local").getProperty("/BusyDialog");
             var oArgs = oEvent.getParameter("arguments");
             var suuid = oArgs.uuid;
@@ -36,67 +37,60 @@ sap.ui.define([
             }
             this.getModel("local").setProperty("/uuid", suuid);
             this.getModel("local").setProperty("/job_name", sjob_name);
-    
+
             this._refreshData(oMainBusyDialog);
 
         },
 
-        _authorityCheck: function () {
-            this._UserInfo = sap.ushell.Container.getService("UserInfo");
-            var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
-            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-            sEmail = "xinlei.xu@sh.shin-china.com";
-            var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
-                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+        onExportJobItem: function () {
+            var oTable = this.byId("idJob_ItemTable");
+            var oBinding = oTable.getBinding("rows");
+
+            var aCols = this._createJobItemColumns();
+
+            var oSettings = {
+                workbook: {
+                    columns: aCols,
+                    context: {
+                        application: "Job Result",
+                        version: "1.0",
+                        title: "Job Item Export"
+                    }
+                },
+                dataSource: oBinding,
+                fileName: "Job_Item.xlsx"
+            };
+
+            var oSheet = new Spreadsheet(oSettings);
+            oSheet.build().finally(function () {
+                oSheet.destroy();
             });
-            oContextBinding.requestObject().then(function (context) {
-                var aAccessBtns = [],
-                    aAllAccessBtns = [];
-                if (context._AssignRole && context._AssignRole.length > 0) {
-                    context._AssignRole.forEach(role => {
-                        aAccessBtns.push(role._UserRoleAccessBtn);
-                    });
-                    aAllAccessBtns = aAccessBtns.flat();
+        },
+
+        _createJobItemColumns: function () {
+            return [
+                {
+                    label: this.getResourceBundle().getText("job_result"),
+                    property: "job_result"
+                },
+                {
+                    label: this.getResourceBundle().getText("job_text"),
+                    property: "job_text"
+                },
+                {
+                    label: this.getResourceBundle().getText("job_status"),
+                    property: "job_status"
+                },
+                {
+                    label: this.getResourceBundle().getText("invno"),
+                    property: "invno"
+                },
+                {
+                    label: this.getResourceBundle().getText("posting_date"),
+                    property: "posting_date",
+                    type: "date"
                 }
-                if (!aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-View")) {
-                    if (!this.oErrorMessageDialog) {
-                        this.oErrorMessageDialog = new sap.m.Dialog({
-                            type: sap.m.DialogType.Message,
-                            state: "Error",
-                            content: new sap.m.Text({
-                                text: this.getModel("i18n").getResourceBundle().getText("noAuthorityView", [sUser])
-                            })
-                        });
-                    }
-                    this.getView().destroy();
-                    this.oErrorMessageDialog.open();
-                }
-                this.getModel("local").setProperty("/authorityCheck", {
-                    button: {
-                        //View: aAllAccessBtns.some(btn => btn.AccessId === "parkedinvoice-View"),
-                        View: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-View"),
-                    },
-                    data: {
-                        PlantSet: context._AssignPlant,
-                        CompanySet: context._AssignCompany,
-                        SalesOrgSet: context._AssignSalesOrg,
-                        PurchOrgSet: context._AssignPurchOrg,
-                        RoleSet: context._AssignRole
-                    }
-                });
-            }.bind(this), function (oError) {
-                if (!this.oErrorMessageDialog) {
-                    this.oErrorMessageDialog = new sap.m.Dialog({
-                        type: sap.m.DialogType.Message,
-                        state: "Error",
-                        content: new sap.m.Text({
-                            text: this.getModel("i18n").getResourceBundle().getText("getAuthorityFailed")
-                        })
-                    });
-                }
-                this.getView().destroy();
-                this.oErrorMessageDialog.open();
-            }.bind(this));
+            ];
         },
 
         _refreshData: function (oMainBusyDialog) {

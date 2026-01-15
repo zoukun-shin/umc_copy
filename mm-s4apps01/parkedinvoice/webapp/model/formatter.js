@@ -23,6 +23,19 @@ sap.ui.define([
             return "None";
         },
 
+        formatStateIcon: function (value) {
+            if (value === "S") {
+                return "sap-icon://status-positive";
+            }
+            if (value === "E") {
+                return "sap-icon://status-negative";
+            }
+            if (value === "W") {
+                return "sap-icon://status-critical";
+            }
+            return "sap-icon://status-inactive";
+        },
+
         // format Date
         formatDate: function (value) {
             if (value) {

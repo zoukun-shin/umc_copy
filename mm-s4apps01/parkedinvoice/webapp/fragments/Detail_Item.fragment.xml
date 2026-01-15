@@ -6,15 +6,16 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <table:Table id="idNG_ItemTable" rows="{local>/JOB_Header/to_JOB_Item/results}" rowSelectionChange="rowSelectionChange" selectionBehavior="Row" fixedColumnCount="2" selectionMode="Single" rowMode="Interactive" class="sapUiSizeCompact">
+    <table:Table id="idJob_ItemTable" rows="{local>/JOB_Header/to_JOB_Item/results}" rowSelectionChange="rowSelectionChange" selectionBehavior="Row" fixedColumnCount="2" selectionMode="Single" rowMode="Interactive" class="sapUiSizeCompact">
         <table:extension>
             <OverflowToolbar>
+            <Button text="{i18n>export}" icon="sap-icon://excel-attachment" press="onExportJobItem"/>
             </OverflowToolbar>
         </table:extension>
         <table:columns>
             <table:Column width="7rem" label="{i18n>job_result}">
                 <table:template>
-                    <Text text="{ parts:[ 'local>job_result'], formatter:'.formatter.formatState' }" wrapping="false"/>
+                    <ObjectStatus state="{ path:'local>job_result',formatter:'.formatter.formatState' }" icon="{ path:'local>job_result', formatter:'.formatter.formatStateIcon'}"/>
                 </table:template>
             </table:Column>
             <table:Column width="35rem" label="{i18n>job_text}">

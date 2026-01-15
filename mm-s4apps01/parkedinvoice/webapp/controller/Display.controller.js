@@ -32,34 +32,80 @@ sap.ui.define([
 			this._LocalData.setProperty("/onExportvisible", false)
 			var oRouter = this.getRouter();
 			oRouter.getRoute("Main").attachMatched(this._onRouteMatched, this);
+	
 		},
+
 		_onRouteMatched: function (oEvent) {
 			this.getView().getModel().resetChanges();
 			this._UserInfo = sap.ushell.Container.getService("UserInfo");
+			this._authorityCheck();
 		},
+
+		_authorityCheck: function () {
+            this._UserInfo = sap.ushell.Container.getService("UserInfo");
+            var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+			sEmail = "xinlei.xu@sh.shin-china.com";
+            var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
+                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+            });
+            oContextBinding.requestObject().then(function (context) {
+                var aAccessBtns = [],
+                    aAllAccessBtns = [];
+                if (context._AssignRole && context._AssignRole.length > 0) {
+                    context._AssignRole.forEach(role => {
+                        aAccessBtns.push(role._UserRoleAccessBtn);
+                    });
+                    aAllAccessBtns = aAccessBtns.flat();
+                }
+                if (!aAllAccessBtns.some(btn => btn.AccessId === "parkedinvoice-View")) {
+                    if (!this.oErrorMessageDialog) {
+                        this.oErrorMessageDialog = new sap.m.Dialog({
+                            type: sap.m.DialogType.Message,
+                            state: "Error",
+                            content: new sap.m.Text({
+                                text: this.getModel("i18n").getResourceBundle().getText("noAuthorityView", [sUser])
+                            })
+                        });
+                    }
+                    this.getView().destroy();
+                    this.oErrorMessageDialog.open();
+                }
+                this.getModel("local").setProperty("/authorityCheck", {
+                    button: {
+                        //View: aAllAccessBtns.some(btn => btn.AccessId === "parkedinvoice-View"),
+                        View: aAllAccessBtns.some(btn => btn.AccessId === "parkedinvoice-View"),
+						Unconfirm: aAllAccessBtns.some(btn => btn.AccessId === "parkedinvoice-Unconfirm"),
+                        Confirm: aAllAccessBtns.some(btn => btn.AccessId === "parkedinvoice-Confirm"),
+                        Post: aAllAccessBtns.some(btn => btn.AccessId === "parkedinvoice-Post"),
+                    },
+                    data: {
+                        PlantSet: context._AssignPlant,
+                        CompanySet: context._AssignCompany,
+                        SalesOrgSet: context._AssignSalesOrg,
+                        PurchOrgSet: context._AssignPurchOrg,
+                        RoleSet: context._AssignRole
+                    }
+                });
+            }.bind(this), function (oError) {
+                if (!this.oErrorMessageDialog) {
+                    this.oErrorMessageDialog = new sap.m.Dialog({
+                        type: sap.m.DialogType.Message,
+                        state: "Error",
+                        content: new sap.m.Text({
+                            text: this.getModel("i18n").getResourceBundle().getText("getAuthorityFailed")
+                        })
+                    });
+                }
+                this.getView().destroy();
+                this.oErrorMessageDialog.open();
+            }.bind(this));
+        },
 
 		onBeforeRebindTable: function (oEvent) {
 			var aFilters = oEvent.getParameter("bindingParams").filters;
 			var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
 			aFilters.push(new Filter("UserEmail", FilterOperator.EQ, sEmail));
-
-			var that = this;
-			var iHeader = 0;
-			var iItems = 0;
-			var mParameters = {
-				filters: aFilters,
-				urlParameters: {
-					"$top": 999999999
-				},
-				success: function (oResponse) {
-					if (oResponse) {
-						if (oResponse.results && oResponse.results.length > 0) {
-							iItems = oResponse.results.length;
-						}
-					}
-				},
-				error: function (oErr) { }
-			};
 		},
 
 		onCancel: function (oEvent) {
@@ -133,6 +179,48 @@ sap.ui.define([
 					this.messages.showError(messages.parseErrors(oError));
 				}.bind(this)
 			});
-		}
+		},
+		onBeforeExport: function (oEvent) {
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
+            this._exportExcel(mExcelSettings, sFileName);
+        },
+
+        _exportExcel: function (mExcelSettings, sFileName) {
+            mExcelSettings.workbook.columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    //  Date
+                    case "ScheduleLineDeliveryDate":
+                    case "DocumentDate":
+                    case "CreationDate":
+                    case "PurchaseOrderDate":
+                    case "PostingDate":
+                        oColumn.type = sap.ui.export.EdmType.Date;
+                        break;
+                    //  Number 分隔符 没有小数位
+                    // case "CurrentPrice":
+                    // case "NewPrice":
+                    // case "Difference":
+                    //     oColumn.type = sap.ui.export.EdmType.Number;
+                    //     oColumn.delimiter = true;
+                    //     oColumn.scale = 3;
+                    //     oColumn.textAlign = "End";
+                    //     break;
+                    // case "OrderQuantity":
+                    //     oColumn.type = sap.ui.export.EdmType.Number;
+                    //     oColumn.delimiter = true;
+                    //     oColumn.scale = 2;
+                    //     oColumn.textAlign = "End";
+                    //     break;
+                    // case "NetPriceQuantity":
+                    // case "ConditionQuantity":
+                    //     oColumn.type = sap.ui.export.EdmType.Number;
+                    //     oColumn.delimiter = true;
+                    //     oColumn.textAlign = "End";
+                    //     break;
+                }
+            });
+            mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
+        }
 	});
 });

@@ -30,11 +30,11 @@
                             </f:content>
                             <f:content>
                                 <m:Label text="{i18n>schedule_begin}" />
-                                <m:Text text="{ path: 'local>/JOB_Header/schedule_end' }"/>
+                                <m:Text text="{ path:'local>/JOB_Header/schedule_begin',type:'sap.ui.model.type.DateTime'}"/>
                             </f:content>
                             <f:content>
                                 <m:Label text="{i18n>schedule_end}" />
-                                <m:Text text="{ path: 'local>/JOB_Header/schedule_end' }"/>
+                               <m:Text text="{ path:'local>/JOB_Header/schedule_end',type:'sap.ui.model.type.DateTime'}"/>
                             </f:content>
                             <f:content>
                                 <m:Label text="{i18n>schedule_user}" />

@@ -45,6 +45,25 @@ sap.ui.define([
             this.getModel("local").setProperty("/BusyDialog", this._BusyDialog);
             this.getRouter("Detail").navTo("Detail", { uuid: oRow.uuid }, false);
         },
+
+		onBeforeExport: function (oEvent) {
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
+            this._exportExcel(mExcelSettings, sFileName);
+        },
+
+        _exportExcel: function (mExcelSettings, sFileName) {
+            mExcelSettings.workbook.columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    //  Date Time
+                    case "schedule_begin":
+                    case "schedule_end":
+                        oColumn.type = sap.ui.export.EdmType.DateTime;
+                        break;
+                }
+            });
+            mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
+        }
 		
 	});
 });

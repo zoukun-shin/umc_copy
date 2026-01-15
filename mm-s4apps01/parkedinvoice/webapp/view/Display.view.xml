@@ -90,13 +90,13 @@
             </f:DynamicPageHeader>
         </f:header>
                 <f:content>
-            <smartTable:SmartTable id="idSmartTable" entitySet="ParkedInvoice" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="parkedInvoiceTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="UserEmail" ignoredFields="UserEmail">
+            <smartTable:SmartTable id="idSmartTable" entitySet="ParkedInvoice" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="parkedInvoiceTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="UserEmail" ignoredFields="UserEmail">
                 <smartTable:customToolbar>
                     <OverflowToolbar >
                         <ToolbarSpacer />
-                        <Button type="Emphasized" text="{i18n>Mark}"   press="onMark"    visible="true" enabled="true" />
-                        <Button type="Reject"  text="{i18n>Cancel}" press="onCancel"  visible="true" enabled="true" />
-                        <Button type="Accept" text="{i18n>Post}"   press="onPost"    visible="true" enabled="true" />
+                        <Button type="Emphasized" text="{i18n>Mark}"    press="onMark"    enabled="{= ${local>/authorityCheck/button/Confirm}}"   visible="true"  />
+                        <Button type="Reject"     text="{i18n>Cancel}"  press="onCancel"  enabled="{= ${local>/authorityCheck/button/Unconfirm}}" visible="true" />
+                        <Button type="Accept"     text="{i18n>Post}"    press="onPost"    enabled="{= ${local>/authorityCheck/button/Post}}"   visible="true"  />
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <t:Table id="idParkedInvoiceTable" selectionMode="MultiToggle" selectionBehavior="Row" rowActionCount="1" rowsUpdated="onUITableRowsUpdated">

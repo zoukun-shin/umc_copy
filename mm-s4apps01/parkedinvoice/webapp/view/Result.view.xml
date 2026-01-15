@@ -36,7 +36,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <smartTable:SmartTable id="idSmartTable" entitySet="JobResult" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="deliveryDocumentTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="uuid" ignoredFields="">
+            <smartTable:SmartTable id="idSmartTable" entitySet="JobResult" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="deliveryDocumentTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="uuid" ignoredFields="">
                 <smartTable:customToolbar>
                     <OverflowToolbar >
                         <ToolbarSpacer />
@@ -55,10 +55,10 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"job_status", "leadingProperty":"job_status", "sortProperty":"job_status", "filterProperty": "job_status"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{job_status}" wrapping="false" />
+                                <Text text="{ parts:[ 'job_status'], formatter:'.formatter.formatState' }" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column width="10rem" label="{i18n>job_name}" sortProperty="job_name" filterProperty="job_name">
+                        <t:Column width="20rem" label="{i18n>job_name}" sortProperty="job_name" filterProperty="job_name">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"job_name", "leadingProperty":"job_name", "sortProperty":"job_name", "filterProperty": "job_name"}'/>
                             </t:customData>    
@@ -66,23 +66,23 @@
                                 <Text text="{job_name}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column width="10rem" label="{i18n>schedule_begin}" sortProperty="schedule_begin" filterProperty="schedule_begin">
+                        <t:Column width="15rem" label="{i18n>schedule_begin}" sortProperty="schedule_begin" filterProperty="schedule_begin">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"schedule_begin", "leadingProperty":"schedule_begin", "sortProperty":"schedule_begin", "filterProperty": "schedule_begin"}'/>
                             </t:customData>    
                         <t:template>
-                                <Text text="{schedule_begin}" wrapping="false" />
+                                <Text text="{path:'schedule_begin',type:'sap.ui.model.type.DateTime'}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column width="10rem" label="{i18n>schedule_end}" sortProperty="schedule_end" filterProperty="schedule_end">
+                        <t:Column width="15rem" label="{i18n>schedule_end}" sortProperty="schedule_end" filterProperty="schedule_end">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"schedule_end", "leadingProperty":"schedule_end", "sortProperty":"schedule_end", "filterProperty": "schedule_end"}'/>
                             </t:customData>    
                         <t:template>
-                                <Text text="{schedule_end}" wrapping="false" />
+                                <Text text="{path:'schedule_end',type:'sap.ui.model.type.DateTime'}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column width="10rem" label="{i18n>schedule_user}" sortProperty="schedule_user" filterProperty="schedule_user">
+                        <t:Column width="15rem" label="{i18n>schedule_user}" sortProperty="schedule_user" filterProperty="schedule_user">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"schedule_user", "leadingProperty":"schedule_user", "sortProperty":"schedule_user", "filterProperty": "schedule_user"}'/>
                             </t:customData>    
