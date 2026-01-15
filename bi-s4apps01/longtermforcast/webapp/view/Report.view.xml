@@ -100,12 +100,10 @@
         </f:content>
     </f:DynamicPage>
     <smarttable:SmartTable id="table" class="smartTablePadding" header="{i18n>appTitle}" smartVariant="__SVM01" smartFilterId="reportFilter" beforeRebindTable="onBeforeRebindTable" entitySet="ZI_BI007_REPORT" persistencyKey="docPersistent" enableAutoBinding="false" showRowCount="true" tableType="Table">
-
         <table:Table id="tableReport02" threshold="20" selectionMode="None" fixedColumnCount="3">
             <table:rowMode>
                 <rowmodes:Auto id="idReport02Auto" minRowCount="15"></rowmodes:Auto>
             </table:rowMode>
-
             <table:columns>
                 <table:Column id="idCompany" width="20em" label="{i18n>company}" sortProperty="CompanyCode" filterProperty="CompanyCode" visible="true">
                     <table:customData>
@@ -115,7 +113,6 @@
                         <Text id="sfCompany" text="{parts: [{path: 'CompanyCode'}, {path: 'CompanyCodeName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
                     </table:template>
                 </table:Column>
-
                 <table:Column id="idType" width="10em" label="{i18n>type}" sortProperty="Type" filterProperty="Type" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Type",  "leadingProperty":"Type", "sortProperty":"Type", "filterProperty": "Type"}'/>
@@ -124,7 +121,6 @@
                         <Text id="sfType" text="{Type}" wrapping="false" />
                     </table:template>
                 </table:Column>
-
                 <table:Column id="idFiscalYearMonth" width="12em" label="{i18n>yearMonth}" sortProperty="FiscalYearMonth" filterProperty="FiscalYearMonth" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"FiscalYearMonth",  "leadingProperty":"FiscalYearMonth", "sortProperty":"FiscalYearMonth", "filterProperty": "FiscalYearMonth"}'/>
@@ -133,7 +129,6 @@
                         <Text id="sfFiscalYearMonth" text="{FiscalYearMonth}" wrapping="false" />
                     </table:template>
                 </table:Column>
-
                 <table:Column id="idProfitCenter" width="10em" label="{i18n>profitCenter}" sortProperty="ProfitCenter" filterProperty="ProfitCenter" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenter", "additionalProperty":"ProfitCenterName", "leadingProperty":"ProfitCenter", "sortProperty":"ProfitCenter", "filterProperty": "ProfitCenter"}'/>
@@ -142,7 +137,6 @@
                         <Text id="sfProfitCenter" text="{parts: [{path: 'ProfitCenter'}, {path: 'ProfitCenterName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
                     </table:template>
                 </table:Column>
-
                 <table:Column id="idProductType" width="10em" label="{i18n>materialType}" sortProperty="ProductType" filterProperty="ProductType" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ProductType", "additionalProperty":"ProductTypeName", "leadingProperty":"ProductType", "sortProperty":"ProductType", "filterProperty": "ProductType"}'/>
@@ -151,7 +145,6 @@
                         <Text id="sfProductType" text="{parts: [{path: 'ProductType'}, {path: 'ProductTypeName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
                     </table:template>
                 </table:Column>
-
                 <table:Column id="idPlant" width="20em" label="{i18n>plant}" sortProperty="Plant" filterProperty="Plant" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Plant",  "additionalProperty":"PlantName", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'/>
@@ -160,7 +153,6 @@
                         <Text id="sfPlant" text="{parts: [{path: 'Plant'}, {path: 'PlantName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
                     </table:template>
                 </table:Column>
-
                 <table:Column id="idProduct" width="20em" label="{i18n>product}" sortProperty="Product" filterProperty="Product" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Product", "additionalProperty":"ProductName", "leadingProperty":"Product", "sortProperty":"Product", "filterProperty": "Product"}'/>
@@ -169,7 +161,6 @@
                         <Text id="sfProduct" text="{parts: [{path: 'Product'}, {path: 'ProductName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
                     </table:template>
                 </table:Column>
-
                 <table:Column id="idCustomer" width="20em" label="{i18n>businessPartner}" sortProperty="Customer" filterProperty="Customer" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "additionalProperty":"CustomerName", "leadingProperty":"Customer", "sortProperty":"Customer", "filterProperty": "Customer"}'/>
@@ -178,7 +169,6 @@
                         <Text id="sfCustomer" text="{parts: [{path: 'Customer'}, {path: 'CustomerName'}], formatter: '.formatter.formatCodeName'}" wrapping="false" />
                     </table:template>
                 </table:Column>
-
                 <table:Column id="idQuantity" width="10em" label="{i18n>longTermInventory}" sortProperty="Qty" filterProperty="Qty" visible="true" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Qty",  "leadingProperty":"Qty", "sortProperty":"Qty", "filterProperty": "Qty"}'/>
@@ -187,22 +177,22 @@
                         <smartfield:SmartField id="sfQty" value="{Qty}" wrapping="false" editable="false" />
                     </table:template>
                 </table:Column>
-
                 <table:Column id="idActualPrice" width="13em" label="{i18n>actualPrice}" sortProperty="ActualPrice" filterProperty="ActualPrice" visible="true" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ActualPrice", "leadingProperty":"ActualPrice", "sortProperty":"ActualPrice", "filterProperty": "ActualPrice"}'/>
                     </table:customData>
                     <table:template>
-                        <Text id="sfActualPrice" text="{parts: [{path: 'ActualPrice'}, {path: 'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                        <!-- <Text id="sfActualPrice" text="{parts: [{path: 'ActualPrice'}, {path: 'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" /> -->
+                        <Text id="sfActualPrice" text="{ path: 'ActualPrice', formatter: '.formatter.formatFloat' }" wrapping="false" />
                     </table:template>
                 </table:Column>
-
                 <table:Column id="idInventoryAmount" width="13em" label="{i18n>longTermInventoryAmount}" sortProperty="InventoryAmount" filterProperty="InventoryAmount" visible="true" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"InventoryAmount", "leadingProperty":"InventoryAmount", "sortProperty":"InventoryAmount", "filterProperty": "InventoryAmount"}'/>
                     </table:customData>
                     <table:template>
-                        <Text id="sfInventoryAmount" text="{parts: [{path: 'InventoryAmount'}, {path: 'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                        <!-- <Text id="sfInventoryAmount" text="{parts: [{path: 'InventoryAmount'}, {path: 'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" /> -->
+                        <Text id="sfInventoryAmount" text="{ path: 'InventoryAmount', formatter: '.formatter.formatFloat' }" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column id="idCurrency" width="6em" label="{i18n>currency}" sortProperty="Currency" filterProperty="Currency" visible="true">

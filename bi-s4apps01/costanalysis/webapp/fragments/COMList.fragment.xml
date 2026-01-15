@@ -6,7 +6,7 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="COSTANALYSISCOM" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="CustomListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 0}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="sales_d_no,quo_version,sales_number,zMonth,zYear" requestAtLeastFields="sales_d_no,quo_version,sales_number,zMonth,zYear">
+    <smartTable:SmartTable entitySet="COSTANALYSISCOM" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="CustomListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 0}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="zMonth,zYear" requestAtLeastFields="zMonth,zYear">
         <table:Table id="idCustomListTable" selectionMode="MultiToggle" rowMode="Auto">
             <table:columns>
                 <table:Column width="8rem" label="{i18n>YearMonth}" sortProperty="YearMonth" filterProperty="YearMonth">

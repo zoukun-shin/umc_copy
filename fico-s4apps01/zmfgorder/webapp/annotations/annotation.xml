@@ -14,7 +14,7 @@
     <edmx:DataServices>
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
             <Annotations Target="SAP__self.MFGORDER1Type">
-                <Annotation Term="UI.LineItem" Qualifier="tableView44">
+                <Annotation Term="UI.LineItem" Qualifier="tableView1">
                     <Collection>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="orderid"/>
@@ -151,13 +151,13 @@
                         </Record>
                     </Collection>
                 </Annotation>
-                <Annotation Term="UI.SelectionPresentationVariant" Qualifier="tableView44">
+                <Annotation Term="UI.SelectionPresentationVariant" Qualifier="tableView1">
                     <Record Type="UI.SelectionPresentationVariantType">
                         <PropertyValue Property="PresentationVariant">
                             <Record Type="UI.PresentationVariantType">
                                 <PropertyValue Property="Visualizations">
                                     <Collection>
-                                        <AnnotationPath>@UI.LineItem#tableView44</AnnotationPath>
+                                        <AnnotationPath>@UI.LineItem#tableView1</AnnotationPath>
                                     </Collection>
                                 </PropertyValue>
                                 <!-- <PropertyValue Property="SortOrder">
@@ -216,7 +216,7 @@
                         <PropertyValue Property="Text" String="{@i18n>key}"/>
                     </Record>
                 </Annotation>
-                <Annotation Term="UI.LineItem" Qualifier="tableView">
+                <!-- <Annotation Term="UI.LineItem" Qualifier="tableView">
                     <Collection>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="YearMonth"/>
@@ -330,7 +330,7 @@
                             <Record Type="UI.PresentationVariantType">
                                 <PropertyValue Property="Visualizations">
                                     <Collection>
-                                        <AnnotationPath>@UI.LineItem#tableView</AnnotationPath>
+                                        <AnnotationPath>@UI.LineItem#tableView2</AnnotationPath>
                                     </Collection>
                                 </PropertyValue>
                             </Record>
@@ -344,10 +344,10 @@
                         </PropertyValue>
                         <PropertyValue Property="Text" String="Table View"/>
                     </Record>
-                </Annotation>
+                </Annotation> -->
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER2Type">
-                <Annotation Term="UI.LineItem" Qualifier="tableView">
+                <Annotation Term="UI.LineItem" Qualifier="tableView2">
                     <Collection>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="orderid"/>
@@ -426,13 +426,13 @@
                         </Record>
                     </Collection>
                 </Annotation>
-                <Annotation Term="UI.SelectionPresentationVariant" Qualifier="tableView">
+                <Annotation Term="UI.SelectionPresentationVariant" Qualifier="tableView2">
                     <Record Type="UI.SelectionPresentationVariantType">
                         <PropertyValue Property="PresentationVariant">
                             <Record Type="UI.PresentationVariantType">
                                 <PropertyValue Property="Visualizations">
                                     <Collection>
-                                        <AnnotationPath>@UI.LineItem#tableView</AnnotationPath>
+                                        <AnnotationPath>@UI.LineItem#tableView2</AnnotationPath>
                                     </Collection>
                                 </PropertyValue>
                             </Record>
@@ -449,7 +449,7 @@
                 </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER3Type">
-                <Annotation Term="UI.LineItem" Qualifier="tableView">
+                <Annotation Term="UI.LineItem" Qualifier="tableView3">
                     <Collection>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="YearMonth"/>
@@ -546,13 +546,13 @@
                         </Record>
                     </Collection>
                 </Annotation>
-                <Annotation Term="UI.SelectionPresentationVariant" Qualifier="tableView">
+                <Annotation Term="UI.SelectionPresentationVariant" Qualifier="tableView3">
                     <Record Type="UI.SelectionPresentationVariantType">
                         <PropertyValue Property="PresentationVariant">
                             <Record Type="UI.PresentationVariantType">
                                 <PropertyValue Property="Visualizations">
                                     <Collection>
-                                        <AnnotationPath>@UI.LineItem#tableView</AnnotationPath>
+                                        <AnnotationPath>@UI.LineItem#tableView3</AnnotationPath>
                                     </Collection>
                                 </PropertyValue>
                             </Record>

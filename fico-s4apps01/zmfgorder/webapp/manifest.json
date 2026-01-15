@@ -134,11 +134,6 @@
           "pattern": ":?query:",
           "name": "MFGORDER1List",
           "target": "MFGORDER1List"
-        },
-        {
-          "pattern": "MFGORDER1({key}):?query:",
-          "name": "MFGORDER1ObjectPage",
-          "target": "MFGORDER1ObjectPage"
         }
       ],
       "targets": {
@@ -151,40 +146,27 @@
               "contextPath": "/MFGORDER1",
               "variantManagement": "Page",
               "controlConfiguration": {
-                "@com.sap.vocabularies.UI.v1.LineItem": {
-                  "tableSettings": {
-                    "type": "GridTable"
-                  }
-                },
-                "/MFGORDER1/@com.sap.vocabularies.UI.v1.LineItem#tableView44": {
+                "/MFGORDER1/@com.sap.vocabularies.UI.v1.LineItem#tableView1": {
                   "tableSettings": {
                     "type": "GridTable",
                     "quickVariantSelection": {
-                      "showCounts": false
+                      "showCounts": true
                     }
                   }
                 },
-                "/MFGORDER2/@com.sap.vocabularies.UI.v1.LineItem#tableView": {
+                "/MFGORDER2/@com.sap.vocabularies.UI.v1.LineItem#tableView2": {
                   "tableSettings": {
                     "type": "GridTable",
                     "quickVariantSelection": {
-                      "showCounts": false
+                      "showCounts": true
                     }
                   }
                 },
-                "/MFGORDER3/@com.sap.vocabularies.UI.v1.LineItem#tableView": {
+                "/MFGORDER3/@com.sap.vocabularies.UI.v1.LineItem#tableView3": {
                   "tableSettings": {
                     "type": "GridTable",
                     "quickVariantSelection": {
-                      "showCounts": false
-                    }
-                  }
-                },
-                "@com.sap.vocabularies.UI.v1.LineItem#tableView44": {
-                  "tableSettings": {
-                    "type": "GridTable",
-                    "quickVariantSelection": {
-                      "showCounts": false
+                      "showCounts": true
                     }
                   }
                 }
@@ -192,34 +174,24 @@
               "views": {
                 "paths": [
                   {
-                    "key": "tableView66",
-                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView44"
+                    "key": "tableView1",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView1",
+                    "entitySet": "MFGORDER1"
                   },
                   {
-                    "key": "tableView1",
-                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView",
+                    "key": "tableView2",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView2",
                     "entitySet": "MFGORDER2"
                   },
                   {
-                    "key": "tableView12",
-                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView",
+                    "key": "tableView3",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView3",
                     "entitySet": "MFGORDER3"
                   }
                 ],
-                "showCounts": false
+                "showCounts": true
               },
               "initialLoad": "Enabled"
-            }
-          }
-        },
-        "MFGORDER1ObjectPage": {
-          "type": "Component",
-          "id": "MFGORDER1ObjectPage",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "editableHeaderContent": false,
-              "contextPath": "/MFGORDER1"
             }
           }
         }
@@ -238,4 +210,3 @@
     "ui5VersionNumber": "1.120.38"
   }
 }
-

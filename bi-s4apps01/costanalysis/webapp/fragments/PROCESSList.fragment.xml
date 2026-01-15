@@ -6,7 +6,7 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="COSTANALYSISPROCESS" smartFilterId="idSmartFilterBar2" tableType="Table" width="100%" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 1}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="Customer,CustomerName,sales_d_no,quo_version,sales_number,zMonth,zYear" requestAtLeastFields="Customer,CustomerName,sales_d_no,quo_version,sales_number,zMonth,zYear">
+    <smartTable:SmartTable entitySet="COSTANALYSISPROCESS" smartFilterId="idSmartFilterBar2" tableType="Table" width="100%" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 1}" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="Customer,CustomerName,zMonth,zYear" requestAtLeastFields="Customer,CustomerName,zMonth,zYear">
         <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto">
             <table:columns>
                 <table:Column width="8rem" label="{i18n>YearMonth}" sortProperty="YearMonth" filterProperty="YearMonth">
