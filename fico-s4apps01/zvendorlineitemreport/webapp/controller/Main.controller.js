@@ -98,5 +98,26 @@ sap.ui.define([
             }.bind(this));
         },
 
+        onBeforeExport: function (oEvent) {
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
+            this._exportExcel(mExcelSettings, sFileName);
+        },
+
+        _exportExcel: function (mExcelSettings, sFileName) {
+            mExcelSettings.workbook.columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    //  Date
+                    case "PostingDate":
+                    case "NetDueDate":
+                    case "ClearingDate":
+                    case "OpenOnKeyDate":
+                        oColumn.type = sap.ui.export.EdmType.Date;
+                        break;
+                }
+            });
+            mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
+        }
+
 	});
 });

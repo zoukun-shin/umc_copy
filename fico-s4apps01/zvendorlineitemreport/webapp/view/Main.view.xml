@@ -34,7 +34,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <smartTable:SmartTable id="idSmartTable" entitySet="VendorLineItem" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="DocumentTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="" ignoredFields="">
+            <smartTable:SmartTable id="idSmartTable" entitySet="VendorLineItem" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="DocumentTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="" ignoredFields="">
                 <smartTable:customToolbar>
                     <OverflowToolbar>
                         <Text text="{i18n>Results}" visible="{= ${local>/data}.length === 0}"/>
@@ -76,12 +76,12 @@
                                 <Text text="{LedgerGLLineItem}" wrapping="false" />
                             </t:template>
                          </t:Column>
-                        <t:Column width="10rem" label="{i18n>ChartOfAccounts}" sortProperty="ChartOfAccounts" filterProperty="ChartOfAccounts">
+                        <t:Column width="10rem" label="{i18n>GLAccount}" sortProperty="GLAccount" filterProperty="GLAccount">
                             <t:customData>
-                                <core:CustomData key="p13nData" value='\{"columnKey":"ChartOfAccounts", "leadingProperty":"ChartOfAccounts", "sortProperty":"ChartOfAccounts", "filterProperty": "ChartOfAccounts"}'/>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"GLAccount", "leadingProperty":"GLAccount", "sortProperty":"GLAccount", "filterProperty": "GLAccount"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{ChartOfAccounts}" wrapping="false" />
+                                <Text text="{GLAccount}" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>FiscalPeriod}" sortProperty="FiscalPeriod" filterProperty="FiscalPeriod">
