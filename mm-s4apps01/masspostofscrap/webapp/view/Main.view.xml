@@ -17,7 +17,7 @@
             >
                 <upload:UploadSet
                     id="idTemplateCollection"
-                    items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'EQ', value1 : 'ZUPLOAD_MPOS' } }"
+                    items="{ path : 'Attach>/Configuration' }"
                     multiple="true"
                     uploadEnabled="false"
                     uploadButtonInvisible="true"
@@ -48,6 +48,7 @@
                     change="onFileUploaderChange"
                     width="40%"
                     class="sapUiSmallMargin"
+                    enabled="{= ${local>/authorityCheck/button/Upload}}"
                 />
             </Panel>
             <Panel
@@ -213,11 +214,11 @@
                         </table:Column>
                         <table:Column
                             width="8rem"
-                            label="{i18n>Reason}"
+                            label="{i18n>ReasonCode}"
                         >
                             <table:template>
                                 <Text
-                                    text="{local>Reason}"
+                                    text="{local>ReasonCode}"
                                     wrapping="false"
                                 />
                             </table:template>

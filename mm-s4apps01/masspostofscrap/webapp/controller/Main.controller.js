@@ -1,14 +1,14 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "./BaseController",
     "sap/m/BusyDialog",
     "../model/formatter",
     "../lib/xlsx",
     "sap/ui/export/Spreadsheet",
     "./messages",
-], (Controller,BusyDialog,formatter,xlsx,Spreadsheet,messages) => {
+], (BaseController,BusyDialog,formatter,xlsx,Spreadsheet,messages) => {
     "use strict";
 
-    return Controller.extend("mm.masspostofscrap.controller.Main", {
+    return BaseController.extend("mm.masspostofscrap.controller.Main", {
         formatter: formatter,
         onInit() {
             this._LocalData = this.getOwnerComponent().getModel("local");
@@ -16,6 +16,74 @@ sap.ui.define([
             this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             this._BusyDialog = new BusyDialog();
 
+
+            this._UserInfo = sap.ushell.Container.getService("UserInfo");
+            this.getRouter().getRoute("RouteMain").attachMatched(this._initialize, this);
+        },
+        _initialize: function () {
+            var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+
+            var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
+            var oFilter = new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.EQ, "ZUPLOAD_MPOS_" + sLanguage);
+            var oControlBinding = this.byId("idTemplateCollection").getBinding("items");
+            oControlBinding.filter(oFilter);
+
+			// sEmail = "xinlei.xu@sh.shin-china.com";
+            var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
+                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+            });
+            oContextBinding.requestObject().then(function (context) {
+                var aAccessBtns = [],
+                    aAllAccessBtns = [];
+                if (context._AssignRole && context._AssignRole.length > 0) {
+                    context._AssignRole.forEach(role => {
+                        aAccessBtns.push(role._UserRoleAccessBtn);
+                    });
+                    aAllAccessBtns = aAccessBtns.flat();
+                }
+                if (!aAllAccessBtns.some(btn => btn.AccessId === "masspostofscrap-View")) {
+                    if (!this.oErrorMessageDialog) {
+                        this.oErrorMessageDialog = new sap.m.Dialog({
+                            type: sap.m.DialogType.Message,
+                            state: "Error",
+                            content: new sap.m.Text({
+                                text: this.getModel("i18n").getResourceBundle().getText("noAuthorityView", [sUser])
+                            })
+                        });
+                    }
+                    this.getView().destroy();
+                    this.oErrorMessageDialog.open();
+                }
+                this.getModel("local").setProperty("/authorityCheck", {
+                    button: {
+                        View: aAllAccessBtns.some(btn => btn.AccessId === "masspostofscrap-View"),
+                        Upload: aAllAccessBtns.some(btn => btn.AccessId === "masspostofscrap-Upload"),
+                        Chcek: aAllAccessBtns.some(btn => btn.AccessId === "masspostofscrap-Chcek"),
+                        Execute: aAllAccessBtns.some(btn => btn.AccessId === "masspostofscrap-Execute"),
+                        Export: aAllAccessBtns.some(btn => btn.AccessId === "masspostofscrap-Export"),
+                    },
+                    data: {
+                        PlantSet: context._AssignPlant,
+                        CompanySet: context._AssignCompany,
+                        SalesOrgSet: context._AssignSalesOrg,
+                        PurchOrgSet: context._AssignPurchOrg,
+                        RoleSet: context._AssignRole
+                    }
+                });
+            }.bind(this), function (oError) {
+                if (!this.oErrorMessageDialog) {
+                    this.oErrorMessageDialog = new sap.m.Dialog({
+                        type: sap.m.DialogType.Message,
+                        state: "Error",
+                        content: new sap.m.Text({
+                            text: this.getModel("i18n").getResourceBundle().getText("getAuthorityFailed")
+                        })
+                    });
+                }
+                this.getView().destroy();
+                this.oErrorMessageDialog.open();
+            }.bind(this));
         },
         onFileUploaderChange: function (oEvent) {
             var that = this;
@@ -61,9 +129,9 @@ sap.ui.define([
                     ScrapQuantity: aSheet1[i]["EntryUnit"] || "0",
                     Unit: aSheet1[i]["QuantityInBaseUnit"] || "",
                     StorageLocation: aSheet1[i]["StorageLocation"] || "",
-                    GLAccount: aSheet1[i]["GLAccount"] || "",
+                    // GLAccount: aSheet1[i]["GLAccount"] || "",
                     HeaderText: aSheet1[i]["MaterialDocumentHeaderText"] || "",
-                    Reason: aSheet1[i]["GoodsMovementReasonCode"] || "",
+                    ReasonCode: aSheet1[i]["GoodsMovementReasonCode"] || "",
 
                 }
                 aExcelSet.push(oItem);
