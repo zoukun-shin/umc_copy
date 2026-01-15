@@ -126,7 +126,7 @@ sap.ui.define([
 			//TH add start 20260106 CR5313
 			var sDisplayUnit = this.getModel("local").getProperty("/Unit");
 			aFilters.push(new Filter("DisplayUnit", FilterOperator.EQ, sDisplayUnit));
-			var sVersion = this.byId("Version").getValue();
+			var sVersion = this.getModel("local").getProperty("/Version");
 			aFilters.push(new Filter("Version", FilterOperator.EQ, sVersion));
 			//TH add end 20260106 CR5313
 			var oFilterData = oSearchBar.getFilterData();
@@ -707,7 +707,7 @@ sap.ui.define([
 				};
 				sTextAlign = "Begin"
 				if (key.substring(0, 1) === "W") {
-					oLabel = new Label({ text: key.substring(1, 9) });
+					oLabel = new Label({ text: key.substring(1, 9) + "W" });
 					oTemplate = new Text({
 						text: "{local>" + key + "}",
 						wrapping: false

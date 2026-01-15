@@ -22,6 +22,7 @@ function (JSONModel, Device) {
                 LatestOF: '01',
                 Contents: '01',
                 Unit: '01',
+                Version: '01',
                 data: []
             });
             return oModel;
