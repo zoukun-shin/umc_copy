@@ -25,6 +25,27 @@ sap.ui.define([
         },
 
         _initialize: function () {
+            // ADD BEGIN BY XINLEI XU 2026/01/16
+            var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
+            var sSAPLanguage = "J";
+            switch (sLanguage) {
+                case "JA":
+                    sSAPLanguage = "J";
+                    break;
+                case "EN":
+                    sSAPLanguage = "E";
+                    break;
+                case "ZH":
+                    sSAPLanguage = "1";
+                    break;
+                default:
+                    sSAPLanguage = "J";
+                    break;
+            }
+            var oFilter = new sap.ui.model.Filter("Zvalue3", sap.ui.model.FilterOperator.EQ, sSAPLanguage);
+            var oControlBinding = this.byId("idSelectionRule").getBinding("items");
+            oControlBinding.filter(oFilter);
+            // ADD END BY XINLEI XU 2026/01/16
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
             var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
