@@ -54,29 +54,29 @@
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
                             <!-- visible -->
-                            <smartFilterBar:ControlConfiguration index='999' key="FiscalYear" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="AccountingDocument" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="LedgerGLLineItem" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="FiscalPeriod" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="PostingDate" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="NetDueDate" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="ChartOfAccounts" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="AlternativeGLAccount" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="OffsettingAcct" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="AccountingDocumentType" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="DebitCreditCode" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="TransactionCurrency" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="DebitAmount" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="CreditAmount" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="AmountInFunctionalCurrency" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="FunctionalCurrency" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="AmountInCompanyCodeCurrency" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="CompanyCodeCurrency" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="DocumentItemText" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="AssignmentReference" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="ProfitCenter" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="ClearingAccountingDocument" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="ClearingDate" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='60' key="FiscalYear" label="{i18n>FiscalYear}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='70' key="AccountingDocument" label="{i18n>AccountingDocument}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='80' key="LedgerGLLineItem" label="{i18n>LedgerGLLineItem}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='90' key="FiscalPeriod" label="{i18n>FiscalPeriod}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='100' key="PostingDate" label="{i18n>PostingDate}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='110' key="NetDueDate" label="{i18n>NetDueDate}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='120' key="ChartOfAccounts" label="{i18n>ChartOfAccounts}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='130' key="AlternativeGLAccount" label="{i18n>AlternativeGLAccount}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='140' key="OffsettingAcct" label="{i18n>OffsettingAcct}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='150' key="AccountingDocumentType" label="{i18n>AccountingDocumentType}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='160' key="DebitCreditCode" label="{i18n>DebitCreditCode}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='170' key="TransactionCurrency" label="{i18n>TransactionCurrency}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='180' key="DebitAmount" label="{i18n>DebitAmount}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='180' key="CreditAmount" label="{i18n>CreditAmount}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='190' key="AmountInFunctionalCurrency" label="{i18n>AmountInFunctionalCurrency}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='200' key="FunctionalCurrency" label="{i18n>FunctionalCurrency}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='210' key="AmountInCompanyCodeCurrency" label="{i18n>AmountInCompanyCodeCurrency}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='220' key="CompanyCodeCurrency" label="{i18n>CompanyCodeCurrency}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='230' key="DocumentItemText" label="{i18n>DocumentItemText}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='240' key="AssignmentReference" label="{i18n>AssignmentReference}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='250' key="ProfitCenter" label="{i18n>ProfitCenter}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='260' key="ClearingAccountingDocument" label="{i18n>ClearingAccountingDocument}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='270' key="ClearingDate" label="{i18n>ClearingDate}" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="Type" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
                         </smartFilterBar:controlConfiguration>
@@ -152,12 +152,12 @@
                             <Text text="{path:'NetDueDate', formatter:'.formatter.formatDate'}" wrapping="false" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="8rem" label="{i18n>ChartOfAccounts}" sortProperty="ChartOfAccounts" filterProperty="ChartOfAccounts">
+                    <table:Column width="8rem" label="{i18n>GLAccount}" sortProperty="GLAccount" filterProperty="GLAccount">
                         <table:customData>
-                            <core:CustomData key="p13nData" value='\{"columnKey":"ChartOfAccounts", "leadingProperty":"ChartOfAccounts"}'/>
+                            <core:CustomData key="p13nData" value='\{"columnKey":"GLAccount", "leadingProperty":"GLAccount"}'/>
                         </table:customData>
                         <table:template>
-                            <Text text="{ChartOfAccounts}" wrapping="false" tooltip="{ChartOfAccounts}" />
+                            <Text text="{GLAccount}" wrapping="false" tooltip="{GLAccount}" />
                         </table:template>
                     </table:Column>
                     <table:Column width="12rem" label="{i18n>AlternativeGLAccount}" sortProperty="AlternativeGLAccount" filterProperty="AlternativeGLAccount">
@@ -229,7 +229,7 @@
                             <core:CustomData key="p13nData" value='\{"columnKey":"FunctionalCurrency", "leadingProperty":"FunctionalCurrency"}'/>
                         </table:customData>
                         <table:template>
-                            <Text text="{path:'FunctionalCurrency', formatter:'.formatter.formatNumber'}" wrapping="false"  />
+                            <Text text="{FunctionalCurrency}" wrapping="false"  />
                         </table:template>
                     </table:Column>
                     <table:Column width="14rem" label="{i18n>AmountInCompanyCodeCurrency}" sortProperty="AmountInCompanyCodeCurrency" filterProperty="AmountInCompanyCodeCurrency">
