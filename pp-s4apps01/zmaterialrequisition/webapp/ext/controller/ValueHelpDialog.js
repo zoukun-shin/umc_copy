@@ -11,9 +11,11 @@ sap.ui.define([
 ], function (Label, FilterGroupItem, SearchField, UIColumn, Text, Filter, FilterOperator, Input, BusyDialog) {
     "use strict";
 
+    var oControl;
     return {
 
         onValueHelpRequested: function (oEvent, that, sPath, aVHFields, aFilterFields) {
+            oControl = oEvent.getSource();
             that._oInput = oEvent.getSource();
             that._aVHFields = aVHFields;
             that._sValueHelpPath = sPath;
@@ -317,23 +319,43 @@ sap.ui.define([
                                 }
                                 // Calculate amount
                                 var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
+                                var sPlant = this.getModel("local").getProperty("/headSet/Plant");
+                                var aConfig = this.getModel("local").getProperty("/Config");
+                                var config = aConfig.find(element => element.Plant === sPlant);
                                 if (sValue && object["StandardPrice"]) {
                                     var iAmount = parseFloat(sValue) * parseFloat(object["StandardPrice"]);
                                     this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
-                                    var sPlant = this.getModel("local").getProperty("/headSet/Plant");
-                                    var aConfig = this.getModel("local").getProperty("/Config");
-                                    var config = aConfig.find(element => element.Plant === sPlant);
-                                    if (iAmount >= parseFloat(config.Amount)) {
-                                        this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
-                                        // this.getModel("local").setProperty(sItemPath + "Status", "Error");
-                                        $("#" + this._oControl.getParent().getId()).css("background-color", "#f2bfc0");
-                                        $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#f2bfc0");
-                                    } else {
-                                        // this.getModel("local").setProperty(sItemPath + "Status", "None");
-                                        $("#" + this._oControl.getParent().getId()).css("background-color", "#fff");
-                                        $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#fff");
-                                    }
+                                    // if (iAmount >= parseFloat(config.Amount)) {
+                                    //     this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
+                                    //     // this.getModel("local").setProperty(sItemPath + "Status", "Error");
+                                    //     $("#" + this._oControl.getParent().getId()).css("background-color", "#f2bfc0");
+                                    //     $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#f2bfc0");
+                                    // } else {
+                                    //     // this.getModel("local").setProperty(sItemPath + "Status", "None");
+                                    //     $("#" + this._oControl.getParent().getId()).css("background-color", "#fff");
+                                    //     $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#fff");
+                                    // }
                                 }
+                                // ADD BEGIN BY XINLEI XU 2026/1/13 VN CM No.5265
+                                if (sValue && object["FunctionalPrice"]) {
+                                    var iFunctionalAmount = parseFloat(sValue) * parseFloat(object["FunctionalPrice"]);
+                                    this.getModel("local").setProperty(sItemPath + "FunctionalTotalAmount", iFunctionalAmount);
+                                }
+                                var sDeleteFlag = "";
+                                if (sPlant === "3000") {
+                                    sDeleteFlag = iFunctionalAmount >= parseFloat(config.Amount) ? "W" : "";
+                                } else {
+                                    sDeleteFlag = iAmount >= parseFloat(config.Amount) ? "W" : "";
+                                }
+                                this.getModel("local").setProperty(sItemPath + "DeleteFlag", sDeleteFlag);
+                                if (sDeleteFlag === "W") {
+                                    $("#" + oControl.getParent().getId()).css("background-color", "#f2bfc0");
+                                    $("#" + oControl.getParent().getId() + "-fixed").css("background-color", "#f2bfc0");
+                                } else {
+                                    $("#" + oControl.getParent().getId()).css("background-color", "#fff");
+                                    $("#" + oControl.getParent().getId() + "-fixed").css("background-color", "#fff");
+                                }
+                                // ADD END BY XINLEI XU 2026/1/13 VN CM No.5265
                             }
                         } else {
                             this._oInput.setValueState("Error");

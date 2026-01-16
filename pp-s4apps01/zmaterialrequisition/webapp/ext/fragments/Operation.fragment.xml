@@ -190,7 +190,7 @@
                         <table:template>
                             <Input value="{local>Material}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.ValueHelpDialog.onValueHelpRequested(
                                 $event, $controller, '/ZC_ProductVH',
-                                ['Material','MaterialDescription','ProductType','StandardPrice','Currency'],['Material','MaterialDescription','ProductType'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ProductVH', length: 40 }" required="{= ${local>/headSet/Type} === '31' || ${local>/headSet/Type} === '40' || ${local>/headSet/Type} === '50' }" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== '' &amp;&amp; (${local>/headSet/Type} === '31' || ${local>/headSet/Type} === '40' || ${local>/headSet/Type} === '50')}">
+                                ['Material','MaterialDescription','ProductType','StandardPrice','Currency','FunctionalPrice','FunctionalCurrency'],['Material','MaterialDescription','ProductType'])" showSuggestion="true" suggestionRows="{ path: '/ZC_ProductVH', length: 40 }" required="{= ${local>/headSet/Type} === '31' || ${local>/headSet/Type} === '40' || ${local>/headSet/Type} === '50' }" editable="{= ${local>/headSet/Plant} !== '' &amp;&amp; ${local>/headSet/Type} !== '' &amp;&amp; (${local>/headSet/Type} === '31' || ${local>/headSet/Type} === '40' || ${local>/headSet/Type} === '50')}">
                                 <suggestionColumns>
                                     <Column>
                                         <Label text="{i18n>Product}"/>
@@ -272,16 +272,28 @@
                             <Input value="{local>Remark}" editable="{= ${local>Reason} === '11'}" change="handler.handleChange" required="true"/>
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>StandardPrice}" hAlign="End">
+                    <table:Column width="12rem" label="{i18n>StandardPrice}" hAlign="End">
                         <table:template>
-                            <Text text="{ path:'local>StandardPrice',formatter:'handler.formatter.formatNumber' } {local>Currency}" wrapping="false"/>
+                            <Text text="{ parts:['local>StandardPrice','local>Currency'], formatter:'handler.formatter.formatNumber' } {local>Currency}" wrapping="false"/>
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" label="{i18n>TotalAmount}" hAlign="End">
+                    <table:Column width="12rem" label="{i18n>TotalAmount}" hAlign="End">
                         <table:template>
-                            <Text text="{ path:'local>TotalAmount',formatter:'handler.formatter.formatNumber' } {local>Currency}" wrapping="false"/>
+                            <Text text="{ parts:['local>TotalAmount','local>Currency'], formatter:'handler.formatter.formatNumber' } {local>Currency}" wrapping="false"/>
                         </table:template>
                     </table:Column>
+                    <!-- ADD BEGIN BY XINLEI XU 2026/1/13 VN CM No.5265 -->
+                    <table:Column width="12rem" label="{i18n>FunctionalPrice}" hAlign="End">
+                        <table:template>
+                            <Text text="{ parts:['local>FunctionalPrice','local>FunctionalCurrency'], formatter:'handler.formatter.formatNumber' } {local>FunctionalCurrency}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>FunctionalTotalAmount}" hAlign="End">
+                        <table:template>
+                            <Text text="{ parts:['local>FunctionalTotalAmount','local>FunctionalCurrency'], formatter:'handler.formatter.formatNumber' } {local>FunctionalCurrency}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- ADD END BY XINLEI XU 2026/1/13 VN CM No.5265 -->
                     <table:Column width="8rem" label="{i18n>OrderIsClosed}">
                         <table:template>
                             <Text text="{ path:'local>OrderIsClosed',formatter:'handler.formatter.formatOrderStatus' }" wrapping="false"/>

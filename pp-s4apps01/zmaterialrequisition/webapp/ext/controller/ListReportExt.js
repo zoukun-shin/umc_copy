@@ -317,6 +317,11 @@ sap.ui.define([
                 StandardPrice: "",
                 TotalAmount: 0,
                 Currency: "",
+                // ADD BEGIN BY XINLEI XU 2026/1/13 VN CM No.5265
+                FunctionalPrice: "",
+                FunctionalTotalAmount: 0,
+                FunctionalCurrency: "",
+                // ADD END BY XINLEI XU 2026/1/13 VN CM No.5265
                 OrderIsClosed: "",
                 DeleteFlag: "",
                 Status: "None"
@@ -338,21 +343,48 @@ sap.ui.define([
                 aRows.forEach(function (oRow, index) {
                     var sAmount = "0",
                         iAmount = 0;
+                    var sFunctionalAmount = "0",
+                        iFunctionalAmount = 0;
                     oRow.getCells().forEach(oCell => {
                         if (oCell.mBindingInfos.text) {
                             if (oCell.mBindingInfos.text.parts[0].path === "TotalAmount") {
                                 sAmount = oCell.getText().split(' ')[0];
                                 iAmount = parseFloat(sAmount.replace(/,/g, ""));
                             }
+                            // ADD BEGIN BY XINLEI XU 2026/1/13 VN CM No.5265
+                            if (oCell.mBindingInfos.text.parts[0].path === "FunctionalTotalAmount") {
+                                sFunctionalAmount = oCell.getText().split(' ')[0];
+                                iFunctionalAmount = parseFloat(sFunctionalAmount.replace(/,/g, ""));
+                            }
+                            // ADD END BY XINLEI XU 2026/1/13 VN CM No.5265
                         }
                     });
-                    if (iAmount >= parseFloat(config.Amount)) {
-                        $("#" + oRow.getId()).css("background-color", "#f2bfc0");
-                        $("#" + oRow.getId() + "-fixed").css("background-color", "#f2bfc0");
+                    // MOD BEGIN BY XINLEI XU 2026/1/13 VN CM No.5265
+                    // if (iAmount >= parseFloat(config.Amount)) {
+                    //     $("#" + oRow.getId()).css("background-color", "#f2bfc0");
+                    //     $("#" + oRow.getId() + "-fixed").css("background-color", "#f2bfc0");
+                    // } else {
+                    //     $("#" + oRow.getId()).css("background-color", "#fff");
+                    //     $("#" + oRow.getId() + "-fixed").css("background-color", "#fff");
+                    // }
+                    if (sPlant === "3000") {
+                        if (iFunctionalAmount >= parseFloat(config.Amount)) {
+                            $("#" + oRow.getId()).css("background-color", "#f2bfc0");
+                            $("#" + oRow.getId() + "-fixed").css("background-color", "#f2bfc0");
+                        } else {
+                            $("#" + oRow.getId()).css("background-color", "#fff");
+                            $("#" + oRow.getId() + "-fixed").css("background-color", "#fff");
+                        }
                     } else {
-                        $("#" + oRow.getId()).css("background-color", "#fff");
-                        $("#" + oRow.getId() + "-fixed").css("background-color", "#fff");
+                        if (iAmount >= parseFloat(config.Amount)) {
+                            $("#" + oRow.getId()).css("background-color", "#f2bfc0");
+                            $("#" + oRow.getId() + "-fixed").css("background-color", "#f2bfc0");
+                        } else {
+                            $("#" + oRow.getId()).css("background-color", "#fff");
+                            $("#" + oRow.getId() + "-fixed").css("background-color", "#fff");
+                        }
                     }
+                    // MOD END BY XINLEI XU 2026/1/13 VN CM No.5265
                 });
             }
         },
@@ -660,12 +692,16 @@ sap.ui.define([
                     aFieldName.push("BaseUnit");
                     aFieldName.push("StandardPrice");
                     aFieldName.push("TotalAmount");
+                    // ADD BEGIN BY XINLEI XU 2026/1/13 VN CM No.5265
+                    aFieldName.push("FunctionalPrice");
+                    aFieldName.push("FunctionalTotalAmount");
+                    // ADD END BY XINLEI XU 2026/1/13 VN CM No.5265
                 } else if (sBindFieldName === "StorageLocation") {
                     aFieldName.push("StorageLocationName");
                 }
                 aFieldName.forEach(field => {
                     this.getModel("local").setProperty(sItemPath + field, "");
-                    if (field === "TotalAmount") {
+                    if (field === "TotalAmount" || field === "FunctionalTotalAmount") { // ADD BY XINLEI XU 2026/1/13 VN CM No.5265
                         this.getModel("local").setProperty(sItemPath + field, 0);
                     }
                 });
@@ -697,22 +733,42 @@ sap.ui.define([
                                 // Calculate amount
                                 if (sBindFieldName === "ManufacturingOrder" || sBindFieldName === "Material") {
                                     var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
+                                    var aConfig = this.getModel("local").getProperty("/Config");
+                                    var config = aConfig.find(element => element.Plant === sPlant);
                                     if (sValue && object["StandardPrice"]) {
                                         var iAmount = parseFloat(sValue) * parseFloat(object["StandardPrice"]);
                                         this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
-                                        var aConfig = this.getModel("local").getProperty("/Config");
-                                        var config = aConfig.find(element => element.Plant === sPlant);
-                                        if (iAmount >= parseFloat(config.Amount)) {
-                                            this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
-                                            // this.getModel("local").setProperty(sItemPath + "Status", "Error");
-                                            $("#" + this._oControl.getParent().getId()).css("background-color", "#f2bfc0");
-                                            $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#f2bfc0");
-                                        } else {
-                                            // this.getModel("local").setProperty(sItemPath + "Status", "None");
-                                            $("#" + this._oControl.getParent().getId()).css("background-color", "#fff");
-                                            $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#fff");
-                                        }
+                                        // if (iAmount >= parseFloat(config.Amount)) {
+                                        //     this.getModel("local").setProperty(sItemPath + "DeleteFlag", "W");
+                                        //     // this.getModel("local").setProperty(sItemPath + "Status", "Error");
+                                        //     $("#" + this._oControl.getParent().getId()).css("background-color", "#f2bfc0");
+                                        //     $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#f2bfc0");
+                                        // } else {
+                                        //     // this.getModel("local").setProperty(sItemPath + "Status", "None");
+                                        //     $("#" + this._oControl.getParent().getId()).css("background-color", "#fff");
+                                        //     $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#fff");
+                                        // }
                                     }
+                                    // ADD BEGIN BY XINLEI XU 2026/1/13 VN CM No.5265
+                                    if (sValue && object["FunctionalPrice"]) {
+                                        var iFunctionalAmount = parseFloat(sValue) * parseFloat(object["FunctionalPrice"]);
+                                        this.getModel("local").setProperty(sItemPath + "FunctionalTotalAmount", iFunctionalAmount);
+                                    }
+                                    var sDeleteFlag = "";
+                                    if (sPlant === "3000") {
+                                        sDeleteFlag = iFunctionalAmount >= parseFloat(config.Amount) ? "W" : "";
+                                    } else {
+                                        sDeleteFlag = iAmount >= parseFloat(config.Amount) ? "W" : "";
+                                    }
+                                    this.getModel("local").setProperty(sItemPath + "DeleteFlag", sDeleteFlag);
+                                    if (sDeleteFlag === "W") {
+                                        $("#" + this._oControl.getParent().getId()).css("background-color", "#f2bfc0");
+                                        $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#f2bfc0");
+                                    } else {
+                                        $("#" + this._oControl.getParent().getId()).css("background-color", "#fff");
+                                        $("#" + this._oControl.getParent().getId() + "-fixed").css("background-color", "#fff");
+                                    }
+                                    // ADD END BY XINLEI XU 2026/1/13 VN CM No.5265
                                 }
                             }
                         }
@@ -743,8 +799,10 @@ sap.ui.define([
             var aConfig = this.getModel("local").getProperty("/Config");
             var config = aConfig.find(element => element.Plant === sPlant);
             var sStandardPrice = this.getModel("local").getProperty(sPath + "/StandardPrice");
+            var sFunctionalPrice = this.getModel("local").getProperty(sPath + "/FunctionalPrice"); // ADD BY XINLEI XU 2026/1/13 VN CM No.5265
             // this.getModel("local").setProperty(sPath + "/Status", "None");
             this.getModel("local").setProperty(sPath + "/TotalAmount", 0);
+            this.getModel("local").setProperty(sPath + "/FunctionalTotalAmount", 0); // ADD BY XINLEI XU 2026/1/13 VN CM No.5265
             this.getModel("local").setProperty(sPath + "/DeleteFlag", "");
             $("#" + oRow.getId()).css("background-color", "#fff");
             $("#" + oRow.getId() + "-fixed").css("background-color", "#fff");
@@ -752,15 +810,33 @@ sap.ui.define([
                 oEvent.getSource().setValueState("None");
                 if (sStandardPrice) {
                     var iAmount = parseFloat(sValue) * parseFloat(sStandardPrice);
-                    var sDeleteFlag = iAmount >= parseFloat(config.Amount) ? "W" : "";
                     this.getModel("local").setProperty(sPath + "/TotalAmount", iAmount);
-                    this.getModel("local").setProperty(sPath + "/DeleteFlag", sDeleteFlag);
-                    if (sDeleteFlag === "W") {
-                        // this.getModel("local").setProperty(sPath + "/Status", "Error");
-                        $("#" + oRow.getId()).css("background-color", "#f2bfc0");
-                        $("#" + oRow.getId() + "-fixed").css("background-color", "#f2bfc0");
-                    }
+                    // var sDeleteFlag = iAmount >= parseFloat(config.Amount) ? "W" : "";
+                    // this.getModel("local").setProperty(sPath + "/DeleteFlag", sDeleteFlag);
+                    // if (sDeleteFlag === "W") {
+                    //     // this.getModel("local").setProperty(sPath + "/Status", "Error");
+                    //     $("#" + oRow.getId()).css("background-color", "#f2bfc0");
+                    //     $("#" + oRow.getId() + "-fixed").css("background-color", "#f2bfc0");
+                    // }
                 }
+                // ADD BEGIN BY XINLEI XU 2026/1/13 VN CM No.5265
+                if (sFunctionalPrice) {
+                    var iFunctionalAmount = parseFloat(sValue) * parseFloat(sFunctionalPrice);
+                    this.getModel("local").setProperty(sPath + "/FunctionalTotalAmount", iFunctionalAmount);
+                }
+                var sDeleteFlag = "";
+                if (sPlant === "3000") {
+                    sDeleteFlag = iFunctionalAmount >= parseFloat(config.Amount) ? "W" : "";
+                } else {
+                    sDeleteFlag = iAmount >= parseFloat(config.Amount) ? "W" : "";
+                }
+                this.getModel("local").setProperty(sPath + "/DeleteFlag", sDeleteFlag);
+                if (sDeleteFlag === "W") {
+                    // this.getModel("local").setProperty(sPath + "/Status", "Error");
+                    $("#" + oRow.getId()).css("background-color", "#f2bfc0");
+                    $("#" + oRow.getId() + "-fixed").css("background-color", "#f2bfc0");
+                }
+                // ADD END BY XINLEI XU 2026/1/13 VN CM No.5265
             } else {
                 oEvent.getSource().setValueState("Error");
             }
@@ -932,8 +1008,13 @@ sap.ui.define([
                                     Reason: element.REASON,
                                     Remark: element.REMARK,
                                     StandardPrice: element.STANDARD_PRICE,
-                                    TotalAmount: iAmount,
+                                    TotalAmount: element.TOTAL_AMOUNT, // iAmount, // MOD BY XINLEI XU 2026/1/13 VN CM No.5265
                                     Currency: element.CURRENCY,
+                                    // ADD BEGIN BY XINLEI XU 2026/1/13 VN CM No.5265
+                                    FunctionalPrice: element.FUNCTIONAL_PRICE,
+                                    FunctionalTotalAmount: element.FUNCTIONAL_TOTAL_AMOUNT,
+                                    FunctionalCurrency: element.FUNCTIONAL_CURRENCY,
+                                    // ADD END BY XINLEI XU 2026/1/13 VN CM No.5265
                                     OrderIsClosed: element.ORDER_IS_CLOSED,
                                     LocalLastChangedAtS: element.LOCAL_LAST_CHANGED_AT_S,
                                     DeleteFlag: element.DELETE_FLAG, //iAmount >= 100000 ? "W" : ""

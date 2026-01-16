@@ -36,19 +36,26 @@ sap.ui.define([
             return value;
         },
 
-        // format Number, integer + thousandths
-        formatNumber: function (n) {
+        // format Number, 2 decimal + thousandths
+        formatNumber: function (n, currency) {
             if (n) {
+                if (parseFloat(n) === 0 && currency === "") {
+                    return "";
+                }
                 var sign = "";
+                var decimal = 2;
                 if (typeof n === "string") {
                     var bNegative = n.endsWith("-");
                     if (bNegative) {
                         n = "-" + n.substring(0, n.length - 1);
                     }
                 }
-                var num = Number(n);
+                if (currency === "JPY" || currency === "TWD" || currency === "VND") {
+                    decimal = 0;
+                }
+                var num = Number(n).toFixed(decimal);
                 if (num < 0) {
-                    num = num * -1;
+                    num = num.substring(1);
                     sign = "-";
                 }
                 var re = /\d{1,3}(?=(\d{3})+$)/g;
