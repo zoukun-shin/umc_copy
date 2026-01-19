@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="SAP__capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="SAP__HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="com.sap.gateway.srvd.zui_ecn_o4.v0001" Alias="SAP__self">
+            <Annotation Term="SAP__core.SchemaVersion" String="1.0.0"/>
+            <EntityType Name="ECNType">
+                <Key>
+                    <PropertyRef Name="seq"/>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="Material"/>
+                </Key>
+                <Property Name="seq" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="changediff" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="serialnumber" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="ECNNo" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="ECNCreateAt" Type="Edm.Date"/>
+                <Property Name="ECNValidFrom" Type="Edm.Date"/>
+                <Property Name="Revison" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="HeadMat" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ItemNo" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Component" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="Qty" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="Unit" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="ECNText" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="ECNReason" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="MRPResponsible" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="BillOfMaterialVariantUsage" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="BillOfMaterialVariant" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="AltGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="DiscontinuationGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="FollowUpGroup" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="Netweight" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="WeightUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="BOMSubItemInstallationPoint" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="subitem" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="BOMItemNodeNumber" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="BillOfMaterial" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="TopLayerMaterial" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="Stock" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="ChangeContent" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="Manage" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <Property Name="BomItemSorter" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="DetSpecification" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="ItemQty" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="BaseQty" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="Quantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="6"/>
+            </EntityType>
+            <EntityType Name="EcnPrintType">
+                <Key>
+                    <PropertyRef Name="ChangeNumber"/>
+                    <PropertyRef Name="Material"/>
+                </Key>
+                <Property Name="ChangeNumber" Type="Edm.String" Nullable="false" MaxLength="12"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="BillOfMaterialVariant" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="CreatedDate" Type="Edm.Date"/>
+                <Property Name="BomHistory" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="CustomerName" Type="Edm.String" Nullable="false" MaxLength="80"/>
+                <Property Name="ReqByCustomer" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ReqByJp" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ReqByHk" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ReqByCn" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ReqByVn" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ReqByOther" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ReqByOtherText" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="BomRev" Type="Edm.String" Nullable="false" MaxLength="2"/>
+                <Property Name="EcoTypeDesc" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="StockOfSfgSmt" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="UnitSfgSmt" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="StockOfSfgFat" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="UnitSfgFat" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="StockOfNcgSmt" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="UnitNcgSmt" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="StockOfNcgFat" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="UnitNcgFat" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="StockOfFg" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3"/>
+                <Property Name="UnitFg" Type="Edm.String" Nullable="false" MaxLength="3"/>
+                <Property Name="OldNewNotTogether" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="OldStockDelivery" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ReworkSfg" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ReworkFg" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="Other" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="ReasonForChange" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="AttachedDocuments" Type="Edm.String" Nullable="false" MaxLength="50"/>
+                <Property Name="CreatedByUser" Type="Edm.String" Nullable="false" MaxLength="80"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="ECN" EntityType="com.sap.gateway.srvd.zui_ecn_o4.v0001.ECNType"/>
+                <EntitySet Name="EcnPrint" EntityType="com.sap.gateway.srvd.zui_ecn_o4.v0001.EcnPrintType"/>
+            </EntityContainer>
+            <Annotations Target="SAP__self.ECNType/Plant">
+                <Annotation Term="SAP__common.Label" String="Plant"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/i_plantstdvh/0001;ps='srvd-zui_ecn_o4-0001';va='com.sap.gateway.srvd.zui_ecn_o4.v0001.et-zr_ecn.plant'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.Heading" String="Plnt"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Plant"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Material">
+                <Annotation Term="SAP__common.Label" String="Material"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/zc_bommaterialvh/0001;ps='srvd-zui_ecn_o4-0001';va='com.sap.gateway.srvd.zui_ecn_o4.v0001.et-zr_ecn.material'/$metadata</String>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/changediff">
+                <Annotation Term="SAP__common.Label" String="Change Before/After"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/serialnumber">
+                <Annotation Term="SAP__common.Label" String="No"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/ECNNo">
+                <Annotation Term="SAP__common.Label" String="Change Number"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Change No."/>
+                <Annotation Term="SAP__common.QuickInfo" String="Change Number"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AENNR"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/ECNCreateAt">
+                <Annotation Term="SAP__common.Label" String="ECN Registration Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/ECNValidFrom">
+                <Annotation Term="SAP__common.Label" String="ECN Effective Start Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Revison">
+                <Annotation Term="SAP__common.Label" String="Revision Level"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/HeadMat">
+                <Annotation Term="SAP__common.Label" String="Target Material"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Material"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Material Number"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/ItemNo">
+                <Annotation Term="SAP__common.Label" String="Item Number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Component">
+                <Annotation Term="SAP__common.Label" String="Component"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Qty">
+                <Annotation Term="SAP__common.Label" String="Component Quantity"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Unit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="Unit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/ECNText">
+                <Annotation Term="SAP__common.Label" String="Change Number Text"/>
+                <Annotation Term="SAP__common.Heading" String="Change number description"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Change number description"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_AETXT"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/ECNReason">
+                <Annotation Term="SAP__common.Label" String="Reason for Change"/>
+                <Annotation Term="SAP__common.Heading" String="Reason for Change"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Reason for change"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_AEGRU"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/MRPResponsible">
+                <Annotation Term="SAP__common.Label" String="MRP Controller"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="MRPCn"/>
+                <Annotation Term="SAP__common.QuickInfo" String="MRP Controller"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=DISPO"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/BillOfMaterialVariantUsage">
+                <Annotation Term="SAP__common.Label" String="BOM Usage"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/BillOfMaterialVariant">
+                <Annotation Term="SAP__common.Label" String="Alternative BOM"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/AltGroup">
+                <Annotation Term="SAP__common.Label" String="Alternative Item Group"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/DiscontinuationGroup">
+                <Annotation Term="SAP__common.Label" String="Discontinuation Group"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/FollowUpGroup">
+                <Annotation Term="SAP__common.Label" String="Follow-up Group"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Netweight">
+                <Annotation Term="SAP__common.Label" String="Net Weight"/>
+                <Annotation Term="SAP__common.Heading" String="Net Weight"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Net Weight"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=NTGEW"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/WeightUnit">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="Weight Unit"/>
+                <Annotation Term="SAP__common.Heading" String="WUn"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Unit of Weight"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=GEWEI"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/BOMSubItemInstallationPoint">
+                <Annotation Term="SAP__common.Label" String="Installation Point"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/subitem">
+                <Annotation Term="SAP__common.Label" String="Sub-item Display"/>
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Collection>
+                        <String>../../../../srvd_f4/sap/zc_boolean_vh/0001;ps='srvd-zui_ecn_o4-0001';va='com.sap.gateway.srvd.zui_ecn_o4.v0001.et-zr_ecn.subitem'/$metadata</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/BOMItemNodeNumber">
+                <Annotation Term="SAP__common.Label" String="BillOfMaterialItemNodeNumber"/>
+                <Annotation Term="SAP__common.IsDigitSequence"/>
+                <Annotation Term="SAP__common.Heading" String="Node"/>
+                <Annotation Term="SAP__common.QuickInfo" String="BOM item node number"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/TopLayerMaterial">
+                <Annotation Term="SAP__common.Label" String="Model"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Heading" String="Material"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Material Number"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType">
+                <Annotation Term="SAP__common.Label" String="ECN Report"/>
+                <Annotation Term="SAP__UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="ECN Report"/>
+                        <PropertyValue Property="TypeNamePlural" String="ECN Report"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.LineItem">
+                    <Collection>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="serialnumber"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="4rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Plant"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="6rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="changediff"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ECNNo"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ECNCreateAt"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ECNValidFrom"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="12rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Revison"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="HeadMat"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ItemNo"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Component"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Qty"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Unit"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ECNText"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="ECNReason"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="MRPResponsible"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="BillOfMaterialVariantUsage"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="BillOfMaterialVariant"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="AltGroup"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="12rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="DiscontinuationGroup"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="FollowUpGroup"/>
+                            <Annotation Term="SAP__HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="12rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="Netweight"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="WeightUnit"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Value" Path="BOMSubItemInstallationPoint"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__UI.PresentationVariant">
+                    <Record>
+                        <PropertyValue Property="RequestAtLeast">
+                            <Collection>
+                                <PropertyPath>Quantity</PropertyPath>
+                                <PropertyPath>BaseQty</PropertyPath>
+                                <PropertyPath>ItemQty</PropertyPath>
+                                <PropertyPath>DetSpecification</PropertyPath>
+                                <PropertyPath>BomItemSorter</PropertyPath>
+                                <PropertyPath>Manage</PropertyPath>
+                                <PropertyPath>ChangeContent</PropertyPath>
+                                <PropertyPath>Stock</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Plant</PropertyPath>
+                        <PropertyPath>MRPResponsible</PropertyPath>
+                        <PropertyPath>Material</PropertyPath>
+                        <PropertyPath>Component</PropertyPath>
+                        <PropertyPath>BillOfMaterialVariantUsage</PropertyPath>
+                        <PropertyPath>BillOfMaterialVariant</PropertyPath>
+                        <PropertyPath>ECNNo</PropertyPath>
+                        <PropertyPath>ECNCreateAt</PropertyPath>
+                        <PropertyPath>ECNValidFrom</PropertyPath>
+                        <PropertyPath>subitem</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/ECN">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="Filterable" Bool="true"/>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Plant"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ECNCreateAt"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="ECNValidFrom"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleRange"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="BillOfMaterialVariantUsage"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="BillOfMaterialVariant"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="subitem"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="RequiredProperties">
+                            <Collection>
+                                <PropertyPath>Plant</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.Container">
+                <Annotation Term="SAP__CodeList.UnitsOfMeasure">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="UnitsOfMeasure"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="SAP__capabilities.FilterFunctions">
+                    <Collection>
+                        <String>eq</String>
+                        <String>ne</String>
+                        <String>gt</String>
+                        <String>ge</String>
+                        <String>lt</String>
+                        <String>le</String>
+                        <String>and</String>
+                        <String>or</String>
+                        <String>contains</String>
+                        <String>startswith</String>
+                        <String>endswith</String>
+                        <String>any</String>
+                        <String>all</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.SupportedFormats">
+                    <Collection>
+                        <String>application/json</String>
+                        <String>application/pdf</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="SAP__PDF.Features">
+                    <Record>
+                        <PropertyValue Property="DocumentDescriptionReference" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="DocumentDescriptionCollection" String="MyDocumentDescriptions"/>
+                        <PropertyValue Property="ArchiveFormat" Bool="true"/>
+                        <PropertyValue Property="Border" Bool="true"/>
+                        <PropertyValue Property="CoverPage" Bool="true"/>
+                        <PropertyValue Property="FitToPage" Bool="true"/>
+                        <PropertyValue Property="FontName" Bool="true"/>
+                        <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="Margin" Bool="true"/>
+                        <PropertyValue Property="Padding" Bool="true"/>
+                        <PropertyValue Property="ResultSizeDefault" Int="20000"/>
+                        <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="TextDirectionLayout" Bool="true"/>
+                        <PropertyValue Property="Treeview" Bool="true"/>
+                        <PropertyValue Property="UploadToFileShare" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
+                <Annotation Term="SAP__capabilities.AsynchronousRequestsSupported"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/ChangeNumber">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Change Number"/>
+                <Annotation Term="SAP__common.Heading" String="Change No."/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AENNR"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/Material">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Material"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Material Number"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/Plant">
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__common.Label" String="Plant"/>
+                <Annotation Term="SAP__common.Heading" String="Plnt"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/StockOfSfgSmt">
+                <Annotation Term="SAP__measures.Unit" Path="UnitSfgSmt"/>
+                <Annotation Term="SAP__common.Label" String="Quantity"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/UnitSfgSmt">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/StockOfSfgFat">
+                <Annotation Term="SAP__measures.Unit" Path="UnitSfgFat"/>
+                <Annotation Term="SAP__common.Label" String="Quantity"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/UnitSfgFat">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/StockOfNcgSmt">
+                <Annotation Term="SAP__measures.Unit" Path="UnitNcgSmt"/>
+                <Annotation Term="SAP__common.Label" String="Quantity"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/UnitNcgSmt">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/StockOfNcgFat">
+                <Annotation Term="SAP__measures.Unit" Path="UnitNcgFat"/>
+                <Annotation Term="SAP__common.Label" String="Quantity"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/UnitNcgFat">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/StockOfFg">
+                <Annotation Term="SAP__measures.Unit" Path="UnitFg"/>
+                <Annotation Term="SAP__common.Label" String="Quantity"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/UnitFg">
+                <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.Heading" String="BUn"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType">
+                <Annotation Term="SAP__common.Label" String="ECN Print"/>
+            </Annotations>
+            <Annotations Target="SAP__self.Container/EcnPrint">
+                <Annotation Term="SAP__capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                        <PropertyValue Property="QueryOptions">
+                            <Record>
+                                <PropertyValue Property="SelectSupported" Bool="true"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="StockOfSfgSmt"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="StockOfSfgFat"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="StockOfNcgSmt"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="StockOfNcgFat"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="StockOfFg"/>
+                                    <PropertyValue Property="AllowedExpressions" String="MultiValue"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/seq">
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/BillOfMaterial">
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Stock">
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/ChangeContent">
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Manage">
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/BomItemSorter">
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/DetSpecification">
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/ItemQty">
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/BaseQty">
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Base quantity"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BASMN"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ECNType/Quantity">
+                <Annotation Term="SAP__UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/CreatedDate">
+                <Annotation Term="SAP__common.Label" String="Created On"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Record Creation Date"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/ReqByCustomer">
+                <Annotation Term="SAP__common.Label" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/ReqByJp">
+                <Annotation Term="SAP__common.Label" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/ReqByHk">
+                <Annotation Term="SAP__common.Label" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/ReqByCn">
+                <Annotation Term="SAP__common.Label" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/ReqByVn">
+                <Annotation Term="SAP__common.Label" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/ReqByOther">
+                <Annotation Term="SAP__common.Label" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/OldNewNotTogether">
+                <Annotation Term="SAP__common.Label" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/OldStockDelivery">
+                <Annotation Term="SAP__common.Label" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/ReworkSfg">
+                <Annotation Term="SAP__common.Label" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/ReworkFg">
+                <Annotation Term="SAP__common.Label" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/Other">
+                <Annotation Term="SAP__common.Label" String="Truth Value"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Truth Value: True/False"/>
+            </Annotations>
+            <Annotations Target="SAP__self.EcnPrintType/ReasonForChange">
+                <Annotation Term="SAP__common.Label" String="Reason for Change"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Reason for change"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_AEGRU"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

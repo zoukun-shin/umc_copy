@@ -110,6 +110,11 @@ sap.ui.define([
                 operator: FilterOperator.EQ,
                 value1: oSelectedLine.Material
             }));
+            aFilters.push(new Filter({
+                path: "subitem",
+                operator: FilterOperator.EQ,
+                value1: oSelectedLine.subitem
+            }));
             var oContextBinding = _oDataModel.bindList("/ECN", undefined, undefined, aFilters, {});
             
             //获取行项目数据
@@ -118,8 +123,16 @@ sap.ui.define([
             oItemPromise.then(function(aContext){
                 for (const boundContext of aContext) {
                     var object = boundContext.getObject();
+                    //TH 打印before行 这几个字段不需要值
+                    if (object.ChangeDiffCode === '01' && object.Plant === "4000" ) {
+                        object.ChangeContent = "";
+                        object.Stock = "";
+                        object.Manage = "";
+                    }
+
                     aPrintItem.push({
-                        Seq: object.seq,
+                        Seq: object.serialnumber,
+                        SerialNumber: object.serialnumber,
                         BeforAfter: object.changediff,
                         PartNo: object.Component,
                         Specification: object.DetSpecification,
@@ -133,7 +146,17 @@ sap.ui.define([
                         ECNCreateAt: object.ECNCreateAt
                     });
                 }
+                let iLastSerialNumber;
+                let iIndex = 0;
+                aPrintItem.forEach(function(e){
+                    if (iLastSerialNumber != e.Seq) {
+                    iIndex += 1;
+                    }
+                    e.SerialNumber = iIndex;
+                    iLastSerialNumber = e.Seq
+                });
             });
+            
 
             var aFilters = [];
             aFilters.push(new Filter({
