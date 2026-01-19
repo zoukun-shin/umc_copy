@@ -29,6 +29,27 @@
                             <smartFilterBar:ControlConfiguration id="id2ControlConfiguration" key="Status" filterType="single" visibleInAdvancedArea="true" label="{i18n>Status}" mandatory="notMandatory" index="15" />
                             <smartFilterBar:ControlConfiguration id="id3ControlConfiguration" key="FiscalPeriod"  visibleInAdvancedArea="true" label="{i18n>FiscalPeriod}" mandatory="notMandatory" index="20" />
                             <smartFilterBar:ControlConfiguration id="id4ControlConfiguration" key="AlternativeGLAccount" visibleInAdvancedArea="true" label="{i18n>AlternativeGLAccount}" mandatory="notMandatory" index="25" />
+                            <smartFilterBar:ControlConfiguration id="id5ControlConfiguration" key="FiscalYear" label="{i18n>FiscalYear}" index="30" visibleInAdvancedArea="false"/>
+                            <!-- visible -->
+                            <smartFilterBar:ControlConfiguration id="id6ControlConfiguration" key="AccountingDocument" label="{i18n>AccountingDocument}" index="35" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id7ControlConfiguration" key="LedgerGLLineItem" label="{i18n>LedgerGLLineItem}" index="40" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id8ControlConfiguration" key="DebitCreditCode" label="{i18n>DebitCreditCode}" index="45" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id9ControlConfiguration" key="AmountInFunctionalCurrency" label="{i18n>AmountInFunctionalCurrency}" index="50" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id10ControlConfiguration" key="FunctionalCurrency" label="{i18n>FunctionalCurrency}" index="55" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id11ControlConfiguration" key="AmountInCompanyCodeCurrency" label="{i18n>AmountInCompanyCodeCurrency}" index="60" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id12ControlConfiguration" key="CompanyCodeCurrency" label="{i18n>CompanyCodeCurrency}" index="65" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id13ControlConfiguration" key="DocumentItemText" label="{i18n>DocumentItemText}" index="70" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id14ControlConfiguration" key="AssignmentReference" label="{i18n>AssignmentReference}" index="75" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id15ControlConfiguration" key="ProfitCenter" label="{i18n>ProfitCenter}" index="80" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id16ControlConfiguration" key="Quantity" label="{i18n>Quantity}" index="85" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id17ControlConfiguration" key="Material" label="{i18n>Material}" index="90" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id18ControlConfiguration" key="Customer" label="{i18n>Customer}" index="95" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id19ControlConfiguration" key="PurchasingDocument" label="{i18n>PurchasingDocument}" index="100" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id20ControlConfiguration" key="PurchasingDocumentItem" label="{i18n>PurchasingDocumentItem}" index="105" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id21ControlConfiguration" key="Supplier" label="{i18n>Supplier}" index="110" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id22ControlConfiguration" key="ClearingAccountingDocument" label="{i18n>ClearingAccountingDocument}" index="115" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id23ControlConfiguration" key="ClearingDate" label="{i18n>ClearingDate}" index="120" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id24ControlConfiguration" key="NetDueDate" label="{i18n>NetDueDate}" index="125" visibleInAdvancedArea="false"/>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -42,7 +63,7 @@
                         <Button type="Transparent" text="{i18n>downloadBtn}" press="onExport" visible="{local>/onExportvisible}" enabled="true" />
                     </OverflowToolbar> -->
                 </smartTable:customToolbar>
-                <t:Table id="idDocumentTable" rowActionCount="1" rowsUpdated="onUITableRowsUpdated">
+                <t:Table id="idDocumentTable" rowActionCount="1" rowMode="Auto" rowsUpdated="onUITableRowsUpdated">
                     <t:columns>
                         <t:Column width="10rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
                             <t:customData>

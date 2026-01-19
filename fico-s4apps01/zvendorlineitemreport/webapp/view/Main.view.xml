@@ -28,6 +28,31 @@
                             <smartFilterBar:ControlConfiguration id="id1ControlConfiguration" key="Status"         filterType="single" visibleInAdvancedArea="true" label="{i18n>Status}"          mandatory="notMandatory" index="10" />
                             <smartFilterBar:ControlConfiguration id="id2ControlConfiguration" key="ClearingDate"   filterType="single" visibleInAdvancedArea="true" label="{i18n>ClearingDate}"    mandatory="notMandatory" index="15" />
                             <smartFilterBar:ControlConfiguration id="id3ControlConfiguration" key="OpenOnKeyDate"  filterType="single" visibleInAdvancedArea="true" label="{i18n>OpenOnKeyDate}"   mandatory="notMandatory" index="20" />
+                            <!-- visible -->
+                            <smartFilterBar:ControlConfiguration id="id4ControlConfiguration" index="26" key="AccountingDocument" label="{i18n>AccountingDocument}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id5ControlConfiguration" index="27" key="LedgerGLLineItem" label="{i18n>LedgerGLLineItem}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id27ControlConfiguration" index="28" key="GLAccount" label="{i18n>GLAccount}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id6ControlConfiguration" index="29" key="FiscalPeriod" label="{i18n>FiscalPeriod}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id7ControlConfiguration" index="30" key="PostingDate" label="{i18n>PostingDate}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id8ControlConfiguration" index="31" key="NetDueDate" label="{i18n>NetDueDate}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id9ControlConfiguration" index="32" key="AlternativeGLAccount" label="{i18n>AlternativeGLAccount}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id10ControlConfiguration" index="33" key="AccountingDocumentType" label="{i18n>AccountingDocumentType}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id11ControlConfiguration" index="34" key="DebitCreditCode" label="{i18n>DebitCreditCode}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id12ControlConfiguration" index="35" key="TransactionCurrency" label="{i18n>TransactionCurrency}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id13ControlConfiguration" index="36" key="AmountInFunctionalCurrency" label="{i18n>AmountInFunctionalCurrency}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id14ControlConfiguration" index="37" key="DebitAmountinFunctionalCurr" label="{i18n>DebitAmountinFunctionalCurr}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id15ControlConfiguration" index="38" key="CreditAmountinFunctionalCur" label="{i18n>CreditAmountinFunctionalCur}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id16ControlConfiguration" index="39" key="FunctionalCurrency" label="{i18n>FunctionalCurrency}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id17ControlConfiguration" index="40" key="AmountInCompanyCodeCurrency" label="{i18n>AmountInCompanyCodeCurrency}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id18ControlConfiguration" index="41" key="CompanyCodeCurrency" label="{i18n>CompanyCodeCurrency}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id19ControlConfiguration" index="42" key="DocumentItemText" label="{i18n>DocumentItemText}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id20ControlConfiguration" index="43" key="AssignmentReference" label="{i18n>AssignmentReference}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id21ControlConfiguration" index="44" key="ProfitCenter" label="{i18n>ProfitCenter}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id22ControlConfiguration" index="45" key="ClearingAccountingDocument" label="{i18n>ClearingAccountingDocument}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id23ControlConfiguration" index="46" key="OffsettingAcctNo" label="{i18n>OffsettingAcctNo}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id24ControlConfiguration" index="47" key="OffsettingAccount" label="{i18n>OffsettingAccount}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id25ControlConfiguration" index="48" key="POVendorCode" label="{i18n>POVendorCode}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id26ControlConfiguration" index="49" key="POVendorName" label="{i18n>POVendorName}" visibleInAdvancedArea="false"/>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -42,7 +67,7 @@
                         
                     </OverflowToolbar>
                 </smartTable:customToolbar>
-                <t:Table id="idDocumentTable" rows="{local>/data}" rowActionCount="1" rowsUpdated="onUITableRowsUpdated">
+                <t:Table id="idDocumentTable" rows="{local>/data}" rowMode="Auto" rowActionCount="1" rowsUpdated="onUITableRowsUpdated">
                     <t:columns>
                         <t:Column width="10rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
                             <t:customData>
@@ -92,7 +117,7 @@
                                 <Text text="{FiscalPeriod}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>Supplier}" width="4rem" sortProperty="Supplier" filterProperty="Supplier" autoResizable="true" >
+                        <t:Column  label="{i18n>Supplier}" width="7rem" sortProperty="Supplier" filterProperty="Supplier" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Supplier", "leadingProperty":"Supplier", "sortProperty":"Supplier", "filterProperty": "Supplier"}'/>
                             </t:customData>
@@ -100,7 +125,7 @@
                                 <Text text="{Supplier}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>Status}" width="4rem" sortProperty="Status" filterProperty="Status" autoResizable="true" >
+                        <t:Column  label="{i18n>Status}" width="5rem" sortProperty="Status" filterProperty="Status" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Status", "leadingProperty":"Status", "sortProperty":"Status", "filterProperty": "Status"}'/>
                             </t:customData>
@@ -108,7 +133,7 @@
                                 <ObjectStatus state="{ path:'Status',formatter:'.formatter.formatState' }" icon="{ path:'Status', formatter:'.formatter.formatStateIcon'}"/>
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>PostingDate}" width="4rem" sortProperty="PostingDate" filterProperty="PostingDate" autoResizable="true" >
+                        <t:Column  label="{i18n>PostingDate}" width="10rem" sortProperty="PostingDate" filterProperty="PostingDate" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"PostingDate", "leadingProperty":"PostingDate", "sortProperty":"PostingDate", "filterProperty": "PostingDate"}'/>
                             </t:customData>
@@ -116,7 +141,7 @@
                                 <Text text="{ path: 'PostingDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>NetDueDate}" width="4rem" sortProperty="NetDueDate" filterProperty="NetDueDate" autoResizable="true" >
+                        <t:Column  label="{i18n>NetDueDate}" width="10rem" sortProperty="NetDueDate" filterProperty="NetDueDate" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"NetDueDate", "leadingProperty":"NetDueDate", "sortProperty":"NetDueDate", "filterProperty": "NetDueDate"}'/>
                             </t:customData>
@@ -124,7 +149,7 @@
                                 <Text text="{ path: 'NetDueDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>AlternativeGLAccount}" width="4rem" sortProperty="AlternativeGLAccount" filterProperty="AlternativeGLAccount" autoResizable="true" >
+                        <t:Column  label="{i18n>AlternativeGLAccount}" width="10rem" sortProperty="AlternativeGLAccount" filterProperty="AlternativeGLAccount" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"AlternativeGLAccount", "leadingProperty":"AlternativeGLAccount", "sortProperty":"AlternativeGLAccount", "filterProperty": "AlternativeGLAccount"}'/>
                             </t:customData>
@@ -132,7 +157,7 @@
                                 <Text text="{AlternativeGLAccount}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>AccountingDocumentType}" width="4rem" sortProperty="AccountingDocumentType" filterProperty="AccountingDocumentType" autoResizable="true" >
+                        <t:Column  label="{i18n>AccountingDocumentType}" width="10rem" sortProperty="AccountingDocumentType" filterProperty="AccountingDocumentType" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"AccountingDocumentType", "leadingProperty":"AccountingDocumentType", "sortProperty":"AccountingDocumentType", "filterProperty": "AccountingDocumentType"}'/>
                             </t:customData>
@@ -140,7 +165,7 @@
                                 <Text text="{AccountingDocumentType}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>DebitCreditCode}" width="4rem" sortProperty="DebitCreditCode" filterProperty="DebitCreditCode" autoResizable="true" >
+                        <t:Column  label="{i18n>DebitCreditCode}" width="10rem" sortProperty="DebitCreditCode" filterProperty="DebitCreditCode" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"DebitCreditCode", "leadingProperty":"DebitCreditCode", "sortProperty":"DebitCreditCode", "filterProperty": "DebitCreditCode"}'/>
                             </t:customData>
@@ -148,7 +173,7 @@
                                 <Text text="{DebitCreditCode}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>TransactionCurrency}" width="4rem" sortProperty="TransactionCurrency" filterProperty="TransactionCurrency" autoResizable="true" >
+                        <t:Column  label="{i18n>TransactionCurrency}" width="10rem" sortProperty="TransactionCurrency" filterProperty="TransactionCurrency" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"TransactionCurrency", "leadingProperty":"TransactionCurrency", "sortProperty":"TransactionCurrency", "filterProperty": "TransactionCurrency"}'/>
                             </t:customData>
@@ -156,7 +181,7 @@
                                 <Text text="{TransactionCurrency}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>AmountInFunctionalCurrency}" width="4rem" sortProperty="AmountInFunctionalCurrency" filterProperty="AmountInFunctionalCurrency" autoResizable="true" >
+                        <t:Column  label="{i18n>AmountInFunctionalCurrency}" width="15rem" sortProperty="AmountInFunctionalCurrency" filterProperty="AmountInFunctionalCurrency" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"AmountInFunctionalCurrency", "leadingProperty":"AmountInFunctionalCurrency", "sortProperty":"AmountInFunctionalCurrency", "filterProperty": "AmountInFunctionalCurrency"}'/>
                             </t:customData>
@@ -164,7 +189,7 @@
                                 <Text text="{AmountInFunctionalCurrency}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>DebitAmountinFunctionalCurr}" width="4rem" sortProperty="DebitAmountinFunctionalCurr" filterProperty="DebitAmountinFunctionalCurr" autoResizable="true" >
+                        <t:Column  label="{i18n>DebitAmountinFunctionalCurr}" width="20rem" sortProperty="DebitAmountinFunctionalCurr" filterProperty="DebitAmountinFunctionalCurr" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"DebitAmountinFunctionalCurr", "leadingProperty":"DebitAmountinFunctionalCurr", "sortProperty":"DebitAmountinFunctionalCurr", "filterProperty": "DebitAmountinFunctionalCurr"}'/>
                             </t:customData>
@@ -172,7 +197,7 @@
                                 <Text text="{DebitAmountinFunctionalCurr}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>CreditAmountinFunctionalCur}" width="4rem" sortProperty="CreditAmountinFunctionalCur" filterProperty="CreditAmountinFunctionalCur" autoResizable="true" >
+                        <t:Column  label="{i18n>CreditAmountinFunctionalCur}" width="20rem" sortProperty="CreditAmountinFunctionalCur" filterProperty="CreditAmountinFunctionalCur" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CreditAmountinFunctionalCur", "leadingProperty":"CreditAmountinFunctionalCur", "sortProperty":"CreditAmountinFunctionalCur", "filterProperty": "CreditAmountinFunctionalCur"}'/>
                             </t:customData>
@@ -180,7 +205,7 @@
                                 <Text text="{CreditAmountinFunctionalCur}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>FunctionalCurrency}" width="4rem" sortProperty="FunctionalCurrency" filterProperty="FunctionalCurrency" autoResizable="true" >
+                        <t:Column  label="{i18n>FunctionalCurrency}" width="10rem" sortProperty="FunctionalCurrency" filterProperty="FunctionalCurrency" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"FunctionalCurrency", "leadingProperty":"FunctionalCurrency", "sortProperty":"FunctionalCurrency", "filterProperty": "FunctionalCurrency"}'/>
                             </t:customData>
@@ -188,7 +213,7 @@
                                 <Text text="{FunctionalCurrency}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>AmountInCompanyCodeCurrency}" width="4rem" sortProperty="AmountInCompanyCodeCurrency" filterProperty="AmountInCompanyCodeCurrency" autoResizable="true" >
+                        <t:Column  label="{i18n>AmountInCompanyCodeCurrency}" width="15rem" sortProperty="AmountInCompanyCodeCurrency" filterProperty="AmountInCompanyCodeCurrency" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"AmountInCompanyCodeCurrency", "leadingProperty":"AmountInCompanyCodeCurrency", "sortProperty":"AmountInCompanyCodeCurrency", "filterProperty": "AmountInCompanyCodeCurrency"}'/>
                             </t:customData>
@@ -196,7 +221,7 @@
                                 <Text text="{AmountInCompanyCodeCurrency}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>CompanyCodeCurrency}" width="4rem" sortProperty="CompanyCodeCurrency" filterProperty="CompanyCodeCurrency" autoResizable="true" >
+                        <t:Column  label="{i18n>CompanyCodeCurrency}" width="15rem" sortProperty="CompanyCodeCurrency" filterProperty="CompanyCodeCurrency" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCodeCurrency", "leadingProperty":"CompanyCodeCurrency", "sortProperty":"CompanyCodeCurrency", "filterProperty": "CompanyCodeCurrency"}'/>
                             </t:customData>
@@ -204,7 +229,7 @@
                                 <Text text="{CompanyCodeCurrency}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>DocumentItemText}" width="4rem" sortProperty="DocumentItemText" filterProperty="DocumentItemText" autoResizable="true" >
+                        <t:Column  label="{i18n>DocumentItemText}" width="10rem" sortProperty="DocumentItemText" filterProperty="DocumentItemText" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"DocumentItemText", "leadingProperty":"DocumentItemText", "sortProperty":"DocumentItemText", "filterProperty": "DocumentItemText"}'/>
                             </t:customData>
@@ -212,7 +237,7 @@
                                 <Text text="{DocumentItemText}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>AssignmentReference}" width="4rem" sortProperty="AssignmentReference" filterProperty="AssignmentReference" autoResizable="true" >
+                        <t:Column  label="{i18n>AssignmentReference}" width="10rem" sortProperty="AssignmentReference" filterProperty="AssignmentReference" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"AssignmentReference", "leadingProperty":"AssignmentReference", "sortProperty":"AssignmentReference", "filterProperty": "AssignmentReference"}'/>
                             </t:customData>
@@ -220,7 +245,7 @@
                                 <Text text="{AssignmentReference}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>ProfitCenter}" width="4rem" sortProperty="ProfitCenter" filterProperty="ProfitCenter" autoResizable="true" >
+                        <t:Column  label="{i18n>ProfitCenter}" width="10rem" sortProperty="ProfitCenter" filterProperty="ProfitCenter" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ProfitCenter", "leadingProperty":"ProfitCenter", "sortProperty":"ProfitCenter", "filterProperty": "ProfitCenter"}'/>
                             </t:customData>
@@ -228,7 +253,7 @@
                                 <Text text="{ProfitCenter}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>ClearingAccountingDocument}" width="4rem" sortProperty="ClearingAccountingDocument" filterProperty="ClearingAccountingDocument" autoResizable="true" >
+                        <t:Column  label="{i18n>ClearingAccountingDocument}" width="10rem" sortProperty="ClearingAccountingDocument" filterProperty="ClearingAccountingDocument" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ClearingAccountingDocument", "leadingProperty":"ClearingAccountingDocument", "sortProperty":"ClearingAccountingDocument", "filterProperty": "ClearingAccountingDocument"}'/>
                             </t:customData>
@@ -236,7 +261,7 @@
                                 <Text text="{ClearingAccountingDocument}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>ClearingDate}" width="4rem" sortProperty="ClearingDate" filterProperty="ClearingDate" autoResizable="true" >
+                        <t:Column  label="{i18n>ClearingDate}" width="10rem" sortProperty="ClearingDate" filterProperty="ClearingDate" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ClearingDate", "leadingProperty":"ClearingDate", "sortProperty":"ClearingDate", "filterProperty": "ClearingDate"}'/>
                             </t:customData>
@@ -244,7 +269,7 @@
                                 <Text text="{ path: 'ClearingDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>OpenOnKeyDate}" width="4rem" sortProperty="OpenOnKeyDate" filterProperty="OpenOnKeyDate" autoResizable="true" >
+                        <t:Column  label="{i18n>OpenOnKeyDate}" width="10rem" sortProperty="OpenOnKeyDate" filterProperty="OpenOnKeyDate" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"OpenOnKeyDate", "leadingProperty":"OpenOnKeyDate", "sortProperty":"OpenOnKeyDate", "filterProperty": "OpenOnKeyDate"}'/>
                             </t:customData>
@@ -252,7 +277,7 @@
                                 <Text text="{ path: 'OpenOnKeyDate', formatter: '.formatter.formatDate' }" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>OffsettingAcctNo}" width="4rem" sortProperty="OffsettingAcctNo" filterProperty="OffsettingAcctNo" autoResizable="true" >
+                        <t:Column  label="{i18n>OffsettingAcctNo}" width="10rem" sortProperty="OffsettingAcctNo" filterProperty="OffsettingAcctNo" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"OffsettingAcctNo", "leadingProperty":"OffsettingAcctNo", "sortProperty":"OffsettingAcctNo", "filterProperty": "OffsettingAcctNo"}'/>
                             </t:customData>
@@ -260,7 +285,7 @@
                                 <Text text="{OffsettingAcctNo}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>OffsettingAccount}" width="4rem" sortProperty="OffsettingAccount" filterProperty="OffsettingAccount" autoResizable="true" >
+                        <t:Column  label="{i18n>OffsettingAccount}" width="10rem" sortProperty="OffsettingAccount" filterProperty="OffsettingAccount" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"OffsettingAccount", "leadingProperty":"OffsettingAccount", "sortProperty":"OffsettingAccount", "filterProperty": "OffsettingAccount"}'/>
                             </t:customData>
@@ -268,7 +293,7 @@
                                 <Text text="{OffsettingAccount}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>POVendorCode}" width="4rem" sortProperty="POVendorCode" filterProperty="POVendorCode" autoResizable="true" >
+                        <t:Column  label="{i18n>POVendorCode}" width="10rem" sortProperty="POVendorCode" filterProperty="POVendorCode" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"POVendorCode", "leadingProperty":"POVendorCode", "sortProperty":"POVendorCode", "filterProperty": "POVendorCode"}'/>
                             </t:customData>
@@ -276,7 +301,7 @@
                                 <Text text="{POVendorCode}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column  label="{i18n>POVendorName}" width="4rem" sortProperty="POVendorName" filterProperty="POVendorName" autoResizable="true" >
+                        <t:Column  label="{i18n>POVendorName}" width="10rem" sortProperty="POVendorName" filterProperty="POVendorName" autoResizable="true" >
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"POVendorName", "leadingProperty":"POVendorName", "sortProperty":"POVendorName", "filterProperty": "POVendorName"}'/>
                             </t:customData>
