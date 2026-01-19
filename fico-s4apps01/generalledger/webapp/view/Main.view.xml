@@ -50,6 +50,7 @@
                             <smartFilterBar:ControlConfiguration id="id22ControlConfiguration" key="ClearingAccountingDocument" label="{i18n>ClearingAccountingDocument}" index="115" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration id="id23ControlConfiguration" key="ClearingDate" label="{i18n>ClearingDate}" index="120" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration id="id24ControlConfiguration" key="NetDueDate" label="{i18n>NetDueDate}" index="125" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration id="id25ControlConfiguration" key="IsReversed" label="{i18n>IsReversed}" index="130" visibleInAdvancedArea="false"/>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -247,6 +248,30 @@
                             </t:customData>
                             <t:template>
                                 <Text text="{ path: 'NetDueDate', formatter: '.formatter.formatDate' }" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>SourceLedger}" sortProperty="SourceLedger" filterProperty="SourceLedger">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SourceLedger", "leadingProperty":"SourceLedger", "sortProperty":"SourceLedger", "filterProperty": "SourceLedger"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{SourceLedger}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>IsReversed}" sortProperty="IsReversed" filterProperty="IsReversed">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"IsReversed", "leadingProperty":"IsReversed", "sortProperty":"IsReversed", "filterProperty": "IsReversed"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{IsReversed}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>AlternativeGLAccount}" sortProperty="AlternativeGLAccount" filterProperty="AlternativeGLAccount">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AlternativeGLAccount", "leadingProperty":"AlternativeGLAccount", "sortProperty":"AlternativeGLAccount", "filterProperty": "AlternativeGLAccount"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AlternativeGLAccount}" wrapping="false" />
                             </t:template>
                         </t:Column>
                     </t:columns>
