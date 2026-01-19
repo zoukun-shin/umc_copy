@@ -40,7 +40,7 @@
                                 <Text text="{local>Message}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="8rem" label="{i18n>Customer}">
+                        <!-- <table:Column width="8rem" label="{i18n>Customer}">
                             <table:template>
                                 <Text text="{local>Customer}" wrapping="false"/>
                             </table:template>
@@ -49,7 +49,7 @@
                             <table:template>
                                 <Text text="{local>MaterialByCustomer}" wrapping="false"/>
                             </table:template>
-                        </table:Column>
+                        </table:Column> -->
                         <table:Column width="14rem" label="{i18n>Material}">
                             <table:template>
                                 <Text text="{local>Material}" wrapping="false"/>
