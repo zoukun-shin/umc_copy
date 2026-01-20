@@ -134,15 +134,6 @@ sap.ui.define([
                 value1: sTotalDimension
             });
              aFilters.push(oTotalDimension);
-
-            //Authority check 
-            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-            var oUserEmail = new sap.ui.model.Filter({
-                path: "UserEmail",
-                operator: "EQ",
-                value1: sEmail
-            });
-            aFilters.push(oUserEmail);
         },
 
         onInputLiveChange: function (oEvent) {
