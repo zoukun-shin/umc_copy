@@ -2,6 +2,7 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:smartfield="sap.ui.comp.smartfield"
+    core:require="{ handler: 'pp/ecnmanagement/controller/ValueHelpDialog' }"
 >
     <Dialog
         id="idEcnCreateDialog"
@@ -26,10 +27,10 @@
                         id="idChangeNumberLabel"
                         text="{i18n>ChangeNumberT}:"
                         required="true"
-					/>
+                    />
                     <Input
                         id="idChangeNumber"
-						ariaLabelledBy="idChangeNumberLabel"
+                        ariaLabelledBy="idChangeNumberLabel"
                         maxLength="12"
                         change="onDialogChange"
                     />
@@ -37,9 +38,10 @@
                 <VBox>
                     <Label
                         id="idCompanyCodeLabel"
+                        required="true"
                         text="{i18n>CompanyCodeT}:"
                     />
-                    <smartfield:SmartField
+                    <!-- <smartfield:SmartField
                         id="idCompanyCode"
 						ariaLabelledBy="idCompanyCodeLabel"
                         entitySet="EcnReport"
@@ -48,6 +50,15 @@
                         innerControlsCreated="onInnerControlsCreated"
 						change="onDialogChange"
                         editable="true"
+                    /> -->
+                    <Input
+                        id="idCompanyCode"
+                        ariaLabelledBy="idCompanyCodeLabel"
+                        value="{local>/CompanyCode}"
+                        showValueHelp="true"
+                        valueHelpRequest="handler.onValueHelpRequested(
+                                        $event, $controller, '/I_CompanyCodeStdVH',
+                                        ['CompanyCode','CompanyCodeName'])"
                     />
                 </VBox>
                 <VBox>
@@ -56,14 +67,23 @@
                         text="{i18n>PlantT}:"
                         required="true"
                     />
-                    <smartfield:SmartField
+                    <!-- <smartfield:SmartField
                         id="idPlant"
-						ariaLabelledBy="idPlantLabel"
+                        ariaLabelledBy="idPlantLabel"
                         entitySet="EcnReport"
                         value="{Plant}"
                         innerControlsCreated="onInnerControlsCreated"
-						change="onDialogChange"
+                        change="onDialogChange"
                         editable="true"
+                    /> -->
+                    <Input
+                        id="idPlant"
+                        ariaLabelledBy="idPlantLabel"
+                        value="{local>/Plant}"
+                        showValueHelp="true"
+                        valueHelpRequest="handler.onValueHelpRequested(
+                                        $event, $controller, '/I_PlantStdVH',
+                                        ['Plant','PlantName'])"
                     />
                 </VBox>
             </VBox>

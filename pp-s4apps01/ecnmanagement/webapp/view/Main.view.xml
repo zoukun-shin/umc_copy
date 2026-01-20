@@ -1,4 +1,5 @@
 <mvc:View controllerName="pp.ecnmanagement.controller.Main"
+    displayBlock="true"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:f="sap.f"
@@ -10,7 +11,7 @@
     xmlns:rowmodes="sap.ui.table.rowmodes"
     xmlns:smartfield = "sap.ui.comp.smartfield"
     xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
-    displayBlock="true">
+    core:require="{ handler: 'pp/ecnmanagement/controller/ValueHelpDialog' }">
     <f:DynamicPage id="idDynamicPage"
     >
         <f:title>
@@ -40,17 +41,17 @@
                     >
                         <smartFilterBar:controlConfiguration>
                             <smartFilterBar:ControlConfiguration key="CompanyCode" visibleInAdvancedArea="true" label="{i18n>CompanyCodeF}" mandatory="notMandatory" index="1" />
-                            <smartFilterBar:ControlConfiguration key="Plant" visibleInAdvancedArea="true" label="{i18n>PlantF}" mandatory="notMandatory" index="3" />
+                            <smartFilterBar:ControlConfiguration key="Plant" visibleInAdvancedArea="true" label="{i18n>PlantF}" mandatory="mandatory" index="3" />
                             <smartFilterBar:ControlConfiguration key="ChangeNumber" visibleInAdvancedArea="true" label="{i18n>ChangeNumberT}" mandatory="notMandatory" index="5" />
                             <smartFilterBar:ControlConfiguration key="ValidFromDate" visibleInAdvancedArea="true" label="{i18n>ValidFromDateT}" mandatory="notMandatory" index="7" >
-                                <smartFilterBar:customControl>
+                                <!-- <smartFilterBar:customControl>
                                     <DatePicker
                                         id="idDatePickerValidFromDate"
                                         valueFormat="yyyy/MM/dd"
                                         displayFormat="yyyy/MM/dd"
                                         change="onDatePickerChange"
                                     />
-                                </smartFilterBar:customControl>
+                                </smartFilterBar:customControl> -->
                             </smartFilterBar:ControlConfiguration>
                             <smartFilterBar:ControlConfiguration key="ChangeNumberStatusT" visibleInAdvancedArea="true" label="{i18n>ChangeNumberStatusT}" mandatory="notMandatory" index="9" />
                             <smartFilterBar:ControlConfiguration key="EcoType" visibleInAdvancedArea="true" label="{i18n>EcoTypeT}" mandatory="notMandatory" index="11" />
@@ -109,6 +110,8 @@
                 editable="true"
                 beforeRebindTable="onBeforeRebindTable"
                 beforeExport="onBeforeExport"
+                requestAtLeastFields="ChangeNumberStatusText,EcoTypeText"
+                customizeConfig='{"textInEditModeSource": {"*": "ValueList"}}'
             >
                 <smartTable:customToolbar>
                     <OverflowToolbar id="idOverflowToolbar">
@@ -189,10 +192,10 @@
                         label="{i18n>ChangeNumberStatusT}"
                         sortProperty="ChangeNumberStatus"
                         filterProperty="ChangeNumberStatus"
-                        customData:p13nData='\{"columnKey":"ChangeNumberStatus", "leadingProperty":"ChangeNumberStatus", "sortProperty":"ChangeNumberStatus", "filterProperty": "ChangeNumberStatus"}'
+                        customData:p13nData='\{"columnKey":"ChangeNumberStatus", "leadingProperty":"ChangeNumberStatus", "additionalProperty":"ChangeNumberStatusText", "sortProperty":"ChangeNumberStatus", "filterProperty": "ChangeNumberStatus"}'
                     >
                         <t:template>
-                            <Text text="{ChangeNumberStatus}" wrapping="false"/>
+                            <smartfield:SmartField value="{ChangeNumberStatus}" wrapping="false" />
                         </t:template>
                     </t:Column>
                     <t:Column  width="8rem"
@@ -212,7 +215,7 @@
                         customData:p13nData='\{"columnKey":"EcoType", "leadingProperty":"EcoType", "sortProperty":"EcoType", "filterProperty": "EcoType"}'
                     >
                         <t:template>
-                            <Text text="{EcoType}" wrapping="false"/>
+                            <smartfield:SmartField value="{EcoType}" wrapping="false" />
                         </t:template>
                     </t:Column>
                     <t:Column  width="8rem"
@@ -232,7 +235,7 @@
                         customData:p13nData='\{"columnKey":"RequestedByCustomer", "leadingProperty":"RequestedByCustomer", "sortProperty":"RequestedByCustomer", "filterProperty": "RequestedByCustomer"}'
                     >
                         <t:template>
-                            <Text text="{RequestedByCustomer}" wrapping="false"/>
+                            <Text text="{path:'RequestedByCustomer',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
                     <t:Column  width="8rem"
@@ -242,7 +245,7 @@
                         customData:p13nData='\{"columnKey":"RequestedByJp", "leadingProperty":"RequestedByJp", "sortProperty":"RequestedByJp", "filterProperty": "RequestedByJp"}'
                     >
                         <t:template>
-                            <Text text="{RequestedByJp}" wrapping="false"/>
+                            <Text text="{path:'RequestedByJp',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
                     <t:Column  width="8rem"
@@ -252,7 +255,7 @@
                         customData:p13nData='\{"columnKey":"RequestedByCn", "leadingProperty":"RequestedByCn", "sortProperty":"RequestedByCn", "filterProperty": "RequestedByCn"}'
                     >
                         <t:template>
-                            <Text text="{RequestedByCn}" wrapping="false"/>
+                            <Text text="{path:'RequestedByCn',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
                     <t:Column  width="8rem"
@@ -262,7 +265,7 @@
                         customData:p13nData='\{"columnKey":"RequestedByHk", "leadingProperty":"RequestedByHk", "sortProperty":"RequestedByHk", "filterProperty": "RequestedByHk"}'
                     >
                         <t:template>
-                            <Text text="{RequestedByHk}" wrapping="false"/>
+                            <Text text="{path:'RequestedByHk',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
                     <t:Column  width="8rem"
@@ -272,7 +275,7 @@
                         customData:p13nData='\{"columnKey":"RequestedByVn", "leadingProperty":"RequestedByVn", "sortProperty":"RequestedByVn", "filterProperty": "RequestedByVn"}'
                     >
                         <t:template>
-                            <Text text="{RequestedByVn}" wrapping="false"/>
+                            <Text text="{path:'RequestedByVn',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
                     <t:Column  width="8rem"
@@ -282,7 +285,7 @@
                         customData:p13nData='\{"columnKey":"RequestedByOther", "leadingProperty":"RequestedByOther", "sortProperty":"RequestedByOther", "filterProperty": "RequestedByOther"}'
                     >
                         <t:template>
-                            <Text text="{RequestedByOther}" wrapping="false"/>
+                            <Text text="{path:'RequestedByOther',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
                     <t:Column  width="8rem"
@@ -402,7 +405,7 @@
                         customData:p13nData='\{"columnKey":"OldNewNotTogether", "leadingProperty":"OldNewNotTogether", "sortProperty":"OldNewNotTogether", "filterProperty": "OldNewNotTogether"}'
                     >
                         <t:template>
-                            <Text text="{OldNewNotTogether}" wrapping="false"/>
+                            <Text text="{path:'OldNewNotTogether',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
                     <t:Column  width="8rem"
@@ -412,7 +415,7 @@
                         customData:p13nData='\{"columnKey":"OldStockDelivery", "leadingProperty":"OldStockDelivery", "sortProperty":"OldStockDelivery", "filterProperty": "OldStockDelivery"}'
                     >
                         <t:template>
-                            <Text text="{OldStockDelivery}" wrapping="false"/>
+                            <Text text="{path:'OldStockDelivery',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
                     <t:Column  width="6rem"
@@ -422,7 +425,7 @@
                         customData:p13nData='\{"columnKey":"ReworkSfg", "leadingProperty":"ReworkSfg", "sortProperty":"ReworkSfg", "filterProperty": "ReworkSfg"}'
                     >
                         <t:template>
-                            <Text text="{ReworkSfg}" wrapping="false"/>
+                            <Text text="{path:'ReworkSfg',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
                     <t:Column  width="6rem"
@@ -432,7 +435,7 @@
                         customData:p13nData='\{"columnKey":"ReworkFg", "leadingProperty":"ReworkFg", "sortProperty":"ReworkFg", "filterProperty": "ReworkFg"}'
                     >
                         <t:template>
-                            <Text text="{ReworkFg}" wrapping="false"/>
+                            <Text text="{path:'ReworkFg',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
                     <t:Column  width="6rem"
@@ -442,7 +445,7 @@
                         customData:p13nData='\{"columnKey":"Other", "leadingProperty":"Other", "sortProperty":"Other", "filterProperty": "Other"}'
                     >
                         <t:template>
-                            <Text text="{Other}" wrapping="false"/>
+                            <Text text="{path:'Other',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
 
@@ -463,7 +466,7 @@
                         customData:p13nData='\{"columnKey":"ObjectTypeActive", "leadingProperty":"ObjectTypeActive", "sortProperty":"ObjectTypeActive", "filterProperty": "ObjectTypeActive"}'
                     >
                         <t:template>
-                            <Text text="{ObjectTypeActive}" wrapping="false"/>
+                            <Text text="{path:'ObjectTypeActive',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
                     <t:Column  width="8rem"
@@ -473,7 +476,7 @@
                         customData:p13nData='\{"columnKey":"ObjectFlag", "leadingProperty":"ObjectFlag", "sortProperty":"ObjectFlag", "filterProperty": "ObjectFlag"}'
                     >
                         <t:template>
-                            <Text text="{ObjectFlag}" wrapping="false"/>
+                            <Text text="{path:'ObjectFlag',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
                     <t:Column  width="8rem"
@@ -483,10 +486,10 @@
                         customData:p13nData='\{"columnKey":"ObjectLockFlag", "leadingProperty":"ObjectLockFlag", "sortProperty":"ObjectLockFlag", "filterProperty": "ObjectLockFlag"}'
                     >
                         <t:template>
-                            <Text text="{ObjectLockFlag}" wrapping="false"/>
+                            <Text text="{path:'ObjectLockFlag',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <!-- <t:Column  width="8rem"
                         label="{i18n>ItemCreatedAtT}"
                         sortProperty="ItemCreatedAt"
                         filterProperty="ItemCreatedAt"
@@ -505,7 +508,7 @@
                         <t:template>
                             <Text text="{ItemCreatedByUser}" wrapping="false"/>
                         </t:template>
-                    </t:Column>
+                    </t:Column> -->
                     <!-- <t:Column  width="8rem"
                         label="{i18n>ItemCreatedByEmailT}"
                         sortProperty="ItemCreatedByEmail"
@@ -627,7 +630,7 @@
                             <Text text="{ObjectValidFrom}" />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <!-- <t:Column  width="8rem"
                         label="{i18n>ObjectMaterialLockT}"
                         sortProperty="ObjectMaterialLock"
                         filterProperty="ObjectMaterialLock"
@@ -636,7 +639,7 @@
                         <t:template>
                             <Text text="{ObjectMaterialLock}" />
                         </t:template>
-                    </t:Column>
+                    </t:Column> -->
                     <t:Column  width="8rem"
                         label="{i18n>DeleteFlagT}"
                         sortProperty="DeleteFlag"
@@ -644,7 +647,7 @@
                         customData:p13nData='\{"columnKey":"DeleteFlag", "leadingProperty":"DeleteFlag", "sortProperty":"DeleteFlag", "filterProperty": "DeleteFlag"}'
                     >
                         <t:template>
-                            <Text text="{DeleteFlag}" />
+                            <Text text="{path:'DeleteFlag',formatter:'.formatter.convertBooleanToString'}" wrapping="false"/>
                         </t:template>
                     </t:Column>
                     <t:Column  width="8rem"

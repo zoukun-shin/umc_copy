@@ -38,7 +38,51 @@ sap.ui.define([
                     oDialog.setDescriptionKey(that._aVHFields[1]);
                 }
 
-                // var aFilters = [];
+                var aFilters = [];
+                var aNewFilters = [];
+                let aCompanyCode = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
+                if (this._sValueHelpPath === "/I_CompanyCodeStdVH") {
+                    aCompanyCode.forEach(item => {
+                        aNewFilters.push(new Filter({
+                            path: "CompanyCode",
+                            operator: FilterOperator.EQ,
+                            value1: item.CompanyCode
+                        }));
+                    });
+
+                    aFilters.push(new Filter({
+                        filters: aNewFilters,
+                        and: false
+                    }));
+                }
+
+                let aPlant = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
+                if (this._sValueHelpPath === "/I_PlantStdVH") {
+                    aPlant.forEach(item => {
+                        aNewFilters.push(new Filter({
+                            path: "Plant",
+                            operator: FilterOperator.EQ,
+                            value1: item.Plant
+                        }));
+                    });
+
+                    aFilters.push(new Filter({
+                        filters: aNewFilters,
+                        and: false
+                    }));
+                }
+
+                let sPlant = that.getModel("local").getProperty("/Plant");
+                if (sPath === "/ZR_ProductPlantVH" || sPath === "/ZR_MaterialBomVH") {
+                    if (sPlant) {
+                        aFilters.push(new Filter({
+                            path: "Plant",
+                            operator: FilterOperator.EQ,
+                            value1: sPlant
+                        }));
+                    }
+                }
+
                 // var headSet = that.getModel("local").getProperty("/headSet");
                 // if (sPath === "/ZC_CostCenterVH" || sPath === "/ZC_CustomerCompanyVH") {
                 //     if (headSet.Plant) {
@@ -124,7 +168,7 @@ sap.ui.define([
                         // Bind rows to the ODataModel and add columns
                         oTable.bindAggregation("rows", {
                             path: sPath,
-                            // filters: aFilters,
+                            filters: aFilters,
                             parameters:{$count:true},
                             events: {
                                 dataReceived: function () {
@@ -135,7 +179,7 @@ sap.ui.define([
                         that._aVHFields.forEach(fieldName => {
                             if (fieldName !== "UUID") {
                                 var oColumn = new UIColumn({
-                                    width: fieldName === "MailAddress" ? "15rem" : "10rem",
+                                    width: fieldName.includes("Name") ? "15rem" : "10rem",
                                     label: new Label({ text: "{i18n>" + fieldName + "}" }),
                                     template: new Text({ wrapping: false, text: "{" + fieldName + "}" })
                                 });
@@ -182,6 +226,21 @@ sap.ui.define([
                 }));
             }
             var headSet = this.getModel("local").getProperty("/headSet");
+
+            // let aCompanyCode = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
+            // if (this._sValueHelpPath === "/I_CompanyCodeStdVH") {
+            //     aCompanyCode.forEach(e => {
+
+            //     });
+            //     if (headSet.Plant) {
+            //         aFilters.push(new Filter({
+            //             path: "CompanyCode",
+            //             operator: FilterOperator.EQ,
+            //             value1: headSet.Plant
+            //         }));
+            //     }
+            // }
+
             if (this._sValueHelpPath === "/ZC_CostCenterVH" || this._sValueHelpPath === "/ZC_CustomerCompanyVH") {
                 if (headSet.Plant) {
                     aFilters.push(new Filter({
@@ -218,11 +277,12 @@ sap.ui.define([
                     }));
                 }
             }
-
-            var oFilter = new Filter({
-                filters: aFilters,
-                and: true
-            });
+            if(aFilters.length > 0){
+                var oFilter = new Filter({
+                    filters: aFilters,
+                    and: true
+                });
+            }
             this._oVHD.getTableAsync().then(function (oTable) {
                 if (oTable.bindRows) {
                     oTable.getBinding("rows").filter(oFilter);
@@ -245,6 +305,9 @@ sap.ui.define([
             _myBusyDialog.open();
             if (sInputPath.includes("/")) {
                 // head bind
+                _myBusyDialog.close();
+                this.getModel("local").setProperty(sInputPath, sKey);
+                this._oInput.setValueState("None");
                 
             } else {
                 // table item bind

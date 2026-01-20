@@ -543,10 +543,8 @@ sap.ui.define([
 			var that = this;
 			this._BusyDialog.open();
 			var oModel = this._oDataModel;
-			if (sEvent === "change") {
-				postData.ChangedByUser = that.getUser();
-				postData.ChangedByEmail = that.getEmail();
-			}
+			postData.ChangedByUser = that.getUser();
+			postData.ChangedByEmail = that.getEmail();
 
 			oModel.callFunction(`/${sAction}`, {
 				method: "POST",

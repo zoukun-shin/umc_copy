@@ -151,11 +151,11 @@ sap.ui.define([
 					aNewFilter.push(new Filter("DeleteFlag", "EQ", false)); break;
 			}
 
-			// 获取处理范围
-			var oValidFromDate = this.byId("idDatePickerValidFromDate");
-			if (oValidFromDate.getDateValue()) {
-				aNewFilter.push(new Filter("ShippingPlanDate", "BT", formatter.odataDate(oValidFromDate.getDateValue())));
-			}
+			// // 获取处理范围
+			// var oValidFromDate = this.byId("idDatePickerValidFromDate");
+			// if (oValidFromDate.getDateValue()) {
+			// 	aNewFilter.push(new Filter("ShippingPlanDate", "BT", formatter.odataDate(oValidFromDate.getDateValue())));
+			// }
 
 			oNewFilter = new Filter({
 				filters:aNewFilter,
@@ -196,8 +196,22 @@ sap.ui.define([
 				}
 			}
 			this.Dialog.then(function(oDialog) {
+				this.setDialogInit();
 				oDialog.open();
 			}.bind(this));
+		},
+
+		setDialogInit: function() {
+			let aCompanyCode = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
+			let aPlant = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
+			aCompanyCode.sort(function(a,b){
+				return a["CompanyCode"] - b["CompanyCode"];
+			});
+			aPlant.sort(function(a,b){
+				return a["Plant"] - b["Plant"];
+			});
+			this._LocalData.setProperty("/CompanyCode",aCompanyCode[0]?.CompanyCode);
+			this._LocalData.setProperty("/Plant",aPlant[0]?.Plant);
 		},
 		
         onDialogClose: function(){

@@ -42,6 +42,20 @@
     </edmx:Reference>
     <edmx:DataServices m:DataServiceVersion="2.0">
         <Schema Namespace="cds_zui_ecn_management_o2" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="I_CompanyCodeStdVHType" sap:label="Company Code" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CompanyCode"/>
+                </Key>
+                <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="CompanyCodeName" sap:label="Company Code"/>
+                <Property Name="CompanyCodeName" Type="Edm.String" MaxLength="25" sap:label="Company Name" sap:quickinfo="Name of Company Code or Company"/>
+            </EntityType>
+            <EntityType Name="I_PlantStdVHType" sap:label="Plant by Name" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="PlantName" sap:label="Plant"/>
+                <Property Name="PlantName" Type="Edm.String" MaxLength="30" sap:label="Plant Name"/>
+            </EntityType>
             <EntityType Name="I_UnitOfMeasureStdVHType" sap:label="Unit of Measure" sap:value-list="true" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="UnitOfMeasure"/>
@@ -64,7 +78,7 @@
                 <Property Name="ChangeNumber" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Change Number" sap:updatable="false"/>
                 <Property Name="ChangeNumberDesc" Type="Edm.String" MaxLength="40" sap:label="Description" sap:quickinfo="Change number description"/>
                 <Property Name="EcoType" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="ECO Type" sap:value-list="fixed-values"/>
-                <Property Name="ReasonForChange" Type="Edm.String" MaxLength="40" sap:label="Reason for Change" sap:quickinfo="Reason for change"/>
+                <Property Name="ReasonForChange" Type="Edm.String" MaxLength="100"/>
                 <Property Name="ValidFromDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Valid From" sap:quickinfo="Valid-From Date"/>
                 <Property Name="ChangeNumberStatus" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Change Number Status" sap:value-list="fixed-values"/>
                 <Property Name="AttachedDocuments" Type="Edm.String" MaxLength="50"/>
@@ -92,6 +106,8 @@
                 <Property Name="Other" Type="Edm.Boolean" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
                 <Property Name="DeleteFlag" Type="Edm.Boolean" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
                 <Property Name="IsCreatedInS4" Type="Edm.Boolean" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
                 <Property Name="CreatedByUser" Type="Edm.String" MaxLength="80" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="CreatedByEmail" Type="Edm.String" MaxLength="50" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="ChangedByUser" Type="Edm.String" MaxLength="80" sap:creatable="false" sap:updatable="false"/>
@@ -115,7 +131,7 @@
                 <Property Name="ChangeNumber" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Change Number" sap:updatable="false"/>
                 <Property Name="AlternativeDateId" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Alternative date" sap:quickinfo="Alternative date external key" sap:updatable="false"/>
                 <Property Name="AlternativeDateCounter" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Counter" sap:quickinfo="Engineering change management: alternative date counter"/>
-                <Property Name="ObjectVaildFrom" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Valid From" sap:quickinfo="Valid-From Date"/>
+                <Property Name="ObjectValidFrom" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Valid From" sap:quickinfo="Valid-From Date"/>
                 <Property Name="AssignFlag" Type="Edm.Boolean" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False" sap:creatable="false" sap:updatable="false"/>
                 <NavigationProperty Name="to_Header" Relationship="cds_zui_ecn_management_o2.assoc_D073C3C1258A8576649EAD385B43B8A0" FromRole="ToRole_assoc_D073C3C1258A8576649EAD385B43B8A0" ToRole="FromRole_assoc_D073C3C1258A8576649EAD385B43B8A0"/>
             </EntityType>
@@ -137,7 +153,7 @@
                 <Property Name="ObjectDescription" Type="Edm.String" MaxLength="40" sap:label="Description" sap:quickinfo="Object management record description"/>
                 <Property Name="AlternativeDateCounter" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Counter" sap:quickinfo="Engineering change management: alternative date counter"/>
                 <Property Name="AlternativeDateId" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Alternative date" sap:quickinfo="Alternative date external key"/>
-                <Property Name="ObjectVaildFrom" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Valid From" sap:quickinfo="Valid-From Date"/>
+                <Property Name="ObjectValidFrom" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Valid From" sap:quickinfo="Valid-From Date"/>
                 <Property Name="ObjectMaterialLock" Type="Edm.Boolean" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
                 <Property Name="ObjectTypeText" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
                 <NavigationProperty Name="to_Header" Relationship="cds_zui_ecn_management_o2.assoc_FEAE56B485A173371D2C213FC24DF412" FromRole="ToRole_assoc_FEAE56B485A173371D2C213FC24DF412" ToRole="FromRole_assoc_FEAE56B485A173371D2C213FC24DF412"/>
@@ -176,17 +192,17 @@
                     <PropertyRef Name="BomMaterial"/>
                 </Key>
                 <Property Name="ChangeNumber" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Change Number"/>
-                <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
-                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code" sap:value-list="standard"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:value-list="standard"/>
                 <Property Name="ObjectType" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="NonNegative" sap:label="Object Type"/>
                 <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
                 <Property Name="BomMaterial" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:value-list="standard"/>
                 <Property Name="ChangeNumberDesc" Type="Edm.String" MaxLength="40" sap:label="Description" sap:quickinfo="Change number description"/>
                 <Property Name="EcoType" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="ECO Type" sap:value-list="fixed-values"/>
                 <Property Name="AttachedDocuments" Type="Edm.String" MaxLength="50"/>
-                <Property Name="ReasonForChange" Type="Edm.String" MaxLength="40" sap:label="Reason for Change" sap:quickinfo="Reason for change"/>
-                <Property Name="ValidFromDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Valid From" sap:quickinfo="Valid-From Date"/>
-                <Property Name="ChangeNumberStatus" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Change Number Status"/>
+                <Property Name="ReasonForChange" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ValidFromDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Date"/>
+                <Property Name="ChangeNumberStatus" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:text="ChangeNumberStatusText" sap:label="Change Number Status"/>
                 <Property Name="RequestedByCustomer" Type="Edm.Boolean" sap:label="Requested By Cust" sap:quickinfo="Requested By Customer"/>
                 <Property Name="RequestedByJp" Type="Edm.Boolean" sap:label="Requested By JP"/>
                 <Property Name="RequestedByCn" Type="Edm.Boolean" sap:label="Requested By CN"/>
@@ -194,6 +210,14 @@
                 <Property Name="RequestedByVn" Type="Edm.Boolean" sap:label="Requested By VN"/>
                 <Property Name="RequestedByOther" Type="Edm.Boolean" sap:label="Requested By Other"/>
                 <Property Name="RequestedByOtherText" Type="Edm.String" MaxLength="20"/>
+                <Property Name="StockOfSfgSmt" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="UnitSfgSmt" sap:label="Quantity"/>
+                <Property Name="UnitSfgSmt" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="StockOfSfgFat" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="UnitSfgFat" sap:label="Quantity"/>
+                <Property Name="UnitSfgFat" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="StockOfNcgSmt" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="UnitNcgSmt" sap:label="Quantity"/>
+                <Property Name="UnitNcgSmt" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="StockOfNcgFat" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="UnitNcgFat" sap:label="Quantity"/>
+                <Property Name="UnitNcgFat" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
                 <Property Name="StockOfFg" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="UnitFg" sap:label="Quantity"/>
                 <Property Name="UnitFg" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
                 <Property Name="OldNewNotTogether" Type="Edm.Boolean" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
@@ -215,7 +239,7 @@
                 <Property Name="ObjectDescription" Type="Edm.String" MaxLength="40" sap:label="Description" sap:quickinfo="Object management record description"/>
                 <Property Name="MaterialDescription" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
                 <Property Name="AlternativeDateId" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Alternative date" sap:quickinfo="Alternative date external key"/>
-                <Property Name="ObjectVaildFrom" Type="Edm.String" MaxLength="8"/>
+                <Property Name="ObjectValidFrom" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Date"/>
                 <Property Name="ObjectMaterialLock" Type="Edm.Boolean" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
                 <Property Name="DeleteFlag" Type="Edm.Boolean" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
                 <Property Name="EcoCreatedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Created On" sap:quickinfo="Creation Date Time"/>
@@ -224,6 +248,7 @@
                 <Property Name="EcoLastChangedAt" Type="Edm.DateTimeOffset" Precision="7" sap:label="Changed On" sap:quickinfo="Last Change Date Time"/>
                 <Property Name="EcoChangedByUser" Type="Edm.String" MaxLength="80"/>
                 <Property Name="EcoChangedByEmail" Type="Edm.String" MaxLength="50"/>
+                <Property Name="ChangeNumberStatusText" Type="Edm.String" MaxLength="30" sap:label="Change status text"/>
             </EntityType>
             <EntityType Name="EcnMaterialType" sap:label="ECN Management Material" sap:content-version="1">
                 <Key>
@@ -241,7 +266,7 @@
                 <Property Name="MaterialDescription" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
                 <Property Name="AlternativeDateId" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Alternative date" sap:quickinfo="Alternative date external key"/>
                 <Property Name="AlternativeDateCounter" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Counter" sap:quickinfo="Engineering change management: alternative date counter"/>
-                <Property Name="ObjectVaildFrom" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Valid From" sap:quickinfo="Valid-From Date"/>
+                <Property Name="ObjectValidFrom" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Valid From" sap:quickinfo="Valid-From Date"/>
                 <Property Name="ObjectMaterialLock" Type="Edm.Boolean" sap:label="Truth Value" sap:quickinfo="Truth Value: True/False"/>
                 <Property Name="ObjectTypeText" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
                 <NavigationProperty Name="to_Header" Relationship="cds_zui_ecn_management_o2.assoc_67F2304E0C0821D98FCBD80E4DA50ECA" FromRole="ToRole_assoc_67F2304E0C0821D98FCBD80E4DA50ECA" ToRole="FromRole_assoc_67F2304E0C0821D98FCBD80E4DA50ECA"/>
@@ -608,6 +633,8 @@
                 </ReferentialConstraint>
             </Association>
             <EntityContainer Name="cds_zui_ecn_management_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
+                <EntitySet Name="I_CompanyCodeStdVH" EntityType="cds_zui_ecn_management_o2.I_CompanyCodeStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_PlantStdVH" EntityType="cds_zui_ecn_management_o2.I_PlantStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_UnitOfMeasureStdVH" EntityType="cds_zui_ecn_management_o2.I_UnitOfMeasureStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="EcnManagement" EntityType="cds_zui_ecn_management_o2.EcnManagementType" sap:content-version="1" sap:deletable-path="Delete_mc" sap:updatable-path="Update_mc"/>
                 <EntitySet Name="EcnAltDate" EntityType="cds_zui_ecn_management_o2.EcnAltDateType" sap:content-version="1" sap:deletable-path="Delete_mc" sap:updatable-path="Update_mc"/>
@@ -739,7 +766,7 @@
                     </Record>
                 </Annotation>
                 <Annotation Term="Common.ValueListWithFixedValues"/>
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/UnitSfgSmt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -956,6 +983,46 @@
                 </Annotation>
                 <Annotation Term="Common.ValueListWithFixedValues"/>
                 <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Company Code"/>
+                        <PropertyValue Property="CollectionPath" String="I_CompanyCodeStdVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="CompanyCode"/>
+                                    <PropertyValue Property="ValueListProperty" String="CompanyCode"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CompanyCodeName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Plant"/>
+                        <PropertyValue Property="CollectionPath" String="I_PlantStdVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Plant"/>
+                                    <PropertyValue Property="ValueListProperty" String="Plant"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PlantName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/BomMaterial" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
@@ -1439,6 +1506,40 @@
                     </Record>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.cds_zui_ecn_management_o2_Entities/I_CompanyCodeStdVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.cds_zui_ecn_management_o2_Entities/I_PlantStdVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.cds_zui_ecn_management_o2_Entities/I_UnitOfMeasureStdVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
@@ -1544,7 +1645,7 @@
             <Annotations Target="cds_zui_ecn_management_o2.EcnAltDateType/AlternativeDateCounter" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_ecn_management_o2.EcnAltDateType/ObjectVaildFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_ecn_management_o2.EcnAltDateType/ObjectValidFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnBomType/AlternativeBom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -1571,7 +1672,7 @@
             <Annotations Target="cds_zui_ecn_management_o2.EcnBomType/ObjectTypeText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_ecn_management_o2.EcnBomType/ObjectVaildFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_ecn_management_o2.EcnBomType/ObjectValidFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnBomType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -1598,6 +1699,9 @@
             <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/ChangeNumberDesc" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
             </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/DeleteFlag" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
@@ -1611,6 +1715,9 @@
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/Other" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/ReasonForChange" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -1679,7 +1786,7 @@
             <Annotations Target="cds_zui_ecn_management_o2.EcnMaterialType/ObjectTypeText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_ecn_management_o2.EcnMaterialType/ObjectVaildFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_ecn_management_o2.EcnMaterialType/ObjectValidFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnMaterialType/Revlev" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -1756,11 +1863,14 @@
             <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/ChangeNumberDesc" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_AETXT&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/ReasonForChange" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_AEGRU&amp;origin=JG5_100"/>
-            </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/StockOfSfgFat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/StockOfSfgFat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/UnitSfgFat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnMaterialType/Material" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
@@ -1773,9 +1883,6 @@
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/UnitFg" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS&amp;origin=JG5_100"/>
-            </Annotations>
-            <Annotations Target="cds_zui_ecn_management_o2.EcnBomType/ObjectVaildFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_CCDAT&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/Material" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
@@ -1792,8 +1899,8 @@
             <Annotations Target="cds_zui_ecn_management_o2.EcnManagementItemType/LastChangedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_TSTMPL&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/ReasonForChange" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_AEGRU&amp;origin=JG5_100"/>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnAltDateType/ObjectValidFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_CCDAT&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/ChangeNumberDesc" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_AETXT&amp;origin=JG5_100"/>
@@ -1804,6 +1911,9 @@
             <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/UnitSfgSmt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/StockOfSfgSmt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.ZR_ProductPlantVHType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
             </Annotations>
@@ -1813,8 +1923,14 @@
             <Annotations Target="cds_zui_ecn_management_o2.I_UnitOfMeasureStdVHType/UnitOfMeasureDimensionName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=TXDIM&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/UnitSfgSmt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnBomType/ChangeNumber" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AENNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/MaterialDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
@@ -1849,6 +1965,9 @@
             <Annotations Target="cds_zui_ecn_management_o2.EcnBomType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnBomType/ObjectValidFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_CCDAT&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.ZR_ProductPlantVHType/ProductDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
             </Annotations>
@@ -1864,11 +1983,11 @@
             <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/BomMaterial" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.I_PlantStdVHType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnBomType/MaterialDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
-            </Annotations>
-            <Annotations Target="cds_zui_ecn_management_o2.EcnAltDateType/ObjectVaildFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_CCDAT&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.I_UnitOfMeasureStdVHType/UnitOfMeasureLongName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MSEHL&amp;origin=JG5_100"/>
@@ -1894,6 +2013,12 @@
             <Annotations Target="cds_zui_ecn_management_o2.EcnAltDateType/AlternativeDateId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_AEDTN&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.I_CompanyCodeStdVHType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/StockOfNcgFat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnManagementItemType/ObjectTypeText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VAL_TEXT&amp;origin=JG5_100"/>
             </Annotations>
@@ -1906,9 +2031,6 @@
             <Annotations Target="cds_zui_ecn_management_o2.EcnBomType/ObjectDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_OITXT&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_ecn_management_o2.EcnMaterialType/ObjectVaildFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_CCDAT&amp;origin=JG5_100"/>
-            </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
             </Annotations>
@@ -1916,6 +2038,9 @@
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VAL_TEXT&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/UnitNcgSmt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/UnitNcgFat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/StockOfNcgFat" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -1936,17 +2061,26 @@
             <Annotations Target="cds_zui_ecn_management_o2.ZR_ObjectTypeVHType/value_low" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=DOMVALUE_L&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/ChangeNumberStatusText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AESTX&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnMaterialType/AlternativeDateId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_AEDTN&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/ObjectValidFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=DATUM&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/ValidFromDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=DATUV&amp;origin=JG5_100"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=DATUM&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnBomType/AlternativeDateId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_AEDTN&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/EcoLastChangedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ABP_LASTCHANGE_TSTMPL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/UnitNcgSmt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnBomType/ObjectTypeText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VAL_TEXT&amp;origin=JG5_100"/>
@@ -1960,8 +2094,17 @@
             <Annotations Target="cds_zui_ecn_management_o2.ZR_MaterialBomVHType/AlternativeBom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=STALT&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnManagementType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnMaterialType/ObjectDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_OITXT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnMaterialType/ObjectValidFrom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CC_CCDAT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/StockOfNcgSmt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MENGE_D&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_ecn_management_o2.EcnReportType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>

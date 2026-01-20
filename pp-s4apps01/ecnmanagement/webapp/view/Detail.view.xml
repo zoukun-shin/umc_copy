@@ -102,19 +102,19 @@
                                         <l:GridData span="L4 M4 S4"/>
                                     </smartForm:layoutData>
                                     <smartForm:GroupElement>
-                                        <smartField:SmartField textLabel="{i18n>StockOfSfgSmtSF}" value="{StockOfSfgSmt}" change="onInputChange"/>
+                                        <smartField:SmartField textLabel="{i18n>StockOfSfgSmtSF}" value="{StockOfSfgSmt}"/>
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement>
-                                        <smartField:SmartField textLabel="{i18n>StockOfSfgFatSF}" value="{StockOfSfgFat}" change="onInputChange"/>
+                                        <smartField:SmartField textLabel="{i18n>StockOfSfgFatSF}" value="{StockOfSfgFat}"/>
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement>
-                                        <smartField:SmartField textLabel="{i18n>StockOfNcgSmtSF}" value="{StockOfNcgSmt}" change="onInputChange"/>
+                                        <smartField:SmartField textLabel="{i18n>StockOfNcgSmtSF}" value="{StockOfNcgSmt}"/>
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement>
-                                        <smartField:SmartField textLabel="{i18n>StockOfNcgFatSF}" value="{StockOfNcgFat}" change="onInputChange"/>
+                                        <smartField:SmartField textLabel="{i18n>StockOfNcgFatSF}" value="{StockOfNcgFat}"/>
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement>
-                                        <smartField:SmartField textLabel="{i18n>StockOfFgSF}" value="{StockOfFg}" change="onInputChange"/>
+                                        <smartField:SmartField textLabel="{i18n>StockOfFgSF}" value="{StockOfFg}"/>
                                     </smartForm:GroupElement>
                                 </smartForm:Group>
                                 <smartForm:Group  title="Process of FG/Semi-FG">

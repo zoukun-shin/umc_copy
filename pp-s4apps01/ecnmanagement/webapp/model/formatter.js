@@ -149,6 +149,9 @@ sap.ui.define([
             } else {
                 return v;
             }
+        },
+        convertBooleanToString: function(value){
+            return value ? "X": "";
         }
 
     };

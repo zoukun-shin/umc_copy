@@ -39,6 +39,10 @@ server:
             metadataPath: ./webapp/localService/mainService/metadata.xml
             mockdataPath: ./webapp/localService/mainService/data
             generateMockData: true
+          - urlPath: /sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001
+            metadataPath: ./webapp/localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml
+            mockdataPath: ./webapp/localService/AuthorityService/data
+            generateMockData: true
         annotations:
           - localPath: ./webapp/localService/mainService/ZUI_ECN_MANAGEMENT_O2_VAN.xml
             urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_ECN_MANAGEMENT_O2_VAN',Version='0001')/$value/
