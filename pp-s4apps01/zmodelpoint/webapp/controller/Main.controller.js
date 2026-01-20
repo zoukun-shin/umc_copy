@@ -1,7 +1,8 @@
 sap.ui.define([
     "./Base",
-    "sap/ui/core/UIComponent"
-], function (Base, UIComponent) {
+    "sap/ui/core/UIComponent",
+    "sap/m/MessageBox",
+], function (Base, UIComponent, MessageBox) {
     "use strict";
 
     return Base.extend("pp.zmodelpoint.controller.Main", {
@@ -78,7 +79,22 @@ sap.ui.define([
         },
 
         onBeforeRebindTable: function (oEvent) {
+            var filters = oEvent.getParameters().bindingParams.filters;
+            if (!filters) {
+                filters = [];
+            }
 
+            var oSmartFilterBar = this.byId("idSmartFilterBar");
+            var sPlant = oSmartFilterBar.getFilterData().Plant;
+            var aAuthorityPlantSet = this.getView().getModel("local").getProperty("/authorityCheck/data/PlantSet");
+            if (!aAuthorityPlantSet.some(data => data.Plant === sPlant)) {
+                MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("noAuthorityPlant", [sPlant]));    
+
+                var oFiltersPlant = filters[0].aFilters.find(Filters => Filters.sPath === "Plant");
+                if (oFiltersPlant) {
+                    oFiltersPlant.oValue1 = '';
+                }
+            }
         },
 
         onBeforeExport: function (oEvent) {
