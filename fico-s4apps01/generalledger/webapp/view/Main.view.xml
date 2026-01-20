@@ -31,6 +31,7 @@
                             <smartFilterBar:ControlConfiguration id="id4ControlConfiguration" key="AlternativeGLAccount" visibleInAdvancedArea="true" label="{i18n>AlternativeGLAccount}" mandatory="notMandatory" index="25" />
                             <smartFilterBar:ControlConfiguration id="id5ControlConfiguration" key="FiscalYear" label="{i18n>FiscalYear}" index="30" visibleInAdvancedArea="false"/>
                             <!-- visible -->
+                            <smartFilterBar:ControlConfiguration id="id26ControlConfiguration" key="OffsettingAcctNo" label="{i18n>OffsettingAcctNo}" index="31" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration id="id6ControlConfiguration" key="AccountingDocument" label="{i18n>AccountingDocument}" index="35" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration id="id7ControlConfiguration" key="LedgerGLLineItem" label="{i18n>LedgerGLLineItem}" index="40" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration id="id8ControlConfiguration" key="DebitCreditCode" label="{i18n>DebitCreditCode}" index="45" visibleInAdvancedArea="false"/>
@@ -272,6 +273,14 @@
                             </t:customData>
                             <t:template>
                                 <Text text="{AlternativeGLAccount}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>OffsettingAcctNo}" sortProperty="OffsettingAcctNo" filterProperty="OffsettingAcctNo">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"OffsettingAcctNo", "leadingProperty":"OffsettingAcctNo", "sortProperty":"OffsettingAcctNo", "filterProperty": "OffsettingAcctNo"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{OffsettingAcctNo}" wrapping="false" />
                             </t:template>
                         </t:Column>
                     </t:columns>
