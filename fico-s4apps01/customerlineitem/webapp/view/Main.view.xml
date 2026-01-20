@@ -53,12 +53,19 @@
                                     />
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration index='60' key="PostingDate" label="{i18n>PostingDate}" visibleInAdvancedArea="true">
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection id="idPostingDate"  
+                                                valueFormat="yyyy-MM-dd" 
+                                                displayFormat="yyyy/MM/dd"                                                
+                                            />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
                             <!-- visible -->
-                            <smartFilterBar:ControlConfiguration index='60' key="FiscalYear" label="{i18n>FiscalYear}" visibleInAdvancedArea="false"/>
-                            <smartFilterBar:ControlConfiguration index='70' key="AccountingDocument" label="{i18n>AccountingDocument}" visibleInAdvancedArea="false"/>
-                            <smartFilterBar:ControlConfiguration index='80' key="LedgerGLLineItem" label="{i18n>LedgerGLLineItem}" visibleInAdvancedArea="false"/>
-                            <smartFilterBar:ControlConfiguration index='90' key="FiscalPeriod" label="{i18n>FiscalPeriod}" visibleInAdvancedArea="false"/>
-                            <smartFilterBar:ControlConfiguration index='100' key="PostingDate" label="{i18n>PostingDate}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='70' key="FiscalYear" label="{i18n>FiscalYear}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='80' key="AccountingDocument" label="{i18n>AccountingDocument}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='90' key="LedgerGLLineItem" label="{i18n>LedgerGLLineItem}" visibleInAdvancedArea="false"/>
+                            <smartFilterBar:ControlConfiguration index='100' key="FiscalPeriod" label="{i18n>FiscalPeriod}" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration index='110' key="NetDueDate" label="{i18n>NetDueDate}" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration index='120' key="ChartOfAccounts" label="{i18n>ChartOfAccounts}" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration index='130' key="AlternativeGLAccount" label="{i18n>AlternativeGLAccount}" visibleInAdvancedArea="false"/>
@@ -141,7 +148,8 @@
                             <core:CustomData key="p13nData" value='\{"columnKey":"PostingDate", "leadingProperty":"PostingDate"}'/>
                         </table:customData>
                         <table:template>
-                            <Text text="{path:'PostingDate', formatter:'.formatter.formatDate'}" wrapping="false" />
+                            <Text text="{path:'PostingDate', formatter:'.formatter.formatDatestring'}" wrapping="false" />
+                            <!-- <Text text="{PostingDate}" wrapping="false"/> -->
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>NetDueDate}" sortProperty="NetDueDate" filterProperty="NetDueDate">

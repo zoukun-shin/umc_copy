@@ -100,7 +100,16 @@ sap.ui.define([
                 });
                 var sOpen = oFmt.format(aDates[0]);
                 aFilters.push(new Filter("OpenDate", "EQ", sOpen));
-            }
+            };
+
+            var oDateRange = this.byId("idPostingDate");
+            if (oDateRange.getFrom()) {
+                var splitStart = `${oDateRange.getFrom().getFullYear()}${(oDateRange.getFrom().getMonth() + 1).toString().padStart(2, "0")}${oDateRange.getFrom().getDate().toString().padStart(2, "0")}`;
+                var splitEnd = `${oDateRange.getTo().getFullYear()}${(oDateRange.getTo().getMonth() + 1).toString().padStart(2, "0")}${oDateRange.getTo().getDate().toString().padStart(2, "0")}`;
+                if (splitStart) {
+                    aFilters.push(new Filter("PostingDate", FilterOperator.BT, splitStart, splitEnd));
+                };
+            };
 
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
             aFilters.push(new Filter("UserEmail", FilterOperator.EQ, sEmail));
