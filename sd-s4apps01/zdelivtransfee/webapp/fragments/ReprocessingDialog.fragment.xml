@@ -1,0 +1,23 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Dialog id="reprocessingDialog" title="{i18n>Reprocessing}" contentWidth="20rem" draggable="true" resizable="false">
+
+        <VBox class="sapUiSmallMargin">
+            <Label text="{i18n>SalesOrganization}" required="true"/>
+            <Input id="idInputSalesOrg" maxLength="4" liveChange="onInputLiveChange"/>
+
+            <Label text="{i18n>BillingMonth}" required="true" class="sapUiSmallMarginTop"/>
+            <Input id="idInputBillingMonth" maxLength="6" liveChange="onInputLiveChange"/>
+        </VBox>
+
+        <beginButton>
+            <Button text="{i18n>Confirm}" type="Emphasized" press="onDialogConfirm"/>
+        </beginButton>
+
+        <endButton>
+            <Button text="{i18n>Cancel}" press="onDialogCancel"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

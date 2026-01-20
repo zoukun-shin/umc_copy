@@ -91,6 +91,10 @@ modules:
       - sdzsalesorderupdate.zip
       name: sdzsalesorderupdate
       target-path: resources/
+    - artifacts:
+      - sdzdelivtransfee.zip
+      name: sdzdelivtransfee
+      target-path: resources/
 - name: sdsalesacceptance
   type: html5
   path: salesacceptance
@@ -199,6 +203,15 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
+- name: sdzdelivtransfee
+  type: html5
+  path: zdelivtransfee
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: sd-s4apps01-uaa
   type: org.cloudfoundry.managed-service
@@ -233,3 +246,4 @@ resources:
     service-plan: app-host
 parameters:
   deploy_mode: html5-repo
+  enable-parallel-deployments: true

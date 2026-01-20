@@ -1,0 +1,61 @@
+<mvc:View controllerName="sd.zdelivtransfee.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="DelivTransFeeSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="DelivTransFee" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="BillingMonth" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>BillingMonth}">
+				                    <!-- <smartFilterBar:customControl>
+					                    <DatePicker id="idBillingMonth" displayFormat="MM-y" />
+				                    </smartFilterBar:customControl> -->
+			                    </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='20' key="Currency" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Currency}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="SalesOrganization" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="Customer" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Customer}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="Material" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="EstimatedUnitPrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ActualUnitPrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SalesVolume" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TransFeeRecovered" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TransFeePaid" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Difference" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Unit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TotalDimension" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+                <f:content>
+                    <RadioButtonGroup id="idRBG1" columns="3" width="100%" select="onSelect" >
+                        <RadioButton id="idRB1-1" text="{i18n>CustomerTotal}" selected="true" />
+                        <RadioButton id="idRB1-2" text="{i18n>MaterialTotal}" />
+                        <RadioButton id="idRB1-3" text="{i18n>CustomerMaterialTotal}" />
+                    </RadioButtonGroup>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="sd.zdelivtransfee.fragments.DelivTransFee" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
