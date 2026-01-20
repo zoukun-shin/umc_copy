@@ -92,7 +92,7 @@
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                     <CheckBox id="idFgOnly" text="{i18n>FgOnly}" selected="true" class="sapUiMediumMarginBegin"/>
-                    <RadioButtonGroup id="idProcessMode" columns="2" class="sapUiMediumMarginBegin">
+                    <RadioButtonGroup id="idProcessMode" columns="2" class="sapUiMediumMarginBegin" select="onSelectProcessMode">
                         <RadioButton text="{i18n>ReportKey}"/>
                         <RadioButton text="{i18n>AdjustKey}"/>
                     </RadioButtonGroup>
@@ -106,7 +106,6 @@
                 selectionMode="Multi"
                 class="sapUiSizeCompact"
                 rowsUpdated="onRowsUpdated"
-                enableSelectAll="false"
             >
                 <t:rowMode>
                     <rm:Auto id="idAuto" />
@@ -126,12 +125,12 @@
                             press="onCreatePIR"
                             enabled="{= ${local>/AdjustShippingPlan}.length > 0 &amp;&amp; ${local>/authorityCheck/button/Edit}}"
                         />
-                        <!-- <Button
+                        <Button
                             icon="sap-icon://excel-attachment"
                             type="Transparent"
                             press="onExport"
                             enabled="{= ${local>/AdjustShippingPlan}.length > 0 &amp;&amp; ${local>/authorityCheck/button/Export}}"
-                        /> -->
+                        />
                     </OverflowToolbar>
                 </t:extension>
                 <t:columns>

@@ -94,6 +94,11 @@ sap.ui.define([
 			if ( this.vaildDate(oDateRange) ){
 				return;
 			}
+			this.checkDateRange(oDateRange);
+			if (!oDateRange.getValue()) {
+				return;
+			}
+
 			var oStartDate = oDateRange.getFrom();
 			var oEndDate = oDateRange.getTo();
 			
@@ -139,6 +144,10 @@ sap.ui.define([
 					this.byId("idDynamicPage").setBusy(false);
 				}
 			}.bind(this));
+		},
+
+		onSelectProcessMode: function(oEvent){
+			this._LocalData.setProperty("/AdjustShippingPlan",[]);
 		},
 
         getEntityCount: function (aFilter) {
@@ -242,6 +251,7 @@ sap.ui.define([
 					aResultTemp = that._LocalData.getProperty("/AdjustShippingPlanTemp");
 					aResult = that.transformData(aResultTemp);
 					that._LocalData.setProperty("/AdjustShippingPlan", aResult);
+					that.destroyColumns();
 					that.addColumns();
 
 					that.aHttpRequest = [];
@@ -318,6 +328,18 @@ sap.ui.define([
 					...item.PlanDates // 展开动态生成的日期列
 				};
 			});
+		},
+		destroyColumns: function () {
+			let aColumns = this.byId("reportTable1").getColumns();
+			aColumns.forEach(function(column){
+				if ( column.sId.includes("PlanDate") ) {
+					if (this.byId(column.sId)) {
+						this.byId(column.sId).destroyLabel();
+						this.byId(column.sId).destroyTemplate();
+						this.byId(column.sId).destroy(true);
+					}
+				}
+			}.bind(this));
 		},
 
 		addColumns: function () {
@@ -455,10 +477,10 @@ sap.ui.define([
 				messages.showError(this._ResourceBundle.getText("msgNoSelect"));
 				return;
 			}
-			if (listItems.length > 1) {
-				messages.showError(this._ResourceBundle.getText("msgOnlyOneRow"));
-				return;
-			}
+			// if (listItems.length > 1) {
+			// 	messages.showError(this._ResourceBundle.getText("msgOnlyOneRow"));
+			// 	return;
+			// }
 			listItems.forEach(_getData, this); //根据选择的行获取具体的数据
 			function _getData(sSelected, index) { //sSelected为选中的行
 				var key = oTable.getContextByIndex(sSelected).getPath();
@@ -489,9 +511,11 @@ sap.ui.define([
 			Object.keys(data).forEach(key => {
 				if (key.startsWith('PlanDate')) {
 					const date = key.replace('PlanDate', ''); // 获取后面的日期
-					// 本来只取数量大于0的数据，但特殊情况下，全部为0也要至少保证一条数据，所以使用isFisrtDate控制
-					if (Number(data[`PlanDate${date}`]) > 0 || isFisrtDate) {
-						isFisrtDate = false;
+					// 限制大于0是为了控制数据传输量，但当前程序在创建PIR时只允许处理一个月的数据，所以放开限制
+					// 同时后端获取处理范围也是根据传到后端的最小日期和最大日期，所以逻辑如果有修改，后端获取处理日期范围的逻辑也要修改
+					// // 本来只取数量大于0的数据，但特殊情况下，全部为0也要至少保证一条数据，所以使用isFisrtDate控制
+					// if (Number(data[`PlanDate${date}`]) > 0 || isFisrtDate) {
+					// 	isFisrtDate = false;
 						result.push({
 							Plant: data.Plant,
 							Material: data.Material,
@@ -503,7 +527,7 @@ sap.ui.define([
 							MaterialByCustomer: data.MaterialByCustomer,
 
 						});
-					}
+					// }
 				}
 			});
 			return result;
@@ -517,7 +541,7 @@ sap.ui.define([
 			let sPlanPath = "";
 
 			//更新Plan数据
-			sPlanPath = "/AdjustShippingPlan" + "/" + sQtyProperty
+			sPlanPath = sPath + "/" + sQtyProperty
 			this._LocalData.setProperty(sPlanPath,iPlanValue.toString());
 			
 			let aLocalData = this._LocalData.getProperty("/AdjustShippingPlan")
@@ -531,6 +555,7 @@ sap.ui.define([
 			//计算差额
 			let sActualPath = "/AdjustShippingPlan/" + iActualIndex + "/" + sQtyProperty;
 			let iActualQuantity = Number(this._LocalData.getProperty(sActualPath));
+			iActualQuantity = iActualQuantity ? iActualQuantity : 0;
 			let iDifferenceQuantity = iActualQuantity - iPlanValue;
 
 			//查找Difference行的index
@@ -544,9 +569,11 @@ sap.ui.define([
 			//获取Difference Total 数据
 			sDifferencePath = "/AdjustShippingPlan/" + iDifferenceIndex + "/TotalQuantity";
 			let iTotalDifference = Number(this._LocalData.getProperty(sDifferencePath));
+			iTotalDifference = iTotalDifference ? iTotalDifference : 0;
 			//获取Difference Qty旧数据
 			sDifferencePath = "/AdjustShippingPlan/" + iDifferenceIndex + "/" + sQtyProperty;
 			let iQtyDifference = Number(this._LocalData.getProperty(sDifferencePath));
+			iQtyDifference = iQtyDifference ? iQtyDifference : 0;
 			//计算新的Difference Total 数据
 			iTotalDifference = iTotalDifference + iDifferenceQuantity - iQtyDifference;
 
@@ -562,6 +589,7 @@ sap.ui.define([
 			//获取Actual Total 数据
 			sActualPath = "/AdjustShippingPlan/" + iActualIndex + "/" + "TotalQuantity";
 			let iTotalActual = Number(this._LocalData.getProperty(sActualPath));
+			iTotalActual = iTotalActual ? iTotalActual : 0;
 			//计算新的Plan Total 数据
 			let iTotalPlan = iTotalActual - iTotalDifference;
 			//更新Plan Total 数据
@@ -571,12 +599,15 @@ sap.ui.define([
 		},
 
 		onDateRangeChange: function(oEvent) {
-			if ( this.vaildDate(oEvent.getSource()) ){
+			let oControl = oEvent.getSource();
+			//格式有误不执行检查
+			if ( this.vaildDate(oControl) ){
 				return;
 			}
 
-			var oControl = oEvent.getSource();
-
+			this.checkDateRange(oControl);
+		},
+		checkDateRange: function(oControl) {
 			var oStartDate = oControl.getFrom();
 			var oEndDate = oControl.getTo();
 			// 如果未完整选择两个日期，则退出
@@ -638,6 +669,60 @@ sap.ui.define([
 				oControl.setValueState("Error");
 				return true;
 			}
+		},
+
+		onExport: function (oEvent) {
+			var sId = oEvent.getSource().getParent().getParent().getId();
+			// 根据id值获取table 
+			var oTable = this.getView().byId(sId);
+			// 获取table的绑定路径
+			var sPath = oTable.getBindingPath("rows");
+			// 获取table数据
+			var aExcelSet = this._LocalData.getProperty(sPath);
+
+			var aExcelCol = [];
+			// 获取table的columns
+			var aTableCol = oTable.getColumns();
+			for (var i = 1; i < aTableCol.length; i++) {
+				if (aTableCol[i].getVisible()) {
+					var sLabelText = aTableCol[i].getAggregation("label").getText();
+					var sProperty = aTableCol[i].getAggregation("template").getBindingPath("text");
+					// 对于Text控件需要获取text属性，对于Input控件需要获取value属性
+					if (!sProperty) {
+						sProperty = aTableCol[i].getAggregation("template").getBindingPath("value");
+					}
+					var sType = "string";
+					// switch (sProperty) {
+					// 	case "PrdStartDate":
+					// 	case "PrdEndDate":
+					// 	case "PostingDate":
+					// 		sType = "Date";
+					// 		break;
+					// }
+					var oExcelCol = {
+						// 获取表格的列名，即设置excel的抬头
+						label: sLabelText,
+						// 数据类型，即设置excel该列的数据类型
+						type: sType,
+						// 获取数据的绑定路径，即设置excel该列的字段路径
+						property: sProperty,
+						// 获取表格的width属性，即设置excel该列的长度
+						width: parseFloat(aTableCol[i].getWidth())
+					};
+					aExcelCol.push(oExcelCol);
+				}
+			}
+			// 设置excel的相关属性
+			var oSettings = {
+				workbook: {
+					columns: aExcelCol,
+					hierarchyLevel: "level"
+				},
+				dataSource: aExcelSet, // 传入参数，数据源
+				fileName: "Export_" + this._ResourceBundle.getText("title") + new Date().getTime() + ".xlsx" // 文件名，需要加上后缀
+			};
+			// 导出excel
+			new Spreadsheet(oSettings).build();
 		},
     });
 });
