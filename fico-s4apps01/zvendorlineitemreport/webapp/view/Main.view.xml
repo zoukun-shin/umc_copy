@@ -25,15 +25,15 @@
                         <smartFilterBar:controlConfiguration>
                             <smartFilterBar:ControlConfiguration id="idControlConfiguration"  key="Supplier"       visibleInAdvancedArea="true" label="{i18n>Supplier_filter}" mandatory="notMandatory" index="1"  />
                             <smartFilterBar:ControlConfiguration id="id0ControlConfiguration" key="CompanyCode"    visibleInAdvancedArea="true" label="{i18n>CompanyCode}"     mandatory="mandatory"    index="5"  />
-                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration" key="Status"         filterType="single" visibleInAdvancedArea="true" label="{i18n>Status}"          mandatory="notMandatory" index="10" />
-                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration" key="ClearingDate"   filterType="single" visibleInAdvancedArea="true" label="{i18n>ClearingDate}"    mandatory="notMandatory" index="15" />
-                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration" key="OpenOnKeyDate"  filterType="single" visibleInAdvancedArea="true" label="{i18n>OpenOnKeyDate}"   mandatory="notMandatory" index="20" />
+                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration" key="Status"         visibleInAdvancedArea="true" label="{i18n>Status}"          mandatory="notMandatory" index="10" filterType="single" />
+                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration" key="ClearingDate"   visibleInAdvancedArea="true" label="{i18n>ClearingDate}"    mandatory="notMandatory" index="15" filterType="single" />
+                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration" key="OpenOnKeyDate"  visibleInAdvancedArea="true" label="{i18n>OpenOnKeyDate}"   mandatory="notMandatory" index="20" />
+                            <smartFilterBar:ControlConfiguration id="id7ControlConfiguration" key="PostingDate"    visibleInAdvancedArea="true" label="{i18n>PostingDate}"     mandatory="notMandatory" index="30" filterType="single" />
                             <!-- visible -->
                             <smartFilterBar:ControlConfiguration id="id4ControlConfiguration" index="26" key="AccountingDocument" label="{i18n>AccountingDocument}" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration id="id5ControlConfiguration" index="27" key="LedgerGLLineItem" label="{i18n>LedgerGLLineItem}" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration id="id27ControlConfiguration" index="28" key="GLAccount" label="{i18n>GLAccount}" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration id="id6ControlConfiguration" index="29" key="FiscalPeriod" label="{i18n>FiscalPeriod}" visibleInAdvancedArea="false"/>
-                            <smartFilterBar:ControlConfiguration id="id7ControlConfiguration" index="30" key="PostingDate" label="{i18n>PostingDate}" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration id="id8ControlConfiguration" index="31" key="NetDueDate" label="{i18n>NetDueDate}" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration id="id9ControlConfiguration" index="32" key="AlternativeGLAccount" label="{i18n>AlternativeGLAccount}" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration id="id10ControlConfiguration" index="33" key="AccountingDocumentType" label="{i18n>AccountingDocumentType}" visibleInAdvancedArea="false"/>
