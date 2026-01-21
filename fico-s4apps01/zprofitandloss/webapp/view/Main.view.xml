@@ -1,0 +1,49 @@
+<mvc:View controllerName="fico.zprofitandloss.controller.Main" displayBlock="true" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:core="sap.ui.core" 
+    xmlns="sap.m"
+	xmlns:f="sap.f" 
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
+	xmlns:sv="sap.ui.comp.smartvariants" >
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="ProfitAndLossSVM" showShare="true" showExecuteOnSelection="true" entitySet="ZC_PROFIT_AND_LOSS"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ProfitAndLoss" useToolbar="false" smartVariant="__SVM01" persistencyKey="ProfitAndLossSFB" initialized="onsMrilterBarInitialized" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="CompanyCode" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>CompanyCode}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="FiscalYear" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>FiscalYear}">
+				                    <smartFilterBar:customControl>
+					                    <DatePicker id="idFiscalYear" displayFormat="yyyy" />
+				                    </smartFilterBar:customControl>
+			                    </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='30' key="FiscalPeriod" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>FiscalPeriod}" />
+                                <smartFilterBar:ControlConfiguration index='40' key="Language" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Language}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="Code" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Description" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Explanation" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PeriodAmt" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PrevPeriodAmt" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Currency" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <!-- <FlexBox fitContainer="true"> -->
+                <core:Fragment fragmentName="fico.zprofitandloss.fragments.ProfitAndLoss" type="XML"/>
+            <!-- </FlexBox> -->
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

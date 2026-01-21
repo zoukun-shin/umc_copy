@@ -1,0 +1,65 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <smartTable:SmartTable entitySet="ProfitAndLoss" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
+        showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" 
+        persistencyKey="ProfitAndLossST" header='{i18n>Results}' enableAutoBinding="false" 
+        placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
+        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="CompanyCode,FiscalYear,FiscalPeriod,Language,Currency">
+        <smartTable:customToolbar>
+            <OverflowToolbar design="Transparent">
+                <ToolbarSpacer/>
+                <Button icon="sap-icon://print" text="{i18n>Print}" type="Transparent" press="onPressBtn('Print')" enabled="{= ${local>/authorityCheck/button/Print}}"/>
+            </OverflowToolbar>
+        </smartTable:customToolbar>
+        <table:Table id="idTable" selectionMode="None" fixedColumnCount="0" rowMode="Auto">
+            <table:columns>
+                <table:Column width="6rem" label="{i18n>Code}" sortProperty="Code" filterProperty="Code">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Code", "leadingProperty":"Code"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Code}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="35rem" label="{i18n>Description}" sortProperty="CompanDescriptionyCode" filterProperty="Description">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Description", "leadingProperty":"Description"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Description}" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="6rem" label="{i18n>Explanation}" sortProperty="Explanation" filterProperty="Explanation">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Explanation", "leadingProperty":"Explanation"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Explanation}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>PeriodAmt}" sortProperty="PeriodAmt" filterProperty="PeriodAmt" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PeriodAmt", "leadingProperty":"PeriodAmt"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{path:'PeriodAmt', formatter:'.formatter.formatNumber'}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>PrevPeriodAmt}" sortProperty="PrevPeriodAmt" filterProperty="PrevPeriodAmt" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PrevPeriodAmt", "leadingProperty":"PrevPeriodAmt"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{path:'PrevPeriodAmt', formatter:'.formatter.formatNumber'}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </smartTable:SmartTable>
+</core:FragmentDefinition>
