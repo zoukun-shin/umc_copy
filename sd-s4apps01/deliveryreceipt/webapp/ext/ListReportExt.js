@@ -3,7 +3,9 @@ sap.ui.define([
     "sap/m/BusyDialog",
     "./messages",
     "../lib/xml-js",
-], function(MessageToast, BusyDialog, messages, xml) {
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+], function(MessageToast, BusyDialog, messages, xml, Filter, FilterOperator) {
     'use strict';
     var _oFunctions, _ResourceBundle, _oDataModel, _oPrintModel, _UserInfo;
     return {
@@ -22,6 +24,7 @@ sap.ui.define([
         _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel, oViews) {
             var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
             var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
+            // sEmail = "xinlei.xu@sh.shin-china.com"
             var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -75,6 +78,103 @@ sap.ui.define([
                 oViews.destroy();
                 this.oErrorMessageDialog.open();
             }.bind(this));
+        },
+        onPrintDeliveryNote: function(oEvent) {
+            var oBusyDialog = new BusyDialog();
+             _oDataModel = this.getModel();
+            _oPrintModel = this.getModel("Print");
+            _ResourceBundle = this.getModel("i18n").getResourceBundle();
+
+            _oDataModel = this.getModel();
+            // 获取选择的行项目
+            if (this.getSelectedContexts) {
+                var aSelectedContexts = this.getSelectedContexts();
+            }
+            let aDeliveryDocument = aSelectedContexts.map(item => item.getObject()?.DeliveryDocument);
+            aDeliveryDocument = Array.from(new Set(aDeliveryDocument))
+
+            var aFilters = [];
+            var aNewFilter = [];
+            aDeliveryDocument.forEach(function(item){
+                aNewFilter.push(new Filter({
+                    path: "DeliveryDocument",
+                    operator: FilterOperator.EQ,
+                    value1: item
+                }));
+            });
+            
+            let oNewFilter = new Filter({
+				filters:aNewFilter,
+				and:false
+			});
+            aFilters.push(oNewFilter);
+
+            var oContextBinding = _oDataModel.bindList("/DeliveryNote", undefined, undefined, aFilters, {});
+            
+            //获取行项目数据
+            var aPrintItem = [];
+            var oItemPromise =  oContextBinding.requestContexts();
+            oItemPromise.then(function(aContext){
+               let aPDFContent = _oFunctions.porcessDeliveryCotent(aDeliveryDocument,aContext);
+               aPDFContent.forEach(pdfContent => {
+                   _oFunctions.getPDF({"PrintData":pdfContent},"YY1_SD041");
+               });
+            });
+        },
+
+        porcessDeliveryCotent: function(aHeader,aContext){
+            var aPrintItem = [];
+            var aDelivery = [];
+            for (const boundContext of aContext) {
+                var object = boundContext.getObject();
+                aPrintItem.push(object);
+            }
+            var aPrintData = [];
+            aHeader.forEach(function(sDeliveryDocument){
+                let aDeliveryItem = aPrintItem.filter(e => e.DeliveryDocument === sDeliveryDocument );
+                let oFirstItem = aDeliveryItem[0];
+                let oHeader ={
+                    CompanyName: oFirstItem.CompanyName,
+                    CompanyAddress: oFirstItem.CompanyAddress,
+                    Companycontacts: oFirstItem.Companycontacts,
+                    BarCode: oFirstItem.BarCode,
+                    DeliveryDocument: oFirstItem.DeliveryDocument,
+                    BillingDocument: oFirstItem.BillingDocument,
+                    IssueDate: oFirstItem.IssueDate,
+                    ShippingType: oFirstItem.ShippingType,
+                    CustomerName: oFirstItem.CustomerName,
+                    Incotern: oFirstItem.Incotern,
+                    OrderQuantityTotal: oFirstItem.OrderQuantityTotal,
+                    NetAmountTotal: oFirstItem.NetAmountTotal,
+                    TaxRate: oFirstItem.TaxRate,
+                    TaxAmount: oFirstItem.TaxAmount,
+                    GrandTotalAmount: oFirstItem.GrandTotalAmount,
+                    Currency: oFirstItem.TransactionCurrency
+                }
+                //删除行项目不需要的字段，节省内存
+                aDeliveryItem.forEach(function(item){
+                    delete item.CompanyName;
+                    delete item.CompanyAddress;
+                    delete item.Companycontacts;
+                    delete item.DeliveryDocument;
+                    delete item.BillingDocument;
+                    delete item.IssueDate;
+                    delete item.ShippingType;
+                    delete item.CustomerName;
+                    delete item.Incotern;
+                    delete item.OrderQuantityTotal;
+                    delete item.NetAmountTotal;
+                    delete item.TaxRate;
+                    delete item.TaxAmount;
+                    delete item.GrandTotalAmount;
+                });
+                aDelivery.push({
+                    ...oHeader,
+                    to_Items: {"results": aDeliveryItem }
+                });
+            });
+            // return {"PrintData":aDelivery};
+            return aDelivery;
         },
         // 印刷和订正印刷， 订正印刷取当前选定的值，印刷需要按打印维度key取自建表已经存储的上次打印的条目的
         onPrint: function(oEvent) {
@@ -136,7 +236,7 @@ sap.ui.define([
                 records.forEach(record => {
                     if (sActionName !== "deleteDeliveryReceiptNo" ) {
                         var pdfContent = _oFunctions.porcessPrintContent(record);
-                        _oFunctions.getPDF(pdfContent);
+                        _oFunctions.getPDF(pdfContent,"YY1_SD018");
                     } else {
                         messages.showSuccess(_ResourceBundle.getText("msgDeleteSuccessed"));
                     }
@@ -228,14 +328,14 @@ sap.ui.define([
 
             return pdfContent;
         },
-        getPDF: function (pdfContent) {
+        getPDF: function (pdfContent,sTemplateID) {
             var that = this;
             var oBusyDialog = new BusyDialog();
             var aRecordCreated = [];
             var sFileName = _ResourceBundle.getText("appTitle") + new Date().getTime();
             var promise = new Promise((resolve, reject) => {
                 var createPrintRecord = _oPrintModel.bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord(...)");
-                createPrintRecord.setParameter("TemplateID", "YY1_SD018");
+                createPrintRecord.setParameter("TemplateID", sTemplateID);
                 createPrintRecord.setParameter("IsExternalProvidedData", true);
                 var oXMLData = json2xml(pdfContent, {
                     compact: true,
