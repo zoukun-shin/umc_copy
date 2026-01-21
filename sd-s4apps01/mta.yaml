@@ -95,6 +95,10 @@ modules:
       - sdzdelivtransfee.zip
       name: sdzdelivtransfee
       target-path: resources/
+    - artifacts:
+      - sdmaterialpricedetail.zip
+      name: sdmaterialpricedetail
+      target-path: resources/  
 - name: sdsalesacceptance
   type: html5
   path: salesacceptance
@@ -206,6 +210,15 @@ modules:
 - name: sdzdelivtransfee
   type: html5
   path: zdelivtransfee
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sdmaterialpricedetail
+  type: html5
+  path: materialpricedetail
   build-parameters:
     build-result: dist
     builder: custom
