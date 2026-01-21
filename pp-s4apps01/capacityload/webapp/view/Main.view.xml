@@ -1,5 +1,5 @@
-
-<mvc:View controllerName="pp.capacityload.controller.Main"
+<mvc:View
+    controllerName="pp.capacityload.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:f="sap.f"
@@ -9,11 +9,11 @@
     xmlns:core="sap.ui.core"
     xmlns:t="sap.ui.table"
     xmlns:rowmodes="sap.ui.table.rowmodes"
-    xmlns:smartfield = "sap.ui.comp.smartfield"
+    xmlns:smartfield="sap.ui.comp.smartfield"
     xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
-    displayBlock="true">
-    <f:DynamicPage id="idDynamicPage"
-    >
+    displayBlock="true"
+>
+    <f:DynamicPage id="idDynamicPage">
         <f:title>
             <f:DynamicPageTitle id="idDynamicPageTitle">
                 <f:heading>
@@ -39,11 +39,41 @@
                         smartVariant="idSmartVariantManagement"
                     >
                         <smartFilterBar:controlConfiguration>
-                            <smartFilterBar:ControlConfiguration key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="mandatory" index="1" />
-                            <smartFilterBar:ControlConfiguration key="WorkCenter" visibleInAdvancedArea="true" label="{i18n>WorkCenter}" mandatory="notMandatory" index="3" />
-                            <smartFilterBar:ControlConfiguration key="MRPController" visibleInAdvancedArea="true" label="{i18n>MRPController}" mandatory="mandatory" index="5" />
-                            <smartFilterBar:ControlConfiguration key="ProductionSupervisor" visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}" mandatory="notMandatory" index="7" />
-                            <smartFilterBar:ControlConfiguration key="StartDate" visibleInAdvancedArea="true" label="{i18n>StartDateF}" mandatory="mandatory" index="9" >
+                            <smartFilterBar:ControlConfiguration
+                                key="Plant"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>Plant}"
+                                mandatory="mandatory"
+                                index="1"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="WorkCenter"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>WorkCenter}"
+                                mandatory="notMandatory"
+                                index="3"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="MRPController"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>MRPController}"
+                                mandatory="mandatory"
+                                index="5"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="ProductionSupervisor"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>ProductionSupervisor}"
+                                mandatory="notMandatory"
+                                index="7"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="StartDate"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>StartDateF}"
+                                mandatory="mandatory"
+                                index="9"
+                            >
                                 <smartFilterBar:customControl>
                                     <DatePicker
                                         id="idDatePickerStartDate"
@@ -53,13 +83,32 @@
                                     />
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
-                            <smartFilterBar:ControlConfiguration key="StartDate1" visibleInAdvancedArea="true" label="{i18n>StartDate1F}" mandatory="mandatory" index="11" >
+                            <smartFilterBar:ControlConfiguration
+                                key="StartDate1"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>StartDate1F}"
+                                mandatory="mandatory"
+                                index="11"
+                            >
                                 <smartFilterBar:customControl>
                                     <DatePicker
                                         id="idDatePickerStartDate1"
                                         valueFormat="yyyy/MM/dd"
                                         displayFormat="yyyy/MM/dd"
                                         change="onDatePickerChange"
+                                    />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="AllPlannedOrders"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>AllPlannedOrders}"
+                                mandatory="notMandatory"
+                                index="13"
+                            >
+                                <smartFilterBar:customControl>
+                                    <CheckBox
+                                        id="idAllPlannedOrders"
                                     />
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
@@ -90,187 +139,258 @@
                     enableColumnFreeze="true"
                     rowsUpdated="onUITableRowsUpdated"
                 >
-                    <t:rowMode >
+                    <t:rowMode>
                         <rowmodes:Auto id="_IDGenAuto" />
                     </t:rowMode>
-                    <t:Column width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>WorkCenter}"
                         sortProperty="WorkCenter"
                         filterProperty="WorkCenter"
                         customData:p13nData='\{"columnKey":"WorkCenter", "leadingProperty":"WorkCenter", "sortProperty":"WorkCenter", "filterProperty": "WorkCenter"}'
-                        >
+                    >
                         <t:template>
-                            <Text text="{WorkCenter}" wrapping="false"/>
+                            <Text
+                                text="{WorkCenter}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>StartDate}"
                         sortProperty="StartDate"
                         filterProperty="StartDate"
                         customData:p13nData='\{"columnKey":"StartDate", "leadingProperty":"StartDate", "sortProperty":"StartDate", "filterProperty": "StartDate", "type":"date"}'
                     >
                         <t:template>
-                            <Text text="{path:'StartDate',type:'sap.ui.model.type.Date'}"/>
+                            <Text
+                                text="{path:'StartDate',type:'sap.ui.model.type.Date'}"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>ManufacturingOrder}"
                         sortProperty="ManufacturingOrder"
                         filterProperty="ManufacturingOrder"
                         customData:p13nData='\{"columnKey":"ManufacturingOrder", "leadingProperty":"ManufacturingOrder", "sortProperty":"ManufacturingOrder", "filterProperty": "ManufacturingOrder"}'
                     >
                         <t:template>
-                            <Text text="{ManufacturingOrder}" wrapping="false"/>
+                            <Text
+                                text="{ManufacturingOrder}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="12rem"
+                    <t:Column
+                        width="12rem"
                         label="{i18n>OrderStatus}"
                         sortProperty="OrderStatus"
                         filterProperty="OrderStatus"
                         customData:p13nData='\{"columnKey":"OrderStatus", "leadingProperty":"OrderStatus", "sortProperty":"OrderStatus", "filterProperty": "OrderStatus"}'
                     >
                         <t:template>
-                            <Text text="{OrderStatus}" wrapping="false"/>
+                            <Text
+                                text="{OrderStatus}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>Model}"
                         sortProperty="Model"
                         filterProperty="Model"
                         customData:p13nData='\{"columnKey":"Model", "leadingProperty":"Model", "sortProperty":"Model", "filterProperty": "Model"}'
                     >
                         <t:template>
-                            <Text text="{Model}" wrapping="false"/>
+                            <Text
+                                text="{Model}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>Material}"
                         sortProperty="Material"
                         filterProperty="Material"
                         customData:p13nData='\{"columnKey":"Material", "leadingProperty":"Material", "sortProperty":"Material", "filterProperty": "Material"}'
                     >
                         <t:template>
-                            <Text text="{Material}" wrapping="false"/>
+                            <Text
+                                text="{Material}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>LongText}"
                         sortProperty="LongText"
                         filterProperty="LongText"
                         customData:p13nData='\{"columnKey":"LongText", "leadingProperty":"LongText", "sortProperty":"LongText", "filterProperty": "LongText"}'
                     >
                         <t:template>
-                            <Text text="{LongText}" wrapping="false"/>
+                            <Text
+                                text="{LongText}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>PlannedQty}"
                         sortProperty="PlannedQty"
                         filterProperty="PlannedQty"
                         customData:p13nData='\{"columnKey":"PlannedQty", "leadingProperty":"PlannedQty", "sortProperty":"PlannedQty", "filterProperty": "PlannedQty"}'
                     >
                         <t:template>
-                            <Text text="{PlannedQty}" wrapping="false"/>
+                            <Text
+                                text="{PlannedQty}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>ActualQty}"
                         sortProperty="ActualQty"
                         filterProperty="ActualQty"
                         customData:p13nData='\{"columnKey":"ActualQty", "leadingProperty":"ActualQty", "sortProperty":"ActualQty", "filterProperty": "ActualQty"}'
                     >
                         <t:template>
-                            <Text text="{ActualQty}" wrapping="false"/>
+                            <Text
+                                text="{ActualQty}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>DifferenceQty}"
                         sortProperty="DifferenceQty"
                         filterProperty="DifferenceQty"
                         customData:p13nData='\{"columnKey":"DifferenceQty", "leadingProperty":"DifferenceQty", "sortProperty":"DifferenceQty", "filterProperty": "DifferenceQty"}'
                     >
                         <t:template>
-                            <Text text="{DifferenceQty}" wrapping="false"/>
+                            <Text
+                                text="{DifferenceQty}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>Capacity}"
                         sortProperty="Capacity"
                         filterProperty="Capacity"
                         customData:p13nData='\{"columnKey":"Capacity", "leadingProperty":"Capacity", "sortProperty":"Capacity", "filterProperty": "Capacity"}'
                     >
                         <t:template>
-                            <Text text="{Capacity}" wrapping="false"/>
+                            <Text
+                                text="{Capacity}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>WorkingHours}"
                         sortProperty="WorkingHours"
                         filterProperty="WorkingHours"
                         customData:p13nData='\{"columnKey":"WorkingHours", "leadingProperty":"WorkingHours", "sortProperty":"WorkingHours", "filterProperty": "WorkingHours"}'
                     >
                         <t:template>
-                            <Text text="{WorkingHours}" wrapping="false"/>
+                            <Text
+                                text="{WorkingHours}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>MaterialDescription}"
                         sortProperty="MaterialDescription"
                         filterProperty="MaterialDescription"
                         customData:p13nData='\{"columnKey":"MaterialDescription", "leadingProperty":"MaterialDescription", "sortProperty":"MaterialDescription", "filterProperty": "MaterialDescription"}'
                     >
                         <t:template>
-                            <Text text="{MaterialDescription}" wrapping="false"/>
+                            <Text
+                                text="{MaterialDescription}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>OrderType}"
                         sortProperty="OrderType"
                         filterProperty="OrderType"
                         customData:p13nData='\{"columnKey":"OrderType", "leadingProperty":"OrderType", "sortProperty":"OrderType", "filterProperty": "OrderType"}'
                     >
                         <t:template>
-                            <Text text="{OrderType}" wrapping="false"/>
+                            <Text
+                                text="{OrderType}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>ProductionSupervisor}"
                         sortProperty="ProductionSupervisor"
                         filterProperty="ProductionSupervisor"
                         customData:p13nData='\{"columnKey":"ProductionSupervisor", "leadingProperty":"ProductionSupervisor", "sortProperty":"ProductionSupervisor", "filterProperty": "ProductionSupervisor"}'
                     >
                         <t:template>
-                            <Text text="{ProductionSupervisor}" wrapping="false"/>
+                            <Text
+                                text="{ProductionSupervisor}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>MRPController}"
                         sortProperty="MRPController"
                         filterProperty="MRPController"
                         customData:p13nData='\{"columnKey":"MRPController", "leadingProperty":"MRPController", "sortProperty":"MRPController", "filterProperty": "MRPController"}'
                     >
                         <t:template>
-                            <Text text="{MRPController}" wrapping="false"/>
+                            <Text
+                                text="{MRPController}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>Customer}"
                         sortProperty="Customer"
                         filterProperty="Customer"
                         customData:p13nData='\{"columnKey":"Customer", "leadingProperty":"Customer", "sortProperty":"Customer", "filterProperty": "Customer"}'
                     >
                         <t:template>
-                            <Text text="{Customer}" wrapping="false"/>
+                            <Text
+                                text="{Customer}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
-                    <t:Column  width="8rem"
+                    <t:Column
+                        width="8rem"
                         label="{i18n>Plant}"
                         sortProperty="Plant"
                         filterProperty="Plant"
                         customData:p13nData='\{"columnKey":"Plant", "leadingProperty":"Plant", "sortProperty":"Plant", "filterProperty": "Plant"}'
                     >
                         <t:template>
-                            <Text text="{Plant}" wrapping="false"/>
+                            <Text
+                                text="{Plant}"
+                                wrapping="false"
+                            />
                         </t:template>
                     </t:Column>
                 </t:Table>
