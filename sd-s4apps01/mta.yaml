@@ -99,6 +99,10 @@ modules:
       - sdmaterialpricedetail.zip
       name: sdmaterialpricedetail
       target-path: resources/  
+    - artifacts:
+      - sdprintpackinglist.zip
+      name: sdprintpackinglist
+      target-path: resources/
 - name: sdsalesacceptance
   type: html5
   path: salesacceptance
@@ -219,6 +223,15 @@ modules:
 - name: sdmaterialpricedetail
   type: html5
   path: materialpricedetail
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sdprintpackinglist
+  type: html5
+  path: printpackinglist
   build-parameters:
     build-result: dist
     builder: custom
