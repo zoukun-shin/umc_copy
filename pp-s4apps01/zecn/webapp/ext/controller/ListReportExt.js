@@ -196,7 +196,7 @@ sap.ui.define([
                         Customer: object.Customer,
                         CustomerName: object.CustomerName,
                         ReqByCustomer: object.ReqByCustomer,
-                        ReqByJp: object.ReqByCustomer,
+                        ReqByJp: object.ReqByJp,
                         ReqByHk: object.ReqByHk,
                         ReqByCn: object.ReqByCn,
                         ReqByVn: object.ReqByVn,
