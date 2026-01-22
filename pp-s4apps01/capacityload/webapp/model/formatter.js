@@ -124,6 +124,13 @@ sap.ui.define([
             }
             return value;
         },
+
+        sumCapcityToBlank: function(value1,value2) {
+            if (value1 === "B01" || value1 === "C01") {
+               return this.formatter.allZeroToBlank(value2);
+            }
+            return value2;
+        },
         
         removeLeadingZero: function (value) {
             if (value) {

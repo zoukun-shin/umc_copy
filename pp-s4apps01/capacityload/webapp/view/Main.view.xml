@@ -207,6 +207,7 @@
                         <t:template>
                             <Text
                                 text="{Model}"
+                                tooltip="{Model}"
                                 wrapping="false"
                             />
                         </t:template>
@@ -221,12 +222,13 @@
                         <t:template>
                             <Text
                                 text="{Material}"
+                                tooltip="{Material}"
                                 wrapping="false"
                             />
                         </t:template>
                     </t:Column>
                     <t:Column
-                        width="8rem"
+                        width="12rem"
                         label="{i18n>LongText}"
                         sortProperty="LongText"
                         filterProperty="LongText"
@@ -235,6 +237,7 @@
                         <t:template>
                             <Text
                                 text="{LongText}"
+                                tooltip="{LongText}"
                                 wrapping="false"
                             />
                         </t:template>
@@ -290,7 +293,7 @@
                     >
                         <t:template>
                             <Text
-                                text="{Capacity}"
+                                text="{parts:['LineType','Capacity'], formatter:'.formatter.sumCapcityToBlank'}"
                                 wrapping="false"
                             />
                         </t:template>
@@ -310,7 +313,7 @@
                         </t:template>
                     </t:Column>
                     <t:Column
-                        width="8rem"
+                        width="12rem"
                         label="{i18n>MaterialDescription}"
                         sortProperty="MaterialDescription"
                         filterProperty="MaterialDescription"
@@ -319,6 +322,7 @@
                         <t:template>
                             <Text
                                 text="{MaterialDescription}"
+                                tooltip="{MaterialDescription}"
                                 wrapping="false"
                             />
                         </t:template>

@@ -88,6 +88,11 @@ sap.ui.define([
             if ( this.vaildDate(oStartDate) || this.vaildDate(oStartDate1) ) {
                 mBindingParams.preventTableBind="true";
             }
+
+            this.checkDateRange(oStartDate,oStartDate1);
+			if (!oStartDate1.getDateValue()) {
+				mBindingParams.preventTableBind="true";
+			}
             
             if (oStartDate.isValidValue() && dStartDate && oStartDate1.isValidValue() && dStartDate1) {
                 aNewFilter.push(new Filter("StartDate", "BT", this.formatter.odataDate(dStartDate), this.formatter.odataDate(dStartDate1))); 
@@ -107,49 +112,46 @@ sap.ui.define([
 
 		},
 
-        onDatePickerChange: function(oEvent) {
-			// if ( this.vaildDate(oEvent.getSource()) ){
-			// 	return;
-			// }
+        checkDateRange: function(oControl1,oControl2) {
+			var oStartDate = oControl1.getDateValue();
+			var oEndDate = oControl2.getDateValue();
+			// 如果未完整选择两个日期，则退出
+			if (!oStartDate || !oEndDate) {
+				return;
+			}
 
-			// var oControl = oEvent.getSource();
-
-			// var oStartDate = oControl.getFrom();
-			// var oEndDate = oControl.getTo();
-			// // 如果未完整选择两个日期，则退出
-			// if (!oStartDate || !oEndDate) {
-			// 	return;
-			// }
-
-			// var sMode = this.byId("idProcessMode").getSelectedIndex()
-			// // 调用核心算法，计算最大允许的截止日期
-			// var oMaxEndDate = this._calculateMaxEndDate(oStartDate,sMode);
+			// 调用核心算法，计算最大允许的截止日期
+			var oMaxEndDate = this._calculateMaxEndDate(oStartDate,1);
 			
-			// // 比较用户选择的截止日期是否超过了最大允许日期
-			// if (oEndDate.getTime() > oMaxEndDate.getTime()) {
-			// 	// 1.给出错误提示
-			// 	switch(sMode) {
-			// 		case 0:
-			// 			sap.m.MessageToast.show("选择的时间范围不能超过一年", {
-			// 				duration: 3000
-			// 			});
-			// 			break;
-						
-			// 		case 1:
-			// 			sap.m.MessageToast.show("选择的时间范围不能超过一个月", {
-			// 				duration: 3000
-			// 			});
-			// 			break;
-			// 	}
+			// 比较用户选择的截止日期是否超过了最大允许日期
+			if (oEndDate.getTime() > oMaxEndDate.getTime()) {
+                sap.m.MessageToast.show(this._ResourceBundle.getText("msg01"), {
+                    duration: 3000
+                });
 				
-			// 	// 2. 可选：自动将截止日期修正为最大允许值
-			// 	// oControl.setDateValue([oStartDate, oMaxEndDate]);
+				// 2. 可选：自动将截止日期修正为最大允许值
+				// oControl.setDateValue([oStartDate, oMaxEndDate]);
 				
-			// 	// 3. 或者：清空选择，让用户重选（更清晰的交互）
-			// 	oControl.setValue("");
-			// 	oControl.setDateValue(null);
-			// 	oControl.focus();
-			// }
+				// 3. 或者：清空选择，让用户重选（更清晰的交互）
+				oControl2.setValue("");
+				oControl2.setDateValue(null);
+				oControl2.focus();
+			}
+		},
+        _calculateMaxEndDate: function(oStartDate,sMode) {
+			// 创建一个起始日期的副本，避免修改原对象
+			var oMaxEndDate = new Date(oStartDate.getTime());
+			
+			switch (sMode) {
+				// 年份加1
+				case 0:
+					oMaxEndDate.setFullYear(oMaxEndDate.getFullYear() + 1);break;
+				// 月份加1
+				case 1:
+					oMaxEndDate.setMonth(oMaxEndDate.getMonth() + 1);break;
+			}
+			
+			return oMaxEndDate;
 		},
 
         onUITableRowsUpdated: function (oEvent) {
