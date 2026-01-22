@@ -624,13 +624,13 @@ sap.ui.define([
 				// 1.给出错误提示
 				switch(sMode) {
 					case 0:
-						sap.m.MessageToast.show("选择的时间范围不能超过一年", {
+						sap.m.MessageToast.show(this._ResourceBundle.getText("msg02"), {
 							duration: 3000
 						});
 						break;
 						
 					case 1:
-						sap.m.MessageToast.show("选择的时间范围不能超过一个月", {
+						sap.m.MessageToast.show(this._ResourceBundle.getText("msg01"), {
 							duration: 3000
 						});
 						break;
