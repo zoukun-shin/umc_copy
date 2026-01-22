@@ -46,7 +46,7 @@ sap.ui.define([
 			else
 				return result;
 		},
-		
+
 		// format Number, integer + thousandths
 		formatNumber: function (n) {
 			if (n) {
@@ -75,15 +75,25 @@ sap.ui.define([
 			}
 		},
 
-		// format Float, two decimal + thousandths
-		formatFloat: function (n, decimal) {
+		// format Float, decimal + thousandths
+		formatFloat: function (n, currency) {
 			if (n) {
+				if (parseFloat(n) === 0 && currency === "") {
+					return "";
+				}
 				var sign = "";
+				var decimal = 2;
 				if (typeof n === "string") {
+					if (n.includes("%")) {
+						return n;
+					}
 					var bNegative = n.endsWith("-");
 					if (bNegative) {
 						n = "-" + n.substring(0, n.length - 1);
 					}
+				}
+				if (currency === "JPY" || currency === "VND" || currency === "TWD") {
+					decimal = 0;
 				}
 				var num = Number(n).toFixed(decimal);
 				if (num < 0) {
@@ -101,6 +111,6 @@ sap.ui.define([
 			} else {
 				return n;
 			}
-		}
+		},
 	};
 });

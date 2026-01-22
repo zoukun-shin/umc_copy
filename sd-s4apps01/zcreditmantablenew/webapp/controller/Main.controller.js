@@ -102,16 +102,66 @@ sap.ui.define([
 			var that = this;
 			this._BusyDialog.open();
 			Promise.all([this.readData(aFilters)]).then((results) => {
+				// MOD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+				// if (results[0].results.length > 0) {
+				// 	that.getModel("local").setProperty("/data", results[0].results);
+				// 	that.buildListResultUITable(oTable, results[0].results[0]);
+				// 	this._BusyDialog.close();
+				// } else {
+				// 	this._BusyDialog.close();
+				// 	MessageBox.error(that.getModel("i18n").getResourceBundle().getText("NoData"));
+				// 	that.buildListResultUITable(oTable, results[0].results[0]);
+				// 	that.getModel("local").setProperty("/data", results[0].results);
+				// }
+				this._BusyDialog.close();
 				if (results[0].results.length > 0) {
-					that.getModel("local").setProperty("/data", results[0].results);
-					that.buildListResultUITable(oTable, results[0].results[0]);
-					this._BusyDialog.close();
+					var aResults = results[0].results;
+
+					for (var i = 0; i < aResults.length; i++) {
+						if (aResults[i]["zpercent1"]) {
+							aResults[i]["zmonth1"] = aResults[i]["zmonth1"] + aResults[i]["zpercent1"];
+						}
+						if (aResults[i]["zpercent2"]) {
+							aResults[i]["zmonth2"] = aResults[i]["zmonth2"] + aResults[i]["zpercent2"];
+						}
+						if (aResults[i]["zpercent3"]) {
+							aResults[i]["zmonth3"] = aResults[i]["zmonth3"] + aResults[i]["zpercent3"];
+						}
+						if (aResults[i]["zpercent4"]) {
+							aResults[i]["zmonth4"] = aResults[i]["zmonth4"] + aResults[i]["zpercent4"];
+						}
+						if (aResults[i]["zpercent5"]) {
+							aResults[i]["zmonth5"] = aResults[i]["zmonth5"] + aResults[i]["zpercent5"];
+						}
+						if (aResults[i]["zpercent6"]) {
+							aResults[i]["zmonth6"] = aResults[i]["zmonth6"] + aResults[i]["zpercent6"];
+						}
+						if (aResults[i]["zpercent7"]) {
+							aResults[i]["zmonth7"] = aResults[i]["zmonth7"] + aResults[i]["zpercent7"];
+						}
+						if (aResults[i]["zpercent8"]) {
+							aResults[i]["zmonth8"] = aResults[i]["zmonth8"] + aResults[i]["zpercent8"];
+						}
+						if (aResults[i]["zpercent9"]) {
+							aResults[i]["zmonth9"] = aResults[i]["zmonth9"] + aResults[i]["zpercent9"];
+						}
+						if (aResults[i]["zpercent10"]) {
+							aResults[i]["zmonth10"] = aResults[i]["zmonth10"] + aResults[i]["zpercent10"];
+						}
+						if (aResults[i]["zpercent11"]) {
+							aResults[i]["zmonth11"] = aResults[i]["zmonth11"] + aResults[i]["zpercent11"];
+						}
+						if (aResults[i]["zpercent12"]) {
+							aResults[i]["zmonth12"] = aResults[i]["zmonth12"] + aResults[i]["zpercent12"];
+						}
+					}
+					that.getModel("local").setProperty("/data", aResults);
+					that.buildListResultUITable(oTable, aResults[0]);
 				} else {
 					this._BusyDialog.close();
-					MessageBox.error("対象データが無いです。");
-					that.getModel("local").setProperty("/data", results[0].results);
-					that.buildListResultUITable(oTable, results[0].results[0]);
+					MessageBox.error(that.getModel("i18n").getResourceBundle().getText("NoData"));
 				}
+				// MOD END BY XINLEI XU 2026/01/22 AMO#5086
 			}).catch((error) => {
 				MessageBox.error(error);
 			}).finally(() => {
@@ -143,43 +193,55 @@ sap.ui.define([
 				oTable.addColumn(new Column({
 					label: "{i18n>Customer}",
 					template: new Text({
-						text: "{local>Customer}"
+						text: "{local>Customer}",
+						wrapping: false
 					}),
-					width: "8rem"
+					width: "5rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>CustomerName}",
 					template: new Text({
-						text: "{local>CustomerName}"
+						text: "{local>CustomerName}",
+						wrapping: false
 					}),
-					width: "30rem"
+					width: "10rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>LimitAmount}",
 					template: new Text({
-						text: "{local>LimitAmount}"
+						// MOD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+						// text: "{local>LimitAmount}",
+						text: {
+							parts: ['local>LimitAmount', 'local>currency'],
+							formatter: this.formatter.formatFloat
+						},
+						wrapping: false
+						// MOD END BY XINLEI XU 2026/01/22 AMO#5086
 					}),
-					width: "6rem",
+					width: "10rem",
 					hAlign: "End"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>Termstext1}",
 					template: new Text({
-						text: "{local>Termstext1}"
+						text: "{local>Termstext1}",
+						wrapping: false
 					}),
-					width: "8rem"
+					width: "10rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>Termstext2}",
 					template: new Text({
-						text: "{local>Termstext2}"
+						text: "{local>Termstext2}",
+						wrapping: false
 					}),
 					width: "15rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>text}",
 					template: new Text({
-						text: "{local>text1}"
+						text: "{local>text1}",
+						wrapping: false
 					}),
 					width: "20rem"
 				}));
@@ -188,7 +250,14 @@ sap.ui.define([
 					// label: "{i18n>zmonth1}",
 					label: titleVariable.zymonth1,
 					template: new Text({
-						text: "{local>zmonth1}" + "{local>zpercent1}"
+						// MOD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+						// text: "{local>zmonth1}" + "{local>zpercent1}",
+						text: {
+							parts: ['local>zmonth1', 'local>currency'],
+							formatter: this.formatter.formatFloat
+						},
+						wrapping: false
+						// MOD END BY XINLEI XU 2026/01/22 AMO#5086
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -198,7 +267,14 @@ sap.ui.define([
 					// label: "{i18n>zmonth2}",
 					label: titleVariable.zymonth2,
 					template: new Text({
-						text: "{local>zmonth2}" + "{local>zpercent2}"
+						// MOD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+						// text: "{local>zmonth2}" + "{local>zpercent2}",
+						text: {
+							parts: ['local>zmonth2', 'local>currency'],
+							formatter: this.formatter.formatFloat
+						},
+						wrapping: false
+						// MOD END BY XINLEI XU 2026/01/22 AMO#5086
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -208,7 +284,14 @@ sap.ui.define([
 					// label: "{i18n>zmonth3}",
 					label: titleVariable.zymonth3,
 					template: new Text({
-						text: "{local>zmonth3}" + "{local>zpercent3}"
+						// MOD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+						// text: "{local>zmonth3}" + "{local>zpercent3}",
+						text: {
+							parts: ['local>zmonth3', 'local>currency'],
+							formatter: this.formatter.formatFloat
+						},
+						wrapping: false
+						// MOD END BY XINLEI XU 2026/01/22 AMO#5086
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -218,7 +301,14 @@ sap.ui.define([
 					// label: "{i18n>zmonth4}",
 					label: titleVariable.zymonth4,
 					template: new Text({
-						text: "{local>zmonth4}" + "{local>zpercent4}"
+						// MOD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+						// text: "{local>zmonth4}" + "{local>zpercent4}",
+						text: {
+							parts: ['local>zmonth4', 'local>currency'],
+							formatter: this.formatter.formatFloat
+						},
+						wrapping: false
+						// MOD END BY XINLEI XU 2026/01/22 AMO#5086
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -228,7 +318,14 @@ sap.ui.define([
 					// label: "{i18n>zmonth5}",
 					label: titleVariable.zymonth5,
 					template: new Text({
-						text: "{local>zmonth5}" + "{local>zpercent5}"
+						// MOD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+						// text: "{local>zmonth5}" + "{local>zpercent5}",
+						text: {
+							parts: ['local>zmonth5', 'local>currency'],
+							formatter: this.formatter.formatFloat
+						},
+						wrapping: false
+						// MOD END BY XINLEI XU 2026/01/22 AMO#5086
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -238,7 +335,14 @@ sap.ui.define([
 					// label: "{i18n>zmonth6}",
 					label: titleVariable.zymonth6,
 					template: new Text({
-						text: "{local>zmonth6}" + "{local>zpercent6}"
+						// MOD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+						// text: "{local>zmonth6}" + "{local>zpercent6}",
+						text: {
+							parts: ['local>zmonth6', 'local>currency'],
+							formatter: this.formatter.formatFloat
+						},
+						wrapping: false
+						// MOD END BY XINLEI XU 2026/01/22 AMO#5086
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -248,7 +352,14 @@ sap.ui.define([
 					// label: "{i18n>zmonth7}",
 					label: titleVariable.zymonth7,
 					template: new Text({
-						text: "{local>zmonth7}" + "{local>zpercent7}"
+						// MOD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+						// text: "{local>zmonth7}" + "{local>zpercent7}",
+						text: {
+							parts: ['local>zmonth7', 'local>currency'],
+							formatter: this.formatter.formatFloat
+						},
+						wrapping: false
+						// MOD END BY XINLEI XU 2026/01/22 AMO#5086
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -258,7 +369,14 @@ sap.ui.define([
 					// label: "{i18n>zmonth8}",
 					label: titleVariable.zymonth8,
 					template: new Text({
-						text: "{local>zmonth8}" + "{local>zpercent8}"
+						// MOD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+						// text: "{local>zmonth8}" + "{local>zpercent8}",
+						text: {
+							parts: ['local>zmonth8', 'local>currency'],
+							formatter: this.formatter.formatFloat
+						},
+						wrapping: false
+						// MOD END BY XINLEI XU 2026/01/22 AMO#5086
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -268,7 +386,14 @@ sap.ui.define([
 					// label: "{i18n>zmonth9}",
 					label: titleVariable.zymonth9,
 					template: new Text({
-						text: "{local>zmonth9}" + "{local>zpercent9}"
+						// MOD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+						// text: "{local>zmonth9}" + "{local>zpercent9}",
+						text: {
+							parts: ['local>zmonth9', 'local>currency'],
+							formatter: this.formatter.formatFloat
+						},
+						wrapping: false
+						// MOD END BY XINLEI XU 2026/01/22 AMO#5086
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -278,7 +403,14 @@ sap.ui.define([
 					// label: "{i18n>zmonth10}",
 					label: titleVariable.zymonth10,
 					template: new Text({
-						text: "{local>zmonth10}" + "{local>zpercent10}"
+						// MOD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+						// text: "{local>zmonth10}" + "{local>zpercent10}",
+						text: {
+							parts: ['local>zmonth10', 'local>currency'],
+							formatter: this.formatter.formatFloat
+						},
+						wrapping: false
+						// MOD END BY XINLEI XU 2026/01/22 AMO#5086
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -288,7 +420,14 @@ sap.ui.define([
 					// label: "{i18n>zmonth11}",
 					label: titleVariable.zymonth11,
 					template: new Text({
-						text: "{local>zmonth11}" + "{local>zpercent11}"
+						// MOD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+						// text: "{local>zmonth11}" + "{local>zpercent11}",
+						text: {
+							parts: ['local>zmonth11', 'local>currency'],
+							formatter: this.formatter.formatFloat
+						},
+						wrapping: false
+						// MOD END BY XINLEI XU 2026/01/22 AMO#5086
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -298,7 +437,14 @@ sap.ui.define([
 					// label: "{i18n>zmonth12}",
 					label: titleVariable.zymonth12,
 					template: new Text({
-						text: "{local>zmonth12}" + "{local>zpercent12}"
+						// MOD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+						// text: "{local>zmonth12}" + "{local>zpercent12}",
+						text: {
+							parts: ['local>zmonth12', 'local>currency'],
+							formatter: this.formatter.formatFloat
+						},
+						wrapping: false
+						// MOD END BY XINLEI XU 2026/01/22 AMO#5086
 					}),
 					width: "10rem",
 					hAlign: "End"
@@ -494,6 +640,19 @@ sap.ui.define([
 						}
 					}
 					pRow = aRows[i];
+
+					// ADD BEGIN BY XINLEI XU 2026/01/22 AMO#5086
+					if (aRows[i].oBindingContexts && aRows[i].oBindingContexts.local && aRows[i].oBindingContexts.local.getPath()) {
+						var sPath = aRows[i].oBindingContexts.local.getPath();
+						var oRowData = this.getModel("local").getProperty(sPath);
+						for (var m = 6; m < pRow.getCells().length; m++) {
+							var n = m - 5;
+							if (oRowData["zpercent" + n] === "%" && oRowData["zmonth" + n].replaceAll("%", '') >= 10) {
+								$("#" + pRow.getCells()[m].getId()).css("background-color", "#f80303ff");
+							}
+						}
+					}
+					// ADD END BY XINLEI XU 2026/01/22 AMO#5086
 				}
 			}
 		},
@@ -513,7 +672,7 @@ sap.ui.define([
 			for (var i = 0; i < aTableCol.length; i++) {
 				if (aTableCol[i].getVisible()) {
 					var sLabelText = aTableCol[i].getAggregation("label").getText();
-					var sType, sTextAlign, bDelimiter, iScale;
+					var sType, sTextAlign, bDelimiter, sUnitProperty;
 					var sFieldName = aTableCol[i].getAggregation("template").mBindingInfos.text.parts[0].path;
 					switch (sFieldName) {
 						//  Number 分隔符
@@ -530,9 +689,10 @@ sap.ui.define([
 						case "zmonth10":
 						case "zmonth11":
 						case "zmonth12":
-							sType = sap.ui.export.EdmType.String;
+							sType = sap.ui.export.EdmType.Number; // sap.ui.export.EdmType.String; // MOD BY XINLEI XU 2026/01/22 AMO#5086
 							sTextAlign = "End";
 							bDelimiter = true;
+							sUnitProperty = "currency"; // ADD BY XINLEI XU 2026/01/22 AMO#5086
 							break;
 						default:
 							sType = sap.ui.export.EdmType.String;
@@ -543,10 +703,10 @@ sap.ui.define([
 						label: sLabelText,
 						type: sType,
 						property: aTableCol[i].getAggregation("template").getBindingPath("text"),
-						width: parseFloat(aTableCol[i].getWidth()),
+						width: aTableCol[i].getWidth(), // parseFloat(aTableCol[i].getWidth()), // MOD BY XINLEI XU 2026/01/22 AMO#5086
 						textAlign: sTextAlign,
 						delimiter: bDelimiter,
-						scale: iScale
+						unitProperty: sUnitProperty // ADD BY XINLEI XU 2026/01/22 AMO#5086
 					};
 					aExcelCol.push(oExcelCol);
 				}
