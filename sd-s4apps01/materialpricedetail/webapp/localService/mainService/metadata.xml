@@ -77,6 +77,9 @@
                     <PropertyRef Name="YearMonth"/>
                     <PropertyRef Name="BaseYearMonth"/>
                     <PropertyRef Name="Customer"/>
+                    <PropertyRef Name="materialdocumentyear"/>
+                    <PropertyRef Name="materialdocument"/>
+                    <PropertyRef Name="materialdocumentitem"/>
                     <PropertyRef Name="PurchaseOrder"/>
                     <PropertyRef Name="PurchaseOrderItem"/>
                 </Key>
@@ -88,7 +91,10 @@
                 <Property Name="YearMonth" Type="Edm.String" Nullable="false" MaxLength="7" sap:display-format="NonNegative"/>
                 <Property Name="BaseYearMonth" Type="Edm.String" Nullable="false" MaxLength="7" sap:display-format="NonNegative"/>
                 <Property Name="Customer" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number" sap:value-list="standard"/>
-                <Property Name="PurchaseOrder" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number"/>
+                <Property Name="materialdocumentyear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Material Doc. Year" sap:quickinfo="Material Document Year"/>
+                <Property Name="materialdocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Material Document" sap:quickinfo="Number of Material Document"/>
+                <Property Name="materialdocumentitem" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Material Doc.Item" sap:quickinfo="Item in Material Document"/>
+                <Property Name="PurchaseOrder" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="PurchaseOrderItem" Type="Edm.String" Nullable="false" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document"/>
                 <Property Name="Type" Type="Edm.String" MaxLength="1"/>
                 <Property Name="CompanyCodeName" Type="Edm.String" MaxLength="40"/>
@@ -683,6 +689,12 @@
             <Annotations Target="cds_zui_materialpricedetail_o2.MaterialPriceType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_materialpricedetail_o2.MaterialPriceType/materialdocumentyear" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MJAHR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_materialpricedetail_o2.MaterialPriceType/materialdocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MBLNR&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_materialpricedetail_o2.ZR_ProductPlantVHType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
             </Annotations>
@@ -716,8 +728,8 @@
             <Annotations Target="cds_zui_materialpricedetail_o2.I_CompanyCodeStdVHType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_materialpricedetail_o2.MaterialPriceType/PurchaseOrder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=EBELN&amp;origin=JG5_100"/>
+            <Annotations Target="cds_zui_materialpricedetail_o2.MaterialPriceType/materialdocumentitem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MBLPO&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_materialpricedetail_o2.ZR_ProductPlantVHType/Product" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTNUMBER&amp;origin=JG5_100"/>

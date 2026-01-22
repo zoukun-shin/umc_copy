@@ -153,6 +153,30 @@
                                 <Text text="{CustomerName}" wrapping="false" tooltip="{CustomerName}"/>
                             </table:template>
                         </table:Column>
+                        <table:Column width="8rem" label="{i18n>materialdocumentyear}" sortProperty="materialdocumentyear" filterProperty="materialdocumentyear">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"materialdocumentyear", "leadingProperty":"materialdocumentyear"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{materialdocumentyear}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>materialdocument}" sortProperty="materialdocument" filterProperty="materialdocument">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"materialdocument", "leadingProperty":"materialdocument"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{materialdocument}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>materialdocumentitem}" sortProperty="materialdocumentitem" filterProperty="materialdocumentitem">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"materialdocumentitem", "leadingProperty":"materialdocumentitem"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{materialdocumentitem}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
                         <table:Column width="10rem" label="{i18n>PurchaseOrder}" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrder", "leadingProperty":"PurchaseOrder"}'/>
@@ -201,7 +225,7 @@
                                 <Text text="{UnitPrice}" wrapping="false"/>
                             </table:template>
                         </table:Column>
-                        <table:Column width="6rem" label="{i18n>Currency}" sortProperty="Currency" filterProperty="Currency">
+                        <table:Column width="8rem" label="{i18n>Currency}" sortProperty="Currency" filterProperty="Currency">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Currency", "leadingProperty":"Currency"}'/>
                             </table:customData>
