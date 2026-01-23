@@ -106,6 +106,8 @@ sap.ui.define([
             aFilters.push(new Filter("DisplayUnit", FilterOperator.EQ, sDisplayUnit));
             var sDisplayUnassigned = this.byId("cbDisplayUnassigned").getSelectedKey();
             aFilters.push(new Filter("DisplayUnassigned", FilterOperator.EQ, sDisplayUnassigned));
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+            aFilters.push(new Filter("UserEmail", FilterOperator.EQ, sEmail));
 
             this.removeAllColumns();
             this._CallODataV2("READ", "/ModelShortage", aFilters, {}, {}).then(function (oResponse) {
@@ -175,6 +177,8 @@ sap.ui.define([
                                 $cellInner.addClass("bgR");
                             } else if (sFirstChar === "Y") {
                                 $cellInner.addClass("bgY");
+                            } else if (sFirstChar === "D") {
+                                $cellInner.addClass("bgD");
                             };
                         }
                     });

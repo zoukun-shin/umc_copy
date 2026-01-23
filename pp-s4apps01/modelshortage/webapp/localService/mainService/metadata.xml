@@ -58,13 +58,6 @@
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
                 <Property Name="MRPControllerName" Type="Edm.String" MaxLength="18" sap:label="MRP Controller Name"/>
             </EntityType>
-            <EntityType Name="ZI_PRODUCT_VHType" sap:label="Product Value Help" sap:value-list="true" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Product"/>
-                </Key>
-                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
-                <Property Name="ProductName" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
-            </EntityType>
             <EntityType Name="ModelShortageType" sap:label="MODEL Shortage" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Plant"/>
@@ -80,6 +73,16 @@
                 <Property Name="DisplayUnassigned" Type="Edm.String" MaxLength="1"/>
                 <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
                 <Property Name="DynamicData" Type="Edm.String"/>
+                <Property Name="UserEmail" Type="Edm.String" MaxLength="241"/>
+            </EntityType>
+            <EntityType Name="ZR_ProductPlantVHType" sap:label="Product Plant Value Help" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Product"/>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Product" sap:quickinfo="Product Number"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="ProductDescription" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -339,8 +342,8 @@
             <EntityContainer Name="cds_zui_modelshortage_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
                 <EntitySet Name="I_PlantStdVH" EntityType="cds_zui_modelshortage_o2.I_PlantStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="ZC_MRPControllerVH" EntityType="cds_zui_modelshortage_o2.ZC_MRPControllerVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
-                <EntitySet Name="ZI_PRODUCT_VH" EntityType="cds_zui_modelshortage_o2.ZI_PRODUCT_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ModelShortage" EntityType="cds_zui_modelshortage_o2.ModelShortageType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZR_ProductPlantVH" EntityType="cds_zui_modelshortage_o2.ZR_ProductPlantVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_modelshortage_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zui_modelshortage_o2.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__TableColumnsSet" EntityType="cds_zui_modelshortage_o2.SAP__TableColumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
@@ -424,7 +427,8 @@
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="MRPResponsible"/>
                                     <PropertyValue Property="ValueListProperty" String="MRPController"/>
                                 </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Plant"/>
                                     <PropertyValue Property="ValueListProperty" String="Plant"/>
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
@@ -439,7 +443,7 @@
                 <Annotation Term="Common.ValueList">
                     <Record>
                         <PropertyValue Property="Label" String="Material"/>
-                        <PropertyValue Property="CollectionPath" String="ZI_PRODUCT_VH"/>
+                        <PropertyValue Property="CollectionPath" String="ZR_ProductPlantVH"/>
                         <PropertyValue Property="SearchSupported" Bool="false"/>
                         <PropertyValue Property="Parameters">
                             <Collection>
@@ -448,7 +452,11 @@
                                     <PropertyValue Property="ValueListProperty" String="Product"/>
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="ProductName"/>
+                                    <PropertyValue Property="ValueListProperty" String="ProductDescription"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Plant"/>
+                                    <PropertyValue Property="ValueListProperty" String="Plant"/>
                                 </Record>
                             </Collection>
                         </PropertyValue>
@@ -530,7 +538,7 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            <Annotations Target="cds_zui_modelshortage_o2.cds_zui_modelshortage_o2_Entities/ZI_PRODUCT_VH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_modelshortage_o2.cds_zui_modelshortage_o2_Entities/ZR_ProductPlantVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
                         <PropertyValue Property="Deletable" Bool="false"/>
@@ -600,8 +608,11 @@
             <Annotations Target="cds_zui_modelshortage_o2.ModelShortageType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_modelshortage_o2.ZI_PRODUCT_VHType/Product" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            <Annotations Target="cds_zui_modelshortage_o2.ZR_ProductPlantVHType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_modelshortage_o2.ZR_ProductPlantVHType/ProductDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_modelshortage_o2.I_PlantStdVHType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
@@ -612,8 +623,8 @@
             <Annotations Target="cds_zui_modelshortage_o2.ModelShortageType/Material" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_modelshortage_o2.ZI_PRODUCT_VHType/ProductName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
+            <Annotations Target="cds_zui_modelshortage_o2.ZR_ProductPlantVHType/Product" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTNUMBER&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_modelshortage_o2.ModelShortageType/MaterialType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MTART&amp;origin=JG5_100"/>
