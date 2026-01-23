@@ -105,13 +105,13 @@ sap.ui.define([
                     case "PriceDate":
                         oColumn.type = sap.ui.export.EdmType.Date;
                         break;
-                    //  Number 分隔符 没有小数位
+                    //  Number 分隔符
                     case "CurrentPrice":
                     case "NewPrice":
                     case "Difference":
                         oColumn.type = sap.ui.export.EdmType.Number;
                         oColumn.delimiter = true;
-                        oColumn.scale = 3;
+                        oColumn.scale = 5; // 3; // MOD BY XINLEI XU 2026/01/23 AMO#5794
                         oColumn.textAlign = "End";
                         break;
                     case "OrderQuantity":

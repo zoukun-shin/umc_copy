@@ -124,21 +124,20 @@ sap.ui.define([
                     case "standardpurchaseorderquantity":
                     case "Taxprice":
                     case "UnitPrice_standard":
+                    case "NetPriceAmount": // ADD BY XINLEI XU 2026/01/23 AMO#5794
+                    case "ConditionRateValue": // ADD BY XINLEI XU 2026/01/23 AMO#5794
                         oColumn.type = sap.ui.export.EdmType.Number;
-                        oColumn.scale = 3
+                        oColumn.scale = 5; // 3; // MOD BY XINLEI XU 2026/01/23 AMO#5794
                         oColumn.delimiter = true;
                         oColumn.textAlign = "End";
                         break;
                     //  Number 分隔符 没有小数位
                     case "MaterialPriceUnitQty":
                     case "PriceUnitQty":
-                    case "NetPriceAmount":
-                    case "ConditionRateValue":
+                    // case "NetPriceAmount": // DEL BY XINLEI XU 2026/01/23 AMO#5794
+                    // case "ConditionRateValue": // DEL BY XINLEI XU 2026/01/23 AMO#5794
                     case "ConditionScaleQuantity":
-                    // case "standardpurchaseorderquantity":
-                    // case "Taxprice":
                     case "UnitPrice_plnt":
-                    // case "UnitPrice_standard":
                     case "MaterialPlannedDeliveryDurn":
                     case "MinimumPurchaseOrderQuantity":
                     case "MaximumOrderQuantity":
