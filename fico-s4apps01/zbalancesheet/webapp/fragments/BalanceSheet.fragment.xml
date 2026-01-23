@@ -10,7 +10,7 @@
         showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" 
         persistencyKey="BalanceSheetST" header='{i18n>Results}' enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="FiscalPeriodFr,FiscalPeriodTo,Language,CompanyCodeCurrency">
+        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="FiscalPeriodFr,FiscalPeriodTo,Language,Currency">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
@@ -35,28 +35,28 @@
                         <Text text="{FiscalYear}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>GLAccountPrefix}" sortProperty="GLAccountPrefix" filterProperty="GLAccountPrefix">
+                <table:Column width="10rem" label="{i18n>Code}" sortProperty="Code" filterProperty="Code">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"GLAccountPrefix", "leadingProperty":"GLAccountPrefix"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Code", "leadingProperty":"Code"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{GLAccountPrefix}" wrapping="false" />
+                        <Text text="{Code}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>OpeningBalInCoCodeCrcy}" sortProperty="OpeningBalInCoCodeCrcy" filterProperty="OpeningBalInCoCodeCrcy" hAlign="End">
+                <table:Column width="15rem" label="{i18n>OpeningBalAmt}" sortProperty="OpeningBalAmt" filterProperty="OpeningBalAmt" hAlign="End">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"OpeningBalInCoCodeCrcy", "leadingProperty":"OpeningBalInCoCodeCrcy"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"OpeningBalAmt", "leadingProperty":"OpeningBalAmt"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{path:'OpeningBalInCoCodeCrcy', formatter:'.formatter.formatNumber'}" wrapping="false" />
+                        <Text text="{path:'OpeningBalAmt', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>ClosingBalInCoCodeCrcy}" sortProperty="ClosingBalInCoCodeCrcy" filterProperty="ClosingBalInCoCodeCrcy" hAlign="End">
+                <table:Column width="15rem" label="{i18n>ClosingBalAmt}" sortProperty="ClosingBalAmt" filterProperty="ClosingBalAmt" hAlign="End">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"ClosingBalInCoCodeCrcy", "leadingProperty":"ClosingBalInCoCodeCrcy"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ClosingBalAmt", "leadingProperty":"ClosingBalAmt"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{path:'ClosingBalInCoCodeCrcy', formatter:'.formatter.formatNumber'}" wrapping="false" />
+                        <Text text="{path:'ClosingBalAmt', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
             </table:columns>

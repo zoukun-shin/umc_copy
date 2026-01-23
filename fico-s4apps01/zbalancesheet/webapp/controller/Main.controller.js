@@ -180,9 +180,9 @@ sap.ui.define([
                     items.push({
                         CompanyCode: oContext.getObject().CompanyCode,
                         FiscalYear: oContext.getObject().FiscalYear,
-                        GLAccountPrefix: oContext.getObject().GLAccountPrefix,
-                        OpeningBalInCoCodeCrcy: oContext.getObject().OpeningBalInCoCodeCrcy,
-                        ClosingBalInCoCodeCrcy: oContext.getObject().ClosingBalInCoCodeCrcy,
+                        Code: oContext.getObject().Code,
+                        OpeningBalAmt: oContext.getObject().OpeningBalAmt,
+                        ClosingBalAmt: oContext.getObject().ClosingBalAmt,
                         FiscalPeriodFr: sFiscalPeriodFr,
                         FiscalPeriodTo: sFiscalPeriodTo,
                         Language: sLanguage
@@ -306,8 +306,8 @@ sap.ui.define([
             var columns = oSettings.workbook.columns;
             columns.forEach(function (oColumn) {
                 switch (oColumn.property) {
-                    case "OpeningBalInCoCodeCrcy": 
-                    case "ClosingBalInCoCodeCrcy": 
+                    case "OpeningBalAmt": 
+                    case "ClosingBalAmt": 
                         oColumn.type = sap.ui.export.EdmType.Number;
                         break;
                     default:

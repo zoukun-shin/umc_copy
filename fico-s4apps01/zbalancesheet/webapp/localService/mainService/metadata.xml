@@ -60,21 +60,36 @@
                 <Property Name="CountryChartOfAccounts" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Alternative Chart of Accounts" sap:quickinfo="Alternative Chart of Accounts for Country/Region"/>
                 <Property Name="FinancialManagementArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="FM Area" sap:quickinfo="Financial Management Area"/>
             </EntityType>
+            <EntityType Name="I_LanguageVHType" sap:label="Language" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:text="LanguageName" sap:label="Language Key"/>
+                <Property Name="LanguageName" Type="Edm.String" MaxLength="16" sap:label="Name" sap:quickinfo="Name of Language"/>
+                <Property Name="LanguageISOCode" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Language Code" sap:quickinfo="2-Character SAP Language Code"/>
+            </EntityType>
             <EntityType Name="BalanceSheetType" sap:label="Banance Sheet" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="CompanyCode"/>
                     <PropertyRef Name="FiscalYear"/>
-                    <PropertyRef Name="GLAccountPrefix"/>
+                    <PropertyRef Name="Code"/>
                 </Key>
                 <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
                 <Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:filter-restriction="single-value" sap:label="Fiscal Year" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="GLAccountPrefix" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="OpeningBalInCoCodeCrcy" Type="Edm.Decimal" Precision="23" Scale="2" sap:unit="CompanyCodeCurrency" sap:variable-scale="true"/>
-                <Property Name="ClosingBalInCoCodeCrcy" Type="Edm.Decimal" Precision="23" Scale="2" sap:unit="CompanyCodeCurrency" sap:variable-scale="true"/>
-                <Property Name="CompanyCodeCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
-                <Property Name="FiscalPeriodFr" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:filter-restriction="single-value" sap:label="Posting Period"/>
-                <Property Name="FiscalPeriodTo" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:filter-restriction="single-value" sap:label="Posting Period"/>
-                <Property Name="Language" Type="Edm.String" MaxLength="2" sap:filter-restriction="single-value" sap:label="Language Key"/>
+                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="OpeningBalAmt" Type="Edm.Decimal" Precision="23" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ClosingBalAmt" Type="Edm.Decimal" Precision="23" Scale="2" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
+                <Property Name="FiscalPeriodFr" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Posting Period" sap:value-list="standard"/>
+                <Property Name="FiscalPeriodTo" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Posting Period" sap:value-list="standard"/>
+                <Property Name="Language" Type="Edm.String" MaxLength="2" sap:value-list="standard"/>
+            </EntityType>
+            <EntityType Name="ZC_FISCALPERIODVALUELIST_VHType" sap:label="Fiscal Period Value List Value Help" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="FiscalPeriod"/>
+                </Key>
+                <Property Name="FiscalPeriod" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="NonNegative" sap:text="FiscalPeriodName" sap:label="Fiscal Period"/>
+                <Property Name="FiscalPeriodName" Type="Edm.String" MaxLength="20" sap:label="Text" sap:quickinfo="Period name long text"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -338,7 +353,9 @@
             </Association>
             <EntityContainer Name="cds_zui_balance_sheet_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
                 <EntitySet Name="I_CompanyCodeVH" EntityType="cds_zui_balance_sheet_o2.I_CompanyCodeVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_LanguageVH" EntityType="cds_zui_balance_sheet_o2.I_LanguageVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="BalanceSheet" EntityType="cds_zui_balance_sheet_o2.BalanceSheetType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_FISCALPERIODVALUELIST_VH" EntityType="cds_zui_balance_sheet_o2.ZC_FISCALPERIODVALUELIST_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_balance_sheet_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zui_balance_sheet_o2.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__TableColumnsSet" EntityType="cds_zui_balance_sheet_o2.SAP__TableColumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
@@ -448,6 +465,69 @@
                     </Record>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zui_balance_sheet_o2.BalanceSheetType/FiscalPeriodFr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Posting Period"/>
+                        <PropertyValue Property="CollectionPath" String="ZC_FISCALPERIODVALUELIST_VH"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="FiscalPeriodFr"/>
+                                    <PropertyValue Property="ValueListProperty" String="FiscalPeriod"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="FiscalPeriodName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_balance_sheet_o2.BalanceSheetType/FiscalPeriodTo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Posting Period"/>
+                        <PropertyValue Property="CollectionPath" String="ZC_FISCALPERIODVALUELIST_VH"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="FiscalPeriodTo"/>
+                                    <PropertyValue Property="ValueListProperty" String="FiscalPeriod"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="FiscalPeriodName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_balance_sheet_o2.BalanceSheetType/Language" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String=""/>
+                        <PropertyValue Property="CollectionPath" String="I_LanguageVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Language"/>
+                                    <PropertyValue Property="ValueListProperty" String="Language"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="LanguageName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="LanguageISOCode"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
             <Annotations Target="cds_zui_balance_sheet_o2.cds_zui_balance_sheet_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
             </Annotations>
@@ -463,18 +543,6 @@
                             <Collection>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="FiscalYear"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="FiscalPeriodFr"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="FiscalPeriodTo"/>
-                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
-                                </Record>
-                                <Record>
-                                    <PropertyValue Property="Property" PropertyPath="Language"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
                                 </Record>
                             </Collection>
@@ -510,6 +578,47 @@
                     <Record>
                         <PropertyValue Property="Updatable" Bool="false"/>
                     </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_balance_sheet_o2.cds_zui_balance_sheet_o2_Entities/I_LanguageVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_balance_sheet_o2.cds_zui_balance_sheet_o2_Entities/ZC_FISCALPERIODVALUELIST_VH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_balance_sheet_o2.I_LanguageVHType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>Language</PropertyPath>
+                    </Collection>
                 </Annotation>
             </Annotations>
             <Annotations Target="cds_zui_balance_sheet_o2.cds_zui_balance_sheet_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -565,14 +674,17 @@
             <Annotations Target="cds_zui_balance_sheet_o2.BalanceSheetType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_balance_sheet_o2.BalanceSheetType/Language" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=SPRAS&amp;origin=JG5_100"/>
-            </Annotations>
             <Annotations Target="cds_zui_balance_sheet_o2.I_CompanyCodeVHType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_balance_sheet_o2.I_LanguageVHType/Language" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=SPRAS&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_balance_sheet_o2.I_CompanyCodeVHType/Language" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=SPRAS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_balance_sheet_o2.BalanceSheetType/Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_balance_sheet_o2.I_CompanyCodeVHType/CityName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ORT01&amp;origin=JG5_100"/>
@@ -583,11 +695,11 @@
             <Annotations Target="cds_zui_balance_sheet_o2.I_CompanyCodeVHType/Country" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LAND1&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_balance_sheet_o2.BalanceSheetType/CompanyCodeCurrency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS&amp;origin=JG5_100"/>
-            </Annotations>
             <Annotations Target="cds_zui_balance_sheet_o2.I_CompanyCodeVHType/Company" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=RCOMP_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_balance_sheet_o2.ZC_FISCALPERIODVALUELIST_VHType/FiscalPeriod" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=FINS_FISCALPERIOD&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_balance_sheet_o2.BalanceSheetType/FiscalPeriodTo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=POPER&amp;origin=JG5_100"/>

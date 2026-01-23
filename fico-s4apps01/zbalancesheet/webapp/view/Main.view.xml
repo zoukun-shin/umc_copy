@@ -9,7 +9,7 @@
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="BalanceSheetSVM" showShare="true" showExecuteOnSelection="true" entitySet="ZC_COST_TRANSFER"/>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="BalanceSheetSVM" showShare="true" showExecuteOnSelection="true" entitySet="BalanceSheet"/>
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
@@ -31,10 +31,10 @@
                                 </smartFilterBar:ControlConfiguration>	
                                 <smartFilterBar:ControlConfiguration index='50' key="Language" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Language}"/>
                                 <!-- visible -->
-                                <smartFilterBar:ControlConfiguration index='999' key="GLAccountPrefix" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="OpeningBalInCoCodeCrcy" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="ClosingBalInCoCodeCrcy" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="CompanyCodeCurrency" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Code" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="OpeningBalAmt" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ClosingBalAmt" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Currency" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
