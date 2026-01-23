@@ -11,7 +11,7 @@
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="DelivTransFeeSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="DelivTransFeeSVM" showShare="true" showExecuteOnSelection="true" entitySet="DelivTransFee"/>
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
@@ -19,7 +19,7 @@
             <f:DynamicPageHeader pinnable="true">
                 <f:content>
                     <FlexBox fitContainer="true">
-                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="DelivTransFee" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="DelivTransFee" useToolbar="false" smartVariant="__SVM01" persistencyKey="DelivTransFeeSFB" initialized="onsMrilterBarInitialized">
                             <smartFilterBar:controlConfiguration>
                                 <smartFilterBar:ControlConfiguration index='10' key="BillingMonth" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>BillingMonth}">
 				                    <!-- <smartFilterBar:customControl>
