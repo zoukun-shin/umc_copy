@@ -26,13 +26,24 @@ sap.ui.define([
 
         onBeforeRebindTable: function (oEvent) {
             let afilters = oEvent.getParameters().bindingParams.filters;
+
+            var sValue = this.byId("idBaseYearMonth1").getValue(); // "2025/01"
+            if (sValue) {
+                var aParts = sValue.split("/");
+                var sBaseYM = aParts[0] + aParts[1].padStart(3, "0"); // "2025001"
+                afilters.push(new sap.ui.model.Filter("BaseYearMonth", 'EQ', sBaseYM));
+            };
+
             var oGjahr = new Date(this.byId("idGjahr1").getValue());
-            afilters.push(new sap.ui.model.Filter( "Gjahr", "EQ", oGjahr.getFullYear()));
+            if (oGjahr.getFullYear()) {
+                afilters.push(new sap.ui.model.Filter("Gjahr", "EQ", oGjahr.getFullYear()));
+            };
+
             var oMonth = this.byId("idMonat1");
             if (oMonth) {
                 var aMonth = oMonth.getSelectedKeys();
                 aMonth.forEach((e) => {
-                    afilters.push(new sap.ui.model.Filter( "Monat", "EQ", e));
+                    afilters.push(new sap.ui.model.Filter("Monat", "EQ", e));
                 })
             };
 

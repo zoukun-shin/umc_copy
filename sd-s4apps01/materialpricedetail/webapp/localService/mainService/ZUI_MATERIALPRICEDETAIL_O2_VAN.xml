@@ -43,6 +43,7 @@
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
                         <PropertyPath>CompanyCode</PropertyPath>
+                        <PropertyPath>BaseYearMonth</PropertyPath>
                         <PropertyPath>Gjahr</PropertyPath>
                         <PropertyPath>Monat</PropertyPath>
                         <PropertyPath>Product</PropertyPath>

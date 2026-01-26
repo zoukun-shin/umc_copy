@@ -25,12 +25,17 @@
                     <smartFilterBar:SmartFilterBar id="idSmartFilterBar2" entitySet="MaterialPrice" useToolbar="false" liveMode="false" smartVariant="__SVM02" persistencyKey="HeaderSFB" search="onSearch">
                         <smartFilterBar:controlConfiguration>
                             <smartFilterBar:ControlConfiguration index='10' key="CompanyCode" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>CompanyCode}"/>
-                            <smartFilterBar:ControlConfiguration index='20' key="Gjahr" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>Gjahr}">
+                            <smartFilterBar:ControlConfiguration index='20' key="BaseYearMonth" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>BaseYearMonth}">
+                                <smartFilterBar:customControl>
+                                    <DatePicker id="idBaseYearMonth2" valueFormat="yyyy/MM" displayFormat="yyyy/MM" />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration index='30' key="Gjahr" visibleInAdvancedArea="true" label="{i18n>Gjahr}">
                                 <smartFilterBar:customControl>
 							        <DatePicker id="idGjahr2" displayFormat="yyyy" />
 						        </smartFilterBar:customControl>
 					        </smartFilterBar:ControlConfiguration>
-                            <smartFilterBar:ControlConfiguration index="30" key="Monat" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>Monat}" >
+                            <smartFilterBar:ControlConfiguration index="40" key="Monat" visibleInAdvancedArea="true" label="{i18n>Monat}" >
 						        <smartFilterBar:customControl>
 							        <MultiComboBox id="idMonat2">
 								        <core:Item id = "List201" key="01" text="01"/>
@@ -48,11 +53,14 @@
 							        </MultiComboBox>
 						        </smartFilterBar:customControl>
 					        </smartFilterBar:ControlConfiguration>
-                            <smartFilterBar:ControlConfiguration index='40' key="Product" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Product}"/>
-                            <smartFilterBar:ControlConfiguration index='50' key="Customer" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Customer}"/>
-                            <smartFilterBar:ControlConfiguration index='60' key="Plant" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                            <smartFilterBar:ControlConfiguration index='50' key="Product" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Product}"/>
+                            <smartFilterBar:ControlConfiguration index='60' key="Customer" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Customer}"/>
+                            <smartFilterBar:ControlConfiguration index='70' key="Plant" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                             <!-- visible -->
-                            <smartFilterBar:ControlConfiguration index='999' key="BaseYearMonth" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="YearMonth" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="materialdocumentyear" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="materialdocument" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="materialdocumentitem" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrder" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderItem" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="CompanyCodeName" visible="false"/>
