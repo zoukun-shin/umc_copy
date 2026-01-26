@@ -106,6 +106,7 @@
                 selectionMode="Multi"
                 class="sapUiSizeCompact"
                 rowsUpdated="onRowsUpdated"
+                enableColumnFreeze="true"
             >
                 <t:rowMode>
                     <rm:Auto id="idAuto" />
