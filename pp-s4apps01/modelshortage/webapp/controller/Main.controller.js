@@ -86,7 +86,13 @@ sap.ui.define([
         onSearch: function () {
             var that = this;
             var aFilters = this.byId("idSmartFilterBar").getFilters();
+            //Check if the input value is date 
             var oDateRange = this.byId("idDate");
+            var oDates = oDateRange.getDateValue();
+            if (!oDates) {
+                MessageBox.error(this.getResourceBundle().getText("msg002"));
+                return;
+            }
             if (oDateRange.getFrom()) {
                 var splitStart = `${oDateRange.getFrom().getFullYear()}${(oDateRange.getFrom().getMonth() + 1).toString().padStart(2, "0")}${oDateRange.getFrom().getDate().toString().padStart(2, "0")}`;
                 var splitEnd = `${oDateRange.getTo().getFullYear()}${(oDateRange.getTo().getMonth() + 1).toString().padStart(2, "0")}${oDateRange.getTo().getDate().toString().padStart(2, "0")}`;
