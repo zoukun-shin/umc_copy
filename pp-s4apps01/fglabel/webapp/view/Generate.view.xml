@@ -110,7 +110,7 @@
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>WO_Order}">
                     <table:template>
-                        <Text text="{local>WO_Order1}" wrapping="false"/>
+                        <Text text="{local>WO_Order}" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>WO_Qty}">
