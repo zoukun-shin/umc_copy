@@ -396,6 +396,7 @@
                         <t:template>
                             <Input
                                 value="{local>BoxNo}"
+                                change="onNoChange"
                             />
                         </t:template>
                     </t:Column>
@@ -474,6 +475,7 @@
                         <t:template>
                             <Input
                                 value="{local>PalletNo}"
+                                change="onNoChange"
                             />
                         </t:template>
                     </t:Column>

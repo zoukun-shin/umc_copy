@@ -245,10 +245,11 @@ sap.ui.define([
                         iFailed: 0
                     };
                     this._BusyDialog.close();
-                    var aExcelSet = this.getModel("local").getProperty("/PackingList");
-                    for (const activeContext of aContext) {
-                        var object = activeContext.processLogic;
-                    }
+                    // var aExcelSet = this.getModel("local").getProperty("/PackingList");
+                    // for (const activeContext of aContext) {
+                    //     var object = activeContext.processLogic;
+                    // }
+					messages.showText("Save Successed");
                 }).catch((error) => {
                     MessageBox.error(error);
                 }).finally(() => {
@@ -289,6 +290,7 @@ sap.ui.define([
 					},
 					success: function (oData) {
 						resolve(oData);
+
 					}.bind(this),
 					error: function (oError) {
 						reject(oError);
@@ -309,5 +311,26 @@ sap.ui.define([
 				return true;
 			}
 		},
+
+		onNoChange: function(oEvent) {
+			let sNo = oEvent.getParameter("value");
+			let aNo = sNo.split("-");
+			let sEndSeq;
+			if (aNo.length === 1) {
+				sEndSeq = aNo[0];
+			} else if (aNo.length > 1) {
+				sEndSeq = aNo[1];
+			}
+			if (sEndSeq) {
+				let iBoxEndSeq = Number(sEndSeq);
+				let sPath = oEvent.getSource().getBindingContext("local").sPath;
+				let sProperty = oEvent.getSource().getBindingPath("value");
+				if (sProperty === "BoxNo") {
+					this._LocalData.setProperty(sPath + "/BoxSeqEnd",iBoxEndSeq);
+				} else if (sProperty === "PalletNo"){
+					this._LocalData.setProperty(sPath + "/PalletSeqEnd",iBoxEndSeq);
+				}
+			}
+		}
     });
 });
