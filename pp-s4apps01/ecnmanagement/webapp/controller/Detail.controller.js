@@ -558,35 +558,35 @@ sap.ui.define([
 					this.readOdataV2(sPath);
 					this._BusyDialog.close();
 					switch(sEvent){
-						case "create":
-							Messaging.addMessages(
-								new Message({
-									message: this._ResourceBundle.getText("msg05",[postData.ChangeNumber]),
-									type: MessageType.Success,
-									processor: that._LocalData
-								})
-							);
-							this.onSaveToS4();
-							break;
-						case "change":
-							Messaging.addMessages(
-								new Message({
-									message: this._ResourceBundle.getText("msg06",[postData.ChangeNumber]),
-									type: MessageType.Success,
-									processor: that._LocalData
-								})
-							);
-							this.onSaveToS4();
-							break;
+						// case "create":
+						// 	Messaging.addMessages(
+						// 		new Message({
+						// 			message: this._ResourceBundle.getText("msg05",[postData.ChangeNumber]),
+						// 			type: MessageType.Success,
+						// 			processor: that._LocalData
+						// 		})
+						// 	);
+						// 	this.onSaveToS4();
+						// 	break;
+						// case "change":
+						// 	Messaging.addMessages(
+						// 		new Message({
+						// 			message: this._ResourceBundle.getText("msg06",[postData.ChangeNumber]),
+						// 			type: MessageType.Success,
+						// 			processor: that._LocalData
+						// 		})
+						// 	);
+						// 	this.onSaveToS4();
+						// 	break;
 						case "post":
 							this._LocalData.setProperty("/viewEditable",false);
 							break;
 					}
+					this.autoPopoMessage();
 				}.bind(this),
 				error: function (oError) {
-					
+					this.autoPopoMessage();
 					this._BusyDialog.close();
-					// this.getModel().refresh();
 				}.bind(this)
 			});
 		},
@@ -706,6 +706,7 @@ sap.ui.define([
 			});
 
 			if (Messaging.getMessageModel().getData().length > 0) {
+				this.autoPopoMessage();
 				return;
 			}
 			let oHeadObject = this.byId("idSmartFormHead").getBindingContext().getObject();
@@ -760,6 +761,18 @@ sap.ui.define([
 				});
 			}
 			return this.MessageDialog;
+		},
+
+		autoPopoMessage: function(){
+			let aMessage = Messaging.getMessageModel().getData();
+			if (!aMessage && aMessage.length === 0) {
+				return;
+			}
+			this._getMessagePopover().then(
+				function (oFragment) {
+					oFragment.openBy(this.byId("idButton"));
+				}.bind(this)
+			);
 		},
 
 		getEntitykey: function(oObject) {
