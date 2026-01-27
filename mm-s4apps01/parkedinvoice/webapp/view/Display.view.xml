@@ -94,9 +94,9 @@
                 <smartTable:customToolbar>
                     <OverflowToolbar >
                         <ToolbarSpacer />
-                        <Button type="Emphasized" text="{i18n>Mark}"    press="onMark"    enabled="{= ${local>/authorityCheck/button/Confirm}}"   visible="true"  />
-                        <Button type="Reject"     text="{i18n>Cancel}"  press="onCancel"  enabled="{= ${local>/authorityCheck/button/Unconfirm}}" visible="true" />
-                        <Button type="Accept"     text="{i18n>Post}"    press="onPost"    enabled="{= ${local>/authorityCheck/button/Post}}"   visible="true"  />
+                        <Button type="Emphasized" text="{i18n>Mark}"    press="onMark"    enabled="true"   visible="{= ${local>/authorityCheck/button/Confirm}}"  />
+                        <Button type="Reject"     text="{i18n>Cancel}"  press="onCancel"  enabled="true"   visible="{= ${local>/authorityCheck/button/Unconfirm}}" />
+                        <Button type="Accept"     text="{i18n>Post}"    press="onPost"    enabled="true"   visible="{= ${local>/authorityCheck/button/Post}}"  />
                     </OverflowToolbar>
                 </smartTable:customToolbar>
                 <t:Table id="idParkedInvoiceTable" selectionMode="MultiToggle" selectionBehavior="Row" rowActionCount="1" rowsUpdated="onUITableRowsUpdated">
