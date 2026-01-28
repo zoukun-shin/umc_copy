@@ -84,7 +84,7 @@
                                 text="{i18n>excuteBtn}"
                                 press="onExcute"
                                 visible="{= ${local>/excelSet}.length > 0}"
-                                enabled="{= ${local>/authorityCheck/button/Excute} &amp;&amp; ${local>/recordCheckSuccessed}}"
+                                enabled="{= ${local>/authorityCheck/button/Execute} &amp;&amp; ${local>/recordCheckSuccessed}}"
                             />
                             <Button
                                 id="idExportButton"
