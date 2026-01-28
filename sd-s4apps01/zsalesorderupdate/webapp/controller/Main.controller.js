@@ -29,7 +29,6 @@ sap.ui.define([
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-            sEmail = "xinlei.xu@sh.shin-china.com";
             var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -42,7 +41,7 @@ sap.ui.define([
                     });
                     aAllAccessBtns = aAccessBtns.flat();
                 }
-                if (!aAllAccessBtns.some(btn => btn.AccessId === "zbomupload-View")) {
+                if (!aAllAccessBtns.some(btn => btn.AccessId === "zsalesorderupdate-View")) {
                     if (!this.oErrorMessageDialog) {
                         this.oErrorMessageDialog = new sap.m.Dialog({
                             type: sap.m.DialogType.Message,
@@ -58,10 +57,6 @@ sap.ui.define([
                 this.getModel("local").setProperty("/authorityCheck", {
                     button: {
                         View: aAllAccessBtns.some(btn => btn.AccessId === "zsalesorderupdate-View"),
-                        Clear: aAllAccessBtns.some(btn => btn.AccessId === "zsalesorderupdate-Clear"),
-                        Check: aAllAccessBtns.some(btn => btn.AccessId === "zsalesorderupdate-Check"),
-                        Excute: aAllAccessBtns.some(btn => btn.AccessId === "zsalesorderupdate-Excute"),
-                        Export: aAllAccessBtns.some(btn => btn.AccessId === "zsalesorderupdate-Export")
                     },
                     data: {
                         PlantSet: context._AssignPlant,
