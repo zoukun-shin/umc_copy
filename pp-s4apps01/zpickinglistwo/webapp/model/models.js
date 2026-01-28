@@ -19,7 +19,8 @@ sap.ui.define([
         createLocalModel: function () {
             var oModel = new JSONModel({
                 CreatedDate: "",
-                DeletedDate: ""
+                DeletedDate: "",
+                IsReport: false
             });
             return oModel;
         },

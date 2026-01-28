@@ -70,7 +70,7 @@ sap.ui.define([
                 verticalScrolling: false
             });
             // *************************************************
-            this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
+            // this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
         },
 
         _initialize: function () {
@@ -131,17 +131,46 @@ sap.ui.define([
         },
 
         onBeforeRebindTable: function (oEvent) {
-            var oFilter = oEvent.getParameter("bindingParams").filters;
+            var aFilters = oEvent.getParameter("bindingParams").filters;
             var oNewFilter, aNewFilter = [];
+
+            var oSmartFilterBar = this.byId("idSmartFilterBar");
+            var oManufacturingOrder = oSmartFilterBar.getFilterData().ManufacturingOrder;
+            var oCreatedDate = oSmartFilterBar.getFilterData().CreatedDate;
+            if (!oManufacturingOrder && !oCreatedDate) {
+                MessageBox.error(this.getResourceBundle().getText("AtLeastOne"));
+                this.removeFilterByPath(aFilters, "Plant");
+                return;
+            };
+
             var sPostingStatus = this.byId("idPostingStatusSelect").getSelectedKey();
             if (sPostingStatus) {
                 aNewFilter.push(new Filter("PostingStatus", "EQ", sPostingStatus));
+            }
+            var bIsReport = this.getModel("local").getProperty("/IsReport");
+            aNewFilter.push(new Filter("IsReport", "EQ", bIsReport));
+
+            if (aNewFilter.length > 0) {
                 oNewFilter = new Filter({
                     filters: aNewFilter,
                     and: true
                 });
-                if (aNewFilter.length > 0) {
-                    oFilter.push(oNewFilter);
+                aFilters.push(oNewFilter);
+            }
+        },
+
+        removeFilterByPath: function (aFilters, sPath) {
+            for (let i = aFilters.length - 1; i >= 0; i--) {
+                let oFilter = aFilters[i];
+                if (oFilter.sPath === sPath) {
+                    aFilters.splice(i, 1);
+                    continue;
+                }
+                if (oFilter.aFilters && oFilter.aFilters.length) {
+                    this.removeFilterByPath(oFilter.aFilters, sPath);
+                    if (oFilter.aFilters.length === 0) {
+                        aFilters.splice(i, 1);
+                    }
                 }
             }
         },
@@ -333,6 +362,40 @@ sap.ui.define([
             aFilters.push(new sap.ui.model.Filter("Plant", sap.ui.model.FilterOperator.EQ, oRowData.Plant));
             aFilters.push(new sap.ui.model.Filter("Material", sap.ui.model.FilterOperator.EQ, oRowData.Material));
             oEvent.getSource().getBinding("suggestionRows").filter(aFilters);
+        },
+
+        onBeforeExport: function (oEvent) {
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
+            this._exportExcel(mExcelSettings, sFileName);
+        },
+
+        _exportExcel: function (mExcelSettings, sFileName) {
+            mExcelSettings.workbook.columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    //  Date
+                    case "RequisitionDate":
+                    case "CreatedDate":
+                    case "DeletedDate":
+                        oColumn.type = sap.ui.export.EdmType.Date;
+                        break;
+                    //  Time
+                    case "CreatedTime":
+                    case "DeletedTime":
+                        oColumn.type = sap.ui.export.EdmType.Time;
+                        oColumn.utc = false;
+                        break;
+                    case "StorageLocationFromStock":
+                    case "RequiredQuantity":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 3;
+                        oColumn.textAlign = "End";
+                        oColumn.unitProperty = "BaseUnit";
+                        break;
+                }
+            });
+            mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
         }
     });
 });

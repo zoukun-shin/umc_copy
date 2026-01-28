@@ -139,14 +139,6 @@ sap.ui.define([
             } else {
                 return sValue;
             }
-        },
-
-        formatBoolean: function (bDeleteFlag) {
-            if (bDeleteFlag) {
-                return "X";
-            } else {
-                return "";
-            }
-        },
+        }
     };
 });

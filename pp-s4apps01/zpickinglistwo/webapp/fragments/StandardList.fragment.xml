@@ -6,15 +6,15 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_WO" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="PickingListWO_ST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="true" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="BaseUnit,Reservation_261,ReservationItem_261,Status,Message" ignoredFields="BaseUnit,Reservation_261,ReservationItem_261,Status,Message">
+    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_WO" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="PickingListWO_ST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="true" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="BaseUnit,Reservation_261,ReservationItem_261,Status,Message,GoodsMovementEntryQty,EntryUnit" ignoredFields="BaseUnit,Status,Message,ManufacturingOrder_Filter1,ManufacturingOrder_Filter2,CreatedDate_Filter1,CreatedDate_Filter2,IsReport">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://create-form" text="{i18n>Create}" type="Transparent" press="onPressBtn('CREATE')" enabled="{= ${local>/authorityCheck/button/Create}}"/>
-                <Button icon="sap-icon://delete" text="{i18n>Delete}" type="Transparent" press="onPressBtn('DELETE')" enabled="{= ${local>/authorityCheck/button/Delete}}"/>
+                <Button icon="sap-icon://create-form" text="{i18n>Create}" type="Transparent" press="onPressBtn('CREATE')" enabled="{= ${local>/authorityCheck/button/Create} &amp;&amp; ${local>/IsReport} === true ? false : true}"/>
+                <Button icon="sap-icon://delete" text="{i18n>Delete}" type="Transparent" press="onPressBtn('DELETE')" enabled="{= ${local>/authorityCheck/button/Delete} &amp;&amp; ${local>/IsReport}}"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
-        <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto" threshold="5000">
+        <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto" threshold="5000" enableColumnFreeze="true">
             <table:columns>
                 <table:Column width="6rem" label="{i18n>RowNo}" sortProperty="RowNo" filterProperty="RowNo">
                     <table:customData>
@@ -85,7 +85,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"StorageLocationFrom", "leadingProperty":"StorageLocationFrom"}'/>
                     </table:customData>
                     <table:template>
-                        <Input value="{StorageLocationFrom}" change="handleChange" valueState="{StorageLocationFromState}" showValueHelp="true" valueHelpRequest=".ValueHelpDialog.onValueHelpRequested(
+                        <Input value="{StorageLocationFrom}" change="handleChange" valueState="{StorageLocationFromState}" editable="{= ${local>/IsReport} === true ? false : true &amp;&amp; ${DeleteFlag} === ''}" showValueHelp="true" valueHelpRequest=".ValueHelpDialog.onValueHelpRequested(
                         $event, $controller, '/ZC_MaterialStockVH', ['Plant','StorageLocation','StorageLocationName','StockQuantity'], ['Plant','StorageLocation','StorageLocationName'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_MaterialStockVH', length: 4 }" maxLength="4">
                             <suggestionColumns>
                                 <Column>
@@ -249,7 +249,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"DeleteFlag", "leadingProperty":"DeleteFlag"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ path:'DeleteFlag', formatter:'.formatter.formatBoolean' }" wrapping="false"/>
+                        <Text text="{DeleteFlag}" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>DeletedBy}" sortProperty="DeletedBy" filterProperty="DeletedBy">
