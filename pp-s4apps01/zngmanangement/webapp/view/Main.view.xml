@@ -20,7 +20,7 @@
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="NG_Report" useToolbar="false" smartVariant="__SVM01" persistencyKey="NG_ReportSFB" search="onSearch">
                             <smartFilterBar:controlConfiguration>
                                 <!-- mandatory="mandatory" -->
-                                <smartFilterBar:ControlConfiguration index='10' key="Plant" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="mandatory"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="NG_No" visibleInAdvancedArea="true" label="{i18n>NG_No}"/>
                                 <smartFilterBar:ControlConfiguration index='30' key="MoveType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MoveType}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="MaterialType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MaterialType}"/>
@@ -30,7 +30,7 @@
                                 <smartFilterBar:ControlConfiguration index='80' key="Material" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>NG_Material}"/>
                                 <smartFilterBar:ControlConfiguration index='90' key="ProductionOrder" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ProductionOrder}"/>
                                 <smartFilterBar:ControlConfiguration index='100' key="Customer" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Customer}"/>
-                                <smartFilterBar:ControlConfiguration index='110' key="FoundDate" visibleInAdvancedArea="true" label="{i18n>FoundDate}"/>
+                                <smartFilterBar:ControlConfiguration index='110' key="FoundDate" visibleInAdvancedArea="true" label="{i18n>FoundDate}" mandatory="mandatory"/>
                                 <smartFilterBar:ControlConfiguration index='120' key="WorkCenter" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>NG_WorkCenter}"/>
                                 <smartFilterBar:ControlConfiguration index='130' key="Shift" visibleInAdvancedArea="true" label="{i18n>Shift}"/>
                                 <smartFilterBar:ControlConfiguration index='140' key="Factor" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Factor}"/>

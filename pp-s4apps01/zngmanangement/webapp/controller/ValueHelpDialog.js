@@ -225,6 +225,7 @@ sap.ui.define([
 
                 var sODataPath;
                 var sPlant = this.getModel("local").getProperty("/NG_Header/Plant");
+                var sMaterialType = this.getModel("local").getProperty("/NG_Header/MaterialType");
 
                 if (this._oSubmitDialog && this._oSubmitDialog.getButtons().length > 0) {
                     this._oSubmitDialog.getButtons()[0].setEnabled(sPlant.length > 0);
@@ -260,8 +261,10 @@ sap.ui.define([
                             this._oInput.setValueState("None");
                             switch (sInputPath) {
                                 case "/ItemEdit/ProductionOrder":
-                                    this.getModel("local").setProperty("/ItemEdit/Material", context["Product"]);
-                                    this.getModel("local").setProperty("/ItemEdit/MaterialName", context["ProductDescription"]);
+                                    if (sMaterialType === "2") { // Assembly
+                                        this.getModel("local").setProperty("/ItemEdit/Material", context["Product"]);
+                                        this.getModel("local").setProperty("/ItemEdit/MaterialName", context["ProductDescription"]);
+                                    }
                                     this.getModel("local").setProperty("/ItemEdit/Assembly", context["Assembly"]);
                                     this.getModel("local").setProperty("/ItemEdit/WorkCenter", context["WorkCenter"]);
                                     this.getModel("local").setProperty("/ItemEdit/WorkCenterText", context["WorkCenterText"]);
@@ -322,6 +325,7 @@ sap.ui.define([
                     break;
             }
             var sPlant = this.getModel("local").getProperty("/NG_Header/Plant");
+            var sMaterialType = this.getModel("local").getProperty("/NG_Header/MaterialType");
             switch (sPath) {
                 case "/ZC_ManufacturingOrderProductVH":
                     sODataPath = sPath + "(ManufacturingOrder='" + sValue.split('/')[0].padStart(10, '0') + "',Item='" + sValue.split('/')[1] + "',ProductionPlant='" + sPlant + "')";
@@ -350,8 +354,10 @@ sap.ui.define([
                         this._oControl.setValueState("None");
                         switch (sPath) {
                             case "/ZC_ManufacturingOrderProductVH":
-                                this.getModel("local").setProperty("/ItemEdit/Material", context["Product"]);
-                                this.getModel("local").setProperty("/ItemEdit/MaterialName", context["ProductDescription"]);
+                                if (sMaterialType === "2") { // Assembly
+                                    this.getModel("local").setProperty("/ItemEdit/Material", context["Product"]);
+                                    this.getModel("local").setProperty("/ItemEdit/MaterialName", context["ProductDescription"]);
+                                }
                                 this.getModel("local").setProperty("/ItemEdit/Assembly", context["Assembly"]);
                                 this.getModel("local").setProperty("/ItemEdit/WorkCenter", context["WorkCenter"]);
                                 this.getModel("local").setProperty("/ItemEdit/WorkCenterText", context["WorkCenterText"]);

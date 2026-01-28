@@ -254,7 +254,14 @@ sap.ui.define([
         },
 
         _openCreateDialog: function () {
+            var bEnabled = false;
+            var aPlantSet = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
             this.getModel("local").setProperty("/NG_Header", { NG_No: "INITIAL", Plant: "", PlantName: "", to_NG_Item: { results: [] } });
+            if (aPlantSet.length > 0) {
+                this.getModel("local").setProperty("/NG_Header/Plant", aPlantSet[0].Plant);
+                this.getModel("local").setProperty("/NG_Header/PlantName", aPlantSet[0].PlantName);
+                bEnabled = true;
+            }
             this.getModel("local").getProperty("/Control/itemNotPosted", true);
             Fragment.load({
                 name: "pp.zngmanangement.fragments.CreateDialog",
@@ -267,7 +274,7 @@ sap.ui.define([
                 this._oSubmitDialog.addButton(new sap.m.Button({
                     type: sap.m.ButtonType.Emphasized,
                     text: "{i18n>Create}",
-                    enabled: false,
+                    enabled: bEnabled,
                     press: function () {
                         this._createNG();
                     }.bind(this)
@@ -370,6 +377,7 @@ sap.ui.define([
                         that._CallODataV2("ACTION", "/processLogic", [], {
                             "Event": sEvent.toUpperCase(),
                             "Zzkey": JSON.stringify({
+                                UserEmail: that._UserInfo.getEmail() === undefined ? "" : that._UserInfo.getEmail(),
                                 to_NG_Item: {
                                     results: aSelectedItems
                                 }

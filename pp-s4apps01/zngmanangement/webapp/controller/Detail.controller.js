@@ -567,6 +567,7 @@ sap.ui.define([
                 }
                 return;
             }
+            oNG_Data["UserEmail"] = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
             MessageBox.confirm(this.getModel("i18n").getResourceBundle().getText("confirmMessage", [sMsg]), {
                 actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
                 emphasizedAction: MessageBox.Action.OK,
