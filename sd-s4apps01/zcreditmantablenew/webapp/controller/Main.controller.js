@@ -227,7 +227,7 @@ sap.ui.define([
 						text: "{local>Termstext1}",
 						wrapping: false
 					}),
-					width: "10rem"
+					width: "6rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>Termstext2}",
@@ -235,7 +235,7 @@ sap.ui.define([
 						text: "{local>Termstext2}",
 						wrapping: false
 					}),
-					width: "15rem"
+					width: "10rem"
 				}));
 				oTable.addColumn(new Column({
 					label: "{i18n>text}",
@@ -243,7 +243,7 @@ sap.ui.define([
 						text: "{local>text1}",
 						wrapping: false
 					}),
-					width: "20rem"
+					width: "19rem"
 				}));
 
 				oTable.addColumn(new Column({
@@ -647,7 +647,7 @@ sap.ui.define([
 						var oRowData = this.getModel("local").getProperty(sPath);
 						for (var m = 6; m < pRow.getCells().length; m++) {
 							var n = m - 5;
-							if (oRowData["zpercent" + n] === "%" && oRowData["zmonth" + n].replaceAll("%", '') >= 10) {
+							if (oRowData["zpercent" + n] === "%" && oRowData["zmonth" + n].replaceAll("%", '') >= 100) {
 								$("#" + pRow.getCells()[m].getId()).css("background-color", "#f80303ff");
 							}
 						}
@@ -706,7 +706,7 @@ sap.ui.define([
 						width: aTableCol[i].getWidth(), // parseFloat(aTableCol[i].getWidth()), // MOD BY XINLEI XU 2026/01/22 AMO#5086
 						textAlign: sTextAlign,
 						delimiter: bDelimiter,
-						unitProperty: sUnitProperty // ADD BY XINLEI XU 2026/01/22 AMO#5086
+						scale: 2 // unitProperty: sUnitProperty // ADD BY XINLEI XU 2026/01/22 AMO#5086
 					};
 					aExcelCol.push(oExcelCol);
 				}
