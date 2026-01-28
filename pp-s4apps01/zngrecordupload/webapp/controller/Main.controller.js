@@ -125,7 +125,8 @@ sap.ui.define([
                         "FoundDate": aSheetData[i]["DateNGFound"] === undefined ? "" : aSheetData[i]["DateNGFound"].toString(),
                         "Symptom": aSheetData[i]["Symptom"] === undefined ? "" : aSheetData[i]["Symptom"],
                         "RootCause": aSheetData[i]["RootCause"] === undefined ? "" : aSheetData[i]["RootCause"],
-                        "CounterMeasure": aSheetData[i]["CounterMeasure"] === undefined ? "" : aSheetData[i]["CounterMeasure"]
+                        "CounterMeasure": aSheetData[i]["CounterMeasure"] === undefined ? "" : aSheetData[i]["CounterMeasure"],
+                        "UserEmail": this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail()
                     };
                     var bError = false;
                     if ((!item.FoundDate.includes("/") && !item.FoundDate.includes("-")) || !this._isValidDate(item.FoundDate)) {
