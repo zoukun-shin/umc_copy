@@ -198,6 +198,27 @@
                       "enabled": "{local>/authorityCheck/button/Clear}",
                       "requiresSelection": true,
                       "text": "{i18n>delete}"
+                    },
+                    "onPrintTHTax": {
+                      "press": "sd.invoiceprint.ext.listReportExt.ListReportExt.onPrintTHTax",
+                      "visible": true,
+                      "enabled": "{local>/authorityCheck/button/PrintTax}",
+                      "requiresSelection": true,
+                      "text": "{i18n>printTHTax}"
+                    },
+                    "onPrintTHCommerical": {
+                      "press": "sd.invoiceprint.ext.listReportExt.ListReportExt.onPrintTHCommercial",
+                      "visible": true,
+                      "enabled": "{local>/authorityCheck/button/PrintCommercial}",
+                      "requiresSelection": true,
+                      "text": "{i18n>printTHComm}"
+                    },
+                    "onPrintVN": {
+                      "press": "sd.invoiceprint.ext.listReportExt.ListReportExt.onPrintVN",
+                      "visible": true,
+                      "enabled": "{local>/authorityCheck/button/PrintVN}",
+                      "requiresSelection": true,
+                      "text": "{i18n>printVN}"
                     }
                   },
                   "columns": {

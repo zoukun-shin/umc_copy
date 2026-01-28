@@ -5,8 +5,10 @@ sap.ui.define([
     "../../lib/xml-js",
     "../../lib/decimal",
     "sap/ui/core/Fragment",
-    "sap/m/Dialog"
-], function (MessageToast, BusyDialog, messages, xml, decimal, Fragment, Dialog) {
+    "sap/m/Dialog",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+], function (MessageToast, BusyDialog, messages, xml, decimal, Fragment, Dialog,Filter,FilterOperator) {
     'use strict';
     var _oFunctions, _ResourceBundle, _oDataModel, _oPrintModel, _UserInfo;
     return {
@@ -24,6 +26,7 @@ sap.ui.define([
         _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel, oViews) {
             var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
             var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
+            // sEmail = "xinlei.xu@sh.shin-china.com";
             var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -54,7 +57,10 @@ sap.ui.define([
                         View: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-View"),
                         Print: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-Print"),
                         Reprint: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-Reprint"),
-                        Clear: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-Clear")
+                        Clear: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-Clear"),
+                        PrintTax: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-PrintTax"),
+                        PrintCommercial: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-PrintCommercial"),
+                        PrintVN: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-PrintVN"),
                     },
                     data: {
                         PlantSet: context._AssignPlant,
@@ -141,7 +147,7 @@ sap.ui.define([
                 records.forEach(record => {
                     if (sActionName !== "deleteInovice") {
                         var pdfContent = _oFunctions.porcessPrintContent(record, sPrintDate, sCreator, sApprover);
-                        _oFunctions.getPDF(pdfContent);
+                        _oFunctions.getPDF(pdfContent,"YY1_SD019");
                     } else {
                         messages.showSuccess(_ResourceBundle.getText("msgDeleteSuccessed"));
                     }
@@ -256,15 +262,352 @@ sap.ui.define([
             }
             return pdfContent;
         },
+        onPrintVN: function() {
+            
+            // 获取选择的行项目
+            if (this.getSelectedContexts) {
+                var aSelectedContexts = this.getSelectedContexts();
+            }
+            let aItemVN = aSelectedContexts.filter(item => item.getObject()?.InvoicePrintType == "4");
+            let aItemVNDR = aSelectedContexts.filter(item => item.getObject()?.InvoicePrintType == "5");
+            let aItemVNCR = aSelectedContexts.filter(item => item.getObject()?.InvoicePrintType == "6");
 
-        getPDF: function (pdfContent) {
+            let aBillingDocumentVN = aItemVN.map(item => item.getObject()?.BillingDocument);
+            let aBillingDocumentVNDR = aItemVNDR.map(item => item.getObject()?.BillingDocument);
+            let aBillingDocumentVNCR = aItemVNCR.map(item => item.getObject()?.BillingDocument);
+            aBillingDocumentVN = Array.from(new Set(aBillingDocumentVN));
+            aBillingDocumentVNDR = Array.from(new Set(aBillingDocumentVNDR));
+            aBillingDocumentVNCR = Array.from(new Set(aBillingDocumentVNCR));
+
+
+            if (aBillingDocumentVN.length > 0) {
+                _oFunctions.getBillingData(this,"BillingPrintVN","YY1_SD019_VN",aBillingDocumentVN);
+            }
+            if (aBillingDocumentVNDR.length > 0) {
+                _oFunctions.getBillingData(this,"BillingPrintVNCD","YY1_SD019_VN_CD",aBillingDocumentVNDR,"DEBIT NOTE");
+            }
+            if (aBillingDocumentVNCR.length > 0) {
+                _oFunctions.getBillingData(this,"BillingPrintVNCD","YY1_SD019_VN_CD",aBillingDocumentVNCR,"CREDIT NOTE");
+            }
+
+        },
+
+        onPrintTHTax: function() {
+            
+            // 获取选择的行项目
+            if (this.getSelectedContexts) {
+                var aSelectedContexts = this.getSelectedContexts();
+            }
+            let aItemTH = aSelectedContexts.filter(item => item.getObject()?.InvoicePrintType == "7");
+            let aBillingDocumentTH = aItemTH.map(item => item.getObject()?.BillingDocument);
+            aBillingDocumentTH = Array.from(new Set(aBillingDocumentTH));
+
+            if (aBillingDocumentTH.length > 0) {
+                _oFunctions.getBillingData(this,"BillingPrintTH","YY1_SD019_TH",aBillingDocumentTH,"TAX INVOICE");
+            }
+
+            // if (aBillingDocumentTH.length > 0) {
+            //     //TH打印 需要选择Tax 或者 Commercial
+            //     _oFunctions.onPrintTHVNPress(this.routing, this, aBillingDocumentTH);
+            // }
+
+        },
+        onPrintTHCommercial: function() {
+            // 获取选择的行项目
+            if (this.getSelectedContexts) {
+                var aSelectedContexts = this.getSelectedContexts();
+            }
+            let aItemTH = aSelectedContexts.filter(item => item.getObject()?.InvoicePrintType == "7");
+            let aBillingDocumentTH = aItemTH.map(item => item.getObject()?.BillingDocument);
+            aBillingDocumentTH = Array.from(new Set(aBillingDocumentTH));
+
+            if (aBillingDocumentTH.length > 0) {
+                _oFunctions.getBillingData(this,"BillingPrintTH","YY1_SD019_TH",aBillingDocumentTH,"COMMERCIAL INVOICE");
+            }
+        },
+
+        // onPrintTHVNPress: function (oRouting, that, aBillingDocument) {
+        //     if (!this.Dialog) {
+        //         var oView = oRouting.getView();
+        //         if (!this.Dialog) {
+        //             this.Dialog = Fragment.load({
+        //                 id: oView.getId(),
+        //                 name: "sd.invoiceprint.ext.fragment.PrintTH",
+        //                 controller: that
+        //             }).then(function (oDialog) {
+        //                 return oDialog;
+        //             }.bind(this));
+        //         }
+        //     }
+        //     this.Dialog.then(function (oDialog) {
+        //         oRouting.getView().addDependent(oDialog);
+        //         oDialog.setBeginButton(new sap.m.Button({
+        //             text: "{i18n>bConfirm}",
+        //             press: function () {
+        //                 var oButton = oRouting.getView().byId("idTitleGroup").getSelectedButton();
+        //                 var sTitle = oButton.getText();
+        //                 _oFunctions.getBillingData(that,"BillingPrintTH","YY1_SD019_TH",aBillingDocument,sTitle);
+        //                 oDialog.close();
+        //             }
+        //         }));
+        //         oDialog.setEndButton(new sap.m.Button({
+        //             text: "{i18n>bCancel}",
+        //             press: function () {
+        //                 oDialog.close();
+        //             }
+        //         }));
+        //         oDialog.open();
+        //     }.bind(this));
+        // },
+
+        getBillingData: function(that,sEnetity,sTemplateID,aBillingDocument,sDocTitle){
+            _oDataModel = that.getModel();
+            _oPrintModel = that.getModel("Print");
+            _ResourceBundle = that.getModel("i18n").getResourceBundle();
+            
+            var aFilters = [];
+            var aNewFilter = [];
+            aBillingDocument.forEach(function(item){
+                aNewFilter.push(new Filter({
+                    path: "BillingDocument",
+                    operator: FilterOperator.EQ,
+                    value1: item
+                }));
+            });
+            
+            let oNewFilter = new Filter({
+				filters:aNewFilter,
+				and:false
+			});
+            aFilters.push(oNewFilter);
+
+            var oContextBinding = _oDataModel.bindList("/" + sEnetity, undefined, undefined, aFilters, {});
+            
+            //获取行项目数据
+            var aPDFContent = [];
+            var oItemPromise =  oContextBinding.requestContexts();
+            oItemPromise.then(function(aContext){
+                if (sEnetity === "BillingPrintVN") {
+                    aPDFContent = _oFunctions.porcessVNCotent(aBillingDocument,aContext);
+                } else if (sEnetity === "BillingPrintTH") {
+                    aPDFContent = _oFunctions.porcessTHCotent(sDocTitle,aBillingDocument,aContext);
+                } else if (sEnetity === "BillingPrintVNCD") {
+                    aPDFContent = _oFunctions.porcessVNCDCotent(sDocTitle,aBillingDocument,aContext);
+                }
+               aPDFContent.forEach(pdfContent => {
+                   _oFunctions.getPDF({"PrintData":pdfContent},sTemplateID);
+               });
+            });
+        },
+
+        porcessVNCotent: function(aHeader,aContext){
+            var aPrintItem = [];
+            var aBilling = [];
+            for (const boundContext of aContext) {
+                var object = boundContext.getObject();
+                aPrintItem.push(object);
+            }
+            var aPrintData = [];
+            aHeader.forEach(function(sKey){
+                let aBillingItem = aPrintItem.filter(e => e.BillingDocument === sKey );
+                let oFirstItem = aBillingItem[0];
+                let oHeader ={
+                    CompanyName: oFirstItem.CompanyName,
+                    CompanyAddress: oFirstItem.CompanyAddress,
+                    CompanyTelFax: oFirstItem.CompanyTelFax,
+                    BillingDocument: oFirstItem.BillingDocument,
+                    CreationDate: oFirstItem.CreationDate,
+                    SoldToParty: oFirstItem.SoldToParty,
+                    SoldToPartyName: oFirstItem.SoldToPartyName,
+                    SoldToPartyStreet: oFirstItem.SoldToPartyStreet,
+                    SoldToPartyCity: oFirstItem.SoldToPartyCity,
+                    ShipToParty: oFirstItem.ShipToParty,
+                    ShipToPartyName: oFirstItem.ShipToPartyName,
+                    ShipToPartyStreet: oFirstItem.ShipToPartyStreet,
+                    ShipToPartyCity: oFirstItem.ShipToPartyCity,
+                    PayerParty: oFirstItem.PayerParty,
+                    PayerPartyName: oFirstItem.PayerPartyName,
+                    PayerPartyStreet: oFirstItem.PayerPartyStreet,
+                    PayerPartyCity: oFirstItem.PayerPartyCity,
+                    ShippingMethod: oFirstItem.ShippingMethod,
+                    IncotermsLocation: oFirstItem.IncotermsLocation1,
+                    CustomerPaymentTerms: oFirstItem.CustomerPaymentTerms,
+                    PlannedGoodsIssueDate: oFirstItem.PlannedGoodsIssueDate,
+                    TotalQuantity: oFirstItem.TotalQuantity,
+                    TotalNetAmount: oFirstItem.TotalNetAmount,
+                    Currency: oFirstItem.TransactionCurrency,
+                }
+                //删除行项目不需要的字段，节省内存
+                aBillingItem.forEach(function(item, index){
+                    item.No = index + 1;
+                    delete item.BillingDocument;
+                    delete item.CreationDate;
+                    delete item.SoldToParty;
+                    delete item.SoldToPartyName;
+                    delete item.SoldToPartyStreet;
+                    delete item.SoldToPartyCity;
+                    delete item.ShipToParty;
+                    delete item.ShipToPartyName;
+                    delete item.ShipToPartyStreet;
+                    delete item.ShipToPartyCity;
+                    delete item.PayerParty;
+                    delete item.PayerPartyName;
+                    delete item.PayerPartyStreet;
+                    delete item.PayerPartyCity;
+                    delete item.ShippingMethod;
+                    delete item.IncotermsLocation1;
+                    delete item.CustomerPaymentTerms;
+                    delete item.PlannedGoodsIssueDate;
+                    delete item.TotalQuantity;
+                    delete item.TotalNetAmount;
+
+
+                });
+                aBilling.push({
+                    ...oHeader,
+                    to_Items: {"results": aBillingItem }
+                });
+            });
+            return aBilling;
+        },
+        porcessTHCotent: function(sDocTitle,aHeader,aContext){
+            var aPrintItem = [];
+            var aBilling = [];
+            for (const boundContext of aContext) {
+                var object = boundContext.getObject();
+                aPrintItem.push(object);
+            }
+            var aPrintData = [];
+            aHeader.forEach(function(sKey){
+                let aBillingItem = aPrintItem.filter(e => e.BillingDocument === sKey );
+                let oFirstItem = aBillingItem[0];
+                let oHeader ={
+                    CompanyName: oFirstItem.CompanyName,
+                    CompanyAddress: oFirstItem.CompanyAddress,
+                    CompanyTelFax: oFirstItem.CompanyTelFax,
+                    DocTitle: sDocTitle,
+                    BillingDocument: oFirstItem.BillingDocument,
+                    CreationDate: oFirstItem.CreationDate,
+                    SoldToParty: oFirstItem.SoldToParty,
+                    SoldToPartyName: oFirstItem.SoldToPartyName,
+                    SoldToPartyStreet: oFirstItem.SoldToPartyStreet,
+                    SoldToPartyCity: oFirstItem.SoldToPartyCity,
+                    ShipToParty: oFirstItem.ShipToParty,
+                    ShipToPartyName: oFirstItem.ShipToPartyName,
+                    ShipToPartyStreet: oFirstItem.ShipToPartyStreet,
+                    ShipToPartyCity: oFirstItem.ShipToPartyCity,
+                    PayerParty: oFirstItem.PayerParty,
+                    PayerPartyName: oFirstItem.PayerPartyName,
+                    PayerPartyStreet: oFirstItem.PayerPartyStreet,
+                    PayerPartyCity: oFirstItem.PayerPartyCity,
+                    ShippingMethod: oFirstItem.ShippingMethod,
+                    IncotermsLocation: oFirstItem.IncotermsLocation1,
+                    CustomerPaymentTerms: oFirstItem.CustomerPaymentTerms,
+                    PlannedGoodsIssueDate: oFirstItem.PlannedGoodsIssueDate,
+                    TotalQuantity:oFirstItem.TotalQuantity,
+                    TotalNetAmount:oFirstItem.TotalNetAmount,
+                    TaxRate:oFirstItem.TaxRate,
+                    TaxAmount:oFirstItem.TaxAmount,
+                    GrandTotalAmount:oFirstItem.GrandTotalAmount,
+                    Currency: oFirstItem.TransactionCurrency,
+                }
+                //删除行项目不需要的字段，节省内存
+                aBillingItem.forEach(function(item, index){
+                    item.No = index + 1;
+                    delete item.DocTitle;
+                    delete item.BillingDocument;
+                    delete item.BillingDocumentItem;
+                    delete item.Material;
+                    delete item.CompanyName;
+                    delete item.CompanyAddress;
+                    delete item.CompanyTelFax;
+                    delete item.CreationDate;
+                    delete item.SoldToParty;
+                    delete item.SoldToPartyName;
+                    delete item.SoldToPartyStreet;
+                    delete item.SoldToPartyCity;
+                    delete item.ShipToParty;
+                    delete item.ShipToPartyName;
+                    delete item.ShipToPartyStreet;
+                    delete item.ShipToPartyCity;
+                    delete item.PayerParty;
+                    delete item.PayerPartyName;
+                    delete item.PayerPartyStreet;
+                    delete item.PayerPartyCity;
+                    delete item.ShippingMethod;
+                    delete item.IncotermsLocation1;
+                    delete item.CustomerPaymentTerms;
+                    delete item.PlannedGoodsIssueDate;
+                    delete item.TotalQuantity;
+                    delete item.TotalNetAmount;
+                    delete item.TaxRate;
+                    delete item.TaxAmount;
+                    delete item.GrandTotalAmount;
+                });
+                aBilling.push({
+                    ...oHeader,
+                    to_Items: {"results": aBillingItem }
+                });
+            });
+            return aBilling;
+        },
+        porcessVNCDCotent: function(sDocTitle,aHeader,aContext){
+            var aPrintItem = [];
+            var aBilling = [];
+            for (const boundContext of aContext) {
+                var object = boundContext.getObject();
+                aPrintItem.push(object);
+            }
+            var aPrintData = [];
+            aHeader.forEach(function(sKey){
+                let aBillingItem = aPrintItem.filter(e => e.BillingDocument === sKey );
+                let oFirstItem = aBillingItem[0];
+                let oHeader ={
+                    CompanyName: oFirstItem.CompanyName,
+                    CompanyAddress: oFirstItem.CompanyAddress,
+                    CompanyTelFax: oFirstItem.CompanyTelFax,
+                    DocTitle: sDocTitle,
+                    BillingDocument: oFirstItem.BillingDocument,
+                    SoldToParty: oFirstItem.SoldToParty,
+                    SoldToPartyName: oFirstItem.SoldToPartyName,
+                    SoldToPartyStreet: oFirstItem.SoldToPartyStreet,
+                    SoldToPartyCity: oFirstItem.SoldToPartyCity,
+                    // IssueDate: oFirstItem.PlannedGoodsIssueDate,//应该要来自屏幕输入
+                    TotalNetAmount:oFirstItem.TotalNetAmount,
+                    Currency: oFirstItem.TransactionCurrency,
+                }
+                //删除行项目不需要的字段，节省内存
+                aBillingItem.forEach(function(item, index){
+                    item.No = index + 1;
+                    delete item.DocTitle;
+                    delete item.BillingDocument;
+                    delete item.BillingDocumentItem;
+                    delete item.CompanyName;
+                    delete item.CompanyAddress;
+                    delete item.CompanyTelFax;
+                    delete item.SoldToParty;
+                    delete item.SoldToPartyName;
+                    delete item.SoldToPartyStreet;
+                    delete item.SoldToPartyCity;
+                    delete item.IssueDate;
+                    delete item.TotalNetAmount;
+                });
+                aBilling.push({
+                    ...oHeader,
+                    to_Items: {"results": aBillingItem }
+                });
+            });
+            return aBilling;
+        },
+
+        getPDF: function (pdfContent,sTemplateID) {
             var that = this;
             var oBusyDialog = new BusyDialog();
             var aRecordCreated = [];
             var sFileName = _ResourceBundle.getText("appTitle") + new Date().getTime();
             var promise = new Promise((resolve, reject) => {
                 var createPrintRecord = _oPrintModel.bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord(...)");
-                createPrintRecord.setParameter("TemplateID", "YY1_SD019");
+                createPrintRecord.setParameter("TemplateID", sTemplateID);
                 createPrintRecord.setParameter("IsExternalProvidedData", true);
                 var oXMLData = json2xml(pdfContent, {
                     compact: true,
