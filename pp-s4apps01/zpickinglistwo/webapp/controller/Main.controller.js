@@ -70,7 +70,7 @@ sap.ui.define([
                 verticalScrolling: false
             });
             // *************************************************
-            // this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
+            this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
         },
 
         _initialize: function () {
