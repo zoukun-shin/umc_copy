@@ -15,7 +15,7 @@
     core:require="{ handler: 'pp/ecnmanagement/controller/ValueHelpDialog' }">
     <uxap:ObjectPageLayout id="idObjectPageLayout" upperCaseAnchorBar="false" showHeaderContent="false" showFooter="true">
         <uxap:sections>
-            <uxap:ObjectPageSection id="idObjectPageSection"  title="Header" titleUppercase="false">
+            <uxap:ObjectPageSection id="idObjectPageSection" titleUppercase="false">
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection title="{i18n>Header}">
                         <uxap:blocks>
@@ -57,7 +57,7 @@
                                         <smartField:SmartField textLabel="{i18n>ReasonForChangeSF}" value="{ReasonForChange}" change="onInputChange"/>
                                     </smartForm:GroupElement>
                                      <smartForm:GroupElement>
-                                        <smartField:SmartField textLabel="{i18n>AttachedDocumentsSF}" value="{AttachedDocuments}" change="onInputChange"/>
+                                        <smartField:SmartField textLabel="{i18n>AttachedDocumentsT}" value="{AttachedDocuments}" change="onInputChange"/>
                                     </smartForm:GroupElement>
                                 </smartForm:Group>
                                 <smartForm:Group>
@@ -71,7 +71,7 @@
                                         <smartField:SmartField textLabel="{i18n>ChangeNumberStatusSF}" value="{ChangeNumberStatus}" change="onInputChange"/>
                                     </smartForm:GroupElement>
                                 </smartForm:Group>
-                                <smartForm:Group title="Request">
+                                <smartForm:Group title="{i18n>RequestedByF}">
                                     <smartForm:layoutData>
                                         <l:GridData span="L4 M4 S4" linebreak="true"/>
                                     </smartForm:layoutData>
@@ -97,7 +97,7 @@
                                         <smartField:SmartField visible="{RequestedByOther}" value="{RequestedByOtherText}" change="onInputChange"/>
                                     </smartForm:GroupElement>
                                 </smartForm:Group>
-                                <smartForm:Group  title="Stock of FG/Semi-FG">
+                                <smartForm:Group  title="{i18n>ProcessF}">
                                     <smartForm:layoutData>
                                         <l:GridData span="L4 M4 S4"/>
                                     </smartForm:layoutData>
@@ -117,7 +117,7 @@
                                         <smartField:SmartField textLabel="{i18n>StockOfFgSF}" value="{StockOfFg}"/>
                                     </smartForm:GroupElement>
                                 </smartForm:Group>
-                                <smartForm:Group  title="Process of FG/Semi-FG">
+                                <smartForm:Group  title="{i18n>ProcessF}">
                                     <smartForm:layoutData>
                                         <l:GridData span="L4 M4 S4"/>
                                     </smartForm:layoutData>
@@ -257,11 +257,6 @@
                             <t:Column width="12rem" label="{i18n>ObjectDescriptionSF}">
                                 <t:template>
                                     <Input value="{local>ObjectDescription}" tooltip="{local>ObjectDescription}" editable="{local>/viewEditable}"/>
-                                </t:template>
-                            </t:Column>
-                            <t:Column width="6rem" label="{i18n>RevlevSF}">
-                                <t:template>
-                                    <Text text="{local>Revlev}" />
                                 </t:template>
                             </t:Column>
                             <t:Column width="12rem" label="{i18n>MaterialDescriptionSF}">

@@ -151,11 +151,26 @@ sap.ui.define([
 					aNewFilter.push(new Filter("DeleteFlag", "EQ", false)); break;
 			}
 
-			// // 获取处理范围
-			// var oValidFromDate = this.byId("idDatePickerValidFromDate");
-			// if (oValidFromDate.getDateValue()) {
-			// 	aNewFilter.push(new Filter("ShippingPlanDate", "BT", formatter.odataDate(oValidFromDate.getDateValue())));
-			// }
+			// 获取日期范围
+			var oDateRange,oStartDate,oEndDate;
+			oDateRange = this.byId("idDRValidFromDate");
+			oStartDate = oDateRange.getFrom();
+			oEndDate = oDateRange.getTo();
+			if (oDateRange.getDateValue()) {
+				aNewFilter.push(new Filter("ValidFromDate", "BT", formatter.odataDate(oStartDate), formatter.odataDate(oEndDate) ));
+			}
+			oDateRange = this.byId("idDREcoCreatedAt");
+			oStartDate = oDateRange.getFrom();
+			oEndDate = oDateRange.getTo();
+			if (oDateRange.getDateValue()) {
+				aNewFilter.push(new Filter("EcoCreatedAt", "BT", formatter.odataDate(oStartDate), formatter.odataDate(oEndDate) ));
+			}
+			oDateRange = this.byId("idDREcoLastChangedAt");
+			oStartDate = oDateRange.getFrom();
+			oEndDate = oDateRange.getTo();
+			if (oDateRange.getDateValue()) {
+				aNewFilter.push(new Filter("EcoLastChangedAt", "BT", formatter.odataDate(oStartDate), formatter.odataDate(oEndDate) ));
+			}
 
 			oNewFilter = new Filter({
 				filters:aNewFilter,
