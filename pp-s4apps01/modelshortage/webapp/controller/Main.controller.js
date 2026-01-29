@@ -195,13 +195,47 @@ sap.ui.define([
                         wrapping: false
                     });
                 };
-                oColumn = new UIColumn({
-                    width: "10rem",
-                    label: oLabel,
-                    hAlign: sTextAlign,
-                    visible: bvisible,
-                    template: oTemplate
-                });
+                switch (key) {
+                    case "Plant":
+                    case "Dispo":
+                    case "Meins":
+                    case "Mtart":
+                        oColumn = new UIColumn({
+                            width: "5rem",
+                            label: oLabel,
+                            hAlign: sTextAlign,
+                            visible: bvisible,
+                            template: oTemplate,
+                        });
+                        break;
+                    case "Stock":
+                        oColumn = new UIColumn({
+                            width: "6rem",
+                            label: oLabel,
+                            hAlign: sTextAlign,
+                            visible: bvisible,
+                            template: oTemplate,
+                        });
+                        break;
+                    case "Matnr":
+                        oColumn = new UIColumn({
+                            width: "10rem",
+                            label: oLabel,
+                            hAlign: sTextAlign,
+                            visible: bvisible,
+                            template: oTemplate,
+                        });
+                        break;
+                    default:
+                        oColumn = new UIColumn({
+                            width: "8rem",
+                            label: oLabel,
+                            hAlign: sTextAlign,
+                            visible: bvisible,
+                            template: oTemplate,
+                        });
+                        break;
+                };
                 this._oTable.addColumn(oColumn);
             };
         },

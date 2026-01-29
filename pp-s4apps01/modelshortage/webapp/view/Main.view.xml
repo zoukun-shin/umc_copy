@@ -61,7 +61,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <table:Table id="idTable" rows="{local>/resultSet}" rowMode="Interactive" class="sapUiSizeCompact"> 
+            <table:Table id="idTable" rows="{local>/resultSet}" rowMode="Auto" enableColumnFreeze="true" class="sapUiSizeCompact"> 
                 <table:extension>
                     <OverflowToolbar>
                         <Text text="{i18n>Results}" visible="{= ${local>/resultSet}.length === 0}"/>
