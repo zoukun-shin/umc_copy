@@ -1,396 +1,378 @@
-<mvc:View controllerName="sd.salesacceptresult.controller.Main" displayBlock="true" 
-    xmlns:core="sap.ui.core" 
-    xmlns="sap.m" 
-    xmlns:f="sap.f"
-  	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
-    xmlns:smartTable="sap.ui.comp.smarttable" 
-    xmlns:sv="sap.ui.comp.smartvariants"
-  	xmlns:mvc="sap.ui.core.mvc" 
-    xmlns:smartField="sap.ui.comp.smartfield" 
-    xmlns:smartform="sap.ui.comp.smartform" 
-    xmlns:t="sap.ui.table" height="100%">
-
+<mvc:View controllerName="sd.salesacceptresult.controller.Main" displayBlock="true"
+  xmlns:core="sap.ui.core"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+  xmlns:smartTable="sap.ui.comp.smarttable"
+  xmlns:sv="sap.ui.comp.smartvariants"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:smartField="sap.ui.comp.smartfield"
+  xmlns:smartform="sap.ui.comp.smartform"
+  xmlns:t="sap.ui.table" height="100%">
   <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{localModel>/busy}" fitContent="true">
     <f:header>
-        <f:DynamicPageHeader pinnable="true">
-          <f:content>
-            <smartFilterBar:SmartFilterBar id="smartFilterBar" useToolbar="false" entitySet="SalesAcceptanceResult" smartVariant="__SVM01" persistencyKey="SFB_Head" search="onSearch">
-			    <smartFilterBar:controlConfiguration>
-					<smartFilterBar:ControlConfiguration index="10" key="Customer" visibleInAdvancedArea="true" label="{i18n>Customer}" filterType="single" mandatory="mandatory"/>
-					<smartFilterBar:ControlConfiguration index="20" key="PeriodType" visibleInAdvancedArea="true" label="{i18n>PeriodType}" displayBehaviour="idAndDescription">
-						<smartFilterBar:customControl>
-							<ComboBox id="idPeriodType" showSecondaryValues="true"
-								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
-								<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
-							</ComboBox>
-					    </smartFilterBar:customControl>
-				    </smartFilterBar:ControlConfiguration>
-          <smartFilterBar:ControlConfiguration index="21" key="AcceptYear" visibleInAdvancedArea="true" label="{i18n>AcceptYear}" mandatory="mandatory">
-						<smartFilterBar:customControl>
-							<DatePicker id="idAcceptYear" displayFormat="yyyy" />
-						</smartFilterBar:customControl>
-					</smartFilterBar:ControlConfiguration>
-					<smartFilterBar:ControlConfiguration index="30" key="AcceptPeriod" change="onChangeLang" visibleInAdvancedArea="true" label="{i18n>AcceptPeriod}" displayBehaviour="idAndDescription">
-						<smartFilterBar:customControl>
-							<ComboBox id="idAcceptPeriod" showSecondaryValues="true"
-								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
-								<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
-							</ComboBox>
-					    </smartFilterBar:customControl>
-				    </smartFilterBar:ControlConfiguration>
-          <smartFilterBar:ControlConfiguration index="40" key="FinishStatus" visibleInAdvancedArea="true" label="{i18n>FinishStatus}" displayBehaviour="idAndDescription">
-						<smartFilterBar:customControl>
-							<ComboBox id="idFinishStatus" showSecondaryValues="true"
-								items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
-								<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
-							</ComboBox>
-					    </smartFilterBar:customControl>
-				    </smartFilterBar:ControlConfiguration>
-            <!-- visible -->
-            <smartFilterBar:ControlConfiguration index='999' key="SalesOrganization" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="SalesDocument" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentItem" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="BillingDocument" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="CustomerPO" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="ProcessStatus" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodFrom" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodTo" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentType" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentTypeText" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="Product" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentItemText" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="PostingDate" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="AcceptDate" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="AcceptQty" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="BillingQuantity" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="AcceptPrice" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="ConditionRateValue" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="ConditionCurrency" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="ConditionQuantity" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="AccceptAmount" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="NetAmount" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="AccceptTaxAmount" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="TaxAmount" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="Currency" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="AccountingExchangeRate" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="ExchangeRateDate" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="OutsideData" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="Remarks" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="ReasonCategory" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="Reason" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="PeriodTypeText" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodText" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodFromText" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodToText" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="Layer" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="unit" visible="false"/>
-            <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
-			    </smartFilterBar:controlConfiguration>
-			</smartFilterBar:SmartFilterBar>
-          </f:content>
-		</f:DynamicPageHeader>
-	</f:header>
-	<f:content>
-    <VBox fitContainer="true">
-			<FlexBox id="Title" wrap="Wrap" fitContainer="true" alignItems="Start" >
-				<VBox id="VBox1" renderType="Bare" class="sapUiSmallMarginBottom">
-					<Label id="Label1" text="{i18n>Customer}:" class="sapUiLargeMarginEnd sapUiSmallMarginBegin"/>
-					<Text id="Text1" text="{local>/head/CustomerName}" class="sapUiLargeMarginEnd sapUiSmallMarginBegin"/>
-				</VBox>
-				<VBox id="VBox2" renderType="Bare" class="sapUiSmallMarginBottom">
-					<Label id="Label2" text="{i18n>PeriodType}:" class="sapUiLargeMarginEnd"/>
-					<Text id="Text2" text="{local>/head/PeriodTypeText}" class="sapUiLargeMarginEnd"/>
-				</VBox>
-				<VBox id="VBox3" renderType="Bare" class="sapUiSmallMarginBottom">
-					<Label id="Label3" text="{i18n>AcceptPeriod}:" class="sapUiLargeMarginEnd"/>
-					<Text id="Text3" text="{local>/head/AcceptPeriodText}" class="sapUiLargeMarginEnd"/>
-				</VBox>
-				<VBox id="VBox4" renderType="Bare" class="sapUiSmallMarginBottom">
-					<Label id="Label4" text="{i18n>AcceptPeriodFrom}:" class="sapUiLargeMarginEnd"/>
-					<Text id="Text4" text="{local>/head/AcceptPeriodFromText}" class="sapUiLargeMarginEnd"/>
-				</VBox>
-		    <VBox id="VBox5" renderType="Bare" class="sapUiSmallMarginBottom">
-					<Label id="Label5" text="{i18n>AcceptPeriodTo}:" class="sapUiLargeMarginEnd"/>
-					<Text id="Text5" text="{local>/head/AcceptPeriodToText}" class="sapUiLargeMarginEnd"/>
-				</VBox>
-			</FlexBox>
-
-      <smartTable:SmartTable id="smartTable" entitySet="SalesAcceptanceResult" smartFilterId="smartFilterBar" tableType="Table"
-				showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}"
-				enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" fitContainer="false" height="100%"
-				beforeExport="onBeforeExport" requestAtLeastFields="CustomerName,PeriodTypeText,AcceptPeriodText,AcceptPeriodFromText,AcceptPeriodToText,AcceptPeriod,AcceptPeriodFrom,AcceptPeriodTo" 
-        ignoredFields="Delete_mc,Update_mc,UserEmail,CustomerName,AcceptPeriodFrom,AcceptPeriodFromText,PeriodTypeText,AcceptPeriodToText,Layer,PeriodType,Reason,ReasonCategory,ProcessStatus,AcceptPeriodText,AcceptPeriodTo,Remarks" >
-        <smartTable:customToolbar>
-			<OverflowToolbar width="100%">
-			  <ToolbarSpacer/>
-				  <Button id="save" icon="sap-icon://save" text="{i18n>saveButtonText}" tooltip="{i18n>saveButtonText}" press="onSave" enabled="{= ${local>/authorityCheck/button/Save}}"/> 
-          <Button id="group" icon="sap-icon://group-2" text="{i18n>groupButtonText}" tooltip="{i18n>groupButtonText}" press="onGroup" enabled="{= ${local>/authorityCheck/button/Navigate}}"/>    
- 
-      </OverflowToolbar>
-		</smartTable:customToolbar>
-    
-		<t:Table id="ReportTable" rowMode="Auto" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" enableColumnFreeze="true">
-          <t:Column id="CustomerPO" label="{i18n>CustomerPO}" width="10rem" sortProperty="CustomerPO" filterProperty="CustomerPO" autoResizable="true">
+      <f:DynamicPageHeader pinnable="true">
+        <f:content>
+          <smartFilterBar:SmartFilterBar id="smartFilterBar" useToolbar="false" entitySet="SalesAcceptanceResult" smartVariant="__SVM01" persistencyKey="SFB_Head" search="onSearch">
+            <smartFilterBar:controlConfiguration>
+              <smartFilterBar:ControlConfiguration index="10" key="Customer" visibleInAdvancedArea="true" label="{i18n>Customer}" filterType="single" mandatory="mandatory"/>
+              <smartFilterBar:ControlConfiguration index="20" key="PeriodType" visibleInAdvancedArea="true" label="{i18n>PeriodType}" displayBehaviour="idAndDescription">
+                <smartFilterBar:customControl>
+                  <ComboBox id="idPeriodType" showSecondaryValues="true" items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
+                    <core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
+                  </ComboBox>
+                </smartFilterBar:customControl>
+              </smartFilterBar:ControlConfiguration>
+              <smartFilterBar:ControlConfiguration index="21" key="AcceptYear" visibleInAdvancedArea="true" label="{i18n>AcceptYear}" mandatory="mandatory">
+                <smartFilterBar:customControl>
+                  <DatePicker id="idAcceptYear" displayFormat="yyyy" />
+                </smartFilterBar:customControl>
+              </smartFilterBar:ControlConfiguration>
+              <smartFilterBar:ControlConfiguration index="30" key="AcceptPeriod" change="onChangeLang" visibleInAdvancedArea="true" label="{i18n>AcceptPeriod}" displayBehaviour="idAndDescription">
+                <smartFilterBar:customControl>
+                  <ComboBox id="idAcceptPeriod" showSecondaryValues="true" items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
+                    <core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
+                  </ComboBox>
+                </smartFilterBar:customControl>
+              </smartFilterBar:ControlConfiguration>
+              <smartFilterBar:ControlConfiguration index="40" key="FinishStatus" visibleInAdvancedArea="true" label="{i18n>FinishStatus}" displayBehaviour="idAndDescription">
+                <smartFilterBar:customControl>
+                  <ComboBox id="idFinishStatus" showSecondaryValues="true" items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
+                    <core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
+                  </ComboBox>
+                </smartFilterBar:customControl>
+              </smartFilterBar:ControlConfiguration>
+              <!-- visible -->
+              <smartFilterBar:ControlConfiguration index='999' key="SalesOrganization" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="SalesDocument" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentItem" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="BillingDocument" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="CustomerPO" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="ProcessStatus" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodFrom" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodTo" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentType" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentTypeText" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="Product" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentItemText" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="PostingDate" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="AcceptDate" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="AcceptQty" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="BillingQuantity" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="AcceptPrice" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="ConditionRateValue" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="ConditionCurrency" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="ConditionQuantity" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="AccceptAmount" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="NetAmount" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="AccceptTaxAmount" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="TaxAmount" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="Currency" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="AccountingExchangeRate" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="ExchangeRateDate" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="OutsideData" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="Remarks" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="ReasonCategory" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="Reason" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="PeriodTypeText" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodText" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodFromText" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="AcceptPeriodToText" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="Layer" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="unit" visible="false"/>
+              <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
+            </smartFilterBar:controlConfiguration>
+          </smartFilterBar:SmartFilterBar>
+        </f:content>
+      </f:DynamicPageHeader>
+    </f:header>
+    <f:content>
+      <VBox fitContainer="true">
+        <FlexBox id="Title" wrap="Wrap" fitContainer="true" alignItems="Start">
+          <VBox id="VBox1" renderType="Bare" class="sapUiSmallMarginBottom">
+            <Label id="Label1" text="{i18n>Customer}:" class="sapUiLargeMarginEnd sapUiSmallMarginBegin"/>
+            <Text id="Text1" text="{local>/head/CustomerName}" class="sapUiLargeMarginEnd sapUiSmallMarginBegin"/>
+          </VBox>
+          <VBox id="VBox2" renderType="Bare" class="sapUiSmallMarginBottom">
+            <Label id="Label2" text="{i18n>PeriodType}:" class="sapUiLargeMarginEnd"/>
+            <Text id="Text2" text="{local>/head/PeriodTypeText}" class="sapUiLargeMarginEnd"/>
+          </VBox>
+          <VBox id="VBox3" renderType="Bare" class="sapUiSmallMarginBottom">
+            <Label id="Label3" text="{i18n>AcceptPeriod}:" class="sapUiLargeMarginEnd"/>
+            <Text id="Text3" text="{local>/head/AcceptPeriodText}" class="sapUiLargeMarginEnd"/>
+          </VBox>
+          <VBox id="VBox4" renderType="Bare" class="sapUiSmallMarginBottom">
+            <Label id="Label4" text="{i18n>AcceptPeriodFrom}:" class="sapUiLargeMarginEnd"/>
+            <Text id="Text4" text="{local>/head/AcceptPeriodFromText}" class="sapUiLargeMarginEnd"/>
+          </VBox>
+          <VBox id="VBox5" renderType="Bare" class="sapUiSmallMarginBottom">
+            <Label id="Label5" text="{i18n>AcceptPeriodTo}:" class="sapUiLargeMarginEnd"/>
+            <Text id="Text5" text="{local>/head/AcceptPeriodToText}" class="sapUiLargeMarginEnd"/>
+          </VBox>
+        </FlexBox>
+        <smartTable:SmartTable id="smartTable" entitySet="SalesAcceptanceResult" smartFilterId="smartFilterBar" tableType="Table" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" fitContainer="false" height="100%" beforeExport="onBeforeExport" requestAtLeastFields="CustomerName,PeriodTypeText,AcceptPeriodText,AcceptPeriodFromText,AcceptPeriodToText,AcceptPeriod,AcceptPeriodFrom,AcceptPeriodTo" ignoredFields="Delete_mc,Update_mc,UserEmail,CustomerName,AcceptPeriodFrom,AcceptPeriodFromText,PeriodTypeText,AcceptPeriodToText,Layer,PeriodType,Reason,ReasonCategory,ProcessStatus,AcceptPeriodText,AcceptPeriodTo,Remarks">
+          <smartTable:customToolbar>
+            <OverflowToolbar width="100%">
+              <ToolbarSpacer/>
+              <Button id="save" icon="sap-icon://save" text="{i18n>saveButtonText}" tooltip="{i18n>saveButtonText}" press="onSave" enabled="{= ${local>/authorityCheck/button/Save}}"/>
+              <Button id="group" icon="sap-icon://group-2" text="{i18n>groupButtonText}" tooltip="{i18n>groupButtonText}" press="onGroup" enabled="{= ${local>/authorityCheck/button/Navigate}}"/>
+            </OverflowToolbar>
+          </smartTable:customToolbar>
+          <t:Table id="ReportTable" rowMode="Auto" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" enableColumnFreeze="true">
+            <t:Column id="CustomerPO" label="{i18n>CustomerPO}" width="10rem" sortProperty="CustomerPO" filterProperty="CustomerPO" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"CustomerPO", "leadingProperty":"CustomerPO", "sortProperty":"CustomerPO", "filterProperty": "CustomerPO"}'/>
               </t:customData>
               <t:template>
-                <Text text="{CustomerPO}"/>
+                <Text text="{CustomerPO}" wrapping="false"/>
               </t:template>
-          </t:Column>
-          <t:Column id="SalesDocument" label="{i18n>SalesDocument}" width="10rem" sortProperty="SalesDocument" filterProperty="SalesDocument" autoResizable="true">
+            </t:Column>
+            <t:Column id="SalesDocument" label="{i18n>SalesDocument}" width="10rem" sortProperty="SalesDocument" filterProperty="SalesDocument" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocument", "leadingProperty":"SalesDocument", "sortProperty":"SalesDocument", "filterProperty": "SalesDocument"}'/>
               </t:customData>
               <t:template>
-                <Text text="{SalesDocument}"/>
+                <Text text="{SalesDocument}" wrapping="false"/>
               </t:template>
-          </t:Column>
-          <t:Column id="SalesDocumentType" label="{i18n>SalesDocumentType}" width="8rem" sortProperty="SalesDocumentType" filterProperty="SalesDocumentType" autoResizable="true">
+            </t:Column>
+            <t:Column id="SalesDocumentType" label="{i18n>SalesDocumentType}" width="8rem" sortProperty="SalesDocumentType" filterProperty="SalesDocumentType" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocumentType", "leadingProperty":"SalesDocumentType", "sortProperty":"SalesDocumentType", "filterProperty": "SalesDocumentType"}'/>
               </t:customData>
               <t:template>
-                <Text text="{SalesDocumentType}"/>
+                <Text text="{SalesDocumentType}" wrapping="false"/>
               </t:template>
-          </t:Column>
-          <t:Column id="SalesDocumentTypeText" label="{i18n>SalesDocumentTypeText}" width="12rem" sortProperty="SalesDocumentTypeText" filterProperty="SalesDocumentTypeText" autoResizable="true">
+            </t:Column>
+            <t:Column id="SalesDocumentTypeText" label="{i18n>SalesDocumentTypeText}" width="12rem" sortProperty="SalesDocumentTypeText" filterProperty="SalesDocumentTypeText" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocumentTypeText", "leadingProperty":"SalesDocumentTypeText", "sortProperty":"SalesDocumentTypeText", "filterProperty": "SalesDocumentTypeText"}'/>
               </t:customData>
               <t:template>
-                <Text text="{SalesDocumentTypeText}"/>
+                <Text text="{SalesDocumentTypeText}" wrapping="false"/>
               </t:template>
-          </t:Column>
-          <t:Column id="SalesDocumentItem" label="{i18n>SalesDocumentItem}" width="8rem" sortProperty="SalesDocumentItem" filterProperty="SalesDocumentItem" autoResizable="true">
+            </t:Column>
+            <t:Column id="SalesDocumentItem" label="{i18n>SalesDocumentItem}" width="8rem" sortProperty="SalesDocumentItem" filterProperty="SalesDocumentItem" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocumentItem", "leadingProperty":"SalesDocumentItem", "sortProperty":"SalesDocumentItem", "filterProperty": "SalesDocumentItem"}'/>
               </t:customData>
               <t:template>
-                <Text text="{SalesDocumentItem}"/>
+                <Text text="{SalesDocumentItem}" wrapping="false"/>
               </t:template>
-          </t:Column>
-          <t:Column id="Product" label="{i18n>Product}" width="10rem" sortProperty="Product" filterProperty="Product" autoResizable="true">
+            </t:Column>
+            <t:Column id="Product" label="{i18n>Product}" width="10rem" sortProperty="Product" filterProperty="Product" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Product", "leadingProperty":"Product", "sortProperty":"Product", "filterProperty": "Product"}'/>
               </t:customData>
               <t:template>
-                <Text text="{Product}"/>
+                <Text text="{Product}" wrapping="false"/>
               </t:template>
-          </t:Column>
-          <t:Column id="SalesDocumentItemText" label="{i18n>SalesDocumentItemText}" width="10rem" sortProperty="SalesDocumentItemText" filterProperty="SalesDocumentItemText" autoResizable="true">
+            </t:Column>
+            <t:Column id="SalesDocumentItemText" label="{i18n>SalesDocumentItemText}" width="10rem" sortProperty="SalesDocumentItemText" filterProperty="SalesDocumentItemText" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"SalesDocumentItemText", "leadingProperty":"SalesDocumentItemText", "sortProperty":"SalesDocumentItemText", "filterProperty": "SalesDocumentItemText"}'/>
               </t:customData>
               <t:template>
-                <Text text="{SalesDocumentItemText}"/>
+                <Text text="{SalesDocumentItemText}" wrapping="false"/>
               </t:template>
-          </t:Column>
-          <t:Column id="BillingDocument" label="{i18n>BillingDocument}" width="10rem" sortProperty="BillingDocument" filterProperty="BillingDocument" autoResizable="true">
+            </t:Column>
+            <t:Column id="BillingDocument" label="{i18n>BillingDocument}" width="10rem" sortProperty="BillingDocument" filterProperty="BillingDocument" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"BillingDocument", "leadingProperty":"BillingDocument", "sortProperty":"BillingDocument", "filterProperty": "BillingDocument"}'/>
               </t:customData>
               <t:template>
-                <Text text="{BillingDocument}"/>
+                <Text text="{BillingDocument}" wrapping="false"/>
               </t:template>
-          </t:Column>
-          <t:Column id="PostingDate" label="{i18n>PostingDate}" width="10rem" sortProperty="PostingDate" filterProperty="PostingDate" autoResizable="true">
+            </t:Column>
+            <t:Column id="PostingDate" label="{i18n>PostingDate}" width="10rem" sortProperty="PostingDate" filterProperty="PostingDate" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"PostingDate", "leadingProperty":"PostingDate", "sortProperty":"PostingDate", "filterProperty": "PostingDate"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'PostingDate',formatter:'.formatter.formatDate' }"/>
+                <Text text="{ path:'PostingDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
               </t:template>
-          </t:Column>
-          <t:Column id="AcceptDate" label="{i18n>AcceptDate}" width="10rem" sortProperty="AcceptDate" filterProperty="AcceptDate" autoResizable="true">
+            </t:Column>
+            <t:Column id="AcceptDate" label="{i18n>AcceptDate}" width="10rem" sortProperty="AcceptDate" filterProperty="AcceptDate" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"AcceptDate", "leadingProperty":"AcceptDate", "sortProperty":"AcceptDate", "filterProperty": "AcceptDate"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'AcceptDate',formatter:'.formatter.formatDate' }"/>
+                <Text text="{ path:'AcceptDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
               </t:template>
-          </t:Column>
-			    <t:Column id="AcceptQty" label="{i18n>AcceptQty}" width="10rem" sortProperty="AcceptQty" filterProperty="AcceptQty" autoResizable="true">
+            </t:Column>
+            <t:Column id="AcceptQty" label="{i18n>AcceptQty}" width="10rem" sortProperty="AcceptQty" filterProperty="AcceptQty" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"AcceptQty", "leadingProperty":"AcceptQty", "sortProperty":"AcceptQty", "filterProperty": "AcceptQty"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'AcceptQty',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'AcceptQty',formatter:'.formatter.formatFloat' }" wrapping="false"/>
               </t:template>
-          </t:Column>
-			    <t:Column id="BillingQuantity" label="{i18n>BillingQuantity}" width="10rem" sortProperty="BillingQuantity" filterProperty="BillingQuantity" autoResizable="true">
+            </t:Column>
+            <t:Column id="BillingQuantity" label="{i18n>BillingQuantity}" width="10rem" sortProperty="BillingQuantity" filterProperty="BillingQuantity" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"BillingQuantity", "leadingProperty":"BillingQuantity", "sortProperty":"BillingQuantity", "filterProperty": "BillingQuantity"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'BillingQuantity',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'BillingQuantity',formatter:'.formatter.formatFloat' }" wrapping="false"/>
               </t:template>
-          </t:Column>
-			    <t:Column id="AcceptPrice" label="{i18n>AcceptPrice}" width="10rem" sortProperty="AcceptPrice" filterProperty="AcceptPrice" autoResizable="true">
+            </t:Column>
+            <t:Column id="AcceptPrice" label="{i18n>AcceptPrice}" width="10rem" sortProperty="AcceptPrice" filterProperty="AcceptPrice" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"AcceptPrice", "leadingProperty":"AcceptPrice", "sortProperty":"AcceptPrice", "filterProperty": "AcceptPrice"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'AcceptPrice',formatter:'.formatter.formatDecimal' }"/>
+                <Text text="{ path:'AcceptPrice',formatter:'.formatter.formatDecimal' }" wrapping="false"/>
               </t:template>
-          </t:Column>
-			    <t:Column id="ConditionRateValue" label="{i18n>ConditionRateValue}" width="10rem" sortProperty="ConditionRateValue" filterProperty="ConditionRateValue" autoResizable="true">
+            </t:Column>
+            <t:Column id="ConditionRateValue" label="{i18n>ConditionRateValue}" width="10rem" sortProperty="ConditionRateValue" filterProperty="ConditionRateValue" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateValue", "leadingProperty":"ConditionRateValue", "sortProperty":"ConditionRateValue", "filterProperty": "ConditionRateValue"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'ConditionRateValue',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'ConditionRateValue',formatter:'.formatter.formatFloat' }" wrapping="false"/>
               </t:template>
-          </t:Column>
-			    <t:Column id="ConditionCurrency" label="{i18n>ConditionCurrency}" width="10rem" sortProperty="ConditionCurrency" filterProperty="ConditionCurrency" autoResizable="true">
+            </t:Column>
+            <t:Column id="ConditionCurrency" label="{i18n>ConditionCurrency}" width="10rem" sortProperty="ConditionCurrency" filterProperty="ConditionCurrency" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ConditionCurrency", "leadingProperty":"ConditionCurrency", "sortProperty":"ConditionCurrency", "filterProperty": "ConditionCurrency"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ConditionCurrency}"/>
+                <Text text="{ConditionCurrency}" wrapping="false"/>
               </t:template>
-          </t:Column>
+            </t:Column>
             <t:Column id="ConditionQuantity" label="{i18n>ConditionQuantity}" width="10rem" sortProperty="ConditionQuantity" filterProperty="ConditionQuantity" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ConditionQuantity", "leadingProperty":"ConditionQuantity", "sortProperty":"ConditionQuantity", "filterProperty": "ConditionQuantity"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'ConditionQuantity',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'ConditionQuantity',formatter:'.formatter.formatFloat' }" wrapping="false"/>
               </t:template>
-          </t:Column>
-			    <t:Column id="AccceptAmount" label="{i18n>AccceptAmount}" width="10rem" sortProperty="AccceptAmount" filterProperty="AccceptAmount" autoResizable="true">
+            </t:Column>
+            <t:Column id="AccceptAmount" label="{i18n>AccceptAmount}" width="10rem" sortProperty="AccceptAmount" filterProperty="AccceptAmount" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"AccceptAmount", "leadingProperty":"AccceptAmount", "sortProperty":"AccceptAmount", "filterProperty": "AccceptAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'AccceptAmount',formatter:'.formatter.formatDecimal' }"/>
+                <Text text="{ path:'AccceptAmount',formatter:'.formatter.formatDecimal' }" wrapping="false"/>
               </t:template>
-          </t:Column>
-          <t:Column id="NetAmount" label="{i18n>NetAmount}" width="10rem" sortProperty="NetAmount" filterProperty="NetAmount" autoResizable="true">
+            </t:Column>
+            <t:Column id="NetAmount" label="{i18n>NetAmount}" width="10rem" sortProperty="NetAmount" filterProperty="NetAmount" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"NetAmount", "leadingProperty":"NetAmount", "sortProperty":"NetAmount", "filterProperty": "NetAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'NetAmount',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'NetAmount',formatter:'.formatter.formatFloat' }" wrapping="false"/>
               </t:template>
-          </t:Column>
-			    <t:Column id="AccceptTaxAmount" label="{i18n>AccceptTaxAmount}" width="10rem" sortProperty="AccceptTaxAmount" filterProperty="AccceptTaxAmount" autoResizable="true">
+            </t:Column>
+            <t:Column id="AccceptTaxAmount" label="{i18n>AccceptTaxAmount}" width="10rem" sortProperty="AccceptTaxAmount" filterProperty="AccceptTaxAmount" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"AccceptTaxAmount", "leadingProperty":"AccceptTaxAmount", "sortProperty":"AccceptTaxAmount", "filterProperty": "AccceptTaxAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'AccceptTaxAmount',formatter:'.formatter.formatDecimal' }"/>
+                <Text text="{ path:'AccceptTaxAmount',formatter:'.formatter.formatDecimal' }" wrapping="false"/>
               </t:template>
-          </t:Column>
-			    <t:Column id="TaxAmount" label="{i18n>TaxAmount}" width="10rem" sortProperty="TaxAmount" filterProperty="TaxAmount" autoResizable="true">
+            </t:Column>
+            <t:Column id="TaxAmount" label="{i18n>TaxAmount}" width="10rem" sortProperty="TaxAmount" filterProperty="TaxAmount" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"TaxAmount", "leadingProperty":"TaxAmount", "sortProperty":"TaxAmount", "filterProperty": "TaxAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'TaxAmount',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'TaxAmount',formatter:'.formatter.formatFloat' }" wrapping="false"/>
               </t:template>
-          </t:Column>
-			    <t:Column id="Currency" label="{i18n>Currency}" width="10rem" sortProperty="Currency" filterProperty="Currency" autoResizable="true">
+            </t:Column>
+            <t:Column id="Currency" label="{i18n>Currency}" width="10rem" sortProperty="Currency" filterProperty="Currency" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Currency", "leadingProperty":"Currency", "sortProperty":"Currency", "filterProperty": "Currency"}'/>
               </t:customData>
               <t:template>
-                <Text text="{Currency}"/>
+                <Text text="{Currency}" wrapping="false"/>
               </t:template>
-          </t:Column>
-			    <t:Column id="AccountingExchangeRate" label="{i18n>AccountingExchangeRate}" width="10rem" sortProperty="AccountingExchangeRate" filterProperty="AccountingExchangeRate" autoResizable="true">
+            </t:Column>
+            <t:Column id="AccountingExchangeRate" label="{i18n>AccountingExchangeRate}" width="10rem" sortProperty="AccountingExchangeRate" filterProperty="AccountingExchangeRate" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"AccountingExchangeRate", "leadingProperty":"AccountingExchangeRate", "sortProperty":"AccountingExchangeRate", "filterProperty": "AccountingExchangeRate"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'AccountingExchangeRate',formatter:'.formatter.formatFloat' }"/>
+                <Text text="{ path:'AccountingExchangeRate',formatter:'.formatter.formatFloat' }" wrapping="false"/>
               </t:template>
-          </t:Column>
-			    <t:Column id="ExchangeRateDate" label="{i18n>ExchangeRateDate}" width="10rem" sortProperty="ExchangeRateDate" filterProperty="ExchangeRateDate" autoResizable="true">
+            </t:Column>
+            <t:Column id="ExchangeRateDate" label="{i18n>ExchangeRateDate}" width="10rem" sortProperty="ExchangeRateDate" filterProperty="ExchangeRateDate" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ExchangeRateDate", "leadingProperty":"ExchangeRateDate", "sortProperty":"ExchangeRateDate", "filterProperty": "ExchangeRateDate"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ path:'ExchangeRateDate',formatter:'.formatter.formatDate' }"/>
+                <Text text="{ path:'ExchangeRateDate',formatter:'.formatter.formatDate' }" wrapping="false"/>
               </t:template>
-          </t:Column>
-			    <t:Column id="OutsideData" label="{i18n>OutsideData}" width="10rem" sortProperty="OutsideData" filterProperty="OutsideData" autoResizable="true">
+            </t:Column>
+            <t:Column id="OutsideData" label="{i18n>OutsideData}" width="10rem" sortProperty="OutsideData" filterProperty="OutsideData" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"OutsideData", "leadingProperty":"OutsideData", "sortProperty":"OutsideData", "filterProperty": "OutsideData"}'/>
               </t:customData>
               <t:template>
-                <Text text="{ OutsideData }"/>
+                <Text text="{OutsideData}" wrapping="false"/>
               </t:template>
-          </t:Column>
-			    <t:Column id="Remarks" label="{i18n>Remarks}" width="20rem" sortProperty="Remarks" filterProperty="Remarks" autoResizable="true" e="true">
+            </t:Column>
+            <t:Column id="Remarks" label="{i18n>Remarks}" width="20rem" sortProperty="Remarks" filterProperty="Remarks" autoResizable="true" e="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Remarks ", "leadingProperty":"Remarks", "sortProperty":"Remarks", "filterProperty": "Remarks"}'/>
               </t:customData>
               <t:template>
                 <VBox id="VBoxRemarks">
-                 <Text id="RemarksT" text="{Remarks}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible1'}"/>
-                 <Input id="RemarksI" value="{Remarks}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible2'}" editable="true" change="onChange($event,'Remarks')"/>
+                  <Text id="RemarksT" text="{Remarks}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible1'}" wrapping="false"/>
+                  <Input id="RemarksI" value="{Remarks}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible2'}" editable="true" change="onChange($event,'Remarks')"/>
                 </VBox>
               </t:template>
-          </t:Column>
-			    <t:Column id="ProcessStatus" label="{i18n>ProcessStatus}" width="10rem" sortProperty="ProcessStatus" filterProperty="ProcessStatus" autoResizable="true">
+            </t:Column>
+            <t:Column id="ProcessStatus" label="{i18n>ProcessStatus}" width="10rem" sortProperty="ProcessStatus" filterProperty="ProcessStatus" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ProcessStatus ", "leadingProperty":"ProcessStatus", "sortProperty":"ProcessStatus", "filterProperty": "ProcessStatus"}'/>
               </t:customData>
               <t:template>
                 <VBox id="VBoxProcessStatus">
-                 <Text id="ProcessStatusT" text="{ProcessStatus}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible1'}"/>
-                 <ComboBox id="ProcessStatusC" showSecondaryValues="true" selectedKey="{ProcessStatus}" required="true"
-										filterSecondaryValues="true" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible2'}" change="onChange($event,'ProcessStatus')"
-										items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
-										<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
+                  <Text id="ProcessStatusT" text="{ProcessStatus}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible1'}"/>
+                  <ComboBox id="ProcessStatusC" showSecondaryValues="true" selectedKey="{ProcessStatus}" required="true" filterSecondaryValues="true" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible2'}" change="onChange($event,'ProcessStatus')" items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
+                    <core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
                   </ComboBox>
                 </VBox>
               </t:template>
-          </t:Column>
-          <t:Column id="ReasonCategory" label="{i18n>ReasonCategory}" width="10rem" sortProperty="ReasonCategory" filterProperty="ReasonCategory" autoResizable="true">
+            </t:Column>
+            <t:Column id="ReasonCategory" label="{i18n>ReasonCategory}" width="10rem" sortProperty="ReasonCategory" filterProperty="ReasonCategory" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"ReasonCategory ", "leadingProperty":"ReasonCategory", "sortProperty":"ReasonCategory", "filterProperty": "ReasonCategory"}'/>
               </t:customData>
               <t:template>
                 <VBox id="VBoxReasonCategory">
-                 <Text id="ReasonCategoryT" text="{ReasonCategory}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible1'}"/>
-                 <ComboBox id="ReasonCategoryC" showSecondaryValues="true" selectedKey="{ReasonCategory}" required="true"
-										filterSecondaryValues="true" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible2'}" change="onChange($event,'ReasonCategory')"
-										items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
-										<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
+                  <Text id="ReasonCategoryT" text="{ReasonCategory}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible1'}"/>
+                  <ComboBox id="ReasonCategoryC" showSecondaryValues="true" selectedKey="{ReasonCategory}" required="true" filterSecondaryValues="true" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible2'}" change="onChange($event,'ReasonCategory')" items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
+                    <core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
                   </ComboBox>
                 </VBox>
               </t:template>
-          </t:Column>
-          <t:Column id="Reason" label="{i18n>Reason}" width="10rem" sortProperty="Reason" filterProperty="Reason" autoResizable="true">
+            </t:Column>
+            <t:Column id="Reason" label="{i18n>Reason}" width="10rem" sortProperty="Reason" filterProperty="Reason" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"Reason ", "leadingProperty":"Reason", "sortProperty":"Reason", "filterProperty": "Reason"}'/>
               </t:customData>
               <t:template>
                 <VBox id="VBoxReason">
                   <Text id="ReasonT" text="{Reason}" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible1'}"/>
-                  <ComboBox id="ReasonC" showSecondaryValues="true" selectedKey="{Reason}" required="true"
-										filterSecondaryValues="true" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible2'}" change="onChange($event,'Reason')"
-										items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' }, filters:[{path: 'ZID',operator:'EQ',value1:'ZSD010'}] }">
-										<core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
+                  <ComboBox id="ReasonC" showSecondaryValues="true" selectedKey="{Reason}" required="true" filterSecondaryValues="true" visible="{parts:['FinishStatus'], formatter:'.formatter.setTextVisible2'}" change="onChange($event,'Reason')" items="{ path: 'AddonConfig>/CommonConfig', sorter: { path: 'Zseq' } }">
+                    <core:ListItem key="{AddonConfig>Zvalue1}" text="{AddonConfig>Zvalue2}" additionalText="{AddonConfig>Zvalue1}"/>
                   </ComboBox>
                 </VBox>
               </t:template>
             </t:Column>
-
             <t:Column id="FinishStatus" label="{i18n>FinishStatus}" width="10rem" sortProperty="FinishStatus" filterProperty="FinishStatus" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"FinishStatus", "leadingProperty":"FinishStatus", "sortProperty":"FinishStatus", "filterProperty": "FinishStatus"}'/>
               </t:customData>
               <t:template>
-                <Text text="{FinishStatus}"/>
+                <Text text="{FinishStatus}" wrapping="false"/>
               </t:template>
             </t:Column>
-		      </t:Table>
+          </t:Table>
         </smartTable:SmartTable>
-       </VBox>
-	  </f:content>
+      </VBox>
+    </f:content>
   </f:DynamicPage>
 </mvc:View>
