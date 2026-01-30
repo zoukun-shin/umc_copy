@@ -283,13 +283,10 @@ sap.ui.define([
             if (aBillingDocumentVN.length > 0) {
                 _oFunctions.getBillingData(this,"BillingPrintVN","YY1_SD019_VN",aBillingDocumentVN);
             }
-            if (aBillingDocumentVNDR.length > 0) {
-                _oFunctions.getBillingData(this,"BillingPrintVNCD","YY1_SD019_VN_CD",aBillingDocumentVNDR,"DEBIT NOTE");
+            if (aBillingDocumentVNDR.length > 0 || aBillingDocumentVNCR.length > 0) {
+                //VNCD打印 需要输入日期
+                _oFunctions.onPrintVNCD(this.routing, this, aBillingDocumentVNDR,aBillingDocumentVNCR);
             }
-            if (aBillingDocumentVNCR.length > 0) {
-                _oFunctions.getBillingData(this,"BillingPrintVNCD","YY1_SD019_VN_CD",aBillingDocumentVNCR,"CREDIT NOTE");
-            }
-
         },
 
         onPrintTHTax: function() {
@@ -305,12 +302,6 @@ sap.ui.define([
             if (aBillingDocumentTH.length > 0) {
                 _oFunctions.getBillingData(this,"BillingPrintTH","YY1_SD019_TH",aBillingDocumentTH,"TAX INVOICE");
             }
-
-            // if (aBillingDocumentTH.length > 0) {
-            //     //TH打印 需要选择Tax 或者 Commercial
-            //     _oFunctions.onPrintTHVNPress(this.routing, this, aBillingDocumentTH);
-            // }
-
         },
         onPrintTHCommercial: function() {
             // 获取选择的行项目
@@ -326,41 +317,56 @@ sap.ui.define([
             }
         },
 
-        // onPrintTHVNPress: function (oRouting, that, aBillingDocument) {
-        //     if (!this.Dialog) {
-        //         var oView = oRouting.getView();
-        //         if (!this.Dialog) {
-        //             this.Dialog = Fragment.load({
-        //                 id: oView.getId(),
-        //                 name: "sd.invoiceprint.ext.fragment.PrintTH",
-        //                 controller: that
-        //             }).then(function (oDialog) {
-        //                 return oDialog;
-        //             }.bind(this));
-        //         }
-        //     }
-        //     this.Dialog.then(function (oDialog) {
-        //         oRouting.getView().addDependent(oDialog);
-        //         oDialog.setBeginButton(new sap.m.Button({
-        //             text: "{i18n>bConfirm}",
-        //             press: function () {
-        //                 var oButton = oRouting.getView().byId("idTitleGroup").getSelectedButton();
-        //                 var sTitle = oButton.getText();
-        //                 _oFunctions.getBillingData(that,"BillingPrintTH","YY1_SD019_TH",aBillingDocument,sTitle);
-        //                 oDialog.close();
-        //             }
-        //         }));
-        //         oDialog.setEndButton(new sap.m.Button({
-        //             text: "{i18n>bCancel}",
-        //             press: function () {
-        //                 oDialog.close();
-        //             }
-        //         }));
-        //         oDialog.open();
-        //     }.bind(this));
-        // },
+        onPrintVNCD: function (oRouting, that, aBillingDocumentVNDR,aBillingDocumentVNCR) {
+            if (!this.Dialog) {
+                var oView = oRouting.getView();
+                if (!this.Dialog) {
+                    this.Dialog = Fragment.load({
+                        id: oView.getId(),
+                        name: "sd.invoiceprint.ext.fragment.Dialog",
+                        controller: that
+                    }).then(function (oDialog) {
+                        return oDialog;
+                    }.bind(this));
+                }
+            }
+            this.Dialog.then(function (oDialog) {
+                oRouting.getView().addDependent(oDialog);
+                oDialog.setBeginButton(new sap.m.Button({
+                    text: "{i18n>bConfirm}",
+                    press: function () {
+                        let oIssuedDate;
+                        var sPrintDate = oRouting.getView().byId("idPrintDate").getValue();
+                        if (sPrintDate === '') {
+                            oIssuedDate = new Date();
+                        } else {
+                            oIssuedDate = oRouting.getView().byId("idPrintDate").getDateValue();
+                        }
+                         sPrintDate = oIssuedDate.toLocaleDateString('zh-CN', {
+                                year: 'numeric',
+                                month: '2-digit',
+                                day: '2-digit'
+                            }).replace(/\//g, '-'); // 将年月日间的分隔符改为"-"
+                        if (aBillingDocumentVNDR.length > 0) {
+                            _oFunctions.getBillingData(that,"BillingPrintVNCD","YY1_SD019_VN_CD",aBillingDocumentVNDR,"DEBIT NOTE",sPrintDate);
+                        }
+                        if (aBillingDocumentVNCR.length > 0) {
+                            _oFunctions.getBillingData(that,"BillingPrintVNCD","YY1_SD019_VN_CD",aBillingDocumentVNCR,"CREDIT NOTE",sPrintDate);
+                        }
+                        oDialog.close();
+                    }
+                }));
+                oDialog.setEndButton(new sap.m.Button({
+                    text: "{i18n>bCancel}",
+                    press: function () {
+                        oDialog.close();
+                    }
+                }));
+                oDialog.open();
+            }.bind(this));
+        },
 
-        getBillingData: function(that,sEnetity,sTemplateID,aBillingDocument,sDocTitle){
+        getBillingData: function(that,sEnetity,sTemplateID,aBillingDocument,sDocTitle,sPrintDate){
             _oDataModel = that.getModel();
             _oPrintModel = that.getModel("Print");
             _ResourceBundle = that.getModel("i18n").getResourceBundle();
@@ -392,7 +398,7 @@ sap.ui.define([
                 } else if (sEnetity === "BillingPrintTH") {
                     aPDFContent = _oFunctions.porcessTHCotent(sDocTitle,aBillingDocument,aContext);
                 } else if (sEnetity === "BillingPrintVNCD") {
-                    aPDFContent = _oFunctions.porcessVNCDCotent(sDocTitle,aBillingDocument,aContext);
+                    aPDFContent = _oFunctions.porcessVNCDContent(sDocTitle,aBillingDocument,aContext,sPrintDate);
                 }
                aPDFContent.forEach(pdfContent => {
                    _oFunctions.getPDF({"PrintData":pdfContent},sTemplateID);
@@ -431,7 +437,7 @@ sap.ui.define([
                     PayerPartyCity: oFirstItem.PayerPartyCity,
                     ShippingMethod: oFirstItem.ShippingMethod,
                     IncotermsLocation: oFirstItem.IncotermsLocation1,
-                    CustomerPaymentTerms: oFirstItem.CustomerPaymentTerms,
+                    PaymentTermsDesc: oFirstItem.PaymentTermsDesc,
                     PlannedGoodsIssueDate: oFirstItem.PlannedGoodsIssueDate,
                     TotalQuantity: oFirstItem.TotalQuantity,
                     TotalNetAmount: oFirstItem.TotalNetAmount,
@@ -551,7 +557,7 @@ sap.ui.define([
             });
             return aBilling;
         },
-        porcessVNCDCotent: function(sDocTitle,aHeader,aContext){
+        porcessVNCDContent: function(sDocTitle,aHeader,aContext,sPrintDate){
             var aPrintItem = [];
             var aBilling = [];
             for (const boundContext of aContext) {
@@ -572,7 +578,10 @@ sap.ui.define([
                     SoldToPartyName: oFirstItem.SoldToPartyName,
                     SoldToPartyStreet: oFirstItem.SoldToPartyStreet,
                     SoldToPartyCity: oFirstItem.SoldToPartyCity,
-                    // IssueDate: oFirstItem.PlannedGoodsIssueDate,//应该要来自屏幕输入
+                    IssuedDate: sPrintDate,
+                    LongTextTX02:oFirstItem.LongTextTX02,
+                    LongTextTX16:oFirstItem.LongTextTX16,
+                    TelephoneNumber1:oFirstItem.TelephoneNumber1,
                     TotalNetAmount:oFirstItem.TotalNetAmount,
                     Currency: oFirstItem.TransactionCurrency,
                 }

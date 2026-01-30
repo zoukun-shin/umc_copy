@@ -30,6 +30,7 @@
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ShippingPoint"/>
+                            <PropertyValue Property="Label" String="{@i18n>shippingPoint}"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="BillingDocumentDate"/>
