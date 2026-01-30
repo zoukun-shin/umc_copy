@@ -5,12 +5,14 @@ sap.ui.define([
 	"sap/ui/model/Filter",
 	"sap/m/MessageBox",
 	"sap/m/BusyDialog",
+	"sap/ui/export/Spreadsheet"
 ], (BaseController,
     formatter,
 	messages,
 	Filter,
 	MessageBox,
-	BusyDialog) => {
+	BusyDialog,
+	Spreadsheet) => {
     "use strict";
 
     return BaseController.extend("sd.printpackinglist.controller.Main", {
@@ -26,6 +28,7 @@ sap.ui.define([
 		onSearch: function (oEvent) {
 			this.errorPopup = false;
 			var aFilter = this.getView().byId("idSmartFilterBar").getFilters();
+			var oFilterData = this.getView().byId("idSmartFilterBar").getFilterData();
 			var oNewFilter, aNewFilter = [];
 
 			// 获取处理范围
@@ -33,6 +36,13 @@ sap.ui.define([
 			if ( this.vaildDate(oDateRange) ){
 				return;
 			}
+			// 必输检查
+			let sMessage = this.CheckRequiredFilter(oFilterData);
+			if (sMessage){
+				messages.showError(sMessage);
+				return;
+			}
+
 			var oStartDate = oDateRange.getFrom();
 			var oEndDate = oDateRange.getTo();
 			
@@ -76,6 +86,7 @@ sap.ui.define([
 				}
 			}.bind(this));
 		},
+
 		getEntityCount: function (aFilter) {
 			var that = this;
 			that.byId("idDynamicPage").setBusy(true);
@@ -312,7 +323,7 @@ sap.ui.define([
 			}
 		},
 
-		onNoChange: function(oEvent) {
+		onNumberChange: function(oEvent) {
 			let sNo = oEvent.getParameter("value");
 			let aNo = sNo.split("-");
 			let sEndSeq;
@@ -331,6 +342,129 @@ sap.ui.define([
 					this._LocalData.setProperty(sPath + "/PalletSeqEnd",iBoxEndSeq);
 				}
 			}
-		}
+		},
+
+		CheckRequiredFilter:function(oFilterData) {
+			if(this.byId("idCreatePackingListCB").getSelected()) {
+				// ShippingPoint 必输
+				if (!oFilterData["ShippingPoint"]) {
+					return this._ResourceBundle.getText("msg01");
+				}
+
+				var oDateRange = this.byId("idDateRangeSelection");
+				// BillingDocument 和 CreationDate 至少输入一个
+				if (!oFilterData["BillingDocument"] && !oDateRange.getValue()) {
+					return this._ResourceBundle.getText("msg02");
+				}
+				// 并且 CreationDate 范围不能超过两周
+				if (!this.checkDateRange(oDateRange)) {
+					return this._ResourceBundle.getText("msg03");
+				}
+			} else {
+				if (!oFilterData["BillingDocument"]) {
+					return this._ResourceBundle.getText("msg04");
+				}
+			}
+
+		},
+
+		checkDateRange: function(oControl) {
+			var oStartDate = oControl.getFrom();
+			var oEndDate = oControl.getTo();
+			// 如果未完整选择两个日期，则退出
+			if (!oStartDate || !oEndDate) {
+				return true;
+			}
+
+			// 调用核心算法，计算最大允许的截止日期
+			var oMaxEndDate = this._calculateMaxEndDate(oStartDate);
+			
+			// 比较用户选择的截止日期是否超过了最大允许日期
+			if (oEndDate.getTime() > oMaxEndDate.getTime()) {
+				// // 1.给出错误提示
+				// sap.m.MessageToast.show(this._ResourceBundle.getText("msg03"), {
+				// 	duration: 3000
+				// });
+				// 2. 可选：自动将截止日期修正为最大允许值
+				// oControl.setDateValue([oStartDate, oMaxEndDate]);
+				
+				// 3. 或者：清空选择，让用户重选（更清晰的交互）
+				oControl.setValue("");
+				oControl.setDateValue(null);
+				oControl.focus();
+				return false;
+			}
+			return true;
+		},
+		_calculateMaxEndDate: function(oStartDate) {
+			// 创建一个起始日期的副本，避免修改原对象
+			var oMaxEndDate = new Date(oStartDate.getTime());
+			// 不允许超过两周
+			oMaxEndDate.setDate(oMaxEndDate.getDate() + 13);
+			return oMaxEndDate;
+		},
+		
+		onExport: function (oEvent) {
+			var sId = oEvent.getSource().getParent().getParent().getId();
+			// 根据id值获取table 
+			var oTable = this.getView().byId(sId);
+			// 获取table的绑定路径
+			var sPath = oTable.getBindingPath("rows");
+			// 获取table数据
+			var aExcelSet = this._LocalData.getProperty(sPath);
+			
+			var oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern: "yyyyMMdd"});
+			var oTimeFormat = sap.ui.core.format.DateFormat.getTimeInstance({pattern: "HHmmss"});
+			var sFileName = this._ResourceBundle.getText("title") + "_" + 
+				oDateFormat.format(new Date()) + oTimeFormat.format(new Date());
+
+
+			var aExcelCol = [];
+			// 获取table的columns
+			var aTableCol = oTable.getColumns();
+			for (var i = 1; i < aTableCol.length; i++) {
+				if (aTableCol[i].getVisible()) {
+					var sLabelText = aTableCol[i].getAggregation("label").getText();
+					var sProperty = aTableCol[i].getAggregation("template").getBindingPath("text");
+					if (!sProperty) {
+						sProperty = aTableCol[i].getAggregation("template").getBindingPath("value");
+					}
+					var sType = "string";
+					switch (sProperty) {
+						case "CreationDate":
+						case "RequestedDeliveryDate":
+						case "PostingDate":
+							sType = "Date";
+							break;
+					}
+					var oExcelCol = {
+						// 获取表格的列名，即设置excel的抬头
+						label: sLabelText,
+						// 数据类型，即设置excel该列的数据类型
+						type: sType,
+						// 获取数据的绑定路径，即设置excel该列的字段路径
+						property: sProperty,
+						// 获取表格的width属性，即设置excel该列的长度
+						width: parseFloat(aTableCol[i].getWidth())
+					};
+					aExcelCol.push(oExcelCol);
+				}
+			}
+			// 设置excel的相关属性
+			var oSettings = {
+				workbook: {
+					columns: aExcelCol,
+					context: {
+						version: "${version}",
+						hierarchyLevel: "level"
+					}
+				},
+				dataSource: aExcelSet, // 传入参数，数据源
+				fileName: sFileName // 文件名，需要加上后缀
+			};
+			// 导出excel
+			new Spreadsheet(oSettings).build();
+		},
+
     });
 });
