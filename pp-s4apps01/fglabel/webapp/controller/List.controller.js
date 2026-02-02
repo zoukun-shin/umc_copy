@@ -354,6 +354,27 @@ sap.ui.define([
         },
         _updatePrintInfo: function () {
             this.getView().byId("idSmartFilterBar").search();
+        },
+
+        onBeforeExport: function (oEvent) {
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
+            this._exportExcel(mExcelSettings, sFileName);
+        },
+
+        _exportExcel: function (mExcelSettings, sFileName) {
+            mExcelSettings.workbook.columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    //  Date
+                    case "Actual_Date":
+                    case "Print_Date":
+                    case "Create_Date":
+                    case "Change_Date":
+                        oColumn.type = sap.ui.export.EdmType.Date;
+                        break;
+                }
+            });
+            mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
         }
     });
 });
