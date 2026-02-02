@@ -108,7 +108,7 @@
                             />
                         </t:template>
                     </t:Column>
-                    <t:Column id="_IDGenColumn2"
+                    <!-- <t:Column id="_IDGenColumn2"
                         width="5rem"
                         label="{/#SalesOrderForDNType/Status/@sap:label}"
                         sortProperty="Status"
@@ -127,7 +127,7 @@
                             }"
                             />
                         </t:template>
-                    </t:Column>
+                    </t:Column> -->
                     <t:Column id="_IDGenColumn3"
                         width="12rem"
                         label="{/#SalesOrderForDNType/Message/@sap:label}"
