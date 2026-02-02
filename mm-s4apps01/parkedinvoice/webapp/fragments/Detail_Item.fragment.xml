@@ -28,6 +28,11 @@
                     <Text text="{ parts:[ 'local>job_status'], formatter:'.formatter.formatState' }" wrapping="false"/>
                 </table:template>
             </table:Column>
+            <table:Column width="10rem" label="{i18n>parkinv}">
+                <table:template>
+                    <Text text="{local>parkinv}" wrapping="false"/>
+                </table:template>
+            </table:Column>
             <table:Column width="10rem" label="{i18n>invno}">
                 <table:template>
                     <Text text="{local>invno}" wrapping="false"/>

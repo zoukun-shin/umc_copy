@@ -35,6 +35,7 @@
                             <smartFilterBar:ControlConfiguration id="idC9ontrolConfiguration"  key="MaterialDocumentHeaderText" visibleInAdvancedArea="true" label="{i18n>MaterialDocumentHeaderText}" mandatory="notMandatory" index="10" />
                             <smartFilterBar:ControlConfiguration id="idC10ontrolConfiguration" key="InvoiceStatus" visibleInAdvancedArea="true" label="{i18n>InvoiceStatus}" mandatory="notMandatory" index="11" />
                             <!-- visible -->
+                            <smartFilterBar:ControlConfiguration key="NotParkedQuantity" visible="false"/>
                             <smartFilterBar:ControlConfiguration key="UserEmail" visible="false"/>
                             <smartFilterBar:ControlConfiguration key="MaterialDocument" visible="false"/>
                             <smartFilterBar:ControlConfiguration key="MaterialDocumentItem" visible="false"/>
@@ -418,7 +419,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"NetPriceQuantity", "leadingProperty":"NetPriceQuantity", "sortProperty":"NetPriceQuantity", "filterProperty": "NetPriceQuantity"}'/>
                             </t:customData>
                             <t:template>
-                                <Label text="{ parts: [ 'NetPriceQuantity' ],formatter:'.formatter.formatFloat2'}" wrapping="false"/>
+                                <Label text="{ parts: [ 'NetPriceQuantity' ],formatter:'.formatter.formatNumberTrimZero'}" wrapping="false"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>RequisitionerName}" sortProperty="RequisitionerName" filterProperty="RequisitionerName">
@@ -469,12 +470,12 @@
                                 <Text text="{Reference}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column width="10rem" label="{i18n>Confirm1}" sortProperty="Confirm1" filterProperty="Confirm1">
+                        <t:Column width="5em" label="{i18n>Confirm1}" sortProperty="Confirm1" filterProperty="Confirm1">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Confirm1", "leadingProperty":"Confirm1", "sortProperty":"Confirm1", "filterProperty": "Confirm1"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{Confirm1}" wrapping="false" />
+                                <ObjectStatus state="{ path:'Confirm1',formatter:'.formatter.formatState' }" icon="{ path:'Confirm1', formatter:'.formatter.formatStateIcon'}"/>
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>CreationTime}" sortProperty="CreationTime" filterProperty="CreationTime">

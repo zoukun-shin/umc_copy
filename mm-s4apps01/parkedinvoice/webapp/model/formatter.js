@@ -195,7 +195,61 @@ sap.ui.define([
                 return n;
             }
         },
-        
+
+        // format number: remove trailing zeros in decimals + thousand separators
+        formatNumberTrimZero: function (n, currency) {
+            if (n || n === 0) {
+                if (parseFloat(n) === 0 && currency === "") {
+                    return "";
+                }
+
+                var sign = "";
+
+                // 处理尾负号：123-
+                if (typeof n === "string") {
+                    if (n.endsWith("-")) {
+                        n = "-" + n.substring(0, n.length - 1);
+                    }
+                }
+
+                var num = Number(n);
+                if (isNaN(num)) {
+                    return n;
+                }
+
+                // 处理负数
+                if (num < 0) {
+                    num = Math.abs(num);
+                    sign = "-";
+                }
+
+                // 转字符串并去掉多余小数 0
+                var sNum = num.toString();
+
+                // 防止科学计数法
+                if (sNum.indexOf("e") !== -1) {
+                    sNum = num.toFixed(10);
+                }
+
+                // 去掉尾随 0 和多余的小数点
+                if (sNum.indexOf(".") > -1) {
+                    sNum = sNum
+                        .replace(/0+$/, "")   // 去尾 0
+                        .replace(/\.$/, "");  // 去尾 .
+                }
+
+                // 千分位
+                var re = /\d{1,3}(?=(\d{3})+$)/g;
+                sNum = sNum.replace(/^(\d+)(\.\d+)?$/, function (s, s1, s2) {
+                    return s1.replace(re, "$&,") + (s2 || "");
+                });
+
+                return sign + sNum;
+            } else {
+                return n;
+            }
+        },
+
         formatOrderStatus: function (value) {
             if (value) {
                 return "完了";
