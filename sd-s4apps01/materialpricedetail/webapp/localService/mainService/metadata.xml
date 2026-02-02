@@ -82,6 +82,7 @@
                     <PropertyRef Name="materialdocumentitem"/>
                     <PropertyRef Name="PurchaseOrder"/>
                     <PropertyRef Name="PurchaseOrderItem"/>
+                    <PropertyRef Name="Zeile"/>
                 </Key>
                 <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:filter-restriction="single-value" sap:label="Company Code" sap:value-list="standard"/>
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:filter-restriction="single-value" sap:label="Plant" sap:value-list="standard"/>
@@ -96,6 +97,7 @@
                 <Property Name="materialdocumentitem" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Material Doc.Item" sap:quickinfo="Item in Material Document"/>
                 <Property Name="PurchaseOrder" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="PurchaseOrderItem" Type="Edm.String" Nullable="false" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document"/>
+                <Property Name="Zeile" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative"/>
                 <Property Name="Type" Type="Edm.String" MaxLength="1"/>
                 <Property Name="CompanyCodeName" Type="Edm.String" MaxLength="40"/>
                 <Property Name="PlantName" Type="Edm.String" MaxLength="40"/>

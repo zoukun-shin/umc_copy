@@ -85,7 +85,7 @@
         </f:header>
         <f:content>
             <smartTable:SmartTable id="idsmartTable2" entitySet="MaterialPrice" smartFilterId="idSmartFilterBar2" smartVariant="__SVM02" tableType="Table" persistencyKey="smartTable" header="{i18n>Results}" 
-                        placeToolbarInTable="true" showRowCount="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" ignoredFields="Gjahr,Monat,BaseYearMonth,SummaryQuantity,Type,UserEmail">
+                        placeToolbarInTable="true" showRowCount="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" ignoredFields="Zeile,Gjahr,Monat,BaseYearMonth,SummaryQuantity,Type,UserEmail">
                 <table:Table id="idStandardListTable2" rowMode="Auto" >
                     <table:columns>
                         <table:Column width="8rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
