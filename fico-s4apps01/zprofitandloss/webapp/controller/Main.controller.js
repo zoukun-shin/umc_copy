@@ -178,7 +178,7 @@ sap.ui.define([
                 var items = [];
                 aContexts.forEach(oContext => {
                     items.push({
-                        CompanyCode: oContext.getObject().CompanyCode,
+                        CompanyCode: sCompanyCode,
                         FiscalYear: sFiscalYear,
                         Code: oContext.getObject().Code,
                         PeriodAmt: oContext.getObject().PeriodAmt,
