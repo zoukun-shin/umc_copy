@@ -220,12 +220,12 @@
                         <Text text="{PostingStatus}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>CreatedBy}" sortProperty="CreatedBy" filterProperty="CreatedBy">
+                <table:Column width="10rem" label="{i18n>CreatedBy}" sortProperty="CreatedByName" filterProperty="CreatedByName">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"CreatedBy", "leadingProperty":"CreatedBy"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CreatedByName", "leadingProperty":"CreatedByName"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{CreatedBy}" wrapping="false"/>
+                        <Text text="{CreatedByName}" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>CreatedDate}" sortProperty="CreatedDate" filterProperty="CreatedDate">
@@ -252,12 +252,12 @@
                         <Text text="{DeleteFlag}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>DeletedBy}" sortProperty="DeletedBy" filterProperty="DeletedBy">
+                <table:Column width="10rem" label="{i18n>DeletedBy}" sortProperty="DeletedByName" filterProperty="DeletedByName">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"DeletedBy", "leadingProperty":"DeletedBy"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"DeletedByName", "leadingProperty":"DeletedByName"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{DeletedBy}" wrapping="false"/>
+                        <Text text="{DeletedByName}" wrapping="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>DeletedDate}" sortProperty="DeletedDate" filterProperty="DeletedDate">

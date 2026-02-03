@@ -21,12 +21,8 @@
                             <smartFilterBar:controlConfiguration>
                                 <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="ManufacturingOrder" visibleInAdvancedArea="true" label="{i18n>ManufacturingOrder}" />
-                                <!-- <smartFilterBar:ControlConfiguration index='21' key="ManufacturingOrder_Filter1" visibleInAdvancedArea="true" label="{i18n>ManufacturingOrder}" visible="{= ${local>/IsReport} === false ? true : false }" mandatory="mandatory"/>
-                                <smartFilterBar:ControlConfiguration index='22' key="ManufacturingOrder_Filter2" visibleInAdvancedArea="true" label="{i18n>ManufacturingOrder}" visible="{= ${local>/IsReport}}"/> -->
                                 <smartFilterBar:ControlConfiguration index='30' key="StorageLocationFrom" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>StorageLocationFrom}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="CreatedDate" visibleInAdvancedArea="true" label="{i18n>CreatedDate}"/>
-                                <!-- <smartFilterBar:ControlConfiguration index='41' key="CreatedDate_Filter1" visibleInAdvancedArea="true" label="{i18n>CreatedDate}" visible="{= ${local>/IsReport}}" mandatory="mandatory"/>
-                                <smartFilterBar:ControlConfiguration index='42' key="CreatedDate_Filter2" visibleInAdvancedArea="true" label="{i18n>CreatedDate}" visible="{= ${local>/IsReport} === false ? true : false }"/> -->
                                 <smartFilterBar:ControlConfiguration index='50' key="DeletedDate" visibleInAdvancedArea="true" label="{i18n>DeletedDate}"/>
                                 <smartFilterBar:ControlConfiguration index='60' key="PostingStatus" visibleInAdvancedArea="true" label="{i18n>PostingStatus}">
                                     <smartFilterBar:customControl>
@@ -43,7 +39,7 @@
                                 <smartFilterBar:ControlConfiguration index='90' key="Reservation_311" visibleInAdvancedArea="true" label="{i18n>Reservation_311}"/>
                                 <smartFilterBar:ControlConfiguration index='100' key="IsReport" visibleInAdvancedArea="true" label="{i18n>Report}">
                                     <smartFilterBar:customControl>
-                                        <CheckBox id="idIsReport" selected="{local>/IsReport}"/>
+                                        <CheckBox id="idIsReport" selected="{local>/IsReport}" select="onCheckBoxSelect"/>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
                                 <!-- visible -->

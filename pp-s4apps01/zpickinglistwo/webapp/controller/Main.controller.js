@@ -197,6 +197,11 @@ sap.ui.define([
             });
         },
 
+        onCheckBoxSelect: function (oEvent) {
+            this.onSearch();
+            this.byId("idSmartFilterBar").search();
+        },
+
         onPressBtn: function (sEvent) {
             var that = this;
             this._oTable = this.byId("idStandardListTable");
