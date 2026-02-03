@@ -71,6 +71,7 @@ sap.ui.define([
                         PurchaseOrderByCustomer: result.PURCHASEORDERBYCUSTOMER,
                         WO_Qty: result.WO_QTY,
                         WO_Start_Date: new Date(result.WO_START_DATE),
+                        Gen_Qty: result.GEN_QTY,
                     });
                     var items = that._LocalData.getProperty("/itemSetG") || [];
                     //比较画面是否已存在
