@@ -189,7 +189,7 @@
                                 />
                             </table:template>
                         </table:Column>
-                        <table:Column
+                        <!-- <table:Column
                             width="8rem"
                             label="{i18n>GLAccount}"
                         >
@@ -199,7 +199,7 @@
                                     wrapping="false"
                                 />
                             </table:template>
-                        </table:Column>
+                        </table:Column> -->
                         <table:Column
                             width="12rem"
                             label="{i18n>HeaderText}"
