@@ -1,72 +1,73 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
-	"sap/ui/core/routing/History",
-	"sap/ui/core/UIComponent",
-	"../model/formatter",
-	"./messages",
-], function (Controller, History, UIComponent, formatter,messages) {
-	"use strict";
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/core/routing/History",
+    "sap/ui/core/UIComponent",
+    "../model/formatter",
+    "./messages",
+], function (Controller, History, UIComponent, formatter, messages) {
+    "use strict";
 
-	return Controller.extend("sd.zdndatebatchupdate.controller.BaseController", {
+    return Controller.extend("sd.zdndatebatchupdate.controller.BaseController", {
 
-		onInit: function () {
-			this.localData = this.getOwnerComponent().getModel("local");
+        onInit: function () {
+            this.localData = this.getOwnerComponent().getModel("local");
             this.oDataModel = this.getOwnerComponent().getModel();
             this.resourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-		},
+        },
 
-		getRouter: function () {
-			return UIComponent.getRouterFor(this);
-		},
+        getRouter: function () {
+            return UIComponent.getRouterFor(this);
+        },
 
-		onNavBack: function () {
-			var oHistory, sPreviousHash;
+        onNavBack: function () {
+            var oHistory, sPreviousHash;
 
-			oHistory = History.getInstance();
-			sPreviousHash = oHistory.getPreviousHash();
+            oHistory = History.getInstance();
+            sPreviousHash = oHistory.getPreviousHash();
 
-			if (sPreviousHash !== undefined) {
-				window.history.go(-1);
-			} else {
-				this.getRouter().navTo("RouteMain", {}, true /*no history*/ );
-			}
-		},
-		setBusy: function (busy) {
-			this.localData.setProperty("/busy", busy, false);
-		},
+            if (sPreviousHash !== undefined) {
+                window.history.go(-1);
+            } else {
+                this.getRouter().navTo("RouteMain", {}, true /*no history*/);
+            }
+        },
+        setBusy: function (busy) {
+            this.localData.setProperty("/busy", busy, false);
+        },
 
-		accNumber: function () {
-			Number.prototype.add = function (arg) {
-				return formatter.accAdd(this, arg);
-			};
-			String.prototype.add = function (arg) {
-				return formatter.accAdd(this, arg);
-			};
-			Number.prototype.sub = function (arg) {
-				return formatter.accSub(this, arg);
-			};
-			String.prototype.sub = function (arg) {
-				return formatter.accSub(this, arg);
-			};
-			Number.prototype.mul = function (arg) {
-				return formatter.accMul(this, arg);
-			};
-			String.prototype.mul = function (arg) {
-				return formatter.accMul(this, arg);
-			};
-			Number.prototype.div = function (arg) {
-				return formatter.accDiv(this, arg);
-			};
-			String.prototype.div = function (arg) {
-				return formatter.accDiv(this, arg);
-			};
-		},
+        accNumber: function () {
+            Number.prototype.add = function (arg) {
+                return formatter.accAdd(this, arg);
+            };
+            String.prototype.add = function (arg) {
+                return formatter.accAdd(this, arg);
+            };
+            Number.prototype.sub = function (arg) {
+                return formatter.accSub(this, arg);
+            };
+            String.prototype.sub = function (arg) {
+                return formatter.accSub(this, arg);
+            };
+            Number.prototype.mul = function (arg) {
+                return formatter.accMul(this, arg);
+            };
+            String.prototype.mul = function (arg) {
+                return formatter.accMul(this, arg);
+            };
+            Number.prototype.div = function (arg) {
+                return formatter.accDiv(this, arg);
+            };
+            String.prototype.div = function (arg) {
+                return formatter.accDiv(this, arg);
+            };
+        },
 
-        postAction: function (sAction, postData,i) {
-			this.localData = this.getOwnerComponent().getModel("local");
+        postAction: function (sAction, postData, i) {
+            this.localData = this.getOwnerComponent().getModel("local");
             this.oDataModel = this.getOwnerComponent().getModel();
 
             var oModel = this.oDataModel;
+            this._BusyDialog.open();
 
             oModel.callFunction("/batchProcess", {
                 method: "POST",
@@ -89,9 +90,9 @@ sap.ui.define([
                             break;
                         default:
                             result.forEach(function (line) {
-                                for ( let i = 0; i < aExcelSet.length; i++ ) {
-                                    if (aExcelSet[i].Row == line.ROW ) {
-                                        Object.keys(aExcelSet[0]).forEach(function(key) {
+                                for (let i = 0; i < aExcelSet.length; i++) {
+                                    if (aExcelSet[i].Row == line.ROW) {
+                                        Object.keys(aExcelSet[0]).forEach(function (key) {
                                             if (sAction == "save") {
                                                 if (key == "Status" || key == "Message") {
                                                     aExcelSet[i][key] = line[key.toUpperCase()];
@@ -101,7 +102,7 @@ sap.ui.define([
                                                     aExcelSet[i][key] = "";
                                                 }
                                             }
-                                            
+
                                         });
                                         // aExcelSet[i].Type = line.TYPE;
                                         // aExcelSet[i].Message = line.MESSAGE;
@@ -128,7 +129,7 @@ sap.ui.define([
             });
         },
 
-        getErrorCount: function (aExcelSet,sAction) {
+        getErrorCount: function (aExcelSet, sAction) {
             var iTotal = 0,
                 iError = 0,
                 iSuccess = 0;
@@ -155,32 +156,32 @@ sap.ui.define([
             // }
         },
 
-		overwriteToFixed: function () {
-			Number.prototype.toFixed = function (digits) {
-				var times = Math.pow(10, digits);
-				var result
-				if (this < 0) {
-					result = this * times - 0.5;
-				} else {
-					result = this * times + 0.5;
-				}
-				result = parseInt(result, 10) / times;
-				result = result.toString();
-				// 补足小数位
-				if (digits > 0) {
-					var decimalPos = result.indexOf(".");
-					if (decimalPos < 0) {
-						decimalPos = result.length;
-						result += ".";
-					}
-					while (result.length <= decimalPos + digits) {
-						result += "0";
-					}
-				}
-				return result;
-			};
-		}
+        overwriteToFixed: function () {
+            Number.prototype.toFixed = function (digits) {
+                var times = Math.pow(10, digits);
+                var result
+                if (this < 0) {
+                    result = this * times - 0.5;
+                } else {
+                    result = this * times + 0.5;
+                }
+                result = parseInt(result, 10) / times;
+                result = result.toString();
+                // 补足小数位
+                if (digits > 0) {
+                    var decimalPos = result.indexOf(".");
+                    if (decimalPos < 0) {
+                        decimalPos = result.length;
+                        result += ".";
+                    }
+                    while (result.length <= decimalPos + digits) {
+                        result += "0";
+                    }
+                }
+                return result;
+            };
+        }
 
-	});
+    });
 
 });

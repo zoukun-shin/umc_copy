@@ -208,9 +208,9 @@ sap.ui.define([
 			if (aExcelSet.length === 0) {
 				return;
 			}
-			this._BusyDialog.open();
+			// this._BusyDialog.open();
 			this.postAction("export", JSON.stringify(aExcelSet), 1);
-			this._BusyDialog.close();
+			// this._BusyDialog.close();
 			// var aExcelCol = [];
 			// // 获取table的columns
 			// var aTableCol = oTable.getColumns();

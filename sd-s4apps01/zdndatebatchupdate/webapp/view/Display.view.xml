@@ -23,13 +23,13 @@
                     <!--数据查询-->
                     <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="deliveryDocument" entitySet="DeliveryDocumentList" useToolbar="false" class="sapUiResponsiveMargin">
                         <smartFilterBar:controlConfiguration>
-                            <smartFilterBar:ControlConfiguration id="idControlConfiguration" key="DeliveryDocument" visibleInAdvancedArea="true" label="{i18n>DeliveryDocument}" mandatory="notMandatory" index="1" />
-                            <smartFilterBar:ControlConfiguration id="id0ControlConfiguration" key="ShippingPoint" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>ShippingPoint}" mandatory="notMandatory" index="5" />
-                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration" key="SalesOrganization" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}" mandatory="notMandatory" index="10" />
-                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration" key="Plant" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="notMandatory" index="15" />
-                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration" key="SalesOffice" controlType="dropDownList" visibleInAdvancedArea="true" label="{i18n>SalesOffice}" mandatory="notMandatory" index="20" />
-                            <smartFilterBar:ControlConfiguration id="id4ControlConfiguration" key="Product" visibleInAdvancedArea="true" label="{i18n>Product}" mandatory="notMandatory" index="25" />
-                            <smartFilterBar:ControlConfiguration id="id5ControlConfiguration" key="StorageLocation" visibleInAdvancedArea="true" label="{i18n>StorageLocation}" mandatory="notMandatory" index="30"/>
+                            <smartFilterBar:ControlConfiguration id="idControlConfiguration" key="DeliveryDocument" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>DeliveryDocument}" mandatory="notMandatory" index="1" />
+                            <smartFilterBar:ControlConfiguration id="id0ControlConfiguration" key="ShippingPoint" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ShippingPoint}" mandatory="notMandatory" index="5" />
+                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration" key="SalesOrganization" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}" mandatory="notMandatory" index="10" />
+                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration" key="Plant" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="notMandatory" index="15" />
+                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration" key="SalesOffice" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>SalesOffice}" mandatory="notMandatory" index="20" />
+                            <smartFilterBar:ControlConfiguration id="id4ControlConfiguration" key="Product" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Product}" mandatory="notMandatory" index="25" />
+                            <smartFilterBar:ControlConfiguration id="id5ControlConfiguration" key="StorageLocation" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>StorageLocation}" mandatory="notMandatory" index="30"/>
                             <!-- visible -->
                             <smartFilterBar:ControlConfiguration key="DeliveryDocumentItem" visible="false"/>
                             <smartFilterBar:ControlConfiguration key="SoldToParty" visible="false"/>
@@ -50,6 +50,12 @@
                             <smartFilterBar:ControlConfiguration key="IntcoExtActlTransfOfCtrlDteTme" visible="false"/>
                             <smartFilterBar:ControlConfiguration key="IntcoIntPlndTransfOfCtrlDteTme" visible="false"/>
                             <smartFilterBar:ControlConfiguration key="IntcoIntActlTransfOfCtrlDteTme" visible="false"/>
+                            <!-- ADD BEGIN BY XINLEI XU 2026/02/03 -->
+                            <smartFilterBar:ControlConfiguration key="IntcoExtPlndTransfOfCtrlDte" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="IntcoExtActlTransfOfCtrlDte" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="IntcoIntPlndTransfOfCtrlDte" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="IntcoIntActlTransfOfCtrlDte" visible="false"/>
+                            <!-- ADD END BY XINLEI XU 2026/02/03 -->
                             <smartFilterBar:ControlConfiguration key="YY1_SalesDocType_DLH" visible="false"/>
                             <smartFilterBar:ControlConfiguration key="Status" visible="false"/>
                             <smartFilterBar:ControlConfiguration key="Message" visible="false"/>
@@ -62,14 +68,14 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <smartTable:SmartTable id="idSmartTable" entitySet="DeliveryDocumentList" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="deliveryDocumentTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="UserEmail,Delete_mc,Update_mc" ignoredFields="UserEmail,Delete_mc,Update_mc">
+            <smartTable:SmartTable id="idSmartTable" entitySet="DeliveryDocumentList" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="deliveryDocumentTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="UserEmail,Delete_mc,Update_mc,IntcoExtPlndTransfOfCtrlDteTme,IntcoExtActlTransfOfCtrlDteTme,IntcoIntPlndTransfOfCtrlDteTme,IntcoIntActlTransfOfCtrlDteTme" ignoredFields="UserEmail,Delete_mc,Update_mc,IntcoExtPlndTransfOfCtrlDteTme,IntcoExtActlTransfOfCtrlDteTme,IntcoIntPlndTransfOfCtrlDteTme,IntcoIntActlTransfOfCtrlDteTme">
                 <smartTable:customToolbar>
                     <OverflowToolbar >
                         <ToolbarSpacer />
                         <Button type="Transparent" text="{i18n>DisplayView.downloadBtn}" press="onExport" visible="{local>/onExportvisible}" enabled="{= ${local>/authorityCheck/button/Export}}" />
                     </OverflowToolbar>
                 </smartTable:customToolbar>
-                <t:Table id="idDeliveryDocumentTable" rowActionCount="1" rowsUpdated="onUITableRowsUpdated">
+                <t:Table id="idDeliveryDocumentTable" rowActionCount="1" rowsUpdated="onUITableRowsUpdated" rowMode="Auto">
                     <t:columns>
                         <t:Column width="10rem" label="{i18n>DeliveryDocument}" sortProperty="DeliveryDocument" filterProperty="DeliveryDocument">
                             <t:customData>
@@ -167,7 +173,7 @@
                                 <Text text="{StorageLocation}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column width="15rem" label="{i18n>ActualDeliveredQtyInBaseUnit}" sortProperty="ActualDeliveredQtyInBaseUnit" filterProperty="ActualDeliveredQtyInBaseUnit">
+                        <t:Column width="15rem" label="{i18n>ActualDeliveredQtyInBaseUnit}" sortProperty="ActualDeliveredQtyInBaseUnit" filterProperty="ActualDeliveredQtyInBaseUnit" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"ActualDeliveredQtyInBaseUnit", "leadingProperty":"ActualDeliveredQtyInBaseUnit", "sortProperty":"ActualDeliveredQtyInBaseUnit", "filterProperty": "ActualDeliveredQtyInBaseUnit"}'/>
                             </t:customData>
@@ -247,7 +253,8 @@
                                 <Text text="{OverallGoodsMovementStatus}" wrapping="false" />
                             </t:template>
                         </t:Column>
-                        <t:Column width="18rem" label="{i18n>IntcoExtPlndTransfOfCtrlDteTme}" sortProperty="IntcoExtPlndTransfOfCtrlDteTme" filterProperty="IntcoExtPlndTransfOfCtrlDteTme">
+                        <!-- MOD BEGIN BY XINLEI XU 2026/02/03 -->
+                        <!-- <t:Column width="18rem" label="{i18n>IntcoExtPlndTransfOfCtrlDteTme}" sortProperty="IntcoExtPlndTransfOfCtrlDteTme" filterProperty="IntcoExtPlndTransfOfCtrlDteTme">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"IntcoExtPlndTransfOfCtrlDteTme", "leadingProperty":"IntcoExtPlndTransfOfCtrlDteTme", "sortProperty":"IntcoExtPlndTransfOfCtrlDteTme", "filterProperty": "IntcoExtPlndTransfOfCtrlDteTme"}'/>
                             </t:customData>
@@ -278,7 +285,40 @@
                             <t:template>
                                 <Text text="{path:'IntcoIntActlTransfOfCtrlDteTme', formatter:'.formatter.odataDate'}" wrapping="false" />
                             </t:template>
+                        </t:Column> -->
+                        <t:Column width="18rem" label="{i18n>IntcoExtPlndTransfOfCtrlDteTme}" sortProperty="IntcoExtPlndTransfOfCtrlDte" filterProperty="IntcoExtPlndTransfOfCtrlDte">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"IntcoExtPlndTransfOfCtrlDte", "leadingProperty":"IntcoExtPlndTransfOfCtrlDte", "sortProperty":"IntcoExtPlndTransfOfCtrlDte", "filterProperty": "IntcoExtPlndTransfOfCtrlDte"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'IntcoExtPlndTransfOfCtrlDte', formatter:'.formatter.odataDate'}" wrapping="false" />
+                            </t:template>
                         </t:Column>
+                        <t:Column width="17rem" label="{i18n>IntcoExtActlTransfOfCtrlDteTme}" sortProperty="IntcoExtActlTransfOfCtrlDte" filterProperty="IntcoExtActlTransfOfCtrlDte">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"IntcoExtActlTransfOfCtrlDte", "leadingProperty":"IntcoExtActlTransfOfCtrlDte", "sortProperty":"IntcoExtActlTransfOfCtrlDte", "filterProperty": "IntcoExtActlTransfOfCtrlDte"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'IntcoExtActlTransfOfCtrlDte', formatter:'.formatter.odataDate'}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="17rem" label="{i18n>IntcoIntPlndTransfOfCtrlDteTme}" sortProperty="IntcoIntPlndTIntcoIntPlndTransfOfCtrlDteransfOfCtrlDteTme" filterProperty="IntcoIntPlndTransfOfCtrlDte">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"IntcoIntPlndTransfOfCtrlDte", "leadingProperty":"IntcoIntPlndTransfOfCtrlDte", "sortProperty":"IntcoIntPlndTransfOfCtrlDte", "filterProperty": "IntcoIntPlndTransfOfCtrlDte"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'IntcoIntPlndTransfOfCtrlDte', formatter:'.formatter.odataDate'}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="17rem" label="{i18n>IntcoIntActlTransfOfCtrlDteTme}" sortProperty="IntcoIntActlTransfOfCtrlDte" filterProperty="IntcoIntActlTransfOfCtrlDte">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"IntcoIntActlTransfOfCtrlDte", "leadingProperty":"IntcoIntActlTransfOfCtrlDte", "sortProperty":"IntcoIntActlTransfOfCtrlDte", "filterProperty": "IntcoIntActlTransfOfCtrlDte"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'IntcoIntActlTransfOfCtrlDte', formatter:'.formatter.odataDate'}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <!-- MOD END BY XINLEI XU 2026/02/03 -->
                         <t:Column width="12rem" label="{i18n>YY1_SalesDocType_DLH}" sortProperty="YY1_SalesDocType_DLH" filterProperty="YY1_SalesDocType_DLH">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"YY1_SalesDocType_DLH", "leadingProperty":"YY1_SalesDocType_DLH", "sortProperty":"YY1_SalesDocType_DLH", "filterProperty": "YY1_SalesDocType_DLH"}'/>
