@@ -46,7 +46,7 @@
                                 key="ShippingPoint"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>ShippingPoint}"
-                                mandatory="notMandatory"
+                                mandatory="mandatory"
                                 index="1"
                             />  
                             <smartFilterBar:ControlConfiguration

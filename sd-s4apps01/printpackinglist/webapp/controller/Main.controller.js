@@ -54,6 +54,10 @@ sap.ui.define([
 				aNewFilter.push(new Filter("CreationDate", "BT", formatter.odataDate(oStartDate), formatter.odataDate(oEndDate)));
 			}
 
+			if (this.byId("idCreatePackingListCB").getSelected()) {
+				aNewFilter.push(new Filter("IsCreatePackingList", "EQ", true));
+			}
+
 			oNewFilter = new Filter({
 				filters: aNewFilter,
 				and: true
@@ -89,6 +93,7 @@ sap.ui.define([
 
 		getEntityCount: function (aFilter) {
 			var that = this;
+			that.byId("idDynamicPage").setBusyIndicatorDelay(0);
 			that.byId("idDynamicPage").setBusy(true);
 			var promise = new Promise(function (resolve, reject) {
 				var mParameters = {
