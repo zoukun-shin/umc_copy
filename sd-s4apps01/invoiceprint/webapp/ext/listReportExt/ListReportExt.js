@@ -26,7 +26,7 @@ sap.ui.define([
         _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel, oViews) {
             var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
             var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
-            sEmail = "xinlei.xu@sh.shin-china.com";
+            // sEmail = "xinlei.xu@sh.shin-china.com";
             var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -348,10 +348,10 @@ sap.ui.define([
                                 day: '2-digit'
                             }).replace(/\//g, '-'); // 将年月日间的分隔符改为"-"
                         if (aBillingDocumentVNDR.length > 0) {
-                            _oFunctions.getBillingData(that,"BillingPrintVNCD","YY1_SD019_VN_CD",aBillingDocumentVNDR,"DEBIT NOTE",sPrintDate);
+                            _oFunctions.getBillingData(that,"BillingPrintVNCD","YY1_SD019_VN_CD",aBillingDocumentVNDR,"1",sPrintDate);
                         }
                         if (aBillingDocumentVNCR.length > 0) {
-                            _oFunctions.getBillingData(that,"BillingPrintVNCD","YY1_SD019_VN_CD",aBillingDocumentVNCR,"CREDIT NOTE",sPrintDate);
+                            _oFunctions.getBillingData(that,"BillingPrintVNCD","YY1_SD019_VN_CD",aBillingDocumentVNCR,"2",sPrintDate);
                         }
                         oDialog.close();
                     }
@@ -366,7 +366,7 @@ sap.ui.define([
             }.bind(this));
         },
 
-        getBillingData: function(that,sEnetity,sTemplateID,aBillingDocument,sDocTitle,sPrintDate){
+        getBillingData: function(that,sEnetity,sTemplateID,aBillingDocument,sPrintType,sPrintDate){
             _oDataModel = that.getModel();
             _oPrintModel = that.getModel("Print");
             _ResourceBundle = that.getModel("i18n").getResourceBundle();
@@ -396,9 +396,9 @@ sap.ui.define([
                 if (sEnetity === "BillingPrintVN") {
                     aPDFContent = _oFunctions.porcessVNCotent(aBillingDocument,aContext);
                 } else if (sEnetity === "BillingPrintTH") {
-                    aPDFContent = _oFunctions.porcessTHCotent(sDocTitle,aBillingDocument,aContext);
+                    aPDFContent = _oFunctions.porcessTHCotent(sPrintType,aBillingDocument,aContext);
                 } else if (sEnetity === "BillingPrintVNCD") {
-                    aPDFContent = _oFunctions.porcessVNCDContent(sDocTitle,aBillingDocument,aContext,sPrintDate);
+                    aPDFContent = _oFunctions.porcessVNCDContent(sPrintType,aBillingDocument,aContext,sPrintDate);
                 }
                aPDFContent.forEach(pdfContent => {
                    _oFunctions.getPDF({"PrintData":pdfContent},sTemplateID);
@@ -557,17 +557,31 @@ sap.ui.define([
             });
             return aBilling;
         },
-        porcessVNCDContent: function(sDocTitle,aHeader,aContext,sPrintDate){
+        porcessVNCDContent: function(sPrintType,aHeader,aContext,sPrintDate){
             var aPrintItem = [];
             var aBilling = [];
             for (const boundContext of aContext) {
                 var object = boundContext.getObject();
                 aPrintItem.push(object);
             }
+            let sDocTitle
+            switch(sPrintType) {
+                case "1":
+                    sDocTitle = "DEBIT NOTE"; break;
+                case "2":
+                    sDocTitle = "CREDIT NOTE"; break;
+            }
             var aPrintData = [];
             aHeader.forEach(function(sKey){
                 let aBillingItem = aPrintItem.filter(e => e.BillingDocument === sKey );
                 let oFirstItem = aBillingItem[0];
+                let sLongTextTX16;
+                switch(sPrintType) {
+                    case "1":
+                        sLongTextTX16 = oFirstItem.LongTextTX16; break;
+                    case "2":
+                        sLongTextTX16 = "Balance SAP only"; break;
+                }
                 let oHeader ={
                     CompanyName: oFirstItem.CompanyName,
                     CompanyAddress: oFirstItem.CompanyAddress,
@@ -580,7 +594,7 @@ sap.ui.define([
                     SoldToPartyCity: oFirstItem.SoldToPartyCity,
                     IssuedDate: sPrintDate,
                     LongTextTX02:oFirstItem.LongTextTX02,
-                    LongTextTX16:oFirstItem.LongTextTX16,
+                    LongTextTX16:sLongTextTX16,
                     TelephoneNumber1:oFirstItem.TelephoneNumber1,
                     TotalNetAmount:oFirstItem.TotalNetAmount,
                     Currency: oFirstItem.TransactionCurrency,
