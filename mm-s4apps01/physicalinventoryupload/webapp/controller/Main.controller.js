@@ -165,6 +165,7 @@ sap.ui.define([
                             Quantity: parseFloat(item.Quantity),
                             Status: "",
                             Message: "",
+                            UserEmail:item.UserEmail,  // ADD BY ZHAO W 2026/02/04
                             Row: item.Row // 保留初始的 Row 信息
                         };
                     }
