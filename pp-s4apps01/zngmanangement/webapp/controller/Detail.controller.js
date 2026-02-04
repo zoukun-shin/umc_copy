@@ -210,7 +210,14 @@ sap.ui.define([
                 // Clear Value
                 var sPlant = this.getModel("local").getProperty("/NG_Header/Plant");
                 var sPlantName = this.getModel("local").getProperty("/NG_Header/PlantName");
-                this.getModel("local").setProperty("/NG_Header", { NG_No: "INITIAL", Plant: sPlant, PlantName: sPlantName, to_NG_Item: { results: [] } });
+                this.getModel("local").setProperty("/NG_Header", {
+                    NG_No: "INITIAL",
+                    Plant: sPlant,
+                    PlantName: sPlantName,
+                    MoveType: "1",
+                    MaterialType: "1",
+                    to_NG_Item: { results: [] }
+                });
             } else {
                 var oBusyDialog = new BusyDialog();
                 oBusyDialog.open();
@@ -353,7 +360,8 @@ sap.ui.define([
                     ProductionOrder: "",
                     Customer: "",
                     CustomerName: "",
-                    FoundDate: null,
+                    FoundDate: new Date(),
+                    FoundDateStr: this.formatter.formatDate(new Date()).replace(/[^0-9]/g, ''),
                     Assembly: "",
                     WorkCenter: "",
                     NG_Position: "",
@@ -522,6 +530,7 @@ sap.ui.define([
                 var oDataValue = oDatePicker.getProperty("dateValue");
                 var sPath = oDatePicker.mBindingInfos.value.parts[0].path;
                 this.getModel("local").setProperty(sPath, oDataValue);
+                this.getModel("local").setProperty(sPath + "Str", this.formatter.formatDate(oDataValue).replace(/[^0-9]/g, ''));
             }
         },
 

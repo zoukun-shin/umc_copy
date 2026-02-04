@@ -78,7 +78,8 @@
             </table:Column>
             <table:Column width="15rem" label="{i18n>IQC_CreatedBy}" visible="{= ${local>/Operation} !== 'Create'}">
                 <table:template>
-                    <Text text="{ parts:[ 'local>IQC_CreatedBy','local>IQC_CreatedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
+                    <!-- <Text text="{ parts:[ 'local>IQC_CreatedBy','local>IQC_CreatedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/> -->
+                    <Text text="{local>IQC_CreatedByName}" wrapping="false"/>
                 </table:template>
             </table:Column>
             <table:Column width="15rem" label="{i18n>IQC_CreatedAt}" visible="{= ${local>/Operation} !== 'Create'}">
@@ -88,7 +89,8 @@
             </table:Column>
             <table:Column width="15rem" label="{i18n>IQC_LastChangedBy}" visible="{= ${local>/Operation} !== 'Create'}">
                 <table:template>
-                    <Text text="{ parts:[ 'local>IQC_LastChangedBy','local>IQC_LastChangedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
+                    <!-- <Text text="{ parts:[ 'local>IQC_LastChangedBy','local>IQC_LastChangedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/> -->
+                    <Text text="{local>IQC_LastChangedByName}" wrapping="false"/>
                 </table:template>
             </table:Column>
             <table:Column width="15rem" label="{i18n>IQC_LastChangedAt}" visible="{= ${local>/Operation} !== 'Create'}">

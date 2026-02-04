@@ -256,7 +256,14 @@ sap.ui.define([
         _openCreateDialog: function () {
             var bEnabled = false;
             var aPlantSet = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
-            this.getModel("local").setProperty("/NG_Header", { NG_No: "INITIAL", Plant: "", PlantName: "", to_NG_Item: { results: [] } });
+            this.getModel("local").setProperty("/NG_Header", {
+                NG_No: "INITIAL",
+                Plant: "",
+                PlantName: "",
+                MoveType: "1",
+                MaterialType: "1",
+                to_NG_Item: { results: [] }
+            });
             if (aPlantSet.length > 0) {
                 this.getModel("local").setProperty("/NG_Header/Plant", aPlantSet[0].Plant);
                 this.getModel("local").setProperty("/NG_Header/PlantName", aPlantSet[0].PlantName);
@@ -414,5 +421,35 @@ sap.ui.define([
                 dependentOn: that.getView()
             });
         },
+
+        onBeforeExport: function (oEvent) {
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
+            this._exportExcel(mExcelSettings, sFileName);
+        },
+
+        _exportExcel: function (mExcelSettings, sFileName) {
+            mExcelSettings.workbook.columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    case "ItemCreatedAt":
+                    case "ItemLastChangedAt":
+                    case "FoundDate":
+                    case "IQC_CreatedAt":
+                    case "Move1PostAt":
+                    case "IQC_PostAt":
+                        oColumn.type = sap.ui.export.EdmType.Date;
+                        break;
+                    case "Quantity":
+                    case "IQC_NG_Quantity":
+                    case "IQC_OK_Quantity":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.unitProperty = "BaseUnit";
+                        oColumn.textAlign = "End";
+                        break;
+                }
+            });
+            mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
+        }
     });
 });

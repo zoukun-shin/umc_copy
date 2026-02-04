@@ -34,18 +34,18 @@
                                 <smartFilterBar:ControlConfiguration index='120' key="WorkCenter" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>NG_WorkCenter}"/>
                                 <smartFilterBar:ControlConfiguration index='130' key="Shift" visibleInAdvancedArea="true" label="{i18n>Shift}"/>
                                 <smartFilterBar:ControlConfiguration index='140' key="Factor" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Factor}"/>
-                                <smartFilterBar:ControlConfiguration index='150' key="ItemCreatedBy" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ItemCreatedBy}"/>
+                                <smartFilterBar:ControlConfiguration index='150' key="ItemCreatedBy" visibleInAdvancedArea="true" label="{i18n>ItemCreatedBy}"/>
                                 <smartFilterBar:ControlConfiguration index='160' key="ItemCreatedAt" visibleInAdvancedArea="true" label="{i18n>ItemCreatedAt}"/>
-                                <smartFilterBar:ControlConfiguration index='170' key="ItemLastChangedBy" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ItemLastChangedBy}"/>
+                                <smartFilterBar:ControlConfiguration index='170' key="ItemLastChangedBy" visibleInAdvancedArea="true" label="{i18n>ItemLastChangedBy}"/>
                                 <smartFilterBar:ControlConfiguration index='180' key="Move1PostStatus" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Move1PostStatus}"/>
-                                <smartFilterBar:ControlConfiguration index='190' key="Move1PostBy" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Move1PostBy}"/>
+                                <smartFilterBar:ControlConfiguration index='190' key="Move1PostBy" visibleInAdvancedArea="true" label="{i18n>Move1PostBy}"/>
                                 <smartFilterBar:ControlConfiguration index='200' key="Move1PostAt" visibleInAdvancedArea="true" label="{i18n>Move1PostAt}"/>
                                 <smartFilterBar:ControlConfiguration index='210' key="Move1PostMaterialDocument" visibleInAdvancedArea="true" label="{i18n>Move1PostMaterialDocument}"/>
                                 <smartFilterBar:ControlConfiguration index='220' key="IQC_ApprovedBy" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>IQC_ApprovedBy}"/>
-                                <smartFilterBar:ControlConfiguration index='230' key="IQC_CreatedBy" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>IQC_CreatedBy}"/>
+                                <smartFilterBar:ControlConfiguration index='230' key="IQC_CreatedBy" visibleInAdvancedArea="true" label="{i18n>IQC_CreatedBy}"/>
                                 <smartFilterBar:ControlConfiguration index='240' key="IQC_CreatedAt" visibleInAdvancedArea="true" label="{i18n>IQC_CreatedAt}"/>
                                 <smartFilterBar:ControlConfiguration index='250' key="IQC_PostStatus" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>IQC_PostStatus}"/>
-                                <smartFilterBar:ControlConfiguration index='260' key="IQC_PostBy" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>IQC_PostBy}"/>
+                                <smartFilterBar:ControlConfiguration index='260' key="IQC_PostBy" visibleInAdvancedArea="true" label="{i18n>IQC_PostBy}"/>
                                 <smartFilterBar:ControlConfiguration index='270' key="IQC_PostAt" visibleInAdvancedArea="true" label="{i18n>IQC_PostAt}"/>
                                 <smartFilterBar:ControlConfiguration index='280' key="IQC_PostMaterialDocument" visibleInAdvancedArea="true" label="{i18n>IQC_PostMaterialDocument}"/>
                                 <smartFilterBar:ControlConfiguration index='290' key="ItemDeleteFlag" visibleInAdvancedArea="true" label="{i18n>DeleteFlag}"/>

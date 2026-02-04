@@ -6,7 +6,7 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable id="idSmartTable" entitySet="NG_Report" smartFilterId="idSmartFilterBar" smartVariant="__SVM01" tableType="Table" width="100%" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="true" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="HeaderDeleteFlag,HeaderCreatedBy,HeaderCreatedAt,HeaderLastChangedBy,HeaderLastChangedAt,HeaderLocalLastChangedAt,BaseUnit,ItemLocalLastChangedAt,IQC_LastChangedBy,IQC_LastChangedAt,PlantName,LocationFromName,LocationTo1Name,LocationTo2Name,MaterialName,AssemblyName,WorkCenterText,MaterialTypeText,MoveTypeText,FactorText,ItemCreatedByName,ItemLastChangedByName,Move1PostByName,IQC_CreatedByName,IQC_LastChangedByName,IQC_PostByName" ignoredFields="HeaderDeleteFlag,HeaderCreatedBy,HeaderCreatedAt,HeaderLastChangedBy,HeaderLastChangedAt,HeaderLocalLastChangedAt,BaseUnit,ItemLocalLastChangedAt,IQC_LastChangedBy,IQC_LastChangedAt,PlantName,LocationFromName,LocationTo1Name,LocationTo2Name,MaterialName,AssemblyName,WorkCenterText,MaterialTypeText,MoveTypeText,FactorText,ItemCreatedByName,ItemLastChangedByName,Move1PostByName,IQC_CreatedByName,IQC_LastChangedByName,IQC_PostByName">
+    <smartTable:SmartTable id="idSmartTable" entitySet="NG_Report" smartFilterId="idSmartFilterBar" smartVariant="__SVM01" tableType="Table" width="100%" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="true" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="HeaderDeleteFlag,HeaderCreatedBy,HeaderCreatedAt,HeaderLastChangedBy,HeaderLastChangedAt,HeaderLocalLastChangedAt,BaseUnit,ItemLocalLastChangedAt,IQC_LastChangedBy,IQC_LastChangedAt,PlantName,LocationFromName,LocationTo1Name,LocationTo2Name,MaterialName,AssemblyName,WorkCenterText,MaterialTypeText,MoveTypeText,FactorText,ItemCreatedBy,ItemLastChangedBy,Move1PostBy,IQC_CreatedBy,IQC_LastChangedBy,IQC_PostBy" ignoredFields="HeaderDeleteFlag,HeaderCreatedBy,HeaderCreatedAt,HeaderLastChangedBy,HeaderLastChangedAt,HeaderLocalLastChangedAt,BaseUnit,ItemLocalLastChangedAt,IQC_LastChangedBy,IQC_LastChangedAt,PlantName,LocationFromName,LocationTo1Name,LocationTo2Name,MaterialName,AssemblyName,WorkCenterText,MaterialTypeText,MoveTypeText,FactorText,ItemCreatedBy,ItemLastChangedBy,Move1PostBy,IQC_CreatedBy,IQC_LastChangedBy,IQC_PostBy">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
@@ -33,7 +33,7 @@
                         <Button icon="sap-icon://comment" press="onShowOperationLog"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="5rem" label="{i18n>Status}" sortProperty="Status" filterProperty="Status">
+                <table:Column width="6rem" label="{i18n>Status}" sortProperty="Status" filterProperty="Status">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"Status", "leadingProperty":"Status"}'/>
                     </table:customData>
@@ -257,12 +257,12 @@
                         <Text text="{IQC_Remark}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="13rem" label="{i18n>IQC_CreatedBy}" sortProperty="IQC_CreatedBy" filterProperty="IQC_CreatedBy">
+                <table:Column width="13rem" label="{i18n>IQC_CreatedBy}" sortProperty="IQC_CreatedByName" filterProperty="IQC_CreatedByName">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"IQC_CreatedBy", "leadingProperty":"IQC_CreatedBy"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"IQC_CreatedByName", "leadingProperty":"IQC_CreatedByName"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ parts:[ 'IQC_CreatedBy','IQC_CreatedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false" />
+                        <Text text="{IQC_CreatedByName}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>IQC_CreatedAt}" sortProperty="IQC_CreatedAt" filterProperty="IQC_CreatedAt">
@@ -297,12 +297,12 @@
                         <Text text="{ path: 'Move1PostAt', 'type':'sap.ui.model.type.Date' }" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="13rem" label="{i18n>Move1PostBy}" sortProperty="Move1PostBy" filterProperty="Move1PostBy">
+                <table:Column width="13rem" label="{i18n>Move1PostBy}" sortProperty="Move1PostByName" filterProperty="Move1PostByName">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"Move1PostBy", "leadingProperty":"Move1PostBy"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Move1PostByName", "leadingProperty":"Move1PostByName"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ parts:[ 'Move1PostBy','Move1PostByName'], formatter:'.formatter.formatCodeName' }" wrapping="false" />
+                        <Text text="{Move1PostByName}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="13rem" label="{i18n>Move1PostMaterialDocument}" sortProperty="Move1PostMaterialDocument" filterProperty="Move1PostMaterialDocument">
@@ -329,12 +329,12 @@
                         <Text text="{ path: 'IQC_PostAt', 'type':'sap.ui.model.type.Date' }" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="13rem" label="{i18n>IQC_PostBy}" sortProperty="IQC_PostBy" filterProperty="IQC_PostBy">
+                <table:Column width="13rem" label="{i18n>IQC_PostBy}" sortProperty="IQC_PostByName" filterProperty="IQC_PostByName">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"IQC_PostBy", "leadingProperty":"IQC_PostBy"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"IQC_PostByName", "leadingProperty":"IQC_PostByName"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ parts:[ 'IQC_PostBy','IQC_PostByName'], formatter:'.formatter.formatCodeName' }" wrapping="false" />
+                        <Text text="{IQC_PostByName}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="13rem" label="{i18n>IQC_PostMaterialDocument}" sortProperty="IQC_PostMaterialDocument" filterProperty="IQC_PostMaterialDocument">
@@ -345,12 +345,12 @@
                         <Text text="{IQC_PostMaterialDocument}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="13rem" label="{i18n>ItemCreatedBy}" sortProperty="ItemCreatedBy" filterProperty="ItemCreatedBy">
+                <table:Column width="13rem" label="{i18n>ItemCreatedBy}" sortProperty="ItemCreatedByName" filterProperty="ItemCreatedByName">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"ItemCreatedBy", "leadingProperty":"ItemCreatedBy"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ItemCreatedByName", "leadingProperty":"ItemCreatedByName"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ parts:[ 'ItemCreatedBy','ItemCreatedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false" />
+                        <Text text="{ItemCreatedByName}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="13rem" label="{i18n>ItemCreatedAt}" sortProperty="ItemCreatedAt" filterProperty="ItemCreatedAt">
@@ -361,12 +361,12 @@
                         <Text text="{ path: 'ItemCreatedAt', 'type':'sap.ui.model.type.Date' }" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="13rem" label="{i18n>ItemLastChangedBy}" sortProperty="ItemLastChangedBy" filterProperty="ItemLastChangedBy">
+                <table:Column width="13rem" label="{i18n>ItemLastChangedBy}" sortProperty="ItemLastChangedByName" filterProperty="ItemLastChangedByName">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"ItemLastChangedBy", "leadingProperty":"ItemLastChangedBy"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ItemLastChangedByName", "leadingProperty":"ItemLastChangedByName"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ parts:[ 'ItemLastChangedBy','ItemLastChangedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false" />
+                        <Text text="{ItemLastChangedByName}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="13rem" label="{i18n>ItemLastChangedAt}" sortProperty="ItemLastChangedAt" filterProperty="ItemLastChangedAt">

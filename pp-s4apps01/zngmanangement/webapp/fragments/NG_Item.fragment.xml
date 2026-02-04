@@ -17,7 +17,7 @@
             </OverflowToolbar>
         </table:extension>
         <table:columns>
-            <table:Column width="3.5rem" label="{i18n>DeleteFlag}">
+            <table:Column width="6rem" label="{i18n>DeleteFlag}" hAlign="Center">
                 <table:template>
                     <Button icon="{ path: 'local>DeleteFlag', formatter:'.formatter.formatDeleteFlagButton'}" />
                 </table:template>
@@ -94,7 +94,8 @@
             </table:Column>
             <table:Column width="15rem" label="{i18n>ItemCreatedBy}" visible="{= ${local>/Operation} !== 'Create'}">
                 <table:template>
-                    <Text text="{ parts:[ 'local>ItemCreatedBy','local>ItemCreatedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
+                    <!-- <Text text="{ parts:[ 'local>ItemCreatedBy','local>ItemCreatedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/> -->
+                    <Text text="{local>ItemCreatedByName}" wrapping="false"/>
                 </table:template>
             </table:Column>
             <table:Column width="15rem" label="{i18n>ItemCreatedAt}" visible="{= ${local>/Operation} !== 'Create'}">
@@ -104,7 +105,8 @@
             </table:Column>
             <table:Column width="15rem" label="{i18n>ItemLastChangedBy}" visible="{= ${local>/Operation} !== 'Create'}">
                 <table:template>
-                    <Text text="{ parts:[ 'local>ItemLastChangedBy','local>ItemLastChangedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
+                    <!-- <Text text="{ parts:[ 'local>ItemLastChangedBy','local>ItemLastChangedByName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/> -->
+                    <Text text="{local>ItemLastChangedByName}" wrapping="false"/>
                 </table:template>
             </table:Column>
             <table:Column width="15rem" label="{i18n>ItemLastChangedAt}" visible="{= ${local>/Operation} !== 'Create'}">

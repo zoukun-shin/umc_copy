@@ -11,7 +11,7 @@
                             <Text text="{local>Seq}" wrapping="false"/>
                         </table:template>
                     </table:Column>
-                    <table:Column width="8rem" label="{i18n>PostType}">
+                    <table:Column width="12rem" label="{i18n>PostType}">
                         <table:template>
                             <Text text="{ parts:[ 'local>PostType','local>PostTypeText'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
                         </table:template>

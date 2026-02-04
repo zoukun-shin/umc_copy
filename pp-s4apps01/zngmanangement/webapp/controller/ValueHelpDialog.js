@@ -104,7 +104,13 @@ sap.ui.define([
                             }
                         });
                         var sWidth = "";
+                        var sLabel = "";
                         that._aVHFields.forEach(fieldName => {
+                            if (sPath === "/ZC_ProductVH") {
+                                sLabel = "{i18n>" + fieldName + "1}";
+                            } else {
+                                sLabel = "{i18n>" + fieldName + "}";
+                            }
                             switch (fieldName) {
                                 case "PlantName":
                                 case "StorageLocationName":
@@ -116,7 +122,7 @@ sap.ui.define([
                             }
                             var oColumn = new UIColumn({
                                 width: sWidth,
-                                label: new Label({ text: "{i18n>" + fieldName + "}" }),
+                                label: new Label({ text: sLabel }),
                                 template: new Text({ wrapping: false, text: "{" + fieldName + "}" })
                             });
                             oColumn.data({
@@ -236,7 +242,7 @@ sap.ui.define([
                         sODataPath = "/ZC_ManufacturingOrderProductVH" + "(ManufacturingOrder='" + sKey + "',Item='" + sText + "',ProductionPlant='" + sPlant + "')";
                         break;
                     case "/ItemEdit/Material":
-                        sODataPath = "/ZC_ProductVH(Material='" + sKey + "',Plant='" + sPlant + "')";
+                        sODataPath = "/ZC_ProductVH(Material='" + encodeURIComponent(sKey) + "',Plant='" + sPlant + "')";
                         break;
                     case "/ItemEdit/WorkCenter":
                         sODataPath = "/ZC_WorkCenterVH(WorkCenter='" + sKey + "',Plant='" + sPlant + "')";
@@ -262,8 +268,8 @@ sap.ui.define([
                             switch (sInputPath) {
                                 case "/ItemEdit/ProductionOrder":
                                     if (sMaterialType === "2") { // Assembly
-                                        this.getModel("local").setProperty("/ItemEdit/Material", context["Product"]);
-                                        this.getModel("local").setProperty("/ItemEdit/MaterialName", context["ProductDescription"]);
+                                        this.getModel("local").setProperty("/ItemEdit/Material", context["Material"]);
+                                        this.getModel("local").setProperty("/ItemEdit/MaterialName", context["MaterialDescription"]);
                                     }
                                     this.getModel("local").setProperty("/ItemEdit/Assembly", context["Assembly"]);
                                     this.getModel("local").setProperty("/ItemEdit/WorkCenter", context["WorkCenter"]);
@@ -331,7 +337,7 @@ sap.ui.define([
                     sODataPath = sPath + "(ManufacturingOrder='" + sValue.split('/')[0].padStart(10, '0') + "',Item='" + sValue.split('/')[1] + "',ProductionPlant='" + sPlant + "')";
                     break;
                 case "/ZC_ProductVH":
-                    sODataPath = sPath + "(Material='" + sValue + "',Plant='" + sPlant + "')";
+                    sODataPath = sPath + "(Material='" + encodeURIComponent(sValue) + "',Plant='" + sPlant + "')";
                     break;
                 case "/ZC_WorkCenterVH":
                     sODataPath = sPath + "(WorkCenter='" + sValue + "',Plant='" + sPlant + "')";
@@ -355,8 +361,8 @@ sap.ui.define([
                         switch (sPath) {
                             case "/ZC_ManufacturingOrderProductVH":
                                 if (sMaterialType === "2") { // Assembly
-                                    this.getModel("local").setProperty("/ItemEdit/Material", context["Product"]);
-                                    this.getModel("local").setProperty("/ItemEdit/MaterialName", context["ProductDescription"]);
+                                    this.getModel("local").setProperty("/ItemEdit/Material", context["Material"]);
+                                    this.getModel("local").setProperty("/ItemEdit/MaterialName", context["MaterialDescription"]);
                                 }
                                 this.getModel("local").setProperty("/ItemEdit/Assembly", context["Assembly"]);
                                 this.getModel("local").setProperty("/ItemEdit/WorkCenter", context["WorkCenter"]);
