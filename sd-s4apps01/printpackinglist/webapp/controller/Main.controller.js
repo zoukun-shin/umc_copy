@@ -351,6 +351,10 @@ sap.ui.define([
 
 		CheckRequiredFilter:function(oFilterData) {
 			if(this.byId("idCreatePackingListCB").getSelected()) {
+				if (!oFilterData["BillingDocument"]) {
+					return this._ResourceBundle.getText("msg04");
+				}
+			} else {
 				// ShippingPoint 必输
 				if (!oFilterData["ShippingPoint"]) {
 					return this._ResourceBundle.getText("msg01");
@@ -364,10 +368,6 @@ sap.ui.define([
 				// 并且 CreationDate 范围不能超过两周
 				if (!this.checkDateRange(oDateRange)) {
 					return this._ResourceBundle.getText("msg03");
-				}
-			} else {
-				if (!oFilterData["BillingDocument"]) {
-					return this._ResourceBundle.getText("msg04");
 				}
 			}
 
