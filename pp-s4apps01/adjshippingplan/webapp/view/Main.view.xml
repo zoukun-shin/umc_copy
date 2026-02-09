@@ -84,7 +84,7 @@
                                 key="Customer"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>Customer}"
-                                mandatory="mandatory"
+                                mandatory="notMandatory"
                                 index="7"
                             />
                             <!-- visible -->

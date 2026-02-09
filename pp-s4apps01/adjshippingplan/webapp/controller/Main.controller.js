@@ -89,6 +89,15 @@ sap.ui.define([
 			var aFilter = this.getView().byId("idSmartFilterBar").getFilters();
 			var oNewFilter, aNewFilter = [];
 
+			let oSmartFilterBar = this.byId("idSmartFilterBar");
+            //Barcode No/WO No/WO Start Date must input at least one!
+            let sMRPResponsible = oSmartFilterBar.getFilterData().MRPResponsible;
+            let sCustomer = oSmartFilterBar.getFilterData().Customer;
+            if (!sMRPResponsible && !sCustomer) {
+                MessageBox.error(this.getResourceBundle().getText("msg03"));
+                return;
+            };
+
 			// 获取处理范围
 			var oDateRange = this.byId("idDateRangeSelection");
 			if ( this.vaildDate(oDateRange) ){
