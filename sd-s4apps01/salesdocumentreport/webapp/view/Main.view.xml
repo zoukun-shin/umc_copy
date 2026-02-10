@@ -26,15 +26,15 @@
                     <smartFilterBar:SmartFilterBar id="idSmartFilterBar" useToolbar="false" entitySet="SalesReport" persistencyKey="SalesReportSFB" search="onSearch" class="sapUiResponsiveMargin" smartVariant="__SVM01">
                         <smartFilterBar:controlConfiguration>
                             <!-- Sales Organization Bar -->
-                            <smartFilterBar:ControlConfiguration index="1" id="SalesOrganizationBar" key="SalesOrganization" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}" mandatory="mandatory">
+                            <smartFilterBar:ControlConfiguration index="1" id="SalesOrganizationBar" key="SalesOrganization" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}" mandatory="mandatory">
                                 <!-- 可以添加默认聚合内容，如果有需要 -->
                             </smartFilterBar:ControlConfiguration>
                             <!-- Customer Bar -->
-                            <smartFilterBar:ControlConfiguration index="3" id="CustomerBar" key="Customer" visibleInAdvancedArea="true" label="{i18n>CustomerBar}">
+                            <smartFilterBar:ControlConfiguration index="3" id="CustomerBar" key="Customer" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>CustomerBar}">
                                 <!-- 可以添加默认聚合内容，如果有需要 -->
                             </smartFilterBar:ControlConfiguration>
                             <!-- Product Bar -->
-                            <smartFilterBar:ControlConfiguration index="4" id="ProductBar" key="Product" visibleInAdvancedArea="true" label="{i18n>ProductBar}">
+                            <smartFilterBar:ControlConfiguration index="4" id="ProductBar" key="Product" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ProductBar}">
                                 <!-- 可以添加默认聚合内容，如果有需要 -->
                             </smartFilterBar:ControlConfiguration>
                             <!-- Plantype Bar with custom Select control -->
@@ -52,7 +52,7 @@
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
                             <!-- ConditionCurrency Bar -->
-                            <smartFilterBar:ControlConfiguration index="1" id="ConditionCurrencyBar" key="ConditionCurrency" visibleInAdvancedArea="true" label="{i18n>ConditionCurrency}" mandatory="mandatory">
+                            <smartFilterBar:ControlConfiguration index="1" id="ConditionCurrencyBar" key="ConditionCurrency" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ConditionCurrency}" mandatory="mandatory">
                             </smartFilterBar:ControlConfiguration>
                             <smartFilterBar:ControlConfiguration index="66" id="SalesPlanVersion0" key="SalesPlanVersion0" visibleInAdvancedArea="true" label="{i18n>SalesPlanVersion0Bar}">
                             </smartFilterBar:ControlConfiguration>
@@ -150,7 +150,7 @@
                             <Text text="{local>YearDate}" tooltip="{local>YearDate}" wrapping="false" />
                         </table:template>
                     </table:Column> -->
-                    <table:Column width="10rem" sortProperty="CustomerName" label="{i18n>CustomerName}">
+                    <table:Column width="13rem" sortProperty="CustomerName" label="{i18n>CustomerName}">
                         <table:template>
                             <Text text="{local>CustomerName}" tooltip="{local>CustomerName}" wrapping="false" />
                         </table:template>
@@ -225,7 +225,7 @@
                             <Text text="{local>Product}" tooltip="{local>Product}" wrapping="false" />
                         </table:template>
                     </table:Column>
-                    <table:Column width="10rem" sortProperty="ProductName" label="{i18n>ProductName}">
+                    <table:Column width="13rem" sortProperty="ProductName" label="{i18n>ProductName}">
                         <table:template>
                             <Text text="{local>ProductName}" tooltip="{local>ProductName}" wrapping="false" />
                         </table:template>
@@ -236,7 +236,7 @@
                             <Text text="{local>ConditionRateValue}" tooltip="{local>ConditionRateValue}" wrapping="false" />
                         </table:template>
                     </table:Column> -->
-                    <table:Column width="10rem" sortProperty="materialcost2000_n" label="{i18n>materialcost2000_n}">
+                    <table:Column width="10rem" sortProperty="materialcost2000_n" label="{i18n>materialcost2000_n}" hAlign="End">
                         <table:template>
                             <Text text="{local>materialcost2000_n}" tooltip="{local>materialcost2000_n}" wrapping="false" />
                         </table:template>
@@ -246,7 +246,7 @@
                             <Text text="{local>ContributionProfit}" tooltip="{local>ContributionProfit}" wrapping="false" />
                         </table:template>
                     </table:Column> -->
-                    <table:Column width="10rem" sortProperty="Manufacturingcost_n" label="{i18n>Manufacturingcost_n}">
+                    <table:Column width="10rem" sortProperty="Manufacturingcost_n" label="{i18n>Manufacturingcost_n}" hAlign="End">
                         <table:template>
                             <Text text="{local>Manufacturingcost_n}" tooltip="{local>Manufacturingcost_n}" wrapping="false" />
                         </table:template>

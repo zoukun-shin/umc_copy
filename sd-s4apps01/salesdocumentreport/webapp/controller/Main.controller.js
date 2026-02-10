@@ -207,6 +207,7 @@ sap.ui.define([
                     req.abort();
                 });
 
+                this._BusyDialog.open();
                 this.getEntityCount(aFilter, splitRange).then(function (iItemCount) {
                     if (iItemCount > 0) {
                         //设置要查询的字段
@@ -234,6 +235,7 @@ sap.ui.define([
                             resolve(iItemCount);
                         },
                         error: function (oError) {
+                            that._BusyDialog.close();
                             var iItemCount = 0;
                             resolve(iItemCount);
                             that.byId("idDynamicPage").setBusy(false);
@@ -278,6 +280,7 @@ sap.ui.define([
                             resolve(oData);
                         },
                         error: function (oError) {
+                            that._BusyDialog.close();
                             //手动中止的导致的错误不需要处理
                             if (!oError.aborted) {
                                 that.byId("idDynamicPage").setBusy(false);
@@ -314,6 +317,7 @@ sap.ui.define([
                         that.getEntityContentOnePage(iTop, iSkip, aFilter, sParamtetrsOfSelect, splitRange);
                         // 如果不存在next参数则说明数据已经取完
                     } else {
+                        that._BusyDialog.close();
                         aResultTemp = that._LocalData.getProperty("/SalesReportTemp");
                         aResult = that.transformData(aResultTemp);
                         //console.log("aResult", aResult);
