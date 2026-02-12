@@ -274,7 +274,15 @@ sap.ui.define([
             var aConfig = this.getModel("local").getProperty("/Config");
             var config = aConfig.find(element => element.Plant === header.Plant);
             items.forEach(item => {
-                var iAmount = parseFloat(item.StandardPrice) * parseFloat(item.Quantity);
+                // MOD BEGIN BY XINLEI XU 2026/02/05 VN CM No.5265
+                // var iAmount = parseFloat(item.StandardPrice) * parseFloat(item.Quantity);
+                var iAmount = 0;
+                if (header.Plant === "3000") {
+                    iAmount = parseFloat(item.FunctionalPrice) * parseFloat(item.Quantity);
+                } else {
+                    iAmount = parseFloat(item.StandardPrice) * parseFloat(item.Quantity);
+                }
+                // MOD END BY XINLEI XU 2026/02/05 VN CM No.5265
                 item.DeleteFlag = iAmount >= parseFloat(config.Amount) ? "W" : "";
             });
             var oRequestData = {
