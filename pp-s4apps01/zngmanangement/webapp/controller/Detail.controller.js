@@ -78,6 +78,7 @@ sap.ui.define([
                         oMainBusyDialog.close();
                     }
                 } else {
+                    MessageBox.warning(this.getModel("i18n").getResourceBundle().getText("PageRedirect"));
                     this.getRouter("Main").navTo("Main", {}, false);
                 }
             } else {

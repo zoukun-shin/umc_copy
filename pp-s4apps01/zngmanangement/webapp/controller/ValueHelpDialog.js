@@ -267,7 +267,12 @@ sap.ui.define([
                             this._oInput.setValueState("None");
                             switch (sInputPath) {
                                 case "/ItemEdit/ProductionOrder":
-                                    if (sMaterialType === "2") { // Assembly
+                                    if (sMaterialType === "2") {
+                                        // Assembly
+                                        this.getModel("local").setProperty("/ItemEdit/Material", context["Product"]);
+                                        this.getModel("local").setProperty("/ItemEdit/MaterialName", context["ProductDescription"]);
+                                    } else {
+                                        // Parts
                                         this.getModel("local").setProperty("/ItemEdit/Material", context["Material"]);
                                         this.getModel("local").setProperty("/ItemEdit/MaterialName", context["MaterialDescription"]);
                                     }
@@ -360,7 +365,12 @@ sap.ui.define([
                         this._oControl.setValueState("None");
                         switch (sPath) {
                             case "/ZC_ManufacturingOrderProductVH":
-                                if (sMaterialType === "2") { // Assembly
+                                if (sMaterialType === "2") {
+                                    // Assembly
+                                    this.getModel("local").setProperty("/ItemEdit/Material", context["Product"]);
+                                    this.getModel("local").setProperty("/ItemEdit/MaterialName", context["ProductDescription"]);
+                                } else {
+                                    // Parts
                                     this.getModel("local").setProperty("/ItemEdit/Material", context["Material"]);
                                     this.getModel("local").setProperty("/ItemEdit/MaterialName", context["MaterialDescription"]);
                                 }
