@@ -69,11 +69,11 @@ sap.ui.define([
                         "GLAccount": aSheetData[i]["GLAccount"] === undefined ? "" : aSheetData[i]["GLAccount"],
                         "FinancialStatementItem": aSheetData[i]["FinancialStatementItem"] === undefined ? "" : aSheetData[i]["FinancialStatementItem"],
                         "FinancialStatementItemText": aSheetData[i]["FinancialStatementItemText"] === undefined ? "" : aSheetData[i]["FinancialStatementItemText"],
- 
+
                     };
                     aExcelSet.push(item);
                 }
- 
+
 
                 this.getModel("local").setProperty("/excelSet", aExcelSet);
                 this.getModel("local").setProperty("/logInfo", this.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, 0, 0]));
@@ -154,7 +154,9 @@ sap.ui.define([
                         }
                     }
                     that.getModel("local").setProperty("/excelSet", aExcelSet);
-                    that.getModel("local").setProperty("/logInfo", that.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                    if (bEvent !== "EXPORT") {
+                        that.getModel("local").setProperty("/logInfo", that.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                    }
                     MessageToast.show(that.getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
                     //that.getModel("local").refresh(true);
                 }).catch((error) => {

@@ -43,7 +43,7 @@ sap.ui.define([
                     aAllAccessBtns = [];
                 if (context._AssignRole && context._AssignRole.length > 0) {
                     context._AssignRole.forEach(role => {
-                        aAccessBtns.push(role._UserRoleAccessBtn );
+                        aAccessBtns.push(role._UserRoleAccessBtn);
                     });
                     aAllAccessBtns = aAccessBtns.flat();
                 }
@@ -245,7 +245,9 @@ sap.ui.define([
                         }
                     }
                     this.getModel("local").setProperty("/excelSet", aExcelSet);
-                    this.getModel("local").setProperty("/logInfo", this.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                    if (bEvent !== "EXPORT") {
+                        this.getModel("local").setProperty("/logInfo", this.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                    }
                     MessageToast.show(this.getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
                 }).catch((error) => {
                     MessageBox.error(error);

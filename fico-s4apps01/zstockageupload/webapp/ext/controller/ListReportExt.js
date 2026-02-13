@@ -75,7 +75,7 @@ sap.ui.define([
                         "Material": aSheetData[i]["Material"] === undefined ? "" : aSheetData[i]["Material"],
                         "Age": aSheetData[i]["Age"] === undefined ? "" : aSheetData[i]["Age"],
                         "Qty": aSheetData[i]["Qty"] === undefined ? "" : aSheetData[i]["Qty"],
- 
+
                     };
                     aExcelSet.push(item);
                 }
@@ -114,14 +114,14 @@ sap.ui.define([
             var aGroupKey = that._Function._removeDuplicates(aExcelSet, ["Row"]);
             var aGroupItems;
             for (var m = 0; m < aGroupKey.length; m++) {
-               // const sGLAccount = aGroupKey[m].GLAccount;
+                // const sGLAccount = aGroupKey[m].GLAccount;
                 aGroupItems = [];
                 for (var n = 0; n < aExcelSet.length; n++) {
-                  //  if (aExcelSet[n].GLAccount === sGLAccount) {
-                        aGroupItems.push(aExcelSet[n]);
-                  //  }
+                    //  if (aExcelSet[n].GLAccount === sGLAccount) {
+                    aGroupItems.push(aExcelSet[n]);
+                    //  }
                 }
-                
+
             }
             aPromise.push(that._Function._callODataAction(bEvent, aGroupItems, that));
             try {
@@ -147,7 +147,7 @@ sap.ui.define([
                                     if (aExcelSet[index].Row === element.ROW) {
                                         aExcelSet[index].Status = element.STATUS;
                                         aExcelSet[index].Message = element.MESSAGE;
-           
+
                                     }
                                 }
                                 if (element.STATUS === 'E') {
@@ -159,7 +159,9 @@ sap.ui.define([
                         }
                     }
                     that.getModel("local").setProperty("/excelSet", aExcelSet);
-                    that.getModel("local").setProperty("/logInfo", that.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                    if (bEvent !== "EXPORT") {
+                        that.getModel("local").setProperty("/logInfo", that.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                    }
                     MessageToast.show(that.getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
                     //that.getModel("local").refresh(true);
                 }).catch((error) => {

@@ -220,7 +220,9 @@ sap.ui.define([
                         }
                     }
                     that.getModel("local").setProperty("/excelSet", aExcelSet);
-                    that.getModel("local").setProperty("/logInfo", that.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                    if (bEvent !== "EXPORT") {
+                        that.getModel("local").setProperty("/logInfo", that.getModel("i18n").getResourceBundle().getText("logInfo", [aExcelSet.length, oResult.iSuccess, oResult.iFailed]));
+                    }
                     MessageToast.show(that.getModel("i18n").getResourceBundle().getText("ProcessingCompleted"));
                 }).catch((error) => {
                     MessageBox.error(error);
