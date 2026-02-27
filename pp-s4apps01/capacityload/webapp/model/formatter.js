@@ -116,7 +116,7 @@ sap.ui.define([
 
         //如果字符全部为0 则显示空白
         allZeroToBlank: function (value) {
-            if (value) {
+            if (value || value == 0) {
                 if (Number(value) === 0) {
                     return "";
                 }
