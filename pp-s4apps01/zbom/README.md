@@ -1,30 +1,28 @@
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Mon Sep 09 2024 05:55:49 GMT+0000 (Coordinated Universal Time)|
-|**App Generator**<br>@sap/generator-fiori-elements|
-|**App Generator Version**<br>1.14.5|
+|**Generation Date and Time**<br>Wed Mar 04 2026 07:55:36 GMT+0000 (Coordinated Universal Time)|
+|**App Generator**<br>SAP Fiori Application Generator|
+|**App Generator Version**<br>1.20.4|
 |**Generation Platform**<br>SAP Business Application Studio|
-|**Template Used**<br>List Report Page V4|
-|**Service Type**<br>SAP System (ABAP On Premise)|
-|**Service URL**<br>https://my412552-api.s4hana.cloud.sap/sap/opu/odata4/sap/zui_bom_o4/srvd/sap/zui_bom_o4/0001/|
+|**Template Used**<br>Basic V2|
+|**Service Type**<br>SAP System (ABAP On-Premise)|
+|**Service URL**<br>https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_BOM_O2|
 |**Module Name**<br>zbom|
-|**Application Title**<br>BOM List|
+|**Application Title**<br>BOM Report|
 |**Namespace**<br>pp|
 |**UI5 Theme**<br>sap_horizon|
 |**UI5 Version**<br>1.120.38|
-|**Enable Code Assist Libraries**<br>False|
 |**Enable TypeScript**<br>False|
 |**Add Eslint configuration**<br>False|
-|**Main Entity**<br>BOM|
 
 ## zbom
 
-BOM List
+BOM Report
 
 ### Starting the generated app
 
--   This app has been generated using the SAP Fiori tools - App Generator, as part of the SAP Fiori tools suite.  In order to launch the generated app, simply run the following from the generated app root folder:
+-   This app has been generated using the SAP Fiori tools - App Generator, as part of the SAP Fiori tools suite.  To launch the generated application, run the following from the generated application root folder:
 
 ```
     npm start

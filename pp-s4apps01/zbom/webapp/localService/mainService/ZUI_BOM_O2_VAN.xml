@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../../sap/zui_bom_o2/$metadata">
+        <edmx:Include Namespace="cds_zui_bom_o2" Alias="SAP"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="zui_bom_o2_van.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_bom_o2.BOMType/BillOfMaterialVariantRoot">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_bom_o2.BOMType/bomsubitemnumbervalue">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_bom_o2.BOMType/BillOfMaterialItemNodeNumber">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_bom_o2.BOMType/BOMHdrRootMatlHierNode">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_bom_o2.BOMType/QTY">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_bom_o2.BOMType">
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="{@i18n&gt;appTitle}"/>
+                        <PropertyValue Property="TypeNamePlural" String="{@i18n&gt;appTitle}"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;Material}"/>
+                            <PropertyValue Property="Value" Path="Material"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;Plant}"/>
+                            <PropertyValue Property="Value" Path="Plant"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="顶层代替BOM"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialVariantRoot"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;HeaderMaterial}"/>
+                            <PropertyValue Property="Value" Path="HeaderMaterial"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;ExplodeBOMLevelValue}"/>
+                            <PropertyValue Property="Value" Path="ExplodeBOMLevelValue"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BillOfMaterialItemNumber}"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialItemNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BillOfMaterialItemCategory}"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialItemCategory"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BillOfMaterialComponent}"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialComponent"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;ComponentDescription}"/>
+                            <PropertyValue Property="Value" Path="ComponentDescription"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BillOfMaterialVariant}"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialVariant"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="8rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;AlternativeItemGroup}"/>
+                            <PropertyValue Property="Value" Path="AlternativeItemGroup"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;AlternativeItemPriority}"/>
+                            <PropertyValue Property="Value" Path="AlternativeItemPriority"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;AlternativeItemStrategy}"/>
+                            <PropertyValue Property="Value" Path="AlternativeItemStrategy"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;UsageProbabilityPercent}"/>
+                            <PropertyValue Property="Value" Path="UsageProbabilityPercent"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;DiscontinuationFollowUpGroup}"/>
+                            <PropertyValue Property="Value" Path="DiscontinuationFollowUpGroup"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="18rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BOMItemIsDiscontinued}"/>
+                            <PropertyValue Property="Value" Path="BOMItemIsDiscontinued"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="15rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;DiscontinuationGroup}"/>
+                            <PropertyValue Property="Value" Path="DiscontinuationGroup"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;FollowUpGroup}"/>
+                            <PropertyValue Property="Value" Path="FollowUpGroup"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;ProductManufacturerNumber}"/>
+                            <PropertyValue Property="Value" Path="ProductManufacturerNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BusinessPartnerFullName}"/>
+                            <PropertyValue Property="Value" Path="BusinessPartnerFullName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BillOfMaterialItemUnit}"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialItemUnit"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BOMHeaderText}"/>
+                            <PropertyValue Property="Value" Path="BOMHeaderText"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;ComponentQuantityInCompUoM}"/>
+                            <PropertyValue Property="Value" Path="ComponentQuantityInCompUoM"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="18rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BOMItemSorter}"/>
+                            <PropertyValue Property="Value" Path="BOMItemSorter"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;IsMaterialProvision}"/>
+                            <PropertyValue Property="Value" Path="IsMaterialProvision"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="8rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;ChangeNumber}"/>
+                            <PropertyValue Property="Value" Path="ChangeNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BOMSubItemInstallationPoint}"/>
+                            <PropertyValue Property="Value" Path="BOMSubItemInstallationPoint"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BillOfMaterialSubItemQuantity}"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialSubItemQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BOMItemText2}"/>
+                            <PropertyValue Property="Value" Path="BOMItemText2"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BOMItemDescription}"/>
+                            <PropertyValue Property="Value" Path="BOMItemDescription"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;IsBulkMaterial}"/>
+                            <PropertyValue Property="Value" Path="IsBulkMaterial"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="8rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BOMItemIsCostingRelevant}"/>
+                            <PropertyValue Property="Value" Path="BOMItemIsCostingRelevant"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="8rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;RevisionLevel}"/>
+                            <PropertyValue Property="Value" Path="RevisionLevel"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="8rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;IsPurConditionRecord}"/>
+                            <PropertyValue Property="Value" Path="IsPurConditionRecord"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;NetWeight}"/>
+                            <PropertyValue Property="Value" Path="NetWeight"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;WeightUnit}"/>
+                            <PropertyValue Property="Value" Path="WeightUnit"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;MaterialGroup}"/>
+                            <PropertyValue Property="Value" Path="MaterialGroup"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;ProductGroupName}"/>
+                            <PropertyValue Property="Value" Path="ProductGroupName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BillOfMaterialItemBaseUnit}"/>
+                            <PropertyValue Property="Value" Path="BillOfMaterialItemBaseUnit"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="12rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;ComponentQuantityInBaseUoM}"/>
+                            <PropertyValue Property="Value" Path="ComponentQuantityInBaseUoM"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="18rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;ProfileCode}"/>
+                            <PropertyValue Property="Value" Path="ProfileCode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;MRPResponsible}"/>
+                            <PropertyValue Property="Value" Path="MRPResponsible"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="8rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;BOMItemIsSparePart}"/>
+                            <PropertyValue Property="Value" Path="BOMItemIsSparePart"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;ProdOrderIssueLocation}"/>
+                            <PropertyValue Property="Value" Path="ProdOrderIssueLocation"/>
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="10rem"/>
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="BOMExplosionApplication"/>
+                            <Annotation Term="UI.Hidden"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Plant</PropertyPath>
+                        <PropertyPath>Material</PropertyPath>
+                        <PropertyPath>MRPResponsible</PropertyPath>
+                        <PropertyPath>BOMExplosionApplication</PropertyPath>
+                        <PropertyPath>BillOfMaterialVariant</PropertyPath>
+                        <PropertyPath>HeaderValidityStartDate</PropertyPath>
+                        <PropertyPath>RequiredQuantity</PropertyPath>
+                        <PropertyPath>BOMExplosionType</PropertyPath>
+                        <PropertyPath>ShowSubParts</PropertyPath>
+                        <PropertyPath>LocalPosition</PropertyPath>
+                        <PropertyPath>YY1_Privilege_PRD</PropertyPath>
+                        <PropertyPath>DisplayMpn</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="_Entities"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
 specVersion: "3.1"
 metadata:
   name: pp.zbom
@@ -7,7 +9,7 @@ server:
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:
-        ignoreCertError: false
+        ignoreCertErrors: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         ui5:
           path:
             - /resources
@@ -17,26 +19,26 @@ server:
           - path: /sap
             url: https://my412552-api.s4hana.cloud.sap
             destination: UMC_Dev_Customizing_BTP
-            authenticationType: BasicAuthentication
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
         port: 35729
         path: webapp
         delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        flp:
+          theme: sap_horizon
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:
         mountPath: /
         services:
-          - urlPath: /sap/opu/odata4/sap/zui_bom_o4/srvd/sap/zui_bom_o4/0001
-            generateMockData: true
-            metadataXmlPath: ./webapp/localService/metadata.xml
-            mockdataRootPath: ./webapp/localService/data
-          - urlPath: /sap/opu/odata4/sap/zui_bom_o4/srvd/sap/zui_bom_o4/0001/
-            metadataPath: ./webapp/localService/metadata.xml
-            mockdataPath: ./webapp/localService/mockdata
+          - urlPath: /sap/opu/odata/sap/ZUI_BOM_O2
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
             generateMockData: true
         annotations:
-          - localPath: ./webapp/annotations/annotation.xml
-            urlPath: annotations/annotation.xml
+          - localPath: ./webapp/localService/mainService/ZUI_BOM_O2_VAN.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_BOM_O2_VAN',Version='0001')/$value/

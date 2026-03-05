@@ -1,0 +1,99 @@
+<mvc:View controllerName="pp.zbom.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="BomSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="BOM" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="Material" mandatory="mandatory" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="MRPResponsible" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="BOMExplosionApplication" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>BOMExplosionApplication}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="BillOfMaterialVariant" filterType="single" visibleInAdvancedArea="true" label="{i18n>BillOfMaterialVariant}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="HeaderValidityStartDate" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>HeaderValidityStartDate}">
+                                <smartFilterBar:customControl>
+                                    <DynamicDateRange id="idValDate" value="{local>/ValDate}" 
+                                        standardOptions="DATE,TODAY,YESTERDAY,TOMORROW,FIRSTDAYWEEK,LASTDAYWEEK,FIRSTDAYMONTH,LASTDAYMONTH,FIRSTDAYQUARTER,LASTDAYQUARTER,FIRSTDAYYEAR,LASTDAYYEAR"
+                                    />
+                                </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='70' key="RequiredQuantity" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>RequiredQuantity}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="BOMExplosionType" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>BOMExplosionType}"/>
+                                <smartFilterBar:ControlConfiguration index='90' key="ShowSubParts" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ShowSubParts}"/>
+                                <smartFilterBar:ControlConfiguration index='100' key="LocalPosition" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>LocalPosition}"/>
+                                <smartFilterBar:ControlConfiguration index='110' key="YY1_Privilege_PRD" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>YY1_Privilege_PRD}"/>
+                                <smartFilterBar:ControlConfiguration index='120' key="DisplayMpn" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>DisplayMpn}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemGroup" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemPriority" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemStrategy" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="UsageProbabilityPercent" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DiscontinuationFollowUpGroup" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMItemIsDiscontinued" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DiscontinuationGroup" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="FollowUpGroup" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductManufacturerNumber" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BusinessPartnerFullName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMHeaderText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ComponentQuantityInCompUoM" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMItemSorter" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IsMaterialProvision" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ChangeNumber" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMSubItemInstallationPoint" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialSubItemQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMItemText2" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMItemDescription" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IsBulkMaterial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMItemIsCostingRelevant" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="RevisionLevel" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IsPurConditionRecord" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NetWeight" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="WeightUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialGroup" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductGroupName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ComponentQuantityInBaseUoM" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProfileCode" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MRPResponsible" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMItemIsSparePart" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProdOrderIssueLocation" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemCategory" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemNumber" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialVariantUsage" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ExplodeBOMLevelValue" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="HeaderMaterial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialComponent" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ComponentDescription" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QTY2" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMExplosionIsMultilevel" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="YY1_DetSpecification_PRD" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="pp.zbom.fragments.Bom" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

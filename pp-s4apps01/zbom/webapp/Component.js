@@ -1,19 +1,37 @@
+/**
+ * eslint-disable @sap/ui5-jsdocs/no-jsdoc
+ */
+
 sap.ui.define([
-    "sap/fe/core/AppComponent",
-    "pp/zbom/ext/controller/ListReportExt"
-], function (Component, ListReportExt) {
+        "sap/ui/core/UIComponent",
+        "sap/ui/Device",
+        "pp/zbom/model/models"
+    ],
+    function (UIComponent, Device, models) {
         "use strict";
 
-        return Component.extend("pp.zbom.Component", {
-
-            ListReportExt: ListReportExt,
-
+        return UIComponent.extend("pp.zbom.Component", {
             metadata: {
                 manifest: "json"
             },
 
-            onAfterRendering: function () {
-                ListReportExt.init(this.oModels, this._oViews);
+            /**
+             * The component is initialized by UI5 automatically during the startup of the app and calls the init method once.
+             * @public
+             * @override
+             */
+            init: function () {
+                // call the base component's init function
+                UIComponent.prototype.init.apply(this, arguments);
+
+                // enable routing
+                this.getRouter().initialize();
+
+                // set the device model
+                this.setModel(models.createDeviceModel(), "device");
+
+                // set the local model
+                this.setModel(models.createLocalModel(), "local");
             }
         });
     }

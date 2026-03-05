@@ -1,5 +1,6 @@
 # yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
-specVersion: '2.4'
+
+specVersion: "3.1"
 metadata:
   name: pp.zbom
 type: application
@@ -9,17 +10,13 @@ resources:
 builder:
   resources:
     excludes:
-      - "/test/**"
-      - "/localService/**"
+      - /test/**
+      - /localService/**
   customTasks:
-  - name: webide-extension-task-updateManifestJson
-    afterTask: replaceVersion
-    configuration:
-      appFolder: webapp
-      destDir: dist
-  - name: ui5-task-zipper
-    afterTask: generateCachebusterInfo
-    configuration:
-      archiveName: ppzbom
-      additionalFiles:
-      - xs-app.json
+    - name: ui5-task-zipper
+      afterTask: generateCachebusterInfo
+      configuration:
+        archiveName: ppzbom
+        relativePaths: true
+        additionalFiles:
+          - xs-app.json

@@ -11,20 +11,16 @@
     "description": "{{appDescription}}",
     "resources": "resources.json",
     "sourceTemplate": {
-      "id": "@sap/generator-fiori:lrop",
-      "version": "1.14.5",
-      "toolsId": "2eb57f46-80c5-4fcc-a6f8-d22193b6b5a0"
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.20.4",
+      "toolsId": "db174fd2-a23a-4e82-9019-ff2dc9b583c1"
     },
     "dataSources": {
-      "mainService": {
-        "uri": "/sap/opu/odata4/sap/zui_bom_o4/srvd/sap/zui_bom_o4/0001/",
-        "type": "OData",
+      "ZUI_BOM_O2_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_BOM_O2_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
         "settings": {
-          "annotations": [
-            "annotation"
-          ],
-          "localUri": "localService/metadata.xml",
-          "odataVersion": "4.0"
+          "localUri": "localService/mainService/ZUI_BOM_O2_VAN.xml"
         }
       },
       "PrintService": {
@@ -36,13 +32,6 @@
           "odataVersion": "4.0"
         }
       },
-      "annotation": {
-        "type": "ODataAnnotation",
-        "uri": "annotations/annotation.xml",
-        "settings": {
-          "localUri": "annotations/annotation.xml"
-        }
-      },
       "AuthorityService": {
         "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
         "type": "OData",
@@ -51,14 +40,25 @@
           "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
           "odataVersion": "4.0"
         }
+      },
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZUI_BOM_O2/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZUI_BOM_O2_VAN"
+          ],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
       }
     },
     "crossNavigation": {
       "inbounds": {
-        "ZBOM-display": {
-          "semanticObject": "ZBOM",
+        "zbom-display": {
+          "semanticObject": "zbom",
           "action": "display",
-          "title": "{{flpTitle}}",
+          "title": "{{zbom-display.flpTitle}}",
           "signature": {
             "parameters": {},
             "additionalParameters": "allowed"
@@ -84,13 +84,15 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
+    "config": {
+      "fullWidth": true
+    },
     "dependencies": {
       "minUI5Version": "1.120.38",
       "libs": {
         "sap.m": {},
-        "sap.ui.core": {},
-        "sap.fe.templates": {}
+        "sap.ui.core": {}
       }
     },
     "contentDensities": {
@@ -107,19 +109,7 @@
       "": {
         "dataSource": "mainService",
         "preload": true,
-        "settings": {
-          "operationMode": "Server",
-          "autoExpandSelect": true,
-          "earlyRequests": true
-        }
-      },
-      "@i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "uri": "i18n/i18n.properties"
-      },
-      "local": {
-        "type": "sap.ui.model.json.JSONModel",
-        "preload": true
+        "settings": {}
       },
       "Print": {
         "dataSource": "PrintService",
@@ -143,51 +133,46 @@
       }
     },
     "resources": {
-      "css": []
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
     },
     "routing": {
-      "config": {},
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "pp.zbom.view",
+        "async": true,
+        "viewPath": "pp.zbom.view"
+      },
       "routes": [
         {
+          "name": "RouteMain",
           "pattern": ":?query:",
-          "name": "BOMList",
-          "target": "BOMList"
+          "target": [
+            "TargetMain"
+          ]
         }
       ],
       "targets": {
-        "BOMList": {
-          "type": "Component",
-          "id": "BOMList",
-          "name": "sap.fe.templates.ListReport",
-          "options": {
-            "settings": {
-              "contextPath": "/BOM",
-              "variantManagement": "Control",
-              "controlConfiguration": {
-                "@com.sap.vocabularies.UI.v1.LineItem": {
-                  "tableSettings": {
-                    "type": "GridTable"
-                  },
-                  "actions": {
-                    "ListReportExt": {
-                      "press": "pp.zbom.ext.controller.ListReportExt.onPrint",
-                      "visible": true,
-                      "enabled": "{local>/authorityCheck/button/Print}",
-                      "requiresSelection": true,
-                      "text": "Print"
-                    }
-                  }
-                }
-              }
-            }
-          }
+        "TargetMain": {
+          "id": "Main",
+          "name": "Main"
         }
       }
+    },
+    "rootView": {
+      "viewName": "pp.zbom.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
     }
-  },
-  "sap.fiori": {
-    "registrationIds": [],
-    "archeType": "transactional"
   },
   "sap.cloud": {
     "public": true,
