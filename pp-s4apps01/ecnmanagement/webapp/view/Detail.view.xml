@@ -396,8 +396,8 @@
                             </t:Column>
                             <t:Column width="12rem" label="{i18n>ObjectValidFromSF}">
                                 <t:template>
-                                    <DatePicker value="{path:'local>ObjectValidFrom',type:'sap.ui.model.type.Date',formatOptions: {style: 'medium',strictParsing: true}}"
-                                        editable="{local>/viewEditable}"/>
+                                    <DatePicker value="{path:'local>ObjectValidFrom',type:'sap.ui.model.type.Date',formatOptions: {style: 'medium',strictParsing: true,UTC: true}}"
+                                        editable="{local>/viewEditable}" change="onChangeDate"/>
                                 </t:template>
                             </t:Column>
                             <t:Column width="6rem" label="{i18n>AssignFlagSF}">

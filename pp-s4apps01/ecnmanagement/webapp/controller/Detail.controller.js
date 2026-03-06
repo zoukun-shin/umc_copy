@@ -781,5 +781,12 @@ sap.ui.define([
 			};
 			return "/" + this._oDataModel.createKey("EcnManagement",oContext);
 		},
+		onChangeDate: function(oEvent) {
+			let oControl = oEvent.getSource();
+			let sPath = oControl.getBindingContext("local").getPath();
+			let sProperty = oControl.getBindingPath("value");
+			let oDate = oControl.getDateValue();
+			this._LocalData.setProperty(sPath + "/" + sProperty, formatter.odataDate(oDate));
+		}
 	});
 });
