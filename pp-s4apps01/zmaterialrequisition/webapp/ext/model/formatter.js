@@ -52,6 +52,8 @@ sap.ui.define([
                 }
                 if (currency === "JPY" || currency === "TWD" || currency === "VND") {
                     decimal = 0;
+                } else if (currency === "USD") {
+                    decimal = 5;
                 }
                 var num = Number(n).toFixed(decimal);
                 if (num < 0) {
