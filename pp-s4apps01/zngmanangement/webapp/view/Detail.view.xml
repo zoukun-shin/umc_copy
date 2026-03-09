@@ -134,7 +134,7 @@
                     </blocks>
                 </ObjectPageSubSection>
             </ObjectPageSection>
-            <ObjectPageSection id="idNG_ItemIQC" titleUppercase="false" title="{i18n>NG_ItemIQC}">
+            <ObjectPageSection id="idNG_ItemIQC" titleUppercase="false" title="{i18n>NG_ItemIQC}" visible="{= ${local>/NG_Header/MoveType} === '2'}">
                 <subSections>
                     <ObjectPageSubSection id="idNG_ItemIQC_SS" titleUppercase="false" title="{i18n>NG_ItemIQC}">
                         <blocks>

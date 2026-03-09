@@ -397,7 +397,9 @@ sap.ui.define([
                         var copyItem = aNG_Item[aSelectedIndices[0]];
                         for (const key in copyItem) {
                             newItem[key] = copyItem[key];
-                            newItem["BaseUnit"] = "PC";
+                            if (!copyItem["BaseUnit"]) {
+                                newItem["BaseUnit"] = "PC";
+                            }
                             if (key.includes("__metadata") &&
                                 key.includes("NG_ItemNo") &&
                                 key.includes("DeleteFlag") &&
