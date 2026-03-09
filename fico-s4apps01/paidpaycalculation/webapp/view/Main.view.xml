@@ -770,6 +770,15 @@
               </t:template>
             </t:Column>
 
+            <t:Column id="TICOAmount" visible="{local>/showBC}" label="{i18n>TICOAmount}" width="10rem" sortProperty="TICOAmount" filterProperty="TICOAmount" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"TICOAmount", "leadingProperty":"TICOAmount", "sortProperty":"TICOAmount", "filterProperty": "TICOAmount"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'TICOAmount', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+              </t:template>
+            </t:Column>
+
             <t:Column id="StockChangeAmount" visible="{local>/showB}" label="{i18n>StockChangeAmount}" width="10rem" sortProperty="StockChangeAmount" filterProperty="StockChangeAmount" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"StockChangeAmount", "leadingProperty":"StockChangeAmount", "sortProperty":"StockChangeAmount", "filterProperty": "StockChangeAmount"}'/>

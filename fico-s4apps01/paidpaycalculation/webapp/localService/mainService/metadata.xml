@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
-    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
     </edmx:Reference>
-    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
     </edmx:Reference>
-    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
     </edmx:Reference>
-    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
     </edmx:Reference>
-    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
         <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
     </edmx:Reference>
-    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
     </edmx:Reference>
-    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
     </edmx:Reference>
-    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
     </edmx:Reference>
-    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
     </edmx:Reference>
-    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
     </edmx:Reference>
-    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
     </edmx:Reference>
-    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
     </edmx:Reference>
-    <edmx:Reference Uri="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
         <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
     </edmx:Reference>
     <edmx:DataServices m:DataServiceVersion="2.0">
@@ -117,49 +117,50 @@
                 <Property Name="SupplierName" Type="Edm.String" MaxLength="80"/>
                 <Property Name="ProfitCenterName" Type="Edm.String" MaxLength="20" sap:label="Name" sap:quickinfo="General Name"/>
                 <Property Name="ProductDescription" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
-                <Property Name="Cost01" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Cost01" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ValuationQuantity01" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
-                <Property Name="Cost02" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Cost02" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ValuationQuantity02" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
-                <Property Name="Cost03" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Cost03" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ValuationQuantity03" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
-                <Property Name="Cost04" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Cost04" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ValuationQuantity04" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
-                <Property Name="Cost05" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Cost05" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ValuationQuantity05" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
-                <Property Name="Cost06" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Cost06" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ValuationQuantity06" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
-                <Property Name="Cost07" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Cost07" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ValuationQuantity07" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
-                <Property Name="Cost08" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Cost08" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ValuationQuantity08" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
-                <Property Name="Cost09" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Cost09" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ValuationQuantity09" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
-                <Property Name="Cost10" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Cost10" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
                 <Property Name="ValuationQuantity10" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Unit"/>
-                <Property Name="MaterialCost2000" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="MaterialCost3000" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="PurGrpAmount1" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="PurGrpAmount2" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="PurGrpAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="ChargeableAmount1" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="ChargeableAmount2" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="ChargeableAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="PreviousStockAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="CurrentStockAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="CustomerRevenue1" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="CustomerRevenue" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="Revenue1" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="Revenue" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="ChargeableRate" Type="Edm.Decimal" Precision="16" Scale="2"/>
-                <Property Name="PurGrpTot" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="ChargeableTot" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="CurrentStockSemi" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="CurrentStockFin" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="CurrentStockTotal" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="StockChangeAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="PaidMaterialCost" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
-                <Property Name="RevenueRate" Type="Edm.Decimal" Precision="9" Scale="5"/>
+                <Property Name="MaterialCost2000" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="MaterialCost3000" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="PurGrpAmount1" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="PurGrpAmount2" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="PurGrpAmount" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ChargeableAmount1" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ChargeableAmount2" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ChargeableAmount" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="PreviousStockAmount" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="CurrentStockAmount" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="CustomerRevenue1" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="CustomerRevenue" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Revenue1" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="Revenue" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ChargeableRate" Type="Edm.String" MaxLength="16"/>
+                <Property Name="PurGrpTot" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="ChargeableTot" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="CurrentStockSemi" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="CurrentStockFin" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="CurrentStockTotal" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="TICOAmount" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="StockChangeAmount" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="PaidMaterialCost" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true"/>
+                <Property Name="RevenueRate" Type="Edm.String" MaxLength="16"/>
                 <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
                 <Property Name="Unit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
             </EntityType>
@@ -192,6 +193,7 @@
                 <Property Name="FileName" Type="Edm.String" Nullable="false" MaxLength="256"/>
                 <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="256"/>
                 <NavigationProperty Name="Format" Relationship="cds_zui_paipaycalculation_o2.to_format" FromRole="FromRole_to_format" ToRole="ToRole_to_format"/>
+                <NavigationProperty Name="FileShare" Relationship="cds_zui_paipaycalculation_o2.to_fileshare" FromRole="FromRole_to_fileshare" ToRole="ToRole_to_fileshare"/>
                 <NavigationProperty Name="TableColumns" Relationship="cds_zui_paipaycalculation_o2.to_tablecolumns" FromRole="FromRole_to_tablecolumns" ToRole="ToRole_to_tablecolumns"/>
                 <NavigationProperty Name="CoverPage" Relationship="cds_zui_paipaycalculation_o2.to_coverpage" FromRole="FromRole_to_coverpage" ToRole="ToRole_to_coverpage"/>
                 <NavigationProperty Name="Signature" Relationship="cds_zui_paipaycalculation_o2.to_signature" FromRole="FromRole_to_signature" ToRole="ToRole_to_signature"/>
@@ -199,6 +201,14 @@
                 <NavigationProperty Name="Hierarchy" Relationship="cds_zui_paipaycalculation_o2.to_Hierarchy" FromRole="FromRole_to_Hierarchy" ToRole="ToRole_to_Hierarchy"/>
                 <NavigationProperty Name="Header" Relationship="cds_zui_paipaycalculation_o2.to_header" FromRole="FromRole_to_header" ToRole="ToRole_to_header"/>
                 <NavigationProperty Name="Footer" Relationship="cds_zui_paipaycalculation_o2.to_Footer" FromRole="FromRole_to_Footer" ToRole="ToRole_to_Footer"/>
+            </EntityType>
+            <EntityType Name="SAP__FileShare" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Repository" Type="Edm.String" Nullable="false" MaxLength="100" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Folder" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="SAP__Format" sap:content-version="1">
                 <Key>
@@ -213,6 +223,7 @@
                 <Property Name="MarginSize" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="FontName" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Font Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Padding" Type="Edm.Int32" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TextDirectionLayout" Type="Edm.String" Nullable="false" MaxLength="40" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="SAP__PDFStandard" sap:content-version="1">
                 <Key>
@@ -242,8 +253,8 @@
                 </Key>
                 <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Id" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Value" Type="Edm.String" Nullable="false" MaxLength="256" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Name" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Value" Type="Edm.String" Nullable="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="SAP__Signature" sap:content-version="1">
                 <Key>
@@ -316,6 +327,18 @@
                         <PropertyRef Name="Id"/>
                     </Principal>
                     <Dependent Role="ToRole_to_format">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="to_fileshare" sap:content-version="1">
+                <End Type="cds_zui_paipaycalculation_o2.SAP__DocumentDescription" Multiplicity="1" Role="FromRole_to_fileshare"/>
+                <End Type="cds_zui_paipaycalculation_o2.SAP__FileShare" Multiplicity="1" Role="ToRole_to_fileshare"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_to_fileshare">
+                        <PropertyRef Name="Id"/>
+                    </Principal>
+                    <Dependent Role="ToRole_to_fileshare">
                         <PropertyRef Name="Id"/>
                     </Dependent>
                 </ReferentialConstraint>
@@ -419,6 +442,7 @@
                 <EntitySet Name="SAP__Currencies" EntityType="cds_zui_paipaycalculation_o2.SAP__Currency" sap:content-version="1"/>
                 <EntitySet Name="SAP__UnitsOfMeasure" EntityType="cds_zui_paipaycalculation_o2.SAP__UnitOfMeasure" sap:content-version="1"/>
                 <EntitySet Name="SAP__MyDocumentDescriptions" EntityType="cds_zui_paipaycalculation_o2.SAP__DocumentDescription" sap:content-version="1"/>
+                <EntitySet Name="SAP__FileShareSet" EntityType="cds_zui_paipaycalculation_o2.SAP__FileShare" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <AssociationSet Name="to_HierarchySet" Association="cds_zui_paipaycalculation_o2.to_Hierarchy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_Hierarchy"/>
                     <End EntitySet="SAP__HierarchySet" Role="ToRole_to_Hierarchy"/>
@@ -438,6 +462,10 @@
                 <AssociationSet Name="to_formatSet" Association="cds_zui_paipaycalculation_o2.to_format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_format"/>
                     <End EntitySet="SAP__FormatSet" Role="ToRole_to_format"/>
+                </AssociationSet>
+                <AssociationSet Name="to_fileshareSet" Association="cds_zui_paipaycalculation_o2.to_fileshare" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_fileshare"/>
+                    <End EntitySet="SAP__FileShareSet" Role="ToRole_to_fileshare"/>
                 </AssociationSet>
                 <AssociationSet Name="to_pdfstandardSet" Association="cds_zui_paipaycalculation_o2.to_pdfstandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="SAP__MyDocumentDescriptions" Role="FromRole_to_pdfstandard"/>
@@ -655,6 +683,9 @@
             <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/SupplierName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/TICOAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
             <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Unit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
@@ -724,6 +755,8 @@
                         <PropertyValue Property="Padding" Bool="true"/>
                         <PropertyValue Property="HeaderFooter" Bool="true"/>
                         <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="TextDirectionLayout" Bool="true"/>
+                        <PropertyValue Property="UploadToFileShare" Bool="true"/>
                         <PropertyValue Property="ResultSizeDefault" Int="20000"/>
                         <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
                         <PropertyValue Property="Treeview" Bool="true"/>
@@ -735,6 +768,120 @@
                         <PropertyValue Property="CollectionPath" String="SAP__MyDocumentDescriptions"/>
                     </Record>
                 </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationClass09" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKLAS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationClass04" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKLAS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ProfitCenterName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KTEXT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/FiscalYear" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=GJAHR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/PurchasingGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=EKGRP&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Product" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationClass01" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKLAS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/UpperProduct04" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/UpperProduct01" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.processLogic/Period" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MONAT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/UpperProduct05" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/UpperProduct09" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.ZD_PARAFORPAIDPAYCALCU/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Period" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MONAT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/UpperProduct08" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationClass08" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKLAS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationClass06" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKLAS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Customer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KUNNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Unit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/Supplier" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LIFNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.I_CompanyCodeStdVHType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/UpperProduct02" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/UpperProduct07" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationClass03" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKLAS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.processLogic/FiscalYear" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=GJAHR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationClass02" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKLAS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.ZD_PARAFORPAIDPAYCALCU/Period" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MONAT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ProductDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MAKTX&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationClass10" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKLAS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/UpperProduct03" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationClass05" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKLAS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ProfitCenter" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRCTR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/UpperProduct06" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.ZD_PARAFORPAIDPAYCALCU/FiscalYear" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=GJAHR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.processLogic/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/UpperProduct10" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.PaidPayCalculationType/ValuationClass07" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKLAS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_paipaycalculation_o2.SAP__Currency/CurrencyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.Text" Path="Text"/>
@@ -768,6 +915,10 @@
             </Annotations>
             <Annotations Target="cds_zui_paipaycalculation_o2.SAP__DocumentDescription/CreatedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__core.Computed"/>
+            </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__Format/TextDirectionLayout" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Description" String="Setting the text direction-layout is supported"/>
+                <Annotation Term="SAP__core.LongDescription" String="PDF supports setting the text direction-layout (e.g. left-to-right or right-to-left) in the document description"/>
             </Annotations>
             <Annotations Target="cds_zui_paipaycalculation_o2.SAP__DocumentDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__capabilties.InsertRestrictions">
@@ -897,6 +1048,15 @@
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
+            <Annotations Target="cds_zui_paipaycalculation_o2.SAP__FileShare" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.ValueListReferences">
+                    <Record>
+                        <PropertyValue Property="Url" String="./$metadata"/>
+                        <PropertyValue Property="CollectionPath" String="SAP__ValueHelpSet?$filter=VALUEHELP%20eq%20%27FileShare%27"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__common.ValueListWithFixedValues"/>
+            </Annotations>
             <Annotations Target="cds_zui_paipaycalculation_o2.SAP__Format/Orientation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.ValueListReferences">
                     <Record>
@@ -915,8 +1075,8 @@
                 </Annotation>
                 <Annotation Term="SAP__common.ValueListWithFixedValues"/>
             </Annotations>
-            <atom:link rel="self" href="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_PAIDPAYCALCULATION_O2/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
-            <atom:link rel="latest-version" href="https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_PAIDPAYCALCULATION_O2/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="self" href="/sap/opu/odata/sap/ZUI_PAIDPAYCALCULATION_O2/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="/sap/opu/odata/sap/ZUI_PAIDPAYCALCULATION_O2/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>

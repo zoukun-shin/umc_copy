@@ -84,10 +84,10 @@ sap.ui.define([
 				if (sOption1 === true) {
 					this.getView().getModel("local").setProperty("/showA", true);
 					this.getView().getModel("local").setProperty("/showB", false);
+					this.getView().getModel("local").setProperty("/showBC", false);
 				} else {
 					this.getView().getModel("local").setProperty("/showA", false);
 					this.getView().getModel("local").setProperty("/showB", true);
-
 				}
 			},
 
@@ -97,6 +97,7 @@ sap.ui.define([
 					setTimeout(() => {
 						this.getView().getModel("local").setProperty("/showA", true);
 						this.getView().getModel("local").setProperty("/showB", false);
+						this.getView().getModel("local").setProperty("/showBC", false);
 					}, 100);
 				} else {
 					setTimeout(() => {
@@ -146,6 +147,18 @@ sap.ui.define([
 					var sLedge = this.getView().byId("idLedge").getSelectedKey();
 					mBindingParams.filters.push(new sap.ui.model.Filter("Ledge", "EQ", sLedge));
 
+					var bOption1Selected = this.byId("Option1").getSelected();
+					if (!bOption1Selected) {
+						if (part === "1100") {
+							setTimeout(() => {
+								this.getView().getModel("local").setProperty("/showBC", true);
+							}, 100);
+						} else {
+							setTimeout(() => {
+								this.getView().getModel("local").setProperty("/showBC", false);
+							}, 100);
+						}
+					}
 				}
 			},
 
@@ -177,6 +190,17 @@ sap.ui.define([
 					return;
 				}
 
+				if (sType === "B") {
+					if (sBukrs === "1100") {
+						setTimeout(() => {
+							this.getView().getModel("local").setProperty("/showBC", true);
+						}, 100);
+					} else {
+						setTimeout(() => {
+							this.getView().getModel("local").setProperty("/showBC", false);
+						}, 100);
+					}
+				}
 				var aPromise = [];
 				aPromise.push(this.callAction(sType, sBukrs, sYear, sMonat, sLedge));
 
