@@ -101,11 +101,13 @@ sap.ui.define([
                 var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                 var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
                 // read valid data starting from line 14
+                var iRowNo = 0;
                 for (var i = 10; i < aSheetData.length; i++) {
+                    iRowNo += 1;
                     var item = {
                         "Status": "",
                         "Message": "",
-                        "RowNo": aSheetData[i]["RowNo"] === undefined ? "" : aSheetData[i]["RowNo"],
+                        "RowNo": iRowNo, //aSheetData[i]["RowNo"] === undefined ? "" : aSheetData[i]["RowNo"],
                         "Plant": aSheetData[i]["Plant"] === undefined ? "" : aSheetData[i]["Plant"],
                         "MoveType": aSheetData[i]["MoveType"] === undefined ? "" : aSheetData[i]["MoveType"],
                         "MaterialType": aSheetData[i]["MaterialType"] === undefined ? "" : aSheetData[i]["MaterialType"],
