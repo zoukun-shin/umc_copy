@@ -218,6 +218,7 @@ sap.ui.define([
                         this.getEntityContentOnePage(iItemCount, 0, aFilter, sParamtetrsOfSelect, splitRange);
 
                     } else {
+                        this._BusyDialog.close();
                         this._LocalData.setProperty("/SalesReport", []);
                         this.byId("idDynamicPage").setBusy(false);
                     }
