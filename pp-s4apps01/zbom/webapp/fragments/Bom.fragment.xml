@@ -395,14 +395,6 @@
                         <Text text="{QTY2}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>DisplayMpn}" sortProperty="DisplayMpn" filterProperty="DisplayMpn" visible="false">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"DisplayMpn", "leadingProperty":"DisplayMpn"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{DisplayMpn}" wrapping="false" />
-                    </table:template>
-                </table:Column>
                 <table:Column width="10rem" label="{i18n>HeaderValidityStartDate}" sortProperty="HeaderValidityStartDate" filterProperty="HeaderValidityStartDate" visible="false">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"HeaderValidityStartDate", "leadingProperty":"HeaderValidityStartDate"}'/>

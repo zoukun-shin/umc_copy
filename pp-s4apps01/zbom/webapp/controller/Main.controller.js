@@ -282,7 +282,7 @@ sap.ui.define([
                 var oHeaderValidityStartDate = new sap.ui.model.Filter({
                     path: "HeaderValidityStartDate",
                     operator: "EQ",
-                    value1: aDates[0] //sDates
+                    value1: aDates[1] //sDates
                 });
 
                aFilters.push(oHeaderValidityStartDate);
