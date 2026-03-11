@@ -26,6 +26,9 @@ sap.ui.define([
 
                 oCopyProvider = new CopyProvider({ extractData: this.extractData, copy: this.onCopy });
                 oTable.addDependent(oCopyProvider);
+
+                const oToolbar = this.byId("idToolBar");
+                oToolbar.addContent(oCopyProvider.getCopyButton());
             }
         },
 
