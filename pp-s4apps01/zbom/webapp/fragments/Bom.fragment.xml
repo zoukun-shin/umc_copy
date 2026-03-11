@@ -10,14 +10,14 @@
         showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" 
         persistencyKey="BOMST" header="{i18n>Results}" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="RequiredQuantity,BOMExplosionType,LocalPosition,ShowSubParts,BOMExplosionIsMultilevel,BOMExplosionApplication">
+        beforeExport="onBeforeExport" showFullScreenButton="false" ignoredFields="RequiredQuantity,BOMExplosionType,LocalPosition,ShowSubParts,BOMExplosionIsMultilevel,BOMExplosionApplication,DisplayMpn">
         <smartTable:customToolbar>
-            <OverflowToolbar design="Transparent">
+            <OverflowToolbar id="idToolBar" design="Transparent">
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://print" text="{i18n>Print}" type="Transparent" press="onPrint('PrintBom')" enabled="{= ${local>/authorityCheck/button/Print}}"/>
+                <Button text="{i18n>Print}" type="Transparent" press="onPrint('PrintBom')" enabled="{= ${local>/authorityCheck/button/Print}}"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
-       <table:Table id="idTable" selectionMode="Multi" rowMode="Auto" threshold="999999999" >
+       <table:Table id="idTable" enableSelectAll="false" selectionMode="Multi" rowMode="Auto" threshold="999999999" >
             <table:columns>
                 <table:Column width="15rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material">
                     <table:customData>
@@ -115,7 +115,7 @@
                         <Text text="{AlternativeItemStrategy}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>UsageProbabilityPercent}" sortProperty="UsageProbabilityPercent" filterProperty="UsageProbabilityPercent">
+                <table:Column width="12rem" label="{i18n>UsageProbabilityPercent}" sortProperty="UsageProbabilityPercent" filterProperty="UsageProbabilityPercent" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"UsageProbabilityPercent", "leadingProperty":"UsageProbabilityPercent"}'/>
                     </table:customData>
@@ -393,14 +393,6 @@
                     </table:customData>
                     <table:template>
                         <Text text="{QTY2}" wrapping="false" />
-                    </table:template>
-                </table:Column>
-                <table:Column width="10rem" label="{i18n>DisplayMpn}" sortProperty="DisplayMpn" filterProperty="DisplayMpn" visible="false">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"DisplayMpn", "leadingProperty":"DisplayMpn"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{DisplayMpn}" wrapping="false" />
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>HeaderValidityStartDate}" sortProperty="HeaderValidityStartDate" filterProperty="HeaderValidityStartDate" visible="false">

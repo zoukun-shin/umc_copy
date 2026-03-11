@@ -26,6 +26,9 @@ sap.ui.define([
 
                 oCopyProvider = new CopyProvider({ extractData: this.extractData, copy: this.onCopy });
                 oTable.addDependent(oCopyProvider);
+
+                const oToolbar = this.byId("idToolBar");
+                oToolbar.addContent(oCopyProvider.getCopyButton());
             }
         },
 
@@ -279,7 +282,7 @@ sap.ui.define([
                 var oHeaderValidityStartDate = new sap.ui.model.Filter({
                     path: "HeaderValidityStartDate",
                     operator: "EQ",
-                    value1: aDates[0] //sDates
+                    value1: aDates[1] //sDates
                 });
 
                aFilters.push(oHeaderValidityStartDate);
