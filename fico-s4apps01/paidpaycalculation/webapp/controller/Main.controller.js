@@ -84,7 +84,6 @@ sap.ui.define([
 				if (sOption1 === true) {
 					this.getView().getModel("local").setProperty("/showA", true);
 					this.getView().getModel("local").setProperty("/showB", false);
-					this.getView().getModel("local").setProperty("/showBC", false);
 				} else {
 					this.getView().getModel("local").setProperty("/showA", false);
 					this.getView().getModel("local").setProperty("/showB", true);
@@ -97,7 +96,6 @@ sap.ui.define([
 					setTimeout(() => {
 						this.getView().getModel("local").setProperty("/showA", true);
 						this.getView().getModel("local").setProperty("/showB", false);
-						this.getView().getModel("local").setProperty("/showBC", false);
 					}, 100);
 				} else {
 					setTimeout(() => {
@@ -111,14 +109,11 @@ sap.ui.define([
 			onBeforeRebindTable: function (oEvent, arg1, arg2, arg3, arg4) {
 				var bHasError = false;
 				var sMessage = "";
-				var sBukrs = this.getView().byId("SFBCalculation").getControlByKey("CompanyCode").getValue();
-				let parts = sBukrs.split("(");
-				let part = parts[1].substring(0, 4);
+				var sBukrs = this.byId("SFBCalculation").getFilterData().CompanyCode;
 				var aAuthorityCompanySet = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
-
-				if (!aAuthorityCompanySet.some(data => data.CompanyCode === part)) {
+				if (!aAuthorityCompanySet.some(data => data.CompanyCode === sBukrs)) {
 					bHasError = true;
-					sMessage = part;
+					sMessage = sBukrs;
 				}
 
 				if (bHasError) {
@@ -149,15 +144,17 @@ sap.ui.define([
 
 					var bOption1Selected = this.byId("Option1").getSelected();
 					if (!bOption1Selected) {
-						if (part === "1100") {
-							setTimeout(() => {
-								this.getView().getModel("local").setProperty("/showBC", true);
-							}, 100);
-						} else {
-							setTimeout(() => {
-								this.getView().getModel("local").setProperty("/showBC", false);
-							}, 100);
-						}
+						const bShow = sBukrs === "1100";
+						const oTable = this.byId("Table_Calc");
+						const oColumn = oTable.getColumns().find(c => c.getId().includes("TICOAmount"));
+						if (oColumn) {
+							oColumn.setVisible(bShow);
+						};
+						if (bShow) {
+							if (!mBindingParams.parameters.select.includes("TICOAmount")) {
+								mBindingParams.parameters.select += ",TICOAmount";
+							}
+						};
 					}
 				}
 			},
@@ -171,7 +168,7 @@ sap.ui.define([
 				} else {
 					var sType = "B";
 				}
-				var sBukrs = this.getView().byId("SFBCalculation").getControlByKey("CompanyCode").getValue();
+				var sBukrs = this.byId("SFBCalculation").getFilterData().CompanyCode;
 				var sYear = new Date(this.byId("idGjahr").getValue()).getFullYear();
 				var sMonat = this.byId("idMonat").getSelectedKey();
 				var sLedge = this.getView().byId("idLedge").getSelectedKey();
@@ -191,15 +188,12 @@ sap.ui.define([
 				}
 
 				if (sType === "B") {
-					if (sBukrs === "1100") {
-						setTimeout(() => {
-							this.getView().getModel("local").setProperty("/showBC", true);
-						}, 100);
-					} else {
-						setTimeout(() => {
-							this.getView().getModel("local").setProperty("/showBC", false);
-						}, 100);
-					}
+					const bShow = sBukrs === "1100";
+					const oTable = this.byId("Table_Calc");
+					const oColumn = oTable.getColumns().find(c => c.getId().includes("TICOAmount"));
+					if (oColumn) {
+						oColumn.setVisible(bShow);
+					};
 				}
 				var aPromise = [];
 				aPromise.push(this.callAction(sType, sBukrs, sYear, sMonat, sLedge));
@@ -228,8 +222,6 @@ sap.ui.define([
 			},
 
 			callAction: function (sType, sBukrs, sYear, sMonat, sLedge) {
-				let parts = sBukrs.split("(");
-				let part = parts[1].substring(0, 4);
 				return new Promise(
 					function (resolve, reject) {
 						var mParameter = {
@@ -242,7 +234,7 @@ sap.ui.define([
 							method: "POST",
 							urlParameters: {
 								Zzkey: "",
-								CompanyCode: part,
+								CompanyCode: sBukrs,
 								FiscalYear: sYear,
 								Period: sMonat,
 								Ztype: sType,

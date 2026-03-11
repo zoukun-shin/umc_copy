@@ -770,7 +770,7 @@
               </t:template>
             </t:Column>
 
-            <t:Column id="TICOAmount" visible="{local>/showBC}" label="{i18n>TICOAmount}" width="10rem" sortProperty="TICOAmount" filterProperty="TICOAmount" autoResizable="true">
+            <t:Column id="TICOAmount" visible="false" label="{i18n>TICOAmount}" width="10rem" sortProperty="TICOAmount" filterProperty="TICOAmount" autoResizable="true">
               <t:customData>
                 <core:CustomData key="p13nData" value='\{"columnKey":"TICOAmount", "leadingProperty":"TICOAmount", "sortProperty":"TICOAmount", "filterProperty": "TICOAmount"}'/>
               </t:customData>
