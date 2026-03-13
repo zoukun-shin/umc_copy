@@ -61,6 +61,7 @@ sap.ui.define([
                         PrintTax: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-PrintTax"),
                         PrintCommercial: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-PrintCommercial"),
                         PrintVN: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-PrintVN"),
+                        PrintTHShipping: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-PrintTHShipping"),
                     },
                     data: {
                         PlantSet: context._AssignPlant,
@@ -316,6 +317,19 @@ sap.ui.define([
                 _oFunctions.getBillingData(this,"BillingPrintTH","YY1_SD019_TH",aBillingDocumentTH,"COMMERCIAL INVOICE");
             }
         },
+        onPrintTHShipping: function() {
+            // 获取选择的行项目
+            if (this.getSelectedContexts) {
+                var aSelectedContexts = this.getSelectedContexts();
+            }
+            let aItemTH = aSelectedContexts.filter(item => item.getObject()?.InvoicePrintType == "8");
+            let aBillingDocumentTH = aItemTH.map(item => item.getObject()?.BillingDocument);
+            aBillingDocumentTH = Array.from(new Set(aBillingDocumentTH));
+
+            if (aBillingDocumentTH.length > 0) {
+                _oFunctions.getBillingData(this,"BillingPrintTH","YY1_SD019_TH_SP",aBillingDocumentTH,"SHIPPING INVOICE");
+            }
+        },
 
         onPrintVNCD: function (oRouting, that, aBillingDocumentVNDR,aBillingDocumentVNCR) {
             if (!this.Dialog) {
@@ -496,16 +510,28 @@ sap.ui.define([
                     CreationDate: oFirstItem.CreationDate,
                     SoldToParty: oFirstItem.SoldToParty,
                     SoldToPartyName: oFirstItem.SoldToPartyName,
+                    SoldToPartyName1: oFirstItem.SoldToPartyName1,
+                    SoldToPartyName2: oFirstItem.SoldToPartyName2,
                     SoldToPartyStreet: oFirstItem.SoldToPartyStreet,
                     SoldToPartyCity: oFirstItem.SoldToPartyCity,
+                    SoldToPartyCountry: oFirstItem.SoldToPartyCountry,
                     ShipToParty: oFirstItem.ShipToParty,
                     ShipToPartyName: oFirstItem.ShipToPartyName,
+                    ShipToPartyName1: oFirstItem.ShipToPartyName1,
+                    ShipToPartyName2: oFirstItem.ShipToPartyName2,
                     ShipToPartyStreet: oFirstItem.ShipToPartyStreet,
                     ShipToPartyCity: oFirstItem.ShipToPartyCity,
+                    ShipToPartyCountry: oFirstItem.ShipToPartyCountry,
+                    ShipToPartyTel: oFirstItem.ShipToPartyTel,
+                    ShipToPartyEmail: oFirstItem.ShipToPartyEmail,
+                    ShipToPartyCountry: oFirstItem.ShipToPartyCountry,
                     PayerParty: oFirstItem.PayerParty,
                     PayerPartyName: oFirstItem.PayerPartyName,
+                    PayerPartyName1: oFirstItem.PayerPartyName1,
+                    PayerPartyName2: oFirstItem.PayerPartyName2,
                     PayerPartyStreet: oFirstItem.PayerPartyStreet,
                     PayerPartyCity: oFirstItem.PayerPartyCity,
+                    PayerPartyCountry: oFirstItem.PayerPartyCountry,
                     ShippingMethod: oFirstItem.ShippingMethod,
                     IncotermsLocation: oFirstItem.IncotermsLocation1,
                     CustomerPaymentTerms: oFirstItem.CustomerPaymentTerms,
@@ -523,7 +549,6 @@ sap.ui.define([
                     delete item.DocTitle;
                     delete item.BillingDocument;
                     delete item.BillingDocumentItem;
-                    delete item.Material;
                     delete item.CompanyName;
                     delete item.CompanyAddress;
                     delete item.CompanyTelFax;
