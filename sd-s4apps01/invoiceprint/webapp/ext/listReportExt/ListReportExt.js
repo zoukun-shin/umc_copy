@@ -61,6 +61,7 @@ sap.ui.define([
                         PrintTax: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-PrintTax"),
                         PrintCommercial: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-PrintCommercial"),
                         PrintVN: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-PrintVN"),
+                        PrintTHShipping: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprint-PrintTHShipping"),
                     },
                     data: {
                         PlantSet: context._AssignPlant,
