@@ -38,7 +38,10 @@ sap.ui.define([
             var sForcastMonth = '', sForcastYear = '';
             if (sMonth === '12') {
                 sForcastMonth = '01';
-                sForcastYear = sYear + 1;
+                // MOD BEGIN BY XINLEI XU 2026/03/18 Bug Fixed
+                // sForcastYear = sYear + 1;
+                sForcastYear = String(Number(sYear) + 1);
+                // MOD END BY XINLEI XU 2026/03/18
             } else {
                 sForcastMonth = String(Number(sMonth) + 1).padStart(2, '0');
                 sForcastYear = sYear;
