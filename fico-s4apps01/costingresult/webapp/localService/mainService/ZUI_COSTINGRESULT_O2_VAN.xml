@@ -37,6 +37,7 @@
                         <PropertyPath>Material</PropertyPath>
                         <PropertyPath>MaterialType</PropertyPath>
                         <PropertyPath>CostRunID</PropertyPath>
+                        <PropertyPath>EstimatedCostCostingRunDate</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>

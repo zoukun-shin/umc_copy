@@ -60,31 +60,27 @@
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="PlantName" sap:label="Plant"/>
                 <Property Name="PlantName" Type="Edm.String" MaxLength="30" sap:label="Plant Name"/>
             </EntityType>
-            <EntityType Name="I_ProductTypeText_2Type" sap:label="Product Type - Text" sap:value-list="true" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="ProductType"/>
-                    <PropertyRef Name="Language"/>
-                </Key>
-                <Property Name="ProductType" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="ProductTypeName" sap:label="Product Type"/>
-                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
-                <Property Name="ProductTypeName" Type="Edm.String" MaxLength="25" sap:label="Product Type Description" sap:quickinfo="Description of product type"/>
-            </EntityType>
             <EntityType Name="CostingResultType" sap:label="Standard Costing Result" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Plant"/>
                     <PropertyRef Name="YearMonth"/>
                     <PropertyRef Name="Material"/>
                     <PropertyRef Name="CostRunID"/>
+                    <PropertyRef Name="EstimatedCostCostingRunDate"/>
                 </Key>
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:filter-restriction="single-value" sap:label="Plant" sap:value-list="standard"/>
                 <Property Name="YearMonth" Type="Edm.String" Nullable="false" MaxLength="6"/>
                 <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:value-list="standard"/>
                 <Property Name="CostRunID" Type="Edm.String" Nullable="false" MaxLength="8" sap:filter-restriction="single-value" sap:value-list="standard"/>
+                <Property Name="EstimatedCostCostingRunDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:filter-restriction="single-value"/>
                 <Property Name="MaterialType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Material Type" sap:value-list="standard"/>
                 <Property Name="MaterialName" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
+                <Property Name="ValuationClass" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Class"/>
+                <Property Name="ValuationClassText" Type="Edm.String" MaxLength="25"/>
                 <Property Name="Customer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number"/>
                 <Property Name="CustomerName" Type="Edm.String" MaxLength="80"/>
                 <Property Name="CostStatus" Type="Edm.String" MaxLength="2"/>
+                <Property Name="CostStatusText" Type="Edm.String" MaxLength="50"/>
                 <Property Name="CostDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="LotSize" Type="Edm.String" MaxLength="30"/>
                 <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
@@ -98,7 +94,7 @@
                 <Property Name="fc_204" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="fc_waers" sap:variable-scale="true"/>
                 <Property Name="fc_205" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="fc_waers" sap:variable-scale="true"/>
                 <Property Name="fc_209" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="fc_waers" sap:variable-scale="true"/>
-                <Property Name="fc_exchage" Type="Edm.String" MaxLength="10"/>
+                <Property Name="fc_exchage" Type="Edm.String" MaxLength="15"/>
                 <Property Name="cc_waers" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
                 <Property Name="cc_total" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="cc_waers" sap:variable-scale="true"/>
                 <Property Name="cc_101" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="cc_waers" sap:variable-scale="true"/>
@@ -116,9 +112,18 @@
                     <PropertyRef Name="Product"/>
                     <PropertyRef Name="Plant"/>
                 </Key>
-                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Product" sap:quickinfo="Product Number"/>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Product"/>
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
                 <Property Name="ProductDescription" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
+            </EntityType>
+            <EntityType Name="ZR_ProductTypeVHType" sap:label="Product Type Value Help" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ProductType"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="ProductType" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="ProductTypeName" sap:label="Product Type"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="ProductTypeName" Type="Edm.String" MaxLength="25" sap:label="Product Type Description" sap:quickinfo="Description of product type"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -378,9 +383,9 @@
             <EntityContainer Name="cds_zui_costingresult_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
                 <EntitySet Name="I_EstimatedCostCostingRunStdVH" EntityType="cds_zui_costingresult_o2.I_EstimatedCostCostingRunStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_PlantStdVH" EntityType="cds_zui_costingresult_o2.I_PlantStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="I_ProductTypeText_2" EntityType="cds_zui_costingresult_o2.I_ProductTypeText_2Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="CostingResult" EntityType="cds_zui_costingresult_o2.CostingResultType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="ZR_ProductPlantVH" EntityType="cds_zui_costingresult_o2.ZR_ProductPlantVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZR_ProductTypeVH" EntityType="cds_zui_costingresult_o2.ZR_ProductTypeVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_costingresult_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zui_costingresult_o2.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__TableColumnsSet" EntityType="cds_zui_costingresult_o2.SAP__TableColumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
@@ -488,7 +493,8 @@
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="CostRunID"/>
                                     <PropertyValue Property="ValueListProperty" String="EstimatedCostCostingRun"/>
                                 </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="EstimatedCostCostingRunDate"/>
                                     <PropertyValue Property="ValueListProperty" String="EstimatedCostCostingRunDate"/>
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
@@ -506,8 +512,8 @@
                 <Annotation Term="Common.ValueList">
                     <Record>
                         <PropertyValue Property="Label" String="Material Type"/>
-                        <PropertyValue Property="CollectionPath" String="I_ProductTypeText_2"/>
-                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="CollectionPath" String="ZR_ProductTypeVH"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
                         <PropertyValue Property="Parameters">
                             <Collection>
                                 <Record Type="Common.ValueListParameterInOut">
@@ -544,6 +550,10 @@
                                 </Record>
                                 <Record>
                                     <PropertyValue Property="Property" PropertyPath="CostRunID"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="EstimatedCostCostingRunDate"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
                                 </Record>
                             </Collection>
@@ -595,23 +605,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            <Annotations Target="cds_zui_costingresult_o2.cds_zui_costingresult_o2_Entities/I_ProductTypeText_2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Capabilities.DeleteRestrictions">
-                    <Record>
-                        <PropertyValue Property="Deletable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.InsertRestrictions">
-                    <Record>
-                        <PropertyValue Property="Insertable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.UpdateRestrictions">
-                    <Record>
-                        <PropertyValue Property="Updatable" Bool="false"/>
-                    </Record>
-                </Annotation>
-            </Annotations>
             <Annotations Target="cds_zui_costingresult_o2.cds_zui_costingresult_o2_Entities/ZR_ProductPlantVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
@@ -629,10 +622,20 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            <Annotations Target="cds_zui_costingresult_o2.I_ProductTypeText_2Type" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.SAPObjectNodeType">
+            <Annotations Target="cds_zui_costingresult_o2.cds_zui_costingresult_o2_Entities/ZR_ProductTypeVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
-                        <PropertyValue Property="Name" String="ProductTypeText"/>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
                     </Record>
                 </Annotation>
             </Annotations>
@@ -695,11 +698,11 @@
             <Annotations Target="cds_zui_costingresult_o2.ZR_ProductPlantVHType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_costingresult_o2.I_ProductTypeText_2Type/ProductType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTTYPE&amp;origin=JG5_100"/>
-            </Annotations>
             <Annotations Target="cds_zui_costingresult_o2.I_EstimatedCostCostingRunStdVHType/EstimatedCostCostingRunDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CK_KALADAT&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_costingresult_o2.CostingResultType/ValuationClass" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BKLAS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_costingresult_o2.ZR_ProductPlantVHType/ProductDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
@@ -713,14 +716,14 @@
             <Annotations Target="cds_zui_costingresult_o2.CostingResultType/fc_waers" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_costingresult_o2.I_ProductTypeText_2Type/Language" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=SPRAS&amp;origin=JG5_100"/>
-            </Annotations>
             <Annotations Target="cds_zui_costingresult_o2.CostingResultType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_costingresult_o2.CostingResultType/Material" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_costingresult_o2.ZR_ProductTypeVHType/ProductType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTTYPE&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_costingresult_o2.ZR_ProductPlantVHType/Product" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTNUMBER&amp;origin=JG5_100"/>
@@ -733,6 +736,9 @@
             </Annotations>
             <Annotations Target="cds_zui_costingresult_o2.CostingResultType/MaterialName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MAKTX&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_costingresult_o2.ZR_ProductTypeVHType/Language" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=SPRAS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_costingresult_o2.SAP__Currency/CurrencyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.Text" Path="Text"/>

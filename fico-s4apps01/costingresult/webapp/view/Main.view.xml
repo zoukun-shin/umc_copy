@@ -32,7 +32,8 @@
                             </smartFilterBar:ControlConfiguration>
                             <smartFilterBar:ControlConfiguration index='30' key="Material" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}"/>
                             <smartFilterBar:ControlConfiguration index='40' key="CostRunID" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>CostRunID}"/>
-                            <smartFilterBar:ControlConfiguration index='50' key="MaterialType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MaterialType}"/>
+                            <smartFilterBar:ControlConfiguration index='50' key="EstimatedCostCostingRunDate" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>EstimatedCostCostingRunDate}"/>
+                            <smartFilterBar:ControlConfiguration index='60' key="MaterialType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MaterialType}"/>
                             <!-- visible -->
                             <smartFilterBar:ControlConfiguration index='999' key="MaterialName" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="Customer" visible="false"/>
@@ -63,6 +64,9 @@
                             <smartFilterBar:ControlConfiguration index='999' key="cc_209" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="ValuationClass" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="ValuationClassText" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="CostStatusText" visible="false"/>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -113,6 +117,22 @@
                                 <Text text="{MaterialType}" wrapping="false" />
                             </table:template>
                         </table:Column>
+                        <table:Column width="8rem" label="{i18n>ValuationClass}" sortProperty="ValuationClass" filterProperty="ValuationClass">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ValuationClass", "leadingProperty":"ValuationClass"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ValuationClass}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>ValuationClassText}" sortProperty="ValuationClassText" filterProperty="ValuationClassText">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ValuationClassText", "leadingProperty":"ValuationClassText"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ValuationClassText}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
                         <table:Column width="8rem" label="{i18n>Customer}" sortProperty="Customer" filterProperty="Customer">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "leadingProperty":"Customer"}'/>
@@ -137,12 +157,28 @@
                                 <Text text="{CostStatus}" wrapping="false" />
                             </table:template>
                         </table:Column>
+                        <table:Column width="12rem" label="{i18n>CostStatusText}" sortProperty="CostStatusText" filterProperty="CostStatusText">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CostStatusText", "leadingProperty":"CostStatusText"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{CostStatusText}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
                         <table:Column width="8rem" label="{i18n>CostDate}" sortProperty="CostDate" filterProperty="CostDate">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CostDate", "leadingProperty":"CostDate"}'/>
                             </table:customData>
                             <table:template>
                                 <Text text="{path:'CostDate', formatter:'.formatter.formatDate'}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>EstimatedCostCostingRunDate}" sortProperty="EstimatedCostCostingRunDate" filterProperty="EstimatedCostCostingRunDate">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"EstimatedCostCostingRunDate", "leadingProperty":"EstimatedCostCostingRunDate"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{path:'EstimatedCostCostingRunDate', formatter:'.formatter.formatDate'}" wrapping="false" />
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>LotSize}" sortProperty="LotSize" filterProperty="LotSize">

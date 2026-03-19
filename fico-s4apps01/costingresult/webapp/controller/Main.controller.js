@@ -86,6 +86,7 @@ sap.ui.define([
             let sMaterialType = oSmartFilterBar.getFilterData().MaterialType;
             let sCostRunID = oSmartFilterBar.getFilterData().CostRunID;
             let sYearMon = this.byId("idYM").getValue().replace("/", "");
+            let sCostDate = oSmartFilterBar.getFilterData().EstimatedCostCostingRunDate;
             let bHasError = false;
             //Material or material type or Costing Run ID – one of the three must be filled in.
             if (!sMaterial && !sMaterialType && !sCostRunID) {
@@ -97,6 +98,13 @@ sap.ui.define([
                 MessageBox.error(this.getResourceBundle().getText("msg002"));
                 bHasError = true;
             };
+            //When Costing Run ID has a value, Costing Run Date is mandatory
+            //When Costing Run Date has a value, Costing Run ID is mandatory
+            if ((sCostRunID && !sCostDate) || (!sCostRunID && sCostDate)) {
+                MessageBox.error(this.getResourceBundle().getText("msg003"));
+                bHasError = true;
+            };
+
             if (!bHasError) {
                 if (sYearMon) {
                     if (sYearMon) {
