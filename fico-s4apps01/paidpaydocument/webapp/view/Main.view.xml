@@ -73,6 +73,7 @@
 			    <smartFilterBar:ControlConfiguration index='999' key="CurrentStockFin" visible="false"/>
 			    <smartFilterBar:ControlConfiguration index='999' key="CurrentStockTotal" visible="false"/>
 			    <smartFilterBar:ControlConfiguration index='999' key="StockChangeAmount" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="TICOAmount" visible="false"/>
           <smartFilterBar:ControlConfiguration index='999' key="PaidMaterialCost" visible="false"/>
           <smartFilterBar:ControlConfiguration index='999' key="CustomerRevenue" visible="false"/>
           <smartFilterBar:ControlConfiguration index='999' key="Revenue" visible="false"/>
@@ -279,6 +280,15 @@
               </t:customData>
               <t:template>
                 <Text text="{path:'CurrentStockTotal', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+              </t:template>
+            </t:Column>
+
+            <t:Column id="TICOAmount" visible="false" label="{i18n>TICOAmount}" width="12rem" sortProperty="TICOAmount" filterProperty="TICOAmount" autoResizable="true">
+              <t:customData>
+                <core:CustomData key="p13nData" value='\{"columnKey":"TICOAmount", "leadingProperty":"TICOAmount", "sortProperty":"TICOAmount", "filterProperty": "TICOAmount"}'/>
+              </t:customData>
+              <t:template>
+                <Text text="{path:'TICOAmount', formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
 

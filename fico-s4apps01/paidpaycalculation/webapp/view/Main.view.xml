@@ -129,6 +129,7 @@
           <smartFilterBar:ControlConfiguration index='999' key="CurrentStockFin" visible="false"/>
           <smartFilterBar:ControlConfiguration index='999' key="CurrentStockTotal" visible="false"/>
           <smartFilterBar:ControlConfiguration index='999' key="StockChangeAmount" visible="false"/>
+          <smartFilterBar:ControlConfiguration index='999' key="TICOAmount" visible="false"/>
           <smartFilterBar:ControlConfiguration index='999' key="PaidMaterialCost" visible="false"/>
           <smartFilterBar:ControlConfiguration index='999' key="CustomerRevenue1" visible="false"/>
           <smartFilterBar:ControlConfiguration index='999' key="CustomerRevenue" visible="false"/>

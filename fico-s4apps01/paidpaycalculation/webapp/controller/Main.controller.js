@@ -155,6 +155,12 @@ sap.ui.define([
 								mBindingParams.parameters.select += ",TICOAmount";
 							}
 						};
+					} else {
+						const oTable = this.byId("Table_Calc");
+						const oColumn = oTable.getColumns().find(c => c.getId().includes("TICOAmount"));
+						if (oColumn) {
+							oColumn.setVisible(false);
+						};
 					}
 				}
 			},
@@ -193,6 +199,12 @@ sap.ui.define([
 					const oColumn = oTable.getColumns().find(c => c.getId().includes("TICOAmount"));
 					if (oColumn) {
 						oColumn.setVisible(bShow);
+					};
+				} else {
+					const oTable = this.byId("Table_Calc");
+					const oColumn = oTable.getColumns().find(c => c.getId().includes("TICOAmount"));
+					if (oColumn) {
+						oColumn.setVisible(false);
 					};
 				}
 				var aPromise = [];
@@ -480,6 +492,12 @@ sap.ui.define([
 							oColumn.textAlign = "End";
 							break;
 						case "CurrentStockTotal":
+							oColumn.type = sap.ui.export.EdmType.Number;
+							oColumn.delimiter = true;
+							oColumn.scale = iScale;
+							oColumn.textAlign = "End";
+							break;
+						case "TICOAmount":
 							oColumn.type = sap.ui.export.EdmType.Number;
 							oColumn.delimiter = true;
 							oColumn.scale = iScale;

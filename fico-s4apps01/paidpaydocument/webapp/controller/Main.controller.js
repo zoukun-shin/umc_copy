@@ -109,15 +109,13 @@ sap.ui.define([
             onBeforeRebindTable: function (oEvent) {
                 var bHasError = false;
                 var sMessage = "";
-                var sBukrs = this.getView().byId("SFBDocument").getControlByKey("CompanyCode").getValue();
-                let parts = sBukrs.split("(");
-                let part = parts[1].substring(0, 4);
+                var sBukrs = this.byId("SFBDocument").getFilterData().CompanyCode;
                 var aAuthorityCompanySet = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
 
-                 if (!aAuthorityCompanySet.some(data => data.CompanyCode === part)) {
-                     bHasError = true;
-                     sMessage = part;
-                 }
+                if (!aAuthorityCompanySet.some(data => data.CompanyCode === sBukrs)) {
+                    bHasError = true;
+                    sMessage = sBukrs;
+                }
 
                 if (bHasError) {
                     MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("noAuthorityCompanyCode", [sMessage]));
@@ -141,6 +139,26 @@ sap.ui.define([
                         newFilter = new sap.ui.model.Filter("Ztype", sap.ui.model.FilterOperator.EQ, "B");
                     }
                     mBindingParams.filters.push(newFilter);
+
+                    if (sOption1) {
+                        const bShow = sBukrs === "1100";
+                        const oTable = this.byId("Table_Doc");
+                        const oColumn = oTable.getColumns().find(c => c.getId().includes("TICOAmount"));
+                        if (oColumn) {
+                            oColumn.setVisible(bShow);
+                        };
+                        if (bShow) {
+                            if (!mBindingParams.parameters.select.includes("TICOAmount")) {
+                                mBindingParams.parameters.select += ",TICOAmount";
+                            }
+                        };
+                    } else {
+                        const oTable = this.byId("Table_Doc");
+                        const oColumn = oTable.getColumns().find(c => c.getId().includes("TICOAmount"));
+                        if (oColumn) {
+                            oColumn.setVisible(false);
+                        };
+                    }
                 }
 
             },
@@ -171,6 +189,21 @@ sap.ui.define([
                     MessageToast.show(that.getModel("i18n").getResourceBundle().getText("msgInputMonat"));
                     return;
                 };
+
+                if (sType === "A") {
+                    const bShow = sBukrs === "1100";
+                    const oTable = this.byId("Table_Doc");
+                    const oColumn = oTable.getColumns().find(c => c.getId().includes("TICOAmount"));
+                    if (oColumn) {
+                        oColumn.setVisible(bShow);
+                    };
+                } else {
+                    const oTable = this.byId("Table_Doc");
+                    const oColumn = oTable.getColumns().find(c => c.getId().includes("TICOAmount"));
+                    if (oColumn) {
+                        oColumn.setVisible(false);
+                    };
+                }
 
                 let postDocs = this.preparePostBody();
                 this._BusyDialog.open();
@@ -272,6 +305,21 @@ sap.ui.define([
                     return;
                 };
 
+                if (sType === "A") {
+                    const bShow = sBukrs === "1100";
+                    const oTable = this.byId("Table_Doc");
+                    const oColumn = oTable.getColumns().find(c => c.getId().includes("TICOAmount"));
+                    if (oColumn) {
+                        oColumn.setVisible(bShow);
+                    };
+                } else {
+                    const oTable = this.byId("Table_Doc");
+                    const oColumn = oTable.getColumns().find(c => c.getId().includes("TICOAmount"));
+                    if (oColumn) {
+                        oColumn.setVisible(false);
+                    };
+                }
+
                 let postDocs = this.preparePostBody();
                 this._BusyDialog.open();
                 this.setBusy(true);
@@ -306,14 +354,14 @@ sap.ui.define([
 
             onBeforeExport: function (oEvent) {
                 var oSmartTable = this.byId("smartTable_Doc");
-				var oTable = oSmartTable.getTable();
-				var oFirstContext = oTable.getBinding("rows").getContexts()[0];
-				var sCurrency = oFirstContext.getObject().Currency;
-				if (sCurrency === "JPY" || sCurrency === "VND") {
-					var iScale = 0;
-				} else {
-					var iScale = 2;
-				}
+                var oTable = oSmartTable.getTable();
+                var oFirstContext = oTable.getBinding("rows").getContexts()[0];
+                var sCurrency = oFirstContext.getObject().Currency;
+                if (sCurrency === "JPY" || sCurrency === "VND") {
+                    var iScale = 0;
+                } else {
+                    var iScale = 2;
+                }
                 var mExcelSettings = oEvent.getParameter("exportSettings");
                 var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
                 this._exportExcel(mExcelSettings, sFileName, iScale);
@@ -368,6 +416,12 @@ sap.ui.define([
                             oColumn.textAlign = "End";
                             break;
                         case "CurrentStockTotal":
+                            oColumn.type = sap.ui.export.EdmType.Number;
+                            oColumn.delimiter = true;
+                            oColumn.scale = iScale;
+                            oColumn.textAlign = "End";
+                            break;
+                        case "TICOAmount":
                             oColumn.type = sap.ui.export.EdmType.Number;
                             oColumn.delimiter = true;
                             oColumn.scale = iScale;
