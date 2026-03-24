@@ -162,7 +162,15 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CostStatusText", "leadingProperty":"CostStatusText"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{CostStatusText}" wrapping="false" />
+                                <Text text="{CostStatusText}" wrapping="false" tooltip="{CostStatusText}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="8rem" label="{i18n>CostRunID}" sortProperty="CostRunID" filterProperty="CostRunID">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CostRunID", "leadingProperty":"CostRunID"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{CostRunID}" wrapping="false" />
                             </table:template>
                         </table:Column>
                         <table:Column width="8rem" label="{i18n>CostDate}" sortProperty="CostDate" filterProperty="CostDate">
