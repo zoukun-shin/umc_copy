@@ -9,32 +9,32 @@
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
     </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation"/>
     </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="SAP__capabilities"/>
     </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="SAP__aggregation"/>
-    </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation"/>
-    </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
     </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI"/>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="SAP__common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="SAP__core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
     </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="SAP__HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="SAP__measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
     </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PDF',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.PDF.v1" Alias="SAP__PDF"/>
@@ -42,11 +42,14 @@
     <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SESSION',Version='0001',SAP__Origin='LOCAL')/$value">
         <edmx:Include Namespace="com.sap.vocabularies.Session.v1" Alias="SAP__session"/>
     </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_SUPPORT',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Support.v1" Alias="SAP__support"/>
     </edmx:Reference>
-    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HIERARCHY',Version='0001',SAP__Origin='LOCAL')/$value">
-        <edmx:Include Namespace="com.sap.vocabularies.Hierarchy.v1" Alias="SAP__hierarchy"/>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="SAP__UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="SAP__validation"/>
     </edmx:Reference>
     <edmx:DataServices>
         <Schema Namespace="com.sap.gateway.srvd.zui_mfgorder.v0001" Alias="SAP__self">
@@ -133,13 +136,13 @@
                 <Property Name="CompanycodeText" Type="Edm.String" Nullable="false" MaxLength="25"/>
                 <Property Name="PlantText" Type="Edm.String" Nullable="false" MaxLength="30"/>
                 <Property Name="ProductDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="MfgOrderPlannedTotalQty" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="3"/>
                 <Property Name="MfgOrderConfirmedYieldQty" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="3"/>
                 <Property Name="ProductionUnit" Type="Edm.String" Nullable="false" MaxLength="3"/>
                 <Property Name="BusinessPartnerName" Type="Edm.String" Nullable="false" MaxLength="35"/>
                 <Property Name="ProfitCenterLongName" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="CostCenterDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="CostCtrActivityTypeName" Type="Edm.String" Nullable="false" MaxLength="20"/>
-                <Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="12"/>
                 <Property Name="ProductionSupervisor" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="PlanQtyInCostSourceUnit" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="3"/>
                 <Property Name="ActualQtyInCostSourceUnit" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="3"/>
@@ -148,10 +151,10 @@
                 <Property Name="ActualCostRate" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="variable"/>
                 <Property Name="Currency1" Type="Edm.String" Nullable="false" MaxLength="5"/>
                 <Property Name="Currency2" Type="Edm.String" Nullable="false" MaxLength="5"/>
+                <Property Name="Currency_Empty" Type="Edm.String" Nullable="false" MaxLength="5"/>
                 <Property Name="CostRateScaleFactor1" Type="Edm.Decimal" Nullable="false" Precision="5"/>
                 <Property Name="CostRateScaleFactor2" Type="Edm.Decimal" Nullable="false" Precision="5"/>
                 <Property Name="TotalActualCost" Type="Edm.Decimal" Nullable="false" Precision="20" Scale="variable"/>
-                <Property Name="ActualCost1PC" Type="Edm.Decimal" Nullable="false" Precision="20" Scale="variable"/>
                 <Property Name="calendaryear" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="calendarMonth" Type="Edm.String" Nullable="false" MaxLength="2"/>
                 <Property Name="producedproduct" Type="Edm.String" Nullable="false" MaxLength="40"/>
@@ -203,6 +206,7 @@
                 <Annotation Term="SAP__common.Label" String="販売単位"/>
                 <Annotation Term="SAP__common.Heading" String="BUn"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Base Unit of Measure"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER2Type/SalesPerfActlAmtInDspCurrency">
                 <Annotation Term="SAP__common.Label" String="実績値"/>
@@ -214,6 +218,7 @@
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Heading" String="Crcy"/>
                 <Annotation Term="SAP__common.QuickInfo" String="SD Document Currency"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERK"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER2Type/calendaryear">
                 <Annotation Term="SAP__common.Label" String="会計年度"/>
@@ -227,12 +232,6 @@
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER2Type">
                 <Annotation Term="SAP__common.Label" String="Query CDS2"/>
-                <Annotation Term="SAP__UI.HeaderInfo">
-                    <Record>
-                        <PropertyValue Property="TypeName" String="Items"/>
-                        <PropertyValue Property="TypeNamePlural" String="Items"/>
-                    </Record>
-                </Annotation>
                 <Annotation Term="SAP__UI.LineItem">
                     <Collection>
                         <Record Type="SAP__UI.DataField">
@@ -347,9 +346,6 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="SAP__core.OptimisticConcurrency">
-                    <Collection/>
-                </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.Container">
                 <Annotation Term="SAP__CodeList.CurrencyCodes">
@@ -362,18 +358,6 @@
                     <Record>
                         <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
                         <PropertyValue Property="CollectionPath" String="UnitsOfMeasure"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="SAP__aggregation.ApplySupported">
-                    <Record>
-                        <PropertyValue Property="Transformations">
-                            <Collection>
-                                <String>aggregate</String>
-                                <String>groupby</String>
-                                <String>filter</String>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="Rollup" EnumMember="SAP__aggregation.RollupType/None"/>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
@@ -394,6 +378,12 @@
                         <String>all</String>
                     </Collection>
                 </Annotation>
+                <Annotation Term="SAP__support.TechnicalInfoLinks">
+                    <Record>
+                        <PropertyValue Property="Url" String="../../../../default/iwbep/common/0001/$metadata"/>
+                        <PropertyValue Property="FunctionImport" String="GetTechnicalInfoLinks"/>
+                    </Record>
+                </Annotation>
                 <Annotation Term="SAP__capabilities.SupportedFormats">
                     <Collection>
                         <String>application/json</String>
@@ -410,14 +400,16 @@
                         <PropertyValue Property="FitToPage" Bool="true"/>
                         <PropertyValue Property="FontName" Bool="true"/>
                         <PropertyValue Property="FontSize" Bool="true"/>
+                        <PropertyValue Property="HeaderFooter" Bool="true"/>
+                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
                         <PropertyValue Property="Margin" Bool="true"/>
                         <PropertyValue Property="Padding" Bool="true"/>
-                        <PropertyValue Property="Signature" Bool="true"/>
-                        <PropertyValue Property="HeaderFooter" Bool="true"/>
                         <PropertyValue Property="ResultSizeDefault" Int="20000"/>
                         <PropertyValue Property="ResultSizeMaximum" Int="20000"/>
-                        <PropertyValue Property="IANATimezoneFormat" Bool="true"/>
+                        <PropertyValue Property="Signature" Bool="true"/>
+                        <PropertyValue Property="TextDirectionLayout" Bool="true"/>
                         <PropertyValue Property="Treeview" Bool="true"/>
+                        <PropertyValue Property="UploadToFileShare" Bool="true"/>
                     </Record>
                 </Annotation>
                 <Annotation Term="SAP__capabilities.KeyAsSegmentSupported"/>
@@ -476,6 +468,7 @@
                 <Annotation Term="SAP__common.IsUpperCase"/>
                 <Annotation Term="SAP__common.Heading" String="Crcy"/>
                 <Annotation Term="SAP__common.QuickInfo" String="SD Document Currency"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERK"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER3Type/calendaryear">
                 <Annotation Term="SAP__common.Label" String="会計年度"/>
@@ -492,12 +485,6 @@
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER3Type">
                 <Annotation Term="SAP__common.Label" String="Query CDS3"/>
-                <Annotation Term="SAP__UI.HeaderInfo">
-                    <Record>
-                        <PropertyValue Property="TypeName" String="Items"/>
-                        <PropertyValue Property="TypeNamePlural" String="Items"/>
-                    </Record>
-                </Annotation>
                 <Annotation Term="SAP__UI.LineItem">
                     <Collection>
                         <Record Type="SAP__UI.DataField">
@@ -616,12 +603,10 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="SAP__core.OptimisticConcurrency">
-                    <Collection/>
-                </Annotation>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/YearMonth">
                 <Annotation Term="SAP__common.Label" String="年月"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/Companycode">
                 <Annotation Term="SAP__common.Label" String="会社コード"/>
@@ -641,101 +626,140 @@
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/Product">
                 <Annotation Term="SAP__common.Label" String="製品"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/BusinessPartner">
                 <Annotation Term="SAP__common.Label" String="得意先"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/ProfitCenter">
                 <Annotation Term="SAP__common.Label" String="利益センタ"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/CostCenter">
                 <Annotation Term="SAP__common.Label" String="原価センタ"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/ActivityType">
                 <Annotation Term="SAP__common.Label" String="活動タイプ"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/orderid">
                 <Annotation Term="SAP__common.Label" String="OrderID"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/CompanycodeText">
                 <Annotation Term="SAP__common.Label" String="会社コードテキスト"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/PlantText">
                 <Annotation Term="SAP__common.Label" String="プラントテキスト"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/ProductDescription">
                 <Annotation Term="SAP__common.Label" String="製品テキスト"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/MfgOrderPlannedTotalQty">
+                <Annotation Term="SAP__common.Label" String="計画入庫数量"/>
+                <Annotation Term="SAP__measures.Unit" Path="ProductionUnit"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/MfgOrderConfirmedYieldQty">
                 <Annotation Term="SAP__common.Label" String="入庫数量"/>
                 <Annotation Term="SAP__measures.Unit" Path="ProductionUnit"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/ProductionUnit">
                 <Annotation Term="SAP__common.IsUnit"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Base Unit of Measure"/>
                 <Annotation Term="SAP__common.Heading" String="BUn"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/BusinessPartnerName">
                 <Annotation Term="SAP__common.Label" String="得意先テキスト"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/ProfitCenterLongName">
                 <Annotation Term="SAP__common.Label" String="利益センタテキスト"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/CostCenterDescription">
                 <Annotation Term="SAP__common.Label" String="原価センタテキスト"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/CostCtrActivityTypeName">
                 <Annotation Term="SAP__common.Label" String="活動タイプテキスト"/>
-            </Annotations>
-            <Annotations Target="SAP__self.MFGORDER1Type/Department">
-                <Annotation Term="SAP__common.Label" String="部署（工程）"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/ProductionSupervisor">
                 <Annotation Term="SAP__common.Label" String="製造責任者（工程情報）"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/PlanQtyInCostSourceUnit">
                 <Annotation Term="SAP__common.Label" String="計画工数"/>
                 <Annotation Term="SAP__measures.Unit" Path="UnitOfMeasure"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/ActualQtyInCostSourceUnit">
                 <Annotation Term="SAP__common.Label" String="実績工数"/>
                 <Annotation Term="SAP__measures.Unit" Path="UnitOfMeasure"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/UnitOfMeasure">
                 <Annotation Term="SAP__common.IsUnit"/>
                 <Annotation Term="SAP__common.Label" String="工数単位"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
                 <Annotation Term="SAP__common.Heading" String="UM"/>
                 <Annotation Term="SAP__common.QuickInfo" String="Unit of Measure for Display"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINH"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/PlanCostRate">
                 <Annotation Term="SAP__common.Label" String="計画賃率"/>
                 <Annotation Term="SAP__measures.ISOCurrency" Path="Currency1"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/ActualCostRate">
                 <Annotation Term="SAP__common.Label" String="実際賃率"/>
                 <Annotation Term="SAP__measures.ISOCurrency" Path="Currency2"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/Currency1">
                 <Annotation Term="SAP__common.IsCurrency"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Document Currency"/>
                 <Annotation Term="SAP__common.Heading" String="Crcy"/>
                 <Annotation Term="SAP__common.QuickInfo" String="SD Document Currency"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERK"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/Currency2">
                 <Annotation Term="SAP__common.IsCurrency"/>
                 <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
                 <Annotation Term="SAP__common.Label" String="Document Currency"/>
                 <Annotation Term="SAP__common.Heading" String="Crcy"/>
                 <Annotation Term="SAP__common.QuickInfo" String="SD Document Currency"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERK"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/Currency_Empty">
+                <Annotation Term="SAP__common.IsCurrency"/>
+                <Annotation Term="SAP__common.IsUpperCase"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__UI.Hidden"/>
+                <Annotation Term="SAP__common.Label" String="Document Currency"/>
+                <Annotation Term="SAP__common.Heading" String="Crcy"/>
+                <Annotation Term="SAP__common.QuickInfo" String="SD Document Currency"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERK"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/TotalActualCost">
                 <Annotation Term="SAP__common.Label" String="加工費実績合計"/>
-                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency2"/>
-            </Annotations>
-            <Annotations Target="SAP__self.MFGORDER1Type/ActualCost1PC">
-                <Annotation Term="SAP__common.Label" String="加工費実績（1単位）"/>
-                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency2"/>
+                <Annotation Term="SAP__measures.ISOCurrency" Path="Currency_Empty"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/calendaryear">
                 <Annotation Term="SAP__common.Label" String="会計年度"/>
@@ -749,15 +773,10 @@
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/producedproduct">
                 <Annotation Term="SAP__common.Label" String="構成品目"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type">
                 <Annotation Term="SAP__common.Label" String="Query CDS"/>
-                <Annotation Term="SAP__UI.HeaderInfo">
-                    <Record>
-                        <PropertyValue Property="TypeName" String="Items"/>
-                        <PropertyValue Property="TypeNamePlural" String="Items"/>
-                    </Record>
-                </Annotation>
                 <Annotation Term="SAP__UI.LineItem">
                     <Collection>
                         <Record Type="SAP__UI.DataField">
@@ -787,6 +806,10 @@
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="製品テキスト"/>
                             <PropertyValue Property="Value" Path="ProductDescription"/>
+                        </Record>
+                        <Record Type="SAP__UI.DataField">
+                            <PropertyValue Property="Label" String="計画入庫数量"/>
+                            <PropertyValue Property="Value" Path="MfgOrderPlannedTotalQty"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="入庫数量"/>
@@ -825,10 +848,6 @@
                             <PropertyValue Property="Value" Path="CostCtrActivityTypeName"/>
                         </Record>
                         <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="部署（工程）"/>
-                            <PropertyValue Property="Value" Path="Department"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="製造責任者（工程情報）"/>
                             <PropertyValue Property="Value" Path="ProductionSupervisor"/>
                         </Record>
@@ -855,10 +874,6 @@
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="加工費実績合計"/>
                             <PropertyValue Property="Value" Path="TotalActualCost"/>
-                        </Record>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="加工費実績（1単位）"/>
-                            <PropertyValue Property="Value" Path="ActualCost1PC"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -920,9 +935,12 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
-                <Annotation Term="SAP__core.OptimisticConcurrency">
-                    <Collection/>
-                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/CostRateScaleFactor1">
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/CostRateScaleFactor2">
+                <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>
