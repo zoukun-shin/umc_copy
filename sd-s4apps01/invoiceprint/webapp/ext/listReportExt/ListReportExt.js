@@ -534,7 +534,7 @@ sap.ui.define([
                     PayerPartyCountry: oFirstItem.PayerPartyCountry,
                     ShippingMethod: oFirstItem.ShippingMethod,
                     IncotermsLocation: oFirstItem.IncotermsLocation1,
-                    CustomerPaymentTerms: oFirstItem.CustomerPaymentTerms,
+                    PaymentTermsDesc: oFirstItem.PaymentTermsDesc,
                     PlannedGoodsIssueDate: oFirstItem.PlannedGoodsIssueDate,
                     TotalQuantity:oFirstItem.TotalQuantity,
                     TotalNetAmount:oFirstItem.TotalNetAmount,
@@ -575,6 +575,13 @@ sap.ui.define([
                     delete item.TaxAmount;
                     delete item.GrandTotalAmount;
                 });
+                //要求即使行数不够也要用空白行填满一页。目前一页可以打印12行，所以添加空白行，将行项目数量改为12的倍数
+                let iMod = aBillingItem.length % 12;
+                if (iMod !== 0) {
+                    for (let i = 0; i < 12 - iMod; i++) {
+                        aBillingItem.push({});
+                    }
+                }
                 aBilling.push({
                     ...oHeader,
                     to_Items: {"results": aBillingItem }
