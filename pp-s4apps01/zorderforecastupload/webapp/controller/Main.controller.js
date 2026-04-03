@@ -129,8 +129,12 @@ sap.ui.define([
                             "Remark": "",
                             "MaterialStr": ""
                         };
-                        for (const key in aSheetData[i]) {
-                            if (key.includes("EMPTY")) {
+                        // MOD BEGIN BY XINLEI XU 2026/04/02 Bug Fixed AMO#5287
+                        // for (const key in aSheetData[i]) {
+                        //     if (key.includes("EMPTY")) {
+                        for (const key in aSheetData[1]) {
+                            if (key.includes("EMPTY_")) {
+                                // MOD END BY XINLEI XU 2026/04/02 Bug Fixed AMO#5287
                                 num += 1;
                                 var row = this._deepClone(item);
                                 row.Row = num;
