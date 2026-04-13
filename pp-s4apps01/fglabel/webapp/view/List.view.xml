@@ -91,6 +91,7 @@
                             <smartFilterBar:ControlConfiguration index='999' key="CustomerMaterial" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="Message" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="ModelName" visible="false"/>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -231,7 +232,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{CustomerName}" wrapping="false" />
+                                <Text text="{CustomerName}" wrapping="false" tooltip="{CustomerName}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>SalesDocument}" sortProperty="SalesDocument" filterProperty="SalesDocument">
@@ -247,7 +248,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderByCustomer", "leadingProperty":"PurchaseOrderByCustomer"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{PurchaseOrderByCustomer}" wrapping="false" />
+                                <Text text="{PurchaseOrderByCustomer}" wrapping="false" tooltip="{PurchaseOrderByCustomer}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>OldMaterial}" sortProperty="OldMaterial" filterProperty="OldMaterial">
@@ -255,7 +256,7 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"OldMaterial", "leadingProperty":"OldMaterial"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{OldMaterial}" wrapping="false" />
+                                <Text text="{OldMaterial}" wrapping="false" tooltip="{OldMaterial}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>CustomerMaterial}" sortProperty="CustomerMaterial" filterProperty="CustomerMaterial">
@@ -263,7 +264,15 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CustomerMaterial", "leadingProperty":"CustomerMaterial"}'/>
                             </table:customData>
                             <table:template>
-                                <Text text="{CustomerMaterial}" wrapping="false" />
+                                <Text text="{CustomerMaterial}" wrapping="false" tooltip="{CustomerMaterial}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>ModelName}" sortProperty="ModelName" filterProperty="ModelName">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ModelName", "leadingProperty":"ModelName"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ModelName}" wrapping="false" tooltip="{ModelName}"/>
                             </table:template>
                         </table:Column>
                         <table:Column width="10rem" label="{i18n>WO_Start_Date}" sortProperty="WO_Start_Date" filterProperty="WO_Start_Date">

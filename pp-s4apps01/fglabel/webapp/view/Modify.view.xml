@@ -153,7 +153,7 @@
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>CustomerName}">
                     <table:template>
-                        <Text text="{local>CustomerName}" wrapping="false"/>
+                        <Text text="{local>CustomerName}" wrapping="false" tooltip="{local>CustomerName}"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>SalesDocument}">
@@ -163,17 +163,22 @@
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>PurchaseOrderByCustomer}">
                     <table:template>
-                        <Text text="{local>PurchaseOrderByCustomer}" wrapping="false"/>
+                        <Text text="{local>PurchaseOrderByCustomer}" wrapping="false" tooltip="{local>PurchaseOrderByCustomer}"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>OldMaterial}">
                     <table:template>
-                        <Text text="{local>OldMaterial}" wrapping="false"/>
+                        <Text text="{local>OldMaterial}" wrapping="false" tooltip="{local>OldMaterial}"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>CustomerMaterial}">
                     <table:template>
-                        <Text text="{local>CustomerMaterial}" wrapping="false"/>
+                        <Text text="{local>CustomerMaterial}" wrapping="false" tooltip="{local>CustomerMaterial}"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>ModelName}">
+                    <table:template>
+                        <Text text="{local>ModelName}" wrapping="false" tooltip="{local>ModelName}"/>
                     </table:template>
                 </table:Column>
                 <table:Column width="10rem" label="{i18n>WO_Start_Date}">
