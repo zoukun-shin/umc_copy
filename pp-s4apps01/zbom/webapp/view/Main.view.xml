@@ -81,7 +81,6 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="HeaderMaterial" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialComponent" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ComponentDescription" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="QTY2" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="BOMExplosionIsMultilevel" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="YY1_DetSpecification_PRD" visible="false"/>
                             </smartFilterBar:controlConfiguration>

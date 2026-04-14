@@ -387,14 +387,6 @@
                         <Text text="{BillOfMaterialVariantUsage}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="16rem" label="{i18n>QTY2}" sortProperty="QTY2" filterProperty="QTY2" visible="false" hAlign="End">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"QTY2", "leadingProperty":"QTY2"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{QTY2}" wrapping="false" />
-                    </table:template>
-                </table:Column>
                 <table:Column width="10rem" label="{i18n>HeaderValidityStartDate}" sortProperty="HeaderValidityStartDate" filterProperty="HeaderValidityStartDate" visible="false">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"HeaderValidityStartDate", "leadingProperty":"HeaderValidityStartDate"}'/>

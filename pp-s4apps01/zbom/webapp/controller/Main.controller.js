@@ -298,7 +298,6 @@ sap.ui.define([
                     case "BillOfMaterialSubItemQuantity":
                     case "NetWeight":
                     case "ComponentQuantityInBaseUoM":
-                    case "QTY2":
                         oColumn.type = sap.ui.export.EdmType.Number;
                         // oColumn.delimiter = true;
                         // oColumn.scale = 2;
