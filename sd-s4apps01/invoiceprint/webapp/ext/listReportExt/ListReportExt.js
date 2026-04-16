@@ -575,10 +575,11 @@ sap.ui.define([
                     delete item.TaxAmount;
                     delete item.GrandTotalAmount;
                 });
-                //要求即使行数不够也要用空白行填满一页。目前一页可以打印12行，所以添加空白行，将行项目数量改为12的倍数
-                let iMod = aBillingItem.length % 12;
+                let iItemLine = 7;
+                //要求即使行数不够也要用空白行填满一页。目前一页可以打印iItemLine行，所以添加空白行，将行项目数量改为iItemLine的倍数
+                let iMod = aBillingItem.length % iItemLine;
                 if (iMod !== 0) {
-                    for (let i = 0; i < 12 - iMod; i++) {
+                    for (let i = 0; i < iItemLine - iMod; i++) {
                         aBillingItem.push({});
                     }
                 }
