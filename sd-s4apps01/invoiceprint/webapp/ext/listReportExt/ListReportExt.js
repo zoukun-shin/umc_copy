@@ -410,7 +410,7 @@ sap.ui.define([
                 if (sEnetity === "BillingPrintVN") {
                     aPDFContent = _oFunctions.porcessVNCotent(aBillingDocument,aContext);
                 } else if (sEnetity === "BillingPrintTH") {
-                    aPDFContent = _oFunctions.porcessTHCotent(sPrintType,aBillingDocument,aContext);
+                    aPDFContent = _oFunctions.porcessTHCotent(sPrintType,aBillingDocument,aContext,sTemplateID);
                 } else if (sEnetity === "BillingPrintVNCD") {
                     aPDFContent = _oFunctions.porcessVNCDContent(sPrintType,aBillingDocument,aContext,sPrintDate);
                 }
@@ -490,7 +490,7 @@ sap.ui.define([
             });
             return aBilling;
         },
-        porcessTHCotent: function(sDocTitle,aHeader,aContext){
+        porcessTHCotent: function(sDocTitle,aHeader,aContext,sTemplateID){
             var aPrintItem = [];
             var aBilling = [];
             for (const boundContext of aContext) {
@@ -575,7 +575,12 @@ sap.ui.define([
                     delete item.TaxAmount;
                     delete item.GrandTotalAmount;
                 });
-                let iItemLine = 7;
+                let iItemLine = 0;
+                if (sTemplateID === 'YY1_SD019_TH_SP') {
+                    iItemLine = 7;
+                } else if (sTemplateID === 'YY1_SD019_TH')  {
+                    iItemLine = 11;
+                }
                 //要求即使行数不够也要用空白行填满一页。目前一页可以打印iItemLine行，所以添加空白行，将行项目数量改为iItemLine的倍数
                 let iMod = aBillingItem.length % iItemLine;
                 if (iMod !== 0) {
