@@ -219,24 +219,32 @@ sap.ui.define([
 			var aPromise = [];
 			var aExcelSet = this.getModel("local").getProperty("/PackingList");
 			// aPromise.push(this._callODataAction("EXPORT", aExcelSet)
-			aPromise.push(this.postAction("processLogic", "EXPORT", aExcelSet));
+			// aPromise.push(this.postAction("processLogic", "EXPORT", aExcelSet));
+			aPromise.push(this.post(
+				{	
+					"Event":"EXPORT",
+					"BillingDocument":aExcelSet[0].BillingDocument,
+					"BillingDocumentItem":aExcelSet[0].BillingDocumentItem,
+					"Zzkey":JSON.stringify(aExcelSet)
 
+				}));
+			
 			try {
 				this._BusyDialog.open();
-				Promise.all(aPromise).then((aContext) => {
-                    var oResult = {
-                        iSuccess: 0,
-                        iFailed: 0
-                    };
-                    this._BusyDialog.close();
-                    var aExcelSet = this.getModel("local").getProperty("/PackingList");
-                    for (const activeContext of aContext) {
-                        var object = activeContext.processLogic;
-						if (object.RecordUUID) {
-							var sURL = this.getModel("Print").getServiceUrl() + "PrintRecord(RecordUUID=" + object.RecordUUID + ",IsActiveEntity=true)/PDFContent";
-							sap.m.URLHelper.redirect(sURL, true);
-						}
-                    }
+				Promise.all(aPromise).then((response) => {
+                    
+                    this._BusyDialog.close()
+					
+                    // for (const activeContext of aContext) {
+                    //     var object = activeContext.processLogic;
+					// 	if (object.RecordUUID) {
+					// 		var sURL = this.getModel("Print").getServiceUrl() + "PrintRecord(RecordUUID=" + object.RecordUUID + ",IsActiveEntity=true)/PDFContent";
+					// 		sap.m.URLHelper.redirect(sURL, true);
+					// 	}
+                    // }
+					let sRecordUUID = JSON.parse(response[0].headers["sap-message"]).message
+					var sURL = this.getModel("Print").getServiceUrl() + "PrintRecord(RecordUUID=" + sRecordUUID + ",IsActiveEntity=true)/PDFContent";
+					sap.m.URLHelper.redirect(sURL, true);
                 }).catch((error) => {
                     MessageBox.error(error);
                 }).finally(() => {
@@ -252,14 +260,18 @@ sap.ui.define([
 			let that = this;
 			let aPromise = [];
 			let aExcelSet = this.getModel("local").getProperty("/PackingList");
-			aPromise.push(this.postAction("processLogic", "SAVE", aExcelSet));
+			// aPromise.push(this.postAction("processLogic", "SAVE", aExcelSet));
+			aPromise.push(this.post(
+				{	
+					"Event":"SAVE",
+					"BillingDocument":aExcelSet[0].BillingDocument,
+					"BillingDocumentItem":aExcelSet[0].BillingDocumentItem,
+					"Zzkey":JSON.stringify(aExcelSet)
+
+				}));
 			try {
 				this._BusyDialog.open();
 				Promise.all(aPromise).then((aContext) => {
-                    var oResult = {
-                        iSuccess: 0,
-                        iFailed: 0
-                    };
                     this._BusyDialog.close();
                     // var aExcelSet = this.getModel("local").getProperty("/PackingList");
                     // for (const activeContext of aContext) {
@@ -314,6 +326,31 @@ sap.ui.define([
 					}.bind(this)
 				});
 			});
+		},
+
+		post: function(postData) {
+			 this._BusyDialog.open();
+            var promise = new Promise(function(resolve,reject){
+                var mParameters = {
+                    groupId: "ProductSerial" + Math.floor(1 / 100),
+                    changeSetId: 1,
+					refreshAfterChange:false,
+                    success: function (oData,response) {
+						resolve(response);
+
+					}.bind(this),
+					error: function (oError) {
+						reject(oError);
+						messages.showError(messages.parseErrors(oError));
+					}.bind(this)
+                };
+                this.getOwnerComponent().getModel().create("/PackingList", postData, mParameters);
+            }.bind(this));
+			// oModel.attachMessageChange( function(oEvent) {
+			// 	let aMessages = oEvent.getParameter("newMessages");
+			// 	oEvent.getSource().setMessages({ "/EntityPath": aMessages });
+			// } );
+            return promise;
 		},
 
 
