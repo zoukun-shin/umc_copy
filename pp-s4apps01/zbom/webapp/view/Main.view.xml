@@ -83,6 +83,7 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="ComponentDescription" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="BOMExplosionIsMultilevel" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="YY1_DetSpecification_PRD" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BomHeaderQuantityInBaseUnit" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
