@@ -226,6 +226,14 @@
                       "enabled": "{local>/authorityCheck/button/PrintTHShipping}",
                       "requiresSelection": true,
                       "text": "{i18n>printTHShipping}"
+                    },
+                    "onSay": {
+                      "id":"idSay",
+                      "press": "sd.invoiceprint.ext.listReportExt.ListReportExt.onSay",
+                      "visible": true,
+                      "requiresSelection": true,
+                      "buttonType":"Emphasized",
+                      "text": "{i18n>says}"
                     }
                   },
                   "columns": {

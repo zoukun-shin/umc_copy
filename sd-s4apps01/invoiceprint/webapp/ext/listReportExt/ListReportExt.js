@@ -14,6 +14,7 @@ sap.ui.define([
     return {
         init: function (oModels, oViews) {
             _oFunctions = this;
+            _ResourceBundle = oModels.i18n.getResourceBundle();
 
             _UserInfo = sap.ushell.Container.getService("UserInfo");
 
@@ -85,6 +86,7 @@ sap.ui.define([
                 this.oErrorMessageDialog.open();
             }.bind(this));
         },
+        
         onPrint: function (oEvent) {
             _oDataModel = this.getModel();
             _oPrintModel = this.getModel("Print");
@@ -380,6 +382,16 @@ sap.ui.define([
             }.bind(this));
         },
 
+        onSay: function(){
+            if (_oFunctions._say) {
+                messages.showText(_ResourceBundle.getText("msg02"));
+                _oFunctions._say = false;
+            } else {
+                messages.showText(_ResourceBundle.getText("msg01"));
+                 _oFunctions._say = true;
+            }
+        },
+
         getBillingData: function(that,sEnetity,sTemplateID,aBillingDocument,sPrintType,sPrintDate){
             _oDataModel = that.getModel();
             _oPrintModel = that.getModel("Print");
@@ -501,6 +513,12 @@ sap.ui.define([
             aHeader.forEach(function(sKey){
                 let aBillingItem = aPrintItem.filter(e => e.BillingDocument === sKey );
                 let oFirstItem = aBillingItem[0];
+                let sEnglishNumber;
+                if (_oFunctions._say) {
+                    sEnglishNumber = _oFunctions.numberToEnglish(oFirstItem.TotalNetAmount);
+                } else {
+                    sEnglishNumber = "";
+                }
                 let oHeader ={
                     CompanyName: oFirstItem.CompanyName,
                     CompanyAddress: oFirstItem.CompanyAddress,
@@ -542,6 +560,7 @@ sap.ui.define([
                     TaxAmount:oFirstItem.TaxAmount,
                     GrandTotalAmount:oFirstItem.GrandTotalAmount,
                     Currency: oFirstItem.TransactionCurrency,
+                    Say:sEnglishNumber
                 }
                 //删除行项目不需要的字段，节省内存
                 aBillingItem.forEach(function(item, index){
@@ -782,6 +801,103 @@ sap.ui.define([
                 }));
                 oDialog.open();
             }.bind(this));
+        },
+        /**
+         * 将数字金额转换为英文描述
+         * @param {number} num - 要转换的数字（支持最多2位小数）
+         * @param {boolean} includeCents - 是否包含小数部分（美分），默认 true
+         * @returns {string} 英文描述的金额
+         */
+        numberToEnglish: function (num, includeCents = true) {
+            if (num === 0) return 'zero';
+            
+            // 分离整数和小数部分
+            let numStr = num.toString();
+            let parts = numStr.split('.');
+            let integerPart = parseInt(parts[0], 10);
+            let decimalPart = parts.length > 1 ? parts[1].substring(0, 2) : '0';
+            
+            // 补全小数部分到2位
+            while (decimalPart.length < 2) decimalPart += '0';
+            
+            let result = '';
+            
+            // 转换整数部分
+            result = _oFunctions.convertIntegerToEnglish(integerPart);
+            
+            // 处理小数部分（美分）
+            if (includeCents && decimalPart !== '00') {
+                let cents = parseInt(decimalPart, 10);
+                if (cents > 0) {
+                    result += ' and ' + _oFunctions.convertNumberBelowThousand(cents) + ' cent' + (cents === 1 ? '' : 's');
+                }
+            }
+            
+            return result.trim();
+        },
+
+        // 转换整数部分（支持到万亿）
+        convertIntegerToEnglish: function(num) {
+            if (num === 0) return '';
+            
+            // 定义单位（英文）
+            const units = [
+                '', 'thousand', 'million', 'billion', 'trillion'
+            ];
+            
+            let result = [];
+            let unitIndex = 0;
+            
+            while (num > 0) {
+                let chunk = num % 1000;
+                if (chunk > 0) {
+                    let chunkStr = _oFunctions.convertNumberBelowThousand(chunk);
+                    if (unitIndex > 0) chunkStr += ' ' + units[unitIndex];
+                    result.unshift(chunkStr);
+                }
+                num = Math.floor(num / 1000);
+                unitIndex++;
+            }
+            
+            return result.join(' ');
+        },
+
+        // 转换 1-999 的数字
+        convertNumberBelowThousand: function (num) {
+            if (num === 0) return '';
+            
+            const ones = [
+                '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
+                'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen',
+                'seventeen', 'eighteen', 'nineteen'
+            ];
+            
+            const tens = [
+                '', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'
+            ];
+            
+            let result = [];
+            
+            // 处理百位
+            let hundred = Math.floor(num / 100);
+            if (hundred > 0) {
+                result.push(ones[hundred] + ' hundred');
+                num %= 100;
+                if (num > 0) result.push('and');
+            }
+            
+            // 处理十位和个位
+            if (num >= 20) {
+                let ten = Math.floor(num / 10);
+                result.push(tens[ten]);
+                num %= 10;
+                if (num > 0) result.push(ones[num]);
+            } else if (num > 0) {
+                result.push(ones[num]);
+            }
+            
+            return result.join(' ');
         }
+
     };
 });
