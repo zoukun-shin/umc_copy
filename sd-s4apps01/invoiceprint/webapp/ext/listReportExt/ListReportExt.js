@@ -515,7 +515,11 @@ sap.ui.define([
                 let oFirstItem = aBillingItem[0];
                 let sEnglishNumber;
                 if (_oFunctions._say) {
-                    sEnglishNumber = _oFunctions.numberToEnglish(oFirstItem.TotalNetAmount);
+                    if (sTemplateID === 'YY1_SD019_TH_SP') {
+                        sEnglishNumber = _oFunctions.numberToEnglish(oFirstItem.TotalNetAmount);
+                    } else if (sTemplateID === 'YY1_SD019_TH')  {
+                        sEnglishNumber = _oFunctions.numberToEnglish(oFirstItem.GrandTotalAmount);
+                    }
                 } else {
                     sEnglishNumber = "";
                 }
