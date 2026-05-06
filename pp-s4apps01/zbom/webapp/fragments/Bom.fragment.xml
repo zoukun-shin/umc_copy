@@ -395,6 +395,14 @@
                         <Text text="{path:'HeaderValidityStartDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}"  wrapping="false" />
                     </table:template>
                 </table:Column>
+                <table:Column width="20rem" label="{i18n>BomHeaderQuantityInBaseUnit}" sortProperty="BomHeaderQuantityInBaseUnit" filterProperty="BomHeaderQuantityInBaseUnit" hAlign="End" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BomHeaderQuantityInBaseUnit", "leadingProperty":"BomHeaderQuantityInBaseUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BomHeaderQuantityInBaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
             </table:columns>
         </table:Table>
     </smartTable:SmartTable>
