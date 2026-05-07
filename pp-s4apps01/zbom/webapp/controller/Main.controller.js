@@ -7,8 +7,9 @@ sap.ui.define([
     "sap/m/plugins/CellSelector",
     "sap/m/plugins/CopyProvider",
     "sap/m/DynamicDateUtil",
-    "sap/ui/model/Filter"
-], function (Base, UIComponent, BusyDialog, MessageBox, xml, CellSelector, CopyProvider, DynamicDateUtil, Filter) {
+    "sap/ui/model/Filter",
+    "sap/ui/export/Spreadsheet"
+], function (Base, UIComponent, BusyDialog, MessageBox, xml, CellSelector, CopyProvider, DynamicDateUtil, Filter, Spreadsheet) {
     "use strict";
 
     let oCellSelector;
@@ -42,6 +43,7 @@ sap.ui.define([
         _initialize: function () {
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+            sEmail = 'xinlei.xu@sh.shin-china.com';
             var oContextBinding = this.getView().getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -287,6 +289,98 @@ sap.ui.define([
 
                aFilters.push(oHeaderValidityStartDate);
             };
+        },
+
+        onSearch: function (oEvent) {
+            var aFilters, sPath;
+                sPath = "/BOM";
+                aFilters = this.byId("idSmartFilterBar").getFilters()[0].aFilters;
+                var oValDate = this.getOwnerComponent().getModel("local").getProperty("/ValDate");
+                if (oValDate) {
+                    var aDates = DynamicDateUtil.toDates(oValDate);
+                    var oHeaderValidityStartDate = new sap.ui.model.Filter({
+                        path: "HeaderValidityStartDate",
+                        operator: "EQ",
+                        value1: aDates[1]
+                    });
+
+                aFilters.push(oHeaderValidityStartDate);
+                };
+            // }
+            // 并行处理 优化速度
+            this.getModel().setUseBatch(false);
+            this._CallODataV2("READ", sPath, aFilters, { "$top": 999999999 }, {}).then(function (oResponse) {
+                if (oResponse) {
+                    this.getModel("local").setProperty("/Bom", oResponse.results);
+                }
+                this.getModel().setUseBatch(true);
+            }.bind(this)), function (oError) {
+                this.getModel().setUseBatch(true);
+            }.bind(this);
+        },
+
+        onExport: function () {
+            var oTable = this.byId("idTable");
+            var aExcelSet = this.getModel("local").getProperty("/Bom");
+            var aExcelCol = [];
+            var aTableCol = oTable.getColumns();
+            for (var i = 0; i < aTableCol.length; i++) {
+                if (aTableCol[i].getVisible()) {
+                    var sLabelText = aTableCol[i].getAggregation("label").getText();
+                    var sType, sTextAlign, sUnitProperty, bDelimiter, iScale;
+                    var sFieldName = aTableCol[i].getAggregation("template").getBindingPath("text");
+                    if (!sFieldName) {
+                        sFieldName = aTableCol[i].getAggregation("template").mBindingInfos.value.parts[0].path;
+                    }
+                    switch (sFieldName) {
+                        //  Date
+                        case "HeaderValidityStartDate":
+                            sType = sap.ui.export.EdmType.Date;
+                            break;
+                        //  Number 
+                        case "ComponentQuantityInCompUoM":
+                        case "BillOfMaterialSubItemQuantity":
+                        case "NetWeight":
+                        case "ComponentQuantityInBaseUoM":
+                        case "BomHeaderQuantityInBaseUnit":
+                            sType = sap.ui.export.EdmType.Number;
+                            bDelimiter = true;
+                            // iScale = 3;
+                            sTextAlign = "End";
+                            // sUnitProperty = "";
+                            break;
+                        default:
+                            sType = sap.ui.export.EdmType.String;
+                            sTextAlign = "Begin";
+                            sUnitProperty = "";
+                            break;
+                    }
+                    var oExcelCol = {
+                        label: sLabelText,
+                        type: sType,
+                        property: sFieldName,
+                        width: parseFloat(aTableCol[i].getWidth()),
+                        textAlign: sTextAlign,
+                        unitProperty: sUnitProperty,
+                        delimiter: bDelimiter,
+                        scale: iScale
+                    };
+                    aExcelCol.push(oExcelCol);
+                }
+            }
+            var oSettings = {
+                workbook: {
+                    columns: aExcelCol,
+                    context: {
+                        version: "1.54",
+                        hierarchyLevel: "level"
+                    }
+                },
+                dataSource: aExcelSet,
+                fileName: this.getModel("i18n").getResourceBundle().getText("BomFileName") + "_" + this.getCurrentDateTime() + ".xlsx"
+            };
+            // export excel file
+            new Spreadsheet(oSettings).build();
         },
 
         onBeforeExport: function (oEvent) {

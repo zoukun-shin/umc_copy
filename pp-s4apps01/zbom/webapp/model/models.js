@@ -22,7 +22,8 @@ function (JSONModel, Device) {
                 std_mode: "display",
                 tab_mode: "display",
                 dateValue: new Date(),
-                detailSet: []
+                detailSet: [],
+                Bom: []
             });
             return oModel;
         }

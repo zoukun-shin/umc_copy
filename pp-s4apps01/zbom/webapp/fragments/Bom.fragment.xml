@@ -15,6 +15,7 @@
             <OverflowToolbar id="idToolBar" design="Transparent">
                 <ToolbarSpacer/>
                 <Button text="{i18n>Print}" type="Transparent" press="onPrint('PrintBom')" enabled="{= ${local>/authorityCheck/button/Print}}"/>
+                <Button text="{i18n>Download}" type="Transparent" press="onExport" enabled="{= ${local>/Bom}.length > 0}"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
        <table:Table id="idTable" enableSelectAll="false" selectionMode="Multi" rowMode="Auto" threshold="999999999" >
