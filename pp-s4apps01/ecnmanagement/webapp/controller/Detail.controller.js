@@ -129,6 +129,7 @@ sap.ui.define([
 						aBom.forEach(e => e.isDraft = false);
 						let aAltDate = oResponse.to_AltDate.results;
 						aAltDate.forEach(e => e.isDraft = false);
+						that._LocalData.setProperty("/LongText", oResponse.LongText ?  oResponse.LongText : "")
 						that._LocalData.setProperty("/to_Item", aItems ? aItems : [])
 						that._LocalData.setProperty("/to_Material", aMaterial ? aMaterial : [])
 						that._LocalData.setProperty("/to_Bom", aBom ? aBom : [])
@@ -609,6 +610,8 @@ sap.ui.define([
 				to_Bom: oJsonData.aEcnBom,
 				to_AltDate: oJsonData.aEcnAltDate,
 			}
+			//添加LongText
+			postData.LongText = this._LocalData.getProperty("/LongText");
 			return postData;
 			// return oData;
 		},
@@ -633,7 +636,8 @@ sap.ui.define([
 			postData.to_Material = oJsonData.aEcnMaterial;
 			postData.to_Bom = oJsonData.aEcnBom;
 			postData.to_AltDate = oJsonData.aEcnAltDate;
-
+			//添加LongText
+			postData.LongText = this._LocalData.getProperty("/LongText");
 			return postData;
 		},
 

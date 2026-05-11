@@ -154,7 +154,13 @@
                             </smartForm:SmartForm>
                         </uxap:blocks>
                     </uxap:ObjectPageSubSection>
-                    
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection titleUppercase="false" title="{i18n>ObjectLongText}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <TextArea id="idLongText1" value="{local>/LongText}" growing="true" width="100%" editable="{local>/viewEditable}"/>
+                    </uxap:ObjectPageSubSection>
                 </uxap:subSections>
             </uxap:ObjectPageSection>
             <uxap:ObjectPageSection titleUppercase="false" title="{i18n>ObjectTypeTitle}">
