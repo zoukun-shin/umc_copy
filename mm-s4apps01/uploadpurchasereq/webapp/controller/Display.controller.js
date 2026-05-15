@@ -39,25 +39,34 @@ sap.ui.define([
 			if (!InstanceId) {
 				InstanceId = "00000000-0000-0000-0000-000000000000";
 			}
+			// MOD BEGIN BY XINLEI XU 2026/05/14
 			// ADD BEGIN BY XINLEI XU 2025/04/30 CR#4359
-			if (oCtx.getProperty("PrType") === "4") { // ApplyDepart 非必输
-				this.getRouter().navTo("PurchaseReq", {
-					contextPath: oCtx.getProperty("UUID"),
-					contextPrNo: oCtx.getProperty("PrNo"),
-					contextApplyDepart: oCtx.getProperty("ApplyDepart") === "" ? "-" : oCtx.getProperty("ApplyDepart"),
-					contextInstanceId: InstanceId,
-					contextApplicationId: oCtx.getProperty("ApplicationId"),
-				});
-			} else {
-				// ADD END BY XINLEI XU 2025/04/30
-				this.getRouter().navTo("PurchaseReq", {
-					contextPath: oCtx.getProperty("UUID"),
-					contextPrNo: oCtx.getProperty("PrNo"),
-					contextApplyDepart: oCtx.getProperty("ApplyDepart"),
-					contextInstanceId: InstanceId,
-					contextApplicationId: oCtx.getProperty("ApplicationId"),
-				});
-			}
+			// if (oCtx.getProperty("PrType") === "4") { // ApplyDepart 非必输
+			// 	this.getRouter().navTo("PurchaseReq", {
+			// 		contextPath: oCtx.getProperty("UUID"),
+			// 		contextPrNo: oCtx.getProperty("PrNo"),
+			// 		contextApplyDepart: oCtx.getProperty("ApplyDepart") === "" ? "-" : oCtx.getProperty("ApplyDepart"),
+			// 		contextInstanceId: InstanceId,
+			// 		contextApplicationId: oCtx.getProperty("ApplicationId"),
+			// 	});
+			// } else {
+			// 	// ADD END BY XINLEI XU 2025/04/30
+			// 	this.getRouter().navTo("PurchaseReq", {
+			// 		contextPath: oCtx.getProperty("UUID"),
+			// 		contextPrNo: oCtx.getProperty("PrNo"),
+			// 		contextApplyDepart: oCtx.getProperty("ApplyDepart"),
+			// 		contextInstanceId: InstanceId,
+			// 		contextApplicationId: oCtx.getProperty("ApplicationId"),
+			// 	});
+			// }
+			this.getRouter().navTo("PurchaseReq", {
+				contextPath: oCtx.getProperty("UUID"),
+				contextPrNo: oCtx.getProperty("PrNo"),
+				contextApplyDepart: oCtx.getProperty("ApplyDepart") === "" ? "-" : oCtx.getProperty("ApplyDepart"),
+				contextInstanceId: InstanceId,
+				contextApplicationId: oCtx.getProperty("ApplicationId"),
+			});
+			// MOD END BY XINLEI XU 2026/05/14
 		},
 
 		_onRouteMatched: function (oEvent) {
