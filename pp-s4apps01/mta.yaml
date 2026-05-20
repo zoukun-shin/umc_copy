@@ -179,6 +179,10 @@ modules:
       - ppzpickinglistwo.zip
       name: ppzpickinglistwo
       target-path: resources/
+    - artifacts:
+      - ppzinstposcomparison.zip
+      name: ppzinstposcomparison
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -479,6 +483,15 @@ modules:
 - name: ppzpickinglistwo
   type: html5
   path: zpickinglistwo
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzinstposcomparison
+  type: html5
+  path: zinstposcomparison
   build-parameters:
     build-result: dist
     builder: custom

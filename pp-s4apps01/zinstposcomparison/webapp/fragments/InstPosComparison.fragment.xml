@@ -1,0 +1,210 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <smartTable:SmartTable id="idSmartTable_1" entitySet="InstPosComparison" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
+        showRowCount="true" smartVariant="__SVM01" useVariantManagement="false" useTablePersonalisation="true" visible="{local>/showTable1}"
+        persistencyKey="InstPosComparisonST_1" header="{i18n>Results}" enableAutoBinding="false" 
+        placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable"
+        beforeExport="onBeforeExport" showFullScreenButton="true" 
+        ignoredFields="OnlyInstPosComparison,BOMExplosionIsMultilevel,Material_A,Plant_A,BillOfMaterialVariant_A,ValidityStartDate_A,Material_B,Plant_B,BillOfMaterialVariant_B,ValidityStartDate_B,PrioPctDiscFollowUp,Discontinuation,FollowUp,Priority,Percent,PriorityOrPercent,DiscOrFollowUp,BillOfMaterialComponent,ComponentDescription,YY1_DETSPECIFICATION">
+        <smartTable:customToolbar>
+            <OverflowToolbar design="Transparent">
+                <ToolbarSpacer/>
+            </OverflowToolbar>
+        </smartTable:customToolbar>
+        <table:Table id="idTable_1" selectionMode="None" rowMode="Auto" threshold="999999999">
+            <table:columns>
+                <table:Column width="12rem" label="{i18n>BillOfMaterialComponent_A}" sortProperty="BillOfMaterialComponent_A" filterProperty="BillOfMaterialComponent_A">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialComponent_A", "leadingProperty":"BillOfMaterialComponent_A"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BillOfMaterialComponent_A}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="20rem" label="{i18n>ComponentDescription_A}" sortProperty="ComponentDescription_A" filterProperty="ComponentDescription_A">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ComponentDescription_A", "leadingProperty":"ComponentDescription_A"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ComponentDescription_A}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>YY1_DETSPECIFICATION_A}" sortProperty="YY1_DETSPECIFICATION_A" filterProperty="YY1_DETSPECIFICATION_A">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"YY1_DETSPECIFICATION_A", "leadingProperty":"YY1_DETSPECIFICATION_A"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{YY1_DETSPECIFICATION_A}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>AlternativeItemGroup_A}" sortProperty="AlternativeItemGroup_A" filterProperty="AlternativeItemGroup_A">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AlternativeItemGroup_A", "leadingProperty":"AlternativeItemGroup_A"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AlternativeItemGroup_A}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>DiscontinuationFollowUpGroup_A}" sortProperty="DiscontinuationFollowUpGroup_A" filterProperty="DiscontinuationFollowUpGroup_A">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"DiscontinuationFollowUpGroup_A", "leadingProperty":"DiscontinuationFollowUpGroup_A"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{DiscontinuationFollowUpGroup_A}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>BillOfMaterialComponent_B}" sortProperty="BillOfMaterialComponent_B" filterProperty="BillOfMaterialComponent_B">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialComponent_B", "leadingProperty":"BillOfMaterialComponent_B"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BillOfMaterialComponent_B}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="20rem" label="{i18n>ComponentDescription_B}" sortProperty="ComponentDescription_B" filterProperty="ComponentDescription_B">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ComponentDescription_B", "leadingProperty":"ComponentDescription_B"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ComponentDescription_B}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>YY1_DETSPECIFICATION_B}" sortProperty="YY1_DETSPECIFICATION_B" filterProperty="YY1_DETSPECIFICATION_B">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"YY1_DETSPECIFICATION_B", "leadingProperty":"YY1_DETSPECIFICATION_B"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{YY1_DETSPECIFICATION_B}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>AlternativeItemGroup_B}" sortProperty="AlternativeItemGroup_B" filterProperty="AlternativeItemGroup_B">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AlternativeItemGroup_B", "leadingProperty":"AlternativeItemGroup_B"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AlternativeItemGroup_B}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>DiscontinuationFollowUpGroup_B}" sortProperty="DiscontinuationFollowUpGroup_B" filterProperty="DiscontinuationFollowUpGroup_B">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"DiscontinuationFollowUpGroup_B", "leadingProperty":"DiscontinuationFollowUpGroup_B"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{DiscontinuationFollowUpGroup_B}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>BOMItemSorter}" sortProperty="BOMItemSorter" filterProperty="BOMItemSorter">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BOMItemSorter", "leadingProperty":"BOMItemSorter"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BOMItemSorter}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>BOMSubItemInstallationPoint_A}" sortProperty="BOMSubItemInstallationPoint_A" filterProperty="BOMSubItemInstallationPoint_A">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BOMSubItemInstallationPoint_A", "leadingProperty":"BOMSubItemInstallationPoint_A"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BOMSubItemInstallationPoint_A}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>BOMSubItemInstallationPoint_B}" sortProperty="BOMSubItemInstallationPoint_B" filterProperty="BOMSubItemInstallationPoint_B">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BOMSubItemInstallationPoint_B", "leadingProperty":"BOMSubItemInstallationPoint_B"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BOMSubItemInstallationPoint_B}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="6rem" label="{i18n>ComparisonResult}" sortProperty="ComparisonResult" filterProperty="ComparisonResult">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ComparisonResult", "leadingProperty":"ComparisonResult"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ComparisonResult}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </smartTable:SmartTable>
+
+    <smartTable:SmartTable id="idSmartTable_2" entitySet="InstPosComparison" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
+        showRowCount="true" smartVariant="__SVM01" useVariantManagement="false" useTablePersonalisation="true" visible="{local>/showTable2}"
+        persistencyKey="InstPosComparisonST_2" header="{i18n>Results}" enableAutoBinding="false" 
+        placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable"
+        beforeExport="onBeforeExport" showFullScreenButton="true" 
+        ignoredFields="OnlyInstPosComparison,BOMExplosionIsMultilevel,Material_A,Plant_A,BillOfMaterialVariant_A,ValidityStartDate_A,Material_B,Plant_B,BillOfMaterialVariant_B,ValidityStartDate_B,PrioPctDiscFollowUp,Discontinuation,FollowUp,Priority,Percent,PriorityOrPercent,DiscOrFollowUp,BillOfMaterialComponent_A,ComponentDescription_A,YY1_DETSPECIFICATION_A,AlternativeItemGroup_A,DiscontinuationFollowUpGroup_A,BillOfMaterialComponent_B,ComponentDescription_B,YY1_DETSPECIFICATION_B,AlternativeItemGroup_B,DiscontinuationFollowUpGroup_B">
+        <smartTable:customToolbar>
+             <OverflowToolbar design="Transparent">
+                 <ToolbarSpacer/>
+             </OverflowToolbar>
+        </smartTable:customToolbar>
+        <table:Table id="idTable_2" selectionMode="None" rowMode="Auto" threshold="999999999">
+            <table:columns>
+                <table:Column width="12rem" label="{i18n>BillOfMaterialComponent}" sortProperty="BillOfMaterialComponent" filterProperty="BillOfMaterialComponent">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialComponent", "leadingProperty":"BillOfMaterialComponent"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BillOfMaterialComponent}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="20rem" label="{i18n>ComponentDescription}" sortProperty="ComponentDescription" filterProperty="ComponentDescription">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ComponentDescription", "leadingProperty":"ComponentDescription"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ComponentDescription}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>YY1_DETSPECIFICATION}" sortProperty="YY1_DETSPECIFICATION" filterProperty="YY1_DETSPECIFICATION">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"YY1_DETSPECIFICATION", "leadingProperty":"YY1_DETSPECIFICATION"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{YY1_DETSPECIFICATION}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>BOMItemSorter}" sortProperty="BOMItemSorter" filterProperty="BOMItemSorter">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BOMItemSorter", "leadingProperty":"BOMItemSorter"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BOMItemSorter}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>BOMSubItemInstallationPoint_A}" sortProperty="BOMSubItemInstallationPoint_A" filterProperty="BOMSubItemInstallationPoint_A">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BOMSubItemInstallationPoint_A", "leadingProperty":"BOMSubItemInstallationPoint_A"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BOMSubItemInstallationPoint_A}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>BOMSubItemInstallationPoint_B}" sortProperty="BOMSubItemInstallationPoint_B" filterProperty="BOMSubItemInstallationPoint_B">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BOMSubItemInstallationPoint_B", "leadingProperty":"BOMSubItemInstallationPoint_B"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BOMSubItemInstallationPoint_B}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="6rem" label="{i18n>ComparisonResult}" sortProperty="ComparisonResult" filterProperty="ComparisonResult">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ComparisonResult", "leadingProperty":"ComparisonResult"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ComparisonResult}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </smartTable:SmartTable>
+</core:FragmentDefinition>

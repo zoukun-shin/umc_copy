@@ -1,0 +1,88 @@
+<mvc:View controllerName="pp.zinstposcomparison.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="InstPosComparisonSVM" showShare="true" showExecuteOnSelection="true" entitySet="InstPosComparison"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content> 
+                    <CheckBox id ="idCB1" text="{i18n>OnlyInstPosComparison}" width="12rem" selected="true" select="onSelect"/> 
+                    <CheckBox id ="idCB2" text="{i18n>BOMExplosionIsMultilevel}" width="11rem" selected="true"/> 
+                </f:content>  
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="InstPosComparison" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Material_A" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material_A}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="Plant_A" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant_A}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="BillOfMaterialVariant_A" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>BillOfMaterialVariant_A}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="ValidityStartDate_A" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ValidityStartDate_A}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="Material_B" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material_B}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="Plant_B" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant_B}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="BillOfMaterialVariant_B" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>BillOfMaterialVariant_B}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="ValidityStartDate_B" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ValidityStartDate_B}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialComponent" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ComponentDescription" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="YY1_DETSPECIFICATION" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialComponent_A" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ComponentDescription_A" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="YY1_DETSPECIFICATION_A" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemGroup_A" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DiscontinuationFollowUpGroup_A" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMSubItemInstallationPoint_A" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialComponent_B" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ComponentDescription_B" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="YY1_DETSPECIFICATION_B" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemGroup_B" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DiscontinuationFollowUpGroup_B" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMSubItemInstallationPoint_B" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMItemSorter" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ComparisonResult" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="OnlyInstPosComparison" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMExplosionIsMultilevel" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PrioPctDiscFollowUp" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PriorityOrPercent" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DiscOrFollowUp" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+                <f:content> 
+                    <CheckBox id ="idCB3" text="{i18n>PrioPctDiscFollowUp}" width="12rem" selected="true" select="onSelect"/> 
+                    <HBox id ="idHB1">
+                        <VBox class="sapUiMediumMarginEnd">
+                            <RadioButtonGroup id="idRBG1" >
+                                <RadioButton id="idRBG1-1" text="{i18n>Discontinuation}"/>
+                                <RadioButton id="idRBG1-2" text="{i18n>FollowUp}" selected="true"/>
+                            </RadioButtonGroup>
+                        </VBox>
+                        <VBox class="sapUiMediumMarginEnd">
+                            <RadioButtonGroup id="idRBG2">
+                                <RadioButton id="idRBG2-1" text="{i18n>Priority}"/>
+                                <RadioButton id="idRBG2-2" text="{i18n>Percent}" selected="true"/>
+                            </RadioButtonGroup>
+                        </VBox>
+                    </HBox>
+                </f:content>  
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="pp.zinstposcomparison.fragments.InstPosComparison" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
