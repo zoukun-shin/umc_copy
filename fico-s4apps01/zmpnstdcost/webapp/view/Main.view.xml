@@ -1,0 +1,197 @@
+<mvc:View controllerName="fico.zmpnstdcost.controller.Main" displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:t="sap.ui.table" height="100%">
+
+    <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{localModel>/busy}" fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="SVM_MPNSTDCost" showShare="true" showExecuteOnSelection="true" entitySet="MPNSTDCost"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+
+                    <smartFilterBar:SmartFilterBar id="SFBMPNSTDCost" useToolbar="false" entitySet="MPNSTDCost" smartVariant="__SVM01" persistencyKey="MPNSTDCostBar" search="onSearch">
+                              <RadioButtonGroup id="rbg1" columns="4" width="100%" class="sapUiMediumMarginBottom">
+                                <RadioButton groupName="GroupA" id="Option1" text="{i18n>Option1}" selected="true" select="onButtonSelect" enabled="{= ${local>/authorityCheck/button/View}}"/>
+		                        <RadioButton groupName="GroupA" id="Option2" text="{i18n>Option2}" select="onButtonSelect" enabled="{= ${local>/authorityCheck/button/Change}}"/>
+                             </RadioButtonGroup>
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration index="1" key="Plant"                      visibleInAdvancedArea="true" label="{i18n>Plant}"                      filterType="single" mandatory="mandatory"/>
+                            <smartFilterBar:ControlConfiguration index="2" key="OwninventoryManagedProduct" visibleInAdvancedArea="true" label="{i18n>OwninventoryManagedProduct}" mandatory="mandatory" />
+                            <!-- <smartFilterBar:ControlConfiguration index="3" key="Product"                    visibleInAdvancedArea="true" label="{i18n>Product}"                                        /> -->
+                            <smartFilterBar:ControlConfiguration index="4" key="PurchasingOrganization"     visibleInAdvancedArea="true" label="{i18n>PurchasingOrganization}"     filterType="single" mandatory="mandatory" />
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <smartTable:SmartTable id="smartTable_MPNSTDCost" entitySet="MPNSTDCost" smartVariant="__SVM01" smartFilterId="SFBMPNSTDCost"
+                tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true"
+                persistencyKey="MPNSTDCostTable" header="{i18n>Result}" enableAutoBinding="false"
+                placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable"
+                fitContainer="true" height="100%" ignoredFields="Status">
+
+                <smartTable:customToolbar>
+                    <OverflowToolbar id="toolbar" width="100%">
+                        <ToolbarSpacer/>
+                        <Button id="btnChange" icon="sap-icon://create" text="{i18n>Change}" tooltip="{i18n>Change}" press="onChange" visible="{local>/showB}"/>
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+
+                <t:Table id="Table_MPNSTDCost" selectionMode="MultiToggle" rowMode="Auto">
+                    <t:Column id="_IDGenColumn"
+                        width="6rem"
+                        label="{i18n>Status}"
+                        sortProperty="Status"
+                        filterProperty="Status"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"Status", "leadingProperty":"Status", "sortProperty":"Status", "filterProperty": "Status"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <ObjectStatus id="_IDGenObjectStatus"
+                                state="{
+                                    path: 'Status',
+                                    formatter: '.formatter.setState'
+                                }"
+                                icon="{
+                                    path: 'Status',
+                                    formatter: '.formatter.setStateIcon'
+                                }"
+                            />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column id="Message" label="{i18n>Message}" width="20rem" sortProperty="Message" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Message","leadingProperty":"Message","sortProperty":"Message"}'/></t:customData>
+                        <t:template><Text text="{Message}" tooltip="{Message}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="Plant" label="{i18n>Plant}" width="6rem" sortProperty="Plant" filterProperty="Plant" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Plant","leadingProperty":"Plant","sortProperty":"Plant","filterProperty":"Plant"}'/></t:customData>
+                        <t:template><Text text="{Plant}" tooltip="{Plant}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="OwninventoryManagedProduct" label="{i18n>OwninventoryManagedProduct}" width="10rem" sortProperty="OwninventoryManagedProduct" filterProperty="OwninventoryManagedProduct" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"OwninventoryManagedProduct","leadingProperty":"OwninventoryManagedProduct","sortProperty":"OwninventoryManagedProduct","filterProperty":"OwninventoryManagedProduct"}'/></t:customData>
+                        <t:template><Text text="{OwninventoryManagedProduct}" tooltip="{OwninventoryManagedProduct}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="Product" label="{i18n>Product}" width="10rem" sortProperty="Product" filterProperty="Product" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Product","leadingProperty":"Product","sortProperty":"Product","filterProperty":"Product"}'/></t:customData>
+                        <t:template><Text text="{Product}" tooltip="{Product}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="ProductName" label="{i18n>ProductName}" width="14rem" sortProperty="ProductName" filterProperty="ProductName" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ProductName","leadingProperty":"ProductName","sortProperty":"ProductName","filterProperty":"ProductName"}'/></t:customData>
+                        <t:template><Text text="{ProductName}" tooltip="{ProductName}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="PurchasingOrganization" label="{i18n>PurchasingOrganization}" width="8rem" sortProperty="PurchasingOrganization" filterProperty="PurchasingOrganization" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PurchasingOrganization","leadingProperty":"PurchasingOrganization","sortProperty":"PurchasingOrganization","filterProperty":"PurchasingOrganization"}'/></t:customData>
+                        <t:template><Text text="{PurchasingOrganization}" tooltip="{PurchasingOrganization}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <!-- 上次数据 -->
+                    <t:Column id="LastPriceBeforeMarkup" label="{i18n>LastPriceBeforeMarkup}" width="10rem" sortProperty="LastPriceBeforeMarkup" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastPriceBeforeMarkup","leadingProperty":"LastPriceBeforeMarkup","sortProperty":"LastPriceBeforeMarkup"}'/></t:customData>
+                        <t:template><Text text="{path:'LastPriceBeforeMarkup', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="LastMarkupPercentage" label="{i18n>LastMarkupPercentage}" width="8rem" sortProperty="LastMarkupPercentage" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastMarkupPercentage","leadingProperty":"LastMarkupPercentage","sortProperty":"LastMarkupPercentage"}'/></t:customData>
+                        <t:template><Text text="{LastMarkupPercentage}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="LastChangedPrice" label="{i18n>LastChangedPrice}" width="10rem" sortProperty="LastChangedPrice" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastChangedPrice","leadingProperty":"LastChangedPrice","sortProperty":"LastChangedPrice"}'/></t:customData>
+                        <t:template><Text text="{path:'LastChangedPrice', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="LastPriceUnit" label="{i18n>LastPriceUnit}" width="6rem" sortProperty="LastPriceUnit" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastPriceUnit","leadingProperty":"LastPriceUnit","sortProperty":"LastPriceUnit"}'/></t:customData>
+                        <t:template><Text text="{LastPriceUnit}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="LastPurchasingInfoRecord" label="{i18n>LastPurchasingInfoRecord}" width="10rem" sortProperty="LastPurchasingInfoRecord" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastPurchasingInfoRecord","leadingProperty":"LastPurchasingInfoRecord","sortProperty":"LastPurchasingInfoRecord"}'/></t:customData>
+                        <t:template><Text text="{LastPurchasingInfoRecord}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="LastSupplier" label="{i18n>LastSupplier}" width="8rem" sortProperty="LastSupplier" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastSupplier","leadingProperty":"LastSupplier","sortProperty":"LastSupplier"}'/></t:customData>
+                        <t:template><Text text="{LastSupplier}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="LastValidityDate" label="{i18n>LastValidityDate}" width="8rem" sortProperty="LastValidityDate" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastValidityDate","leadingProperty":"LastValidityDate","sortProperty":"LastValidityDate"}'/></t:customData>
+                        <t:template><Text text="{ path:'LastValidityDate', formatter: '.formatter.date'}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="LastCurrency" label="{i18n>LastCurrency}" width="6rem" sortProperty="LastCurrency" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastCurrency","leadingProperty":"LastCurrency","sortProperty":"LastCurrency"}'/></t:customData>
+                        <t:template><Text text="{LastCurrency}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <!-- 本次数据 -->
+                    <t:Column id="CurrentPriceBeforeMarkup" visible="{local>/showB}"  label="{i18n>CurrentPriceBeforeMarkup}" width="10rem" sortProperty="CurrentPriceBeforeMarkup" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentPriceBeforeMarkup","leadingProperty":"CurrentPriceBeforeMarkup","sortProperty":"CurrentPriceBeforeMarkup"}'/></t:customData>
+                        <t:template><Text text="{path:'CurrentPriceBeforeMarkup', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="CurrentMarkupPercentage"  visible="{local>/showB}" label="{i18n>CurrentMarkupPercentage}" width="8rem" sortProperty="CurrentMarkupPercentage" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentMarkupPercentage","leadingProperty":"CurrentMarkupPercentage","sortProperty":"CurrentMarkupPercentage"}'/></t:customData>
+                        <t:template><Text text="{CurrentMarkupPercentage}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="CurrentChangedPrice" visible="{local>/showB}" label="{i18n>CurrentChangedPrice}" width="10rem" sortProperty="CurrentChangedPrice" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentChangedPrice","leadingProperty":"CurrentChangedPrice","sortProperty":"CurrentChangedPrice"}'/></t:customData>
+                        <t:template><Text text="{path:'CurrentChangedPrice', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="CurrentPriceUnit" visible="{local>/showB}" label="{i18n>CurrentPriceUnit}" width="6rem" sortProperty="CurrentPriceUnit" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentPriceUnit","leadingProperty":"CurrentPriceUnit","sortProperty":"CurrentPriceUnit"}'/></t:customData>
+                        <t:template><Text text="{CurrentPriceUnit}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="CurrentPurchasingInfoRecord" visible="{local>/showB}" label="{i18n>CurrentPurchasingInfoRecord}" width="10rem" sortProperty="CurrentPurchasingInfoRecord" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentPurchasingInfoRecord","leadingProperty":"CurrentPurchasingInfoRecord","sortProperty":"CurrentPurchasingInfoRecord"}'/></t:customData>
+                        <t:template><Text text="{CurrentPurchasingInfoRecord}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="CurrentSupplier" visible="{local>/showB}" label="{i18n>CurrentSupplier}" width="8rem" sortProperty="CurrentSupplier" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentSupplier","leadingProperty":"CurrentSupplier","sortProperty":"CurrentSupplier"}'/></t:customData>
+                        <t:template><Text text="{CurrentSupplier}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="CurrentValidityDate" visible="{local>/showB}" label="{i18n>CurrentValidityDate}" width="8rem" sortProperty="CurrentValidityDate" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentValidityDate","leadingProperty":"CurrentValidityDate","sortProperty":"CurrentValidityDate"}'/></t:customData>
+                        <t:template><Text text="{ path:'CurrentValidityDate', formatter: '.formatter.date'}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <t:Column id="Currency" visible="{local>/showB}" label="{i18n>Currency}" width="6rem" sortProperty="Currency" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Currency","leadingProperty":"Currency","sortProperty":"Currency"}'/></t:customData>
+                        <t:template><Text text="{Currency}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

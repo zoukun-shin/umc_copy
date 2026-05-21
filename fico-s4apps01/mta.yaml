@@ -135,6 +135,10 @@ modules:
       - ficozprofitandloss.zip
       name: ficozprofitandloss
       target-path: resources/
+    - artifacts:
+      - ficozmpnstdcost.zip
+      name: ficozmpnstdcost
+      target-path: resources/
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -336,6 +340,15 @@ modules:
 - name: ficozprofitandloss
   type: html5
   path: zprofitandloss
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozmpnstdcost
+  type: html5
+  path: zmpnstdcost
   build-parameters:
     build-result: dist
     builder: custom
