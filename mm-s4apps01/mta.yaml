@@ -95,6 +95,10 @@ modules:
       - mmquotaarrangement.zip
       name: mmquotaarrangement
       target-path: resources/
+    - artifacts:
+      - mmsourcelist.zip
+      name: mmsourcelist
+      target-path: resources/
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -218,6 +222,16 @@ modules:
 - name: mmquotaarrangement
   type: html5
   path: quotaarrangement
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: mmsourcelist
+  type: html5
+  path: sourcelist
   build-parameters:
     build-result: dist
     builder: custom

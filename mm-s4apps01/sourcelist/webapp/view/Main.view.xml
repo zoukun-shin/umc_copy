@@ -1,0 +1,69 @@
+<mvc:View controllerName="mm.sourcelist.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="SourceListSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="Sourcelist" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="Material" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="PurchasingGroup" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="MRPResponsible" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="QuotaArrangement" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ValidityEndDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ValidityStartDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CreationDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CreatedByUser" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MinQtyForSpltQuota" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="LastChangeDateTime" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QuotaArrangementItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialProcurementCategory" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialProcurementType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Supplier" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplyingPlant" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchasingSourceQuota" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QuotaBaseQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QuotaAllocatedQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ManufacturerMaterial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="YY1_DetSpecification_PRD" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BusinessPartnerName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductManufacturerNumber" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CrossPlantStatus" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ManufacturerNumber" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IsMarkedForDeletion" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MinimumPurchaseOrderQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialPlannedDeliveryDurn" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaximumOrderQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplierIsFixed" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="mm.sourcelist.fragments.SourceList" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
