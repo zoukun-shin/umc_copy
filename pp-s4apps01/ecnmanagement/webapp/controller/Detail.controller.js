@@ -95,6 +95,7 @@ sap.ui.define([
 			that._LocalData.setProperty("/to_Material", [])
 			that._LocalData.setProperty("/to_Bom", [])
 			that._LocalData.setProperty("/to_AltDate", [])
+			that._LocalData.setProperty("/LongText", "")
 		},
 
 		resetControlState: function () {
