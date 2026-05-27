@@ -1,0 +1,62 @@
+<mvc:View controllerName="pp.zupdatesopoallocation.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="UpdatesopoallocationSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="SoUpdateAndPoAss" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="Material" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="BaseStartDate" visibleInAdvancedArea="true" label="{i18n>BaseStartDate}" >
+                                    <smartFilterBar:customControl>
+                                        <DateRangeSelection id="idDate" 
+                                            valueFormat="yyyy/MM/dd" 
+                                            displayFormat="yyyy/MM/dd" />
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='40' key="TecoUPD"        visibleInAdvancedArea="true" label="{i18n>TecoUPD}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="DelUPD"         visibleInAdvancedArea="true" label="{i18n>DelUPD}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="CRTDUPD"        visibleInAdvancedArea="true" label="{i18n>CRTDUPD}"/>
+                                
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="ResultType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Message" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProcessingType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductionOrder" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="StartDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Unit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PlannedQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SalesOrder" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SalesOrderItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DeliveryDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AssignedQtyBefore" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AssignedQtyAfter" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="pp.zupdatesopoallocation.fragments.UpdateReport" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

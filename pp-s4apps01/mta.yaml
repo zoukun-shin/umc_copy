@@ -183,6 +183,10 @@ modules:
       - ppzinstposcomparison.zip
       name: ppzinstposcomparison
       target-path: resources/
+    - artifacts:
+      - ppzupdatesopoallocation.zip
+      name: ppzupdatesopoallocation
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -492,6 +496,15 @@ modules:
 - name: ppzinstposcomparison
   type: html5
   path: zinstposcomparison
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzupdatesopoallocation
+  type: html5
+  path: zupdatesopoallocation
   build-parameters:
     build-result: dist
     builder: custom
