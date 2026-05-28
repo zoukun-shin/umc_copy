@@ -187,6 +187,10 @@ modules:
       - ppzupdatesopoallocation.zip
       name: ppzupdatesopoallocation
       target-path: resources/
+    - artifacts:
+      - ppzbomversion.zip
+      name: ppzbomversion
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -505,6 +509,15 @@ modules:
 - name: ppzupdatesopoallocation
   type: html5
   path: zupdatesopoallocation
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzbomversion
+  type: html5
+  path: zbomversion
   build-parameters:
     build-result: dist
     builder: custom

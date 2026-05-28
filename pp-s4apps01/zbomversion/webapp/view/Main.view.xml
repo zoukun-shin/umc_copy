@@ -1,0 +1,61 @@
+<mvc:View controllerName="pp.zbomversion.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="BomVersionSVM" showShare="true" showExecuteOnSelection="true" entitySet="BomVersion"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="BomVersion" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onSmartFilterBarInitialized">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="Material" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="BillOfMaterialVariant" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>BillOfMaterialVariant}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="ObjMgmtRecdObjRevisionLevel" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ChangeNumber" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMHeaderQuantityInBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialStatusText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMIsArchivedForDeletion" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMHeaderText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMAlternativeText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="YY1_BOMHistory_BMH" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="YY1_ProjectCode" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="YY1_DetSpecification_PRD" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="valid_from_date" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ChangeNumberStatusText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="delete_flag" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="change_number_desc" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="reason_for_change" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="created_by_user" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="created_at" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BOMHeaderBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="OnlyLatestVersion" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                            
+                            <CheckBox id ="idCB1" text="{i18n>OnlyLatestVersion}" width="12rem" selected="true" select="onSelect"/>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="pp.zbomversion.fragments.BomVersion" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

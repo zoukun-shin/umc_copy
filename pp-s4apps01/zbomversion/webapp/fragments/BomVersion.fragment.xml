@@ -1,0 +1,183 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <smartTable:SmartTable id="idSmartTable" entitySet="BomVersion" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
+        showRowCount="true" smartVariant="__SVM01" useVariantManagement="false" useTablePersonalisation="true"
+        persistencyKey="BomVersionST" header="{i18n>Results}" enableAutoBinding="false" 
+        placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable"
+        beforeExport="onBeforeExport" showFullScreenButton="true" 
+        ignoredFields="OnlyLatestVersion,BOMHeaderBaseUnit">
+        <smartTable:customToolbar>
+            <OverflowToolbar design="Transparent">
+                <ToolbarSpacer/>
+            </OverflowToolbar>
+        </smartTable:customToolbar>
+        <table:Table id="idTable" selectionMode="None" rowMode="Auto" threshold="999999999">
+            <table:Column width="10rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{Plant}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="15rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"Material", "leadingProperty":"Material"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{Material}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>BillOfMaterialVariant}" sortProperty="BillOfMaterialVariant" filterProperty="BillOfMaterialVariant">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialVariant", "leadingProperty":"BillOfMaterialVariant"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{BillOfMaterialVariant}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>ObjMgmtRecdObjRevisionLevel}" sortProperty="ObjMgmtRecdObjRevisionLevel" filterProperty="ObjMgmtRecdObjRevisionLevel">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"ObjMgmtRecdObjRevisionLevel", "leadingProperty":"ObjMgmtRecdObjRevisionLevel"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{ObjMgmtRecdObjRevisionLevel}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>BOMHeaderQuantityInBaseUnit}" sortProperty="BOMHeaderQuantityInBaseUnit" filterProperty="BOMHeaderQuantityInBaseUnit" hAlign="End">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"BOMHeaderQuantityInBaseUnit", "leadingProperty":"BOMHeaderQuantityInBaseUnit"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{BOMHeaderQuantityInBaseUnit}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>BillOfMaterialStatusText}" sortProperty="BillOfMaterialStatusText" filterProperty="BillOfMaterialStatusText">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialStatusText", "leadingProperty":"BillOfMaterialStatusText"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{BillOfMaterialStatusText}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>BOMIsArchivedForDeletion}" sortProperty="BOMIsArchivedForDeletion" filterProperty="BOMIsArchivedForDeletion">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"BOMIsArchivedForDeletion", "leadingProperty":"BOMIsArchivedForDeletion"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{BOMIsArchivedForDeletion}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>BOMHeaderText}" sortProperty="BOMHeaderText" filterProperty="BOMHeaderText">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"BOMHeaderText", "leadingProperty":"BOMHeaderText"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{BOMHeaderText}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>BOMAlternativeText}" sortProperty="BOMAlternativeText" filterProperty="BOMAlternativeText">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"BOMAlternativeText", "leadingProperty":"BOMAlternativeText"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{BOMAlternativeText}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>YY1_BOMHistory_BMH}" sortProperty="YY1_BOMHistory_BMH" filterProperty="YY1_BOMHistory_BMH">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"YY1_BOMHistory_BMH", "leadingProperty":"YY1_BOMHistory_BMH"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{YY1_BOMHistory_BMH}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>YY1_ProjectCode}" sortProperty="YY1_ProjectCode" filterProperty="YY1_ProjectCode">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"YY1_ProjectCode", "leadingProperty":"YY1_ProjectCode"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{YY1_ProjectCode}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>YY1_DetSpecification_PRD}" sortProperty="YY1_DetSpecification_PRD" filterProperty="YY1_DetSpecification_PRD">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"YY1_DetSpecification_PRD", "leadingProperty":"YY1_DetSpecification_PRD"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{YY1_DetSpecification_PRD}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>ChangeNumber}" sortProperty="ChangeNumber" filterProperty="ChangeNumber">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"ChangeNumber", "leadingProperty":"ChangeNumber"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{ChangeNumber}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>valid_from_date}" sortProperty="valid_from_date" filterProperty="valid_from_date">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"valid_from_date", "leadingProperty":"valid_from_date"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{path:'valid_from_date', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>ChangeNumberStatusText}" sortProperty="ChangeNumberStatusText" filterProperty="ChangeNumberStatusText">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"ChangeNumberStatusText", "leadingProperty":"ChangeNumberStatusText"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{ChangeNumberStatusText}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>delete_flag}" sortProperty="delete_flag" filterProperty="delete_flag">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"delete_flag", "leadingProperty":"delete_flag"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{delete_flag}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>change_number_desc}" sortProperty="change_number_desc" filterProperty="change_number_desc">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"change_number_desc", "leadingProperty":"change_number_desc"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{change_number_desc}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>reason_for_change}" sortProperty="reason_for_change" filterProperty="reason_for_change">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"reason_for_change", "leadingProperty":"reason_for_change"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{reason_for_change}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>created_by_user}" sortProperty="created_by_user" filterProperty="created_by_user">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"created_by_user", "leadingProperty":"created_by_user"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{created_by_user}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>created_at}" sortProperty="created_at" filterProperty="created_at">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"created_at", "leadingProperty":"created_at"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{created_at}" wrapping="false" />
+                </table:template>
+            </table:Column>
+        </table:Table>
+    </smartTable:SmartTable>
+</core:FragmentDefinition>
