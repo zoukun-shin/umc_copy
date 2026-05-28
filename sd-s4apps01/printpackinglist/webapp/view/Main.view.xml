@@ -83,7 +83,7 @@
                             </smartFilterBar:ControlConfiguration>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
-                    <CheckBox id="idCreatePackingListCB" class="sapUiResponsiveMargin" text="Create Packing List"/>
+                    <CheckBox id="idCreatePackingListCB" class="sapUiResponsiveMargin" text="{i18n>CreatePackingList}"/>
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>

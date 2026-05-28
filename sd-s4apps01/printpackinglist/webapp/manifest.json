@@ -59,6 +59,7 @@
                 "semanticObject": "printpackinglist",
                 "action": "display",
                 "icon": "sap-icon://print",
+                "title": "{{appTitle}}",
                 "signature": {
                     "parameters": {},
                     "additionalParameters": "allowed"
