@@ -98,10 +98,14 @@ modules:
     - artifacts:
       - sdmaterialpricedetail.zip
       name: sdmaterialpricedetail
-      target-path: resources/  
+      target-path: resources/
     - artifacts:
       - sdprintpackinglist.zip
       name: sdprintpackinglist
+      target-path: resources/
+    - artifacts:
+      - sdcustomerreport.zip
+      name: sdcustomerreport
       target-path: resources/
 - name: sdsalesacceptance
   type: html5
@@ -110,6 +114,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: sdbatchcreationdn
@@ -119,6 +124,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: sdshipmentstorageloc
@@ -128,6 +134,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: sddeliveryreceipt
@@ -137,6 +144,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: sdinvoiceprint
@@ -146,6 +154,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: sdzcreditmantablenew
@@ -155,6 +164,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: sdzsalesdocumentlist
@@ -164,6 +174,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: sdsalesdocumentreport
@@ -173,6 +184,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: sdsalesacceptdn
@@ -182,6 +194,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: sdzdndatebatchupdate
@@ -191,6 +204,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: sdsalesacceptresult
@@ -200,6 +214,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: sdzsalesorderupdate
@@ -209,6 +224,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: sdzdelivtransfee
@@ -218,6 +234,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: sdmaterialpricedetail
@@ -227,6 +244,7 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: sdprintpackinglist
@@ -236,6 +254,17 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: sdcustomerreport
+  type: html5
+  path: customerreport
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:

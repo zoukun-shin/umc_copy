@@ -1,0 +1,29 @@
+{
+  "generationParameters": {
+    "generationDate": "Fri May 29 2026 08:06:15 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "https://my412552-api.s4hana.cloud.sap/sap/opu/odata4/sap/zui_customerreport_o4/srvd/sap/zui_customerreport_o4/0001/",
+    "appName": "customerreport",
+    "appTitle": "客户数据查询报表",
+    "appDescription": "客户数据查询报表",
+    "appNamespace": "sd",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.38",
+    "enableEslint": true,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.25.0",
+    "template": "List Report Page V4",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [
+      {
+        "type": "Main Entity",
+        "value": "CustomerReport"
+      }
+    ],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```",
+    "valueHelpDownloaded": true
+  }
+}
