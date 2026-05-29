@@ -42,21 +42,6 @@
     </edmx:Reference>
     <edmx:DataServices m:DataServiceVersion="2.0">
         <Schema Namespace="cds_zui_semifinstockretention_o2" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-            <EntityType Name="I_MRPControllerType" sap:label="MRP Controller" sap:value-list="true" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Plant"/>
-                    <PropertyRef Name="MRPController"/>
-                </Key>
-                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:value-list="standard"/>
-                <Property Name="MRPController" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:text="MRPControllerName" sap:label="MRP Controller"/>
-                <Property Name="MRPControllerName" Type="Edm.String" MaxLength="18" sap:label="MRP Controller Name"/>
-                <Property Name="MRPControllerPhoneNumber" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="MRP Controller Phone" sap:quickinfo="MRP Controller's Phone Number"/>
-                <Property Name="PurchasingGroup" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Purchasing Group"/>
-                <Property Name="BusinessArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="BusinessArea_Text" sap:label="Business Area"/>
-                <Property Name="BusinessArea_Text" Type="Edm.String" MaxLength="30" sap:label="Business Area Name" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="ProfitCenter" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Profit Center"/>
-                <Property Name="UserID" Type="Edm.String" MaxLength="70" sap:display-format="UpperCase" sap:label="Recipient" sap:quickinfo="Object ID for recipient"/>
-            </EntityType>
             <EntityType Name="I_PlantStdVHType" sap:label="Plant by Name" sap:value-list="true" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Plant"/>
@@ -93,7 +78,7 @@
                     <PropertyRef Name="SemiFinishedComponent"/>
                 </Key>
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:value-list="standard"/>
-                <Property Name="MrpController" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="MRP Controller" sap:value-list="standard"/>
+                <Property Name="MrpController" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="MRP Controller"/>
                 <Property Name="ProductionSupervisor" Type="Edm.String" Nullable="false" MaxLength="3" sap:value-list="standard"/>
                 <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:value-list="standard"/>
                 <Property Name="ManufacturingOrder" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Order" sap:quickinfo="Order Number"/>
@@ -368,7 +353,6 @@
                 </ReferentialConstraint>
             </Association>
             <EntityContainer Name="cds_zui_semifinstockretention_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
-                <EntitySet Name="I_MRPController" EntityType="cds_zui_semifinstockretention_o2.I_MRPControllerType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="I_PlantStdVH" EntityType="cds_zui_semifinstockretention_o2.I_PlantStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_ProductionSupervisor" EntityType="cds_zui_semifinstockretention_o2.I_ProductionSupervisorType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="I_ProductStdVH" EntityType="cds_zui_semifinstockretention_o2.I_ProductStdVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
@@ -424,26 +408,6 @@
                 </AssociationSet>
             </EntityContainer>
             <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
-            <Annotations Target="cds_zui_semifinstockretention_o2.I_MRPControllerType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.ValueList">
-                    <Record>
-                        <PropertyValue Property="Label" String="Plant"/>
-                        <PropertyValue Property="CollectionPath" String="I_PlantStdVH"/>
-                        <PropertyValue Property="SearchSupported" Bool="true"/>
-                        <PropertyValue Property="Parameters">
-                            <Collection>
-                                <Record Type="Common.ValueListParameterInOut">
-                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Plant"/>
-                                    <PropertyValue Property="ValueListProperty" String="Plant"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="PlantName"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-            </Annotations>
             <Annotations Target="cds_zui_semifinstockretention_o2.I_ProductionSupervisorType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -509,23 +473,6 @@
             </Annotations>
             <Annotations Target="cds_zui_semifinstockretention_o2.cds_zui_semifinstockretention_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
-            </Annotations>
-            <Annotations Target="cds_zui_semifinstockretention_o2.cds_zui_semifinstockretention_o2_Entities/I_MRPController" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Capabilities.DeleteRestrictions">
-                    <Record>
-                        <PropertyValue Property="Deletable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.InsertRestrictions">
-                    <Record>
-                        <PropertyValue Property="Insertable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.UpdateRestrictions">
-                    <Record>
-                        <PropertyValue Property="Updatable" Bool="false"/>
-                    </Record>
-                </Annotation>
             </Annotations>
             <Annotations Target="cds_zui_semifinstockretention_o2.cds_zui_semifinstockretention_o2_Entities/I_PlantStdVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
@@ -595,19 +542,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-            <Annotations Target="cds_zui_semifinstockretention_o2.I_MRPControllerType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.SAPObjectNodeType">
-                    <Record>
-                        <PropertyValue Property="Name" String="MRPController"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Common.SemanticKey">
-                    <Collection>
-                        <PropertyPath>MRPController</PropertyPath>
-                        <PropertyPath>Plant</PropertyPath>
-                    </Collection>
-                </Annotation>
-            </Annotations>
             <Annotations Target="cds_zui_semifinstockretention_o2.I_ProductionSupervisorType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.SAPObjectNodeType">
                     <Record>
@@ -671,9 +605,6 @@
             <Annotations Target="cds_zui_semifinstockretention_o2.SemiFinStockRetentionType/BaseUnit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINH&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_semifinstockretention_o2.I_MRPControllerType/ProfitCenter" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRCTR&amp;origin=JG5_100"/>
-            </Annotations>
             <Annotations Target="cds_zui_semifinstockretention_o2.SemiFinStockRetentionType/SemiFinishedComponent" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
             </Annotations>
@@ -692,9 +623,6 @@
             <Annotations Target="cds_zui_semifinstockretention_o2.I_ProductStdVHType/Product" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTNUMBER&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_semifinstockretention_o2.I_MRPControllerType/BusinessArea" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=GSBER&amp;origin=JG5_100"/>
-            </Annotations>
             <Annotations Target="cds_zui_semifinstockretention_o2.I_PlantStdVHType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
             </Annotations>
@@ -710,17 +638,8 @@
             <Annotations Target="cds_zui_semifinstockretention_o2.SemiFinStockRetentionType/SemiFinComponentName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MAKTX&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_semifinstockretention_o2.I_MRPControllerType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
-            </Annotations>
-            <Annotations Target="cds_zui_semifinstockretention_o2.I_MRPControllerType/PurchasingGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=EKGRP&amp;origin=JG5_100"/>
-            </Annotations>
             <Annotations Target="cds_zui_semifinstockretention_o2.I_ProductionSupervisorType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
-            </Annotations>
-            <Annotations Target="cds_zui_semifinstockretention_o2.I_MRPControllerType/UserID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MDUSRKEY&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_semifinstockretention_o2.SAP__Currency/CurrencyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.Text" Path="Text"/>

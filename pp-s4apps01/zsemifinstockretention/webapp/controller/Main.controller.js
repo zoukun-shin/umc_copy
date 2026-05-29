@@ -16,7 +16,7 @@ sap.ui.define([
                 this._LocalData = this.getOwnerComponent().getModel("local");
                 this._oDataModel = this.getOwnerComponent().getModel();
                 this._BusyDialog = new BusyDialog();
-                //this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
+                this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
             },
 
             _initialize: function () {
@@ -75,9 +75,59 @@ sap.ui.define([
                 }.bind(this));
             },
 
-            onBeforeRebindTable: function (oEvent) {
-                var mBindingParams = oEvent.getParameter("bindingParams");
-            }
+            onDateRangeChange: function (oEvent) {
+                var oSource = oEvent.getSource();
+                var dStartDate = oSource.getDateValue();
+                var dEndDate = oSource.getSecondDateValue();
+                var oToday = new Date();
+                oToday.setHours(0, 0, 0, 0);
 
+                var bValidation = true;
+                var sErrorMessage = "";
+
+                // 验证开始日期和结束日期都不能早于今天
+                if (dStartDate && dStartDate < oToday) {
+                    bValidation = false;
+                    sErrorMessage = this.getModel("i18n").getResourceBundle().getText("dateRangeStartError");
+                }
+
+                if (bValidation && dEndDate && dEndDate < oToday) {
+                    bValidation = false;
+                    sErrorMessage = this.getModel("i18n").getResourceBundle().getText("dateRangeEndError");
+                }
+
+                // 验证失败：显示错误并清空日期
+                if (!bValidation) {
+                    MessageBox.error(sErrorMessage, {
+                        onClose: function () {
+                            oSource.setDateValue(null);
+                            oSource.setSecondDateValue(null);
+                        }
+                    });
+                }
+            },
+onBeforeRebindTable: function (oEvent) {
+    var mBindingParams = oEvent.getParameter("bindingParams");
+
+    // customControl 的日期值不会自动进查询，手动取出并加入 filter
+    var oDateRange = this.byId("dateRangeStartDate");
+    var dLow  = oDateRange.getDateValue();        // 起始日
+    var dHigh = oDateRange.getSecondDateValue();  // 结束日
+
+    if (dLow && dHigh) {
+        mBindingParams.filters.push(new Filter({
+            path: "MfgOrderPlannedStartDate",
+            operator: FilterOperator.BT,
+            value1: dLow,
+            value2: dHigh
+        }));
+    } else if (dLow) {
+        mBindingParams.filters.push(new Filter({
+            path: "MfgOrderPlannedStartDate",
+            operator: FilterOperator.GE,
+            value1: dLow
+        }));
+    }
+}
         });
     });

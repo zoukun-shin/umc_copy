@@ -22,13 +22,23 @@
                 <f:content>
                     <smartFilterBar:SmartFilterBar id="SFBSemiFinStockRetention" useToolbar="false" entitySet="SemiFinStockRetention" smartVariant="__SVM01" persistencyKey="SemiFinStockRetentionBar" search="onSearch">
                         <smartFilterBar:controlConfiguration>
-                            <smartFilterBar:ControlConfiguration index="1" key="Plant"                   visibleInAdvancedArea="true" label="{i18n>Plant}"                   filterType="single" mandatory="mandatory"/>
+                            <smartFilterBar:ControlConfiguration index="1" key="Plant"                   visibleInAdvancedArea="true" label="{i18n>Plant}"                    mandatory="mandatory"/>
                             <smartFilterBar:ControlConfiguration index="2" key="MrpController"           visibleInAdvancedArea="true" label="{i18n>MrpController}"           />
                             <smartFilterBar:ControlConfiguration index="3" key="ProductionSupervisor"    visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}"     mandatory="mandatory"  />
                             <smartFilterBar:ControlConfiguration index="4" key="Product"                 visibleInAdvancedArea="true" label="{i18n>Product}"                 />
                             <smartFilterBar:ControlConfiguration index="5" key="ManufacturingOrder"      visibleInAdvancedArea="true" label="{i18n>ManufacturingOrder}"      />
-                            <smartFilterBar:ControlConfiguration index="6" key="MfgOrderPlannedStartDate" visibleInAdvancedArea="true" label="{i18n>MfgOrderPlannedStartDate}" mandatory="mandatory"/>
-                        </smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                index="6"
+                                key="MfgOrderPlannedStartDate"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>MfgOrderPlannedStartDate}">
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection
+                                        id="dateRangeStartDate"
+                                        xmlns="sap.m"
+                                        change="onDateRangeChange"/>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration></smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
             </f:DynamicPageHeader>
@@ -43,7 +53,7 @@
 
                 <t:Table id="Table_SemiFinStockRetention" selectionMode="None" rowMode="Auto">
 
-                    <t:Column id="Plant" label="{i18n>Plant}" width="6rem" sortProperty="Plant" filterProperty="Plant" autoResizable="true">
+                    <t:Column id="Plant" label="{i18n>Plant}" width="6rem" sortProperty="Plant" filterProperty="Plant" autoResizable="true" visible="false">
                         <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Plant","leadingProperty":"Plant","sortProperty":"Plant","filterProperty":"Plant"}'/></t:customData>
                         <t:template><Text text="{Plant}" tooltip="{Plant}" wrapping="false"/></t:template>
                     </t:Column>
@@ -130,7 +140,13 @@
 
                     <t:Column id="RetentionHours" label="{i18n>RetentionHours}" width="8rem" sortProperty="RetentionHours" autoResizable="true">
                         <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"RetentionHours","leadingProperty":"RetentionHours","sortProperty":"RetentionHours"}'/></t:customData>
-                        <t:template><Text text="{path:'RetentionHours', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
+                        <t:template>
+                            <Text text="{
+                                path: 'RetentionHours',
+                                type: 'sap.ui.model.type.Float',
+                                formatOptions: { minFractionDigits: 3, maxFractionDigits: 3 }
+                            }" wrapping="false"/>
+                        </t:template>
                     </t:Column>
 
                     <t:Column id="BaseUnit" label="{i18n>BaseUnit}" width="6rem" sortProperty="BaseUnit" autoResizable="true">
