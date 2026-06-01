@@ -194,7 +194,11 @@ modules:
     - artifacts:
       - ppzsemifinstockretention.zip
       name: ppzsemifinstockretention
-      target-path: resources/      
+      target-path: resources/   
+    - artifacts:   
+      - ppzproductionversionreport.zip
+      name: ppzproductionversionreport
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -531,6 +535,15 @@ modules:
 - name: ppzsemifinstockretention
   type: html5
   path: zsemifinstockretention
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzproductionversionreport
+  type: html5
+  path: zproductionversionreport
   build-parameters:
     build-result: dist
     builder: custom

@@ -1,0 +1,66 @@
+<mvc:View controllerName="pp.zproductionversionreport.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="ProductionVersionSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ProductionVerRep" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="MRPResponsible" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="ProcurementType" visibleInAdvancedArea="true" label="{i18n>ProcurementType}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="SpecialProcurementType" visibleInAdvancedArea="true" label="{i18n>SpecialProcurementType}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="ProductionSupervisor" visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="YY1_BPCODE_PRD_PRD" visibleInAdvancedArea="true" label="{i18n>YY1_BPCODE_PRD_PRD}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="ProductionVersion" visibleInAdvancedArea="true" label="{i18n>ProductionVersion}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="Material" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='90' key="DisplayBillOfOperations" visibleInAdvancedArea="true" label="{i18n>DisplayBillOfOperations}"/>
+                                <smartFilterBar:ControlConfiguration index='100' key="DisplayLock" visibleInAdvancedArea="true" label="{i18n>DisplayLock}"/>
+                                
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductionSupervisor" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductionVersionText" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfOperationsGroup" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfOperationsType" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="DisplayBillOfOperations" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfOperationsVariant" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialVariant" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialVariantUsage" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductionLine" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="IssuingStorageLocation" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="ReceivingStorageLocation" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="Operation" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="OperationText" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="RoutingText" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="ValidityStartDate" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="ValidityEndDate" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductionVersionIsLocked" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="WorkCenter" visible="false" />
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="pp.zproductionversionreport.fragments.ProductionVerRep" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
