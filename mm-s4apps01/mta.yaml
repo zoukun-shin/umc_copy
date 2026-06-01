@@ -106,7 +106,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: mmpochange
@@ -116,7 +115,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: mmpoacceptance
@@ -126,7 +124,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: mmpodataanalysis
@@ -136,7 +133,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: mmphysicalinventoryupload
@@ -146,7 +142,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: mmuploadpurchasereq
@@ -156,7 +151,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: mmzpurchasepricevariance
@@ -166,7 +160,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: mmpoposting
@@ -176,7 +169,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: mmpurinfomasterlist
@@ -186,7 +178,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: mmzprworkflow
@@ -196,7 +187,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: mmmasspostofscrap
@@ -206,7 +196,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: mmparkedinvoice
@@ -216,7 +205,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: mmquotaarrangement
@@ -226,7 +214,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: mmsourcelist
@@ -236,7 +223,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:
