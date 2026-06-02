@@ -199,6 +199,10 @@ modules:
       - ppzproductionversionreport.zip
       name: ppzproductionversionreport
       target-path: resources/
+    - artifacts:
+      - ppzproductdiscontinuation.zip
+      name: ppzproductdiscontinuation
+      target-path: resources/      
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -550,6 +554,15 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
+- name: ppzproductdiscontinuation
+  type: html5
+  path: zproductdiscontinuation
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []   
 resources:
 - name: pp-s4apps01-uaa
   type: org.cloudfoundry.managed-service
