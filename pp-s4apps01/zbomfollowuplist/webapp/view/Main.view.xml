@@ -1,0 +1,61 @@
+<mvc:View controllerName="pp.zbomfollowuplist.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="Bomfollowuplist" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="BomFollowupList" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="Material" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="BillOfMaterialVariant" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>BillOfMaterialVariant}"/>
+                                <!-- check box -->
+                                <smartFilterBar:ControlConfiguration index='40' key="DisplayStockQty"   visible="false"/>
+                
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="Component" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemNumber" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="DiscontinuationGroup" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="FollowUpGroup" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="EffectiveOutDate" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="MatlWrhsStkQtyInMatlBaseUnit" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialBaseUnit" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemQuantity" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemUnit" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialComponentA" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialComponentB" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialVariantUsage" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="ValidityStartDate" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="ValidityEndDate" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="DisplayStockQty" visible="false" />
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+                <f:content>
+                    <CheckBox id='idCB1' text="{i18n>DisplayStockQty}" width="11rem" select="onSelect"/>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="pp.zbomfollowuplist.fragments.BomFollowupList" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

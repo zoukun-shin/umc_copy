@@ -194,15 +194,19 @@ modules:
     - artifacts:
       - ppzsemifinstockretention.zip
       name: ppzsemifinstockretention
-      target-path: resources/   
-    - artifacts:   
+      target-path: resources/
+    - artifacts:
       - ppzproductionversionreport.zip
       name: ppzproductionversionreport
       target-path: resources/
     - artifacts:
       - ppzproductdiscontinuation.zip
       name: ppzproductdiscontinuation
-      target-path: resources/      
+      target-path: resources/
+    - artifacts:
+      - ppzbomfollowuplist.zip
+      name: ppzbomfollowuplist
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -562,7 +566,16 @@ modules:
     builder: custom
     commands:
     - npm run build:cf
-    supported-platforms: []   
+    supported-platforms: []
+- name: ppzbomfollowuplist
+  type: html5
+  path: zbomfollowuplist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: pp-s4apps01-uaa
   type: org.cloudfoundry.managed-service
