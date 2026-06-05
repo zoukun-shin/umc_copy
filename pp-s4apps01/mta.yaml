@@ -207,6 +207,10 @@ modules:
       - ppzbomfollowuplist.zip
       name: ppzbomfollowuplist
       target-path: resources/
+    - artifacts:
+      - ppofupload.zip
+      name: ppofupload
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -570,6 +574,15 @@ modules:
 - name: ppzbomfollowuplist
   type: html5
   path: zbomfollowuplist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppofupload
+  type: html5
+  path: ofupload
   build-parameters:
     build-result: dist
     builder: custom
