@@ -33,34 +33,34 @@
         "type": "ODataAnnotation"
       },
       "AuthorityService": {
-          "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
-          "type": "OData",
-          "settings": {
-              "annotations": [],
-              "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
-              "odataVersion": "4.0"
-          }
+        "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
       },
       "annotation": {
-				"type": "ODataAnnotation",
-				"uri": "annotation/annotation.xml",
-				"settings": {
-					"localUri": "annotation/annotation.xml"
-				}
-			}
+        "type": "ODataAnnotation",
+        "uri": "annotation/annotation.xml",
+        "settings": {
+          "localUri": "annotation/annotation.xml"
+        }
+      }
     },
     "crossNavigation": {
-        "inbounds": {
-            "intent1": {
-                "signature": {
-                    "parameters": {},
-                    "additionalParameters": "allowed"
-                },
-                "semanticObject": "batchcreationdn",
-                "action": "display",
-                "icon": "sap-icon://request"
-            }
+      "inbounds": {
+        "intent1": {
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          },
+          "semanticObject": "batchcreationdn",
+          "action": "display",
+          "icon": "sap-icon://request"
         }
+      }
     }
   },
   "sap.ui": {
@@ -80,8 +80,11 @@
     }
   },
   "sap.ui5": {
-    "handleValidation":true,
-    "flexEnabled": true,
+    "handleValidation": true,
+    "flexEnabled": false,
+    "config": {
+      "fullWidth": true
+    },
     "dependencies": {
       "minUI5Version": "1.120.38",
       "libs": {
@@ -113,18 +116,18 @@
           "operationMode": "Server",
           "autoExpandSelect": true,
           "earlyRequests": true,
-          "refreshAfterChange":false
+          "refreshAfterChange": false
         }
       },
       "Authority": {
-          "dataSource": "AuthorityService",
-          "preload": true,
-          "settings": {
-              "synchronizationMode": "None",
-              "operationMode": "Server",
-              "autoExpandSelect": true,
-              "earlyRequests": true
-          }
+        "dataSource": "AuthorityService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
       }
     },
     "resources": {
