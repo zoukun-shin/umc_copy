@@ -27,10 +27,10 @@
 		                        <RadioButton groupName="GroupA" id="Option2" text="{i18n>Option2}" select="onButtonSelect" enabled="{= ${local>/authorityCheck/button/Change}}"/>
                              </RadioButtonGroup>
                         <smartFilterBar:controlConfiguration>
-                            <smartFilterBar:ControlConfiguration index="1" key="Plant"                      visibleInAdvancedArea="true" label="{i18n>Plant}"                      filterType="single" mandatory="mandatory"/>
-                            <smartFilterBar:ControlConfiguration index="2" key="OwninventoryManagedProduct" visibleInAdvancedArea="true" label="{i18n>OwninventoryManagedProduct}" mandatory="mandatory" />
+                            <smartFilterBar:ControlConfiguration index="1" key="Plant"                      displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"                      filterType="single" mandatory="mandatory"/>
+                            <smartFilterBar:ControlConfiguration index="2" key="OwninventoryManagedProduct" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>OwninventoryManagedProduct}" mandatory="mandatory" />
                             <!-- <smartFilterBar:ControlConfiguration index="3" key="Product"                    visibleInAdvancedArea="true" label="{i18n>Product}"                                        /> -->
-                            <smartFilterBar:ControlConfiguration index="4" key="PurchasingOrganization"     visibleInAdvancedArea="true" label="{i18n>PurchasingOrganization}"     filterType="single" mandatory="mandatory" />
+                            <smartFilterBar:ControlConfiguration index="4" key="PurchasingOrganization"     displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PurchasingOrganization}"     filterType="single" mandatory="mandatory" />
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
