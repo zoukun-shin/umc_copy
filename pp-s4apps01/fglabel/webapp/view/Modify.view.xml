@@ -24,7 +24,7 @@
                 <Label text="{i18n>SalesDocument}:" />
                 <Input value="{local>/headSet/SalesDocument}" editable="false" width="13rem"/>
                 <Label text="{i18n>History}:"/>
-                <Input value="{local>/headSet/History}" editable="{= ${local>/tab_mode} === 'edit'}" width="13rem"/>                
+                <Input value="{local>/headSet/History}" editable="{= ${local>/tab_mode} === 'edit'}" width="13rem"/>
             </VBox>
             <VBox class="sapUiSmallMarginEnd">
                 <Label text="{i18n>Barcode_Qty}:"/>
@@ -38,13 +38,16 @@
                             'formatOptions': {
                             'pattern': 'yyyy/MM/dd',
                             'UTC': true } 
-                        }"/>                
+                        }"/>
             </VBox>
             <VBox class="sapUiSmallMarginEnd">
                 <Label text="{i18n>New_Qty}:"/>
-                <Input id="idNew_Qty" value="{local>/New_Qty}" editable="{= ${local>/tab_mode} === 'edit'}" width="13rem"/>
+                <!-- MOD BEGIN BY XINLEI XU 2026/06/03 TH-P-017 -->
+                <!-- <Input id="idNew_Qty" value="{local>/New_Qty}" editable="{= ${local>/tab_mode} === 'edit'}" width="13rem"/> -->
+                <Input id="idNew_Qty" value="{local>/New_Qty}" liveChange="onPosIntLiveChange" editable="{= ${local>/tab_mode} === 'edit'}" width="13rem"/>
+                <!-- MOD END BY XINLEI XU 2026/06/03 TH-P-017 -->
                 <Label text="{i18n>WO_Qty}:"/>
-                <Input value="{ path: 'local>/headSet/WO_Qty', formatter: '.formatter.formatNumber' }" editable="false" width="13rem"/>                
+                <Input value="{ path: 'local>/headSet/WO_Qty', formatter: '.formatter.formatNumber' }" editable="false" width="13rem"/>
             </VBox>
             <VBox class="sapUiSmallMarginEnd">
                 <Label text="{i18n>WO_Order}:"/>
@@ -75,7 +78,7 @@
         <table:Table id="idModifyTable" rows="{local>/itemSetM}" rowsUpdated="handler.onUITableRowsUpdated" selectionMode="Multi" fixedColumnCount="3" rowMode="Interactive" class="sapUiSizeCompact">
             <table:extension>
                 <OverflowToolbar>
-                <ToolbarSpacer/>
+                    <ToolbarSpacer/>
                     <Button id="idRefreshBtn" icon="sap-icon://refresh" type="Transparent" text="{i18n>refreshBtn}" press=".onRefresh" enabled="{= ${local>/authorityCheck/button/Update}}"/>
                     <Button id="idFind2Btn" icon="sap-icon://search" type="Transparent" text="{i18n>FindBtn}" press=".onFind2" enabled="{= ${local>/authorityCheck/button/Find2}}"/>
                     <Button id="idSplit1Btn" icon="sap-icon://split" type="Transparent" text="{i18n>Split1Btn}" press=".onSplit1" enabled="{= ${local>/authorityCheck/button/Split}}"/>
@@ -91,17 +94,17 @@
                         <Text text="{local>ItemNo}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>Plant}">
+                <table:Column width="6rem" label="{i18n>Plant}">
                     <table:template>
                         <Text text="{local>Plant}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>Barcode1}">
+                <table:Column width="10rem" label="{i18n>Barcode1}">
                     <table:template>
                         <Text text="{local>Barcode}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>Father_Barcode}">
+                <table:Column width="10rem" label="{i18n>Father_Barcode}">
                     <table:template>
                         <Text text="{local>Father_Barcode}" wrapping="false"/>
                     </table:template>
@@ -216,7 +219,7 @@
                         <Text text="{local>Delete_Flag}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="5rem" label="{i18n>Print_Count}">
+                <table:Column width="8rem" label="{i18n>Print_Count}">
                     <table:template>
                         <Text text="{local>Print_Count}" wrapping="false"/>
                     </table:template>

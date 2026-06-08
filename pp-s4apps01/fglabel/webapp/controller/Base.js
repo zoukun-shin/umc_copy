@@ -327,5 +327,20 @@ sap.ui.define([
                 return result;
             }, []);
         },
+
+        // ADD BEGIN BY XINLEI XU 2026/06/03 TH-P-017
+        onPosIntLiveChange: function (oEvent) {
+            var oInput = oEvent.getSource();
+            var sValue = oEvent.getParameter("newValue");
+            // 1. 移除非数字字符（例如负号、小数点、字母）
+            var sCleaned = sValue.replace(/[^\d]/g, "");
+            // 2. 确保不能以 0 开头（因为是正整数）
+            if (sCleaned.startsWith("0")) {
+                sCleaned = sCleaned.replace(/^0+/, "");
+            }
+            // 3. 把过滤后的值写回输入框
+            oInput.setValue(sCleaned);
+        },
+        // ADD END BY XINLEI XU 2026/06/03 TH-P-017
     })
 });

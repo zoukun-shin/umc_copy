@@ -14,7 +14,10 @@
                     <core:ListItem key="{Plant}" text="{PlantName}({Plant})" additionalText="{Plant}"/>
                 </ComboBox>
                 <Label text="{i18n>WO_Qty}:"/>
-                <Input value="{ path: 'local>/headSetG/WO_Qty', formatter: '.formatter.formatNumber'}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+                <!-- MOD BEGIN BY XINLEI XU 2026/06/04 TH-P-017 -->
+                <!-- <Input value="{ path: 'local>/headSetG/WO_Qty', formatter: '.formatter.formatNumber'}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/> -->
+                <Input value="{local>/headSetG/WO_Qty}" liveChange="onPosIntLiveChange" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+                <!-- MOD END BY XINLEI XU 2026/06/04 TH-P-017 -->
             </VBox>
             <VBox class="sapUiSmallMarginEnd">
                 <Label text="{i18n>WO_Order}:" required="true"/>
@@ -37,13 +40,19 @@
                 <Label text="{i18n>Product}:" />
                 <Input value="{local>/headSetG/Product}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
                 <Label text="{i18n>Gen_Qty}:" required="true"/>
-                <Input id="idGen_QtyG" value="{local>/headSetG/Gen_Qty}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+                <!-- MOD BEGIN BY XINLEI XU 2026/06/04 TH-P-017 -->
+                <!-- <Input id="idGen_QtyG" value="{local>/headSetG/Gen_Qty}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/> -->
+                <Input id="idGen_QtyG" value="{local>/headSetG/Gen_Qty}" liveChange="onPosIntLiveChange" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+                <!-- MOD END BY XINLEI XU 2026/06/04 TH-P-017 -->
             </VBox>
             <VBox class="sapUiSmallMarginEnd">
                 <Label text="{i18n>Customer}:" />
                 <Input value="{local>/headSetG/Customer}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
                 <Label text="{i18n>Packing_Qty}:" required="true"/>
-                <Input id="idPacking_QtyG" value="{local>/headSetG/Packing_Qty}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+                <!-- MOD BEGIN BY XINLEI XU 2026/06/04 TH-P-017 -->
+                <!-- <Input id="idPacking_QtyG" value="{local>/headSetG/Packing_Qty}" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/> -->
+                <Input id="idPacking_QtyG" value="{local>/headSetG/Packing_Qty}" liveChange="onPosIntLiveChange" editable="{= ${local>/tab_modeG} === 'edit'}" width="13rem"/>
+                <!-- MOD END BY XINLEI XU 2026/06/04 TH-P-017 -->
             </VBox>
             <VBox class="sapUiSmallMarginEnd">
                 <Label text="{i18n>SalesDocument}:" />
@@ -83,12 +92,12 @@
                         <Text text="{local>ItemNo}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>Plant}">
+                <table:Column width="6rem" label="{i18n>Plant}">
                     <table:template>
                         <Text text="{local>Plant}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="15rem" label="{i18n>Barcode_Text}">
+                <table:Column width="10rem" label="{i18n>Barcode_Text}">
                     <table:template>
                         <Text text="{local>Barcode_Text}" wrapping="false"/>
                     </table:template>
@@ -208,7 +217,7 @@
                         <Text text="{local>Delete_Flag}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="5rem" label="{i18n>Print_Count}">
+                <table:Column width="8rem" label="{i18n>Print_Count}">
                     <table:template>
                         <Text text="{local>Print_Count}" wrapping="false"/>
                     </table:template>
