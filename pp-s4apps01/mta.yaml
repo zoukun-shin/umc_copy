@@ -206,10 +206,14 @@ modules:
     - artifacts:
       - ppzbomfollowuplist.zip
       name: ppzbomfollowuplist
-      target-path: resources/
+      target-path: resources/     
     - artifacts:
       - ppofupload.zip
       name: ppofupload
+      target-path: resources/
+    - artifacts: 
+      - ppzipqcpinaimsheet.zip
+      name: ppzipqcpinaimsheet
       target-path: resources/
 - name: ppzbomupload
   type: html5
@@ -583,6 +587,15 @@ modules:
 - name: ppofupload
   type: html5
   path: ofupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzipqcpinaimsheet
+  type: html5
+  path: zipqcpinaimsheet
   build-parameters:
     build-result: dist
     builder: custom
