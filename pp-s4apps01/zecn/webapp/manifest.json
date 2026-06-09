@@ -84,7 +84,10 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
+    "config": {
+      "fullWidth": true
+    },
     "dependencies": {
       "minUI5Version": "1.120.38",
       "libs": {
@@ -168,13 +171,7 @@
             "settings": {
               "contextPath": "/ECN",
               "variantManagement": "Page",
-              "navigation": {
-                "ECN": {
-                  "detail": {
-                    "route": "ECNObjectPage"
-                  }
-                }
-              },
+              "navigation": {},
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
@@ -190,6 +187,14 @@
                       "enabled": "{local>/authorityCheck/button/Print}",
                       "requiresSelection": true,
                       "text": "Print"
+                    }
+                  },
+                  "columns": {
+                    "LongText": {
+                      "header": "{i18n>LongText}",
+                      "horizontalAlignment": "Begin",
+                      "template": "pp.zecn.ext.fragment.LongText",
+                      "availability": "Adaptation"
                     }
                   }
                 }

@@ -26,7 +26,6 @@ sap.ui.define([
         _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel, oViews) {
             var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
             var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
-            // sEmail = "xinlei.xu@sh.shin-china.com";
             var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -116,13 +115,37 @@ sap.ui.define([
                 value1: oSelectedLine.subitem
             }));
             var oContextBinding = _oDataModel.bindList("/ECN", undefined, undefined, aFilters, {});
-            
+            //add by zhao.w 20260609 for longtext printing CM#6159 TH-P-039
+            var sLongText = "";
+            var sECNCreateAt = "";
+            //从 i18n获取 After 的翻译
+            var sAfter = _ResourceBundle.getText("After");
+            //add by zhao.w 20260609 for longtext printing CM#6159 TH-P-039
+
             //获取行项目数据
             var aPrintItem = [];
             var oItemPromise =  oContextBinding.requestContexts();
             oItemPromise.then(function(aContext){
                 for (const boundContext of aContext) {
                     var object = boundContext.getObject();
+
+                    //add by zhao.w 20260609 for longtext printing CM#6159 TH-P-039
+                    // 特殊打印项目
+                    if (object.isspecialprintitem === 'X') {
+                        // 只记录一次 longtext
+                        if (!sLongText && object.long_text) {
+                            sLongText = object.long_text;
+                        };
+
+                        if (!sECNCreateAt && object.ECNCreateAt) {
+                            sECNCreateAt = object.ECNCreateAt;
+                        };
+
+                        // 不进入正常明细
+                        continue;
+                    };
+                    //add by zhao.w 20260609 for longtext printing CM#6159 TH-P-039
+
                     //TH 打印before行 这几个字段不需要值
                     if (object.ChangeDiffCode === '01' && object.Plant === "4000" ) {
                         object.ChangeContent = "";
@@ -145,7 +168,32 @@ sap.ui.define([
                         Manage: object.Manage,
                         ECNCreateAt: object.ECNCreateAt
                     });
+                    //add by zhao.w 20260609 for longtext printing CM#6159 TH-P-039
+                    // 只记录一次 longtext
+                    if (!sLongText && object.long_text) {
+                        sLongText = object.long_text;
+                    };
                 }
+                // 循环结束后统一追加一行
+                if (sLongText) {
+                    aPrintItem.push({
+                        Seq: "999999",
+                        SerialNumber: "",
+                        BeforAfter: sAfter,
+                        PartNo: "",
+                        Specification: "",
+                        ChangeContent: sLongText,
+                        RefNo: "",
+                        Quantity: "",
+                        Unit: "",
+                        Loc: "",
+                        Stock: "",
+                        Manage: "",
+                        ECNCreateAt: sECNCreateAt,
+                    });
+                }
+                //add by zhao.w 20260609 for longtext printing CM#6159 TH-P-039
+                
                 let iLastSerialNumber;
                 let iIndex = 0;
                 aPrintItem.forEach(function(e){

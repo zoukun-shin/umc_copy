@@ -1,0 +1,4 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <Text text="{long_text}" wrapping="false" tooltip="{long_text}" />
+</core:FragmentDefinition>
