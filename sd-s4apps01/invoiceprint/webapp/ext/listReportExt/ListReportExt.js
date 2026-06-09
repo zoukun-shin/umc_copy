@@ -520,16 +520,24 @@ sap.ui.define([
                     } else if (sTemplateID === 'YY1_SD019_TH')  {
                         sEnglishNumber = _oFunctions.numberToEnglish(oFirstItem.GrandTotalAmount);
                     }
+                     sEnglishNumber = oFirstItem.TransactionCurrency + ":" + sEnglishNumber;
                 } else {
                     sEnglishNumber = "";
+                }
+                if (sDocTitle !== 'TAX INVOICE') {
+                    oFirstItem.CompanyTaxBranch = "";
                 }
                 let oHeader ={
                     CompanyName: oFirstItem.CompanyName,
                     CompanyAddress: oFirstItem.CompanyAddress,
                     CompanyTelFax: oFirstItem.CompanyTelFax,
+                    CompanyTaxBranch: oFirstItem.CompanyTaxBranch,
                     DocTitle: sDocTitle,
                     BillingDocument: oFirstItem.BillingDocument,
                     CreationDate: oFirstItem.CreationDate,
+                    UMCInvoice: oFirstItem.UMCInvoice,
+                    BillingDocumentDate: oFirstItem.BillingDocumentDate,
+                    Remark: oFirstItem.Remark,
                     SoldToParty: oFirstItem.SoldToParty,
                     SoldToPartyName: oFirstItem.SoldToPartyName,
                     SoldToPartyName1: oFirstItem.SoldToPartyName1,
@@ -564,7 +572,7 @@ sap.ui.define([
                     TaxAmount:oFirstItem.TaxAmount,
                     GrandTotalAmount:oFirstItem.GrandTotalAmount,
                     Currency: oFirstItem.TransactionCurrency,
-                    Say:sEnglishNumber
+                    Say: sEnglishNumber
                 }
                 //删除行项目不需要的字段，节省内存
                 aBillingItem.forEach(function(item, index){
