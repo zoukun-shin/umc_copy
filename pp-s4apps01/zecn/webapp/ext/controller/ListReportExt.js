@@ -166,7 +166,8 @@ sap.ui.define([
                         Loc: object.BomItemSorter,
                         Stock: object.Stock,
                         Manage: object.Manage,
-                        ECNCreateAt: object.ECNCreateAt
+                        ECNCreateAt: object.ECNCreateAt,
+                        ECNValidFrom: object.ECNValidFrom
                     });
                     //add by zhao.w 20260609 for longtext printing CM#6159 TH-P-039
                     // 只记录一次 longtext
@@ -190,6 +191,7 @@ sap.ui.define([
                         Stock: "",
                         Manage: "",
                         ECNCreateAt: sECNCreateAt,
+                        ECNValidFrom: sECNValidFrom
                     });
                 }
                 //add by zhao.w 20260609 for longtext printing CM#6159 TH-P-039
@@ -298,7 +300,7 @@ sap.ui.define([
                 if (pdfContent) {
                     pdfContent.PrintData.to_Items = { results: aPrintItem };
                     pdfContent.PrintData.CreatedDate = aPrintItem[0]?.ECNCreateAt;
-                    pdfContent.PrintData.CreatedDateFooter = aPrintItem[0]?.ECNCreateAt;
+                    pdfContent.PrintData.CreatedDateFooter = aPrintItem[0]?.ECNValidFrom;
                     switch (pdfContent.PrintData.Plant) {
                         case "3000":
                             _oFunctions.getPDF(pdfContent,"YY1_PP008_VN");break;
