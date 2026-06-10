@@ -525,7 +525,7 @@ sap.ui.define([
                     sEnglishNumber = "";
                 }
                 if (sDocTitle !== 'TAX INVOICE') {
-                    oFirstItem.CompanyTaxBranch = "";
+                    oFirstItem.SoldToTaxBranch = "";
                 }
                 let oHeader ={
                     CompanyName: oFirstItem.CompanyName,
@@ -545,6 +545,7 @@ sap.ui.define([
                     SoldToPartyStreet: oFirstItem.SoldToPartyStreet,
                     SoldToPartyCity: oFirstItem.SoldToPartyCity,
                     SoldToPartyCountry: oFirstItem.SoldToPartyCountry,
+                    SoldToTaxBranch: oFirstItem.SoldToTaxBranch,
                     ShipToParty: oFirstItem.ShipToParty,
                     ShipToPartyName: oFirstItem.ShipToPartyName,
                     ShipToPartyName1: oFirstItem.ShipToPartyName1,
@@ -605,12 +606,13 @@ sap.ui.define([
                     delete item.TaxRate;
                     delete item.TaxAmount;
                     delete item.GrandTotalAmount;
+                    delete item.SoldToTaxBranch;
                 });
                 let iItemLine = 0;
                 if (sTemplateID === 'YY1_SD019_TH_SP') {
                     iItemLine = 7;
                 } else if (sTemplateID === 'YY1_SD019_TH')  {
-                    iItemLine = 11;
+                    iItemLine = 10;
                 }
                 //要求即使行数不够也要用空白行填满一页。目前一页可以打印iItemLine行，所以添加空白行，将行项目数量改为iItemLine的倍数
                 let iMod = aBillingItem.length % iItemLine;
