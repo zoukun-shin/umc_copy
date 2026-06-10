@@ -526,6 +526,7 @@ sap.ui.define([
                 }
                 if (sDocTitle !== 'TAX INVOICE') {
                     oFirstItem.SoldToTaxBranch = "";
+                    oFirstItem.BillingLongText = "";
                 }
                 let oHeader ={
                     CompanyName: oFirstItem.CompanyName,
@@ -538,6 +539,7 @@ sap.ui.define([
                     UMCInvoice: oFirstItem.UMCInvoice,
                     BillingDocumentDate: oFirstItem.BillingDocumentDate,
                     Remark: oFirstItem.Remark,
+                    BillingLongText: oFirstItem.BillingLongText,
                     SoldToParty: oFirstItem.SoldToParty,
                     SoldToPartyName: oFirstItem.SoldToPartyName,
                     SoldToPartyName1: oFirstItem.SoldToPartyName1,
@@ -607,6 +609,7 @@ sap.ui.define([
                     delete item.TaxAmount;
                     delete item.GrandTotalAmount;
                     delete item.SoldToTaxBranch;
+                    delete item.BillingLongText;
                 });
                 let iItemLine = 0;
                 if (sTemplateID === 'YY1_SD019_TH_SP') {
