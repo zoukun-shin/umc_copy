@@ -26,6 +26,7 @@ sap.ui.define([
         _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel, oViews) {
             var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
             var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
+            sEmail = "xinlei.xu@sh.shin-china.com";
             var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -118,6 +119,7 @@ sap.ui.define([
             //add by zhao.w 20260609 for longtext printing CM#6159 TH-P-039
             var sLongText = "";
             var sECNCreateAt = "";
+            var sECNValidFrom = "";
             //从 i18n获取 After 的翻译
             var sAfter = _ResourceBundle.getText("After");
             //add by zhao.w 20260609 for longtext printing CM#6159 TH-P-039
@@ -139,6 +141,10 @@ sap.ui.define([
 
                         if (!sECNCreateAt && object.ECNCreateAt) {
                             sECNCreateAt = object.ECNCreateAt;
+                        };
+
+                        if (!sECNValidFrom && object.ECNValidFrom) {
+                            sECNValidFrom = object.ECNValidFrom;
                         };
 
                         // 不进入正常明细
@@ -167,7 +173,8 @@ sap.ui.define([
                         Stock: object.Stock,
                         Manage: object.Manage,
                         ECNCreateAt: object.ECNCreateAt,
-                        ECNValidFrom: object.ECNValidFrom
+                        ECNValidFrom: object.ECNValidFrom,
+                        AltGroup : object.AltGroup
                     });
                     //add by zhao.w 20260609 for longtext printing CM#6159 TH-P-039
                     // 只记录一次 longtext
@@ -191,7 +198,8 @@ sap.ui.define([
                         Stock: "",
                         Manage: "",
                         ECNCreateAt: sECNCreateAt,
-                        ECNValidFrom: sECNValidFrom
+                        ECNValidFrom: sECNValidFrom,
+                        AltGroup: ""
                     });
                 }
                 //add by zhao.w 20260609 for longtext printing CM#6159 TH-P-039
@@ -205,8 +213,8 @@ sap.ui.define([
                     e.SerialNumber = iIndex;
                     iLastSerialNumber = e.Seq
                 });
+
             });
-            
 
             var aFilters = [];
             aFilters.push(new Filter({
