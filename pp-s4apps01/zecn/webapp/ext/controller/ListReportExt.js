@@ -26,7 +26,6 @@ sap.ui.define([
         _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel, oViews) {
             var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
             var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
-            sEmail = "xinlei.xu@sh.shin-china.com";
             var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -203,16 +202,51 @@ sap.ui.define([
                     });
                 }
                 //add by zhao.w 20260609 for longtext printing CM#6159 TH-P-039
-                
-                let iLastSerialNumber;
-                let iIndex = 0;
-                aPrintItem.forEach(function(e){
-                    if (iLastSerialNumber != e.Seq) {
-                    iIndex += 1;
+                // let iLastSerialNumber;
+                // let iIndex = 0;
+                // aPrintItem.forEach(function(e){
+                //     if (iLastSerialNumber != e.Seq) {
+                //     iIndex += 1;
+                //     }
+                //     e.SerialNumber = iIndex;
+                //     iLastSerialNumber = e.Seq
+                // });
+                // ====== 修正：基于整个 Seq 判断是否有 AltGroup ======
+                var norm = aPrintItem.filter(e => e.Seq !== "999999");
+                var long = aPrintItem.find(e => e.Seq === "999999");
+
+                // 1. 先扫描所有行，标记哪些 Seq 有 AltGroup
+                var hasGrp = {};
+                norm.forEach(e => { if (e.AltGroup) hasGrp[e.Seq] = true; });
+
+                // 2. 按原始出现顺序收集 Seq，区分有无组
+                var noGrp = [], grpSeqs = [], seen = {};
+                norm.forEach(e => {
+                    if (!seen[e.Seq]) {
+                        seen[e.Seq] = true;
+                        hasGrp[e.Seq] ? grpSeqs.push(e.Seq) : noGrp.push(e.Seq);
                     }
-                    e.SerialNumber = iIndex;
-                    iLastSerialNumber = e.Seq
                 });
+
+                // 3. 构建 Seq → SerialNumber 映射
+                var map = {}, num = 0;
+                noGrp.forEach(s => map[s] = ++num);
+                if (grpSeqs.length) { ++num; grpSeqs.forEach(s => map[s] = num); }
+
+                // 4. 排序：无组内 Before→After；有组先全部 Before 再全部 After
+                var result = [];
+                noGrp.forEach(s => {
+                    result.push(...norm.filter(e => e.Seq === s && e.BeforAfter === 'Before'));
+                    result.push(...norm.filter(e => e.Seq === s && e.BeforAfter !== 'Before'));
+                });
+                var before = grpSeqs.flatMap(s => norm.filter(e => e.Seq === s && e.BeforAfter === 'Before'));
+                var after  = grpSeqs.flatMap(s => norm.filter(e => e.Seq === s && e.BeforAfter !== 'Before'));
+                result.push(...before, ...after);
+
+                // 5. 统一写入编号，追加特殊行
+                result.forEach(e => e.SerialNumber = map[e.Seq]);
+                if (long) { long.SerialNumber = ++num; result.push(long); }
+                aPrintItem = result;
 
             });
 
