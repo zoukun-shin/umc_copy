@@ -1,0 +1,113 @@
+<mvc:View controllerName="fico.zproxyjournal.controller.Main" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:t="sap.ui.table" height="100%">
+
+    <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{localModel>/busy}" fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="SVM_PROXYJournal" showShare="true" showExecuteOnSelection="true" entitySet="ProxyJournal"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar id="SFBProxyJournal" useToolbar="false" entitySet="ProxyJournal" smartVariant="__SVM01" persistencyKey="ProxyJournalBar" search="onSearch">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration index="1" key="SourceCompanyCode" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>SourceCompanyCode}" filterType="single" mandatory="mandatory"/>
+                            <smartFilterBar:ControlConfiguration index="2" key="TargetCompanyCode" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>TargetCompanyCode}" filterType="single" mandatory="mandatory"/>
+                            <smartFilterBar:ControlConfiguration index="3" key="FiscalYear" visibleInAdvancedArea="true" filterType="single" label="{i18n>FiscalYear}" mandatory="mandatory">
+                                <smartFilterBar:customControl>
+                                    <DatePicker id="idGjahr" displayFormat="yyyy" />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration index="4" key="FiscalPeriod" visibleInAdvancedArea="true" filterType="single" label="{i18n>FiscalPeriod}" mandatory="mandatory">
+                                <smartFilterBar:customControl>
+                                    <Select id="idMonat">
+                                        <core:Item id = "01" key="01" text="01"/>
+                                        <core:Item id = "02" key="02" text="02"/>
+                                        <core:Item id = "03" key="03" text="03"/>
+                                        <core:Item id = "04" key="04" text="04"/>
+                                        <core:Item id = "05" key="05" text="05"/>
+                                        <core:Item id = "06" key="06" text="06"/>
+                                        <core:Item id = "07" key="07" text="07"/>
+                                        <core:Item id = "08" key="08" text="08"/>
+                                        <core:Item id = "09" key="09" text="09"/>
+                                        <core:Item id = "10" key="10" text="10"/>
+                                        <core:Item id = "11" key="11" text="11"/>
+                                        <core:Item id = "12" key="12" text="12"/>
+                                    </Select>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                             
+                            <smartFilterBar:ControlConfiguration index="5" key="PostingStatus" visibleInAdvancedArea="true" label="{i18n>PostingStatus}">
+                                <smartFilterBar:customControl>
+                                    <Select id="PostingStatusSelect" selectedKey="1" change="onPostingStatusChange" width="12rem">
+                                        <core:Item key="1" text="1 - {i18n>NotPostedList}"/>
+                                        <core:Item key="2" text="2 - {i18n>PostedList}"/>
+                                    </Select>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <smartTable:SmartTable id="smartTable_ProxyJournal" entitySet="ProxyJournal" smartVariant="__SVM01" smartFilterId="SFBProxyJournal"
+                tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true"
+                persistencyKey="ProxyJournalTable" header="{i18n>Result}" enableAutoBinding="false"
+                placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable"
+                fitContainer="true" height="100%">
+
+                <smartTable:customToolbar>
+                    <OverflowToolbar id="toolbar" width="100%">
+                        <ToolbarSpacer/>
+                        <Button id="btnPost" icon="sap-icon://create" text="{i18n>Post}" tooltip="{i18n>Post}" press="onPost" visible="{local>/showPost}" enabled="{= ${local>/authorityCheck/button/Post} !== false}"/>
+                        <Button id="btnCancel" icon="sap-icon://undo" text="{i18n>Cancel}" tooltip="{i18n>Cancel}" press="onCancel" visible="{local>/showCancel}" enabled="{= ${local>/authorityCheck/button/Cancel} !== false}"/>
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+
+                <t:Table id="Table_ProxyJournal" selectionMode="MultiToggle" rowMode="Auto">
+                    <t:Column id="Status" width="6rem" label="{i18n>Status}" sortProperty="Status" filterProperty="Status">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Status","leadingProperty":"Status","sortProperty":"Status","filterProperty":"Status"}'/></t:customData>
+                        <t:template><ObjectStatus state="{path:'Status', formatter:'.formatter.setState'}" icon="{path:'Status', formatter:'.formatter.setStateIcon'}"/></t:template>
+                    </t:Column>
+                    <t:Column id="Message" label="{i18n>Message}" width="20rem" sortProperty="Message"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Message","leadingProperty":"Message","sortProperty":"Message"}'/></t:customData><t:template><Text text="{Message}" tooltip="{Message}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="SourceCompanyCode" label="{i18n>SourceCompanyCode}" width="7rem" sortProperty="SourceCompanyCode" filterProperty="SourceCompanyCode"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SourceCompanyCode","leadingProperty":"SourceCompanyCode","sortProperty":"SourceCompanyCode","filterProperty":"SourceCompanyCode"}'/></t:customData><t:template><Text text="{SourceCompanyCode}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="TargetCompanyCode" label="{i18n>TargetCompanyCode}" width="7rem" sortProperty="TargetCompanyCode" filterProperty="TargetCompanyCode"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"TargetCompanyCode","leadingProperty":"TargetCompanyCode","sortProperty":"TargetCompanyCode","filterProperty":"TargetCompanyCode"}'/></t:customData><t:template><Text text="{TargetCompanyCode}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="FiscalYear" label="{i18n>FiscalYear}" width="6rem" sortProperty="FiscalYear" filterProperty="FiscalYear"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FiscalYear","leadingProperty":"FiscalYear","sortProperty":"FiscalYear","filterProperty":"FiscalYear"}'/></t:customData><t:template><Text text="{FiscalYear}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="FiscalPeriod" label="{i18n>FiscalPeriod}" width="6rem" sortProperty="FiscalPeriod" filterProperty="FiscalPeriod"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FiscalPeriod","leadingProperty":"FiscalPeriod","sortProperty":"FiscalPeriod","filterProperty":"FiscalPeriod"}'/></t:customData><t:template><Text text="{FiscalPeriod}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PostingDate" label="{i18n>PostingDate}" width="8rem" sortProperty="PostingDate"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PostingDate","leadingProperty":"PostingDate","sortProperty":"PostingDate"}'/></t:customData><t:template><Text text="{path:'PostingDate', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="DocumentDate" label="{i18n>DocumentDate}" width="8rem" sortProperty="DocumentDate"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"DocumentDate","leadingProperty":"DocumentDate","sortProperty":"DocumentDate"}'/></t:customData><t:template><Text text="{path:'DocumentDate', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="CreationDate" label="{i18n>CreationDate}" width="8rem" sortProperty="CreationDate"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CreationDate","leadingProperty":"CreationDate","sortProperty":"CreationDate"}'/></t:customData><t:template><Text text="{path:'CreationDate', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AccountingDocument" label="{i18n>AccountingDocument}" width="10rem" sortProperty="AccountingDocument"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AccountingDocument","leadingProperty":"AccountingDocument","sortProperty":"AccountingDocument"}'/></t:customData><t:template><Text text="{AccountingDocument}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="LedgerGLLineItem" label="{i18n>LedgerGLLineItem}" width="7rem" sortProperty="LedgerGLLineItem"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LedgerGLLineItem","leadingProperty":"LedgerGLLineItem","sortProperty":"LedgerGLLineItem"}'/></t:customData><t:template><Text text="{LedgerGLLineItem}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="GLAccount" label="{i18n>GLAccount}" width="10rem" sortProperty="GLAccount"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"GLAccount","leadingProperty":"GLAccount","sortProperty":"GLAccount"}'/></t:customData><t:template><Text text="{GLAccount}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="GLAccountName" label="{i18n>GLAccountName}" width="14rem" sortProperty="GLAccountName"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"GLAccountName","leadingProperty":"GLAccountName","sortProperty":"GLAccountName"}'/></t:customData><t:template><Text text="{GLAccountName}" tooltip="{GLAccountName}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PurchasingDocument" label="{i18n>PurchasingDocument}" width="10rem" sortProperty="PurchasingDocument"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PurchasingDocument","leadingProperty":"PurchasingDocument","sortProperty":"PurchasingDocument"}'/></t:customData><t:template><Text text="{PurchasingDocument}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PurchasingDocumentItem" label="{i18n>PurchasingDocumentItem}" width="8rem" sortProperty="PurchasingDocumentItem"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PurchasingDocumentItem","leadingProperty":"PurchasingDocumentItem","sortProperty":"PurchasingDocumentItem"}'/></t:customData><t:template><Text text="{PurchasingDocumentItem}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="InternationalArticleNumber" label="{i18n>InternationalArticleNumber}" width="10rem" sortProperty="InternationalArticleNumber"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"InternationalArticleNumber","leadingProperty":"InternationalArticleNumber","sortProperty":"InternationalArticleNumber"}'/></t:customData><t:template><Text text="{InternationalArticleNumber}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="SalesOrder" label="{i18n>SalesOrder}" width="10rem" sortProperty="SalesOrder"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesOrder","leadingProperty":"SalesOrder","sortProperty":"SalesOrder"}'/></t:customData><t:template><Text text="{SalesOrder}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="SalesOrderItem" label="{i18n>SalesOrderItem}" width="8rem" sortProperty="SalesOrderItem"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesOrderItem","leadingProperty":"SalesOrderItem","sortProperty":"SalesOrderItem"}'/></t:customData><t:template><Text text="{SalesOrderItem}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="Customer" label="{i18n>Customer}" width="10rem" sortProperty="Customer"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Customer","leadingProperty":"Customer","sortProperty":"Customer"}'/></t:customData><t:template><Text text="{Customer}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="TransactionCurrency" label="{i18n>TransactionCurrency}" width="6rem" sortProperty="TransactionCurrency"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"TransactionCurrency","leadingProperty":"TransactionCurrency","sortProperty":"TransactionCurrency"}'/></t:customData><t:template><Text text="{TransactionCurrency}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AmountInTransactionCurrency" label="{i18n>AmountInTransactionCurrency}" width="12rem" hAlign="End" sortProperty="AmountInTransactionCurrency"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AmountInTransactionCurrency","leadingProperty":"AmountInTransactionCurrency","sortProperty":"AmountInTransactionCurrency"}'/></t:customData><t:template><Text text="{AmountInTransactionCurrency}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PostedCompanyCode" label="{i18n>PostedCompanyCode}" width="8rem" sortProperty="PostedCompanyCode"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PostedCompanyCode","leadingProperty":"PostedCompanyCode","sortProperty":"PostedCompanyCode"}'/></t:customData><t:template><Text text="{PostedCompanyCode}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PostedPostingDate" label="{i18n>PostedPostingDate}" width="9rem" sortProperty="PostedPostingDate"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PostedPostingDate","leadingProperty":"PostedPostingDate","sortProperty":"PostedPostingDate"}'/></t:customData><t:template><Text text="{path:'PostedPostingDate', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PostedAccountingDocument" label="{i18n>PostedAccountingDocument}" width="11rem" sortProperty="PostedAccountingDocument"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PostedAccountingDocument","leadingProperty":"PostedAccountingDocument","sortProperty":"PostedAccountingDocument"}'/></t:customData><t:template><Text text="{PostedAccountingDocument}" wrapping="false"/></t:template></t:Column>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
+

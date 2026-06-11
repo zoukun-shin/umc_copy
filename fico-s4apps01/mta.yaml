@@ -143,6 +143,10 @@ modules:
       - ficosalesbillingposting.zip
       name: ficosalesbillingposting
       target-path: resources/
+    - artifacts:
+      - ficozproxyjournal.zip
+      name: ficozproxyjournal
+      target-path: resources/
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -362,6 +366,15 @@ modules:
 - name: ficosalesbillingposting
   type: html5
   path: salesbillingposting
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozproxyjournal
+  type: html5
+  path: zproxyjournal
   build-parameters:
     build-result: dist
     builder: custom
