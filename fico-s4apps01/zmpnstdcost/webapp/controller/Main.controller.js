@@ -101,12 +101,18 @@ sap.ui.define([
             },
 
             onBeforeRebindTable: function (oEvent) {
-                // var bHasError = false;
-                // var sMessage = "";
-                // var sPlant = this.byId("SFBMPNSTDCost").getFilterData().Plant;
-                // var aAuthorityCompanySet = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
-
- 
+			var bHasError = false;
+			var sMessage = "";
+			var sPlant = this.byId("SFBMPNSTDCost").getFilterData().Plant; 
+			var aAuthorityPlantSet = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
+			if (!aAuthorityPlantSet.some(data => data.Plant === sPlant)) {
+				bHasError = true;
+				sMessage = sPlant;
+			}
+			if (bHasError) {
+				MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("noAuthorityPlant", [sMessage]));
+				return;
+			}else {
                 var mBindingParams = oEvent.getParameter("bindingParams");
                 var bOption2 = this.byId("Option2").getSelected();
                 var oTable = this.byId("Table_MPNSTDCost");
@@ -129,6 +135,7 @@ sap.ui.define([
                         oColumn.setVisible(bOption2);
                     }
                 });
+            }
             },
 
             onChange: function (oEvent) {
