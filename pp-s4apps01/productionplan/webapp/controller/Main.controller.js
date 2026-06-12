@@ -71,12 +71,24 @@ sap.ui.define([
          */
         onPaste: function (oEvent) {
             var that = this;
-            function handlePaste(that, aData, oCellInfo) {
+            function handlePaste(that, aData, oCellInfo, sPasteMode) {
                 var oTable = that.byId("ReportTable");
                 var rowIndexFrom = oCellInfo.from.rowIndex;
                 var rowIndexTo = oCellInfo.to.rowIndex;
                 var colIndexFrom = oCellInfo.from.colIndex;
                 var colIndexTo = oCellInfo.to.colIndex;
+                // ADD BEGIN BY XINLEIX XU 2026/06/10 TH-P-027
+                switch (sPasteMode) {
+                    case "2":
+                        // TH/VN/CN Mode
+                        rowIndexTo = rowIndexFrom + aData.length;
+                        colIndexTo = colIndexFrom + aData[0].length;
+                        break;
+                    default:
+                        // JP Mode
+                        break;
+                }
+                // ADD END BY XINLEIX XU 2026/06/10 TH-P-027
                 var iRowNum = -1;
                 for (var index = rowIndexFrom; index <= rowIndexTo; index++) {
                     var iColNum1 = 0,
@@ -118,8 +130,9 @@ sap.ui.define([
 
             const aData = oEvent.getParameter("data");
             const oRange = oCellSelector.getSelectionRange();
+            const sPasteMode = this.getModel("local").getProperty("/pasteMode"); // ADD BY XINLEIX XU 2026/06/10 TH-P-027
             if (oRange) {
-                handlePaste(that, aData, oRange);
+                handlePaste(that, aData, oRange, sPasteMode);
             }
         },
 

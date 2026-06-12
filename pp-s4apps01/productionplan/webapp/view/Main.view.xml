@@ -189,6 +189,13 @@
           <t:extension>
             <OverflowToolbar id="toolbar" style="Clear">
               <ToolbarSpacer/>
+              <!-- ADD BEGIN BY XINLEIX XU 2026/06/10 TH-P-027 -->
+              <Label text="{i18n>pasteMode}" labelFor="idPasteModeSelect"/>
+              <Select id="idPasteModeSelect" selectedKey="{local>/pasteMode}">
+                <core:Item key="1" text="{i18n>mode1}"/>
+                <core:Item key="2" text="{i18n>mode2}"/>
+              </Select>
+              <!-- ADD END BY XINLEIX XU 2026/06/10 TH-P-027 -->
               <Button>
                 <dependents>
                   <plugins.PasteProvider pasteFor="table" />

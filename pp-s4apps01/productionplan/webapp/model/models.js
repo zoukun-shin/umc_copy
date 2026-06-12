@@ -1,8 +1,7 @@
 sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/Device"
-], 
-function (JSONModel, Device) {
+], function (JSONModel, Device) {
     "use strict";
 
     return {
@@ -18,7 +17,8 @@ function (JSONModel, Device) {
         // Create local Model
         createLocalModel: function () {
             var oModel = new JSONModel({
-
+                // Default to JP Mode
+                pasteMode: "1"  // ADD BY XINLEIX XU 2026/06/10 TH-P-027
             });
             return oModel;
         },
