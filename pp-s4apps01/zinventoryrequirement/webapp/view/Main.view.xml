@@ -19,16 +19,16 @@
                     <FlexBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ZC_InventoryRequirement" useToolbar="false" smartVariant="__SVM01" persistencyKey="InventoryRequirementSFB" search="onSearch">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
-                                <smartFilterBar:ControlConfiguration index='20' key="MRPArea" visibleInAdvancedArea="true" label="{i18n>MRPArea}"/>
-                                <smartFilterBar:ControlConfiguration index='30' key="MRPController" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>MRPController}"/>
-                                <smartFilterBar:ControlConfiguration index='40' key="PurchasingGroup" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
-                                <smartFilterBar:ControlConfiguration index='50' key="ProductGroup" visibleInAdvancedArea="true" label="{i18n>ProductGroup}"/>
-                                <smartFilterBar:ControlConfiguration index='60' key="ProductType" visibleInAdvancedArea="true" label="{i18n>ProductType}"/>
-                                <smartFilterBar:ControlConfiguration index='70' key="Product" visibleInAdvancedArea="true" label="{i18n>Product}"/>
-                                <smartFilterBar:ControlConfiguration index='80' key="Supplier" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="MRPArea" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MRPArea}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="MRPController" displayBehaviour="idAndDescription" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>MRPController}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="PurchasingGroup" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="ProductGroup" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ProductGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="ProductType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ProductType}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="Product" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Product}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="Supplier" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
                                 <smartFilterBar:ControlConfiguration index='90' key="SupplierMaterialNumber" visibleInAdvancedArea="true" label="{i18n>SupplierMaterialNumber}"/>
-                                <smartFilterBar:ControlConfiguration index='100' key="DisplayUnit" visibleInAdvancedArea="true" label="{i18n>DisplayUnit}">
+                                <smartFilterBar:ControlConfiguration index='100' key="DisplayUnit" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>DisplayUnit}">
                                     <smartFilterBar:customControl>
                                         <Select change="removeAllColumns" forceSelection="true" selectedKey="{local>/filter/DisplayUnit}">
                                             <core:Item key="D" text="{i18n>UnitDay}"/>

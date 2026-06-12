@@ -81,6 +81,7 @@ sap.ui.define([
                         PurchaseList: aAllAccessBtns.some(btn => btn.AccessId === "zinventoryrequirement-PurchaseList"),
                         PurchaseListExport: aAllAccessBtns.some(btn => btn.AccessId === "zinventoryrequirement-PurchaseListExport"),
                         MRPSynchronous: aAllAccessBtns.some(btn => btn.AccessId === "zinventoryrequirement-MRPSynchronous"),
+                        SyncHistory: aAllAccessBtns.some(btn => btn.AccessId === "zinventoryrequirement-SyncHistory") // ADD BY XINLEI XU 2026/06/10 CM#6502
                     },
                     data: {
                         PlantSet: context._AssignPlant,
@@ -90,35 +91,40 @@ sap.ui.define([
                         RoleSet: context._AssignRole
                     }
                 });
-                // ADD BEGIN BY XINLEI XU 2025/03/21 CM#4333
-                this._myBusyDialog.open();
-                this._CallODataV2("ACTION", "/GetMRPSynchronousTime", [], {}, {}).then(function (oResponse) {
-                    this._myBusyDialog.close();
-                    var oResult = JSON.parse(oResponse.GetMRPSynchronousTime.Zzkey);
-                    var oMessageStrip = this.byId("idMRPSynchronousMsg");
-                    var oButton = this.byId("idMRPSynchronous");
-                    var sType = "",
-                        sText = "";
-                    var sDateTime = oResult.SCHEDULEEND === "" ? oResult.SCHEDULEBEGIN : oResult.SCHEDULEEND;
-                    var sDateTimeStr = sDateTime.substring(0, 4) + "/" + sDateTime.substring(4, 6) + "/" + sDateTime.substring(6, 8) + " " +
-                        sDateTime.substring(8, 10) + ":" + sDateTime.substring(10, 12) + ":" + sDateTime.substring(12, 14);
-                    var iTimezoneOffset = new Date().getTimezoneOffset();
-                    var newDate = new Date(new Date(sDateTimeStr).getTime() - iTimezoneOffset * 60 * 1000);
-                    if (oResult.SCHEDULEEND) {
-                        sType = "Success";
-                        sText = this.getModel("i18n").getResourceBundle().getText("MRPSynchronousMsg1", [newDate]);
-                    } else {
-                        sType = "Warning";
-                        sText = this.getModel("i18n").getResourceBundle().getText("MRPSynchronousMsg2", [oResult.SCHEDULEUSER, newDate]);
-                        oButton.setEnabled(false);
-                    }
-                    oMessageStrip.setText(sText);
-                    oMessageStrip.setType(sType);
-                }.bind(this), function (oError) {
-                    this._myBusyDialog.close();
-                    MessageBox.error(oError);
-                }.bind(this));
-                // ADD END BY XINLEI XU 2025/03/21 CM#4333
+                // DEL BEGIN BY XINLEI XU 2026/06/09 CM#6502
+                // // ADD BEGIN BY XINLEI XU 2025/03/21 CM#4333
+                // this._myBusyDialog.open();
+                // this._CallODataV2("ACTION", "/GetMRPSynchronousTime", [], {}, {}).then(function (oResponse) {
+                //     this._myBusyDialog.close();
+                //     var oResult = JSON.parse(oResponse.GetMRPSynchronousTime.Zzkey);
+                //     var oMessageStrip = this.byId("idMRPSynchronousMsg");
+                //     var oButton = this.byId("idMRPSynchronous");
+                //     var sType = "",
+                //         sText = "";
+                //     var sDateTime = oResult.SCHEDULEEND === "" ? oResult.SCHEDULEBEGIN : oResult.SCHEDULEEND;
+                //     var sDateTimeStr = sDateTime.substring(0, 4) + "/" + sDateTime.substring(4, 6) + "/" + sDateTime.substring(6, 8) + " " +
+                //         sDateTime.substring(8, 10) + ":" + sDateTime.substring(10, 12) + ":" + sDateTime.substring(12, 14);
+                //     var iTimezoneOffset = new Date().getTimezoneOffset();
+                //     var newDate = new Date(new Date(sDateTimeStr).getTime() - iTimezoneOffset * 60 * 1000);
+                //     if (oResult.SCHEDULEEND) {
+                //         sType = "Success";
+                //         sText = this.getModel("i18n").getResourceBundle().getText("MRPSynchronousMsg1", [newDate]);
+                //     } else {
+                //         sType = "Warning";
+                //         sText = this.getModel("i18n").getResourceBundle().getText("MRPSynchronousMsg2", [oResult.SCHEDULEUSER, newDate]);
+                //         oButton.setEnabled(false);
+                //     }
+                //     oMessageStrip.setText(sText);
+                //     oMessageStrip.setType(sType);
+                // }.bind(this), function (oError) {
+                //     this._myBusyDialog.close();
+                //     MessageBox.error(oError);
+                // }.bind(this));
+                // // ADD END BY XINLEI XU 2025/03/21 CM#4333
+                // DEL END BY XINLEI XU 2026/06/09 CM#6502
+                // ADD BEGIN BY XINLEI XU 2026/06/09 CM#6502
+                this.onGetMRPSyncHistory(false);
+                // ADD END BY XINLEI XU 2026/06/09 CM#6502
             }.bind(this), function (oError) {
                 if (!this.oErrorMessageDialog) {
                     this.oErrorMessageDialog = new sap.m.Dialog({
@@ -568,29 +574,79 @@ sap.ui.define([
             new Spreadsheet(oSettings).build();
         },
 
-        // ADD BEGIN BY XINLEI XU 2025/03/21 CM#4333
-        onMRPSynchronous: function () {
+        // DEL BEGIN BY XINLEI XU 2026/06/08 CM#6502
+        // // ADD BEGIN BY XINLEI XU 2025/03/21 CM#4333
+        // onMRPSynchronous: function () {
+        //     this._myBusyDialog.open();
+        //     this._CallODataV2("ACTION", "/ScheduleMRPSynchronous", [], {
+        //         "Event": "",
+        //         "Zzkey": this._UserInfo.getLastName() + " " + this._UserInfo.getFirstName(),
+        //         "RecordUUID": ""
+        //     }, {}).then(function (oResponse) {
+        //         this._myBusyDialog.close();
+        //         if (oResponse.ScheduleMRPSynchronous.Event === "S") {
+        //             this.byId("idMRPSynchronous").setEnabled(false);
+        //             var oResult = JSON.parse(oResponse.ScheduleMRPSynchronous.Zzkey);
+        //             MessageBox.success(this.getModel("i18n").getResourceBundle().getText("MRPSynchronousMsg3", [oResult.JOBNAME]));
+        //             var oMessageStrip = this.byId("idMRPSynchronousMsg");
+        //             var sDateTime = oResult.SCHEDULEBEGIN;
+        //             var sDateTimeStr = sDateTime.substring(0, 4) + "/" + sDateTime.substring(4, 6) + "/" + sDateTime.substring(6, 8) + " " +
+        //                 sDateTime.substring(8, 10) + ":" + sDateTime.substring(10, 12) + ":" + sDateTime.substring(12, 14);
+        //             var iTimezoneOffset = new Date().getTimezoneOffset();
+        //             var newDate = new Date(new Date(sDateTimeStr).getTime() - iTimezoneOffset * 60 * 1000);
+        //             var sType = "Warning";
+        //             var sText = this.getModel("i18n").getResourceBundle().getText("MRPSynchronousMsg2", [oResult.SCHEDULEUSER, newDate]);
+        //             oMessageStrip.setText(sText);
+        //             oMessageStrip.setType(sType);
+        //         } else {
+        //             MessageBox.error(oResponse.ScheduleMRPSynchronous.Zzkey);
+        //         }
+        //     }.bind(this), function (oError) {
+        //         this._myBusyDialog.close();
+        //         MessageBox.error(oError);
+        //     }.bind(this));
+        // },
+        // // ADD END BY XINLEI XU 2025/03/21 CM#4333
+        // DEL END BY XINLEI XU 2026/06/08 CM#6502
+
+        // ADD BEGIN BY XINLEI XU 2026/06/08 CM#6502
+        onMRPSubmitByPlant: function () {
+            var aPlantSet = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
+            var sPlant = this.byId("idSmartFilterBar").getFilterData().Plant;
+            if (!sPlant) {
+                MessageBox.error(this.getModel("i18n").getResourceBundle().getText("PlantRequired"));
+                return;
+            } else {
+                var oPlant = aPlantSet.find(item => item.Plant === sPlant);
+                if (!oPlant) {
+                    MessageBox.error(this.getModel("i18n").getResourceBundle().getText("noAuthorityPlant", [sPlant]));
+                    return;
+                }
+                var aMRPsyncHistory = this.getModel("local").getProperty("/filteredMRPsyncHistory");
+                var oHistory = aMRPsyncHistory.find(item => item.Plant === sPlant);
+                if (oHistory && !oHistory.EndTime) {
+                    MessageBox.error(this.getModel("i18n").getResourceBundle().getText("MRPSynchronousMsg2", [oHistory.SyncUser, oHistory.StartTime]));
+                    return;
+                }
+                this._MRPSynchronous(sPlant, oPlant.PlantName);
+            }
+        },
+
+        _MRPSynchronous: function (sPlant, sPlantName) {
             this._myBusyDialog.open();
             this._CallODataV2("ACTION", "/ScheduleMRPSynchronous", [], {
                 "Event": "",
-                "Zzkey": this._UserInfo.getLastName() + " " + this._UserInfo.getFirstName(),
+                "Zzkey": JSON.stringify({
+                    Plant: sPlant,
+                    PlantName: sPlantName,
+                    User: this._UserInfo.getLastName() + " " + this._UserInfo.getFirstName()
+                }),
                 "RecordUUID": ""
             }, {}).then(function (oResponse) {
                 this._myBusyDialog.close();
                 if (oResponse.ScheduleMRPSynchronous.Event === "S") {
-                    this.byId("idMRPSynchronous").setEnabled(false);
                     var oResult = JSON.parse(oResponse.ScheduleMRPSynchronous.Zzkey);
                     MessageBox.success(this.getModel("i18n").getResourceBundle().getText("MRPSynchronousMsg3", [oResult.JOBNAME]));
-                    var oMessageStrip = this.byId("idMRPSynchronousMsg");
-                    var sDateTime = oResult.SCHEDULEBEGIN;
-                    var sDateTimeStr = sDateTime.substring(0, 4) + "/" + sDateTime.substring(4, 6) + "/" + sDateTime.substring(6, 8) + " " +
-                        sDateTime.substring(8, 10) + ":" + sDateTime.substring(10, 12) + ":" + sDateTime.substring(12, 14);
-                    var iTimezoneOffset = new Date().getTimezoneOffset();
-                    var newDate = new Date(new Date(sDateTimeStr).getTime() - iTimezoneOffset * 60 * 1000);
-                    var sType = "Warning";
-                    var sText = this.getModel("i18n").getResourceBundle().getText("MRPSynchronousMsg2", [oResult.SCHEDULEUSER, newDate]);
-                    oMessageStrip.setText(sText);
-                    oMessageStrip.setType(sType);
                 } else {
                     MessageBox.error(oResponse.ScheduleMRPSynchronous.Zzkey);
                 }
@@ -598,7 +654,79 @@ sap.ui.define([
                 this._myBusyDialog.close();
                 MessageBox.error(oError);
             }.bind(this));
+        },
+
+        onGetMRPSyncHistory: function (bOpenDialog) {
+            this._myBusyDialog.open();
+            this._CallODataV2("ACTION", "/GetMRPSynchronousTime", [], {}, {}).then(function (oResponse) {
+                this._myBusyDialog.close();
+                var aResult = JSON.parse(oResponse.GetMRPSynchronousTime.Zzkey);
+                var aPlantSet = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
+                for (var i = 0; i < aResult.length; i++) {
+                    if (!aPlantSet.find(item => item.Plant === aResult[i].PLANT)) {
+                        aResult.splice(i, 1);
+                    }
+                    if (aResult[i].SCHEDULE_BEGIN) {
+                        var sDateTime = aResult[i].SCHEDULE_BEGIN.toString();
+                        var sDateTimeStr = sDateTime.substring(0, 4) + "/" + sDateTime.substring(4, 6) + "/" + sDateTime.substring(6, 8) + " " +
+                            sDateTime.substring(8, 10) + ":" + sDateTime.substring(10, 12) + ":" + sDateTime.substring(12, 14);
+                        var iTimezoneOffset = new Date().getTimezoneOffset();
+                        aResult[i]["StartTime"] = new Date(new Date(sDateTimeStr).getTime() - iTimezoneOffset * 60 * 1000);
+                    } else {
+                        aResult[i]["StartTime"] = "";
+                    }
+                    if (aResult[i].SCHEDULE_END) {
+                        sDateTime = aResult[i].SCHEDULE_END.toString();
+                        sDateTimeStr = sDateTime.substring(0, 4) + "/" + sDateTime.substring(4, 6) + "/" + sDateTime.substring(6, 8) + " " +
+                            sDateTime.substring(8, 10) + ":" + sDateTime.substring(10, 12) + ":" + sDateTime.substring(12, 14);
+                        aResult[i]["EndTime"] = new Date(new Date(sDateTimeStr).getTime() - iTimezoneOffset * 60 * 1000);
+                    } else {
+                        var iCurrentTime = new Date().getTime();
+                        var iThreeHoursInMs = 3 * 60 * 60 * 1000;
+                        // 检查 StartTime 是否存在，且 (当前时间 - 开始时间) 是否大于 3 小时
+                        if (aResult[i]["StartTime"] && (iCurrentTime - aResult[i]["StartTime"].getTime() > iThreeHoursInMs)) {
+                            aResult[i]["EndTime"] = this.getModel("i18n").getResourceBundle().getText("TimeOut");
+                        } else {
+                            aResult[i]["EndTime"] = "";
+                        }
+                    }
+                    aResult[i]["Plant"] = aResult[i].PLANT;
+                    aResult[i]["SyncUser"] = aResult[i].SCHEDULE_USER;
+                }
+                aResult.sort(function (a, b) {
+                    return a.Plant - b.Plant;
+                });
+                this.getModel("local").setProperty("/filteredMRPsyncHistory", aResult);
+
+                if (bOpenDialog) {
+                    this.onOpenHistoryDialog();
+                }
+            }.bind(this), function (oError) {
+                this._myBusyDialog.close();
+                MessageBox.error(oError);
+            }.bind(this));
+        },
+
+        onOpenHistoryDialog: function () {
+            if (!this._pDialog) {
+                this._pDialog = Fragment.load({
+                    id: this.getView().getId(),
+                    name: "pp.zinventoryrequirement.fragments.SyncHistoryDialog",
+                    controller: this
+                }).then(function (oDialog) {
+                    this.getView().addDependent(oDialog);
+                    return oDialog;
+                }.bind(this));
+            }
+            this._pDialog.then(function (oDialog) {
+                oDialog.setModel(this.getModel("local"), "local");
+                oDialog.open();
+            }.bind(this));
+        },
+
+        onCloseDialog: function () {
+            this.byId("syncHistoryDialog").close();
         }
-        // ADD END BY XINLEI XU 2025/03/21 CM#4333
+        // ADD END BY XINLEI XU 2026/06/10 CM#6502
     });
 });

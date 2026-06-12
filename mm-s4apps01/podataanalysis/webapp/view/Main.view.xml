@@ -19,14 +19,14 @@
                     <FlexBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="PODataAnalysis" useToolbar="false" smartVariant="__SVM01" persistencyKey="PODataAnalysisSFB" search="onSearch">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="PurchasingGroup" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
-                                <smartFilterBar:ControlConfiguration index='20' key="MRPResponsible" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}"/>
+                                <smartFilterBar:ControlConfiguration index='10' key="PurchasingGroup" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="MRPResponsible" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}"/>
                                 <smartFilterBar:ControlConfiguration index='30' key="PurchaseOrder" visibleInAdvancedArea="true" label="{i18n>PurchaseOrder}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="POPOItem" visibleInAdvancedArea="true" label="{i18n>POPOItem}"/>
                                 <smartFilterBar:ControlConfiguration index='50' key="AccountAssignmentCategory" visibleInAdvancedArea="true" label="{i18n>AccountAssignmentCategory}"/>
                                 <smartFilterBar:ControlConfiguration index='60' key="InternationalArticleNumber" visibleInAdvancedArea="true" label="{i18n>InternationalArticleNumber}"/>
-                                <smartFilterBar:ControlConfiguration index='70' key="Supplier" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
-                                <smartFilterBar:ControlConfiguration index='80' key="Material" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="Supplier" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="Material" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}"/>
                                 <smartFilterBar:ControlConfiguration index='90' key="SupplierMaterialNumber" visibleInAdvancedArea="true" label="{i18n>SupplierMaterialNumber}"/>
                                 <smartFilterBar:ControlConfiguration index='100' key="PurchaseOrderDate" visibleInAdvancedArea="true" label="{i18n>PurchaseOrderDate}"/>
                                 <smartFilterBar:ControlConfiguration index='110' key="ScheduleLineDeliveryDate" visibleInAdvancedArea="true" label="{i18n>ScheduleLineDeliveryDate}"/>
@@ -34,8 +34,8 @@
                                 <smartFilterBar:ControlConfiguration index='130' key="WorkflowTaskResult" visibleInAdvancedArea="true" label="{i18n>WorkflowTaskResult}"/>
                                 <smartFilterBar:ControlConfiguration index='140' key="CreatedByUser" visibleInAdvancedArea="true" label="{i18n>CreatedByUser}"/>
                                 <smartFilterBar:ControlConfiguration index='150' key="CorrespncInternalReference" visibleInAdvancedArea="true" label="{i18n>CorrespncInternalReference}"/>
-                                <smartFilterBar:ControlConfiguration index='160' key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
-                                <smartFilterBar:ControlConfiguration index='170' key="StorageLocation" visibleInAdvancedArea="true" label="{i18n>StorageLocation}"/>
+                                <smartFilterBar:ControlConfiguration index='160' key="Plant" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='170' key="StorageLocation" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>StorageLocation}"/>
                                 <smartFilterBar:ControlConfiguration index='180' key="IncotermsClassification" visibleInAdvancedArea="true" label="{i18n>IncotermsClassification}"/>
                                 <smartFilterBar:ControlConfiguration index='190' key="CorrespncExternalReference" visibleInAdvancedArea="true" label="{i18n>CorrespncExternalReference}"/>
                                 <smartFilterBar:ControlConfiguration index='200' key="ponokodis" visibleInAdvancedArea="true" label="{i18n>ponokodis}"/>
