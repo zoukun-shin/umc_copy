@@ -93,7 +93,8 @@ sap.ui.define([
             //Barcode No/WO No/WO Start Date must input at least one!
             let sMRPResponsible = oSmartFilterBar.getFilterData().MRPResponsible;
             let sCustomer = oSmartFilterBar.getFilterData().Customer;
-            if (!sMRPResponsible && !sCustomer) {
+			let sMaterial = oSmartFilterBar.getFilterData().Material;
+            if (!sMRPResponsible && !sCustomer && !sMaterial) {
                 MessageBox.error(this.getResourceBundle().getText("msg03"));
                 return;
             };
