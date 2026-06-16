@@ -1,0 +1,89 @@
+<mvc:View controllerName="pp.zecobomlchange.controller.Main" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:t="sap.ui.table" height="100%">
+
+    <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="false" busy="{local>/busy}" fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="SVM_ECOBOMLChange" showShare="true" showExecuteOnSelection="true" entitySet="ECOBOMLChange"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar id="SFBECOBOMLChange" useToolbar="false" entitySet="ECOBOMLChange" smartVariant="__SVM01" persistencyKey="ECOBOMLChangeBar" search="onSearch">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration index="1" key="Plant" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="mandatory"/>
+                            <smartFilterBar:ControlConfiguration index="2" key="BillOfMaterialComponent" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>BillOfMaterialComponent}"/>
+                            <smartFilterBar:ControlConfiguration index="3" key="MRPController" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MRPController}"/>
+                            <smartFilterBar:ControlConfiguration
+                                index="4"
+                                key="ValidDate"
+                                visibleInAdvancedArea="true"
+                                filterType="interval"
+                                label="{i18n>ValidDate}">
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection
+                                        id="idValidDateRange"
+                                        displayFormat="yyyyMMdd"
+                                        valueFormat="yyyyMMdd"
+                                        delimiter=" - " />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration index="5" key="OldPartsManagement" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>OldPartsManagement}"/>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <smartTable:SmartTable id="smartTable_ECOBOMLChange" entitySet="ECOBOMLChange" smartVariant="__SVM01" smartFilterId="SFBECOBOMLChange"
+                tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true"
+                persistencyKey="ECOBOMLChangeTable" header="{i18n>Result}" enableAutoBinding="false"
+                useExportToExcel="true" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable"
+                fitContainer="true" height="100%">
+
+                <t:Table id="Table_ECOBOMLChange" selectionMode="None" rowMode="Auto">
+                    <t:Column id="Plant" width="6rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Plant","leadingProperty":"Plant","sortProperty":"Plant","filterProperty":"Plant"}'/></t:customData><t:template><Text text="{Plant}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="Material" width="10rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Material","leadingProperty":"Material","sortProperty":"Material","filterProperty":"Material"}'/></t:customData><t:template><Text text="{Material}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BillOfMaterialVariant" width="8rem" label="{i18n>BillOfMaterialVariant}" sortProperty="BillOfMaterialVariant"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialVariant","leadingProperty":"BillOfMaterialVariant","sortProperty":"BillOfMaterialVariant"}'/></t:customData><t:template><Text text="{BillOfMaterialVariant}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BomHeaderQuantityInBaseUnit" width="9rem" hAlign="End" label="{i18n>BomHeaderQuantityInBaseUnit}" sortProperty="BomHeaderQuantityInBaseUnit"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BomHeaderQuantityInBaseUnit","leadingProperty":"BomHeaderQuantityInBaseUnit","sortProperty":"BomHeaderQuantityInBaseUnit"}'/></t:customData><t:template><Text text="{BomHeaderQuantityInBaseUnit}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BomHeaderBaseUnit" width="7rem" label="{i18n>BomHeaderBaseUnit}" sortProperty="BomHeaderBaseUnit"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BomHeaderBaseUnit","leadingProperty":"BomHeaderBaseUnit","sortProperty":"BomHeaderBaseUnit"}'/></t:customData><t:template><Text text="{BomHeaderBaseUnit}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BillOfMaterialComponent" width="10rem" label="{i18n>BillOfMaterialComponent}" sortProperty="BillOfMaterialComponent"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialComponent","leadingProperty":"BillOfMaterialComponent","sortProperty":"BillOfMaterialComponent"}'/></t:customData><t:template><Text text="{BillOfMaterialComponent}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ComponentDescription" width="14rem" label="{i18n>ComponentDescription}" sortProperty="ComponentDescription"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ComponentDescription","leadingProperty":"ComponentDescription","sortProperty":"ComponentDescription"}'/></t:customData><t:template><Text text="{ComponentDescription}" tooltip="{ComponentDescription}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BillOfMaterialItemQuantity" width="9rem" hAlign="End" label="{i18n>BillOfMaterialItemQuantity}" sortProperty="BillOfMaterialItemQuantity"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialItemQuantity","leadingProperty":"BillOfMaterialItemQuantity","sortProperty":"BillOfMaterialItemQuantity"}'/></t:customData><t:template><Text text="{BillOfMaterialItemQuantity}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BillOfMaterialItemUnit" width="7rem" label="{i18n>BillOfMaterialItemUnit}" sortProperty="BillOfMaterialItemUnit"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialItemUnit","leadingProperty":"BillOfMaterialItemUnit","sortProperty":"BillOfMaterialItemUnit"}'/></t:customData><t:template><Text text="{BillOfMaterialItemUnit}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ValidityStartDate" width="8rem" label="{i18n>ValidityStartDate}" sortProperty="ValidityStartDate"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ValidityStartDate","leadingProperty":"ValidityStartDate","sortProperty":"ValidityStartDate"}'/></t:customData><t:template><Text text="{path:'ValidityStartDate', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ValidityEndDate" width="8rem" label="{i18n>ValidityEndDate}" sortProperty="ValidityEndDate"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ValidityEndDate","leadingProperty":"ValidityEndDate","sortProperty":"ValidityEndDate"}'/></t:customData><t:template><Text text="{path:'ValidityEndDate', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AlternativeItemGroup" width="7rem" label="{i18n>AlternativeItemGroup}" sortProperty="AlternativeItemGroup"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AlternativeItemGroup","leadingProperty":"AlternativeItemGroup","sortProperty":"AlternativeItemGroup"}'/></t:customData><t:template><Text text="{AlternativeItemGroup}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="UsageProbabilityPercent" width="8rem" label="{i18n>UsageProbabilityPercent}" sortProperty="UsageProbabilityPercent"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"UsageProbabilityPercent","leadingProperty":"UsageProbabilityPercent","sortProperty":"UsageProbabilityPercent"}'/></t:customData><t:template><Text text="{UsageProbabilityPercent}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AlternativeItemPriority" width="7rem" label="{i18n>AlternativeItemPriority}" sortProperty="AlternativeItemPriority"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AlternativeItemPriority","leadingProperty":"AlternativeItemPriority","sortProperty":"AlternativeItemPriority"}'/></t:customData><t:template><Text text="{AlternativeItemPriority}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AlternativeItemStrategy" width="7rem" label="{i18n>AlternativeItemStrategy}" sortProperty="AlternativeItemStrategy"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AlternativeItemStrategy","leadingProperty":"AlternativeItemStrategy","sortProperty":"AlternativeItemStrategy"}'/></t:customData><t:template><Text text="{AlternativeItemStrategy}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="FollowUpGroup" width="7rem" label="{i18n>FollowUpGroup}" sortProperty="FollowUpGroup"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FollowUpGroup","leadingProperty":"FollowUpGroup","sortProperty":"FollowUpGroup"}'/></t:customData><t:template><Text text="{FollowUpGroup}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="DiscontinuationGroup" width="7rem" label="{i18n>DiscontinuationGroup}" sortProperty="DiscontinuationGroup"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"DiscontinuationGroup","leadingProperty":"DiscontinuationGroup","sortProperty":"DiscontinuationGroup"}'/></t:customData><t:template><Text text="{DiscontinuationGroup}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="YY1OldPartsManagementBmi" width="9rem" label="{i18n>YY1OldPartsManagementBmi}" sortProperty="YY1OldPartsManagementBmi"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"YY1OldPartsManagementBmi","leadingProperty":"YY1OldPartsManagementBmi","sortProperty":"YY1OldPartsManagementBmi"}'/></t:customData><t:template><Text text="{YY1OldPartsManagementBmi}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="YY1StockBmi" width="8rem" hAlign="End" label="{i18n>YY1StockBmi}" sortProperty="YY1StockBmi"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"YY1StockBmi","leadingProperty":"YY1StockBmi","sortProperty":"YY1StockBmi"}'/></t:customData><t:template><Text text="{YY1StockBmi}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="YY1ChangeContentBmi" width="14rem" label="{i18n>YY1ChangeContentBmi}" sortProperty="YY1ChangeContentBmi"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"YY1ChangeContentBmi","leadingProperty":"YY1ChangeContentBmi","sortProperty":"YY1ChangeContentBmi"}'/></t:customData><t:template><Text text="{YY1ChangeContentBmi}" tooltip="{YY1ChangeContentBmi}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ChangeBasis" width="14rem" label="{i18n>ChangeBasis}" sortProperty="ChangeBasis"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ChangeBasis","leadingProperty":"ChangeBasis","sortProperty":"ChangeBasis"}'/></t:customData><t:template><Text text="{ChangeBasis}" tooltip="{ChangeBasis}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="OldPartsManagementText" width="10rem" label="{i18n>OldPartsManagementText}" sortProperty="OldPartsManagementText"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"OldPartsManagementText","leadingProperty":"OldPartsManagementText","sortProperty":"OldPartsManagementText"}'/></t:customData><t:template><Text text="{OldPartsManagementText}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="MRPResponsible" width="7rem" label="{i18n>MRPResponsible}" sortProperty="MRPResponsible"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"MRPResponsible","leadingProperty":"MRPResponsible","sortProperty":"MRPResponsible"}'/></t:customData><t:template><Text text="{MRPResponsible}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="MRPControllerName" width="10rem" label="{i18n>MRPControllerName}" sortProperty="MRPControllerName"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"MRPControllerName","leadingProperty":"MRPControllerName","sortProperty":"MRPControllerName"}'/></t:customData><t:template><Text text="{MRPControllerName}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BomItemSorter" width="7rem" label="{i18n>BomItemSorter}" sortProperty="BomItemSorter"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BomItemSorter","leadingProperty":"BomItemSorter","sortProperty":"BomItemSorter"}'/></t:customData><t:template><Text text="{BomItemSorter}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BillOfMaterialItemNumber" width="7rem" label="{i18n>BillOfMaterialItemNumber}" sortProperty="BillOfMaterialItemNumber"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialItemNumber","leadingProperty":"BillOfMaterialItemNumber","sortProperty":"BillOfMaterialItemNumber"}'/></t:customData><t:template><Text text="{BillOfMaterialItemNumber}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BillOfMaterialStatus" width="7rem" label="{i18n>BillOfMaterialStatus}" sortProperty="BillOfMaterialStatus"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialStatus","leadingProperty":"BillOfMaterialStatus","sortProperty":"BillOfMaterialStatus"}'/></t:customData><t:template><Text text="{BillOfMaterialStatus}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="IsMarkedForDeletion" width="8rem" label="{i18n>IsMarkedForDeletion}" sortProperty="IsMarkedForDeletion"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"IsMarkedForDeletion","leadingProperty":"IsMarkedForDeletion","sortProperty":"IsMarkedForDeletion"}'/></t:customData><t:template><Text text="{IsMarkedForDeletion}" wrapping="false"/></t:template></t:Column>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

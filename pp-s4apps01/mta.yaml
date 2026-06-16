@@ -215,6 +215,10 @@ modules:
       - ppzipqcpinaimsheet.zip
       name: ppzipqcpinaimsheet
       target-path: resources/
+    - artifacts:
+      - ppzecobomlchange.zip
+      name: ppzecobomlchange
+      target-path: resources/      
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -602,6 +606,15 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
+- name: ppzecobomlchange
+  type: html5
+  path: zecobomlchange
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []    
 resources:
 - name: pp-s4apps01-uaa
   type: org.cloudfoundry.managed-service
