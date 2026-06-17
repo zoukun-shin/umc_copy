@@ -293,11 +293,9 @@ sap.ui.define([
                 this._myBusyDialog.close();
                 var aResult = JSON.parse(oResponse.GetMRPSynchronousTime.Zzkey);
                 var aPlantSet = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
-                for (var j = 0; j < aResult.length; j++) {
-                    if (!aPlantSet.find(item => item.Plant === aResult[j].PLANT)) {
-                        aResult.splice(j, 1);
-                    }
-                }
+                aResult = aResult.filter(resultItem =>
+                    aPlantSet.some(plantItem => plantItem.Plant === resultItem.PLANT)
+                );
                 for (var i = 0; i < aResult.length; i++) {
                     if (aResult[i].SCHEDULE_BEGIN) {
                         var sDateTime = aResult[i].SCHEDULE_BEGIN.toString();
