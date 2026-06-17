@@ -1,0 +1,73 @@
+<mvc:View controllerName="fico.zecpartsstats.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="ECPSSVM" showShare="true" showExecuteOnSelection="true" entitySet="ECPS"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ECPS" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onSmartFilterBarInitialized">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="CompanyCode" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>CompanyCode}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="Customer" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Customer}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="Material" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="FiscalYear" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>FiscalYear}">
+				                    <smartFilterBar:customControl>
+					                    <DatePicker id="idFiscalYear" displayFormat="yyyy" />
+				                    </smartFilterBar:customControl>
+			                    </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='50' key="FiscalPeriod" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>FiscalPeriod}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="Plant" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ItemNo" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="HeaderMaterial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialComponent" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillingQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillingQuantityUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillingQuantityInBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillingQuantityBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ActualIncome" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TransactionCurrency" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ValuationClassFG" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ValuationClassDescriptionFG" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductTypeName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QuantityInBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ValuationClassComp" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ValuationClassDescriptionComp" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Currency" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductGroup" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductGroupText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TotalQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="StandardPrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="StandardPriceAmount" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="StandardPriceAmountUSD" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ExchangeRate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CostingDate" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="fico.zecpartsstats.fragments.ECPS" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
