@@ -30,7 +30,8 @@ sap.ui.define([
                     FromMRPTable: true     // はい
                 },
                 resultSet: [],
-                MRPSynchronousTime: ""
+                MRPSynchronousTime: "",
+                filteredMRPsyncHistory: []
             });
             return oModel;
         }
