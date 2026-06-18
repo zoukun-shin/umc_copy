@@ -527,6 +527,11 @@ sap.ui.define([
                 if (sDocTitle !== 'TAX INVOICE') {
                     oFirstItem.SoldToTaxBranch = "";
                     oFirstItem.BillingLongText = "";
+                } else {
+                    oFirstItem.ShipToPartyContactPerson = "";
+                    oFirstItem.ShipToPartyTel = "";
+                    oFirstItem.ShipToPartyEmail = "";
+                    oFirstItem.ShipToPartyEmail2 = "";
                 }
                 let oHeader ={
                     CompanyName: oFirstItem.CompanyName,
@@ -555,8 +560,10 @@ sap.ui.define([
                     ShipToPartyStreet: oFirstItem.ShipToPartyStreet,
                     ShipToPartyCity: oFirstItem.ShipToPartyCity,
                     ShipToPartyCountry: oFirstItem.ShipToPartyCountry,
+                    ShipToPartyContactPerson: oFirstItem.ShipToPartyContactPerson,
                     ShipToPartyTel: oFirstItem.ShipToPartyTel,
                     ShipToPartyEmail: oFirstItem.ShipToPartyEmail,
+                    ShipToPartyEmail2: oFirstItem.ShipToPartyEmail2,
                     ShipToPartyCountry: oFirstItem.ShipToPartyCountry,
                     PayerParty: oFirstItem.PayerParty,
                     PayerPartyName: oFirstItem.PayerPartyName,
@@ -595,6 +602,10 @@ sap.ui.define([
                     delete item.ShipToPartyName;
                     delete item.ShipToPartyStreet;
                     delete item.ShipToPartyCity;
+                    delete item.ShipToPartyContactPerson;
+                    delete item.ShipToPartyTel;
+                    delete item.ShipToPartyEmail;
+                    delete item.ShipToPartyEmail2;
                     delete item.PayerParty;
                     delete item.PayerPartyName;
                     delete item.PayerPartyStreet;
@@ -613,9 +624,9 @@ sap.ui.define([
                 });
                 let iItemLine = 0;
                 if (sTemplateID === 'YY1_SD019_TH_SP') {
-                    iItemLine = 7;
+                    iItemLine = 8;
                 } else if (sTemplateID === 'YY1_SD019_TH')  {
-                    iItemLine = 10;
+                    iItemLine = 8;
                 }
                 //要求即使行数不够也要用空白行填满一页。目前一页可以打印iItemLine行，所以添加空白行，将行项目数量改为iItemLine的倍数
                 let iMod = aBillingItem.length % iItemLine;
