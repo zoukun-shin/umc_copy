@@ -111,6 +111,10 @@ modules:
       - sddeliverynoteprint.zip
       name: sddeliverynoteprint
       target-path: resources/
+    - artifacts:
+      - sdmarkprint.zip
+      name: sdmarkprint
+      target-path: resources/
 - name: sdsalesacceptance
   type: html5
   path: salesacceptance
@@ -258,6 +262,15 @@ modules:
 - name: sddeliverynoteprint
   type: html5
   path: deliverynoteprint
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sdmarkprint
+  type: html5
+  path: markprint
   build-parameters:
     build-result: dist
     builder: custom

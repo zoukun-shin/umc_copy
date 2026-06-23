@@ -1,0 +1,59 @@
+<mvc:View controllerName="sd.markprint.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="MarkPrint" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="Mark" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="BillingDocument" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>BillingDocument}"/>
+                                <!-- check box -->
+                                <smartFilterBar:ControlConfiguration index='20' key="Nagoya"   visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="Tokyo"    visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="CustomerParNo" visible="false"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderByCustomer" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="CustomerPurchaseOrderItem" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="ActualDeliveryQuantity" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="PerBoxTargetQty" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="TotalPallet" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="PerPalletTargetQty" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="PalletQty" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="PalletGrossWeight" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="PlannedGoodsIssueDate" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="BeginBoxNo" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="EndBoxNo" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialByCustomer" visible="false" />
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+                <f:content>
+                    <CheckBox id='idCB1' text="{i18n>Nagoya}" width="11rem" select="onSelect"/>
+                    <CheckBox id='idCB2' text="{i18n>Tokyo}" width="11rem" select="onSelect"/>
+                    <CheckBox id='idCB3' text="{i18n>CustomerParNo}" width="11rem" select="onSelect"/>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="sd.markprint.fragments.MarkPrint" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
