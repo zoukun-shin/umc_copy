@@ -1,0 +1,15 @@
+<mvc:View controllerName="sd.deliverynoteprint.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" showHeader="false" title="{i18n>title}">
+        <content>
+            <IconTabBar id="idIconTabBar" expandable="true" expanded="{device>/isNoPhone}" class="sapUiNoContentPadding" applyContentPadding="false" stretchContentHeight="true">
+                <items>
+                    <IconTabFilter id="idTabFilter1" text="{i18n>title1}" key="title1" enabled="{= ${local>/authorityCheck/button/Report1}}">
+                        <mvc:XMLView id="idGenerateView" viewName="sd.deliverynoteprint.view.List" />
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

@@ -107,6 +107,10 @@ modules:
       - sdcustomerreport.zip
       name: sdcustomerreport
       target-path: resources/
+    - artifacts:
+      - sddeliverynoteprint.zip
+      name: sddeliverynoteprint
+      target-path: resources/
 - name: sdsalesacceptance
   type: html5
   path: salesacceptance
@@ -245,6 +249,15 @@ modules:
 - name: sdcustomerreport
   type: html5
   path: customerreport
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sddeliverynoteprint
+  type: html5
+  path: deliverynoteprint
   build-parameters:
     build-result: dist
     builder: custom
