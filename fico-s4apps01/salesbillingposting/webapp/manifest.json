@@ -33,17 +33,17 @@
           "localUri": "localService/mainService/metadata.xml",
           "odataVersion": "2.0"
         }
-      },
-      "crossNavigation": {
-        "inbounds": {
-          "salesbillingposting-display": {
-            "semanticObject": "salesbillingposting",
-            "action": "display",
-            "title": "{{flpTitle}}",
-            "signature": {
-              "parameters": {},
-              "additionalParameters": "allowed"
-            }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "salesbillingposting-display": {
+          "semanticObject": "salesbillingposting",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
           }
         }
       }
