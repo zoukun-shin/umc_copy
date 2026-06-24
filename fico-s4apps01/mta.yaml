@@ -151,6 +151,10 @@ modules:
       - ficozecpartsstats.zip
       name: ficozecpartsstats
       target-path: resources/
+    - artifacts:
+      - ficozgrircogstrf.zip
+      name: ficozgrircogstrf
+      target-path: resources/      
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -388,6 +392,15 @@ modules:
 - name: ficozecpartsstats
   type: html5
   path: zecpartsstats
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozgrircogstrf
+  type: html5
+  path: zgrircogstrf
   build-parameters:
     build-result: dist
     builder: custom
