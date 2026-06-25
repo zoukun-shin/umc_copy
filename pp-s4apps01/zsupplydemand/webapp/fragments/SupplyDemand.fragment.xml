@@ -1,0 +1,135 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <smartTable:SmartTable id="idSmartTable" entitySet="SupplyDemand" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
+        showRowCount="true" smartVariant="__SVM01" useVariantManagement="false" useTablePersonalisation="true"
+        persistencyKey="SupplyDemandST" header="{i18n>Results}" enableAutoBinding="false" 
+        placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable"
+        beforeExport="onBeforeExport" showFullScreenButton="true" 
+        ignoredFields="ProcessingType">
+        <smartTable:customToolbar>
+            <OverflowToolbar design="Transparent">
+                <ToolbarSpacer/>
+            </OverflowToolbar>
+        </smartTable:customToolbar>
+        <table:Table id="idTable" selectionMode="None" rowMode="Auto" threshold="999999999">
+            <table:Column width="8rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{Plant}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="8rem" label="{i18n>MRPResponsible}" sortProperty="MRPResponsible" filterProperty="MRPResponsible">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"MRPResponsible", "leadingProperty":"MRPResponsible"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{MRPResponsible}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>Customer}" sortProperty="Customer" filterProperty="Customer">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"Customer", "leadingProperty":"Customer"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{Customer}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="20rem" label="{i18n>CustomerName}" sortProperty="CustomerName" filterProperty="CustomerName">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"CustomerName", "leadingProperty":"CustomerName"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{CustomerName}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="15rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"Material", "leadingProperty":"Material"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{Material}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="18rem" label="{i18n>ProductType}" sortProperty="ProductType" filterProperty="ProductType">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"ProductType", "leadingProperty":"ProductType"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{ProductType}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="15rem" label="{i18n>OrderNumber}" sortProperty="OrderNumber" filterProperty="OrderNumber">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"OrderNumber", "leadingProperty":"OrderNumber"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{OrderNumber}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>OrderType}" sortProperty="OrderType" filterProperty="OrderType">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"OrderType", "leadingProperty":"OrderType"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{OrderType}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="13rem" label="{i18n>MRPElementOpenQuantity}" sortProperty="MRPElementOpenQuantity" filterProperty="MRPElementOpenQuantity" hAlign="End">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"MRPElementOpenQuantity", "leadingProperty":"MRPElementOpenQuantity"}'/>
+                </table:customData>
+                <table:template>
+                        <Text text="{path:'MRPElementOpenQuantity', formatter:'.formatter.formatNumber'}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>StartDate}" sortProperty="StartDate" filterProperty="StartDate">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"StartDate", "leadingProperty":"StartDate"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{path:'StartDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>EndDate}" sortProperty="EndDate" filterProperty="EndDate">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"EndDate", "leadingProperty":"EndDate"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{path:'EndDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="13rem" label="{i18n>CurrentAvailableQuantity}" sortProperty="CurrentAvailableQuantity" filterProperty="CurrentAvailableQuantity" hAlign="End">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"CurrentAvailableQuantity", "leadingProperty":"CurrentAvailableQuantity"}'/>
+                </table:customData>
+                <table:template>
+                        <Text text="{path:'CurrentAvailableQuantity', formatter:'.formatter.formatNumber'}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="13rem" label="{i18n>FinalAvailableQuantity}" sortProperty="FinalAvailableQuantity" filterProperty="FinalAvailableQuantity" hAlign="End">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"FinalAvailableQuantity", "leadingProperty":"FinalAvailableQuantity"}'/>
+                </table:customData>
+                <table:template>
+                        <Text text="{path:'FinalAvailableQuantity', formatter:'.formatter.formatNumber'}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>ExceptionMessageNumber}" sortProperty="ExceptionMessageNumber" filterProperty="ExceptionMessageNumber">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"ExceptionMessageNumber", "leadingProperty":"ExceptionMessageNumber"}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{ExceptionMessageNumber}" wrapping="false" />
+                </table:template>
+            </table:Column>
+        </table:Table>
+    </smartTable:SmartTable>
+</core:FragmentDefinition>

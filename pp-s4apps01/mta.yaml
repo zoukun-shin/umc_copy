@@ -206,19 +206,23 @@ modules:
     - artifacts:
       - ppzbomfollowuplist.zip
       name: ppzbomfollowuplist
-      target-path: resources/     
+      target-path: resources/
     - artifacts:
       - ppofupload.zip
       name: ppofupload
       target-path: resources/
-    - artifacts: 
+    - artifacts:
       - ppzipqcpinaimsheet.zip
       name: ppzipqcpinaimsheet
       target-path: resources/
     - artifacts:
       - ppzecobomlchange.zip
       name: ppzecobomlchange
-      target-path: resources/      
+      target-path: resources/
+    - artifacts:
+      - ppzsupplydemand.zip
+      name: ppzsupplydemand
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -614,7 +618,16 @@ modules:
     builder: custom
     commands:
     - npm run build:cf
-    supported-platforms: []    
+    supported-platforms: []
+- name: ppzsupplydemand
+  type: html5
+  path: zsupplydemand
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: pp-s4apps01-uaa
   type: org.cloudfoundry.managed-service
