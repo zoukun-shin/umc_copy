@@ -84,45 +84,44 @@ sap.ui.define([
             this._setActionButtonsByPostingStatus();
         },
 
-        onBeforeRebindTable: function (oEvent) {
-    if (this._oDataModel.hasPendingChanges()) {
-        this._oDataModel.resetChanges();
-    }
-			var bHasError = false;
-			var sMessage = "";
-			var sBukrs = this.byId("SFBProxyJournal").getFilterData().SourceCompanyCode;
-            var sTargetBukrs = this.byId("SFBProxyJournal").getFilterData().TargetCompanyCode;
-			var aAuthorityCompanySet = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
-			if (!aAuthorityCompanySet.some(data => data.CompanyCode === sBukrs)) {
-				bHasError = true;
-				sMessage = sBukrs;
-			}
-            else if (!aAuthorityCompanySet.some(data => data.CompanyCode === sTargetBukrs)) {
-				bHasError = true;
-				sMessage = sTargetBukrs;
-			}
-			if (bHasError) {
-				MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("noAuthorityCompanyCode", [sMessage]));
-				return;
-			} else {
-                var mBindingParams = oEvent.getParameter("bindingParams");
-                var sPostingStatus = this.byId("PostingStatusSelect").getSelectedKey();
-                this._removeFilterByPath(mBindingParams.filters, "PostingStatus");
+        onBeforeRebindTable: function (oEvent) {  
+            var mBindingParams = oEvent.getParameter("bindingParams");
 
-                if (sPostingStatus) {
-                    mBindingParams.filters.push(
-                        new Filter("PostingStatus", FilterOperator.EQ, sPostingStatus)
-                    );
-                }
-                var oGjahr = new Date(this.byId("idGjahr").getValue());
-                var oGjahrFilter = new sap.ui.model.Filter("FiscalYear", sap.ui.model.FilterOperator.EQ, oGjahr.getFullYear());
-                mBindingParams.filters.push(oGjahrFilter);
-
-                var sMonat = this.byId("idMonat").getSelectedKey();
-                var oMonatFilter = new sap.ui.model.Filter("FiscalPeriod", sap.ui.model.FilterOperator.EQ, sMonat);
-                mBindingParams.filters.push(oMonatFilter);
-                this._setActionButtonsByPostingStatus();
+            if (this._oDataModel.hasPendingChanges()) {
+                this._oDataModel.resetChanges();
             }
+
+            var sBukrs = this.byId("SFBProxyJournal").getFilterData().SourceCompanyCode;
+            var sTargetBukrs = this.byId("SFBProxyJournal").getFilterData().TargetCompanyCode;
+            var aAuthorityCompanySet = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
+
+            if (!aAuthorityCompanySet.some(data => data.CompanyCode === sBukrs)) {
+                MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("noAuthorityCompanyCode", [sBukrs]));
+                mBindingParams.preventTableBind = true;
+                return;
+            }
+            if (!aAuthorityCompanySet.some(data => data.CompanyCode === sTargetBukrs)) {
+                MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("noAuthorityCompanyCode", [sTargetBukrs]));
+                mBindingParams.preventTableBind = true;
+                return;
+            }
+
+            var sPostingStatus = this.byId("PostingStatusSelect").getSelectedKey();
+            this._removeFilterByPath(mBindingParams.filters, "PostingStatus");
+
+            if (sPostingStatus) {
+                mBindingParams.filters.push(
+                    new Filter("PostingStatus", FilterOperator.EQ, sPostingStatus)
+                );
+            }
+            var oGjahr = new Date(this.byId("idGjahr").getValue());
+            var oGjahrFilter = new sap.ui.model.Filter("FiscalYear", sap.ui.model.FilterOperator.EQ, oGjahr.getFullYear());
+            mBindingParams.filters.push(oGjahrFilter);
+
+            var sMonat = this.byId("idMonat").getSelectedKey();
+            var oMonatFilter = new sap.ui.model.Filter("FiscalPeriod", sap.ui.model.FilterOperator.EQ, sMonat);
+            mBindingParams.filters.push(oMonatFilter);
+            this._setActionButtonsByPostingStatus();
         },
 
         _removeFilterByPath: function (aFilters, sPath) {
@@ -154,13 +153,6 @@ sap.ui.define([
         onPost: function () {
             var oTable = this.byId("Table_ProxyJournal");
             var aIndices = oTable.getSelectedIndices();
-            /*
-            if (aIndices.length === 0) {
-                MessageBox.warning(
-                    this.getModel("i18n").getResourceBundle().getText("selectAtLeastOneRow")
-                );
-                return;
-            }*/
             if (aIndices.length === 0) {
                 this._selectAllRows();
             }
@@ -290,7 +282,7 @@ sap.ui.define([
         },
         _executeAction: function (sEvent) {
             var postDocs = this.preparePostBody();
-            var sCurrentPostingStatus = this.byId("PostingStatusSelect").getSelectedKey(); // 取UI当前值
+            var sCurrentPostingStatus = this.byId("PostingStatusSelect").getSelectedKey();
             this._BusyDialog.open();
             var aPromise = [];
             aPromise.push(this.postAction(postDocs, sEvent));
@@ -347,7 +339,6 @@ sap.ui.define([
             return [JSON.stringify(selectedRows)];
         },
 
-        // ── 与 zproxyjournal postAction 对齐：success/error 显式回调 ──
         postAction: function (postData, bEvent) {
             return new Promise(function (resolve, reject) {
                 var mParameter = {

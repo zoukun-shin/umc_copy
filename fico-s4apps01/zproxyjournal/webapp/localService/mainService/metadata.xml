@@ -61,13 +61,13 @@
                 </Key>
                 <Property Name="Delete_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="Update_mc" Type="Edm.Boolean" sap:label="Dyn. Method Control" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="SourceCompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
-                <Property Name="TargetCompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
-                <Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Fiscal Year" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="FiscalPeriod" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="NonNegative" sap:label="Posting Period" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="SourceCompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:filter-restriction="single-value" sap:label="Company Code" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
+                <Property Name="TargetCompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:filter-restriction="single-value" sap:label="Company Code" sap:creatable="false" sap:updatable="false" sap:value-list="standard"/>
+                <Property Name="FiscalYear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:filter-restriction="single-value" sap:label="Fiscal Year" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="FiscalPeriod" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="NonNegative" sap:filter-restriction="single-value" sap:label="Posting Period" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="PostingStatus" Type="Edm.String" Nullable="false" MaxLength="1" sap:filter-restriction="single-value" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="AccountingDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Document Number" sap:quickinfo="Document Number of an Accounting Document" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="LedgerGLLineItem" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="NonNegative" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="LedgerGLLineItem" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="PostingDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="DocumentDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
@@ -76,8 +76,7 @@
                 <Property Name="PurchasingDocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Purchasing Document" sap:quickinfo="Purchasing Document Number"/>
                 <Property Name="PurchasingDocumentItem" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Item" sap:quickinfo="Item Number of Purchasing Document"/>
                 <Property Name="InternationalArticleNumber" Type="Edm.String" MaxLength="18"/>
-                <Property Name="SalesOrder" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="SD Document" sap:quickinfo="Sales and Distribution Document Number"/>
-                <Property Name="SalesOrderItem" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative" sap:label="Originating Item"/>
+                <Property Name="TradingPartner" Type="Edm.String" MaxLength="10"/>
                 <Property Name="Customer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number"/>
                 <Property Name="AmountInTransactionCurrency" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="TransactionCurrency" sap:variable-scale="true"/>
                 <Property Name="TransactionCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
@@ -488,6 +487,22 @@
                         <PropertyValue Property="FilterExpressionRestrictions">
                             <Collection>
                                 <Record>
+                                    <PropertyValue Property="Property" PropertyPath="SourceCompanyCode"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="TargetCompanyCode"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="FiscalYear"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="FiscalPeriod"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
+                                </Record>
+                                <Record>
                                     <PropertyValue Property="Property" PropertyPath="PostingStatus"/>
                                     <PropertyValue Property="AllowedExpressions" String="SingleValue"/>
                                 </Record>
@@ -566,13 +581,10 @@
             <Annotations Target="cds_zui_proxyjournal_o2.ProxyJournalType/PurchasingDocumentItem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
-            <Annotations Target="cds_zui_proxyjournal_o2.ProxyJournalType/SalesOrder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
-            <Annotations Target="cds_zui_proxyjournal_o2.ProxyJournalType/SalesOrderItem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
-            </Annotations>
             <Annotations Target="cds_zui_proxyjournal_o2.ProxyJournalType/Status" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
+            </Annotations>
+            <Annotations Target="cds_zui_proxyjournal_o2.ProxyJournalType/TradingPartner" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Optional"/>
             </Annotations>
             <Annotations Target="cds_zui_proxyjournal_o2.ProxyJournalType/TransactionCurrency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -678,9 +690,6 @@
             </Annotations>
             <Annotations Target="cds_zui_proxyjournal_o2.ProxyJournalType/PostedAccountingDocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BELNR_D&amp;origin=JG5_100"/>
-            </Annotations>
-            <Annotations Target="cds_zui_proxyjournal_o2.ProxyJournalType/SalesOrder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VBELN&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_proxyjournal_o2.ProxyJournalType/SourceCompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
