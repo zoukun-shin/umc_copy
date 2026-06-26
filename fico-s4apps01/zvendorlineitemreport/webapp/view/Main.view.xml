@@ -59,14 +59,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <smartTable:SmartTable id="idSmartTable" entitySet="VendorLineItem" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="DocumentTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="" ignoredFields="">
-                <smartTable:customToolbar>
-                    <OverflowToolbar>
-                        <Text text="{i18n>Results}" visible="{= ${local>/data}.length === 0}"/>
-                        <Text text="{i18n>Results}({= ${local>/data}.length})" visible="{= ${local>/data}.length > 0}"/>
-                        
-                    </OverflowToolbar>
-                </smartTable:customToolbar>
+            <smartTable:SmartTable id="idSmartTable" entitySet="VendorLineItem" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="DocumentTable" header="{i18n>Results}" placeToolbarInTable="true" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" showRowCount="true" requestAtLeastFields="" ignoredFields="">
                 <t:Table id="idDocumentTable" rows="{local>/data}" rowMode="Auto" rowActionCount="1" rowsUpdated="onUITableRowsUpdated">
                     <t:columns>
                         <t:Column width="10rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
@@ -186,7 +179,8 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"AmountInFunctionalCurrency", "leadingProperty":"AmountInFunctionalCurrency", "sortProperty":"AmountInFunctionalCurrency", "filterProperty": "AmountInFunctionalCurrency"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{AmountInFunctionalCurrency}" wrapping="false" />
+                                <!-- <Text text="{AmountInFunctionalCurrency}" wrapping="false" /> -->
+                                <Text text="{ path: 'AmountInFunctionalCurrency', formatter: '.formatter.formatNumber' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column  label="{i18n>DebitAmountinFunctionalCurr}" width="20rem" sortProperty="DebitAmountinFunctionalCurr" filterProperty="DebitAmountinFunctionalCurr" autoResizable="true" >
@@ -194,7 +188,8 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"DebitAmountinFunctionalCurr", "leadingProperty":"DebitAmountinFunctionalCurr", "sortProperty":"DebitAmountinFunctionalCurr", "filterProperty": "DebitAmountinFunctionalCurr"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{DebitAmountinFunctionalCurr}" wrapping="false" />
+                                <!-- <Text text="{DebitAmountinFunctionalCurr}" wrapping="false" /> -->
+                                <Text text="{ path: 'DebitAmountinFunctionalCurr', formatter: '.formatter.formatNumber' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column  label="{i18n>CreditAmountinFunctionalCur}" width="20rem" sortProperty="CreditAmountinFunctionalCur" filterProperty="CreditAmountinFunctionalCur" autoResizable="true" >
@@ -202,7 +197,8 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CreditAmountinFunctionalCur", "leadingProperty":"CreditAmountinFunctionalCur", "sortProperty":"CreditAmountinFunctionalCur", "filterProperty": "CreditAmountinFunctionalCur"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{CreditAmountinFunctionalCur}" wrapping="false" />
+                                <!-- <Text text="{CreditAmountinFunctionalCur}" wrapping="false" /> -->
+                                <Text text="{ path: 'CreditAmountinFunctionalCur', formatter: '.formatter.formatNumber' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column  label="{i18n>FunctionalCurrency}" width="10rem" sortProperty="FunctionalCurrency" filterProperty="FunctionalCurrency" autoResizable="true" >
@@ -218,7 +214,8 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"AmountInCompanyCodeCurrency", "leadingProperty":"AmountInCompanyCodeCurrency", "sortProperty":"AmountInCompanyCodeCurrency", "filterProperty": "AmountInCompanyCodeCurrency"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{AmountInCompanyCodeCurrency}" wrapping="false" />
+                                <!-- <Text text="{AmountInCompanyCodeCurrency}" wrapping="false" /> -->
+                                <Text text="{ path: 'AmountInCompanyCodeCurrency', formatter: '.formatter.formatNumber' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column  label="{i18n>CompanyCodeCurrency}" width="15rem" sortProperty="CompanyCodeCurrency" filterProperty="CompanyCodeCurrency" autoResizable="true" >
