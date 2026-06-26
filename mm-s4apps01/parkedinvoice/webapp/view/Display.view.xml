@@ -23,17 +23,17 @@
                     <!--数据查询-->
                     <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="ParkedInvoice" entitySet="ParkedInvoice" useToolbar="false" class="sapUiResponsiveMargin">
                         <smartFilterBar:controlConfiguration>
-                            <smartFilterBar:ControlConfiguration id="id0ControlConfiguration"  key="PurchaseOrder"    visibleInAdvancedArea="true" label="{i18n>PurchaseOrder}" mandatory="notMandatory" index="1" />
-                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration"  key="PurchaseOrderItem"    visibleInAdvancedArea="true" label="{i18n>PurchaseOrderItem_filter}" mandatory="notMandatory" index="2" />
-                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration"  key="Supplier"         visibleInAdvancedArea="true" label="{i18n>Supplier_filter}" mandatory="mandatory" index="3" />
-                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration"  key="PurchasingOrganization" visibleInAdvancedArea="true" label="{i18n>PurchasingOrganization}" mandatory="notMandatory" index="4" />
-                            <smartFilterBar:ControlConfiguration id="id4ControlConfiguration"  key="PurchasingGroup"   visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}" mandatory="notMandatory" index="5" />
-                            <smartFilterBar:ControlConfiguration id="id5ControlConfiguration"  key="Material"         visibleInAdvancedArea="true" label="{i18n>Material}" mandatory="notMandatory" index="6" />
-                            <smartFilterBar:ControlConfiguration id="id6ControlConfiguration"  key="Plant"            visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="mandatory" index="7" />
-                            <smartFilterBar:ControlConfiguration id="id7ControlConfiguration"  key="MaterialGroup"    visibleInAdvancedArea="true" label="{i18n>MaterialGroup}" mandatory="notMandatory" index="8" />
-                            <smartFilterBar:ControlConfiguration id="id8ControlConfiguration"  key="PostingDate"      visibleInAdvancedArea="true" label="{i18n>PostingDate}" mandatory="mandatory" index="9" />
-                            <smartFilterBar:ControlConfiguration id="idC9ontrolConfiguration"  key="MaterialDocumentHeaderText" visibleInAdvancedArea="true" label="{i18n>MaterialDocumentHeaderText}" mandatory="notMandatory" index="10" />
-                            <smartFilterBar:ControlConfiguration id="idC10ontrolConfiguration" key="InvoiceStatus" visibleInAdvancedArea="true" label="{i18n>InvoiceStatus}" mandatory="notMandatory" index="11" />
+                            <smartFilterBar:ControlConfiguration id="id0ControlConfiguration"  key="PurchaseOrder"              displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PurchaseOrder}" mandatory="notMandatory" index="1" />
+                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration"  key="PurchaseOrderItem"          displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PurchaseOrderItem_filter}" mandatory="notMandatory" index="2" />
+                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration"  key="Supplier"                   displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Supplier_filter}" mandatory="mandatory" index="3" />
+                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration"  key="PurchasingOrganization"     displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PurchasingOrganization}" mandatory="notMandatory" index="4" />
+                            <smartFilterBar:ControlConfiguration id="id4ControlConfiguration"  key="PurchasingGroup"            displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}" mandatory="notMandatory" index="5" />
+                            <smartFilterBar:ControlConfiguration id="id5ControlConfiguration"  key="Material"                   displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}" mandatory="notMandatory" index="6" />
+                            <smartFilterBar:ControlConfiguration id="id6ControlConfiguration"  key="Plant"                      displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="mandatory" index="7" />
+                            <smartFilterBar:ControlConfiguration id="id7ControlConfiguration"  key="MaterialGroup"              displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MaterialGroup}" mandatory="notMandatory" index="8" />
+                            <smartFilterBar:ControlConfiguration id="id8ControlConfiguration"  key="PostingDate"                displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PostingDate}" mandatory="mandatory" index="9" />
+                            <smartFilterBar:ControlConfiguration id="idC9ontrolConfiguration"  key="MaterialDocumentHeaderText" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MaterialDocumentHeaderText}" mandatory="notMandatory" index="10" />
+                            <smartFilterBar:ControlConfiguration id="idC10ontrolConfiguration" key="InvoiceStatus"              displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>InvoiceStatus}" mandatory="notMandatory" index="11" />
                             <!-- visible -->
                             <smartFilterBar:ControlConfiguration key="NotParkedQuantity" visible="false"/>
                             <smartFilterBar:ControlConfiguration key="UserEmail" visible="false"/>
@@ -91,7 +91,7 @@
             </f:DynamicPageHeader>
         </f:header>
                 <f:content>
-            <smartTable:SmartTable id="idSmartTable" entitySet="ParkedInvoice" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="parkedInvoiceTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="UserEmail" ignoredFields="UserEmail">
+            <smartTable:SmartTable id="idSmartTable" entitySet="ParkedInvoice" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="parkedInvoiceTable" header="{i18n>Result}" placeToolbarInTable="true" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" showRowCount="true" requestAtLeastFields="UserEmail" ignoredFields="UserEmail">
                 <smartTable:customToolbar>
                     <OverflowToolbar >
                         <ToolbarSpacer />
