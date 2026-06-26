@@ -127,6 +127,8 @@ sap.ui.define([
                     //  Date
                     case "PostingDate":
                         oColumn.type = sap.ui.export.EdmType.Date;
+                        oColumn.inputFormat = "yyyymmdd";
+                        oColumn.format = "yyyy/m/d";
                         break;
                     case "NetDueDate":
                         oColumn.type = sap.ui.export.EdmType.Date;
