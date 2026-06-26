@@ -23,13 +23,13 @@
                     <!--数据查询-->
                     <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="Document" entitySet="GeneralLedger" useToolbar="false" class="sapUiResponsiveMargin">
                         <smartFilterBar:controlConfiguration>
-                            <smartFilterBar:ControlConfiguration id="idControlConfiguration"  key="SourceLedger" filterType="single" visibleInAdvancedArea="true" label="{i18n>SourceLedger}" mandatory="notMandatory" index="1" />
-                            <smartFilterBar:ControlConfiguration id="id0ControlConfiguration" key="CompanyCode"  filterType="single" visibleInAdvancedArea="true" label="{i18n>CompanyCode}" mandatory="notMandatory" index="5" />
-                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration" key="GLAccount"  visibleInAdvancedArea="true" label="{i18n>GLAccount}" mandatory="notMandatory" index="10" />
-                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration" key="Status" filterType="single" visibleInAdvancedArea="true" label="{i18n>Status}" mandatory="notMandatory" index="15" />
-                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration" key="FiscalPeriod"  visibleInAdvancedArea="true" label="{i18n>FiscalPeriod}" mandatory="notMandatory" index="20" />
-                            <smartFilterBar:ControlConfiguration id="id4ControlConfiguration" key="AlternativeGLAccount" visibleInAdvancedArea="true" label="{i18n>AlternativeGLAccount}" mandatory="notMandatory" index="25" />
-                            <smartFilterBar:ControlConfiguration id="id32ControlConfiguration" key="PostingDate" label="{i18n>PostingDate}" index="135" visibleInAdvancedArea="true" mandatory="notMandatory"/>
+                            <!-- <smartFilterBar:ControlConfiguration id="idControlConfiguration"  key="SourceLedger" filterType="single" visibleInAdvancedArea="true" label="{i18n>SourceLedger}" mandatory="notMandatory" index="1" /> -->
+                            <smartFilterBar:ControlConfiguration id="id0ControlConfiguration" key="CompanyCode"  displayBehaviour="idAndDescription" filterType="single" visibleInAdvancedArea="true" label="{i18n>CompanyCode}" mandatory="notMandatory" index="5" />
+                            <smartFilterBar:ControlConfiguration id="id1ControlConfiguration" key="GLAccount"  displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>GLAccount}" mandatory="notMandatory" index="10" />
+                            <smartFilterBar:ControlConfiguration id="id2ControlConfiguration" key="Status" displayBehaviour="idAndDescription" filterType="single" visibleInAdvancedArea="true" label="{i18n>Status}" mandatory="notMandatory" index="15" />
+                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration" key="FiscalPeriod"  displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>FiscalPeriod}" mandatory="notMandatory" index="20" />
+                            <smartFilterBar:ControlConfiguration id="id4ControlConfiguration" key="AlternativeGLAccount" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>AlternativeGLAccount}" mandatory="notMandatory" index="25" />
+                            <smartFilterBar:ControlConfiguration id="id32ControlConfiguration" key="PostingDate" displayBehaviour="idAndDescription" label="{i18n>PostingDate}" index="135" visibleInAdvancedArea="true" mandatory="notMandatory"/>
                             <!-- visible -->
                             <smartFilterBar:ControlConfiguration id="id5ControlConfiguration" key="FiscalYear" label="{i18n>FiscalYear}" index="30" visibleInAdvancedArea="false"/>
                             <smartFilterBar:ControlConfiguration id="id26ControlConfiguration" key="OffsettingAcctNo" label="{i18n>OffsettingAcctNo}" index="31" visibleInAdvancedArea="false"/>
@@ -64,7 +64,7 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <smartTable:SmartTable id="idSmartTable" entitySet="GeneralLedger" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="DocumentTable" header="{local>/disInfo}" placeToolbarInTable="true" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" showRowCount="false" requestAtLeastFields="" ignoredFields="">
+            <smartTable:SmartTable id="idSmartTable" entitySet="GeneralLedger" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="DocumentTable" header="{i18n>Results}" placeToolbarInTable="true" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" showRowCount="true" requestAtLeastFields="" ignoredFields="">
                 <smartTable:customToolbar>
                     <!-- <OverflowToolbar >
                         <ToolbarSpacer />
@@ -191,7 +191,8 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"DebitAmountinFunctionalCurr", "leadingProperty":"DebitAmountinFunctionalCurr", "sortProperty":"DebitAmountinFunctionalCurr", "filterProperty": "DebitAmountinFunctionalCurr"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{DebitAmountinFunctionalCurr}" wrapping="false" />
+                                <!-- <Text text="{DebitAmountinFunctionalCurr}" wrapping="false" /> -->
+                                <Text text="{ path: 'DebitAmountinFunctionalCurr', formatter: '.formatter.formatNumber' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>CreditAmountinFunctionalCurr}" sortProperty="CreditAmountinFunctionalCurr" filterProperty="CreditAmountinFunctionalCurr">
@@ -199,7 +200,8 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"CreditAmountinFunctionalCurr", "leadingProperty":"CreditAmountinFunctionalCurr", "sortProperty":"CreditAmountinFunctionalCurr", "filterProperty": "CreditAmountinFunctionalCurr"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{CreditAmountinFunctionalCurr}" wrapping="false" />
+                                <!-- <Text text="{CreditAmountinFunctionalCurr}" wrapping="false" /> -->
+                                <Text text="{ path: 'CreditAmountinFunctionalCurr', formatter: '.formatter.formatNumber' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>AmountInFunctionalCurrency}" sortProperty="AmountInFunctionalCurrency" filterProperty="AmountInFunctionalCurrency">
@@ -207,7 +209,8 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"AmountInFunctionalCurrency", "leadingProperty":"AmountInFunctionalCurrency", "sortProperty":"AmountInFunctionalCurrency", "filterProperty": "AmountInFunctionalCurrency"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{AmountInFunctionalCurrency}" wrapping="false" />
+                                <!-- <Text text="{AmountInFunctionalCurrency}" wrapping="false" /> -->
+                                <Text text="{ path: 'AmountInFunctionalCurrency', formatter: '.formatter.formatNumber' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>FunctionalCurrency}" sortProperty="FunctionalCurrency" filterProperty="FunctionalCurrency">
@@ -223,7 +226,8 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"AmountInCompanyCodeCurrency", "leadingProperty":"AmountInCompanyCodeCurrency", "sortProperty":"AmountInCompanyCodeCurrency", "filterProperty": "AmountInCompanyCodeCurrency"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{AmountInCompanyCodeCurrency}" wrapping="false" />
+                                <!-- <Text text="{AmountInCompanyCodeCurrency}" wrapping="false" /> -->
+                                <Text text="{ path: 'AmountInCompanyCodeCurrency', formatter: '.formatter.formatNumber' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>CompanyCodeCurrency}" sortProperty="CompanyCodeCurrency" filterProperty="CompanyCodeCurrency">
@@ -263,7 +267,8 @@
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Quantity", "leadingProperty":"Quantity", "sortProperty":"Quantity", "filterProperty": "Quantity"}'/>
                             </t:customData>
                             <t:template>
-                                <Text text="{Quantity}" wrapping="false" />
+                                <!-- <Text text="{Quantity}" wrapping="false" /> -->
+                                <Text text="{ path: 'Quantity', formatter: '.formatter.formatQuantity' }" wrapping="false" />
                             </t:template>
                         </t:Column>
                         <t:Column width="10rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material">
