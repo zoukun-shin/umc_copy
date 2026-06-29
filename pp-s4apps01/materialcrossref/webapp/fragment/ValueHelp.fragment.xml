@@ -1,0 +1,18 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <SelectDialog
+        id="ValueHelpDialog"
+        title="Select"
+        search="onValueHelpSearch"
+        confirm="onValueHelpConfirm"
+        cancel="onValueHelpCancel"
+        items="{valueHelp>/items}">
+
+        <StandardListItem
+            title="{valueHelp>key}"
+            description="{valueHelp>text}" />
+    </SelectDialog>
+
+</core:FragmentDefinition>

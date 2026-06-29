@@ -223,6 +223,10 @@ modules:
       - ppzsupplydemand.zip
       name: ppzsupplydemand
       target-path: resources/
+    - artifacts:
+      - ppmaterialcrossref.zip
+      name: ppmaterialcrossref
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -622,6 +626,15 @@ modules:
 - name: ppzsupplydemand
   type: html5
   path: zsupplydemand
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppmaterialcrossref
+  type: html5
+  path: materialcrossref
   build-parameters:
     build-result: dist
     builder: custom

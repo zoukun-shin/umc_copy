@@ -1,0 +1,88 @@
+<mvc:View controllerName="pp.materialcrossref.controller.Upload"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:t="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:layout="sap.ui.layout">
+    <VBox id="idVBox" fitContainer="true">
+        <Panel id="idPanel" expandable="true" headerText="{i18n>templateText}" width="auto">
+            <upload:UploadSet id="idUploadSet" items="{ path : 'Template>/Configuration' }" multiple="false" mode="None" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+                <upload:items>
+                    <upload:UploadSetItem id="idUploadSetItem" fileName="{Template>TemplateName}" mediaType="{Template>TemplateMimeType}" url="{Template>TemplateContent}" visibleEdit="false" visibleRemove="false" />
+                </upload:items>
+            </upload:UploadSet>
+        </Panel>
+        <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto">
+            <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileUploaderChange" width="40%" class="sapUiSmallMargin" sameFilenameAllowed="true" />
+        </Panel>
+        <Panel id="id0Panel" expandable="true" expanded="true" headerText="{i18n>result}" width="auto" height="100%">
+            <layoutData>
+                <FlexItemData id="idFlexItemData" maxHeight="100%" maxWidth="100%" growFactor="1" />
+            </layoutData>
+            <t:Table id="idTable" rows="{local>/excelSet}" selectionMode="Multi" class="sapUiSizeCompact">
+                <t:rowMode>
+                    <rm:Auto id="idAuto" />
+                </t:rowMode>
+                <t:extension>
+                    <OverflowToolbar id="idOverflowToolbar">
+                        <Text id="idLogInfoText" text="{local>/logInfo}" />
+                        <ToolbarSpacer id="idToolbarSpacer" />
+                        <Button id="idCheckButton" icon="sap-icon://check-availability" type="Transparent" text="{i18n>UploadView.checkBtn}" press=".onButtonPress($event, 'check')" visible="{= ${local>/excelSet}.length > 0}" />
+                        <Button id="idSaveButton" icon="sap-icon://document" type="Transparent" text="{i18n>UploadView.saveBtn}" press=".onButtonPress($event, 'excute')" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/recordCheckSuccessed} &amp;&amp; ${local>/authorityCheck/button/Excute}}" />
+                        <Button id="idDownloadButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>UploadView.DownloadBtn}" press="onExport" enabled="{= ${local>/excelSet}.length > 0 &amp;&amp; ${local>/authorityCheck/button/Export}}" />
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column id="id36Column" width="6rem" sortProperty="Type" label="{i18n>Status}">
+                        <t:template>
+                            <ObjectStatus id="idObjectStatus" state="{
+                                    path: 'local>Type',
+                                    formatter: '.formatter.setState'
+                                }" icon="{
+                                    path: 'local>Type',
+                                    formatter: '.formatter.setStateIcon'
+                                }" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="id38Column" width="14rem" sortProperty="Message" label="{i18n>Message}">
+                        <t:template>
+                            <Text id="idMessageText" text="{local>Message}" tooltip="{local>Message}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="id1Column" width="10rem" label="{i18n>Plant}">
+                        <t:template>
+                            <Text id="idPlantText" text="{local>Plant}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="id2Column" width="10rem" label="{i18n>DeliveryMaterial}">
+                        <t:template>
+                            <Text id="idDeliveryMaterialText" text="{local>DeliveryMaterial}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="id3Column" width="10rem" label="{i18n>ReceiptMaterial}">
+                        <t:template>
+                            <Text id="idReceiptMaterialText" text="{local>ReceiptMaterial}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="id4Column" width="10rem" label="{i18n>PurchaseOrder}">
+                        <t:template>
+                            <Text id="idPurchaseOrderText" text="{local>PurchaseOrder}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="id5Column" width="10rem" label="{i18n>PurchaseOrderItem}">
+                        <t:template>
+                            <Text id="idPurchaseOrderItemText" text="{local>PurchaseOrderItem}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="id6Column" width="10rem" label="{i18n>DelFlag}">
+                        <t:template>
+                            <Text id="idDelFlagText" text="{local>DelFlag}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </Panel>
+    </VBox>
+</mvc:View>
