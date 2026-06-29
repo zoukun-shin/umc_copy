@@ -3,7 +3,7 @@
     xmlns="sap.m"
     xmlns:layout="sap.ui.layout"
     xmlns:table="sap.ui.table" core:require="{ handler: 'pp/zmaterialrequisition/ext/controller/ListReportExt' }">
-    <Dialog title="{i18n>OperationScreen}">
+    <Dialog title="{i18n>OperationScreen}" draggable="true" resizable="true">
         <Panel expandable="true" expanded="true" width="auto">
             <HBox>
                 <VBox class="sapUiSmallMarginEnd">

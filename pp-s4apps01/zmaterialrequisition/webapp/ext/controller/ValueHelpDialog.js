@@ -279,6 +279,7 @@ sap.ui.define([
                 sInputPath = sItemPath + sBindFieldName;
                 this.getModel("local").setProperty(sInputPath, sKey);
                 var sPlant = this.getModel("local").getProperty("/headSet/Plant");
+                var sType = this.getModel("local").getProperty("/headSet/Type");
                 if (sBindFieldName === "ManufacturingOrder") {
                     var oContextBinding = this.getModel().bindContext("/ZC_ManufacturingOrderProductVH" + "(ManufacturingOrder='" + sKey + "',Item='" + sText + "',ProductionPlant='" + sPlant + "')");
                     oContextBinding.requestObject().then(function (context) {
@@ -289,6 +290,40 @@ sap.ui.define([
                                 this.getModel("local").setProperty(sItemPath + key, context[key]);
                             }
                         }
+                        // ADD BEGIN BY XINLEI XU 2026/06/24 TH-P-043
+                        // Calculate amount
+                        var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
+                        var sPlant = this.getModel("local").getProperty("/headSet/Plant");
+                        var aConfig = this.getModel("local").getProperty("/Config");
+                        var aConfigPP039 = this.getModel("local").getProperty("/ConfigPP039");
+                        var config = aConfig.find(element => element.Plant === sPlant);
+                        if (sValue && context["StandardPrice"]) {
+                            var iAmount = parseFloat(sValue) * parseFloat(context["StandardPrice"]);
+                            this.getModel("local").setProperty(sItemPath + "TotalAmount", iAmount);
+                        }
+                        if (sValue && context["FunctionalPrice"]) {
+                            var iFunctionalAmount = parseFloat(sValue) * parseFloat(context["FunctionalPrice"]);
+                            this.getModel("local").setProperty(sItemPath + "FunctionalTotalAmount", iFunctionalAmount);
+                        }
+                        var sDeleteFlag = "";
+                        if (sPlant === "3000") {
+                            sDeleteFlag = iFunctionalAmount >= parseFloat(config.Amount) ? "W" : "";
+                        } else {
+                            sDeleteFlag = iAmount >= parseFloat(config.Amount) ? "W" : "";
+                        }
+                        var configPP039 = aConfigPP039.find(element => element.Plant === sPlant && element.MRType === sType && element.StorageLocation === context["DfltStorageLocationExtProcmt"]);
+                        if (configPP039) {
+                            sDeleteFlag = "";
+                        }
+                        this.getModel("local").setProperty(sItemPath + "DeleteFlag", sDeleteFlag);
+                        if (sDeleteFlag === "W") {
+                            $("#" + oControl.getParent().getId()).css("background-color", "#f2bfc0");
+                            $("#" + oControl.getParent().getId() + "-fixed").css("background-color", "#f2bfc0");
+                        } else {
+                            $("#" + oControl.getParent().getId()).css("background-color", "#fff");
+                            $("#" + oControl.getParent().getId() + "-fixed").css("background-color", "#fff");
+                        }
+                        // ADD END BY XINLEI XU 2026/06/24 TH-P-043
                     }.bind(this), function (oError) {
                         _myBusyDialog.close();
                     }.bind(this));
@@ -321,6 +356,7 @@ sap.ui.define([
                                 var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
                                 var sPlant = this.getModel("local").getProperty("/headSet/Plant");
                                 var aConfig = this.getModel("local").getProperty("/Config");
+                                var aConfigPP039 = this.getModel("local").getProperty("/ConfigPP039"); // ADD BY XINLEI XU 2026/06/22 TH-P-043
                                 var config = aConfig.find(element => element.Plant === sPlant);
                                 if (sValue && object["StandardPrice"]) {
                                     var iAmount = parseFloat(sValue) * parseFloat(object["StandardPrice"]);
@@ -347,6 +383,14 @@ sap.ui.define([
                                 } else {
                                     sDeleteFlag = iAmount >= parseFloat(config.Amount) ? "W" : "";
                                 }
+
+                                // ADD BEGIN BY XINLEI XU 2026/06/22 TH-P-043 Remove amount limit when conditions are met
+                                var configPP039 = aConfigPP039.find(element => element.Plant === sPlant && element.MRType === sType && element.StorageLocation === object["DfltStorageLocationExtProcmt"]);
+                                if (configPP039) {
+                                    sDeleteFlag = "";
+                                }
+                                // ADD END BY XINLEI XU 2026/06/22 TH-P-043
+
                                 this.getModel("local").setProperty(sItemPath + "DeleteFlag", sDeleteFlag);
                                 if (sDeleteFlag === "W") {
                                     $("#" + oControl.getParent().getId()).css("background-color", "#f2bfc0");

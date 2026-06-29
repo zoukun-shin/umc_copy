@@ -78,6 +78,10 @@ sap.ui.define([
         },
 
         _getConfig: function (oDataModel, oLocalModel) {
+            oLocalModel.setProperty("/Config", []);
+            oLocalModel.setProperty("/ConfigPP039", []);
+            oLocalModel.setProperty("/ReasonSet", []);
+
             var aFilters = [];
             aFilters.push(new Filter({
                 path: "ZID",
@@ -96,6 +100,28 @@ sap.ui.define([
                 }
                 oLocalModel.setProperty("/Config", aConfig);
             });
+
+            // ADD BEGIN BY XINLEI XU 2026/06/22 TH-P-043
+            var aFilters1 = [];
+            aFilters1.push(new Filter({
+                path: "ZID",
+                operator: FilterOperator.EQ,
+                value1: "ZPP039"
+            }));
+            var oContextBinding1 = oDataModel.bindList("/ZC_TBC1001", undefined, undefined, aFilters1, {});
+            oContextBinding1.requestContexts().then(function (aContext) {
+                var aConfigPP039 = [];
+                for (const boundContext of aContext) {
+                    var object = boundContext.getObject();
+                    aConfigPP039.push({
+                        Plant: object.Zvalue1,
+                        MRType: object.Zvalue2,
+                        StorageLocation: object.Zvalue3
+                    });
+                }
+                oLocalModel.setProperty("/ConfigPP039", aConfigPP039);
+            });
+            // ADD END BY XINLEI XU 2026/06/22 TH-P-043
 
             // ADD BEGIN BY XINLEI XU 2025/10/28 AMO #5328
             var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
@@ -272,6 +298,7 @@ sap.ui.define([
             var header = this.getModel("local").getProperty("/headSet");
             var items = this.getModel("local").getProperty("/itemSet");
             var aConfig = this.getModel("local").getProperty("/Config");
+            var aConfigPP039 = this.getModel("local").getProperty("/ConfigPP039"); // ADD BEGIN BY XINLEI XU 2026/06/22 TH-P-043
             var config = aConfig.find(element => element.Plant === header.Plant);
             items.forEach(item => {
                 // MOD BEGIN BY XINLEI XU 2026/02/05 VN CM No.5265
@@ -284,6 +311,13 @@ sap.ui.define([
                 }
                 // MOD END BY XINLEI XU 2026/02/05 VN CM No.5265
                 item.DeleteFlag = iAmount >= parseFloat(config.Amount) ? "W" : "";
+
+                // ADD BEGIN BY XINLEI XU 2026/06/22 TH-P-043 Remove amount limit when conditions are met
+                var configPP039 = aConfigPP039.find(element => element.Plant === header.Plant && element.MRType === header.Type && element.StorageLocation === item.DfltStorageLocationExtProcmt);
+                if (configPP039) {
+                    item.DeleteFlag = "";
+                }
+                // ADD END BY XINLEI XU 2026/06/22 TH-P-043
             });
             var oRequestData = {
                 header: header,
@@ -332,7 +366,8 @@ sap.ui.define([
                 // ADD END BY XINLEI XU 2026/1/13 VN CM No.5265
                 OrderIsClosed: "",
                 DeleteFlag: "",
-                Status: "None"
+                Status: "None",
+                DfltStorageLocationExtProcmt: "" // ADD BY XINLEI XU 2026/06/25 TH-P-043
             };
             items.push(item);
             items.forEach((line, index) => {
@@ -342,10 +377,15 @@ sap.ui.define([
         },
 
         onUITableRowsUpdated: function (oEvent) {
+            var that = this;
             var oTable = oEvent.getSource();
             var aRows = oTable.getRows();
             var aConfig = this.getModel("local").getProperty("/Config");
             var sPlant = this.getModel("local").getProperty("/headSet/Plant");
+            // ADD BEGIN BY XINLEI XU 2026/06/25 TH-P-043
+            var aConfigPP039 = this.getModel("local").getProperty("/ConfigPP039");
+            var sType = this.getModel("local").getProperty("/headSet/Type");
+            // ADD END BY XINLEI XU 2026/06/25 TH-P-043
             var config = aConfig.find(element => element.Plant === sPlant);
             if (config) {
                 aRows.forEach(function (oRow, index) {
@@ -393,6 +433,18 @@ sap.ui.define([
                         }
                     }
                     // MOD END BY XINLEI XU 2026/1/13 VN CM No.5265
+
+                    // ADD BEGIN BY XINLEI XU 2026/06/25 TH-P-043 Remove amount limit when conditions are met
+                    if (oRow.oBindingContexts.local) {
+                        var sPath = oRow.oBindingContexts.local.getPath();
+                        var oItemData = that.getModel("local").getProperty(sPath);
+                        var configPP039 = aConfigPP039.find(element => element.Plant === sPlant && element.MRType === sType && element.StorageLocation === oItemData["DfltStorageLocationExtProcmt"]);
+                        if (configPP039) {
+                            $("#" + oRow.getId()).css("background-color", "#fff");
+                            $("#" + oRow.getId() + "-fixed").css("background-color", "#fff");
+                        }
+                    }
+                    // ADD END BY XINLEI XU 2026/06/25 TH-P-043
                 });
             }
         },
@@ -522,6 +574,7 @@ sap.ui.define([
 
             var aFilters = [];
             var sPlant = this.getModel("local").getProperty("/headSet/Plant");
+            var sType = this.getModel("local").getProperty("/headSet/Type");
             // if (sODataPath === "/ZC_ManufacturingOrderProductVH") {
             //     oContextBinding = this.getModel().bindContext(sODataPath + "(ManufacturingOrder='" + sValue.split('/')[0] + "',Item='" + sValue.split('/')[1] + "',ProductionPlant='" + sPlant + "')");
             // } else if (sODataPath === "/I_StorageLocationStdVH") {
@@ -695,6 +748,7 @@ sap.ui.define([
                     aFieldName.push("BaseUnit");
                     aFieldName.push("StandardPrice");
                     aFieldName.push("OrderIsClosed");
+                    aFieldName.push("DfltStorageLocationExtProcmt"); // ADD BEGIN BY XINLEI XU 2026/06/25 TH-P-043
                 } else if (sBindFieldName === "Material") {
                     aFieldName.push("MaterialDescription");
                     aFieldName.push("BaseUnit");
@@ -704,6 +758,7 @@ sap.ui.define([
                     aFieldName.push("FunctionalPrice");
                     aFieldName.push("FunctionalTotalAmount");
                     // ADD END BY XINLEI XU 2026/1/13 VN CM No.5265
+                    aFieldName.push("DfltStorageLocationExtProcmt"); // ADD BEGIN BY XINLEI XU 2026/06/25 TH-P-043
                 } else if (sBindFieldName === "StorageLocation") {
                     aFieldName.push("StorageLocationName");
                 }
@@ -742,6 +797,7 @@ sap.ui.define([
                                 if (sBindFieldName === "ManufacturingOrder" || sBindFieldName === "Material") {
                                     var sValue = this.getModel("local").getProperty(sItemPath + "Quantity");
                                     var aConfig = this.getModel("local").getProperty("/Config");
+                                    var aConfigPP039 = this.getModel("local").getProperty("/ConfigPP039"); // ADD BY XINLEI XU 2026/06/22 TH-P-043
                                     var config = aConfig.find(element => element.Plant === sPlant);
                                     if (sValue && object["StandardPrice"]) {
                                         var iAmount = parseFloat(sValue) * parseFloat(object["StandardPrice"]);
@@ -768,6 +824,14 @@ sap.ui.define([
                                     } else {
                                         sDeleteFlag = iAmount >= parseFloat(config.Amount) ? "W" : "";
                                     }
+
+                                    // ADD BEGIN BY XINLEI XU 2026/06/22 TH-P-043 Remove amount limit when conditions are met
+                                    var configPP039 = aConfigPP039.find(element => element.Plant === sPlant && element.MRType === sType && element.StorageLocation === object["DfltStorageLocationExtProcmt"]);
+                                    if (configPP039) {
+                                        sDeleteFlag = "";
+                                    }
+                                    // ADD END BY XINLEI XU 2026/06/22 TH-P-043
+
                                     this.getModel("local").setProperty(sItemPath + "DeleteFlag", sDeleteFlag);
                                     if (sDeleteFlag === "W") {
                                         $("#" + this._oControl.getParent().getId()).css("background-color", "#f2bfc0");
@@ -808,6 +872,11 @@ sap.ui.define([
             var config = aConfig.find(element => element.Plant === sPlant);
             var sStandardPrice = this.getModel("local").getProperty(sPath + "/StandardPrice");
             var sFunctionalPrice = this.getModel("local").getProperty(sPath + "/FunctionalPrice"); // ADD BY XINLEI XU 2026/1/13 VN CM No.5265
+            // ADD BEGIN BY XINLEI XU 2026/06/22 TH-P-043
+            var aConfigPP039 = this.getModel("local").getProperty("/ConfigPP039");
+            var sType = this.getModel("local").getProperty("/headSet/Type");
+            var sStorageLocation = this.getModel("local").getProperty(sPath + "/DfltStorageLocationExtProcmt");
+            // ADD END BY XINLEI XU 2026/06/22 TH-P-043
             // this.getModel("local").setProperty(sPath + "/Status", "None");
             this.getModel("local").setProperty(sPath + "/TotalAmount", 0);
             this.getModel("local").setProperty(sPath + "/FunctionalTotalAmount", 0); // ADD BY XINLEI XU 2026/1/13 VN CM No.5265
@@ -838,6 +907,14 @@ sap.ui.define([
                 } else {
                     sDeleteFlag = iAmount >= parseFloat(config.Amount) ? "W" : "";
                 }
+
+                // ADD BEGIN BY XINLEI XU 2026/06/22 TH-P-043 Remove amount limit when conditions are met
+                var configPP039 = aConfigPP039.find(element => element.Plant === sPlant && element.MRType === sType && element.StorageLocation === sStorageLocation);
+                if (configPP039) {
+                    sDeleteFlag = "";
+                }
+                // ADD END BY XINLEI XU 2026/06/22 TH-P-043
+
                 this.getModel("local").setProperty(sPath + "/DeleteFlag", sDeleteFlag);
                 if (sDeleteFlag === "W") {
                     // this.getModel("local").setProperty(sPath + "/Status", "Error");
