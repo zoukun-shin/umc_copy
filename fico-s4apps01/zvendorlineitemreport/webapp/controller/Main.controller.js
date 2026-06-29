@@ -96,6 +96,30 @@ sap.ui.define([
                     case "OpenOnKeyDate":
                         oColumn.type = sap.ui.export.EdmType.Date;
                         break;
+                    case "AmountInFunctionalCurrency":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "DebitAmountinFunctionalCurr":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "CreditAmountinFunctionalCur":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "AmountInCompanyCodeCurrency":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
                 }
             });
             mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
