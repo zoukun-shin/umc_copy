@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog id="idPrintDialog" title="{i18n>DialogTempltSelectTitle}" contentWidth="25rem" draggable="true">
+		<VBox class="sapUiContentPadding">
+			<RadioButtonGroup id="idTemplateGroup" selectedIndex="0">
+				<RadioButton text="{i18n>optInvoicePrintCH}"/>
+				<RadioButton text="{i18n>optInvoicePrintGEN}"/>
+				<RadioButton text="{i18n>optPackingList}"/>
+				<RadioButton text="{i18n>optCreditDebitNote}"/>
+				<RadioButton text="{i18n>optCreditDebitNoteMerge}"/>
+			</RadioButtonGroup>
+		</VBox>
+		<beginButton>
+			<Button text="{i18n>bConfirm}" press="onPrintDialogConfirm"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>bCancel}" press="onPrintDialogClose"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

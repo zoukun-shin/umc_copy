@@ -119,6 +119,10 @@ modules:
       - sdzshippinginstruction.zip
       name: sdzshippinginstruction
       target-path: resources/
+    - artifacts:
+      - sdinvoiceprintcn.zip
+      name: sdinvoiceprintcn
+      target-path: resources/
 - name: sdsalesacceptance
   type: html5
   path: salesacceptance
@@ -284,6 +288,15 @@ modules:
 - name: sdzshippinginstruction
   type: html5
   path: zshippinginstruction
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sdinvoiceprintcn
+  type: html5
+  path: invoiceprintcn
   build-parameters:
     build-result: dist
     builder: custom
