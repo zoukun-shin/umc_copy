@@ -51,6 +51,16 @@
                             <smartFilterBar:ControlConfiguration index='999' key="BaseAmount" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="TaxAmount" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="ledgergllineitem" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="HeaderText" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="ItemText" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="ItemAssignment" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Reference1" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Reference2" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Reference3" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="ReferenceKey1" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="ReferenceKey2" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="ReferenceKey3" visible="false"/>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -195,6 +205,86 @@
                             </table:customData>
                             <table:template>
                                 <Text text="{path:'TaxAmount', formatter:'.formatter.formatNumber'}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>ledgergllineitem}" sortProperty="ledgergllineitem" filterProperty="ledgergllineitem">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ledgergllineitem", "leadingProperty":"ledgergllineitem"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ledgergllineitem}" wrapping="false" tooltip="{ledgergllineitem}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>HeaderText}" sortProperty="HeaderText" filterProperty="HeaderText">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"HeaderText", "leadingProperty":"HeaderText"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{HeaderText}" wrapping="false" tooltip="{HeaderText}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>ItemText}" sortProperty="ItemText" filterProperty="ItemText">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ItemText", "leadingProperty":"ItemText"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ItemText}" wrapping="false" tooltip="{ItemText}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>ItemAssignment}" sortProperty="ItemAssignment" filterProperty="ItemAssignment">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ItemAssignment", "leadingProperty":"ItemAssignment"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ItemAssignment}" wrapping="false" tooltip="{ItemAssignment}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Reference1}" sortProperty="Reference1" filterProperty="Reference1">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Reference1", "leadingProperty":"Reference1"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Reference1}" wrapping="false" tooltip="{Reference1}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Reference2}" sortProperty="Reference2" filterProperty="Reference2">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Reference2", "leadingProperty":"Reference2"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Reference2}" wrapping="false" tooltip="{Reference2}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Reference3}" sortProperty="Reference3" filterProperty="Reference3">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Reference3", "leadingProperty":"Reference3"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Reference3}" wrapping="false" tooltip="{Reference3}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>ReferenceKey1}" sortProperty="ReferenceKey1" filterProperty="ReferenceKey1">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ReferenceKey1", "leadingProperty":"ReferenceKey1"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ReferenceKey1}" wrapping="false" tooltip="{ReferenceKey1}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>ReferenceKey2}" sortProperty="ReferenceKey2" filterProperty="ReferenceKey2">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ReferenceKey2", "leadingProperty":"ReferenceKey2"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ReferenceKey2}" wrapping="false" tooltip="{ReferenceKey2}"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>ReferenceKey3}" sortProperty="ReferenceKey3" filterProperty="ReferenceKey3">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ReferenceKey3", "leadingProperty":"ReferenceKey3"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ReferenceKey3}" wrapping="false" tooltip="{ReferenceKey3}"/>
                             </table:template>
                         </table:Column>
                     </table:columns>
