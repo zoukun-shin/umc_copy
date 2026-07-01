@@ -227,6 +227,10 @@ modules:
       - ppmaterialcrossref.zip
       name: ppmaterialcrossref
       target-path: resources/
+    - artifacts:
+      - ppzprodordercomponentupload.zip
+      name: ppzprodordercomponentupload
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -635,6 +639,15 @@ modules:
 - name: ppmaterialcrossref
   type: html5
   path: materialcrossref
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzprodordercomponentupload
+  type: html5
+  path: zprodordercomponentupload
   build-parameters:
     build-result: dist
     builder: custom
