@@ -95,6 +95,14 @@ sap.ui.define([
                     oFiltersPlant.oValue1 = '';
                 }
             }
+
+            var bSelected = this.byId("idCB1").getSelected();
+            var oDisplaySpecProcInfo = new sap.ui.model.Filter({
+                path: "DisplaySpecProcInfo",
+                operator: "EQ",
+                value1: bSelected
+            });
+             filters.push(oDisplaySpecProcInfo);
         },
 
         onBeforeExport: function (oEvent) {

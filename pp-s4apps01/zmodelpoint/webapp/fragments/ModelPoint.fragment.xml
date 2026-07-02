@@ -10,7 +10,7 @@
         showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" 
         persistencyKey="ModelPointST" header="{i18n>Results}" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="Material,MRPController">
+        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="Material,MRPController,DisplaySpecProcInfo">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
@@ -56,6 +56,22 @@
                     </table:customData>
                     <table:template>
                         <Text text="{Point}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>SpecialProcurementType}" sortProperty="SpecialProcurementType" filterProperty="SpecialProcurementType" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SpecialProcurementType", "leadingProperty":"SpecialProcurementType"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SpecialProcurementType}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="20rem" label="{i18n>ProductionVersion}" sortProperty="ProductionVersion" filterProperty="ProductionVersion" visible="false" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ProductionVersion", "leadingProperty":"ProductionVersion"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ProductionVersion}" wrapping="false" />
                     </table:template>
                 </table:Column>
             </table:columns>

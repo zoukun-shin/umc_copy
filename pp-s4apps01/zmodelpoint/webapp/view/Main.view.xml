@@ -29,7 +29,12 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="FinishedGoods" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="SemiFinishedGoods" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Point" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SpecialProcurementType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductionVersion" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DisplaySpecProcInfo" visible="false"/>
                             </smartFilterBar:controlConfiguration>
+
+                            <CheckBox id ="idCB1" text="{i18n>DisplaySpecProcInfo}" select="onSelect"/>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
                 </f:content>
