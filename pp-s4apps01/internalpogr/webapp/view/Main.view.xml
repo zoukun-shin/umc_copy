@@ -1,0 +1,16 @@
+<mvc:View controllerName="pp.internalpogr.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+    <Page id="page" showHeader="false">
+        <content>
+            <IconTabBar id="idIconTabBar" expanded="{device>/isNoPhone}" stretchContentHeight="true" backgroundDesign="Transparent" applyContentPadding="false" class="sapUiResponsiveContentPadding">
+                <items>
+                    <IconTabFilter id="tabInternalPost" text="{i18n>Tab.InternalPost}" key="internalPost">
+                        <mvc:XMLView id="viewInternalPost" viewName="pp.internalpogr.view.InternalPost" height="100%" />
+                    </IconTabFilter>
+                    <IconTabFilter id="tabPostHistory" text="{i18n>Tab.PostHistory}" key="postHistory">
+                        <mvc:XMLView id="viewPostHistory" viewName="pp.internalpogr.view.PostHistory" height="100%" />
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

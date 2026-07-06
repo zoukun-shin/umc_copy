@@ -231,6 +231,10 @@ modules:
       - ppzprodordercomponentupload.zip
       name: ppzprodordercomponentupload
       target-path: resources/
+    - artifacts:
+      - ppinternalpogr.zip
+      name: ppinternalpogr
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -648,6 +652,15 @@ modules:
 - name: ppzprodordercomponentupload
   type: html5
   path: zprodordercomponentupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppinternalpogr
+  type: html5
+  path: internalpogr
   build-parameters:
     build-result: dist
     builder: custom
