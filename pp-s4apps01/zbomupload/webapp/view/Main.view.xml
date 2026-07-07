@@ -15,6 +15,12 @@
                 </upload:UploadSet>
             </Panel>
             <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto">
+                <RadioButtonGroup id="idRadioGroup" columns="2">
+                    <buttons>
+                        <RadioButton text="{i18n>Horizontal}" selected="true" />
+                        <RadioButton text="{i18n>Vertical}"/>
+                    </buttons>
+                </RadioButtonGroup>
                 <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileChange" width="40%" class="sapUiSmallMargin"/>
             </Panel>
             <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
@@ -182,6 +188,13 @@
                             </table:template>
                         </table:Column>
                         <!-- ADD END BY XINLEI XU 2025/11/07 VN CR No.5441 -->
+                        <!-- ADD BEGIN BY XINLEI XU 2026/07/06 CN 需求 No.16 -->
+                        <table:Column width="8rem" label="{i18n>IsBulkMaterial}">
+                            <table:template>
+                                <Text text="{local>IsBulkMaterial}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <!-- ADD END BY XINLEI XU 2026/07/06 CN 需求 No.16 -->
                     </table:columns>
                 </table:Table>
             </Panel>
