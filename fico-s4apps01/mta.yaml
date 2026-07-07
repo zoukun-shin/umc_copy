@@ -154,11 +154,15 @@ modules:
     - artifacts:
       - ficozgrircogstrf.zip
       name: ficozgrircogstrf
-      target-path: resources/      
+      target-path: resources/
     - artifacts:
       - ficozprocfeetrf.zip
       name: ficozprocfeetrf
-      target-path: resources/        
+      target-path: resources/
+    - artifacts:
+      - ficozaccountmapping.zip
+      name: ficozaccountmapping
+      target-path: resources/
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -414,6 +418,15 @@ modules:
 - name: ficozprocfeetrf
   type: html5
   path: zprocfeetrf
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozaccountmapping
+  type: html5
+  path: zaccountmapping
   build-parameters:
     build-result: dist
     builder: custom

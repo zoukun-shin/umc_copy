@@ -1,0 +1,29 @@
+{
+  "generationParameters": {
+    "generationDate": "Tue Jul 07 2026 09:48:37 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "https://my412552.s4hana.cloud.sap/sap/opu/odata4/sap/zui_tfi_1035_o4/srvd/sap/zui_tfi_1035_o4/0001/",
+    "appName": "zaccountmapping",
+    "appTitle": "根据成本中心类别&物料组维护科目",
+    "appDescription": "根据成本中心类别&物料组维护科目",
+    "appNamespace": "fico",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.38",
+    "enableEslint": true,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.28.0",
+    "template": "List Report Page V4",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [
+      {
+        "type": "Main Entity",
+        "value": "ZC_TFI_1035"
+      }
+    ],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```",
+    "valueHelpDownloaded": true
+  }
+}
