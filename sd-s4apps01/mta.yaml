@@ -123,6 +123,10 @@ modules:
       - sdinvoiceprintcn.zip
       name: sdinvoiceprintcn
       target-path: resources/
+    - artifacts:
+      - sdinvoicedomestic.zip
+      name: sdinvoicedomestic
+      target-path: resources/
 - name: sdsalesacceptance
   type: html5
   path: salesacceptance
@@ -297,6 +301,15 @@ modules:
 - name: sdinvoiceprintcn
   type: html5
   path: invoiceprintcn
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sdinvoicedomestic
+  type: html5
+  path: invoicedomestic
   build-parameters:
     build-result: dist
     builder: custom

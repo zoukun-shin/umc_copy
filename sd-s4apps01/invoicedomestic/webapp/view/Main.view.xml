@@ -1,0 +1,25 @@
+<mvc:View controllerName="sd.invoicedomestic.controller.Main"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page showHeader="false" showFooter="false">
+        <content>
+            <IconTabBar
+                id="idIconTabBar"
+                expanded="{device>/isNoPhone}"
+                stretchContentHeight="true"
+                backgroundDesign="Transparent"
+                applyContentPadding="false"
+                class="sapUiNoContentPadding">
+                <items>
+                    <IconTabFilter text="内销发票明细" key="InvoiceDetail">
+                        <mvc:XMLView viewName="sd.invoicedomestic.view.InvoiceDetail" height="100%"/>
+                    </IconTabFilter>
+                    <IconTabFilter text="FXMFG专用格式" key="InvoiceFxmfgs">
+                        <mvc:XMLView viewName="sd.invoicedomestic.view.InvoiceFxmfgs" height="100%"/>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

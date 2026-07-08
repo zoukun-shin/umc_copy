@@ -1,0 +1,608 @@
+<mvc:View
+    controllerName="sd.invoicedomestic.controller.InvoiceFxmfgs"
+    displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:t="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+    <f:DynamicPage
+        id="idDynamicPage2"
+        showFooter="true"
+    >
+        <f:title>
+            <f:DynamicPageTitle id="idDynamicPageTitle2">
+                <f:heading>
+                    <sv:SmartVariantManagement
+                        id="idSmartVariantManagement2"
+                        showShare="true"
+                        persistencyKey="invoiceDomesticFxmfgsFilter"
+                        showExecuteOnSelection="true"
+                        entitySet="InvoiceFxmfgs"
+                    />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="idDynamicPageHeader2">
+                <f:content>
+                    <HBox class="sapUiMediumMarginBeginEnd">
+                        <CheckBox id="idCBShowBatchParent" text="{i18n>ShowBatchParent}" width="16rem"/>
+                        <CheckBox id="idCBShowZeroPrice" text="{i18n>ShowZeroPrice}" width="12rem"/>
+                        <CheckBox id="idCBShowInternalDelivery" text="{i18n>ShowInternalDelivery}" width="14rem"/>
+                    </HBox>
+                </f:content>
+                <f:content>
+                    <smartFilterBar:SmartFilterBar
+                        id="idSmartFilterBar2"
+                        smartVariant="idSmartVariantManagement2"
+                        persistencyKey="invoiceDomesticFxmfgsSmartFilter"
+                        entitySet="InvoiceFxmfgs"
+                        useToolbar="false"
+                        class="sapUiResponsiveMargin"
+                        search="onSearch"
+                    >
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="SalesOrganization"
+                                visibleInAdvancedArea="true"
+                                label="{/#InvoiceFxmfgsType/SalesOrganization/@sap:label}"
+                                mandatory="notMandatory"
+                                index="1"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="SoldToParty"
+                                visibleInAdvancedArea="true"
+                                label="{/#InvoiceFxmfgsType/SoldToParty/@sap:label}"
+                                mandatory="notMandatory"
+                                index="3"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="BillToParty"
+                                visibleInAdvancedArea="true"
+                                label="{/#InvoiceFxmfgsType/BillToParty/@sap:label}"
+                                mandatory="notMandatory"
+                                index="5"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="PayerParty"
+                                visibleInAdvancedArea="true"
+                                label="{/#InvoiceFxmfgsType/PayerParty/@sap:label}"
+                                mandatory="notMandatory"
+                                index="7"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="BillingDocumentType"
+                                visibleInAdvancedArea="true"
+                                label="{/#InvoiceFxmfgsType/BillingDocumentType/@sap:label}"
+                                mandatory="notMandatory"
+                                index="9"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="Product"
+                                visibleInAdvancedArea="true"
+                                label="{/#InvoiceFxmfgsType/Product/@sap:label}"
+                                mandatory="notMandatory"
+                                index="11"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="Plant"
+                                visibleInAdvancedArea="true"
+                                label="{/#InvoiceFxmfgsType/Plant/@sap:label}"
+                                mandatory="notMandatory"
+                                index="13"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="CreationDate"
+                                visibleInAdvancedArea="true"
+                                label="{/#InvoiceFxmfgsType/CreationDate/@sap:label}"
+                                mandatory="notMandatory"
+                                index="15"
+                            >
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection
+                                        id="idDRCreationDate"
+                                        valueFormat="yyyy/MM/dd"
+                                        displayFormat="yyyy/MM/dd"
+                                    />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="BillingDocument"
+                                visibleInAdvancedArea="true"
+                                label="{/#InvoiceFxmfgsType/BillingDocument/@sap:label}"
+                                mandatory="notMandatory"
+                                index="17"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="BillingDocumentDate"
+                                visibleInAdvancedArea="true"
+                                label="{/#InvoiceFxmfgsType/BillingDocumentDate/@sap:label}"
+                                mandatory="notMandatory"
+                                index="19"
+                            >
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection
+                                        id="idDRBillingDocumentDate"
+                                        valueFormat="yyyy/MM/dd"
+                                        displayFormat="yyyy/MM/dd"
+                                    />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable
+                id="idSmartTable2"
+                entitySet="InvoiceFxmfgs"
+                smartFilterId="idSmartFilterBar2"
+                smartVariant="idSmartVariantManagement2"
+                persistencyKey="invoiceDomesticFxmfgsSmartTable"
+                header="{i18n>tableHeaderTitle2}"
+                placeToolbarInTable="true"
+                beforeRebindTable="onBeforeRebindTable"
+                requestAtLeastFields="SerialNo,ReceiptAdviceNo"
+            >
+                <t:Table
+                    id="reportTable2"
+                    selectionMode="Multi"
+                    class="sapUiSizeCompact"
+                >
+                    <t:rowMode>
+                        <rm:Auto id="idAuto2"/>
+                    </t:rowMode>
+                    <t:columns>
+                        <t:Column
+                            width="6rem"
+                            label="{/#InvoiceFxmfgsType/SerialNo/@sap:label}"
+                            sortProperty="SerialNo"
+                            filterProperty="SerialNo"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"SerialNo","leadingProperty":"SerialNo","sortProperty":"SerialNo","filterProperty":"SerialNo"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{SerialNo}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="12rem"
+                            label="{/#InvoiceFxmfgsType/FileID/@sap:label}"
+                            sortProperty="FileID"
+                            filterProperty="FileID"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"FileID","leadingProperty":"FileID","sortProperty":"FileID","filterProperty":"FileID"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{FileID}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            label="{/#InvoiceFxmfgsType/ReceiptAdviceNo/@sap:label}"
+                            sortProperty="ReceiptAdviceNo"
+                            filterProperty="ReceiptAdviceNo"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"ReceiptAdviceNo","leadingProperty":"ReceiptAdviceNo","sortProperty":"ReceiptAdviceNo","filterProperty":"ReceiptAdviceNo"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ReceiptAdviceNo}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            label="{/#InvoiceFxmfgsType/ReceiptAdviceItemNo/@sap:label}"
+                            sortProperty="ReceiptAdviceItemNo"
+                            filterProperty="ReceiptAdviceItemNo"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"ReceiptAdviceItemNo","leadingProperty":"ReceiptAdviceItemNo","sortProperty":"ReceiptAdviceItemNo","filterProperty":"ReceiptAdviceItemNo"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ReceiptAdviceItemNo}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="12rem"
+                            label="{/#InvoiceFxmfgsType/VendorCode/@sap:label}"
+                            sortProperty="VendorCode"
+                            filterProperty="VendorCode"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"VendorCode","leadingProperty":"VendorCode","sortProperty":"VendorCode","filterProperty":"VendorCode"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{VendorCode}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="9rem"
+                            label="{/#InvoiceFxmfgsType/ShipmentDate/@sap:label}"
+                            sortProperty="ShipmentDate"
+                            filterProperty="ShipmentDate"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"ShipmentDate","leadingProperty":"ShipmentDate","sortProperty":"ShipmentDate","filterProperty":"ShipmentDate","type":"date"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'ShipmentDate', type:'sap.ui.model.type.Date'}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="9rem"
+                            label="{/#InvoiceFxmfgsType/ExpectedReceiptDate/@sap:label}"
+                            sortProperty="ExpectedReceiptDate"
+                            filterProperty="ExpectedReceiptDate"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"ExpectedReceiptDate","leadingProperty":"ExpectedReceiptDate","sortProperty":"ExpectedReceiptDate","filterProperty":"ExpectedReceiptDate","type":"date"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'ExpectedReceiptDate', type:'sap.ui.model.type.Date'}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            label="{/#InvoiceFxmfgsType/PONo/@sap:label}"
+                            sortProperty="PONo"
+                            filterProperty="PONo"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"PONo","leadingProperty":"PONo","sortProperty":"PONo","filterProperty":"PONo"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PONo}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            label="{/#InvoiceFxmfgsType/ItemSeqNo/@sap:label}"
+                            sortProperty="ItemSeqNo"
+                            filterProperty="ItemSeqNo"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"ItemSeqNo","leadingProperty":"ItemSeqNo","sortProperty":"ItemSeqNo","filterProperty":"ItemSeqNo"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ItemSeqNo}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            label="{/#InvoiceFxmfgsType/ShippingOrderNo/@sap:label}"
+                            sortProperty="ShippingOrderNo"
+                            filterProperty="ShippingOrderNo"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"ShippingOrderNo","leadingProperty":"ShippingOrderNo","sortProperty":"ShippingOrderNo","filterProperty":"ShippingOrderNo"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ShippingOrderNo}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            label="{/#InvoiceFxmfgsType/BLNo/@sap:label}"
+                            sortProperty="BLNo"
+                            filterProperty="BLNo"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"BLNo","leadingProperty":"BLNo","sortProperty":"BLNo","filterProperty":"BLNo"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BLNo}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            hAlign="Right"
+                            label="{/#InvoiceFxmfgsType/BillingQuantity/@sap:label}"
+                            sortProperty="BillingQuantity"
+                            filterProperty="BillingQuantity"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"BillingQuantity","leadingProperty":"BillingQuantity","sortProperty":"BillingQuantity","filterProperty":"BillingQuantity"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'BillingQuantity', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="5rem"
+                            label="{/#InvoiceFxmfgsType/BillingQuantityUnit/@sap:label}"
+                            sortProperty="BillingQuantityUnit"
+                            filterProperty="BillingQuantityUnit"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"BillingQuantityUnit","leadingProperty":"BillingQuantityUnit","sortProperty":"BillingQuantityUnit","filterProperty":"BillingQuantityUnit"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BillingQuantityUnit}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            label="{/#InvoiceFxmfgsType/MaterialByCustomer/@sap:label}"
+                            sortProperty="MaterialByCustomer"
+                            filterProperty="MaterialByCustomer"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"MaterialByCustomer","leadingProperty":"MaterialByCustomer","sortProperty":"MaterialByCustomer","filterProperty":"MaterialByCustomer"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{MaterialByCustomer}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="5rem"
+                            label="{/#InvoiceFxmfgsType/TransactionCurrency/@sap:label}"
+                            sortProperty="TransactionCurrency"
+                            filterProperty="TransactionCurrency"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"TransactionCurrency","leadingProperty":"TransactionCurrency","sortProperty":"TransactionCurrency","filterProperty":"TransactionCurrency"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{TransactionCurrency}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            hAlign="Right"
+                            label="{/#InvoiceFxmfgsType/UnitPrice/@sap:label}"
+                            sortProperty="UnitPrice"
+                            filterProperty="UnitPrice"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"UnitPrice","leadingProperty":"UnitPrice","sortProperty":"UnitPrice","filterProperty":"UnitPrice"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'UnitPrice', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            label="{/#InvoiceFxmfgsType/OutputInvoiceNo/@sap:label}"
+                            sortProperty="OutputInvoiceNo"
+                            filterProperty="OutputInvoiceNo"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"OutputInvoiceNo","leadingProperty":"OutputInvoiceNo","sortProperty":"OutputInvoiceNo","filterProperty":"OutputInvoiceNo"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{OutputInvoiceNo}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            hAlign="Right"
+                            label="{/#InvoiceFxmfgsType/NetAmount/@sap:label}"
+                            sortProperty="NetAmount"
+                            filterProperty="NetAmount"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"NetAmount","leadingProperty":"NetAmount","sortProperty":"NetAmount","filterProperty":"NetAmount"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'NetAmount', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            label="{/#InvoiceFxmfgsType/APDept/@sap:label}"
+                            sortProperty="APDept"
+                            filterProperty="APDept"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"APDept","leadingProperty":"APDept","sortProperty":"APDept","filterProperty":"APDept"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{APDept}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            label="{/#InvoiceFxmfgsType/Applicable/@sap:label}"
+                            sortProperty="Applicable"
+                            filterProperty="Applicable"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"Applicable","leadingProperty":"Applicable","sortProperty":"Applicable","filterProperty":"Applicable"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Applicable}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            label="{/#InvoiceFxmfgsType/FxMfgPONo/@sap:label}"
+                            sortProperty="FxMfgPONo"
+                            filterProperty="FxMfgPONo"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"FxMfgPONo","leadingProperty":"FxMfgPONo","sortProperty":"FxMfgPONo","filterProperty":"FxMfgPONo"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{FxMfgPONo}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            label="{/#InvoiceFxmfgsType/BillingDocument/@sap:label}"
+                            sortProperty="BillingDocument"
+                            filterProperty="BillingDocument"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"BillingDocument","leadingProperty":"BillingDocument","sortProperty":"BillingDocument","filterProperty":"BillingDocument"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BillingDocument}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            label="{/#InvoiceFxmfgsType/SalesOrganization/@sap:label}"
+                            sortProperty="SalesOrganization"
+                            filterProperty="SalesOrganization"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"SalesOrganization","leadingProperty":"SalesOrganization","sortProperty":"SalesOrganization","filterProperty":"SalesOrganization"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{SalesOrganization}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="9rem"
+                            label="{/#InvoiceFxmfgsType/BillingDocumentDate/@sap:label}"
+                            sortProperty="BillingDocumentDate"
+                            filterProperty="BillingDocumentDate"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"BillingDocumentDate","leadingProperty":"BillingDocumentDate","sortProperty":"BillingDocumentDate","filterProperty":"BillingDocumentDate","type":"date"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'BillingDocumentDate', type:'sap.ui.model.type.Date'}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="8rem"
+                            label="{/#InvoiceFxmfgsType/PostingStatus/@sap:label}"
+                            sortProperty="PostingStatus"
+                            filterProperty="PostingStatus"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"PostingStatus","leadingProperty":"PostingStatus","sortProperty":"PostingStatus","filterProperty":"PostingStatus"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PostingStatus}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="12rem"
+                            label="{/#InvoiceFxmfgsType/PostingStatusDesc/@sap:label}"
+                            sortProperty="PostingStatusDesc"
+                            filterProperty="PostingStatusDesc"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"PostingStatusDesc","leadingProperty":"PostingStatusDesc","sortProperty":"PostingStatusDesc","filterProperty":"PostingStatusDesc"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PostingStatusDesc}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            label="{/#InvoiceFxmfgsType/CustomerBatchNo/@sap:label}"
+                            sortProperty="CustomerBatchNo"
+                            filterProperty="CustomerBatchNo"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"CustomerBatchNo","leadingProperty":"CustomerBatchNo","sortProperty":"CustomerBatchNo","filterProperty":"CustomerBatchNo"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{CustomerBatchNo}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="6rem"
+                            label="{/#InvoiceFxmfgsType/Cancelled/@sap:label}"
+                            sortProperty="Cancelled"
+                            filterProperty="Cancelled"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"Cancelled","leadingProperty":"Cancelled","sortProperty":"Cancelled","filterProperty":"Cancelled"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Cancelled}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="12rem"
+                            label="{/#InvoiceFxmfgsType/CancelledBillingDoc/@sap:label}"
+                            sortProperty="CancelledBillingDoc"
+                            filterProperty="CancelledBillingDoc"
+                        >
+                            <t:customData>
+                                <core:CustomData key="p13nData"
+                                    value='\{"columnKey":"CancelledBillingDoc","leadingProperty":"CancelledBillingDoc","sortProperty":"CancelledBillingDoc","filterProperty":"CancelledBillingDoc"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text text="{CancelledBillingDoc}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
