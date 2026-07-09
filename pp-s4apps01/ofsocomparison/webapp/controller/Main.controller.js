@@ -148,19 +148,28 @@ sap.ui.define([
 				//TH add end 20260106 CR5313	
 				this._BusyDialog.open();
 				Promise.all([this.readData(aFilters)]).then((results) => {
-					if (results[0].results.length > 0) {
-						that.getModel("local").setProperty("/data", results[0].results);
-						that.buildListResultUITable(oTable, results[0].results[0]);
+					// MOD BEGIN BY XINLEI XU 2026/07/09 
+					// if (results[0].results.length > 0) {
+					// 	that.getModel("local").setProperty("/data", results[0].results);
+					// 	that.buildListResultUITable(oTable, results[0].results[0]);
+					// 	this._BusyDialog.close();
+					// } else {
+					// 	this._BusyDialog.close();
+					// 	MessageBox.error(this.getModel("i18n").getResourceBundle().getText("NoData"));
+					// 	that.getModel("local").setProperty("/data", results[0].results);
+					// 	that.buildListResultUITable(oTable, results[0].results[0]);
+					// }
+					if (results[0].length > 0) {
+						that.getModel("local").setProperty("/data", results[0]);
+						that.buildListResultUITable(oTable, results[0][0]);
 						this._BusyDialog.close();
 					} else {
 						this._BusyDialog.close();
 						MessageBox.error(this.getModel("i18n").getResourceBundle().getText("NoData"));
-						that.getModel("local").setProperty("/data", results[0].results);
-						that.buildListResultUITable(oTable, results[0].results[0]);
-
-
-
+						that.getModel("local").setProperty("/data", results[0]);
+						that.buildListResultUITable(oTable, results[0][0]);
 					}
+					// MOD END BY XINLEI XU 2026/07/09 
 				}).catch((error) => {
 					MessageBox.error(error);
 				}).finally(() => {
@@ -171,8 +180,18 @@ sap.ui.define([
 				this._BusyDialog.open();
 				Promise.all([this.readData(aFilters)]).then((results) => {
 					var aResults = [];
+					// MOD BEGIN BY XINLEI XU 2026/07/09 
+					// if (results[0]) {
+					// 	aResults = JSON.parse(results[0].results[0].DynamicData);
+					// };
+					// if (aResults.length > 0) {
+					// 	this.getModel("local").setProperty("/data", aResults);
+					// 	this._renderingColumns(aResults[0], oTable);
+					// } else {
+					// 	MessageBox.error(this.getModel("i18n").getResourceBundle().getText("NoData"));
+					// }
 					if (results[0]) {
-						aResults = JSON.parse(results[0].results[0].DynamicData);
+						aResults = JSON.parse(results[0][0].DynamicData);
 					};
 					if (aResults.length > 0) {
 						this.getModel("local").setProperty("/data", aResults);
@@ -180,7 +199,7 @@ sap.ui.define([
 					} else {
 						MessageBox.error(this.getModel("i18n").getResourceBundle().getText("NoData"));
 					}
-
+					// MOD END BY XINLEI XU 2026/07/09 
 				}).catch((error) => {
 					MessageBox.error(error);
 				}).finally(() => {
@@ -193,22 +212,29 @@ sap.ui.define([
 		readData(aFilters) {
 			var that = this;
 			return new Promise((resolve, reject) => {
-				that.getModel().read("/OFSOCOMPARISON", {
-					filters: aFilters,
-					urlParameters: {
-						"$top": 999999999
-					},
+				// MOD BEGIN BY XINLEI XU 2026/07/09 
+				// that.getModel().read("/OFSOCOMPARISON", {
+				// 	filters: aFilters,
+				// 	urlParameters: {
+				// 		"$top": 999999999
+				// 	},
 
-					// urlParameters: {
-					// 	"$expand": "toResults"
-					// },
-					success: function (oData) {
-						resolve(oData);
-					},
-					error: function (oError) {
-						reject(oError);
-					}
-				});
+				// 	// urlParameters: {
+				// 	// 	"$expand": "toResults"
+				// 	// },
+				// 	success: function (oData) {
+				// 		resolve(oData);
+				// 	},
+				// 	error: function (oError) {
+				// 		reject(oError);
+				// 	}
+				// });
+				that._loadAllData("/OFSOCOMPARISON", aFilters).then(function (aAllResults) {
+					resolve(aAllResults);
+				}.bind(this)).catch(function (oError) {
+					reject(oError);
+				}.bind(this));
+				// MOD END BY XINLEI XU 2026/07/09 
 			});
 		},
 
