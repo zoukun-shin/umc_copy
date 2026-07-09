@@ -1,0 +1,73 @@
+<mvc:View controllerName="pp.zprodordercomppr.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="ProdOrderCompPRSVM" showShare="true" showExecuteOnSelection="true" entitySet="ProdOrderCompPR"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ProdOrderCompPR" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onSmartFilterBarInitialized" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="ManufacturingOrder" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ManufacturingOrder}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="Plant" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Assembly" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Material" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="GoodsMovementEntryQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="EntryUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PrNo" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PrItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PrPlant" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PrType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchasingInfoRecord" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Supplier" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CompanyCode" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrg" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseGrp" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Currency" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Quantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Unit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Price" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="UnitPrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DeliveryDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Location" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PrBy" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ApproveStatus" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IsLink" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IsApprove" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="LocalCreatedBy" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="LocalCreatedAt" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Reservation" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ReservationItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurgDocOrderQuantityUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ExcludeItemsWithPr" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Status" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Message" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+
+                            <CheckBox id ="idCB1" text="{i18n>ExcludeItemsWithPr}" selected="false" select="onSelect"/>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="pp.zprodordercomppr.fragments.ProdOrderCompPR" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

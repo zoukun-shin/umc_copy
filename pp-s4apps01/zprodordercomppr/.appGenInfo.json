@@ -1,0 +1,23 @@
+{
+  "generationParameters": {
+    "generationDate": "Mon Jul 06 2026 06:59:37 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_PRODORDERCOMP_PR_O2",
+    "appName": "zprodordercomppr",
+    "appTitle": "LCA工单采购请求生成",
+    "appDescription": "LCA工单采购请求生成",
+    "appNamespace": "pp",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.38",
+    "enableEslint": true,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.27.0",
+    "template": "Basic V2",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}
