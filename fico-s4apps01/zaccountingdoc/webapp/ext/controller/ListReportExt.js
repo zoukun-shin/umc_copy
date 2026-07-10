@@ -22,7 +22,7 @@ sap.ui.define([
 
         _getAuthorityData: function (oAuthorityModel, oLocalModel, oI18nModel, oViews) {
             var sUser = _UserInfo.getFullName() === undefined ? "" : _UserInfo.getFullName();
-            var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail();
+            var sEmail = _UserInfo.getEmail() === undefined ? "" : _UserInfo.getEmail(); 
             var oContextBinding = oAuthorityModel.bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -51,7 +51,8 @@ sap.ui.define([
                 oLocalModel.setProperty("/authorityCheck", {
                     button: {
                         View: aAllAccessBtns.some(btn => btn.AccessId === "zaccountingdoc-View"),
-                        Export: aAllAccessBtns.some(btn => btn.AccessId === "zaccountingdoc-Export")
+                        Export: aAllAccessBtns.some(btn => btn.AccessId === "zaccountingdoc-Export"),
+                        Merge: aAllAccessBtns.some(btn => btn.AccessId === "zaccountingdoc-Merge")
                     },
                     data: {
                         PlantSet: context._AssignPlant,

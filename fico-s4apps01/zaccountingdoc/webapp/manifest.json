@@ -202,11 +202,18 @@
                   },
                   "actions": {
                     "Action1": {
-                      "press": "fico.zaccountingdoc.ext.listExtension.ListExtension.onPrint1",
+                      "press": "fico.zaccountingdoc.ext.listExtension.ListExtension.onPrint",
                       "visible": true,
                       "enabled": "{local>/authorityCheck/button/Export}",
                       "requiresSelection": true,
                       "text": "{i18n>i18nprint}"
+                    },
+                    "Action2": {
+                      "press": "fico.zaccountingdoc.ext.listExtension.ListExtension.onMergePrint",
+                      "visible": true,
+                      "enabled": "{local>/authorityCheck/button/Merge}",
+                      "requiresSelection": true,
+                      "text": "{i18n>i18nmergeprint}"
                     }
                   }
                 }
