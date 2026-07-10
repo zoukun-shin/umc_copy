@@ -11,7 +11,7 @@
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="UsageListSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="ComponentUsageListSVM" showShare="true" showExecuteOnSelection="true" entitySet=""/>
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
@@ -43,6 +43,12 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemGroup" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="UsageProbabilityPercent" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="NoDisplayNonProduct" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MRPType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BomHeaderQuantityInBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ComponentQuantityInBaseUoM" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialItemBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ChgToEngineeringChgDocument" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DisplayComponentQtyInBaseUnit" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
@@ -50,12 +56,13 @@
                 <f:content>
                     <CheckBox id='idCB1' text="{i18n>NoDisplayNonProduct}" width="11rem" select="onSelect"/>
                     <CheckBox id='idCB2' text="{i18n>DisplayPurchasingInfo}" width="11rem" select="onSelect"/>
+                    <CheckBox id='idCB3' text="{i18n>DisplayComponentQtyInBaseUnit}" select="onSelect"/>
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
             <FlexBox fitContainer="true">
-                <core:Fragment fragmentName="pp.zcomponentusagelist.fragments.UsageList" type="XML"/>
+                <core:Fragment fragmentName="pp.zcomponentusagelist.fragments.ComponentUsageList" type="XML"/>
             </FlexBox>
         </f:content>
     </f:DynamicPage>

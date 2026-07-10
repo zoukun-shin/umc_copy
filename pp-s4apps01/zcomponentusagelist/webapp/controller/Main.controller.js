@@ -104,7 +104,6 @@ sap.ui.define([
             }
 
             var sNoDisplayNonProduct = this.byId("idCB1").getSelected();
-
             if (sNoDisplayNonProduct === true) {
                 var oIndicator1Filter = new sap.ui.model.Filter({
                     path: "NoDisplayNonProduct",
@@ -112,6 +111,16 @@ sap.ui.define([
                     value1: sNoDisplayNonProduct
                 });
                 filters.push(oIndicator1Filter);
+            }
+
+            var bDisplayComponentQtyInBaseUnit = this.byId("idCB3").getSelected();
+            if (bDisplayComponentQtyInBaseUnit === true) {
+                var oDisplayComponentQtyInBaseUnit = new sap.ui.model.Filter({
+                    path: "DisplayComponentQtyInBaseUnit",
+                    operator: "EQ",
+                    value1: bDisplayComponentQtyInBaseUnit
+                });
+                filters.push(oDisplayComponentQtyInBaseUnit);
             }
         },
 
@@ -133,6 +142,11 @@ sap.ui.define([
                         oColumn.type = sap.ui.export.EdmType.Number;
                         oColumn.delimiter = true;
                         oColumn.scale = 2;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "ComponentQuantityInBaseUoM":
+                    case "BomHeaderQuantityInBaseUnit":
+                        oColumn.type = sap.ui.export.EdmType.Number;
                         oColumn.textAlign = "End";
                         break;
                 }

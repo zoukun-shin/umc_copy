@@ -7,10 +7,10 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
     <smartTable:SmartTable entitySet="ComponentUsageList" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
-        showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" 
-        persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" 
+        showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" 
+        persistencyKey="ComponentUsageListST" header="{i18n>Results}" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="NoDisplayNonProduct,DisplayPurchasingInfo">
+        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="NoDisplayNonProduct,DisplayPurchasingInfo,DisplayComponentQtyInBaseUnit">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
@@ -176,6 +176,46 @@
                     </table:customData>
                     <table:template>
                         <Text text="{UsageProbabilityPercent}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>MRPType}" sortProperty="MRPType" filterProperty="MRPType" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"MRPType", "leadingProperty":"MRPType"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{MRPType}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>BomHeaderQuantityInBaseUnit}" sortProperty="BomHeaderQuantityInBaseUnit" filterProperty="BomHeaderQuantityInBaseUnit" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BomHeaderQuantityInBaseUnit", "leadingProperty":"BomHeaderQuantityInBaseUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BomHeaderQuantityInBaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ComponentQuantityInBaseUoM}" sortProperty="ComponentQuantityInBaseUoM" filterProperty="ComponentQuantityInBaseUoM" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ComponentQuantityInBaseUoM", "leadingProperty":"ComponentQuantityInBaseUoM"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ComponentQuantityInBaseUoM}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>BillOfMaterialItemBaseUnit}" sortProperty="BillOfMaterialItemBaseUnit" filterProperty="BillOfMaterialItemBaseUnit" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialItemBaseUnit", "leadingProperty":"BillOfMaterialItemBaseUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BillOfMaterialItemBaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ChgToEngineeringChgDocument}" sortProperty="ChgToEngineeringChgDocument" filterProperty="ChgToEngineeringChgDocument" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ChgToEngineeringChgDocument", "leadingProperty":"ChgToEngineeringChgDocument"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ChgToEngineeringChgDocument}" wrapping="false" />
                     </table:template>
                 </table:Column>
             </table:columns>
