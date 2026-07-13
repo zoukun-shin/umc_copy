@@ -488,7 +488,9 @@ sap.ui.define([
 			switch (oEvent.getSource().getDataType()) {
 				case 'Edm.DateTime':
 				case 'Edm.Date':
-					oModel.setProperty(sPath + "/" + sProperty, this.formatter.odataDate(oEvent.getParameter('value')));
+					var oInnerControl = oEvent.getSource().getInnerControls()[0];
+					var oDateValue = oInnerControl ? oInnerControl.getDateValue() : oEvent.getParameter('value');
+					oModel.setProperty(sPath + "/" + sProperty, this.formatter.odataDate(oDateValue));
 					break;
 				default:
 					oModel.setProperty(sPath + "/" + sProperty, oEvent.getParameter('value'));
