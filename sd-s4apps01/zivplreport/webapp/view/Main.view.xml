@@ -1,0 +1,88 @@
+<mvc:View controllerName="sd.zivplreport.controller.Main" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:t="sap.ui.table" height="100%">
+
+    <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="false" busy="{local>/busy}" fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="SVM_IvplReport" showShare="true" showExecuteOnSelection="true" entitySet="IvplReport"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar id="SFBIvplReport" useToolbar="false" entitySet="IvplReport" smartVariant="__SVM01" persistencyKey="IvplReportBar" search="onSearch">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration index="1" key="Customer" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Customer}" filterType="multiple"/>
+                            <smartFilterBar:ControlConfiguration index="2" key="BillingDocument" visibleInAdvancedArea="true" label="{i18n>BillingDocument}" filterType="multiple"/>
+                            <smartFilterBar:ControlConfiguration index="3" key="ShippingOrderNo" visibleInAdvancedArea="true" label="{i18n>ShippingOrderNo}" filterType="multiple"/>
+                            <smartFilterBar:ControlConfiguration index="4" key="BillingDocumentDateFilter" visibleInAdvancedArea="true" label="{i18n>BillingDocumentDateFilter}">
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection id="idBillingDate" />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration index="5" key="DeliveryDocument" visibleInAdvancedArea="true" label="{i18n>DeliveryDocument}" filterType="multiple"/>
+                            <smartFilterBar:ControlConfiguration index="6" key="DeliveryDate" visibleInAdvancedArea="true" label="{i18n>DeliveryDate}">
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection id="idDeliveryDate" />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <smartTable:SmartTable id="smartTable_IvplReport" entitySet="IvplReport" smartVariant="__SVM01" smartFilterId="SFBIvplReport"
+                tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true"
+                persistencyKey="IvplReportTable" header="{i18n>Result}" enableAutoBinding="false"
+                beforeRebindTable="onBeforeRebindTable" enableExport="true"
+                fitContainer="true" height="100%">
+
+                <t:Table id="Table_IvplReport" selectionMode="None" rowMode="Auto">
+                    <t:Column id="BillingDocument" label="{i18n>BillingDocument}" width="10rem" sortProperty="BillingDocument"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BillingDocument","leadingProperty":"BillingDocument","sortProperty":"BillingDocument"}'/></t:customData><t:template><Text text="{BillingDocument}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BillingDocumentItem" label="{i18n>BillingDocumentItem}" width="8rem" sortProperty="BillingDocumentItem"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BillingDocumentItem","leadingProperty":"BillingDocumentItem","sortProperty":"BillingDocumentItem"}'/></t:customData><t:template><Text text="{BillingDocumentItem}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AccountingPostingStatus" label="{i18n>AccountingPostingStatus}" width="8rem" sortProperty="AccountingPostingStatus"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AccountingPostingStatus","leadingProperty":"AccountingPostingStatus","sortProperty":"AccountingPostingStatus"}'/></t:customData><t:template><Text text="{AccountingPostingStatus}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AccountingPostingStatusDesc" label="{i18n>AccountingPostingStatusDesc}" width="12rem" sortProperty="AccountingPostingStatusDesc"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AccountingPostingStatusDesc","leadingProperty":"AccountingPostingStatusDesc","sortProperty":"AccountingPostingStatusDesc"}'/></t:customData><t:template><Text text="{AccountingPostingStatusDesc}" tooltip="{AccountingPostingStatusDesc}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="SoldToParty" label="{i18n>SoldToParty}" width="8rem" sortProperty="SoldToParty"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SoldToParty","leadingProperty":"SoldToParty","sortProperty":"SoldToParty"}'/></t:customData><t:template><Text text="{SoldToParty}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="CustomerName" label="{i18n>CustomerName}" width="14rem" sortProperty="CustomerName"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CustomerName","leadingProperty":"CustomerName","sortProperty":"CustomerName"}'/></t:customData><t:template><Text text="{CustomerName}" tooltip="{CustomerName}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="Product" label="{i18n>Product}" width="10rem" sortProperty="Product"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Product","leadingProperty":"Product","sortProperty":"Product"}'/></t:customData><t:template><Text text="{Product}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ActualDeliveryQuantity" label="{i18n>ActualDeliveryQuantity}" width="9rem" hAlign="End" sortProperty="ActualDeliveryQuantity"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ActualDeliveryQuantity","leadingProperty":"ActualDeliveryQuantity","sortProperty":"ActualDeliveryQuantity"}'/></t:customData><t:template><Text text="{ActualDeliveryQuantity}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BaseUnit" label="{i18n>BaseUnit}" width="6rem" sortProperty="BaseUnit"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BaseUnit","leadingProperty":"BaseUnit","sortProperty":"BaseUnit"}'/></t:customData><t:template><Text text="{BaseUnit}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BoxNumberRange" label="{i18n>BoxNumberRange}" width="10rem" sortProperty="BoxNumberRange"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BoxNumberRange","leadingProperty":"BoxNumberRange","sortProperty":"BoxNumberRange"}'/></t:customData><t:template><Text text="{BoxNumberRange}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PerBoxTargetQty" label="{i18n>PerBoxTargetQty}" width="9rem" hAlign="End" sortProperty="PerBoxTargetQty"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PerBoxTargetQty","leadingProperty":"PerBoxTargetQty","sortProperty":"PerBoxTargetQty"}'/></t:customData><t:template><Text text="{PerBoxTargetQty}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="HandlingUnitLoadWeight" label="{i18n>HandlingUnitLoadWeight}" width="9rem" hAlign="End" sortProperty="HandlingUnitLoadWeight"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"HandlingUnitLoadWeight","leadingProperty":"HandlingUnitLoadWeight","sortProperty":"HandlingUnitLoadWeight"}'/></t:customData><t:template><Text text="{HandlingUnitLoadWeight}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="HandlingUnitGrossWeight" label="{i18n>HandlingUnitGrossWeight}" width="9rem" hAlign="End" sortProperty="HandlingUnitGrossWeight"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"HandlingUnitGrossWeight","leadingProperty":"HandlingUnitGrossWeight","sortProperty":"HandlingUnitGrossWeight"}'/></t:customData><t:template><Text text="{HandlingUnitGrossWeight}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="WeightUnit" label="{i18n>WeightUnit}" width="6rem" sortProperty="WeightUnit"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"WeightUnit","leadingProperty":"WeightUnit","sortProperty":"WeightUnit"}'/></t:customData><t:template><Text text="{WeightUnit}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BoxMeasureSize" label="{i18n>BoxMeasureSize}" width="10rem" sortProperty="BoxMeasureSize"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BoxMeasureSize","leadingProperty":"BoxMeasureSize","sortProperty":"BoxMeasureSize"}'/></t:customData><t:template><Text text="{BoxMeasureSize}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ShipToPartyName" label="{i18n>ShipToPartyName}" width="14rem" sortProperty="ShipToPartyName"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ShipToPartyName","leadingProperty":"ShipToPartyName","sortProperty":"ShipToPartyName"}'/></t:customData><t:template><Text text="{ShipToPartyName}" tooltip="{ShipToPartyName}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PurchaseOrderByCustomer" label="{i18n>PurchaseOrderByCustomer}" width="12rem" sortProperty="PurchaseOrderByCustomer"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderByCustomer","leadingProperty":"PurchaseOrderByCustomer","sortProperty":"PurchaseOrderByCustomer"}'/></t:customData><t:template><Text text="{PurchaseOrderByCustomer}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="TransactionCurrency" label="{i18n>TransactionCurrency}" width="6rem" sortProperty="TransactionCurrency"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"TransactionCurrency","leadingProperty":"TransactionCurrency","sortProperty":"TransactionCurrency"}'/></t:customData><t:template><Text text="{TransactionCurrency}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="UnitPrice" label="{i18n>UnitPrice}" width="10rem" hAlign="End" sortProperty="UnitPrice"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"UnitPrice","leadingProperty":"UnitPrice","sortProperty":"UnitPrice"}'/></t:customData><t:template><Text text="{UnitPrice}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="NetAmount" label="{i18n>NetAmount}" width="12rem" hAlign="End" sortProperty="NetAmount"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"NetAmount","leadingProperty":"NetAmount","sortProperty":"NetAmount"}'/></t:customData><t:template><Text text="{NetAmount}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ShippingOrderNoDisplay" label="{i18n>ShippingOrderNoDisplay}" width="10rem" sortProperty="ShippingOrderNoDisplay"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ShippingOrderNoDisplay","leadingProperty":"ShippingOrderNoDisplay","sortProperty":"ShippingOrderNoDisplay"}'/></t:customData><t:template><Text text="{ShippingOrderNoDisplay}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="InvoiceNumber" label="{i18n>InvoiceNumber}" width="10rem" sortProperty="InvoiceNumber"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"InvoiceNumber","leadingProperty":"InvoiceNumber","sortProperty":"InvoiceNumber"}'/></t:customData><t:template><Text text="{InvoiceNumber}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BillingDocumentDate" label="{i18n>BillingDocumentDate}" width="9rem" sortProperty="BillingDocumentDate"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BillingDocumentDate","leadingProperty":"BillingDocumentDate","sortProperty":"BillingDocumentDate"}'/></t:customData><t:template><Text text="{path:'BillingDocumentDate', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="SalesDocumentItemText" label="{i18n>SalesDocumentItemText}" width="14rem" sortProperty="SalesDocumentItemText"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesDocumentItemText","leadingProperty":"SalesDocumentItemText","sortProperty":"SalesDocumentItemText"}'/></t:customData><t:template><Text text="{SalesDocumentItemText}" tooltip="{SalesDocumentItemText}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BoxQty" label="{i18n>BoxQty}" width="7rem" hAlign="End" sortProperty="BoxQty"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BoxQty","leadingProperty":"BoxQty","sortProperty":"BoxQty"}'/></t:customData><t:template><Text text="{BoxQty}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="DeliveryDocument" label="{i18n>DeliveryDocument}" width="10rem" sortProperty="DeliveryDocument"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"DeliveryDocument","leadingProperty":"DeliveryDocument","sortProperty":"DeliveryDocument"}'/></t:customData><t:template><Text text="{DeliveryDocument}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="OutboundDeliveryItem" label="{i18n>OutboundDeliveryItem}" width="8rem" sortProperty="OutboundDeliveryItem"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"OutboundDeliveryItem","leadingProperty":"OutboundDeliveryItem","sortProperty":"OutboundDeliveryItem"}'/></t:customData><t:template><Text text="{OutboundDeliveryItem}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="DeliveryDate" label="{i18n>DeliveryDate}" width="9rem" sortProperty="DeliveryDate"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"DeliveryDate","leadingProperty":"DeliveryDate","sortProperty":"DeliveryDate"}'/></t:customData><t:template><Text text="{path:'DeliveryDate', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="Remarks" label="{i18n>Remarks}" width="14rem" sortProperty="Remarks"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Remarks","leadingProperty":"Remarks","sortProperty":"Remarks"}'/></t:customData><t:template><Text text="{Remarks}" tooltip="{Remarks}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ShippingType" label="{i18n>ShippingType}" width="7rem" sortProperty="ShippingType"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ShippingType","leadingProperty":"ShippingType","sortProperty":"ShippingType"}'/></t:customData><t:template><Text text="{ShippingType}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ShippingTypeDesc" label="{i18n>ShippingTypeDesc}" width="12rem" sortProperty="ShippingTypeDesc"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ShippingTypeDesc","leadingProperty":"ShippingTypeDesc","sortProperty":"ShippingTypeDesc"}'/></t:customData><t:template><Text text="{ShippingTypeDesc}" tooltip="{ShippingTypeDesc}" wrapping="false"/></t:template></t:Column>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

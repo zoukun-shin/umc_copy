@@ -127,6 +127,10 @@ modules:
       - sdinvoicedomestic.zip
       name: sdinvoicedomestic
       target-path: resources/
+    - artifacts:
+      - sdzivplreport.zip
+      name: sdzivplreport
+      target-path: resources/      
 - name: sdsalesacceptance
   type: html5
   path: salesacceptance
@@ -310,6 +314,15 @@ modules:
 - name: sdinvoicedomestic
   type: html5
   path: invoicedomestic
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sdzivplreport
+  type: html5
+  path: zivplreport
   build-parameters:
     build-result: dist
     builder: custom
