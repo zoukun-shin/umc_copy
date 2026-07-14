@@ -1,0 +1,65 @@
+<mvc:View controllerName="pp.projectedfginv.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="ProjectedFGInvSVM" showShare="true" showExecuteOnSelection="true" entitySet="ZC_PROJECTED_FG_INV"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ZC_PROJECTED_FG_INV" useToolbar="false" smartVariant="__SVM01" persistencyKey="ProjectedFGInvSFB" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="MRPController" displayBehaviour="idAndDescription" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>MRPController}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="Product" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Product}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="OFVersion" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>OFVersion}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="PeriodStartDate" visibleInAdvancedArea="true" label="{i18n>PeriodStartDate}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="PeriodEndDate" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>PeriodEndDate}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="DisplayDimension" visibleInAdvancedArea="true" label="{i18n>DisplayDimension}">
+                                    <smartFilterBar:customControl>
+                                        <Select change="removeAllColumns" forceSelection="true" selectedKey="{local>/filter/DisplayDimension}">
+                                            <core:Item key="H" text="{i18n>Horizontal}"/>
+                                            <core:Item key="V" text="{i18n>Vertical}"/>
+                                        </Select>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='80' key="ShowInclude" visibleInAdvancedArea="true" label="{i18n>ShowInclude}">
+                                    <smartFilterBar:customControl>
+                                        <Select change="removeAllColumns" forceSelection="true" selectedKey="{local>/filter/ShowInclude}">
+                                            <core:Item key="X" text="{i18n>Yes}"/>
+                                            <core:Item key="" text="{i18n>No}"/>
+                                        </Select>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='90' key="ShowExpired" visibleInAdvancedArea="true" label="{i18n>ShowExpired}">
+                                    <smartFilterBar:customControl>
+                                        <Select change="removeAllColumns" forceSelection="true" selectedKey="{local>/filter/ShowExpired}">
+                                            <core:Item key="X" text="{i18n>Yes}"/>
+                                            <core:Item key="" text="{i18n>No}"/>
+                                        </Select>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="UUID" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DynamicData" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <core:Fragment fragmentName="pp.projectedfginv.fragments.List" type="XML"/>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
