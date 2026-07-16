@@ -243,6 +243,10 @@ modules:
       - ppprojectedfginv.zip
       name: ppprojectedfginv
       target-path: resources/
+    - artifacts:
+      - ppzprodorderachrate.zip
+      name: ppzprodorderachrate
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -687,6 +691,15 @@ modules:
 - name: ppprojectedfginv
   type: html5
   path: projectedfginv
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzprodorderachrate
+  type: html5
+  path: zprodorderachrate
   build-parameters:
     build-result: dist
     builder: custom

@@ -1,0 +1,60 @@
+<mvc:View controllerName="pp.zprodorderachrate.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="ProdOrderAchRateSVM" showShare="true" showExecuteOnSelection="true" entitySet="ProdOrderAchRate"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ProdOrderAchRate" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onSmartFilterBarInitialized" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="MRPResponsible" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="ProductionSupervisor" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="Product" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Product}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="Customer" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Customer}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="ManufacturingOrderType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ManufacturingOrderType}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="MfgOrderPlannedStartDate" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MfgOrderPlannedStartDate}">
+                                    <smartFilterBar:customControl>
+                                        <DateRangeSelection id="idDateRangeSelection" valueFormat="yyyy/MM/dd" displayFormat="yyyy/MM/dd" />
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="DynamicData" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DisplayMode" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DisplayFG" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+
+	                        <VBox>
+                                <RadioButtonGroup id="idRBG1" selectedIndex="1">
+                                    <RadioButton id="idRBG1-0" text="{i18n>DisplayBaseOrderEntryQty}"/>
+                                    <RadioButton id="idRBG1-1" text="{i18n>DisplayBaseProductionQty}"/>
+                                </RadioButtonGroup>
+                                <CheckBox id ="idCB1" text="{i18n>DisplayFG}"/> 
+                            </VBox>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <!-- <FlexBox fitContainer="true">¯ -->
+                <core:Fragment fragmentName="pp.zprodorderachrate.fragments.ProdOrderAchRate" type="XML"/>
+            <!-- </FlexBox> -->
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
