@@ -1,0 +1,147 @@
+<mvc:View controllerName="fico.zmpnmovavgprice.controller.Main" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:t="sap.ui.table" height="100%">
+
+    <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="false" busy="{local>/busy}" fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="SVM_MpnMovAvgPrice" showShare="true" showExecuteOnSelection="true" entitySet="MpnMovAvgPrice"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar id="SFBMpnMovAvgPrice" useToolbar="false" entitySet="MpnMovAvgPrice" smartVariant="__SVM01" persistencyKey="MpnMovAvgPriceBar" search="onSearch">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration index="1" key="Product" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Product}" filterType="multiple"/>
+                            <smartFilterBar:ControlConfiguration index="2" key="Plant" displayBehaviour="idAndDescription" visibleInAdvancedArea="true"  mandatory="mandatory" label="{i18n>Plant}" filterType="single"/>
+                            <smartFilterBar:ControlConfiguration index="3" key="PurchasingOrganization" displayBehaviour="idAndDescription" visibleInAdvancedArea="true"  label="{i18n>PurchasingOrganization}" filterType="single"/>
+                            <smartFilterBar:ControlConfiguration index="4" key="TargetPlant" displayBehaviour="idAndDescription" visibleInAdvancedArea="true"  label="{i18n>TargetPlant}" filterType="single"/>
+                            <smartFilterBar:ControlConfiguration index="5" key="CurrentPostingDate" displayBehaviour="idAndDescription" visibleInAdvancedArea="true"  label="{i18n>CurrentPostingDate}">
+                                <smartFilterBar:customControl>
+                                    <DatePicker id="idPostingDate" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"/>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration index="6" key="CreatedOnFilter" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>CreatedOnFilter}">
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection id="idCreatedOn"/>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration index="7" key="UpdateMode" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" mandatory="mandatory" label="{i18n>UpdateMode}" filterType="single">
+                                <smartFilterBar:customControl>
+                                    <ComboBox id="idUpdateMode" selectedKey="1" selectionChange="onUpdateModeChange" change="onUpdateModeChange">
+                                        <core:Item key="1" text="{i18n>UpdateMode1}"/>
+                                        <core:Item key="2" text="{i18n>UpdateMode2}"/>
+                                    </ComboBox>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <smartTable:SmartTable id="smartTable_MpnMovAvgPrice" entitySet="MpnMovAvgPrice" smartVariant="__SVM01" smartFilterId="SFBMpnMovAvgPrice"
+                tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true"
+                persistencyKey="MpnMovAvgPriceTable" header="{i18n>Result}" enableAutoBinding="false"
+                beforeRebindTable="onBeforeRebindTable"
+                fitContainer="true" height="100%">
+
+                <smartTable:customToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer/>
+                        <Button id="btnUpdate" text="{i18n>Update}"  icon="sap-icon://create"
+                            visible="false" press="onUpdate"/>
+                        <!--  UpdateJob：只排JOB，改价由后台异步执行 -->
+                        <Button id="btnUpdateJob" text="{i18n>UpdateJob}" icon="sap-icon://add-calendar"
+                            visible="false" press="onUpdateJob"/>
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+
+                <!--  不要选择框：selectionMode="None" -->
+                <t:Table id="Table_MpnMovAvgPrice" selectionMode="None" rowMode="Auto">
+                    <t:Column id="Status"
+                        width="6rem"
+                        label="{i18n>Status}"
+                        sortProperty="Status"
+                        filterProperty="Status"
+                    >
+                        <t:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnKey":"Status", "leadingProperty":"Status", "sortProperty":"Status", "filterProperty": "Status"}'
+                            />
+                        </t:customData>
+                        <t:template>
+                            <ObjectStatus id="_IDGenObjectStatus"
+                                state="{
+                                    path: 'Status',
+                                    formatter: '.formatter.setState'
+                                }"
+                                icon="{
+                                    path: 'Status',
+                                    formatter: '.formatter.setStateIcon'
+                                }"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column id="Message" label="{i18n>Message}" width="30rem" sortProperty="Message"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Message","leadingProperty":"Message","sortProperty":"Message"}'/></t:customData><t:template><Text text="{Message}" tooltip="{Message}" wrapping="false"/></t:template></t:Column>
+                    <!--  新增：分类账 0L / 2L -->
+                    <t:Column id="Ledger" label="{i18n>Ledger}" width="7rem" sortProperty="Ledger" filterProperty="Ledger"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Ledger","leadingProperty":"Ledger","sortProperty":"Ledger","filterProperty":"Ledger"}'/></t:customData><t:template><Text text="{Ledger}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="TargetPlantStockIndicator" label="{i18n>TargetPlantStockIndicator}" width="10rem" sortProperty="TargetPlantStockIndicator"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"TargetPlantStockIndicator","leadingProperty":"TargetPlantStockIndicator","sortProperty":"TargetPlantStockIndicator"}'/></t:customData><t:template><Text text="{path:'TargetPlantStockIndicator', formatter:'.formatter.stockIndicator'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="Plant" label="{i18n>Plant}" width="7rem" sortProperty="Plant"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Plant","leadingProperty":"Plant","sortProperty":"Plant"}'/></t:customData><t:template><Text text="{Plant}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="TargetPlant" label="{i18n>TargetPlant}" width="8rem" sortProperty="TargetPlant"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"TargetPlant","leadingProperty":"TargetPlant","sortProperty":"TargetPlant"}'/></t:customData><t:template><Text text="{TargetPlant}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="OwninventoryManagedProduct" label="{i18n>OwninventoryManagedProduct}" width="12rem" sortProperty="OwninventoryManagedProduct"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"OwninventoryManagedProduct","leadingProperty":"OwninventoryManagedProduct","sortProperty":"OwninventoryManagedProduct"}'/></t:customData><t:template><Text text="{OwninventoryManagedProduct}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ProductName" label="{i18n>ProductName}" width="16rem" sortProperty="ProductName"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ProductName","leadingProperty":"ProductName","sortProperty":"ProductName"}'/></t:customData><t:template><Text text="{ProductName}" tooltip="{ProductName}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="Mpn" label="{i18n>Mpn}" width="12rem" sortProperty="Mpn"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Mpn","leadingProperty":"Mpn","sortProperty":"Mpn"}'/></t:customData><t:template><Text text="{Mpn}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PurchasingInfoRecord" label="{i18n>PurchasingInfoRecord}" width="10rem" sortProperty="PurchasingInfoRecord"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PurchasingInfoRecord","leadingProperty":"PurchasingInfoRecord","sortProperty":"PurchasingInfoRecord"}'/></t:customData><t:template><Text text="{PurchasingInfoRecord}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="Supplier" label="{i18n>Supplier}" width="9rem" sortProperty="Supplier"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Supplier","leadingProperty":"Supplier","sortProperty":"Supplier"}'/></t:customData><t:template><Text text="{Supplier}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PurchasingInfoRecordPrice" label="{i18n>PurchasingInfoRecordPrice}" width="11rem" hAlign="End" sortProperty="PurchasingInfoRecordPrice"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PurchasingInfoRecordPrice","leadingProperty":"PurchasingInfoRecordPrice","sortProperty":"PurchasingInfoRecordPrice"}'/></t:customData><t:template><Text text="{PurchasingInfoRecordPrice}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PurchInfoRecPriceCrcy" label="{i18n>PurchInfoRecPriceCrcy}" width="7rem" sortProperty="PurchInfoRecPriceCrcy"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PurchInfoRecPriceCrcy","leadingProperty":"PurchInfoRecPriceCrcy","sortProperty":"PurchInfoRecPriceCrcy"}'/></t:customData><t:template><Text text="{PurchInfoRecPriceCrcy}" wrapping="false"/></t:template></t:Column>
+
+                    <!-- 变更价格 三币别（原 ChangedPrice 一个 → 三个） -->
+                    <t:Column id="ChangedPriceCc" label="{i18n>ChangedPriceCc}" width="14rem" hAlign="End" sortProperty="ChangedPriceCc"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ChangedPriceCc","leadingProperty":"ChangedPriceCc","sortProperty":"ChangedPriceCc"}'/></t:customData><t:template><Text text="{ChangedPriceCc}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ChangedPriceGrp" label="{i18n>ChangedPriceGrp}" width="14rem" hAlign="End" sortProperty="ChangedPriceGrp"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ChangedPriceGrp","leadingProperty":"ChangedPriceGrp","sortProperty":"ChangedPriceGrp"}'/></t:customData><t:template><Text text="{ChangedPriceGrp}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ChangedPriceFun" label="{i18n>ChangedPriceFun}" width="14rem" hAlign="End" sortProperty="ChangedPriceFun"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ChangedPriceFun","leadingProperty":"ChangedPriceFun","sortProperty":"ChangedPriceFun"}'/></t:customData><t:template><Text text="{ChangedPriceFun}" wrapping="false"/></t:template></t:Column>
+
+                    <!-- 币别 三币别（原 Currency 一个 → 三个） -->
+                    <t:Column id="CurrencyCc" label="{i18n>CurrencyCc}" width="10rem" sortProperty="CurrencyCc"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrencyCc","leadingProperty":"CurrencyCc","sortProperty":"CurrencyCc"}'/></t:customData><t:template><Text text="{CurrencyCc}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="CurrencyGrp" label="{i18n>CurrencyGrp}" width="10rem" sortProperty="CurrencyGrp"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrencyGrp","leadingProperty":"CurrencyGrp","sortProperty":"CurrencyGrp"}'/></t:customData><t:template><Text text="{CurrencyGrp}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="CurrencyFun" label="{i18n>CurrencyFun}" width="10rem" sortProperty="CurrencyFun"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrencyFun","leadingProperty":"CurrencyFun","sortProperty":"CurrencyFun"}'/></t:customData><t:template><Text text="{CurrencyFun}" wrapping="false"/></t:template></t:Column>
+
+                    <!-- 价格单位 三币别（原「价格单位（目标工厂）」一个 → 三个） -->
+                    <t:Column id="PriceUnitCc" label="{i18n>PriceUnitCc}" width="14rem" hAlign="End" sortProperty="PriceUnitCc"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PriceUnitCc","leadingProperty":"PriceUnitCc","sortProperty":"PriceUnitCc"}'/></t:customData><t:template><Text text="{PriceUnitCc}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PriceUnitGrp" label="{i18n>PriceUnitGrp}" width="14rem" hAlign="End" sortProperty="PriceUnitGrp"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PriceUnitGrp","leadingProperty":"PriceUnitGrp","sortProperty":"PriceUnitGrp"}'/></t:customData><t:template><Text text="{PriceUnitGrp}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PriceUnitFun" label="{i18n>PriceUnitFun}" width="14rem" hAlign="End" sortProperty="PriceUnitFun"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PriceUnitFun","leadingProperty":"PriceUnitFun","sortProperty":"PriceUnitFun"}'/></t:customData><t:template><Text text="{PriceUnitFun}" wrapping="false"/></t:template></t:Column>
+
+                    <!-- 当前移动平均价 三币别（原 MovingAveragePrice 一个 → 三个） -->
+                    <t:Column id="MovingAveragePriceCc" label="{i18n>MovingAveragePriceCc}" width="16rem" hAlign="End" sortProperty="MovingAveragePriceCc"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"MovingAveragePriceCc","leadingProperty":"MovingAveragePriceCc","sortProperty":"MovingAveragePriceCc"}'/></t:customData><t:template><Text text="{MovingAveragePriceCc}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="MovingAveragePriceGrp" label="{i18n>MovingAveragePriceGrp}" width="16rem" hAlign="End" sortProperty="MovingAveragePriceGrp"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"MovingAveragePriceGrp","leadingProperty":"MovingAveragePriceGrp","sortProperty":"MovingAveragePriceGrp"}'/></t:customData><t:template><Text text="{MovingAveragePriceGrp}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="MovingAveragePriceFun" label="{i18n>MovingAveragePriceFun}" width="16rem" hAlign="End" sortProperty="MovingAveragePriceFun"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"MovingAveragePriceFun","leadingProperty":"MovingAveragePriceFun","sortProperty":"MovingAveragePriceFun"}'/></t:customData><t:template><Text text="{MovingAveragePriceFun}" wrapping="false"/></t:template></t:Column>
+
+                    <t:Column id="PostingDate" label="{i18n>PostingDate}" width="9rem" sortProperty="PostingDate"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PostingDate","leadingProperty":"PostingDate","sortProperty":"PostingDate"}'/></t:customData><t:template><Text text="{path:'PostingDate', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="CreatedOn" label="{i18n>CreatedOn}" width="9rem" sortProperty="CreatedOn"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CreatedOn","leadingProperty":"CreatedOn","sortProperty":"CreatedOn"}'/></t:customData><t:template><Text text="{path:'CreatedOn', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="CreatedAt" label="{i18n>CreatedAt}" width="8rem" sortProperty="CreatedAt"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CreatedAt","leadingProperty":"CreatedAt","sortProperty":"CreatedAt"}'/></t:customData><t:template><Text text="{path:'CreatedAt', formatter:'.formatter.formatTime'}" wrapping="false"/></t:template></t:Column>
+
+                    <!-- 更改凭证 三币别（原 ChangeDocument/Year 各一个 → 各三个） -->
+                    <t:Column id="ChangeDocumentCc" label="{i18n>ChangeDocumentCc}" width="14rem" sortProperty="ChangeDocumentCc"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ChangeDocumentCc","leadingProperty":"ChangeDocumentCc","sortProperty":"ChangeDocumentCc"}'/></t:customData><t:template><Text text="{ChangeDocumentCc}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ChangeDocYearCc" label="{i18n>ChangeDocYearCc}" width="12rem" sortProperty="ChangeDocYearCc"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ChangeDocYearCc","leadingProperty":"ChangeDocYearCc","sortProperty":"ChangeDocYearCc"}'/></t:customData><t:template><Text text="{ChangeDocYearCc}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ChangeDocumentGrp" label="{i18n>ChangeDocumentGrp}" width="14rem" sortProperty="ChangeDocumentGrp"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ChangeDocumentGrp","leadingProperty":"ChangeDocumentGrp","sortProperty":"ChangeDocumentGrp"}'/></t:customData><t:template><Text text="{ChangeDocumentGrp}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ChangeDocYearGrp" label="{i18n>ChangeDocYearGrp}" width="12rem" sortProperty="ChangeDocYearGrp"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ChangeDocYearGrp","leadingProperty":"ChangeDocYearGrp","sortProperty":"ChangeDocYearGrp"}'/></t:customData><t:template><Text text="{ChangeDocYearGrp}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ChangeDocumentFun" label="{i18n>ChangeDocumentFun}" width="14rem" sortProperty="ChangeDocumentFun"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ChangeDocumentFun","leadingProperty":"ChangeDocumentFun","sortProperty":"ChangeDocumentFun"}'/></t:customData><t:template><Text text="{ChangeDocumentFun}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ChangeDocYearFun" label="{i18n>ChangeDocYearFun}" width="12rem" sortProperty="ChangeDocYearFun"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ChangeDocYearFun","leadingProperty":"ChangeDocYearFun","sortProperty":"ChangeDocYearFun"}'/></t:customData><t:template><Text text="{ChangeDocYearFun}" wrapping="false"/></t:template></t:Column>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

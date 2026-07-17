@@ -163,6 +163,10 @@ modules:
       - ficozaccountmapping.zip
       name: ficozaccountmapping
       target-path: resources/
+    - artifacts:
+      - ficozmpnmovavgprice.zip
+      name: ficozmpnmovavgprice
+      target-path: resources/      
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -427,6 +431,15 @@ modules:
 - name: ficozaccountmapping
   type: html5
   path: zaccountmapping
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozmpnmovavgprice
+  type: html5
+  path: zmpnmovavgprice
   build-parameters:
     build-result: dist
     builder: custom
