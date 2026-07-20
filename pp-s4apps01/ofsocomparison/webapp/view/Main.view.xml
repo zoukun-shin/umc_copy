@@ -72,6 +72,10 @@
                                         </Select>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
+                                <!-- ADD BEGIN BY XINLEI XU 2026/06/03 CN 需求 No.315 -->
+                                <smartFilterBar:ControlConfiguration index='110' key="MRPController" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MRPController}"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DynamicData" visible="false"/>
+                                <!-- ADD END BY XINLEI XU 2026/06/03 需求 No.315 -->
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="unit_of_measure" visible="false"/>

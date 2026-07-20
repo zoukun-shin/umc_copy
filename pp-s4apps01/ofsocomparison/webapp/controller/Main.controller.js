@@ -258,6 +258,18 @@ sap.ui.define([
 					}),
 					width: "8rem"
 				}));
+
+				// ADD BEGIN BY XINLEI XU 2026/06/03 CN 需求 No.315
+				oTable.addColumn(new Column({
+					label: "{i18n>MRPController}",
+					template: new Text({
+						text: "{local>MRPController}",
+						wrapping: false
+					}),
+					width: "8rem"
+				}));
+				// ADD END BY XINLEI XU 2026/06/03 CN 需求 No.315
+
 				oTable.addColumn(new Column({
 					label: "{i18n>Material}",
 					template: new Text({
