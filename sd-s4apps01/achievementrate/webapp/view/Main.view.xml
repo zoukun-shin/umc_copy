@@ -1,0 +1,25 @@
+<mvc:View controllerName="sd.achievementrate.controller.Main"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page showHeader="false" showFooter="false">
+        <content>
+            <IconTabBar
+                id="idIconTabBar"
+                expanded="{device>/isNoPhone}"
+                stretchContentHeight="true"
+                backgroundDesign="Transparent"
+                applyContentPadding="false"
+                class="sapUiNoContentPadding">
+                <items>
+                    <IconTabFilter text="{i18n>tabSalesAchieveRate}" key="SalesAchieveRate">
+                        <mvc:XMLView viewName="sd.achievementrate.view.SalesAchieveRate" height="100%"/>
+                    </IconTabFilter>
+                    <IconTabFilter text="{i18n>tabIntercompanyTP}" key="IntercompanyTP">
+                        <mvc:XMLView viewName="sd.achievementrate.view.IntercompanyTP" height="100%"/>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

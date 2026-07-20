@@ -130,7 +130,11 @@ modules:
     - artifacts:
       - sdzivplreport.zip
       name: sdzivplreport
-      target-path: resources/      
+      target-path: resources/
+    - artifacts:
+      - sdachievementrate.zip
+      name: sdachievementrate
+      target-path: resources/
 - name: sdsalesacceptance
   type: html5
   path: salesacceptance
@@ -323,6 +327,15 @@ modules:
 - name: sdzivplreport
   type: html5
   path: zivplreport
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sdachievementrate
+  type: html5
+  path: achievementrate
   build-parameters:
     build-result: dist
     builder: custom
