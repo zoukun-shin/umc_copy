@@ -195,47 +195,71 @@ sap.ui.define([
                         wrapping: false
                     });
                 };
+                // MOD BEGIN BY XINLEI XU 2026/06/05 CN 需求 No.164
+                // switch (key) {
+                //     case "Plant":
+                //     case "Dispo":
+                //     case "Meins":
+                //     case "Mtart":
+                //         oColumn = new UIColumn({
+                //             width: "6rem",
+                //             label: oLabel,
+                //             hAlign: sTextAlign,
+                //             visible: bvisible,
+                //             template: oTemplate,
+                //         });
+                //         break;
+                //     case "Stock":
+                //         oColumn = new UIColumn({
+                //             width: "6rem",
+                //             label: oLabel,
+                //             hAlign: sTextAlign,
+                //             visible: bvisible,
+                //             template: oTemplate,
+                //         });
+                //         break;
+                //     case "Matnr":
+                //         oColumn = new UIColumn({
+                //             width: "10rem",
+                //             label: oLabel,
+                //             hAlign: sTextAlign,
+                //             visible: bvisible,
+                //             template: oTemplate,
+                //         });
+                //         break;
+                //     default:
+                //         oColumn = new UIColumn({
+                //             width: "10rem",
+                //             label: oLabel,
+                //             hAlign: sTextAlign,
+                //             visible: bvisible,
+                //             template: oTemplate,
+                //         });
+                //         break;
+                // };
+                var sWidth = "";
                 switch (key) {
                     case "Plant":
-                    case "Dispo":
                     case "Meins":
-                    case "Mtart":
-                        oColumn = new UIColumn({
-                            width: "5rem",
-                            label: oLabel,
-                            hAlign: sTextAlign,
-                            visible: bvisible,
-                            template: oTemplate,
-                        });
-                        break;
                     case "Stock":
-                        oColumn = new UIColumn({
-                            width: "6rem",
-                            label: oLabel,
-                            hAlign: sTextAlign,
-                            visible: bvisible,
-                            template: oTemplate,
-                        });
+                        sWidth = "6rem";
                         break;
-                    case "Matnr":
-                        oColumn = new UIColumn({
-                            width: "10rem",
-                            label: oLabel,
-                            hAlign: sTextAlign,
-                            visible: bvisible,
-                            template: oTemplate,
-                        });
+                    case "Dispo":
+                    case "Mtart":
+                        sWidth = "8rem";
                         break;
                     default:
-                        oColumn = new UIColumn({
-                            width: "8rem",
-                            label: oLabel,
-                            hAlign: sTextAlign,
-                            visible: bvisible,
-                            template: oTemplate,
-                        });
+                        sWidth = "10rem";
                         break;
                 };
+                oColumn = new UIColumn({
+                    width: sWidth,
+                    label: oLabel,
+                    hAlign: sTextAlign,
+                    visible: bvisible,
+                    template: oTemplate,
+                });
+                // MOD END BY XINLEI XU 2026/06/05 CN 需求 No.164
                 this._oTable.addColumn(oColumn);
             };
         },

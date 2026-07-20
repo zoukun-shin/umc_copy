@@ -52,6 +52,11 @@
                                     </ComboBox>
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
+                            <!-- ADD BEGIN BY XINLEI XU 2026/06/05 CN 需求 No.164 -->
+                            <smartFilterBar:ControlConfiguration index='80' key="ProductionSupervisor" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Productionsupervisor}"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="ProductTypeName" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
+                            <!-- ADD END BY XINLEI XU 2026/06/05 CN 需求 No.164 -->
                             <!-- visible -->
                             <smartFilterBar:ControlConfiguration index='999' key="BaseUnit" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="DynamicData" visible="false"/>
