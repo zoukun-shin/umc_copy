@@ -132,7 +132,10 @@ sap.ui.define([
                         "StandardWorkQuantityUnit5": aSheetData[i]["StandardWorkQuantityUnit5"] === undefined ? "" : aSheetData[i]["StandardWorkQuantityUnit5"],
                         "StandardWorkQuantity6": aSheetData[i]["StandardWorkQuantity6"] === undefined ? "" : aSheetData[i]["StandardWorkQuantity6"],
                         "StandardWorkQuantityUnit6": aSheetData[i]["StandardWorkQuantityUnit6"] === undefined ? "" : aSheetData[i]["StandardWorkQuantityUnit6"],
-                        "NumberOfTimeTickets": aSheetData[i]["NumberOfTimeTickets"] === undefined ? "" : aSheetData[i]["NumberOfTimeTickets"]
+                        "NumberOfTimeTickets": aSheetData[i]["NumberOfTimeTickets"] === undefined ? "" : aSheetData[i]["NumberOfTimeTickets"],
+                        // ADD BEGIN BY XINLEI XU 2026/06/02 CN GAP No.82
+                        "StandardQueueDuration": aSheetData[i]["StandardQueueDuration"] === undefined ? "" : aSheetData[i]["StandardQueueDuration"]
+                        // ADD END BY XINLEI XU 2026/06/02 CN GAP No.82
                     };
                     aExcelSet.push(item);
                 }

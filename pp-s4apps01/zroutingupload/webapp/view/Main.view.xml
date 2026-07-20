@@ -165,6 +165,13 @@
                                 <Text text="{local>NumberOfTimeTickets}" wrapping="false"/>
                             </table:template>
                         </table:Column>
+                        <!-- ADD BEGIN BY XINLEI XU 2026/06/02 CN GAP No.82 -->
+                        <table:Column width="10rem" label="{i18n>StandardQueueDuration}">
+                            <table:template>
+                                <Text text="{local>StandardQueueDuration}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <!-- ADD END BY XINLEI XU 2026/06/02 CN GAP No.82 -->
                     </table:columns>
                 </table:Table>
             </Panel>
