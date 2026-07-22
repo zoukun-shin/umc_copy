@@ -135,6 +135,10 @@ modules:
       - sdachievementrate.zip
       name: sdachievementrate
       target-path: resources/
+    - artifacts:
+      - sdlogisticscost.zip
+      name: sdlogisticscost
+      target-path: resources/
 - name: sdsalesacceptance
   type: html5
   path: salesacceptance
@@ -336,6 +340,15 @@ modules:
 - name: sdachievementrate
   type: html5
   path: achievementrate
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sdlogisticscost
+  type: html5
+  path: logisticscost
   build-parameters:
     build-result: dist
     builder: custom

@@ -1,0 +1,28 @@
+<mvc:View controllerName="sd.logisticscost.controller.Main"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page showHeader="false" showFooter="false">
+        <content>
+            <IconTabBar
+                id="idIconTabBar"
+                expanded="{device>/isNoPhone}"
+                stretchContentHeight="true"
+                backgroundDesign="Transparent"
+                applyContentPadding="false"
+                class="sapUiNoContentPadding">
+                <items>
+                    <IconTabFilter text="{i18n>tabPackDetail}" key="PackDetail">
+                        <mvc:XMLView viewName="sd.logisticscost.view.PackDetail" height="100%"/>
+                    </IconTabFilter>
+                    <IconTabFilter text="{i18n>tabPackSummary}" key="PackSummary">
+                        <mvc:XMLView viewName="sd.logisticscost.view.PackSummary" height="100%"/>
+                    </IconTabFilter>
+                    <IconTabFilter text="{i18n>tabInvoiceInfo}" key="InvoiceInfo">
+                        <mvc:XMLView viewName="sd.logisticscost.view.InvoiceInfo" height="100%"/>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>
