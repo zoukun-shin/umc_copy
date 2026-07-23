@@ -1,0 +1,58 @@
+<mvc:View controllerName="pp.zmaterialreadiness.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="MaterialReadinessSVM" showShare="true" showExecuteOnSelection="true" entitySet="MaterialReadiness"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="MaterialReadiness" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onSmartFilterBarInitialized" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="YearMonth" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>YearMonth}">
+                                   <smartFilterBar:customControl>
+                                        <DatePicker 
+                                            value="{local>/YearMonth}"
+                                            valueFormat="yyyyMM"
+                                            displayFormat="yyyyMM"
+                                        />
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='30' key="MRPResponsible" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="Product" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Product}"/>
+
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="DynamicData" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="OnlyDispPlndOrder" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="OnlyDispProdOrder" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+
+	                        <VBox>
+                                <CheckBox id ="idCB1" text="{i18n>OnlyDispPlndOrder}"/> 
+                                <CheckBox id ="idCB2" text="{i18n>OnlyDispProdOrder}"/> 
+                            </VBox>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <!-- <FlexBox fitContainer="true">¯ -->
+                <core:Fragment fragmentName="pp.zmaterialreadiness.fragments.MaterialReadiness" type="XML"/>
+            <!-- </FlexBox> -->
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

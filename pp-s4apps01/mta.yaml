@@ -247,6 +247,10 @@ modules:
       - ppzprodorderachrate.zip
       name: ppzprodorderachrate
       target-path: resources/
+    - artifacts:
+      - ppzmaterialreadiness.zip
+      name: ppzmaterialreadiness
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -700,6 +704,15 @@ modules:
 - name: ppzprodorderachrate
   type: html5
   path: zprodorderachrate
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzmaterialreadiness
+  type: html5
+  path: zmaterialreadiness
   build-parameters:
     build-result: dist
     builder: custom
