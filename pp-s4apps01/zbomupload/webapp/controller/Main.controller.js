@@ -147,18 +147,6 @@ sap.ui.define([
                     aExcelSet.push(item);
 
                     // ADD BEGIN BY XINLEI XU 2026/07/06 CN 需求 No.17
-                    var sKey = [
-                        item.Material,
-                        item.Plant,
-                        item.BillOfMaterialVariantUsage,
-                        item.BillOfMaterialVariant,
-                        item.BillOfMaterialComponent
-                    ].join("_");
-                    if (oDuplicateCheckMap[sKey]) {
-                        bHasDuplicateItem = true;
-                    }
-                    oDuplicateCheckMap[sKey] = true;
-
                     if (item.BOMSubItemInstallationPoint.includes(",")) {
                         bHasComma = true;
                     }
@@ -167,52 +155,12 @@ sap.ui.define([
 
                 // ADD BEGIN BY XINLEI XU 2026/07/06 CN 需求 No.17
                 var iSelectedIndex = this.byId("idRadioGroup").getSelectedIndex();
-                if (iSelectedIndex === 0) { // Horizontal
-                    if (bHasDuplicateItem) {
-                        MessageBox.error(this.getResourceBundle().getText("TemplateError2"));
-                        this.byId("idFileUploader").clear();
-                        this._BusyDialog.close();
-                        return;
-                    }
-                } else if (iSelectedIndex === 1) { // Vertical
-                    if (bHasComma) {
-                        MessageBox.error(this.getResourceBundle().getText("TemplateError1"));
-                        this.byId("idFileUploader").clear();
-                        this._BusyDialog.close();
-                        return;
-                    }
-                    var oGroupedMap = aExcelSet.reduce(function (oAcc, oCurrent) {
-                        // 💡 拼接 4 个核心维度作为唯一的 Group Key
-                        var sKey = [
-                            oCurrent.Material,
-                            oCurrent.Plant,
-                            oCurrent.BillOfMaterialVariantUsage,
-                            oCurrent.BillOfMaterialVariant,
-                            oCurrent.BillOfMaterialComponent
-                        ].join("_");
-                        // 如果这个 Key 还没出现过
-                        if (!oAcc[sKey]) {
-                            // 💡 绝招：使用 Object.assign 或 ... 展开运算符，直接复制当前行的所有字段
-                            oAcc[sKey] = Object.assign({}, oCurrent, {
-                                _points: [] // 创建一个独立的临时数组用来存点位
-                            });
-                        }
-                        // 将当前的位号塞进临时数组中
-                        if (oCurrent.BOMSubItemInstallationPoint) {
-                            oAcc[sKey]._points.push(oCurrent.BOMSubItemInstallationPoint);
-                        }
-                        return oAcc;
-                    }, {});
-
-                    var aDisplayData = Object.keys(oGroupedMap).map(function (sKey) {
-                        var oGroupItem = oGroupedMap[sKey];
-                        // 用逗号拼接位号，并安全删除临时数组
-                        oGroupItem.BOMSubItemInstallationPoint = oGroupItem._points.join(",");
-                        delete oGroupItem._points;
-                        return oGroupItem;
-                    });
-
-                    aExcelSet = aDisplayData;
+                // Vertical
+                if (iSelectedIndex === 1 && bHasComma) {
+                    MessageBox.error(this.getResourceBundle().getText("TemplateError"));
+                    this.byId("idFileUploader").clear();
+                    this._BusyDialog.close();
+                    return;
                 }
                 // ADD END BY XINLEI XU 2026/07/06 CN 需求 No.17  
                 this.getModel("local").setProperty("/excelSet", aExcelSet);
