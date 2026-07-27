@@ -72,11 +72,15 @@
                 <smartTable:customToolbar>
                     <OverflowToolbar id="toolbar" width="100%">
                         <ToolbarSpacer/>
-                        <Button id="btnPost" icon="sap-icon://create" text="{i18n>Post}" tooltip="{i18n>Post}" press="onPost" visible="{local>/showPost}" enabled="{= ${local>/authorityCheck/button/Post} !== false}"/>
-                        <Button id="btnCancel" icon="sap-icon://undo" text="{i18n>Cancel}" tooltip="{i18n>Cancel}" press="onCancel" visible="{local>/showCancel}" enabled="{= ${local>/authorityCheck/button/Cancel} !== false}"/>
+                        <!-- ★ 改为排JOB：过账不选行（传filter），冲销要选一行（传创建日期） -->
+                        <Button id="btnPostJob" icon="sap-icon://add-calendar" text="{i18n>PostJob}" tooltip="{i18n>PostJob}" press="onPostJob" visible="{local>/showPost}" enabled="{= ${local>/authorityCheck/button/Post} !== false}"/>
+                        <Button id="btnCancelJob" icon="sap-icon://add-calendar" text="{i18n>CancelJob}" tooltip="{i18n>CancelJob}" press="onCancelJob" visible="{local>/showCancel}" enabled="{= ${local>/authorityCheck/button/Cancel} !== false}"/>
                     </OverflowToolbar>
                 </smartTable:customToolbar>
 
+                <!-- ★ selectionMode 由 controller 按过账状态动态切换：
+                         状态=1（未过账/过账JOB）→ None       （不选行，传filter）
+                         状态=2（已过账/冲销JOB）→ MultiToggle（要选一行，传创建日期） -->
                 <t:Table id="Table_ProxyJournal" selectionMode="MultiToggle" rowMode="Auto">
                     <t:Column id="Status" width="6rem" label="{i18n>Status}" sortProperty="Status" filterProperty="Status">
                         <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Status","leadingProperty":"Status","sortProperty":"Status","filterProperty":"Status"}'/></t:customData>
