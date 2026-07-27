@@ -1,0 +1,102 @@
+<mvc:View controllerName="fico.suppreconinvpark.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="SuppReconInvParkSVM" showShare="true" showExecuteOnSelection="true" entitySet="SuppReconInvPark"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                    <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="SuppReconInvPark" useToolbar="false" smartVariant="__SVM01" persistencyKey="SuppReconInvParkSFB" initialized="onSmartFilterBarInitialized" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="PurchaseOrder" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PurchaseOrder}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="Vendor" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Vendor}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="PurchasingGroup" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="Product" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Product}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="Plant" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="TransferDate" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>TransferDate}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="TransferOrder" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>TransferOrder}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="InvoiceNo" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>InvoiceNo}"/>
+                                <smartFilterBar:ControlConfiguration index='90' key="ListType" visibleInAdvancedArea="true" label="{i18n>ListType}">
+                                    <smartFilterBar:customControl>
+                                        <Select id="idListType" change="onSelectModeChange" selectedKey="{local>/ListType}">
+                                            <core:Item key="1" text="{i18n>NoComplete}"/>
+                                            <core:Item key="2" text="{i18n>Complete}"/>
+                                            <core:Item key="3" text="{i18n>All}"/>
+                                        </Select>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderItemText" visible="false"/>    
+                                <smartFilterBar:ControlConfiguration index='999' key="CompanyCode" visible="false"/>    
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialDocumentYear" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialDocument" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialDocumentItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderItemCategory" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchasingOrganization" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="InvoicingParty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="InvoicingPartyName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialGroup" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Currency" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TaxCode" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TaxRate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DocumentDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="POQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="POUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NetPrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PriceUnitPer" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="POLinePrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialDocumentDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialDocumentEntryDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MaterialDocumentCreationDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="InboundDelivery" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="GRAccount" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="GRQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="GRUnitPrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="GRAmount" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QualifiedQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="UnqualifiedQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="InspectionQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ParkedQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ParkedAmount" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PostedQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PostedAmount" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NotParkedQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NotParkedAmount" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="InvoiceDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MIROVendorInvoiceNo" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MIROText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MIROHeaderText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PayableAccount" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PayableAccountDescription" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TaxPriceQualifiedQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PORequiredDeliveryDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="InvoiceYear" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Status" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Message" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="fico.suppreconinvpark.fragments.SuppReconInvPark" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
