@@ -49,6 +49,13 @@
                                 <Text text="{local>Plant}" wrapping="false"/>
                             </table:template>
                         </table:Column>
+                        <!-- ADD BEGIN BY XINLEI XU 2026/07/20 CN 需求 No.392 -->
+                        <table:Column width="8rem" label="{i18n>NGType}">
+                            <table:template>
+                                <Text text="{local>NGType}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <!-- ADD END BY XINLEI XU 2026/07/20 CN 需求 No.392 -->
                         <table:Column width="8rem" label="{i18n>MoveType}">
                             <table:template>
                                 <Text text="{local>MoveType}" wrapping="false"/>
@@ -74,6 +81,13 @@
                                 <Text text="{local>LocationTo2}" wrapping="false"/>
                             </table:template>
                         </table:Column>
+                        <!-- ADD BEGIN BY XINLEI XU 2026/07/20 CN 需求 No.392 -->
+                        <table:Column width="10rem" label="{i18n>NoNeedIQCConfirm}">
+                            <table:template>
+                                <Text text="{local>NoNeedIQCConfirm}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <!-- ADD END BY XINLEI XU 2026/07/20 CN 需求 No.392 -->
                         <table:Column width="8rem" label="{i18n>ItemNo}">
                             <table:template>
                                 <Text text="{local>ItemNo}" wrapping="false"/>
@@ -144,6 +158,23 @@
                                 <Text text="{local>CounterMeasure}" wrapping="false"/>
                             </table:template>
                         </table:Column>
+                        <!-- ADD BEGIN BY XINLEI XU 2026/07/20 CN 需求 No.392 -->
+                        <table:Column width="10rem" label="{i18n>RefMaterial}">
+                            <table:template>
+                                <Text text="{local>RefMaterial}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="10rem" label="{i18n>Batch}">
+                            <table:template>
+                                <Text text="{local>Batch}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <table:Column width="12rem" label="{i18n>FGMaterial}">
+                            <table:template>
+                                <Text text="{local>FGMaterial}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
+                        <!-- ADD END BY XINLEI XU 2026/07/20 CN 需求 No.392 -->
                     </table:columns>
                 </table:Table>
             </Panel>

@@ -109,11 +109,13 @@ sap.ui.define([
                         "Message": "",
                         "RowNo": iRowNo, //aSheetData[i]["RowNo"] === undefined ? "" : aSheetData[i]["RowNo"],
                         "Plant": aSheetData[i]["Plant"] === undefined ? "" : aSheetData[i]["Plant"],
+                        "NGType": aSheetData[i]["NGType"] === undefined ? "" : aSheetData[i]["NGType"], // ADD BY XINLEI XU 2026/07/20 CN 需求 No.392
                         "MoveType": aSheetData[i]["MoveType"] === undefined ? "" : aSheetData[i]["MoveType"],
                         "MaterialType": aSheetData[i]["MaterialType"] === undefined ? "" : aSheetData[i]["MaterialType"],
                         "LocationFrom": aSheetData[i]["FromLocation"] === undefined ? "" : aSheetData[i]["FromLocation"],
                         "LocationTo1": aSheetData[i]["TOLocaiton1"] === undefined ? "" : aSheetData[i]["TOLocaiton1"],
                         "LocationTo2": aSheetData[i]["TOLocaiton2"] === undefined ? "" : aSheetData[i]["TOLocaiton2"],
+                        "NoNeedIQCConfirm": aSheetData[i]["NoNeedIQCConfirm"] === undefined ? "" : aSheetData[i]["NoNeedIQCConfirm"], // ADD BY XINLEI XU 2026/07/20 CN 需求 No.392
                         "ItemNo": aSheetData[i]["ItemNo"] === undefined ? "" : aSheetData[i]["ItemNo"],
                         "WorkCenter": aSheetData[i]["WorkCenter"] === undefined ? "" : aSheetData[i]["WorkCenter"],
                         "Shift": aSheetData[i]["Shift"] === undefined ? "" : aSheetData[i]["Shift"],
@@ -128,6 +130,11 @@ sap.ui.define([
                         "Symptom": aSheetData[i]["Symptom"] === undefined ? "" : aSheetData[i]["Symptom"],
                         "RootCause": aSheetData[i]["RootCause"] === undefined ? "" : aSheetData[i]["RootCause"],
                         "CounterMeasure": aSheetData[i]["CounterMeasure"] === undefined ? "" : aSheetData[i]["CounterMeasure"],
+                        // ADD BY XINLEI XU 2026/07/20 CN 需求 No.392 & No.394
+                        "RefMaterial": aSheetData[i]["RefMaterial"] === undefined ? "" : aSheetData[i]["RefMaterial"],
+                        "Batch": aSheetData[i]["Batch"] === undefined ? "" : aSheetData[i]["Batch"],
+                        "FGMaterial": aSheetData[i]["FGMaterial"] === undefined ? "" : aSheetData[i]["FGMaterial"],
+                        // ADD END BY XINLEI XU 2026/07/20 CN 需求 No.392 & No.394
                         "UserEmail": this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail()
                     };
                     var bError = false;
@@ -157,7 +164,9 @@ sap.ui.define([
                         item.FoundDate = "";
                         item.Message = this.getResourceBundle().getText("isValidDate");
                     } else {
+                        item.Status = "";
                         item.FoundDate = this.conversionDate(item.FoundDate);
+                        item.Message = "";
                     }
                     aExcelSet.push(item);
                 }
@@ -188,7 +197,7 @@ sap.ui.define([
         _callOData: function (bEvent) {
             var aPromise = [];
             var aExcelSet = this.getModel("local").getProperty("/excelSet");
-            var obj = aExcelSet.find(element => element.Status === 'E');
+            var obj = aExcelSet.find(element => element.Message === this.getResourceBundle().getText("isValidDate"));
             if (obj) {
                 MessageBox.error(this.getResourceBundle().getText("isValidDate"));
                 return;
