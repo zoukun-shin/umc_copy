@@ -810,63 +810,6 @@
                                 />
                             </t:template>
                         </t:Column> -->
-                        <t:Column
-                            width="6rem"
-                            label="{/#SalesBillingType/ReturnItemProcessingType/@sap:label}"
-                            sortProperty="ReturnItemProcessingType"
-                            filterProperty="ReturnItemProcessingType"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"ReturnItemProcessingType","leadingProperty":"ReturnItemProcessingType","sortProperty":"ReturnItemProcessingType","filterProperty":"ReturnItemProcessingType"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{ReturnItemProcessingType}"
-                                    wrapping="false"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
-                            width="6rem"
-                            label="{/#SalesBillingType/BillingDocumentIsCancelled/@sap:label}"
-                            sortProperty="BillingDocumentIsCancelled"
-                            filterProperty="BillingDocumentIsCancelled"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"BillingDocumentIsCancelled","leadingProperty":"BillingDocumentIsCancelled","sortProperty":"BillingDocumentIsCancelled","filterProperty":"BillingDocumentIsCancelled"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{BillingDocumentIsCancelled}"
-                                    wrapping="false"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
-                            width="8rem"
-                            label="{/#SalesBillingType/CancelledBillingDocument/@sap:label}"
-                            sortProperty="CancelledBillingDocument"
-                            filterProperty="CancelledBillingDocument"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"CancelledBillingDocument","leadingProperty":"CancelledBillingDocument","sortProperty":"CancelledBillingDocument","filterProperty":"CancelledBillingDocument"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{CancelledBillingDocument}"
-                                    wrapping="false"
-                                />
-                            </t:template>
-                        </t:Column>
                     </t:columns>
                 </t:Table>
             </smartTable:SmartTable>
