@@ -1,0 +1,47 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table">
+    <Dialog title="{i18n>LoadDeliveryDialogTitle}({= ${local>/LoadDelivery}.length })" draggable="true" resizable="true" contentWidth="85rem" class="sapUiSizeCompact">
+        <content>
+            <table:Table id="idLoadDeliveryTable" rows="{local>/LoadDelivery}" selectionMode="MultiToggle">
+                <table:columns>
+                    <table:Column width="8rem" label="{i18n>OutboundDelivery}">
+                        <table:template>
+                            <Text text="{local>OutboundDelivery}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>ShippingPoint}">
+                        <table:template>
+                            <Text text="{local>ShippingPoint}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>ShipToParty}">
+                        <table:template>
+                            <Text text="{local>ShipToParty}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>ShipToPartyName}">
+                        <table:template>
+                            <Text text="{local>ShipToName}" wrapping="true" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>PurchaseOrderByCustomer}">
+                        <table:template>
+                            <Text text="{local>PurchaseOrderByCustomer}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>SalesDocument}">
+                        <table:template>
+                            <Text text="{local>SalesDocument}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>RequestedDeliveryDate}">
+                        <table:template>
+                            <Text text="{ path:'local>RequestedDeliveryDate', type:'sap.ui.model.type.Date', formatOptions:{ pattern: 'yyyy/MM/dd' } }" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </content>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,6 +1,5 @@
 <mvc:View controllerName="sd.zshippinginstruction.controller.App"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-    </Page>
+    <App id="app" />
 </mvc:View>

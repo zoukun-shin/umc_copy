@@ -1,0 +1,573 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table">
+    <Dialog title="{i18n>Maintain}" draggable="true" stretch="true" class="sapUiSizeCompact">
+        <Bar>
+            <contentRight>
+                <Button type="Ghost" icon="sap-icon://synchronize" text="{i18n>LoadDelivery}" press="onPressAction('LoadDelivery')" enabled="{= ${local>/authorityCheck/button/LoadDelivery} &amp;&amp; ${local>/Header/IsApproved} === false}"/>
+                <Button type="Emphasized" icon="sap-icon://write-new-document" text="{i18n>WritePackageStructure}" press="onPressAction('WritePackageStructure')" enabled="{= ${local>/authorityCheck/button/WritePackageStructure} &amp;&amp; ${local>/Header/IsApproved} === false}"/>
+                <Button type="Ghost" icon="sap-icon://simulate" text="{i18n>Recalculate}" press="onPressAction('Recalculate')" enabled="{= ${local>/authorityCheck/button/Recalculate} &amp;&amp; ${local>/Header/IsApproved} === false}"/>
+                <Button type="Success" text="{i18n>Approve}" press="onPressAction('Approve')" enabled="{= ${local>/authorityCheck/button/Approve} &amp;&amp; ${local>/Header/IsExists} === true &amp;&amp; ${local>/Header/IsApproved} === false}"/>
+                <Button type="Negative" text="{i18n>CancelApproval}" press="onPressAction('CancelApproval')" enabled="{= ${local>/authorityCheck/button/CancelApproval} &amp;&amp; ${local>/Header/IsApproved} === true}"/>
+            </contentRight>
+        </Bar>
+        <Panel expandable="true" expanded="true" width="auto" headerText="{i18n>PanelTitle1}">
+            <HBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>SalesOrganization}:"/>
+                    <Input value="{local>/Header/SalesOrganization} {local>/Header/SalesOrganizationName}" editable="false" width="20rem"/>
+                    <Label text="{i18n>SoldToParty}:"/>
+                    <Input value="{local>/Header/SoldToParty} {local>/Header/SoldToPartyName}" editable="false" width="20rem"/>
+                    <Label text="{i18n>ShipToParty}:"/>
+                    <Input value="{local>/Header/ShipToParty} {local>/Header/ShipToPartyName}" editable="false" width="20rem"/>
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>ShippingType}:"/>
+                    <ComboBox items="{ path: '/ZC_ShippingTypeVH' }" selectedKey="{local>/Header/ShippingType}" filterSecondaryValues= "true" required="true" width="13rem" editable="{local>/MaintainEditable}">
+                        <core:ListItem key="{ShippingType}" text="{ShippingType}({ShippingTypeDesc})" additionalText="{ShippingType}"/>
+                    </ComboBox>
+                    <Label text="{i18n>StartBoxNumber}:" />
+                    <Input value="{local>/Header/StartBoxNumber}" width="13rem" maxLength="6" liveChange="onLiveChangePositiveInteger" change="onPressAction('Recalculate')" editable="{local>/MaintainEditable}"/>
+                    <Label text="{i18n>ContainerNumber}:" />
+                    <Input value="{local>/Header/ContainerNumber}" width="13rem" maxLength="20" editable="{local>/MaintainEditable}"/>
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>RequestedDeliveryDate}:"/>
+                    <DatePicker width="12rem" editable="false" value="{
+						'path':'local>/Header/RequestedDeliveryDate',
+						'type':'sap.ui.model.type.Date',
+						'formatOptions': {
+							'pattern': 'yyyy/MM/dd',
+                            'UTC':true
+						} 
+                    }"/>
+                    <Label text="{i18n>PlannedGoodsMovementDate}:"/>
+                    <DatePicker width="12rem" editable="{local>/MaintainEditable}" value="{
+						'path':'local>/Header/PlannedGoodsMovementDate',
+						'type':'sap.ui.model.type.Date',
+						'formatOptions': {
+							'pattern': 'yyyy/MM/dd',
+                            'UTC':true
+						} 
+                    }"/>
+                    <Label text="{i18n>TruckNumber}:"/>
+                    <Input value="{local>/Header/TruckNumber}" width="12rem" maxLength="20" editable="{local>/MaintainEditable}"/>
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>PlannedGoodsIssueDate}:"/>
+                    <DatePicker width="12rem" editable="{local>/MaintainEditable}" value="{
+						'path':'local>/Header/PlannedGoodsIssueDate',
+						'type':'sap.ui.model.type.Date',
+						'formatOptions': {
+							'pattern': 'yyyy/MM/dd',
+                            'UTC':true
+						}
+                    }"/>
+                    <Label text="{i18n>PlannedCustomsDeclarationDate}:"/>
+                    <DatePicker width="12rem" editable="{local>/MaintainEditable}" value="{
+						'path':'local>/Header/PlannedCustomsDeclarationDate',
+						'type':'sap.ui.model.type.Date',
+						'formatOptions': {
+							'pattern': 'yyyy/MM/dd',
+                            'UTC':true
+						} 
+                    }"/>
+                    <Label text="{i18n>Driver}:"/>
+                    <Input value="{local>/Header/Driver}" width="12rem" maxLength="20" editable="{local>/MaintainEditable}"/>
+                </VBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <HBox>
+                        <VBox class="sapUiSmallMarginEnd">
+                            <Label text="{i18n>IsApproved}:" width="5rem"/>
+                            <CheckBox selected="{local>/Header/IsApproved}" editable="false"/>
+                        </VBox>
+                        <VBox>
+                            <Label text="{i18n>ApproverName}:"/>
+                            <Input value="{local>/Header/ApproverName}" width="15rem" editable="false"/>
+                        </VBox>
+                    </HBox>
+                    <HBox>
+                        <VBox class="sapUiSmallMarginEnd">
+                            <Label text="{i18n>IncotermsClassification}:" />
+                            <Input value="{local>/Header/IncotermsClassification}" editable="false" width="5rem"/>
+                        </VBox>
+                        <VBox>
+                            <Label text="{i18n>IncotermsTransferLocation}:"/>
+                            <Input value="{local>/Header/IncotermsTransferLocation}" editable="{local>/MaintainEditable}" maxLength="28" width="15rem"/>
+                        </VBox>
+                    </HBox>
+                    <HBox>
+                        <VBox class="sapUiSmallMarginEnd">
+                            <Label text="{i18n>Remarks}:"/>
+                            <TextArea value="{local>/Header/Remarks}" width="21rem" maxLength="100" rows="2" editable="{local>/MaintainEditable}"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </HBox>
+        </Panel>
+        <Panel expandable="true" expanded="true" width="auto" headerText="{i18n>PanelTitle2}">
+            <table:Table id="idTable_Delivery" rows="{local>/Item/DeliverySet}" selectionMode="Multi" fixedColumnCount="3" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:extension>
+                    <OverflowToolbar>
+                        <ToolbarSpacer/>
+                        <Button type="Critical" icon="sap-icon://split" text="{i18n>SplitLine}" press="onPressAction('SplitLine')" enabled="{= ${local>/authorityCheck/button/SplitLine} &amp;&amp; ${local>/Header/IsApproved} === false}"/>
+                        <Button type="Critical" icon="sap-icon://reset" text="{i18n>ResetLine}" press="onPressAction('ResetLine')" enabled="{= ${local>/authorityCheck/button/ResetLine} &amp;&amp; ${local>/Header/IsApproved} === false}"/>
+                    </OverflowToolbar>
+                </table:extension>
+                <table:columns>
+                    <table:Column width="5rem" label="{i18n>SerialNumber}">
+                        <table:template>
+                            <Text text="{local>SerialNumber}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="5rem" label="{i18n>Plant}">
+                        <table:template>
+                            <Text text="{local>Plant}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>Product}">
+                        <table:template>
+                            <Text text="{local>Product}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PurchaseOrderByCustomer}">
+                        <table:template>
+                            <Text text="{local>PurchaseOrderByCustomer}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>CustomerPurchaseOrderItem}">
+                        <table:template>
+                            <Text text="{local>CustomerPurchaseOrderItem}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>ActualDeliveryQuantity}">
+                        <table:template>
+                            <Text text="{local>ActualDeliveryQuantity}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PerBoxTargetQty}">
+                        <table:template>
+                            <Text text="{local>PerBoxTargetQty}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>BoxNumberRange}">
+                        <table:template>
+                            <Text text="{local>BoxNumberRange}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>BeginBoxNo}">
+                        <table:template>
+                            <Text text="{local>BeginBoxNo}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>EndBoxNo}">
+                        <table:template>
+                            <Text text="{local>EndBoxNo}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>BoxQty}">
+                        <table:template>
+                            <Text text="{local>BoxQty}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>Length}">
+                        <table:template>
+                            <Text text="{local>Length}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>Width}">
+                        <table:template>
+                            <Text text="{local>Width}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>Height}">
+                        <table:template>
+                            <Text text="{local>Height}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>BoxMeasureSize}">
+                        <table:template>
+                            <Text text="{local>BoxMeasureSize}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- <table:Column width="8rem" label="{i18n>MeasureUnit}">
+                        <table:template>
+                            <Text text="{local>MeasureUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column> -->
+                    <table:Column width="8rem" label="{i18n>HandlingUnitLoadWeight}">
+                        <table:template>
+                            <Text text="{ parts: [ { path: 'local>HandlingUnitLoadWeight' }, { path: 'local>HandlingUnitWeightUnit' } ],
+                                          type: 'sap.ui.model.type.Unit',
+                                          formatOptions: {
+                                             showMeasure: false,
+                                             decimals: 3
+                                           } 
+                                        }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>HandlingUnitTareWeight}">
+                        <table:template>
+                            <Text text="{ parts: [ { path: 'local>HandlingUnitTareWeight' }, { path: 'local>HandlingUnitWeightUnit' } ],
+                                          type: 'sap.ui.model.type.Unit',
+                                          formatOptions: {
+                                             showMeasure: false,
+                                             decimals: 3
+                                           } 
+                                        }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>HandlingUnitGrossWeight}">
+                        <table:template>
+                            <Text text="{ parts: [ { path: 'local>HandlingUnitGrossWeight' }, { path: 'local>HandlingUnitWeightUnit' } ],
+                                          type: 'sap.ui.model.type.Unit',
+                                          formatOptions: {
+                                             showMeasure: false,
+                                             decimals: 3
+                                           } 
+                                        }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- <table:Column width="8rem" label="{i18n>HandlingUnitWeightUnit}">
+                        <table:template>
+                            <Text text="{local>HandlingUnitWeightUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column> -->
+                    <table:Column width="10rem" label="{i18n>MaterialByCustomer}">
+                        <table:template>
+                            <Text text="{local>MaterialByCustomer}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>BaseQuantityUnit}">
+                        <table:template>
+                            <Text text="{local>BaseQuantityUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>OutboundDelivery}">
+                        <table:template>
+                            <Text text="{local>OutboundDelivery}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>OutboundDeliveryItem}">
+                        <table:template>
+                            <Text text="{local>OutboundDeliveryItem}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>SalesDocument}">
+                        <table:template>
+                            <Text text="{local>SalesDocument}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>SalesDocumentItem}">
+                        <table:template>
+                            <Text text="{local>SalesDocumentItem}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </Panel>
+        <Panel expandable="true" expanded="true" width="auto" headerText="{i18n>PanelTitle3}">
+            <table:Table id="idTable_PackingBox" rows="{local>/Item/PackingBoxSet}" selectionMode="Multi" fixedColumnCount="3" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:columns>
+                    <table:Column width="5rem" label="{i18n>SerialNumber}">
+                        <table:template>
+                            <Text text="{local>SerialNumber}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="5rem" label="{i18n>Plant}">
+                        <table:template>
+                            <Text text="{local>Plant}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>Product}">
+                        <table:template>
+                            <Text text="{local>Product}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PurchaseOrderByCustomer}">
+                        <table:template>
+                            <Text text="{local>PurchaseOrderByCustomer}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>CustomerPurchaseOrderItem}">
+                        <table:template>
+                            <Text text="{local>CustomerPurchaseOrderItem}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>ActualDeliveryQuantity}">
+                        <table:template>
+                            <Text text="{local>ActualDeliveryQuantity}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PerBoxTargetQty}">
+                        <table:template>
+                            <Text text="{local>PerBoxTargetQty}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>BoxNumberRange}">
+                        <table:template>
+                            <Input value="{local>BoxNumberRange}" maxLength="10" liveChange="onLiveChangeRange"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>BeginBoxNo}">
+                        <table:template>
+                            <Input value="{local>BeginBoxNo}" maxLength="10" liveChange="onLiveChangePositiveInteger"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>EndBoxNo}">
+                        <table:template>
+                            <Input value="{local>EndBoxNo}" maxLength="10" liveChange="onLiveChangePositiveInteger"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>BoxQty}">
+                        <table:template>
+                            <Text text="{local>BoxQty}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>HandlingUnitLoadWeight}">
+                        <table:template>
+                            <Input value="{ parts: [ { path: 'local>HandlingUnitLoadWeight' }, { path: 'local>HandlingUnitWeightUnit' } ],
+                                            type: 'sap.ui.model.type.Unit',
+                                            formatOptions: {
+                                               showMeasure: false,
+                                               decimals: 3
+                                           } 
+                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>HandlingUnitTareWeight}">
+                        <table:template>
+                            <Input value="{ parts: [ { path: 'local>HandlingUnitTareWeight' }, { path: 'local>HandlingUnitWeightUnit' } ],
+                                            type: 'sap.ui.model.type.Unit',
+                                            formatOptions: {
+                                               showMeasure: false,
+                                               decimals: 3
+                                           } 
+                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>HandlingUnitGrossWeight}">
+                        <table:template>
+                            <Input value="{ parts: [ { path: 'local>HandlingUnitGrossWeight' }, { path: 'local>HandlingUnitWeightUnit' } ],
+                                            type: 'sap.ui.model.type.Unit',
+                                            formatOptions: {
+                                               showMeasure: false,
+                                               decimals: 3
+                                           } 
+                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- <table:Column width="8rem" label="{i18n>HandlingUnitWeightUnit}">
+                        <table:template>
+                            <Text text="{local>HandlingUnitWeightUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column> -->
+                    <table:Column width="10rem" label="{i18n>BoxMeasureSize}">
+                        <table:template>
+                            <Input value="{local>BoxMeasureSize}" maxLength="20"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- <table:Column width="8rem" label="{i18n>MeasureUnit}">
+                        <table:template>
+                            <Text text="{local>MeasureUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column> -->
+                    <table:Column width="12rem" label="{i18n>CommodityCode}">
+                        <table:template>
+                            <Input value="{local>CommodityCode}" maxLength="15"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>CommodityName}">
+                        <table:template>
+                            <Input value="{local>CommodityName}" maxLength="30"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>MaterialByCustomer}">
+                        <table:template>
+                            <Text text="{local>MaterialByCustomer}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>DeliveryDocumentItemText}">
+                        <table:template>
+                            <Text text="{local>DeliveryDocumentItemText}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>BaseQuantityUnit}">
+                        <table:template>
+                            <Text text="{local>BaseQuantityUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>Length}">
+                        <table:template>
+                            <Text text="{local>Length}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>Width}">
+                        <table:template>
+                            <Text text="{local>Width}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>Height}">
+                        <table:template>
+                            <Text text="{local>Height}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>OutboundDelivery}">
+                        <table:template>
+                            <Text text="{local>OutboundDelivery}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>OutboundDeliveryItem}">
+                        <table:template>
+                            <Text text="{local>OutboundDeliveryItem}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>SalesDocument}">
+                        <table:template>
+                            <Text text="{local>SalesDocument}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>SalesDocumentItem}">
+                        <table:template>
+                            <Text text="{local>SalesDocumentItem}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </Panel>
+        <Panel expandable="true" expanded="true" width="auto" headerText="{i18n>PanelTitle4}">
+            <table:Table id="idTable_Pallet" rows="{local>/Item/PalletSet}" selectionMode="Multi" fixedColumnCount="3" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:columns>
+                    <table:Column width="5rem" label="{i18n>SerialNumber}">
+                        <table:template>
+                            <Text text="{local>SerialNumber}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="5rem" label="{i18n>Plant}">
+                        <table:template>
+                            <Text text="{local>Plant}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>Product}">
+                        <table:template>
+                            <Text text="{local>Product}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>ActualDeliveryQuantity}">
+                        <table:template>
+                            <Text text="{local>ActualDeliveryQuantity}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PerPalletTargetQty}">
+                        <table:template>
+                            <Input value="{local>PerPalletTargetQty}" maxLength="15" liveChange="onLiveChangePositiveDecimal"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PalletQty}">
+                        <table:template>
+                            <Input value="{local>PalletQty}" maxLength="15" liveChange="onLiveChangePositiveInteger"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PalletNumberRange}">
+                        <table:template>
+                            <Input value="{local>PalletNumberRange}" maxLength="10" liveChange="onLiveChangeRange"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>BeginPalletNo}">
+                        <table:template>
+                            <Input value="{local>BeginPalletNo}" maxLength="10" liveChange="onLiveChangePositiveInteger"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>EndPalletNo}">
+                        <table:template>
+                            <Input value="{local>EndPalletNo}" maxLength="10" liveChange="onLiveChangePositiveInteger"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PalletLoadWeight}">
+                        <table:template>
+                            <Input value="{ parts: [ { path: 'local>PalletLoadWeight' }, { path: 'local>PalletWeightUnit' } ],
+                                            type: 'sap.ui.model.type.Unit',
+                                            formatOptions: {
+                                               showMeasure: false,
+                                               decimals: 3
+                                           } 
+                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PalletTareWeight}">
+                        <table:template>
+                            <Input value="{ parts: [ { path: 'local>PalletTareWeight' }, { path: 'local>PalletWeightUnit' } ],
+                                            type: 'sap.ui.model.type.Unit',
+                                            formatOptions: {
+                                               showMeasure: false,
+                                               decimals: 3
+                                           } 
+                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PalletGrossWeight}">
+                        <table:template>
+                            <Input value="{ parts: [ { path: 'local>PalletGrossWeight' }, { path: 'local>PalletWeightUnit' } ],
+                                            type: 'sap.ui.model.type.Unit',
+                                            formatOptions: {
+                                               showMeasure: false,
+                                               decimals: 3
+                                           } 
+                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- <table:Column width="8rem" label="{i18n>PalletWeightUnit}">
+                        <table:template>
+                            <Text text="{local>PalletWeightUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column> -->
+                    <table:Column width="8rem" label="{i18n>PalletLength}">
+                        <table:template>
+                            <Input value="{ parts: [ { path: 'local>PalletLength' }, { path: 'local>MeasureUnit' } ],
+                                            type: 'sap.ui.model.type.Unit',
+                                            formatOptions: {
+                                               showMeasure: false,
+                                               decimals: 3
+                                           } 
+                                          }" maxLength="13" liveChange="onLiveChangePositiveDecimal"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PalletWidth}">
+                        <table:template>
+                            <Input value="{ parts: [ { path: 'local>PalletWidth' }, { path: 'local>MeasureUnit' } ],
+                                            type: 'sap.ui.model.type.Unit',
+                                            formatOptions: {
+                                               showMeasure: false,
+                                               decimals: 3
+                                           } 
+                                          }" maxLength="13" liveChange="onLiveChangePositiveDecimal"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PalletHeight}">
+                        <table:template>
+                            <Input value="{ parts: [ { path: 'local>PalletHeight' }, { path: 'local>MeasureUnit' } ],
+                                            type: 'sap.ui.model.type.Unit',
+                                            formatOptions: {
+                                               showMeasure: false,
+                                               decimals: 3
+                                           } 
+                                          }" maxLength="13" liveChange="onLiveChangePositiveDecimal"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>PalletMeasureSize}">
+                        <table:template>
+                            <Text text="{local>PalletMeasureSize}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- <table:Column width="8rem" label="{i18n>MeasureUnit}">
+                        <table:template>
+                            <Text text="{local>MeasureUnit}" wrapping="false"/>
+                        </table:template>
+                    </table:Column> -->
+                </table:columns>
+            </table:Table>
+        </Panel>
+    </Dialog>
+</core:FragmentDefinition>

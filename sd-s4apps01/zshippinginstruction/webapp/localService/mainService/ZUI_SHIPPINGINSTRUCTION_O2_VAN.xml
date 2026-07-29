@@ -29,21 +29,6 @@
     </edmx:Reference>
     <edmx:DataServices>
         <Schema Namespace="zui_shippinginstruction_o2_van.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-            <Annotations Target="cds_zui_shippinginstruction_o2.ReportType/Product">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_shippinginstruction_o2.ReportType/SalesDocument">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_shippinginstruction_o2.ReportType/OutboundDelivery">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_shippinginstruction_o2.ReportType/DeliveryDocumentType">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
-            <Annotations Target="cds_zui_shippinginstruction_o2.ReportType/ShippingPoint">
-                <Annotation Term="UI.Hidden"/>
-            </Annotations>
             <Annotations Target="_Entities"/>
         </Schema>
     </edmx:DataServices>

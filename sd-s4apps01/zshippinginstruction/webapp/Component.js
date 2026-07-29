@@ -21,6 +21,9 @@ sap.ui.define([
 
             // enable routing
             this.getRouter().initialize();
+
+            // set the local model
+            this.setModel(models.createLocalModel(), "local");
         }
     });
 });

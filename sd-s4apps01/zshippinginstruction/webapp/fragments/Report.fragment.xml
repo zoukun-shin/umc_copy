@@ -1,0 +1,128 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <smartTable:SmartTable entitySet="ShipgInstrReport" smartVariant="__SVM01" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="ShipgInstr_ST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="true" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="CompanyCode,SalesOrganizationName,Product,SalesDocument,OutboundDelivery,DeliveryDocumentType,ShippingPoint,RequestedDeliveryDate,IncotermsClassification,IncotermsTransferLocation,DefaultPackingItem,ShippingTypeDesc" ignoredFields="CompanyCode,SalesOrganizationName,Product,SalesDocument,OutboundDelivery,DeliveryDocumentType,ShippingPoint,RequestedDeliveryDate,IncotermsClassification,IncotermsTransferLocation,DefaultPackingItem,ShippingTypeDesc">
+        <smartTable:customToolbar>
+            <OverflowToolbar design="Transparent">
+                <ToolbarSpacer/>
+                <Button icon="sap-icon://request" text="{i18n>Maintain}" type="Transparent" press="onPressAction('Maintain')" enabled="{= ${local>/authorityCheck/button/Maintain}}"/>
+                <Button icon="sap-icon://delete" text="{i18n>Delete}" type="Transparent" press="onPressAction('Delete')" enabled="{= ${local>/authorityCheck/button/Delete} &amp;&amp; ${local>/RptButtonEnabled}}"/>
+                <Button icon="sap-icon://print" text="{i18n>Print}" type="Transparent" press="onPressAction('Print')" enabled="{= ${local>/authorityCheck/button/Print} &amp;&amp; ${local>/RptButtonEnabled}}"/>
+                <Button icon="sap-icon://download-from-cloud" text="{i18n>Export}" type="Transparent" press="onPressAction('Export')" enabled="{= ${local>/authorityCheck/button/Export} &amp;&amp; ${local>/RptButtonEnabled}}"/>
+            </OverflowToolbar>
+        </smartTable:customToolbar>
+        <table:Table id="idStandardListTable" selectionMode="Multi" rowMode="Auto" enableColumnFreeze="true" rowSelectionChange="onRowSelectionChange">
+            <table:columns>
+                <table:Column width="6rem" label="{i18n>SalesOrganization}" sortProperty="SalesOrganization" filterProperty="SalesOrganization">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SalesOrganization", "leadingProperty":"SalesOrganization"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SalesOrganization}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="7rem" label="{i18n>BillingDocument}" sortProperty="BillingDocument" filterProperty="BillingDocument">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillingDocument", "leadingProperty":"BillingDocument"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BillingDocument}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="7rem" label="{i18n>IsExists}" sortProperty="IsExists" filterProperty="IsExists">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"IsExists", "leadingProperty":"IsExists"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{IsExists}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>SoldToParty}" sortProperty="SoldToParty" filterProperty="SoldToParty">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SoldToParty", "leadingProperty":"SoldToParty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SoldToParty}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>SoldToPartyName}" sortProperty="SoldToPartyName" filterProperty="SoldToPartyName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SoldToPartyName", "leadingProperty":"SoldToPartyName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SoldToPartyName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>ShipToParty}" sortProperty="ShipToParty" filterProperty="ShipToParty">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShipToParty", "leadingProperty":"ShipToParty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ShipToParty}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ShipToPartyName}" sortProperty="ShipToPartyName" filterProperty="ShipToPartyName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShipToPartyName", "leadingProperty":"ShipToPartyName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ShipToPartyName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="11rem" label="{i18n>ShippingType}" sortProperty="ShippingType" filterProperty="ShippingType">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShippingType", "leadingProperty":"ShippingType"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{= ${ShippingType} ? ${ShippingTypeDesc} + '(' + ${ShippingType} + ')' : '' }" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>PlannedGoodsIssueDate}" sortProperty="PlannedGoodsIssueDate" filterProperty="PlannedGoodsIssueDate">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PlannedGoodsIssueDate", "leadingProperty":"PlannedGoodsIssueDate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ path:'PlannedGoodsIssueDate', type:'sap.ui.model.type.Date' }" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>PlannedGoodsMovementDate}" sortProperty="PlannedGoodsMovementDate" filterProperty="PlannedGoodsMovementDate">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PlannedGoodsMovementDate", "leadingProperty":"PlannedGoodsMovementDate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ path:'PlannedGoodsMovementDate', type:'sap.ui.model.type.Date' }" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>PlannedCustomsDeclarationDate}" sortProperty="PlannedCustomsDeclarationDate" filterProperty="PlannedCustomsDeclarationDate">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PlannedCustomsDeclarationDate", "leadingProperty":"PlannedCustomsDeclarationDate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ path:'PlannedCustomsDeclarationDate', type:'sap.ui.model.type.Date' }" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="5rem" label="{i18n>IsApproved}" sortProperty="IsApproved" filterProperty="IsApproved">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"IsApproved", "leadingProperty":"IsApproved"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{IsApproved}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>ApproverName}" sortProperty="ApproverName" filterProperty="ApproverName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ApproverName", "leadingProperty":"ApproverName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ApproverName}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </smartTable:SmartTable>
+</core:FragmentDefinition>

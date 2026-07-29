@@ -19,7 +19,6 @@ server:
           - path: /sap
             url: https://my412552.s4hana.cloud.sap
             destination: UMC_Dev_Customizing
-            authenticationType: reentranceTicket # SAML support for vscode
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
@@ -43,6 +42,11 @@ server:
           - urlPath: /sap/opu/odata/sap/ZUI_SHIPPINGINSTRUCTION_O2
             metadataPath: ./webapp/localService/mainService/metadata.xml
             mockdataPath: ./webapp/localService/mainService/data
+            generateMockData: true
+            resolveExternalServiceReferences: true
+          - urlPath: /sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001
+            metadataPath: ./webapp/localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml
+            mockdataPath: ./webapp/localService/AuthorityService/data
             generateMockData: true
         annotations:
           - localPath: ./webapp/localService/mainService/ZUI_SHIPPINGINSTRUCTION_O2_VAN.xml

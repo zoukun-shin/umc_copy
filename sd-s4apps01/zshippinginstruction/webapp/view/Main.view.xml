@@ -1,0 +1,60 @@
+<mvc:View controllerName="sd.zshippinginstruction.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="ShipgInstr_SVM" showShare="true" showExecuteOnSelection="true" entitySet="ShipgInstrReport"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ShipgInstrReport" useToolbar="false" smartVariant="__SVM01" persistencyKey="ShipgInstr_SFB" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="SalesOrganization" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="BillingDocument" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>BillingDocument}" />
+                                <smartFilterBar:ControlConfiguration index='30' key="SalesDocument" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>SalesDocument}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="SoldToParty" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>SoldToParty}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="ShipToParty" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ShipToParty}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="OutboundDelivery" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>OutboundDelivery}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="DeliveryDocumentType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>DeliveryDocumentType}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="ShippingType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ShippingType}"/>
+                                <smartFilterBar:ControlConfiguration index='90' key="PlannedGoodsMovementDate" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PlannedGoodsMovementDate}"/>
+                                <smartFilterBar:ControlConfiguration index='100' key="PlannedGoodsIssueDate" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PlannedGoodsIssueDate}"/>
+                                <smartFilterBar:ControlConfiguration index='110' key="Product" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Product}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="CompanyCode" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SalesOrganization" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SalesOrganizationName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IsExists" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SoldToPartyName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ShipToPartyName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PlannedCustomsDeclarationDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IsApproved" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ApproverName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ShippingPoint" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="RequestedDeliveryDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IncotermsClassification" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IncotermsTransferLocation" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DefaultPackingItem" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="sd.zshippinginstruction.fragments.Report" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
