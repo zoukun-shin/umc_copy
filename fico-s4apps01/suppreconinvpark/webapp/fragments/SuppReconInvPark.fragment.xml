@@ -15,6 +15,7 @@
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
+                <Button icon="sap-icon://save" text="{i18n>saveBtn}" type="Transparent" press="onSaveDraft" visible="true" enabled="{= ${local>/authorityCheck/button/Post}}"/>
                 <Button icon="sap-icon://create" text="{i18n>postBtn}" type="Transparent" press="onPost" visible="true" enabled="{= ${local>/authorityCheck/button/Post}}"/>
                 <!-- <Button icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/dataLines} > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/> -->
             </OverflowToolbar>
@@ -385,7 +386,13 @@
                     <core:CustomData key="p13nData" value='\{"columnKey":"InvoiceDate", "leadingProperty":"InvoiceDate"\}'/>
                 </table:customData>
                 <table:template>
-                    <Text text="{path:'InvoiceDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}" wrapping="false" />
+                    <DatePicker
+                        value="{path:'InvoiceDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}"
+                        displayFormat="yyyy/MM/dd"
+                        valueFormat="yyyy/MM/dd"
+                        change="onDraftFieldChange"
+                        valueLiveUpdate="true"
+                        width="100%" />
                 </table:template>
             </table:Column>
             <table:Column width="12rem" label="{i18n>MIROVendorInvoiceNo}" sortProperty="MIROVendorInvoiceNo" filterProperty="MIROVendorInvoiceNo">
@@ -393,7 +400,7 @@
                     <core:CustomData key="p13nData" value='\{"columnKey":"MIROVendorInvoiceNo", "leadingProperty":"MIROVendorInvoiceNo"\}'/>
                 </table:customData>
                 <table:template>
-                    <Text text="{MIROVendorInvoiceNo}" wrapping="false" />
+                    <Input value="{MIROVendorInvoiceNo}" liveChange="onDraftFieldChange" change="onDraftFieldChange" valueLiveUpdate="true" maxLength="16" width="100%" />
                 </table:template>
             </table:Column>
             <table:Column width="14rem" label="{i18n>MIROText}" sortProperty="MIROText" filterProperty="MIROText">
@@ -401,7 +408,7 @@
                     <core:CustomData key="p13nData" value='\{"columnKey":"MIROText", "leadingProperty":"MIROText"\}'/>
                 </table:customData>
                 <table:template>
-                    <Text text="{MIROText}" wrapping="false" />
+                    <Input value="{MIROText}" liveChange="onDraftFieldChange" change="onDraftFieldChange" valueLiveUpdate="true" maxLength="50" width="100%" />
                 </table:template>
             </table:Column>
             <table:Column width="14rem" label="{i18n>MIROHeaderText}" sortProperty="MIROHeaderText" filterProperty="MIROHeaderText">
@@ -409,7 +416,7 @@
                     <core:CustomData key="p13nData" value='\{"columnKey":"MIROHeaderText", "leadingProperty":"MIROHeaderText"\}'/>
                 </table:customData>
                 <table:template>
-                    <Text text="{MIROHeaderText}" wrapping="false" />
+                    <Input value="{MIROHeaderText}" liveChange="onDraftFieldChange" change="onDraftFieldChange" valueLiveUpdate="true" maxLength="50" width="100%" />
                 </table:template>
             </table:Column>
             <table:Column width="10rem" label="{i18n>PayableAccount}" sortProperty="PayableAccount" filterProperty="PayableAccount">

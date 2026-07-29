@@ -91,6 +91,7 @@ sap.ui.define([
                     );
                 });
             }
+            this.getModel("local").setProperty("/draftEdits", {});
         },
 
         onBeforeRebindTable: function (oEvent) {
@@ -112,7 +113,67 @@ sap.ui.define([
             this._callOData("Post");
         },
 
+        onDraftFieldChange: function (oEvent) {
+            var oSource = oEvent.getSource();
+            var oContext = oSource.getBindingContext();
+            if (!oContext) {
+                return;
+            }
+
+            var oBindingInfo = oSource.getBindingInfo("value");
+            var sFieldName = oBindingInfo && oBindingInfo.parts && oBindingInfo.parts[0] && oBindingInfo.parts[0].path;
+            if (!sFieldName) {
+                return;
+            }
+
+            var vValue = oEvent.getParameter("value");
+            if (vValue === undefined && typeof oSource.getValue === "function") {
+                vValue = oSource.getValue();
+            }
+
+            this._setDraftFieldValue(oContext, sFieldName, vValue);
+        },
+
+        onSaveDraft: function () {
+            this._syncActiveEditorValue();
+
+            var oLocalModel = this.getModel("local");
+            var oMainModel = this.getModel();
+            var oDraftEdits = oLocalModel.getProperty("/draftEdits") || {};
+            var aDraftKeys = Object.keys(oDraftEdits);
+
+            if (aDraftKeys.length === 0) {
+                MessageToast.show(this.getResourceBundle().getText("noDraftChanges"));
+                return;
+            }
+
+            var iSavedRows = 0;
+            aDraftKeys.forEach(function (sDraftKey) {
+                var oDraftRow = oDraftEdits[sDraftKey];
+                var sPath = oDraftRow.__path;
+                if (!sPath) {
+                    return;
+                }
+
+                var bHasSavedField = false;
+                ["InvoiceDate", "MIROVendorInvoiceNo", "MIROText", "MIROHeaderText"].forEach(function (sFieldName) {
+                    if (oDraftRow[sFieldName] !== undefined) {
+                        oMainModel.setProperty(sPath + "/" + sFieldName, oDraftRow[sFieldName]);
+                        bHasSavedField = true;
+                    }
+                });
+
+                if (bHasSavedField) {
+                    iSavedRows += 1;
+                }
+            });
+
+            MessageToast.show(this.getResourceBundle().getText("draftSaved", [iSavedRows]));
+        },
+
         _callOData: function (sEvent) {
+            this._syncActiveEditorValue();
+
             var oTable = this.byId("idTable");
             var aSelectedIndices = oTable.getSelectedIndices();
             if (aSelectedIndices.length === 0) {
@@ -126,11 +187,15 @@ sap.ui.define([
                 aRequestData.push({
                     InvoiceNo: '',
                     InvoiceYear: '',
-                    Plant: oContext.getObject().Plant,
-                    CompanyCode: oContext.getObject().CompanyCode,
-                    MaterialDocumentYear: oContext.getObject().MaterialDocumentYear,
-                    MaterialDocument: oContext.getObject().MaterialDocument,
-                    MaterialDocumentItem: oContext.getObject().MaterialDocumentItem
+                    InvoiceDate: this._getRowFieldValue(oContext, "InvoiceDate"),
+                    MIROVendorInvoiceNo: this._getRowFieldValue(oContext, "MIROVendorInvoiceNo"),
+                    MIROText: this._getRowFieldValue(oContext, "MIROText"),
+                    MIROHeaderText: this._getRowFieldValue(oContext, "MIROHeaderText"),
+                    Plant: this._getRowFieldValue(oContext, "Plant"),
+                    CompanyCode: this._getRowFieldValue(oContext, "CompanyCode"),
+                    MaterialDocumentYear: this._getRowFieldValue(oContext, "MaterialDocumentYear"),
+                    MaterialDocument: this._getRowFieldValue(oContext, "MaterialDocument"),
+                    MaterialDocumentItem: this._getRowFieldValue(oContext, "MaterialDocumentItem")
                 });
             });
 
@@ -314,6 +379,113 @@ sap.ui.define([
 
         exportExcel: function (mExcelSettings, sFileName) {
             mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
+        },
+
+        _syncActiveEditorValue: function () {
+            var oActiveElement = document.activeElement;
+            if (!oActiveElement || !oActiveElement.id) {
+                return;
+            }
+
+            var oControl = sap.ui.getCore().byId(oActiveElement.id);
+            if (!oControl) {
+                return;
+            }
+
+            if (typeof oControl.fireChange === "function" && typeof oControl.getValue === "function") {
+                oControl.fireChange({
+                    value: oControl.getValue()
+                });
+            }
+
+            sap.ui.getCore().applyChanges();
+        },
+
+        _getRowFieldValue: function (oContext, sFieldName) {
+            var oModel = oContext.getModel();
+            var sPath = oContext.getPath();
+            var sDraftKey = this._getDraftRowKey(sPath);
+            var oDraftRow = this.getModel("local").getProperty("/draftEdits/" + sDraftKey);
+            var oPendingChanges = oModel.getPendingChanges ? oModel.getPendingChanges() : null;
+            var sPendingKey = sPath.startsWith("/") ? sPath.substring(1) : sPath;
+            var vValue;
+
+            if (oDraftRow && oDraftRow[sFieldName] !== undefined) {
+                vValue = oDraftRow[sFieldName];
+                return sFieldName === "InvoiceDate" ? this._formatDateForBackend(vValue) : vValue;
+            }
+
+            if (oPendingChanges && oPendingChanges[sPendingKey] && oPendingChanges[sPendingKey][sFieldName] !== undefined) {
+                vValue = oPendingChanges[sPendingKey][sFieldName];
+                return sFieldName === "InvoiceDate" ? this._formatDateForBackend(vValue) : vValue;
+            }
+
+            vValue = oModel.getProperty(sPath + "/" + sFieldName);
+            return sFieldName === "InvoiceDate" ? this._formatDateForBackend(vValue) : vValue;
+        },
+
+        _setDraftFieldValue: function (oContext, sFieldName, vValue) {
+            var oLocalModel = this.getModel("local");
+            var sPath = oContext.getPath();
+            var sDraftKey = this._getDraftRowKey(sPath);
+
+            if (!oLocalModel.getProperty("/draftEdits/" + sDraftKey)) {
+                oLocalModel.setProperty("/draftEdits/" + sDraftKey, {
+                    __path: sPath
+                });
+            }
+            oLocalModel.setProperty("/draftEdits/" + sDraftKey + "/" + sFieldName, vValue);
+        },
+
+        _getDraftRowKey: function (sPath) {
+            return encodeURIComponent(sPath.startsWith("/") ? sPath.substring(1) : sPath);
+        },
+
+        _formatDateForBackend: function (vDate) {
+            if (vDate === null || vDate === undefined || vDate === "") {
+                return "";
+            }
+
+            if (vDate instanceof Date && !isNaN(vDate.getTime())) {
+                return vDate.getFullYear().toString() +
+                    this._pad2(vDate.getMonth() + 1) +
+                    this._pad2(vDate.getDate());
+            }
+
+            if (typeof vDate === "string") {
+                var sDate = vDate.trim();
+                if (!sDate) {
+                    return "";
+                }
+
+                if (/^\d{8}$/.test(sDate)) {
+                    return sDate;
+                }
+
+                var aDateParts = sDate.match(/^(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})$/);
+                if (aDateParts) {
+                    return aDateParts[1] + this._pad2(aDateParts[2]) + this._pad2(aDateParts[3]);
+                }
+
+                var aSapDate = sDate.match(/^\/Date\((\d+)\)\/$/);
+                if (aSapDate) {
+                    var oSapDate = new Date(parseInt(aSapDate[1], 10));
+                    if (!isNaN(oSapDate.getTime())) {
+                        return oSapDate.getFullYear().toString() +
+                            this._pad2(oSapDate.getMonth() + 1) +
+                            this._pad2(oSapDate.getDate());
+                    }
+                }
+
+                var oIsoDate = new Date(sDate);
+                if (!isNaN(oIsoDate.getTime())) {
+                    return oIsoDate.getFullYear().toString() +
+                        this._pad2(oIsoDate.getMonth() + 1) +
+                        this._pad2(oIsoDate.getDate());
+                }
+            }
+
+            return vDate;
         }
     });
 });
