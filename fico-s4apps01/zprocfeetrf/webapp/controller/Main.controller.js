@@ -8,8 +8,6 @@ sap.ui.define([
 ], function (Base, formatter, Filter, FilterOperator, BusyDialog, MessageBox) {
     "use strict";
 
-    const ENTITY_SET = "ProcFeeTrf";
-
     return Base.extend("fico.zprocfeetrf.controller.Main", {
         formatter: formatter,
 
@@ -23,7 +21,7 @@ sap.ui.define([
         _initialize: function () {
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
-            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail(); 
             var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -134,8 +132,8 @@ sap.ui.define([
 
         _setActionButtonsByPostingStatus: function () {
             var oStatusSelect  = this.byId("PostingStatusSelect");
-            var oPostButton    = this.byId("btnPost");
-            var oCancelButton  = this.byId("btnCancel");
+            var oPostButton    = this.byId("btnPostJob");
+            var oCancelButton  = this.byId("btnCancelJob");
 
             if (!oStatusSelect || !oPostButton || !oCancelButton) {
                 return;
@@ -146,221 +144,181 @@ sap.ui.define([
             oCancelButton.setVisible(sPostingStatus === "2");
         },
 
-        onPost: function () {
-            var oTable   = this.byId("Table_ProcFeeTrf");
-            var aIndices = oTable.getSelectedIndices();
+        //========================================================
+        // ★【改动】过账JOB：不选行，把检索条件传给后端排JOB
+        //   弹窗消息 = 原过账确认消息 + JOB说明（原文未改动，只在后面追加）
+        //========================================================
+        onPostJob: function () {
+            var oBundle = this.getModel("i18n").getResourceBundle();
 
-            if (aIndices.length === 0) {
-                this._selectAllRows();
-            }
-            if (this._hasPostedAccountingDocument()) {
-                MessageBox.error(this.getModel("i18n").getResourceBundle().getText("NotPostRepeatedly"));
+            // 防重复点击
+            if (this._bRunning) { return; }
+
+            if (!this._hasTableData()) {
+                MessageBox.error(oBundle.getText("noDataMsg"));
                 return;
             }
-            var oBundle = this.getModel("i18n").getResourceBundle();
+
+            // 公司代码权限校验（防止查询后改了公司代码再点）
+            if (!this._checkCompanyAuthority()) { return; }
+
+            var oPayload = this._buildFilterPayload();
+            if (!oPayload) {
+                MessageBox.error(oBundle.getText("filterIncompleteMsg"));
+                return;
+            }
+
             MessageBox.confirm(
-                oBundle.getText("postConfirmMsg"),
+                oBundle.getText("postConfirmMsg") + "\n" + oBundle.getText("jobAppendMsg"),
                 {
                     title: oBundle.getText("postConfirmTitle"),
                     actions: [MessageBox.Action.YES, MessageBox.Action.NO],
                     emphasizedAction: MessageBox.Action.NO,
                     onClose: function (sAction) {
                         if (sAction === MessageBox.Action.YES) {
-                            this._selectAllRows();
-                            this._executeAction("POST");
+                            this._executeAction("POST", oPayload);
                         }
                     }.bind(this)
                 }
             );
         },
 
-        onCancel: function () {
-            var oTable   = this.byId("Table_ProcFeeTrf");
-            var aIndices = oTable.getSelectedIndices();
+        //========================================================
+        // ★【改动】冲销JOB：同样不选行，按检索条件冲销该期间全部已过账凭证
+        //   后端会先同步校验有无可冲销记录，通过后才排JOB
+        //   弹窗消息 = 原冲销确认消息 + JOB说明（原文未改动，只在后面追加）
+        //========================================================
+        onCancelJob: function () {
+            var oBundle = this.getModel("i18n").getResourceBundle();
 
-            if (aIndices.length === 0) {
-                this._selectAllRows();
-            }
-            if (this._hasReversedAccountingDocument()) {
-                MessageBox.error(this.getModel("i18n").getResourceBundle().getText("NotReversedRepeatedly"));
+            if (this._bRunning) { return; }
+
+            if (!this._hasTableData()) {
+                MessageBox.error(oBundle.getText("noDataMsg"));
                 return;
             }
-            var oBundle = this.getModel("i18n").getResourceBundle();
+
+            if (!this._checkCompanyAuthority()) { return; }
+
+            var oPayload = this._buildFilterPayload();
+            if (!oPayload) {
+                MessageBox.error(oBundle.getText("filterIncompleteMsg"));
+                return;
+            }
+
             MessageBox.confirm(
-                oBundle.getText("cancelConfirmMsg"),
+                oBundle.getText("cancelConfirmMsg") + "\n" + oBundle.getText("jobAppendMsg"),
                 {
                     title: oBundle.getText("cancelConfirmTitle"),
                     actions: [MessageBox.Action.YES, MessageBox.Action.NO],
                     emphasizedAction: MessageBox.Action.NO,
                     onClose: function (sAction) {
                         if (sAction === MessageBox.Action.YES) {
-                            this._selectAllRows();
-                            this._executeAction("CANCEL");
+                            this._executeAction("CANCEL", oPayload);
                         }
                     }.bind(this)
                 }
             );
         },
 
-        onExport: function () {
-            var oTable   = this.byId("Table_ProcFeeTrf");
-            var oBinding = oTable.getBinding("rows");
-            if (!oBinding) { return; }
-
-            var aData = [];
-            var iLength = oBinding.getLength();
-            for (var i = 0; i < iLength; i++) {
-                var oContext = oBinding.getContextByIndex(i);
-                var oRow     = oContext && oContext.getObject();
-                if (oRow) { aData.push(oRow); }
-            }
-
-            sap.ui.require(["sap/ui/export/Spreadsheet"], function (Spreadsheet) {
-            var aColumns = [
-                { label: this.getModel("i18n").getResourceBundle().getText("Status"),                          property: "Status" },
-                { label: this.getModel("i18n").getResourceBundle().getText("Message"),                         property: "Message" },
-                { label: this.getModel("i18n").getResourceBundle().getText("CompanyCode"),                     property: "CompanyCode" },
-                { label: this.getModel("i18n").getResourceBundle().getText("FiscalYear"),                      property: "FiscalYear" },
-                { label: this.getModel("i18n").getResourceBundle().getText("FiscalPeriod"),                    property: "FiscalPeriod" },
-                { label: this.getModel("i18n").getResourceBundle().getText("TargetCompanyCode"),               property: "TargetCompanyCode" },
-                { label: this.getModel("i18n").getResourceBundle().getText("Product"),                         property: "Product" },
-                { label: this.getModel("i18n").getResourceBundle().getText("Quantity"),                        property: "Quantity",                   type: "Number" },
-                { label: this.getModel("i18n").getResourceBundle().getText("BaseUnit"),                        property: "BaseUnit" },
-                { label: this.getModel("i18n").getResourceBundle().getText("DeliveryDocument"),                property: "DeliveryDocument" },
-                { label: this.getModel("i18n").getResourceBundle().getText("DeliveryDocumentItem"),            property: "DeliveryDocumentItem" },
-                { label: this.getModel("i18n").getResourceBundle().getText("AccountingDocument2200"),          property: "AccountingDocument2200" },
-                { label: this.getModel("i18n").getResourceBundle().getText("LedgerGLLineItem2200"),            property: "LedgerGLLineItem2200" },
-                { label: this.getModel("i18n").getResourceBundle().getText("SalesOrder2200"),                  property: "SalesOrder2200" },
-                { label: this.getModel("i18n").getResourceBundle().getText("SalesOrderItem2200"),              property: "SalesOrderItem2200" },
-                { label: this.getModel("i18n").getResourceBundle().getText("PurchasingDocument2000"),          property: "PurchasingDocument2000" },
-                { label: this.getModel("i18n").getResourceBundle().getText("PurchasingDocumentItem2000"),      property: "PurchasingDocumentItem2000" },
-                { label: this.getModel("i18n").getResourceBundle().getText("SalesOrder2000"),                  property: "SalesOrder2000" },
-                { label: this.getModel("i18n").getResourceBundle().getText("SalesOrderItem2000"),              property: "SalesOrderItem2000" },
-                { label: this.getModel("i18n").getResourceBundle().getText("Customer"),                        property: "Customer" },
-                { label: this.getModel("i18n").getResourceBundle().getText("SalesOrganization"),               property: "SalesOrganization" },
-                { label: this.getModel("i18n").getResourceBundle().getText("DistributionChannel"),             property: "DistributionChannel" },
-                { label: this.getModel("i18n").getResourceBundle().getText("OrganizationDivision"),            property: "OrganizationDivision" },
-                { label: this.getModel("i18n").getResourceBundle().getText("Plant"),                           property: "Plant" },
-                { label: this.getModel("i18n").getResourceBundle().getText("ProfitCenter"),                    property: "ProfitCenter" },
-                { label: this.getModel("i18n").getResourceBundle().getText("Amount2200Cny"),                   property: "Amount2200Cny",              type: "Number" },
-                { label: this.getModel("i18n").getResourceBundle().getText("Amount2200Usd"),                   property: "Amount2200Usd",              type: "Number" },
-                { label: this.getModel("i18n").getResourceBundle().getText("MaterialCost2200Cny"),             property: "MaterialCost2200Cny",        type: "Number" },
-                { label: this.getModel("i18n").getResourceBundle().getText("MaterialCost2200Usd"),             property: "MaterialCost2200Usd",        type: "Number" },
-                { label: this.getModel("i18n").getResourceBundle().getText("Amount2000PurchaseUsd"),           property: "Amount2000PurchaseUsd",      type: "Number" },
-                { label: this.getModel("i18n").getResourceBundle().getText("Amount2000SalesUsd"),              property: "Amount2000SalesUsd",         type: "Number" },
-                { label: this.getModel("i18n").getResourceBundle().getText("PostedCompanyCode"),               property: "PostedCompanyCode" },
-                { label: this.getModel("i18n").getResourceBundle().getText("PostedFiscalYear"),                property: "PostedFiscalYear" },
-                { label: this.getModel("i18n").getResourceBundle().getText("PostedPostingDate"),               property: "PostedPostingDate",          type: "Date" },
-                { label: this.getModel("i18n").getResourceBundle().getText("PostedAccountingDocument"),        property: "PostedAccountingDocument" },
-                { label: this.getModel("i18n").getResourceBundle().getText("ReversedCompanyCode"),             property: "ReversedCompanyCode" },
-                { label: this.getModel("i18n").getResourceBundle().getText("ReversedFiscalYear"),              property: "ReversedFiscalYear" },
-                { label: this.getModel("i18n").getResourceBundle().getText("ReversedPostingDate"),             property: "ReversedPostingDate",        type: "Date" },
-                { label: this.getModel("i18n").getResourceBundle().getText("ReversedAccountingDocument"),      property: "ReversedAccountingDocument" }
-            ];
-                var oSheet = new Spreadsheet({
-                    workbook:   { columns: aColumns },
-                    dataSource: aData,
-                    fileName: this.getModel("i18n").getResourceBundle().getText("Result") + ".xlsx"
-                });
-                oSheet.build().finally(function () { oSheet.destroy(); });
-            }.bind(this));
-        },
-
-        _selectAllRows: function () {
+        // ★【改动】表格是否有数据（未查询 / 查询结果0条 → false）
+        _hasTableData: function () {
             var oTable   = this.byId("Table_ProcFeeTrf");
             var oBinding = oTable && oTable.getBinding("rows");
-
-            if (!oTable || !oBinding) { return; }
-
-            var iLength = oBinding.getLength();
-            oTable.clearSelection();
-            if (iLength > 0) {
-                oTable.addSelectionInterval(0, iLength - 1);
-            }
-        },
-
-        _hasPostedAccountingDocument: function () {
-            var oTable   = this.byId("Table_ProcFeeTrf");
-            var oBinding = oTable && oTable.getBinding("rows");
-
             if (!oBinding) { return false; }
-
-            var iLength = oBinding.getLength();
-            for (var i = 0; i < iLength; i++) {
-                var oContext = oBinding.getContextByIndex(i);
-                var oRow     = oContext && oContext.getObject();
-                if (oRow && oRow.PostedAccountingDocument) { return true; }
-            }
-            return false;
+            return oBinding.getLength() > 0;
         },
 
-        _hasReversedAccountingDocument: function () {
-            var oTable   = this.byId("Table_ProcFeeTrf");
-            var oBinding = oTable && oTable.getBinding("rows");
-
-            if (!oBinding) { return false; }
-
-            var iLength = oBinding.getLength();
-            for (var i = 0; i < iLength; i++) {
-                var oContext = oBinding.getContextByIndex(i);
-                var oRow     = oContext && oContext.getObject();
-                if (oRow && oRow.Status === "S") { return true; }
+        // ★【改动】公司代码权限校验（与 onBeforeRebindTable 里的校验一致）
+        _checkCompanyAuthority: function () {
+            var sBukrs = this.byId("SFBProcFeeTrf").getFilterData().CompanyCode;
+            var aAuthorityCompanySet = this.getModel("local").getProperty("/authorityCheck/data/CompanySet") || [];
+            if (!aAuthorityCompanySet.some(function (data) { return data.CompanyCode === sBukrs; })) {
+                MessageBox.error(this.getModel("i18n").getResourceBundle().getText("noAuthorityCompanyCode", [sBukrs]));
+                return false;
             }
-            return false;
+            return true;
         },
 
-        _executeAction: function (sEvent) {
-            var postDocs              = this.preparePostBody();
-            var sCurrentPostingStatus = this.byId("PostingStatusSelect").getSelectedKey();
+        //========================================================
+        // ★【改动】排JOB的payload：从 SmartFilterBar / 自定义控件读检索条件
+        //   {
+        //     "CompanyCode":       "2200",
+        //     "TargetCompanyCode": "2000",
+        //     "FiscalYear":        "2026",
+        //     "FiscalPeriod":      "04"
+        //   }
+        //   条件不完整返回 null（目标公司代码可空，后端默认2000）
+        //========================================================
+        _buildFilterPayload: function () {
+            var oSFB = this.byId("SFBProcFeeTrf");
+            if (!oSFB) { return null; }
+
+            var oFilterData = oSFB.getFilterData() || {};
+            var sCompany    = oFilterData.CompanyCode;
+            var sTargetCC   = oFilterData.TargetCompanyCode || "";
+
+            // 年度/期间是 customControl，不在 getFilterData 里
+            var oGjahrCtl = this.byId("idGjahr");
+            var sGjahr = "";
+            if (oGjahrCtl && oGjahrCtl.getValue()) {
+                var oGjahrDate = new Date(oGjahrCtl.getValue());
+                if (!isNaN(oGjahrDate.getTime())) {
+                    sGjahr = String(oGjahrDate.getFullYear());
+                }
+            }
+
+            var oMonatCtl = this.byId("idMonat");
+            var sMonat = oMonatCtl ? oMonatCtl.getSelectedKey() : "";
+
+            if (!sCompany || !sGjahr || !sMonat) {
+                return null;
+            }
+
+            return {
+                CompanyCode:       sCompany,
+                TargetCompanyCode: sTargetCC,
+                FiscalYear:        sGjahr,
+                FiscalPeriod:      sMonat
+            };
+        },
+
+        //========================================================
+        // ★【改动】调后端排JOB
+        //   JOB是异步的，排完后 ZTFI_1034 还没结果，所以【不刷新列表】
+        //   用户稍后重新点 GO 就能看到执行结果
+        //========================================================
+        _executeAction: function (sEvent, oPayload) {
+            var that = this;
+
+            this._bRunning = true;
+            this._setActionButtonsEnabled(false);
             this._BusyDialog.open();
 
-            Promise.all([this.postAction(postDocs, sEvent)]).then((oData) => {
-                oData.forEach((item) => {
-                    var message = item["processLogic"].Event;
-                    if (message && message === "MESSAGE") {
-                        MessageBox.error(item["processLogic"].Zzkey);
-                        return;
-                    }
-                    var aResult = JSON.parse(item["processLogic"].Zzkey);
-                    aResult.forEach(function (line) {
-                        line.POSTINGSTATUS = sCurrentPostingStatus;
-                        var sKey = this._buildEntityKey(line);
-                        if (!sKey) { return; }
+            this.postAction([JSON.stringify(oPayload)], sEvent).then(function (oData) {
+                var oRes = oData && oData["processLogic"];
 
-                        this._setIfExists(sKey, "Status",  line.STATUS  || line.Status);
-                        this._setIfExists(sKey, "Message", line.MESSAGE || line.Message);
+                // 后端校验失败 / 排程失败 → 红框
+                if (oRes && oRes.Event === "MESSAGE") {
+                    MessageBox.error(oRes.Zzkey);
+                    return;
+                }
 
-                        this._setIfExists(sKey, "PostedCompanyCode",        line.POSTEDCOMPANYCODE        || line.PostedCompanyCode);
-                        this._setIfExists(sKey, "PostedPostingDate",        line.POSTEDPOSTINGDATE        || line.PostedPostingDate);
-                        this._setIfExists(sKey, "PostedFiscalYear",         line.POSTEDFISCALYEAR         || line.PostedFiscalYear);
-                        this._setIfExists(sKey, "PostedAccountingDocument", line.POSTEDACCOUNTINGDOCUMENT || line.PostedAccountingDocument);
-
-                        this._setIfExists(sKey, "ReversedCompanyCode",        line.REVERSEDCOMPANYCODE        || line.ReversedCompanyCode);
-                        this._setIfExists(sKey, "ReversedPostingDate",        line.REVERSEDPOSTINGDATE        || line.ReversedPostingDate);
-                        this._setIfExists(sKey, "ReversedFiscalYear",         line.REVERSEDFISCALYEAR         || line.ReversedFiscalYear);
-                        this._setIfExists(sKey, "ReversedAccountingDocument", line.REVERSEDACCOUNTINGDOCUMENT || line.ReversedAccountingDocument);
-                    }, this);
-                });
-            }).catch((error) => {
+                MessageBox.information(oRes && oRes.Zzkey ? oRes.Zzkey : "");
+            }).catch(function (error) {
                 MessageBox.error(error.message || error.responseText || String(error));
-            }).finally(() => {
-                this._BusyDialog.close();
+            }).finally(function () {
+                that._bRunning = false;
+                that._setActionButtonsEnabled(true);
+                that._BusyDialog.close();
             });
         },
 
-        preparePostBody: function () {
-            var oTable       = this.byId("Table_ProcFeeTrf");
-            var aIndices     = oTable.getSelectedIndices();
-            var selectedRows = [];
-
-            aIndices.forEach((iIndex) => {
-                var sPath = oTable.getContextByIndex(iIndex).getPath();
-                var oRow  = Object.assign({}, this.getModel().getObject(sPath));
-                delete oRow.__metadata;
-                selectedRows.push(oRow);
-            });
-
-            return [JSON.stringify(selectedRows)];
+        _setActionButtonsEnabled: function (bEnabled) {
+            var oPost   = this.byId("btnPostJob");
+            var oCancel = this.byId("btnCancelJob");
+            if (oPost)   { oPost.setEnabled(bEnabled); }
+            if (oCancel) { oCancel.setEnabled(bEnabled); }
         },
 
         postAction: function (postData, bEvent) {
@@ -375,32 +333,6 @@ sap.ui.define([
                     }
                 });
             }.bind(this));
-        },
-
-        _setIfExists: function (sKey, sProperty, vValue) {
-            if (vValue !== undefined && vValue !== null) {
-                this._oDataModel.setProperty(sKey + "/" + sProperty, vValue);
-            }
-        },
-
-        _buildEntityKey: function (line) {
-            var sCompanyCode           = line.COMPANYCODE           || line.CompanyCode;
-            var sFiscalYear            = line.FISCALYEAR            || line.FiscalYear;
-            var sFiscalPeriod          = line.FISCALPERIOD          || line.FiscalPeriod;
-            var sDeliveryDocument      = line.DELIVERYDOCUMENT      || line.DeliveryDocument;
-            var sDeliveryDocumentItem  = line.DELIVERYDOCUMENTITEM  || line.DeliveryDocumentItem;
-
-            if (!sCompanyCode || !sFiscalYear || !sFiscalPeriod || !sDeliveryDocument || !sDeliveryDocumentItem) {
-                return "";
-            }
-
-            return "/" + ENTITY_SET +
-                "(CompanyCode='"           + sCompanyCode          +
-                "',FiscalYear='"           + sFiscalYear           +
-                "',FiscalPeriod='"         + sFiscalPeriod         +
-                "',DeliveryDocument='"     + sDeliveryDocument     +
-                "',DeliveryDocumentItem='" + sDeliveryDocumentItem +
-                "')";
         }
     });
 });

@@ -65,19 +65,20 @@
             <smartTable:SmartTable id="smartTable_ProcFeeTrf" entitySet="ProcFeeTrf" smartVariant="__SVM01" smartFilterId="SFBProcFeeTrf"
                 tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true"
                 persistencyKey="ProcFeeTrfTable" header="{i18n>Result}" enableAutoBinding="false"
-                placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="false"
+                placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="true"
                 fitContainer="true" height="100%" requestAtLeastFields="Amount2200CnyCurrency,Amount2200UsdCurrency,Amount2000UsdCurrency">
 
                 <smartTable:customToolbar>
                     <OverflowToolbar id="toolbar" width="100%">
                         <ToolbarSpacer/>
-                        <Button id="btnPost" icon="sap-icon://create" text="{i18n>Post}" tooltip="{i18n>Post}" press="onPost" visible="{local>/showPost}" enabled="{= ${local>/authorityCheck/button/Post} !== false}"/>
-                        <Button id="btnCancel" icon="sap-icon://undo" text="{i18n>Cancel}" tooltip="{i18n>Cancel}" press="onCancel" visible="{local>/showCancel}" enabled="{= ${local>/authorityCheck/button/Cancel} !== false}"/>
-                        <Button id="btnExport" icon="sap-icon://excel-attachment"  press="onExport"/>
+                        <!-- ★【改动】过账/冲销按钮 → 过账JOB/冲销JOB：不选行，按检索条件排后台JOB -->
+                        <Button id="btnPostJob" icon="sap-icon://add-calendar" text="{i18n>PostJob}" tooltip="{i18n>PostJob}" press="onPostJob" visible="{local>/showPost}" enabled="{= ${local>/authorityCheck/button/Post} !== false}"/>
+                        <Button id="btnCancelJob" icon="sap-icon://add-calendar" text="{i18n>CancelJob}" tooltip="{i18n>CancelJob}" press="onCancelJob" visible="{local>/showCancel}" enabled="{= ${local>/authorityCheck/button/Cancel} !== false}"/>
                     </OverflowToolbar>
                 </smartTable:customToolbar>
 
-                <t:Table id="Table_ProcFeeTrf" selectionMode="MultiToggle" rowMode="Auto">
+                <!-- ★【改动】过账JOB/冲销JOB 都按检索条件全选执行，不再需要选择框 -->
+                <t:Table id="Table_ProcFeeTrf" selectionMode="None" rowMode="Auto" threshold="9999999">
                     <t:Column id="Status" width="6rem" label="{i18n>Status}" sortProperty="Status" filterProperty="Status"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Status","leadingProperty":"Status","sortProperty":"Status","filterProperty":"Status"}'/></t:customData><t:template><ObjectStatus state="{path:'Status', formatter:'.formatter.setState'}" icon="{path:'Status', formatter:'.formatter.setStateIcon'}"/></t:template></t:Column>
                     <t:Column id="Message" label="{i18n>Message}" width="20rem" sortProperty="Message"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Message","leadingProperty":"Message","sortProperty":"Message"}'/></t:customData><t:template><Text text="{Message}" tooltip="{Message}" wrapping="false"/></t:template></t:Column>
                     <t:Column id="CompanyCode" label="{i18n>CompanyCode}" width="7rem" sortProperty="CompanyCode"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode","leadingProperty":"CompanyCode","sortProperty":"CompanyCode"}'/></t:customData><t:template><Text text="{CompanyCode}" wrapping="false"/></t:template></t:Column>
