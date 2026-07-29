@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../../sap/zui_icpriceorder_o2/$metadata">
+        <edmx:Include Namespace="cds_zui_icpriceorder_o2" Alias="SAP"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="zui_icpriceorder_o2_van.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_icpriceorder_o2.I_CustomerType/DataControllerSet">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.I_CustomerType/DataController1">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.I_CustomerType/DataController2">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.I_CustomerType/DataController3">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.I_CustomerType/DataController4">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.I_CustomerType/DataController5">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.I_CustomerType/DataController6">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.I_CustomerType/DataController7">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.I_CustomerType/DataController8">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.I_CustomerType/DataController9">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.I_CustomerType/DataController10">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.I_SalesOrganizationType/AddressID">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/SalesOrder">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/SalesOrderItem">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/DistributionChannel">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/SalesQuantity">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/SalesQtyUnit">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/SalesUnitPrice">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/SalesAmount">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/SalesPriceUnitUom">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/SalesPriceUnit">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/OrderCurrency">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/PurchaseOrder">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/PurchaseOrderItem">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/PurQuantity">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/PurQtyUnit">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/PurUnitPrice">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/PurAmount">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/PurPriceUnitUom">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/PurPriceUnit">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/PurCurrency">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/IcSalesOrder">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/IcSalesOrderItem">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/IcSalesQuantity">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/IcSalesQtyUnit">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/IcSalesUnitPrice">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/IcSalesAmount">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/IcOrderCurrency">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/ExecStatus">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/Message">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/SoldToPartyName">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/MaterialName">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/Supplier">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/Customer">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/SalesDocumentType">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/YY1_SalesDocType_SDH">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/Rate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/OrderDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/IcStep">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/IcCounter">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/IcCondQtyUnit">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/IcCondQuantity">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType/OrderDateF">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpriceorder_o2.IcPriceOrderType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="{@i18n&gt;SalesOrganization}"/>
+                            <PropertyValue Property="Value" Path="SalesOrganization"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="分销渠道"/>
+                            <PropertyValue Property="Value" Path="DistributionChannel"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="销售订单号"/>
+                            <PropertyValue Property="Value" Path="SalesOrder"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="订单行号"/>
+                            <PropertyValue Property="Value" Path="SalesOrderItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="售达方"/>
+                            <PropertyValue Property="Value" Path="SoldToParty"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="收票方"/>
+                            <PropertyValue Property="Value" Path="BillToParty"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="物料号"/>
+                            <PropertyValue Property="Value" Path="Material"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="销售数量"/>
+                            <PropertyValue Property="Value" Path="SalesQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="销售单价"/>
+                            <PropertyValue Property="Value" Path="SalesUnitPrice"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="销售金额"/>
+                            <PropertyValue Property="Value" Path="SalesAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="价格单位"/>
+                            <PropertyValue Property="Value" Path="SalesPriceUnit"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="订单货币"/>
+                            <PropertyValue Property="Value" Path="OrderCurrency"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="交货工厂"/>
+                            <PropertyValue Property="Value" Path="Plant"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="公司间采购订单号"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrder"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="采购订单行号"/>
+                            <PropertyValue Property="Value" Path="PurchaseOrderItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="采购数量"/>
+                            <PropertyValue Property="Value" Path="PurQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="采购单价"/>
+                            <PropertyValue Property="Value" Path="PurUnitPrice"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="采购金额"/>
+                            <PropertyValue Property="Value" Path="PurAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="价格单位"/>
+                            <PropertyValue Property="Value" Path="PurPriceUnit"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="采购货币"/>
+                            <PropertyValue Property="Value" Path="PurCurrency"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="公司间销售订单号"/>
+                            <PropertyValue Property="Value" Path="IcSalesOrder"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="销售订单行号"/>
+                            <PropertyValue Property="Value" Path="IcSalesOrderItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="销售数量"/>
+                            <PropertyValue Property="Value" Path="IcSalesQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="销售单价"/>
+                            <PropertyValue Property="Value" Path="IcSalesUnitPrice"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="销售金额"/>
+                            <PropertyValue Property="Value" Path="IcSalesAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="价格单位"/>
+                            <PropertyValue Property="Value" Path="IcCondQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="订单货币"/>
+                            <PropertyValue Property="Value" Path="IcOrderCurrency"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="执行状态"/>
+                            <PropertyValue Property="Value" Path="ExecStatus"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="消息"/>
+                            <PropertyValue Property="Value" Path="Message"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>SalesOrganization</PropertyPath>
+                        <PropertyPath>SoldToParty</PropertyPath>
+                        <PropertyPath>BillToParty</PropertyPath>
+                        <PropertyPath>Plant</PropertyPath>
+                        <PropertyPath>Material</PropertyPath>
+                        <PropertyPath>SalesOrderF</PropertyPath>
+                        <PropertyPath>IcSalesOrderF</PropertyPath>
+                        <PropertyPath>OrderDateF</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="_Entities"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

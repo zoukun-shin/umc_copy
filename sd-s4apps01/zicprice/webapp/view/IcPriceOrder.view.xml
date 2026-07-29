@@ -1,0 +1,282 @@
+<mvc:View
+    controllerName="sd.zicprice.controller.IcPriceOrder"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:t="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants">
+    <!--=====================================================================
+        SD-056 页签2：订单价格更新
+          · GO   → SmartTable rebind，读原始SO+PO+IC-SO（ZCL_ICPRICEORDER）
+          · 更新 → processLogic Event='UPDATE'，改选中行 PO+SO 价（加价）
+                   勾选行按【整行】回传后台
+    ======================================================================-->
+    <f:DynamicPage id="idOrderDynamicPage" showFooter="true" fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle id="idOrderTitle">
+                <f:heading>
+                    <sv:SmartVariantManagement
+                        id="idOrderSVM"
+                        showShare="true"
+                        persistencyKey="icPriceOrderVariantV2"
+                        showExecuteOnSelection="true"
+                        entitySet="IcPriceOrder"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader id="idOrderHeader">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar
+                        id="idOrderFilterBar"
+                        smartVariant="idOrderSVM"
+                        persistencyKey="icPriceOrderFilter"
+                        entitySet="IcPriceOrder"
+                        useToolbar="false"
+                        class="sapUiResponsiveMargin"
+                        search="onSearch">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="SalesOrganization" index="1"
+                                visibleInAdvancedArea="true" mandatory="mandatory"
+                                displayBehaviour="idAndDescription"
+                                label="{i18n>SalesOrganization}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="SoldToParty" index="2"
+                                visibleInAdvancedArea="true" mandatory="notMandatory"
+                                displayBehaviour="idAndDescription"
+                                label="{i18n>SoldToParty}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="BillToParty" index="3"
+                                visibleInAdvancedArea="true" mandatory="notMandatory"
+                                displayBehaviour="idAndDescription"
+                                label="{i18n>BillToParty}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="Plant" index="4"
+                                visibleInAdvancedArea="true" mandatory="notMandatory"
+                                displayBehaviour="idAndDescription"
+                                label="{i18n>Plant}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="Material" index="5"
+                                visibleInAdvancedArea="true" mandatory="notMandatory"
+                                displayBehaviour="idAndDescription"
+                                label="{i18n>Material}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="SalesOrderF" index="6"
+                                visibleInAdvancedArea="true" mandatory="notMandatory"
+                                displayBehaviour="idAndDescription"
+                                label="{i18n>filterSalesOrder}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="IcSalesOrderF" index="7"
+                                visibleInAdvancedArea="true" mandatory="notMandatory"
+                                displayBehaviour="idAndDescription"
+                                label="{i18n>filterIcSalesOrder}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="OrderDateF" index="8"
+                                visibleInAdvancedArea="true" mandatory="notMandatory"
+                                label="{i18n>OrderDate}">
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection id="idDROrder"
+                                        valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"/>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <smartTable:SmartTable
+                id="idOrderSmartTable"
+                height="100%"
+                entitySet="IcPriceOrder"
+                smartFilterId="idOrderFilterBar"
+                smartVariant="idOrderSVM"
+                persistencyKey="icPriceOrderTableV2"
+                tableType="Table"
+                useVariantManagement="true"
+                useTablePersonalisation="true"
+                header="{i18n>orderResultTitle}"
+                showRowCount="true"
+                enableAutoBinding="false"
+                placeToolbarInTable="true"
+                beforeRebindTable="onBeforeRebindTable"
+                requestAtLeastFields="SalesOrganization,SalesOrder,SalesOrderItem,SoldToParty,BillToParty,Material,Plant,SalesUnitPrice,SalesPriceUnit,SalesPriceUnitUom,OrderCurrency,Rate,Supplier,Customer,SalesDocumentType,YY1_SalesDocType_SDH,PurchaseOrder,PurchaseOrderItem,PurUnitPrice,PurQuantity,PurQtyUnit,PurPriceUnit,PurPriceUnitUom,PurCurrency,IcSalesOrder,IcSalesOrderItem,IcSalesUnitPrice,IcOrderCurrency,IcStep,IcCounter,IcCondQuantity,IcCondQtyUnit,OrderDate">
+                <smartTable:customToolbar>
+                    <OverflowToolbar id="idOrderCustToolbar">
+                        <ToolbarSpacer id="idOrderSpacer"/>
+                        <Button id="idBtnUpdate" text="{i18n>btnUpdateOrder}" visible="{auth>/button/UpdateOrder}" press="onUpdate"/>
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+                <t:Table selectionMode="MultiToggle" selectionBehavior="Row" class="sapUiSizeCompact">
+                    <t:rowMode>
+                        <!-- 固定行内容高度：屏幕缩放150%(devicePixelRatio=1.5)时 Auto 模式行高测量出小数，底部会留白 -->
+                        <rm:Auto id="idOrderAuto" rowContentHeight="32"/>
+                    </t:rowMode>
+                    <t:columns>
+                        <!-- 手工列 + i18n（路线2）；顺序=业务要求 + 三个价格单位/加价率 -->
+                        <t:Column width="8rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesOrganization","leadingProperty":"SalesOrganization"\}'/></t:customData>
+                            <t:label><Text text="{i18n>SalesOrganization}"/></t:label>
+                            <t:template><Text text="{SalesOrganization}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"DistributionChannel","leadingProperty":"DistributionChannel"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2DistributionChannel}"/></t:label>
+                            <t:template><Text text="{DistributionChannel}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="11rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesOrder","leadingProperty":"SalesOrder"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2SalesOrder}"/></t:label>
+                            <t:template><Text text="{SalesOrder}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesOrderItem","leadingProperty":"SalesOrderItem"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2SalesOrderItem}"/></t:label>
+                            <t:template><Text text="{SalesOrderItem}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="8rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SoldToParty","leadingProperty":"SoldToParty"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2SoldToParty}"/></t:label>
+                            <t:template><Text text="{SoldToParty}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="8rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BillToParty","leadingProperty":"BillToParty"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2BillToParty}"/></t:label>
+                            <t:template><Text text="{BillToParty}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="11rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Material","leadingProperty":"Material"\}'/></t:customData>
+                            <t:label><Text text="{i18n>Material}"/></t:label>
+                            <t:template><Text text="{Material}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="10rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesQuantity","leadingProperty":"SalesQuantity"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2SalesQuantity}"/></t:label>
+                            <t:template><Text text="{parts:[{path:'SalesQuantity'},{path:'SalesQtyUnit'}], type:'sap.ui.model.type.Unit', formatOptions:{showMeasure:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="11rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesUnitPrice","leadingProperty":"SalesUnitPrice"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2SalesUnitPrice}"/></t:label>
+                            <t:template><Text text="{path:'SalesUnitPrice', type:'sap.ui.model.type.Float', formatOptions:{groupingEnabled:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="11rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesAmount","leadingProperty":"SalesAmount"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2SalesAmount}"/></t:label>
+                            <t:template><Text text="{path:'SalesAmount', type:'sap.ui.model.type.Float', formatOptions:{groupingEnabled:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="9rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesPriceUnit","leadingProperty":"SalesPriceUnit"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2SalesPriceUnit}"/></t:label>
+                            <t:template><Text text="{parts:[{path:'SalesPriceUnit'},{path:'SalesPriceUnitUom'}], type:'sap.ui.model.type.Unit', formatOptions:{showMeasure:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"OrderCurrency","leadingProperty":"OrderCurrency"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2OrderCurrency}"/></t:label>
+                            <t:template><Text text="{OrderCurrency}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Rate","leadingProperty":"Rate"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2Rate}"/></t:label>
+                            <t:template><Text text="{path:'Rate', type:'sap.ui.model.type.Float', formatOptions:{groupingEnabled:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Plant","leadingProperty":"Plant"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2Plant}"/></t:label>
+                            <t:template><Text text="{Plant}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="12rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrder","leadingProperty":"PurchaseOrder"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2PurchaseOrder}"/></t:label>
+                            <t:template><Text text="{PurchaseOrder}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderItem","leadingProperty":"PurchaseOrderItem"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2PurchaseOrderItem}"/></t:label>
+                            <t:template><Text text="{PurchaseOrderItem}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="10rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PurQuantity","leadingProperty":"PurQuantity"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2PurQuantity}"/></t:label>
+                            <t:template><Text text="{parts:[{path:'PurQuantity'},{path:'PurQtyUnit'}], type:'sap.ui.model.type.Unit', formatOptions:{showMeasure:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="11rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PurUnitPrice","leadingProperty":"PurUnitPrice"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2PurUnitPrice}"/></t:label>
+                            <t:template><Text text="{path:'PurUnitPrice', type:'sap.ui.model.type.Float', formatOptions:{groupingEnabled:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="11rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PurAmount","leadingProperty":"PurAmount"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2PurAmount}"/></t:label>
+                            <t:template><Text text="{path:'PurAmount', type:'sap.ui.model.type.Float', formatOptions:{groupingEnabled:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="9rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PurPriceUnit","leadingProperty":"PurPriceUnit"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2PurPriceUnit}"/></t:label>
+                            <t:template><Text text="{parts:[{path:'PurPriceUnit'},{path:'PurPriceUnitUom'}], type:'sap.ui.model.type.Unit', formatOptions:{showMeasure:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PurCurrency","leadingProperty":"PurCurrency"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2PurCurrency}"/></t:label>
+                            <t:template><Text text="{PurCurrency}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="12rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"IcSalesOrder","leadingProperty":"IcSalesOrder"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2IcSalesOrder}"/></t:label>
+                            <t:template><Text text="{IcSalesOrder}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"IcSalesOrderItem","leadingProperty":"IcSalesOrderItem"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2IcSalesOrderItem}"/></t:label>
+                            <t:template><Text text="{IcSalesOrderItem}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="10rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"IcSalesQuantity","leadingProperty":"IcSalesQuantity"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2IcSalesQuantity}"/></t:label>
+                            <t:template><Text text="{parts:[{path:'IcSalesQuantity'},{path:'IcSalesQtyUnit'}], type:'sap.ui.model.type.Unit', formatOptions:{showMeasure:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="11rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"IcSalesUnitPrice","leadingProperty":"IcSalesUnitPrice"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2IcSalesUnitPrice}"/></t:label>
+                            <t:template><Text text="{path:'IcSalesUnitPrice', type:'sap.ui.model.type.Float', formatOptions:{groupingEnabled:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="11rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"IcSalesAmount","leadingProperty":"IcSalesAmount"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2IcSalesAmount}"/></t:label>
+                            <t:template><Text text="{path:'IcSalesAmount', type:'sap.ui.model.type.Float', formatOptions:{groupingEnabled:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="9rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"IcCondQuantity","leadingProperty":"IcCondQuantity"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2IcCondQuantity}"/></t:label>
+                            <t:template><Text text="{parts:[{path:'IcCondQuantity'},{path:'IcCondQtyUnit'}], type:'sap.ui.model.type.Unit', formatOptions:{showMeasure:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"IcOrderCurrency","leadingProperty":"IcOrderCurrency"\}'/></t:customData>
+                            <t:label><Text text="{i18n>o2IcOrderCurrency}"/></t:label>
+                            <t:template><Text text="{IcOrderCurrency}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ExecStatus","leadingProperty":"ExecStatus"\}'/></t:customData>
+                            <t:label><Text text="{i18n>ExecStatus}"/></t:label>
+                            <t:template><ObjectStatus state="{ path: 'ExecStatus', formatter: '.formatter.setState' }" icon="{ path: 'ExecStatus', formatter: '.formatter.setStateIcon' }"/></t:template>
+                        </t:Column>
+                        <t:Column width="24rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Message","leadingProperty":"Message"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colMessage}"/></t:label>
+                            <t:template><Text text="{Message}"/></t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

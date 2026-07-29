@@ -1,0 +1,259 @@
+{
+  "_version": "1.60.0",
+  "sap.app": {
+    "id": "sd.zicpricerate",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.29.0",
+      "toolsId": "7edb169f-0836-42a3-b067-46a76e98e257"
+    },
+    "dataSources": {
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      },
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/zui_tsd_1023_o4/srvd/sap/zui_tsd_1023_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "zui_dtimp_conf_o4": {
+        "uri": "/sap/opu/odata4/sap/zui_dtimp_conf_o4/srvd/sap/zui_dtimp_conf_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/zui_dtimp_conf_o4/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "PrintService": {
+        "uri": "/sap/opu/odata4/sap/zui_prt_record_o4/srvd/sap/zui_prt_record_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PRT_RECORD_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "AuthorityService": {
+        "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "icpriceService": {
+        "uri": "/sap/opu/odata4/sap/zui_icpricerate_o4/srvd/sap/zui_icpricerate_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/icpriceService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.120.38",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "sd.zicpricerate.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      },
+      "Attach": {
+        "dataSource": "zui_dtimp_conf_o4",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "local": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true
+      },
+      "Print": {
+        "dataSource": "PrintService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "Authority": {
+        "dataSource": "AuthorityService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "ICPrice": {
+        "dataSource": "icpriceService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "icpriceService": {
+        "dataSource": "icpriceService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "ZC_TSD_1023List",
+          "target": "ZC_TSD_1023List"
+        },
+        {
+          "pattern": "ZC_TSD_1023({key}):?query:",
+          "name": "ZC_TSD_1023ObjectPage",
+          "target": "ZC_TSD_1023ObjectPage"
+        }
+      ],
+      "targets": {
+        "ZC_TSD_1023List": {
+          "type": "Component",
+          "id": "ZC_TSD_1023List",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/ZC_TSD_1023",
+              "variantManagement": "Page",
+              "navigation": {
+                "ZC_TSD_1023": {
+                  "detail": {
+                    "route": "ZC_TSD_1023ObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable",
+                    "disableCopyToClipboard": false
+                  },
+                  "actions": {
+                    "upload": {
+                      "press": "sd.zicpricerate.ext.controller.ListReportExt.openUploadDialog",
+                      "visible": true,
+                      "enabled": "{local>/authorityCheck/button/Upload}",
+                      "text": "{@i18n>upload}",
+                      "icon": "sap-icon://upload-to-cloud"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ZC_TSD_1023ObjectPage": {
+          "type": "Component",
+          "id": "ZC_TSD_1023ObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/ZC_TSD_1023"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.fe": {
+    "app": {
+      "enableLazyLoading": true
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "sd-s4apps01"
+  }
+}

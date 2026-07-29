@@ -1,0 +1,194 @@
+<mvc:View
+    controllerName="sd.zicprice.controller.IcPriceQuery"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:table="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    core:require="{ CustomDecimal: 'sd/zicprice/model/CustomDecimal' }">
+    <!--=====================================================================
+        SD-056 画面2：公司间价格查询（页签1）
+          · 固定列（4.2 的503销售价格）写死在 XML
+          · 动态列（4.3.1采购价 / 4.3.2销售价，每个工厂两列）
+            由 controller 在 onSearch 回调里 addColumn 追加
+          · 不用 SmartTable（它按metadata自动建列，跟手工加列冲突），
+            用 SmartFilterBar + 普通 table:Table + local JSONModel
+    ======================================================================-->
+    <f:DynamicPage id="idDynamicPage" showFooter="true" fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle id="idTitle">
+                <f:heading>
+                    <sv:SmartVariantManagement
+                        id="idSVM"
+                        showShare="true"
+                        persistencyKey="icPriceQueryVariant"
+                        showExecuteOnSelection="true"
+                        entitySet="IcPriceQuery"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader id="idHeader">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar
+                        id="idSmartFilterBar"
+                        smartVariant="idSVM"
+                        persistencyKey="icPriceQueryFilter"
+                        entitySet="IcPriceQuery"
+                        useToolbar="false"
+                        class="sapUiResponsiveMargin"
+                        search="onSearch">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="SalesOrganization"
+                                index="1"
+                                visibleInAdvancedArea="true"
+                                mandatory="mandatory"
+                                displayBehaviour="idAndDescription"
+                                label="{i18n>SalesOrganization}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="Material"
+                                index="2"
+                                visibleInAdvancedArea="true"
+                                mandatory="notMandatory"
+                                displayBehaviour="idAndDescription"
+                                label="{i18n>Material}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="SoldToParty"
+                                index="3"
+                                visibleInAdvancedArea="true"
+                                mandatory="notMandatory"
+                                displayBehaviour="idAndDescription"
+                                label="{i18n>SoldToParty}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="BillToParty"
+                                index="4"
+                                visibleInAdvancedArea="true"
+                                mandatory="notMandatory"
+                                displayBehaviour="idAndDescription"
+                                label="{i18n>BillToParty}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="DynPlant"
+                                index="5"
+                                visibleInAdvancedArea="true"
+                                mandatory="notMandatory"
+                                displayBehaviour="idAndDescription"
+                                label="{i18n>Plant}"/>
+                            <!-- 有效期间：区间，后端按 StartDate<=To AND EndDate>=From 过滤 -->
+                            <smartFilterBar:ControlConfiguration
+                                key="ValidityDateF"
+                                index="6"
+                                visibleInAdvancedArea="true"
+                                mandatory="notMandatory"
+                                label="{i18n>ValidityPeriod}">
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection
+                                        id="idDRValidity"
+                                        valueFormat="yyyy-MM-dd"
+                                        displayFormat="yyyy-MM-dd"/>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <table:Table
+                id="idPriceTable"
+                rows="{local>/rows}"
+                selectionMode="MultiToggle"
+                selectionBehavior="Row"
+                class="sapUiSizeCompact">
+                <table:rowMode>
+                    <!-- 固定行内容高度：屏幕缩放150%(devicePixelRatio=1.5)时 Auto 模式行高测量出小数，底部会留白 -->
+                    <rm:Auto id="idAuto" rowContentHeight="32"/>
+                </table:rowMode>
+                <table:extension>
+                    <OverflowToolbar id="idToolbar">
+                        <Title
+                            text="{i18n>resultTitle} ({= ${local>/rows}.length })"
+                            visible="{= ${local>/rows}.length > 0 }"/>
+                        <ToolbarSpacer id="idSpacer"/>
+                        <Button
+                            id="idBtnRefreshPur"
+                            text="{i18n>btnRefreshPur}"
+                            visible="{auth>/button/ExecPur}"
+                            press="onRefreshPurchase"/>
+                        <Button
+                            id="idBtnRefreshSls"
+                            text="{i18n>btnRefreshSls}"
+                            visible="{auth>/button/ExecSls}"
+                            press="onRefreshSales"/>
+                    </OverflowToolbar>
+                </table:extension>
+                <table:columns>
+                    <!-- ===== 固定列（4.2 503销售价格）===== -->
+                    <table:Column width="9rem" sortProperty="SalesOrganization">
+                        <table:label><Label text="{i18n>SalesOrganization}"/></table:label>
+                        <table:template><Text text="{local>SalesOrganization}" wrapping="false"/></table:template>
+                    </table:Column>
+                    <table:Column width="7rem" sortProperty="DistributionChannel">
+                        <table:label><Label text="{i18n>DistributionChannel}"/></table:label>
+                        <table:template><Text text="{local>DistributionChannel}" wrapping="false"/></table:template>
+                    </table:Column>
+                    <table:Column width="9rem" sortProperty="SoldToParty">
+                        <table:label><Label text="{i18n>SoldToParty}"/></table:label>
+                        <table:template><Text text="{local>SoldToParty}" wrapping="false"/></table:template>
+                    </table:Column>
+                    <table:Column width="9rem" sortProperty="BillToParty">
+                        <table:label><Label text="{i18n>BillToParty}"/></table:label>
+                        <table:template><Text text="{local>BillToParty}" wrapping="false"/></table:template>
+                    </table:Column>
+                    <table:Column width="11rem" sortProperty="Material">
+                        <table:label><Label text="{i18n>Material}"/></table:label>
+                        <table:template><Text text="{local>Material}" wrapping="false"/></table:template>
+                    </table:Column>
+                    <table:Column width="13rem" sortProperty="MaterialName">
+                        <table:label><Label text="{i18n>MaterialName}"/></table:label>
+                        <table:template><Text text="{local>MaterialName}" wrapping="false"/></table:template>
+                    </table:Column>
+                    <table:Column width="11rem" sortProperty="ConditionRecord">
+                        <table:label><Label text="{i18n>ConditionRecord}"/></table:label>
+                        <table:template><Text text="{local>ConditionRecord}" wrapping="false"/></table:template>
+                    </table:Column>
+                    <table:Column width="11rem" hAlign="End" sortProperty="ConditionRateAmount">
+                        <table:label><Label text="{i18n>SalesPrice}"/></table:label>
+                        <table:template>
+                            <Text text="{path:'local>ConditionRateAmount', type:'sap.ui.model.type.Float', formatOptions:{ minFractionDigits:2, maxFractionDigits:2, groupingEnabled:true }}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="6rem" sortProperty="ConditionCurrency">
+                        <table:label><Label text="{i18n>Currency}"/></table:label>
+                        <table:template><Text text="{local>ConditionCurrency}" wrapping="false"/></table:template>
+                    </table:Column>
+                    <table:Column width="8rem" hAlign="End" sortProperty="ConditionQuantity">
+                        <table:label><Label text="{i18n>PriceUnit}"/></table:label>
+                        <table:template><Text text="{local>ConditionQuantity}" wrapping="false"/></table:template>
+                    </table:Column>
+                    <table:Column width="6rem" sortProperty="BaseUnit">
+                        <table:label><Label text="{i18n>BaseUnit}"/></table:label>
+                        <table:template><Text text="{local>BaseUnit}" wrapping="false"/></table:template>
+                    </table:Column>
+                    <table:Column width="9rem" sortProperty="ConditionValidityStartDate">
+                        <table:label><Label text="{i18n>ValidFrom}"/></table:label>
+                        <table:template><Text text="{path:'local>ConditionValidityStartDate', type:'sap.ui.model.type.Date', formatOptions:{ pattern:'yyyy-MM-dd' }}" wrapping="false"/></table:template>
+                    </table:Column>
+                    <table:Column width="9rem" sortProperty="ConditionValidityEndDate">
+                        <table:label><Label text="{i18n>ValidTo}"/></table:label>
+                        <table:template><Text text="{path:'local>ConditionValidityEndDate', type:'sap.ui.model.type.Date', formatOptions:{ pattern:'yyyy-MM-dd' }}" wrapping="false"/></table:template>
+                    </table:Column>
+                    <!-- 动态列（每个工厂 采购价+销售价）由 controller addColumn 追加到这后面 -->
+                </table:columns>
+            </table:Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

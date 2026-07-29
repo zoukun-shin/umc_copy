@@ -1,0 +1,32 @@
+<mvc:View controllerName="sd.zicprice.controller.Main"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <!-- SD-056 公司间销售价格：三个页签
+         页签1 公司间价格查询（改价格主数据，动态列）
+         页签2 订单价格（改公司间PO+SO）
+         页签3 修改日志（只读） -->
+    <Page showHeader="false" showFooter="false">
+        <content>
+            <IconTabBar
+                id="idIconTabBar"
+                expanded="{device>/isNoPhone}"
+                stretchContentHeight="true"
+                backgroundDesign="Transparent"
+                applyContentPadding="false"
+                class="sapUiNoContentPadding">
+                <items>
+                    <IconTabFilter text="{i18n>tabPriceQuery}" key="IcPriceQuery">
+                        <mvc:XMLView viewName="sd.zicprice.view.IcPriceQuery" height="100%"/>
+                    </IconTabFilter>
+                    <IconTabFilter text="{i18n>tabPriceOrder}" key="IcPriceOrder">
+                        <mvc:XMLView viewName="sd.zicprice.view.IcPriceOrder" height="100%"/>
+                    </IconTabFilter>
+                    <IconTabFilter text="{i18n>tabPriceJobLog}" key="IcPriceJobLog">
+                        <mvc:XMLView viewName="sd.zicprice.view.IcPriceJobLog" height="100%"/>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../../sap/zui_icpricejoblog_o2/$metadata">
+        <edmx:Include Namespace="cds_zui_icpricejoblog_o2" Alias="SAP"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="zui_icpricejoblog_o2_van.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/TargetDocumentItem">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/OldPrice">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/NewPrice">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/OldPriceUnit">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/OldPriceUnitUom">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/NewPriceUnit">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/NewPriceUnitUom">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/OldCurrency">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/NewCurrency">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/ExeMode">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/CreatedTime">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/Message">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/RunUuid">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/LogType">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SalesOrganization">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/Plant">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/Material">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SalesOrder">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SalesOrderItem">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SalesOrderCreatedDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SalesOrderCreatedTime">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SalesOrderChangedDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SalesOrderChangedTime">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SoldToParty">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/BillToParty">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/Supplier">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/Customer">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SalesDocumentType">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/YY1_SalesDocType_SDH">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/Rate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SrcConditionRecord">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SrcAmount">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SrcCurrency">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SrcPriceUnit">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SrcPriceUnitUom">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SrcValidFrom">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/SrcValidTo">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/Action">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType/CreatedBy">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricejoblog_o2.IcPriceJobLogType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="执行对象"/>
+                            <PropertyValue Property="Value" Path="UpdateType"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="对象号"/>
+                            <PropertyValue Property="Value" Path="TargetDocument"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="对象行号"/>
+                            <PropertyValue Property="Value" Path="TargetDocumentItem"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="单价(旧)"/>
+                            <PropertyValue Property="Value" Path="OldPrice"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="单价(新)"/>
+                            <PropertyValue Property="Value" Path="NewPrice"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="价格单位(旧)"/>
+                            <PropertyValue Property="Value" Path="OldPriceUnit"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="价格单位(新)"/>
+                            <PropertyValue Property="Value" Path="NewPriceUnit"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="货币(旧)"/>
+                            <PropertyValue Property="Value" Path="OldCurrency"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="货币(新)"/>
+                            <PropertyValue Property="Value" Path="NewCurrency"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="执行方式"/>
+                            <PropertyValue Property="Value" Path="ExeMode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="执行日期"/>
+                            <PropertyValue Property="Value" Path="CreatedOn"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="执行时间"/>
+                            <PropertyValue Property="Value" Path="CreatedTime"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="执行状态"/>
+                            <PropertyValue Property="Value" Path="ExecStatus"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="消息"/>
+                            <PropertyValue Property="Value" Path="Message"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>UpdateType</PropertyPath>
+                        <PropertyPath>TargetDocument</PropertyPath>
+                        <PropertyPath>CreatedOn</PropertyPath>
+                        <PropertyPath>ExecStatus</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="_Entities"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

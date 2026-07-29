@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "4.0"
+metadata:
+  name: sd.zicprice
+type: application
+framework:
+  name: SAPUI5
+  version: 1.120.38
+  libraries:
+    - name: sap.m
+    - name: sap.ui.core
+    - name: sap.ushell
+    - name: themelib_sap_horizon
+server:
+  customMiddleware:
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        flp:
+          theme: sap_horizon
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertErrors: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        backend:
+          - path: /sap
+            url: https://my412552-api.s4hana.cloud.sap
+            destination: UMC_Dev_Customizing_BTP
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        mountPath: /
+        services:
+          - urlPath: /sap/opu/odata/sap/ZUI_ICPRICEQUERY_O2
+            metadataPath: ./webapp/localService/queryService/metadata.xml
+            mockdataPath: ./webapp/localService/queryService/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/sap/ZUI_ICPRICEORDER_O2
+            metadataPath: ./webapp/localService/orderService/metadata.xml
+            mockdataPath: ./webapp/localService/orderService/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/sap/ZUI_ICPRICEJOBLOG_O2
+            metadataPath: ./webapp/localService/jobService/metadata.xml
+            mockdataPath: ./webapp/localService/jobService/data
+            generateMockData: true
+            resolveExternalServiceReferences: true
+          - urlPath: /sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001
+            metadataPath: ./webapp/localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml
+            mockdataPath: ./webapp/localService/AuthorityService/data
+            generateMockData: true
+        annotations:
+          - localPath: ./webapp/localService/queryService/ZUI_ICPRICEQUERY_O2_VAN.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_ICPRICEQUERY_O2_VAN',Version='0001')/$value/
+          - localPath: ./webapp/localService/orderService/ZUI_ICPRICEORDER_O2_VAN.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_ICPRICEORDER_O2_VAN',Version='0001')/$value/
+          - localPath: ./webapp/localService/jobService/ZUI_ICPRICEJOBLOG_O2_VAN.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_ICPRICEJOBLOG_O2_VAN',Version='0001')/$value/
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**

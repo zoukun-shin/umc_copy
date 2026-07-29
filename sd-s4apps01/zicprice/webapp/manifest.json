@@ -1,0 +1,219 @@
+{
+  "_version": "1.60.0",
+  "sap.app": {
+    "id": "sd.zicprice",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.29.0",
+      "toolsId": "6194a0ac-e235-456a-a740-ba535cc11547"
+    },
+    "dataSources": {
+      "queryService": {
+        "uri": "/sap/opu/odata/sap/ZUI_ICPRICEQUERY_O2/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZUI_ICPRICEQUERY_O2_VAN"
+          ],
+          "localUri": "localService/queryService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "orderService": {
+        "uri": "/sap/opu/odata/sap/ZUI_ICPRICEORDER_O2/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZUI_ICPRICEORDER_O2_VAN"
+          ],
+          "localUri": "localService/orderService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "jobService": {
+        "uri": "/sap/opu/odata/sap/ZUI_ICPRICEJOBLOG_O2/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZUI_ICPRICEJOBLOG_O2_VAN"
+          ],
+          "localUri": "localService/jobService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "AuthorityService": {
+        "uri": "/sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "ZUI_ICPRICEQUERY_O2_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_ICPRICEQUERY_O2_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/queryService/ZUI_ICPRICEQUERY_O2_VAN.xml"
+        }
+      },
+      "ZUI_ICPRICEORDER_O2_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_ICPRICEORDER_O2_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/orderService/ZUI_ICPRICEORDER_O2_VAN.xml"
+        }
+      },
+      "ZUI_ICPRICEJOBLOG_O2_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZUI_ICPRICEJOBLOG_O2_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/jobService/ZUI_ICPRICEJOBLOG_O2_VAN.xml"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.38",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ui.comp": {},
+        "sap.ui.table": {},
+        "sap.f": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "sd.zicprice.i18n.i18n"
+        }
+      },
+      "query": {
+        "dataSource": "queryService",
+        "preload": true,
+        "settings": {
+          "defaultCountMode": "Inline"
+        }
+      },
+      "order": {
+        "dataSource": "orderService",
+        "preload": true,
+        "settings": {
+          "defaultCountMode": "Inline"
+        }
+      },
+      "job": {
+        "dataSource": "jobService",
+        "preload": true,
+        "settings": {
+          "defaultCountMode": "Inline"
+        }
+      },
+      "Authority": {
+        "dataSource": "AuthorityService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "auth": {
+        "type": "sap.ui.model.json.JSONModel"
+      },
+      "queryService": {
+        "dataSource": "queryService",
+        "preload": true,
+        "settings": {}
+      },
+      "orderService": {
+        "dataSource": "orderService",
+        "preload": true,
+        "settings": {}
+      },
+      "jobService": {
+        "dataSource": "jobService",
+        "preload": true,
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "sd.zicprice.view",
+        "async": true,
+        "viewPath": "sd.zicprice.view"
+      },
+      "routes": [
+        {
+          "name": "RouteMain",
+          "pattern": ":?query:",
+          "target": [
+            "TargetMain"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetMain": {
+          "id": "Main",
+          "name": "Main"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "sd.zicprice.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "sd-s4apps01"
+  }
+}

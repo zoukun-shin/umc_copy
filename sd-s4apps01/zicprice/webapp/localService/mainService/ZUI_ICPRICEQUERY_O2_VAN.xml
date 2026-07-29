@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_HTML5',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="HTML5"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../../sap/zui_icpricequery_o2/$metadata">
+        <edmx:Include Namespace="cds_zui_icpricequery_o2" Alias="SAP"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="zui_icpricequery_o2_van.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="cds_zui_icpricequery_o2.I_CustomerType/DataControllerSet">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.I_CustomerType/DataController1">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.I_CustomerType/DataController2">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.I_CustomerType/DataController3">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.I_CustomerType/DataController4">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.I_CustomerType/DataController5">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.I_CustomerType/DataController6">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.I_CustomerType/DataController7">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.I_CustomerType/DataController8">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.I_CustomerType/DataController9">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.I_CustomerType/DataController10">
+                <Annotation Term="UI.HiddenFilter"/>
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.I_SalesOrganizationType/AddressID">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/ConditionRecord">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/DistributionChannel">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/MaterialName">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/ConditionTable">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/ConditionType">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/ConditionRateAmount">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/ConditionCurrency">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/ConditionQuantity">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/BaseUnit">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/ConditionValidityStartDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/ConditionValidityEndDate">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/DynPurPrice">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/DynPurCurrency">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/DynColLabelPur">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/DynSlsPrice">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/DynSlsCurrency">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/DynColLabelSls">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/DynSupplier">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/DynCustomer">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/DynPurInfoRecord">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/DynPurConditionRecord">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/DynSlsConditionRecord">
+                <Annotation Term="UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType/ValidityDateF">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_icpricequery_o2.IcPriceQueryType">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>SalesOrganization</PropertyPath>
+                        <PropertyPath>Material</PropertyPath>
+                        <PropertyPath>SoldToParty</PropertyPath>
+                        <PropertyPath>BillToParty</PropertyPath>
+                        <PropertyPath>DynPlant</PropertyPath>
+                        <PropertyPath>ValidityDateF</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="_Entities"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

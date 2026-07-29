@@ -1,0 +1,68 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "4.0"
+metadata:
+  name: sd.zicpricerate
+type: application
+framework:
+  name: SAPUI5
+  version: 1.120.38
+  libraries:
+    - name: sap.m
+    - name: sap.ui.core
+    - name: sap.fe.templates
+    - name: sap.ushell
+    - name: themelib_sap_horizon
+server:
+  customMiddleware:
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        flp:
+          theme: sap_horizon
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertErrors: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        backend:
+          - path: /sap
+            url: https://my412552-api.s4hana.cloud.sap
+            destination: UMC_Dev_Customizing_BTP
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        mountPath: /
+        services:
+          - urlPath: /sap/opu/odata4/sap/zui_tsd_1023_o4/srvd/sap/zui_tsd_1023_o4/0001
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
+            generateMockData: true
+            resolveExternalServiceReferences: true
+          - urlPath: /sap/opu/odata4/sap/zui_dtimp_conf_o4/srvd/sap/zui_dtimp_conf_o4/0001
+            metadataPath: ./webapp/localService/zui_dtimp_conf_o4/metadata.xml
+            mockdataPath: ./webapp/localService/zui_dtimp_conf_o4/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata4/sap/zui_prt_record_o4/srvd/sap/zui_prt_record_o4/0001
+            metadataPath: ./webapp/localService/ZUI_PRT_RECORD_O4/metadata.xml
+            mockdataPath: ./webapp/localService/PrintService/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata4/sap/zui_permission_access_o4/srvd/sap/zui_permission_access_o4/0001
+            metadataPath: ./webapp/localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml
+            mockdataPath: ./webapp/localService/AuthorityService/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata4/sap/zui_icpricerate_o4/srvd/sap/zui_icpricerate_o4/0001
+            metadataPath: ./webapp/localService/icpriceService/metadata.xml
+            mockdataPath: ./webapp/localService/icpriceService/data
+            generateMockData: true
+        annotations: []
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**

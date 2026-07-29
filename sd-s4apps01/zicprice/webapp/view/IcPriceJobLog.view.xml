@@ -1,0 +1,229 @@
+<mvc:View
+    controllerName="sd.zicprice.controller.IcPriceJobLog"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:t="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants">
+    <!--=====================================================================
+        SD-056 页签3：修改日志（只读）
+          · GO → SmartTable rebind，读 ZTSD_1024（ZCL_ICPRICEJOBLOG）
+          · 无按钮：前台改价/后台JOB 都会写日志，这里只看
+          · 一段一行，UpdateType 区分 11采购/12销售/21公司间PO/22公司间SO
+    ======================================================================-->
+    <f:DynamicPage id="idLogDynamicPage" showFooter="true" fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle id="idLogTitle">
+                <f:heading>
+                    <sv:SmartVariantManagement
+                        id="idLogSVM"
+                        showShare="true"
+                        persistencyKey="icPriceLogVariantV2"
+                        showExecuteOnSelection="true"
+                        entitySet="IcPriceJobLog"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader id="idLogHeader">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar
+                        id="idLogFilterBar"
+                        smartVariant="idLogSVM"
+                        persistencyKey="icPriceLogFilter"
+                        entitySet="IcPriceJobLog"
+                        useToolbar="false"
+                        class="sapUiResponsiveMargin"
+                        search="onSearch">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="UpdateType" index="1"
+                                visibleInAdvancedArea="true" mandatory="notMandatory"
+                                label="{i18n>UpdateType}">
+                                <smartFilterBar:customControl>
+                                    <MultiComboBox id="idMCBUpdType">
+                                        <core:Item key="11" text="{i18n>updType11}"/>
+                                        <core:Item key="12" text="{i18n>updType12}"/>
+                                        <core:Item key="21" text="{i18n>updType21}"/>
+                                        <core:Item key="22" text="{i18n>updType22}"/>
+                                    </MultiComboBox>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="TargetDocument" index="2"
+                                visibleInAdvancedArea="true" mandatory="notMandatory"
+                                displayBehaviour="idAndDescription"
+                                label="{i18n>TargetDocument}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="ExecStatus" index="4"
+                                visibleInAdvancedArea="true" mandatory="notMandatory"
+                                label="{i18n>ExecStatus}">
+                                <smartFilterBar:customControl>
+                                    <MultiComboBox id="idMCBExecStatus">
+                                        <core:Item key="S" text="{i18n>statusSuccess}"/>
+                                        <core:Item key="E" text="{i18n>statusFail}"/>
+                                    </MultiComboBox>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="CreatedOn" index="3"
+                                visibleInAdvancedArea="true" mandatory="notMandatory"
+                                label="{i18n>CreatedOn}">
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection id="idDRLog"
+                                        valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"/>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <smartTable:SmartTable
+                id="idLogSmartTable"
+                height="100%"
+                entitySet="IcPriceJobLog"
+                smartFilterId="idLogFilterBar"
+                smartVariant="idLogSVM"
+                persistencyKey="icPriceLogTableV2"
+                tableType="Table"
+                useVariantManagement="true"
+                useTablePersonalisation="true"
+                header="{i18n>logResultTitle}"
+                showRowCount="true"
+                enableAutoBinding="false"
+                placeToolbarInTable="true"
+                beforeRebindTable="onBeforeRebindTable"
+                requestAtLeastFields="Uuid,OldCurrency,NewCurrency,OldPriceUnitUom,NewPriceUnitUom">
+                <t:Table selectionMode="None" class="sapUiSizeCompact">
+                    <t:rowMode>
+                        <!-- 固定行内容高度：屏幕缩放150%(devicePixelRatio=1.5)时 Auto 模式行高测量出小数，底部会留白 -->
+                        <rm:Auto id="idLogAuto" rowContentHeight="32"/>
+                    </t:rowMode>
+                    <t:columns>
+                        <!-- 手工列 + i18n 列头（路线2：列头走 app 的 i18n，跟UI语言切换）-->
+                        <t:Column width="9rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"UpdateType","leadingProperty":"UpdateType"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colUpdateType}"/></t:label>
+                            <t:template><Text text="{path:'UpdateType', formatter:'.formatUpdateType'}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="11rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"TargetDocument","leadingProperty":"TargetDocument"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colTargetDocument}"/></t:label>
+                            <t:template><Text text="{path:'TargetDocument', formatter:'.stripZeros'}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"TargetDocumentItem","leadingProperty":"TargetDocumentItem"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colTargetDocItem}"/></t:label>
+                            <t:template><Text text="{path:'TargetDocumentItem', formatter:'.stripZeros'}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="8rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesOrganization","leadingProperty":"SalesOrganization"\}'/></t:customData>
+                            <t:label><Text text="{i18n>SalesOrganization}"/></t:label>
+                            <t:template><Text text="{SalesOrganization}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Plant","leadingProperty":"Plant"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colPlant}"/></t:label>
+                            <t:template><Text text="{Plant}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="11rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Material","leadingProperty":"Material"\}'/></t:customData>
+                            <t:label><Text text="{i18n>Material}"/></t:label>
+                            <t:template><Text text="{Material}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="11rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesOrder","leadingProperty":"SalesOrder"\}'/></t:customData>
+                            <t:label><Text text="{i18n>SalesOrder}"/></t:label>
+                            <t:template><Text text="{SalesOrder}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesOrderItem","leadingProperty":"SalesOrderItem"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colSalesOrderItem}"/></t:label>
+                            <t:template><Text text="{SalesOrderItem}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="11rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"OldPrice","leadingProperty":"OldPrice"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colOldPrice}"/></t:label>
+                            <t:template><Text text="{path:'OldPrice', type:'sap.ui.model.type.Float', formatOptions:{groupingEnabled:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="11rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"NewPrice","leadingProperty":"NewPrice"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colNewPrice}"/></t:label>
+                            <t:template><Text text="{path:'NewPrice', type:'sap.ui.model.type.Float', formatOptions:{groupingEnabled:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="10rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"OldPriceUnit","leadingProperty":"OldPriceUnit"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colOldPriceUnit}"/></t:label>
+                            <t:template><Text text="{parts:[{path:'OldPriceUnit'},{path:'OldPriceUnitUom'}], type:'sap.ui.model.type.Unit', formatOptions:{showMeasure:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="10rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"NewPriceUnit","leadingProperty":"NewPriceUnit"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colNewPriceUnit}"/></t:label>
+                            <t:template><Text text="{parts:[{path:'NewPriceUnit'},{path:'NewPriceUnitUom'}], type:'sap.ui.model.type.Unit', formatOptions:{showMeasure:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="6rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"OldCurrency","leadingProperty":"OldCurrency"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colOldCurrency}"/></t:label>
+                            <t:template><Text text="{OldCurrency}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="6rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"NewCurrency","leadingProperty":"NewCurrency"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colNewCurrency}"/></t:label>
+                            <t:template><Text text="{NewCurrency}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem" hAlign="End">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Rate","leadingProperty":"Rate"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colRate}"/></t:label>
+                            <t:template><Text text="{path:'Rate', type:'sap.ui.model.type.Float', formatOptions:{groupingEnabled:true}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ExeMode","leadingProperty":"ExeMode"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colExeMode}"/></t:label>
+                            <t:template><Text text="{ExeMode}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="7rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ExecStatus","leadingProperty":"ExecStatus"\}'/></t:customData>
+                            <t:label><Text text="{i18n>ExecStatus}"/></t:label>
+                            <t:template>
+                                <ObjectStatus
+                                    state="{ path: 'ExecStatus', formatter: '.formatter.setState' }"
+                                    icon="{ path: 'ExecStatus', formatter: '.formatter.setStateIcon' }"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="24rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Message","leadingProperty":"Message"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colMessage}"/></t:label>
+                            <t:template><Text text="{Message}"/></t:template>
+                        </t:Column>
+                        <t:Column width="9rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CreatedOn","leadingProperty":"CreatedOn"\}'/></t:customData>
+                            <t:label><Text text="{i18n>CreatedOn}"/></t:label>
+                            <t:template><Text text="{path:'CreatedOn', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy-MM-dd'}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="8rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CreatedTime","leadingProperty":"CreatedTime"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colCreatedTime}"/></t:label>
+                            <t:template><Text text="{path:'CreatedTime', type:'sap.ui.model.odata.type.Time', formatOptions:{pattern:'HH:mm:ss'}}" wrapping="false"/></t:template>
+                        </t:Column>
+                        <t:Column width="9rem">
+                            <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CreatedBy","leadingProperty":"CreatedBy"\}'/></t:customData>
+                            <t:label><Text text="{i18n>colCreatedBy}"/></t:label>
+                            <t:template><Text text="{CreatedBy}" wrapping="false"/></t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

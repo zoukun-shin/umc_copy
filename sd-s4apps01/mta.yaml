@@ -139,6 +139,14 @@ modules:
       - sdlogisticscost.zip
       name: sdlogisticscost
       target-path: resources/
+    - artifacts:
+      - sdzicprice.zip
+      name: sdzicprice
+      target-path: resources/
+    - artifacts:
+      - sdzicpricerate.zip
+      name: sdzicpricerate
+      target-path: resources/      
 - name: sdsalesacceptance
   type: html5
   path: salesacceptance
@@ -353,6 +361,24 @@ modules:
     build-result: dist
     builder: custom
     commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sdzicprice
+  type: html5
+  path: zicprice
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: sdzicpricerate
+  type: html5
+  path: zicpricerate
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands: 
     - npm run build:cf
     supported-platforms: []
 resources:
