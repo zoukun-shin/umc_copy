@@ -94,10 +94,7 @@ sap.ui.define([
             }
 
             // 公司代码权限校验
-            var sBukrs = this.byId("SFBGrirCogsTrf").getFilterData().CompanyCode;
-            var aAuthorityCompanySet = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
-            if (!aAuthorityCompanySet.some(data => data.CompanyCode === sBukrs)) {
-                MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("noAuthorityCompanyCode", [sBukrs]));
+            if (!this._checkCompanyAuthority()) {
                 mBindingParams.preventTableBind = true;
                 return;
             }
@@ -127,6 +124,30 @@ sap.ui.define([
             this._setActionButtonsByPostingStatus();
         },
 
+        // ★ 公司代码权限校验
+        //   返回 false = 校验不通过（已弹错误框）
+        _checkCompanyAuthority: function () {
+            var oSFB = this.byId("SFBGrirCogsTrf");
+            if (!oSFB) { return true; }
+
+            var oFilterData = oSFB.getFilterData() || {};
+            var oBundle     = this.getModel("i18n").getResourceBundle();
+
+            var aAuthorityCompanySet = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
+            if (!aAuthorityCompanySet) {
+                // 权限数据还没取回来，先不拦（_initialize 里失败会另行弹窗）
+                return true;
+            }
+
+            var sBukrs = oFilterData.CompanyCode;
+            if (sBukrs && !aAuthorityCompanySet.some(function (d) { return d.CompanyCode === sBukrs; })) {
+                MessageBox.error(oBundle.getText("noAuthorityCompanyCode", [sBukrs]));
+                return false;
+            }
+
+            return true;
+        },
+
         _removeFilterByPath: function (aFilters, sPath) {
             for (var i = aFilters.length - 1; i >= 0; i--) {
                 if (aFilters[i].sPath === sPath) {
@@ -139,20 +160,262 @@ sap.ui.define([
             this._setActionButtonsByPostingStatus();
         },
 
+        //========================================================
+        // ★ 按过账状态切按钮 + 切表格选择模式
+        //   状态=1（未过账）→ 过账JOB按钮，表格不选行（传filter）
+        //   状态=2（已过账）→ 冲销JOB按钮，表格要选一行（传创建日期）
+        //========================================================
         _setActionButtonsByPostingStatus: function () {
-            var oStatusSelect  = this.byId("PostingStatusSelect");
-            var oPostButton    = this.byId("btnPost");
-            var oCancelButton  = this.byId("btnCancel");
+            var oStatusSelect = this.byId("PostingStatusSelect");
+            var oPostButton   = this.byId("btnPostJob");
+            var oCancelButton = this.byId("btnCancelJob");
+            var oTable        = this.byId("Table_GrirCogsTrf");
 
-            if (!oStatusSelect || !oPostButton || !oCancelButton) {
+            if (!oStatusSelect) { return; }
+
+            var sPostingStatus = oStatusSelect.getSelectedKey();
+            var bIsPost   = sPostingStatus === "1";
+            var bIsCancel = sPostingStatus === "2";
+
+            if (oPostButton)   { oPostButton.setVisible(bIsPost); }
+            if (oCancelButton) { oCancelButton.setVisible(bIsCancel); }
+
+            // ★ 过账不需要选行；冲销需要选一行
+            if (oTable) {
+                oTable.setSelectionMode(bIsCancel ? "MultiToggle" : "None");
+                if (!bIsCancel) { oTable.clearSelection(); }
+            }
+        },
+
+        //========================================================
+        // ★ 过账JOB：不选行，把检索条件传给后端排JOB
+        //========================================================
+        onPostJob: function () {
+            var oBundle = this.getModel("i18n").getResourceBundle();
+
+            // 防重复点击
+            if (this._bRunning) { return; }
+
+            if (!this._hasTableData()) {
+                MessageBox.error(oBundle.getText("noDataMsg"));
                 return;
             }
 
-            var sPostingStatus = oStatusSelect.getSelectedKey();
-            oPostButton.setVisible(sPostingStatus === "1");
-            oCancelButton.setVisible(sPostingStatus === "2");
+            // 公司代码权限校验（防止查询后改了公司代码再点）
+            if (!this._checkCompanyAuthority()) { return; }
+
+            var oPayload = this._buildPostPayload();
+            if (!oPayload) {
+                MessageBox.error(oBundle.getText("filterIncompleteMsg"));
+                return;
+            }
+
+            MessageBox.confirm(
+                oBundle.getText("postJobConfirmMsg"),
+                {
+                    title: oBundle.getText("postJobConfirmTitle"),
+                    actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+                    emphasizedAction: MessageBox.Action.NO,
+                    onClose: function (sAction) {
+                        if (sAction === MessageBox.Action.YES) {
+                            this._executeAction("POST", oPayload);
+                        }
+                    }.bind(this)
+                }
+            );
         },
 
+        //========================================================
+        // ★ 冲销JOB：必须选且只能选一行，传该行的创建日期
+        //   后端会先同步校验（「请先冲销过账期间 XXX 的数据」），
+        //   通过后才排JOB
+        //========================================================
+        onCancelJob: function () {
+            var oBundle = this.getModel("i18n").getResourceBundle();
+            var oTable  = this.byId("Table_GrirCogsTrf");
+
+            if (this._bRunning) { return; }
+
+            var aIndices = oTable ? oTable.getSelectedIndices() : [];
+
+            if (aIndices.length === 0) {
+                MessageBox.warning(oBundle.getText("selectAtLeastOneRow"));
+                return;
+            }
+            if (aIndices.length > 1) {
+                MessageBox.warning(oBundle.getText("cancelSelectOnlyOne"));
+                return;
+            }
+
+            if (!this._checkCompanyAuthority()) { return; }
+
+            var oContext = oTable.getContextByIndex(aIndices[0]);
+            var oRow     = oContext && this.getModel().getObject(oContext.getPath());
+            if (!oRow) {
+                MessageBox.error(oBundle.getText("selectAtLeastOneRow"));
+                return;
+            }
+
+            var sCreationDate = this._toAbapDate(oRow.CreationDate);
+            if (!sCreationDate) {
+                MessageBox.error(oBundle.getText("cancelNoCreationDate"));
+                return;
+            }
+
+            var oPayload = { CreationDate: sCreationDate };
+            var sShowDate = formatter.date(oRow.CreationDate) || sCreationDate;
+
+            MessageBox.confirm(
+                oBundle.getText("cancelJobConfirmMsg", [sShowDate]),
+                {
+                    title: oBundle.getText("cancelJobConfirmTitle"),
+                    actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+                    emphasizedAction: MessageBox.Action.NO,
+                    onClose: function (sAction) {
+                        if (sAction === MessageBox.Action.YES) {
+                            this._executeAction("CANCEL", oPayload);
+                        }
+                    }.bind(this)
+                }
+            );
+        },
+
+        //========================================================
+        // ★ 调后端排JOB
+        //   JOB是异步的，排完后 ZTFI_1032 还没结果，所以【不刷新列表】
+        //   用户稍后重新点 GO 就能看到（查询类会回填上次执行的 E 消息）
+        //========================================================
+        _executeAction: function (sEvent, oPayload) {
+            var that = this;
+
+            this._bRunning = true;
+            this._setActionButtonsEnabled(false);
+            this._BusyDialog.open();
+
+            this.postAction([JSON.stringify(oPayload)], sEvent).then(function (oData) {
+                var oRes = oData && oData["processLogic"];
+
+                // 后端校验失败 / 排程失败 → 红框
+                if (oRes && oRes.Event === "MESSAGE") {
+                    MessageBox.error(oRes.Zzkey);
+                    return;
+                }
+
+                MessageBox.information(oRes && oRes.Zzkey ? oRes.Zzkey : "");
+            }).catch(function (error) {
+                MessageBox.error(error.message || error.responseText || String(error));
+            }).finally(function () {
+                that._bRunning = false;
+                that._setActionButtonsEnabled(true);
+                that._BusyDialog.close();
+            });
+        },
+
+        _setActionButtonsEnabled: function (bEnabled) {
+            var oPost   = this.byId("btnPostJob");
+            var oCancel = this.byId("btnCancelJob");
+            if (oPost)   { oPost.setEnabled(bEnabled); }
+            if (oCancel) { oCancel.setEnabled(bEnabled); }
+        },
+
+        // 表格是否有数据（未查询 / 查询结果0条 → false）
+        _hasTableData: function () {
+            var oTable   = this.byId("Table_GrirCogsTrf");
+            var oBinding = oTable && oTable.getBinding("rows");
+            if (!oBinding) { return false; }
+            return oBinding.getLength() > 0;
+        },
+
+        //========================================================
+        // ★ 过账JOB的payload：从 SmartFilterBar / 自定义控件读检索条件
+        //   {
+        //     "CompanyCode":  "2200",
+        //     "Category":     "1",
+        //     "FiscalYear":   [{"sign":"I","option":"EQ","low":"2026","high":""}],
+        //     "FiscalPeriod": [{"sign":"I","option":"EQ","low":"04","high":""}]
+        //   }
+        //   条件不完整返回 null
+        //========================================================
+        _buildPostPayload: function () {
+            var oSFB = this.byId("SFBGrirCogsTrf");
+            if (!oSFB) { return null; }
+
+            var oFilterData = oSFB.getFilterData() || {};
+
+            var sCompany = oFilterData.CompanyCode;
+
+            // 年度/期间/业务类型是 customControl，不在 getFilterData 里
+            var oGjahrCtl = this.byId("idGjahr");
+            var sGjahr = "";
+            if (oGjahrCtl && oGjahrCtl.getValue()) {
+                var oGjahrDate = new Date(oGjahrCtl.getValue());
+                if (!isNaN(oGjahrDate.getTime())) {
+                    sGjahr = String(oGjahrDate.getFullYear());
+                }
+            }
+
+            var oMonatCtl = this.byId("idMonat");
+            var sMonat = oMonatCtl ? oMonatCtl.getSelectedKey() : "";
+
+            var oCategCtl = this.byId("CategorySelect");
+            var sCategory = oCategCtl ? oCategCtl.getSelectedKey() : "";
+
+            if (!sCompany || !sGjahr || !sMonat || !sCategory) {
+                return null;
+            }
+
+            return {
+                CompanyCode: sCompany,
+                Category:    sCategory,
+                FiscalYear:   [{ sign: "I", option: "EQ", low: sGjahr, high: "" }],
+                FiscalPeriod: [{ sign: "I", option: "EQ", low: sMonat, high: "" }]
+            };
+        },
+
+        // Edm.DateTime / Date / YYYYMMDD → ABAP 的 YYYYMMDD
+        _toAbapDate: function (vValue) {
+            if (!vValue) { return ""; }
+
+            if (vValue instanceof Date) {
+                var y = String(vValue.getFullYear());
+                var m = ("0" + (vValue.getMonth() + 1)).slice(-2);
+                var d = ("0" + vValue.getDate()).slice(-2);
+                return y + m + d;
+            }
+
+            var s = String(vValue);
+            // 已经是 YYYYMMDD
+            if (/^\d{8}$/.test(s)) { return s; }
+            // YYYY-MM-DD
+            if (/^\d{4}-\d{2}-\d{2}/.test(s)) { return s.substring(0, 10).replace(/-/g, ""); }
+
+            var oDate = new Date(s);
+            if (!isNaN(oDate.getTime())) {
+                return this._toAbapDate(oDate);
+            }
+            return "";
+        },
+
+        postAction: function (postData, bEvent) {
+            return new Promise(function (resolve, reject) {
+                var mParameter = {
+                    success: function (oData, response) { resolve(oData); },
+                    error: function (oError) { reject(oError); },
+                    method: "POST",
+                    urlParameters: {
+                        Zzkey: postData,
+                        Event: bEvent
+                    }
+                };
+                this.getModel().callFunction("/processLogic", mParameter);
+            }.bind(this));
+        }
+
+        //========================================================
+        // ★ 以下为旧版「前台同步过账/冲销 + 逐行回写」的逻辑，
+        //   现已改为「排JOB + 重新GO时由查询类回填」，故整段保留但不再调用。
+        //========================================================
+        /*
         onPost: function () {
             var oTable   = this.byId("Table_GrirCogsTrf");
             var aIndices = oTable.getSelectedIndices();
@@ -174,7 +437,7 @@ sap.ui.define([
                     onClose: function (sAction) {
                         if (sAction === MessageBox.Action.YES) {
                             this._selectAllRows();
-                            this._executeAction("POST");
+                            this._executeActionOld("POST");
                         }
                     }.bind(this)
                 }
@@ -211,7 +474,7 @@ sap.ui.define([
                     emphasizedAction: MessageBox.Action.NO,
                     onClose: function (sAction) {
                         if (sAction === MessageBox.Action.YES) {
-                            this._executeAction("CANCEL");
+                            this._executeActionOld("CANCEL");
                         }
                     }.bind(this)
                 }
@@ -261,7 +524,7 @@ sap.ui.define([
             return false;
         },
 
-        _executeAction: function (sEvent) {
+        _executeActionOld: function (sEvent) {
             var postDocs             = this.preparePostBody();
             var sCurrentPostingStatus = this.byId("PostingStatusSelect").getSelectedKey();
             this._BusyDialog.open();
@@ -315,20 +578,6 @@ sap.ui.define([
             return [JSON.stringify(selectedRows)];
         },
 
-        postAction: function (postData, bEvent) {
-            return new Promise(function (resolve, reject) {
-                this.getModel().callFunction("/processLogic", {
-                    success: function (oData) { resolve(oData); },
-                    error:   function (oError) { reject(oError); },
-                    method:  "POST",
-                    urlParameters: {
-                        Zzkey: postData,
-                        Event: bEvent
-                    }
-                });
-            }.bind(this));
-        },
-
         _setIfExists: function (sKey, sProperty, vValue) {
             if (vValue !== undefined && vValue !== null) {
                 this._oDataModel.setProperty(sKey + "/" + sProperty, vValue);
@@ -352,5 +601,7 @@ sap.ui.define([
                 "',LedgerGLLineItem='"  + sLedgerGLLineItem   +
                 "')";
         }
+        */
+
     });
 });
