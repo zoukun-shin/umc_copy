@@ -71,7 +71,8 @@ sap.ui.define([
                 this.getOwnerComponent().getModel("local").setProperty("/authorityCheck", {
                     button: {
                         View: aAllAccessBtns.some(btn => btn.AccessId === "zbom-View"),
-                        Print: aAllAccessBtns.some(btn => btn.AccessId === "zbom-Print")
+                        Print: aAllAccessBtns.some(btn => btn.AccessId === "zbom-Print"),
+                        PrintVN: aAllAccessBtns.some(btn => btn.AccessId === "zbom-PrintVN")
                     },
                     data: {
                         PlantSet: context._AssignPlant,
@@ -119,7 +120,7 @@ sap.ui.define([
                 Promise.all(aPromise).then((aContext) => {
                     if (aContext.length > 0) {
                         var pdfContent = that.processPrintContent(oSelected, aContext[0].results, HeaderValidityStartDate);
-                        that.getPDF(pdfContent);
+                        that.getPDF(pdfContent, "YY1_BOMPRINT");
                     } 
                 }).catch((error) => {
                     MessageBox.error(error);
@@ -216,14 +217,48 @@ sap.ui.define([
             return pdfContent;
         },
 
-        getPDF: function (pdfContent) {
+        onPrintVN: function (sEvent) {
+            var that = this;
+            var aSelectedIndices = this.byId("idTable").getSelectedIndices();
+            if (aSelectedIndices.length === 0) {
+                return;
+            } else if (aSelectedIndices.length > 1) {
+                MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("onlyCanSelectOne"));
+                return;
+            }
+
+            var oTable = this.byId("idTable");
+            var oBinding = oTable.getBinding();
+            var aAllContexts = oBinding.getContexts();
+            var aAllData = aAllContexts.map(ctx => ctx.getObject());
+            var oSelected = oTable.getContextByIndex(aSelectedIndices[0]).getObject();
+            var HeaderValidityStartDate = oSelected.HeaderValidityStartDate;
+            var aItems = that.getItems(oSelected, aAllData);
+
+            var aPromise = that._callOData(sEvent, aItems);
+            try {
+                Promise.all(aPromise).then((aContext) => {
+                    if (aContext.length > 0) {
+                        var pdfContent = that.processPrintContent(oSelected, aContext[0].results, HeaderValidityStartDate);
+                        that.getPDF(pdfContent, "YY1_BOMPRINT_VN");
+                    }
+                }).catch((error) => {
+                    MessageBox.error(error);
+                }).finally(() => {
+                });
+            } catch (error) {
+                MessageBox.error(error);
+            }
+        },
+
+        getPDF: function (pdfContent, sTemplateID) {
             var that = this;
             var oBusyDialog = new BusyDialog();
             var aRecordCreated = [];
             var sFileName = this.getView().getModel("i18n").getResourceBundle().getText("appTitle") + new Date().getTime();
             var promise = new Promise((resolve, reject) => {
                 var createPrintRecord = this.getModel("Print").bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord(...)");
-                createPrintRecord.setParameter("TemplateID", "YY1_BOMPRINT");
+                createPrintRecord.setParameter("TemplateID", sTemplateID || "YY1_BOMPRINT");
                 createPrintRecord.setParameter("IsExternalProvidedData", true);
                 var oXMLData = json2xml(pdfContent, {
                     compact: true,
