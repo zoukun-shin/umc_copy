@@ -79,6 +79,19 @@
           "localUri": "localService/jobService/ZUI_ICPRICEJOBLOG_O2_VAN.xml"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "zicprice-display": {
+          "semanticObject": "zicprice",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
     }
   },
   "sap.ui": {
@@ -211,6 +224,9 @@
       "id": "App",
       "async": true
     }
+  },
+  "sap.platform.cf": {
+    "ui5VersionNumber": "1.120"
   },
   "sap.cloud": {
     "public": true,

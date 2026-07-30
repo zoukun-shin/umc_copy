@@ -70,6 +70,19 @@
           "odataVersion": "4.0"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "zicpricerate-display": {
+          "semanticObject": "zicpricerate",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
     }
   },
   "sap.ui": {
@@ -251,6 +264,9 @@
     "app": {
       "enableLazyLoading": true
     }
+  },
+  "sap.platform.cf": {
+    "ui5VersionNumber": "1.120"
   },
   "sap.cloud": {
     "public": true,
