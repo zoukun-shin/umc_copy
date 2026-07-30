@@ -54,7 +54,8 @@ sap.ui.define([
                 oLocalModel.setProperty("/authorityCheck", {
                     button: {
                         View: aAllAccessBtns.some(btn => btn.AccessId === "zecn-View"),
-                        Print: aAllAccessBtns.some(btn => btn.AccessId === "zecn-Print")
+                        Print: aAllAccessBtns.some(btn => btn.AccessId === "zecn-Print"),
+                        PrintCN: aAllAccessBtns.some(btn => btn.AccessId === "zecn-PrintCN")
                     },
                     data: {
                         PlantSet: context._AssignPlant,
@@ -80,13 +81,21 @@ sap.ui.define([
         },
 
         printAction: function (oEvent) {
+            _oFunctions.getPrintData(oEvent,this);
+        },
+
+        printcnAction: function (oEvent){
+            _oFunctions.getPrintData(oEvent,this,"CN");
+        },
+
+        getPrintData: function (oEvent,that,sType){
             var oBusyDialog = new BusyDialog();
-            _oDataModel = this.getModel();
-            _oPrintModel = this.getModel("Print");
-            _ResourceBundle = this.getModel("i18n").getResourceBundle();
+            _oDataModel = that.getModel();
+            _oPrintModel = that.getModel("Print");
+            _ResourceBundle = that.getModel("i18n").getResourceBundle();
 
             oBusyDialog.open();
-            var aSelectedContexts = this.getSelectedContexts();
+            var aSelectedContexts = that.getSelectedContexts();
 
             if (aSelectedContexts.length > 0) {
                 var oSelectedLine = aSelectedContexts[0].getObject();
@@ -285,6 +294,10 @@ sap.ui.define([
                         Plant: object.Plant,
                         // CreatedDate: object.CreatedDate,
                         BomHistory: object.BomHistory,
+                        Project: object.Project,
+                        ProjectName: object.ProjectName,
+                        EndUser: object.EndUser,
+                        FreeDefinedAttribute02: object.FreeDefinedAttribute02,
                         Customer: object.Customer,
                         CustomerName: object.CustomerName,
                         ReqByCustomer: object.ReqByCustomer,
@@ -314,6 +327,8 @@ sap.ui.define([
                         ReasonForChange: object.ReasonForChange,
                         AttachedDocuments: object.AttachedDocuments,
                         CreatedByUser: object.CreatedByUser,
+                        ChangeBasis: object.ChangeBasis,
+                        ChangeNode: object.ChangeNode,
                         to_Items:{
                             results: aPrintItem
                         }
@@ -343,11 +358,15 @@ sap.ui.define([
                     pdfContent.PrintData.to_Items = { results: aPrintItem };
                     pdfContent.PrintData.CreatedDate = aPrintItem[0]?.ECNCreateAt;
                     pdfContent.PrintData.CreatedDateFooter = aPrintItem[0]?.ECNValidFrom;
-                    switch (pdfContent.PrintData.Plant) {
-                        case "3000":
-                            _oFunctions.getPDF(pdfContent,"YY1_PP008_VN");break;
-                        case "4000":
-                            _oFunctions.getPDF(pdfContent,"YY1_PP008_TH");break;
+                    if (sType === "CN") {
+                        _oFunctions.getPDF(pdfContent,"YY1_PP008_CN");
+                    } else {
+                        switch (pdfContent.PrintData.Plant) {
+                            case "3000":
+                                _oFunctions.getPDF(pdfContent,"YY1_PP008_VN");break;
+                            case "4000":
+                                _oFunctions.getPDF(pdfContent,"YY1_PP008_TH");break;
+                        }
                     }
                 }
                 oBusyDialog.close();

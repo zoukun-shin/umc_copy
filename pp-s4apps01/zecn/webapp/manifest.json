@@ -187,6 +187,13 @@
                       "enabled": "{local>/authorityCheck/button/Print}",
                       "requiresSelection": true,
                       "text": "Print"
+                    },
+                    "printcn": {
+                      "press": "pp.zecn.ext.controller.ListReportExt.printcnAction",
+                      "visible": true,
+                      "enabled": "{local>/authorityCheck/button/PrintCN}",
+                      "requiresSelection": true,
+                      "text": "Print CN"
                     }
                   },
                   "columns": {
