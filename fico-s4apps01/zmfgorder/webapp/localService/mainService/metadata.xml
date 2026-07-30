@@ -123,6 +123,7 @@
                     <PropertyRef Name="CostCenter"/>
                     <PropertyRef Name="ActivityType"/>
                     <PropertyRef Name="orderid"/>
+                    <PropertyRef Name="Material"/>
                 </Key>
                 <Property Name="YearMonth" Type="Edm.String" Nullable="false" MaxLength="7"/>
                 <Property Name="Companycode" Type="Edm.String" Nullable="false" MaxLength="4"/>
@@ -133,6 +134,7 @@
                 <Property Name="CostCenter" Type="Edm.String" Nullable="false" MaxLength="10"/>
                 <Property Name="ActivityType" Type="Edm.String" Nullable="false" MaxLength="6"/>
                 <Property Name="orderid" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40"/>
                 <Property Name="CompanycodeText" Type="Edm.String" Nullable="false" MaxLength="25"/>
                 <Property Name="PlantText" Type="Edm.String" Nullable="false" MaxLength="30"/>
                 <Property Name="ProductDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
@@ -158,6 +160,7 @@
                 <Property Name="calendaryear" Type="Edm.String" Nullable="false" MaxLength="4"/>
                 <Property Name="calendarMonth" Type="Edm.String" Nullable="false" MaxLength="2"/>
                 <Property Name="producedproduct" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="MaterialText" Type="Edm.String" Nullable="false" MaxLength="40"/>
             </EntityType>
             <EntityContainer Name="Container">
                 <EntitySet Name="MFGORDER1" EntityType="com.sap.gateway.srvd.zui_mfgorder.v0001.MFGORDER1Type"/>
@@ -648,6 +651,10 @@
                 <Annotation Term="SAP__common.Label" String="OrderID"/>
                 <Annotation Term="SAP__UI.HiddenFilter"/>
             </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/Material">
+                <Annotation Term="SAP__common.Label" String="部品"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+            </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type/CompanycodeText">
                 <Annotation Term="SAP__common.Label" String="会社コードテキスト"/>
                 <Annotation Term="SAP__UI.HiddenFilter"/>
@@ -774,6 +781,13 @@
             <Annotations Target="SAP__self.MFGORDER1Type/producedproduct">
                 <Annotation Term="SAP__common.Label" String="構成品目"/>
                 <Annotation Term="SAP__UI.HiddenFilter"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MFGORDER1Type/MaterialText">
+                <Annotation Term="SAP__common.Label" String="部品テキスト"/>
+                <Annotation Term="SAP__UI.HiddenFilter"/>
+                <Annotation Term="SAP__common.Heading" String="Material Description"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Material Description"/>
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MAKTX"/>
             </Annotations>
             <Annotations Target="SAP__self.MFGORDER1Type">
                 <Annotation Term="SAP__common.Label" String="Query CDS"/>

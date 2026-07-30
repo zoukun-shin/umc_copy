@@ -103,6 +103,14 @@
                             <PropertyValue Property="Label" String="{@i18n>CostCtrActivityTypeName}"/>
                         </Record>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Material"/>
+                            <PropertyValue Property="Label" String="{@i18n>Material}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MaterialText"/>
+                            <PropertyValue Property="Label" String="{@i18n>MaterialText}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ProductionSupervisor"/>
                             <PropertyValue Property="Label" String="{@i18n>ProductionSupervisor}"/>
                         </Record>
