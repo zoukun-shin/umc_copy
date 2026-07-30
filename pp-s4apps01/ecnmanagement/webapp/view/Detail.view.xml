@@ -45,6 +45,9 @@
                                     <smartForm:GroupElement>
                                         <smartField:SmartField textLabel="{i18n>EcoTypeSF}" value="{EcoType}" change="onInputChange"/>
                                     </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>ChangeNodeSF}" value="{ChangeNode}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
                                 </smartForm:Group>
                                 <smartForm:Group>
                                     <smartForm:layoutData>  
@@ -58,6 +61,9 @@
                                     </smartForm:GroupElement>
                                      <smartForm:GroupElement>
                                         <smartField:SmartField textLabel="{i18n>AttachedDocumentsT}" value="{AttachedDocuments}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>ChangeBasisSF}" value="{ChangeBasis}" change="onInputChange"/>
                                     </smartForm:GroupElement>
                                 </smartForm:Group>
                                 <smartForm:Group>

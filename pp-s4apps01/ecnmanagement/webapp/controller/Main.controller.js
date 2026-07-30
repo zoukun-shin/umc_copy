@@ -248,6 +248,12 @@ sap.ui.define([
 			this.checkDialogAuth(oCompanyCode);
 			this.checkDialogAuth(oPlant);
 
+			// 全角字符校验
+			if (/[^\x00-\x7F]/.test(sChangeNumber)) {
+				oChangeNumber.setValueState("Error");
+				oChangeNumber.setValueStateText(this._ResourceBundle.getText("msg10"));
+			}
+
 			let isError = false;
 			isError = this.checkDialogFieldError();
 			if (isError) {

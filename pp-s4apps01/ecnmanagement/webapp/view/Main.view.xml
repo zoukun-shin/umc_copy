@@ -243,6 +243,26 @@
                             <Text text="{AttachedDocuments}" wrapping="false"/>
                         </t:template>
                     </t:Column>
+                    <t:Column  width="10rem"
+                        label="{i18n>ChangeNodeT}"
+                        sortProperty="ChangeNode"
+                        filterProperty="ChangeNode"
+                        customData:p13nData='\{"columnKey":"ChangeNode", "leadingProperty":"ChangeNode", "sortProperty":"ChangeNode", "filterProperty": "ChangeNode"}'
+                    >
+                        <t:template>
+                            <Text text="{ChangeNode}" tooltip="{ChangeNode}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column  width="10rem"
+                        label="{i18n>ChangeBasisT}"
+                        sortProperty="ChangeBasis"
+                        filterProperty="ChangeBasis"
+                        customData:p13nData='\{"columnKey":"ChangeBasis", "leadingProperty":"ChangeBasis", "sortProperty":"ChangeBasis", "filterProperty": "ChangeBasis"}'
+                    >
+                        <t:template>
+                            <Text text="{ChangeBasis}" tooltip="{ChangeBasis}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
                     <t:Column  width="8rem"
                         label="{i18n>RequestedByCustomerT}"
                         sortProperty="RequestedByCustomer"
