@@ -99,6 +99,10 @@ modules:
       - mmsourcelist.zip
       name: mmsourcelist
       target-path: resources/
+    - artifacts:
+      - mmretmatscrapdisp.zip
+      name: mmretmatscrapdisp
+      target-path: resources/
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -219,6 +223,15 @@ modules:
 - name: mmsourcelist
   type: html5
   path: sourcelist
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmretmatscrapdisp
+  type: html5
+  path: retmatscrapdisp
   build-parameters:
     build-result: dist
     builder: custom
