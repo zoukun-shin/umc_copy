@@ -131,6 +131,16 @@ sap.ui.define([
             }
             return value2;
         },
+
+        boolToYesNo: function(value1, value2) {
+            if (value1 === "B01" || value1 === "C01") {
+                return "";
+            }
+            if (value2 === true) {
+                return "是";
+            }
+            return "否";
+        },
         
         removeLeadingZero: function (value) {
             if (value) {

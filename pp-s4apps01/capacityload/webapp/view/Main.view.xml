@@ -100,11 +100,71 @@
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
                             <smartFilterBar:ControlConfiguration
+                                key="OrderStatus"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>OrderStatus}"
+                                mandatory="notMandatory"
+                                index="13"
+                            >
+                                <smartFilterBar:customControl>
+                                    <MultiComboBox
+                                        id="idMultiComboBoxOrderStatus"
+                                        showSecondaryValues="false"
+                                    >
+                                        <core:ListItem key="CRTD" text="CRTD"/>
+                                        <core:ListItem key="REL" text="REL"/>
+                                        <core:ListItem key="Fixed" text="Fixed"/>
+                                        <core:ListItem key="Unfix" text="Unfix"/>
+                                    </MultiComboBox>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="Model"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>Model}"
+                                mandatory="notMandatory"
+                                index="15"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="OnlySOAssigned"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>OnlySOAssigned}"
+                                mandatory="notMandatory"
+                                index="17"
+                            >
+                                <smartFilterBar:customControl>
+                                    <Select
+                                        id="idSelectOnlySOAssigned"
+                                        selectedKey="No"
+                                    >
+                                        <core:ListItem key="Yes" text="{i18n>Yes}"/>
+                                        <core:ListItem key="No" text="{i18n>No}"/>
+                                    </Select>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="ConsiderSetupTime"
+                                visibleInAdvancedArea="true"
+                                label="{i18n>ConsiderSetupTime}"
+                                mandatory="notMandatory"
+                                index="19"
+                            >
+                                <smartFilterBar:customControl>
+                                    <Select
+                                        id="idSelectConsiderSetupTime"
+                                        selectedKey="No"
+                                    >
+                                        <core:ListItem key="Yes" text="{i18n>Yes}"/>
+                                        <core:ListItem key="No" text="{i18n>No}"/>
+                                    </Select>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration
                                 key="AllPlannedOrders"
                                 visibleInAdvancedArea="true"
                                 label="{i18n>AllPlannedOrders}"
                                 mandatory="notMandatory"
-                                index="13"
+                                index="21"
                             >
                                 <smartFilterBar:customControl>
                                     <CheckBox
@@ -126,7 +186,7 @@
                 smartVariant="idSmartVariantManagement"
                 header="{i18n>tableHeaderTitle}"
                 beforeRebindTable="onBeforeRebindTable"
-                requestAtLeastFields="LineType,StartDateStr"
+                requestAtLeastFields="LineType,StartDateStr,OverCapacity"
             >
                 <smartTable:customToolbar>
                     <OverflowToolbar id="idOverflowToolbar">
@@ -393,6 +453,63 @@
                         <t:template>
                             <Text
                                 text="{Plant}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <!-- V1.01 追加列 -->
+                    <t:Column
+                        width="8rem"
+                        label="{i18n>IsSOAssigned}"
+                        sortProperty="IsSOAssigned"
+                        filterProperty="IsSOAssigned"
+                        customData:p13nData='\{"columnKey":"IsSOAssigned", "leadingProperty":"IsSOAssigned", "sortProperty":"IsSOAssigned", "filterProperty": "IsSOAssigned"}'
+                    >
+                        <t:template>
+                            <Text
+                                text="{parts:['LineType','IsSOAssigned'], formatter:'.formatter.boolToYesNo'}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        label="{i18n>ProductionVersion}"
+                        sortProperty="ProductionVersion"
+                        filterProperty="ProductionVersion"
+                        customData:p13nData='\{"columnKey":"ProductionVersion", "leadingProperty":"ProductionVersion", "sortProperty":"ProductionVersion", "filterProperty": "ProductionVersion"}'
+                    >
+                        <t:template>
+                            <Text
+                                text="{ProductionVersion}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="12rem"
+                        label="{i18n>ProductionVersionText}"
+                        sortProperty="ProductionVersionText"
+                        filterProperty="ProductionVersionText"
+                        customData:p13nData='\{"columnKey":"ProductionVersionText", "leadingProperty":"ProductionVersionText", "sortProperty":"ProductionVersionText", "filterProperty": "ProductionVersionText"}'
+                    >
+                        <t:template>
+                            <Text
+                                text="{ProductionVersionText}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="12rem"
+                        label="{i18n>SOList}"
+                        sortProperty="SOList"
+                        filterProperty="SOList"
+                        customData:p13nData='\{"columnKey":"SOList", "leadingProperty":"SOList", "sortProperty":"SOList", "filterProperty": "SOList"}'
+                    >
+                        <t:template>
+                            <Text
+                                text="{SOList}"
                                 wrapping="false"
                             />
                         </t:template>

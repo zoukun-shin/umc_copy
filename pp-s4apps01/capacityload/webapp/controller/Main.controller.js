@@ -22,7 +22,6 @@ sap.ui.define([
 		_initialize: function () {
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-			// sEmail = "xinlei.xu@sh.shin-china.com";
             var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -95,8 +94,28 @@ sap.ui.define([
 			}
             
             if (oStartDate.isValidValue() && dStartDate && oStartDate1.isValidValue() && dStartDate1) {
-                aNewFilter.push(new Filter("StartDate", "BT", this.formatter.odataDate(dStartDate), this.formatter.odataDate(dStartDate1))); 
+                aNewFilter.push(new Filter("StartDate", "BT", this.formatter.odataDate(dStartDate), this.formatter.odataDate(dStartDate1)));
             }
+            //begin add by zoukun at 20260803 需求 No.93
+            // V1.01 订单状态多选
+            let aOrderStatusKeys = this.byId("idMultiComboBoxOrderStatus").getSelectedKeys();
+            if (aOrderStatusKeys && aOrderStatusKeys.length > 0) {
+                let aOrderStatusFilters = aOrderStatusKeys.map(function(key) {
+                    return new Filter("OrderStatus", "EQ", key);
+                });
+                aNewFilter.push(new Filter({ filters: aOrderStatusFilters, and: false }));
+            }
+            // V1.01 仅显示已分配SO
+            let sOnlySOAssigned = this.byId("idSelectOnlySOAssigned").getSelectedKey();
+            if (sOnlySOAssigned === "Yes") {
+                aNewFilter.push(new Filter("OnlySOAssigned", "EQ", true));
+            }
+            // V1.01 考虑段取时间
+            let sConsiderSetupTime = this.byId("idSelectConsiderSetupTime").getSelectedKey();
+            if (sConsiderSetupTime === "Yes") {
+                aNewFilter.push(new Filter("ConsiderSetupTime", "EQ", true));
+            }
+            //end add by zoukun at 20260803 需求 No.93
             let isAllPlannedOrders = this.byId("idAllPlannedOrders").getSelected();
             if (isAllPlannedOrders) {
                 aNewFilter.push(new Filter("AllPlannedOrders", "EQ", isAllPlannedOrders)); 
@@ -171,6 +190,16 @@ sap.ui.define([
                         $("#" + aRows[i].getId()).css("background-color", "");
                         $("#" + aRows[i].getId() + "-fixed").css("background-color", "");
                     }
+                    //begin add by zoukun at 20260803 需求 No.93
+                    // V1.01 超能力行红色背景 (仅 B01 日汇总行)
+                    if (sLineType === "B01") {
+                        var bOverCapacity = aRows[i].getBindingContext()?.getObject()?.OverCapacity;
+                        if (bOverCapacity === true) {
+                            $("#" + aRows[i].getId()).css("background-color", "#FF0000");
+                            $("#" + aRows[i].getId() + "-fixed").css("background-color", "#FF0000");
+                        }
+                    }
+                    //end add by zoukun at 20260803 需求 No.93
                     aCells?.forEach(function (oCell) {
                         let sProperty = oCell.getBinding("text").getPath();
                         if (sProperty === "WorkCenter" || sProperty === "StartDate") {
