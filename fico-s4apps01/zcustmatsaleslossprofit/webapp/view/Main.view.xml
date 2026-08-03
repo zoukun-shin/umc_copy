@@ -1,0 +1,512 @@
+<mvc:View controllerName="fico.zcustmatsaleslossprofit.controller.Main" displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:t="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants" height="100%" busyIndicatorDelay="0">
+    <f:DynamicPage id="idDynamicPage" fitContent="true" class="sapUiNoContentPadding">
+        <f:title>
+            <f:DynamicPageTitle id="idDynamicPageTitle">
+                <f:heading>
+                    <sv:SmartVariantManagement id="idSmartVariantManagement" showShare="true" persistencyKey="uploadPurchaseReqFilter" showExecuteOnSelection="true" entitySet="ZC_CUSTMATSALESLOSSPROFIT" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="idDynamicPageHeader">
+                <f:content>
+                    <!--数据查询-->
+                    <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="pkCustMatPL" entitySet="ZC_CUSTMATSALESLOSSPROFIT" useToolbar="false">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration id="sfPlant" index="1" key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                            <smartFilterBar:ControlConfiguration id="sfYearMonth" index="2" key="YearMonth" visibleInAdvancedArea="true" mandatory="mandatory" label="{i18n>YearMonth}">
+                                <smartFilterBar:customControl>
+                                    <DatePicker
+                                        id="monthPicker"
+                                        displayFormat="yyyyMM"
+                                        valueFormat="yyyyMM"
+                                        change="onYearMonthChange"/>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration id="sfSalesOrg" index="3" key="SalesOrg" visibleInAdvancedArea="true" label="{i18n>SalesOrg}"/>
+                            <smartFilterBar:ControlConfiguration id="sfMaterial" index="4" key="Material" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                            <smartFilterBar:ControlConfiguration id="sfCustomer" index="5" key="Customer" visibleInAdvancedArea="true" label="{i18n>Customer}"/>
+                            <smartFilterBar:ControlConfiguration id="idReportType" index="6" key="ReportType" visibleInAdvancedArea="true" label="{i18n>ReportType}" mandatory="mandatory">
+                                <smartFilterBar:customControl>
+                                    <ComboBox id="comboReportType"  selectedKey="3" change="onReportTypeChange">
+                                        <items>
+                                            <core:ListItem id="listPosted" key="1" text="{i18n>ReportTypePost}"></core:ListItem>
+                                            <core:ListItem id="listNotPosted" key="2" text="{i18n>ReportTypeNotPost}"></core:ListItem>
+                                            <core:ListItem id="listAll" key="3" text="{i18n>ReportTypeAll}"></core:ListItem>
+                                        </items>
+                                    </ComboBox>
+                                </smartFilterBar:customControl> 
+                            </smartFilterBar:ControlConfiguration>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable id="idSmartTable" entitySet="ZC_CUSTMATSALESLOSSPROFIT" 
+            smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement"
+            persistencyKey="pkPLTable" header="{i18n>title}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable">
+                <smartTable:customToolbar>
+                </smartTable:customToolbar>
+                <t:Table id="idPlTable">
+                     <t:rowMode>
+                        <rm:Auto id="rowMode" minRowCount="5"/>
+                    </t:rowMode>
+                    <t:columns>
+                         <t:Column id="colBillingDocument" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "BillingDocument", "leadingProperty": "BillingDocument", "sortProperty": "BillingDocument", "filterProperty": "BillingDocument", "columnIndex": "0"\}'/>
+                            </t:customData>
+                            <Label id="labelBillingDocument" labelFor="textBillingDocument" text="{i18n>BillingDocument}"></Label>
+                            <t:template>
+                                <Text id="textBillingDocument" text="{BillingDocument}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colBillingDocumentItem" width="6rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "BillingDocumentItem", "leadingProperty": "BillingDocumentItem", "sortProperty": "BillingDocumentItem", "filterProperty": "BillingDocumentItem", "columnIndex": "1"\}'/>
+                            </t:customData>
+                            <Label id="labelBillingDocumentItem" labelFor="textBillingDocumentItem" text="{i18n>BillingDocumentItem}"></Label>
+                            <t:template>
+                                <Text id="textBillingDocumentItem" text="{BillingDocumentItem}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colCompanyCode" width="6rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "CompanyCode", "leadingProperty": "CompanyCode", "sortProperty": "CompanyCode", "filterProperty": "CompanyCode", "columnIndex": "2"\}'/>
+                            </t:customData>
+                            <Label id="labelCompanyCode" labelFor="textCompanyCode" text="{i18n>CompanyCode}"></Label>
+                            <t:template>
+                                <Text id="textCompanyCode" text="{CompanyCode}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colPlant" width="6rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "Plant", "leadingProperty": "Plant", "sortProperty": "Plant", "filterProperty": "Plant", "columnIndex": "3"\}'/>
+                            </t:customData>
+                            <Label id="labelPlant" labelFor="textPlant" text="{i18n>Plant}"></Label>
+                            <t:template>
+                                <Text id="textPlant" text="{Plant}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colSalesOrg" width="6rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "SalesOrg", "leadingProperty": "SalesOrg", "sortProperty": "SalesOrg", "filterProperty": "SalesOrg", "columnIndex": "4"\}'/>
+                            </t:customData>
+                            <Label id="labelSalesOrg" labelFor="textSalesOrg" text="{i18n>SalesOrg}"></Label>
+                            <t:template>
+                                <Text id="textSalesOrg" text="{SalesOrg}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colYearMonth" width="6rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "YearMonth", "leadingProperty": "YearMonth", "sortProperty": "YearMonth", "filterProperty": "YearMonth", "columnIndex": "5"\}'/>
+                            </t:customData>
+                            <Label id="labelYearMonth" labelFor="textYearMonth" text="{i18n>YearMonth}"></Label>
+                            <t:template>
+                                <Text id="textYearMonth" text="{YearMonth}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colCostDetermination" width="10rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "CostDetermination", "leadingProperty": "CostDetermination", "sortProperty": "CostDetermination", "filterProperty": "CostDetermination", "columnIndex": "6"\}'/>
+                            </t:customData>
+                            <Label id="labelCostDetermination" labelFor="textCostDetermination" text="{i18n>CostDetermination}"></Label>
+                            <t:template>
+                                <Text id="textCostDetermination" text="{CostDetermination}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colCustomer" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "Customer", "leadingProperty": "Customer", "sortProperty": "Customer", "filterProperty": "Customer", "columnIndex": "7"\}'/>
+                            </t:customData>
+                            <Label id="labelCustomer" labelFor="textCustomer" text="{i18n>Customer}"></Label>
+                            <t:template>
+                                <Text id="textCustomer" text="{Customer}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colCustomerName" width="10rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "CustomerName", "leadingProperty": "CustomerName", "sortProperty": "CustomerName", "filterProperty": "CustomerName", "columnIndex": "8"\}'/>
+                            </t:customData>
+                            <Label id="labelCustomerName" labelFor="textCustomerName" text="{i18n>CustomerName}"></Label>
+                            <t:template>
+                                <Text id="textCustomerName" text="{CustomerName}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colMaterial" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "Material", "leadingProperty": "Material", "sortProperty": "Material", "filterProperty": "Material", "columnIndex": "9"\}'/>
+                            </t:customData>
+                            <Label id="labelMaterial" labelFor="textMaterial" text="{i18n>Material}"></Label>
+                            <t:template>
+                                <Text id="textMaterial" text="{Material}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colMaterialType" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "MaterialType", "leadingProperty": "MaterialType", "sortProperty": "MaterialType", "filterProperty": "MaterialType", "columnIndex": "10"\}'/>
+                            </t:customData>
+                            <Label id="labelMaterialType" labelFor="textMaterialType" text="{i18n>MaterialType}"></Label>
+                            <t:template>
+                                <Text id="textMaterialType" text="{MaterialType}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colMaterialName" width="10rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "MaterialName", "leadingProperty": "MaterialName", "sortProperty": "MaterialName", "filterProperty": "MaterialName", "columnIndex": "11"\}'/>
+                            </t:customData>
+                            <Label id="labelMaterialName" labelFor="textMaterialName" text="{i18n>MaterialName}"></Label>
+                            <t:template>
+                                <Text id="textMaterialName" text="{MaterialName}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colMaterialGroup" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "MaterialGroup", "leadingProperty": "MaterialGroup", "sortProperty": "MaterialGroup", "filterProperty": "MaterialGroup", "columnIndex": "12"\}'/>
+                            </t:customData>
+                            <Label id="labelMaterialGroup" labelFor="textMaterialGroup" text="{i18n>MaterialGroup}"></Label>
+                            <t:template>
+                                <Text id="textMaterialGroup" text="{MaterialGroup}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colRevenueCurrency" width="6rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "RevenueCurrency", "leadingProperty": "RevenueCurrency", "sortProperty": "RevenueCurrency", "filterProperty": "RevenueCurrency", "columnIndex": "13"\}'/>
+                            </t:customData>
+                            <Label id="labelRevenueCurrency" labelFor="textRevenueCurrency" text="{i18n>RevenueCurrency}"></Label>
+                            <t:template>
+                                <Text id="textRevenueCurrency" text="{RevenueCurrency}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colTargetCurrency" width="6rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "TargetCurrency", "leadingProperty": "TargetCurrency", "sortProperty": "TargetCurrency", "filterProperty": "TargetCurrency", "columnIndex": "14"\}'/>
+                            </t:customData>
+                            <Label id="labelTargetCurrency" labelFor="textTargetCurrency" text="{i18n>TargetCurrency}"></Label>
+                            <t:template>
+                                <Text id="textTargetCurrency" text="{TargetCurrency}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colRevenueExchangeRate" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "RevenueExchangeRate", "leadingProperty": "RevenueExchangeRate", "sortProperty": "RevenueExchangeRate", "filterProperty": "RevenueExchangeRate", "columnIndex": "15"\}'/>
+                            </t:customData>
+                            <Label id="labelRevenueExchangeRate" labelFor="textRevenueExchangeRate" text="{i18n>RevenueExchangeRate}"></Label>
+                            <t:template>
+                                <Text id="textRevenueExchangeRate" text="{RevenueExchangeRate}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colCostExchangeRate" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "CostExchangeRate", "leadingProperty": "CostExchangeRate", "sortProperty": "CostExchangeRate", "filterProperty": "CostExchangeRate", "columnIndex": "16"\}'/>
+                            </t:customData>
+                            <Label id="labelCostExchangeRate" labelFor="textCostExchangeRate" text="{i18n>CostExchangeRate}"></Label>
+                            <t:template>
+                                <Text id="textCostExchangeRate" text="{CostExchangeRate}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colInvoiceQuantity" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "InvoiceQuantity", "leadingProperty": "InvoiceQuantity", "sortProperty": "InvoiceQuantity", "filterProperty": "InvoiceQuantity", "columnIndex": "17"\}'/>
+                            </t:customData>
+                            <Label id="labelInvoiceQuantity" labelFor="textInvoiceQuantity" text="{i18n>InvoiceQuantity}"></Label>
+                            <t:template>
+                                <Text id="textInvoiceQuantity" text="{InvoiceQuantity}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colUnitOfMeasure" width="4rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "UnitOfMeasure", "leadingProperty": "UnitOfMeasure", "sortProperty": "UnitOfMeasure", "filterProperty": "UnitOfMeasure", "columnIndex": "18"\}'/>
+                            </t:customData>
+                            <Label id="labelUnitOfMeasure" labelFor="textUnitOfMeasure" text="{i18n>UnitOfMeasure}"></Label>
+                            <t:template>
+                                <Text id="textUnitOfMeasure" text="{UnitOfMeasure}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colSellingPricePerUnit" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "SellingPricePerUnit", "leadingProperty": "SellingPricePerUnit", "sortProperty": "SellingPricePerUnit", "filterProperty": "SellingPricePerUnit", "columnIndex": "19"\}'/>
+                            </t:customData>
+                            <Label id="labelSellingPricePerUnit" labelFor="textSellingPricePerUnit" text="{i18n>SellingPricePerUnit}"></Label>
+                            <t:template>
+                                <Text id="textSellingPricePerUnit" text="{SellingPricePerUnit}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colSalesRevenue" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "SalesRevenue", "leadingProperty": "SalesRevenue", "sortProperty": "SalesRevenue", "filterProperty": "SalesRevenue", "columnIndex": "20"\}'/>
+                            </t:customData>
+                            <Label id="labelSalesRevenue" labelFor="textSalesRevenue" text="{i18n>SalesRevenue}"></Label>
+                            <t:template>
+                                <Text id="textSalesRevenue" text="{SalesRevenue}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colStandardCost" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "StandardCost", "leadingProperty": "StandardCost", "sortProperty": "StandardCost", "filterProperty": "StandardCost", "columnIndex": "21"\}'/>
+                            </t:customData>
+                            <Label id="labelStandardCost" labelFor="textStandardCost" text="{i18n>StandardCost}"></Label>
+                            <t:template>
+                                <Text id="textStandardCost" text="{StandardCost}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colStPerUnit" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "StPerUnit", "leadingProperty": "StPerUnit", "sortProperty": "StPerUnit", "filterProperty": "StPerUnit", "columnIndex": "22"\}'/>
+                            </t:customData>
+                            <Label id="labelStPerUnit" labelFor="textStPerUnit" text="{i18n>StPerUnit}"></Label>
+                            <t:template>
+                                <Text id="textStPerUnit" text="{StPerUnit}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colStGrossProfit" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "StGrossProfit", "leadingProperty": "StGrossProfit", "sortProperty": "StGrossProfit", "filterProperty": "StGrossProfit", "columnIndex": "23"\}'/>
+                            </t:customData>
+                            <Label id="labelStGrossProfit" labelFor="textStGrossProfit" text="{i18n>StGrossProfit}"></Label>
+                            <t:template>
+                                <Text id="textStGrossProfit" text="{StGrossProfit}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colStGrossProfitMargin" width="10rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "StGrossProfitMargin", "leadingProperty": "StGrossProfitMargin", "sortProperty": "StGrossProfitMargin", "filterProperty": "StGrossProfitMargin", "columnIndex": "24"\}'/>
+                            </t:customData>
+                            <Label id="labelStGrossProfitMargin" labelFor="textStGrossProfitMargin" text="{i18n>StGrossProfitMargin}"></Label>
+                            <t:template>
+                                <Text id="textStGrossProfitMargin" text="{StGrossProfitMargin}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colStMaterialCost" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "StMaterialCost", "leadingProperty": "StMaterialCost", "sortProperty": "StMaterialCost", "filterProperty": "StMaterialCost", "columnIndex": "25"\}'/>
+                            </t:customData>
+                            <Label id="labelStMaterialCost" labelFor="textStMaterialCost" text="{i18n>StMaterialCost}"></Label>
+                            <t:template>
+                                <Text id="textStMaterialCost" text="{StMaterialCost}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colStPrimaryMaterial" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "StPrimaryMaterial", "leadingProperty": "StPrimaryMaterial", "sortProperty": "StPrimaryMaterial", "filterProperty": "StPrimaryMaterial", "columnIndex": "26"\}'/>
+                            </t:customData>
+                            <Label id="labelStPrimaryMaterial" labelFor="textStPrimaryMaterial" text="{i18n>StPrimaryMaterial}"></Label>
+                            <t:template>
+                                <Text id="textStPrimaryMaterial" text="{StPrimaryMaterial}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colStAuxiliaryMaterial" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "StAuxiliaryMaterial", "leadingProperty": "StAuxiliaryMaterial", "sortProperty": "StAuxiliaryMaterial", "filterProperty": "StAuxiliaryMaterial", "columnIndex": "27"\}'/>
+                            </t:customData>
+                            <Label id="labelStAuxiliaryMaterial" labelFor="textStAuxiliaryMaterial" text="{i18n>StAuxiliaryMaterial}"></Label>
+                            <t:template>
+                                <Text id="textStAuxiliaryMaterial" text="{StAuxiliaryMaterial}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colStSubcontractingCost" width="11rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "StSubcontractingCost", "leadingProperty": "StSubcontractingCost", "sortProperty": "StSubcontractingCost", "filterProperty": "StSubcontractingCost", "columnIndex": "28"\}'/>
+                            </t:customData>
+                            <Label id="labelStSubcontractingCost" labelFor="textStSubcontractingCost" text="{i18n>StSubcontractingCost}"></Label>
+                            <t:template>
+                                <Text id="textStSubcontractingCost" text="{StSubcontractingCost}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colStDirectLaborCost" width="11rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "StDirectLaborCost", "leadingProperty": "StDirectLaborCost", "sortProperty": "StDirectLaborCost", "filterProperty": "StDirectLaborCost", "columnIndex": "29"\}'/>
+                            </t:customData>
+                            <Label id="labelStDirectLaborCost" labelFor="textStDirectLaborCost" text="{i18n>StDirectLaborCost}"></Label>
+                            <t:template>
+                                <Text id="textStDirectLaborCost" text="{StDirectLaborCost}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colStEquipmentDepreciation" width="11rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "StEquipmentDepreciation", "leadingProperty": "StEquipmentDepreciation", "sortProperty": "StEquipmentDepreciation", "filterProperty": "StEquipmentDepreciation", "columnIndex": "30"\}'/>
+                            </t:customData>
+                            <Label id="labelStEquipmentDepreciation" labelFor="textStEquipmentDepreciation" text="{i18n>StEquipmentDepreciation}"></Label>
+                            <t:template>
+                                <Text id="textStEquipmentDepreciation" text="{StEquipmentDepreciation}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colStSetupCost" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "StSetupCost", "leadingProperty": "StSetupCost", "sortProperty": "StSetupCost", "filterProperty": "StSetupCost", "columnIndex": "31"\}'/>
+                            </t:customData>
+                            <Label id="labelStSetupCost" labelFor="textStSetupCost" text="{i18n>StSetupCost}"></Label>
+                            <t:template>
+                                <Text id="textStSetupCost" text="{StSetupCost}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colStPowerCost" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "StPowerCost", "leadingProperty": "StPowerCost", "sortProperty": "StPowerCost", "filterProperty": "StPowerCost", "columnIndex": "32"\}'/>
+                            </t:customData>
+                            <Label id="labelStPowerCost" labelFor="textStPowerCost" text="{i18n>StPowerCost}"></Label>
+                            <t:template>
+                                <Text id="textStPowerCost" text="{StPowerCost}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colStTransportationCost" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "StTransportationCost", "leadingProperty": "StTransportationCost", "sortProperty": "StTransportationCost", "filterProperty": "StTransportationCost", "columnIndex": "33"\}'/>
+                            </t:customData>
+                            <Label id="labelStTransportationCost" labelFor="textStTransportationCost" text="{i18n>StTransportationCost}"></Label>
+                            <t:template>
+                                <Text id="textStTransportationCost" text="{StTransportationCost}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colStOtherExpense" width="11rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "StOtherExpense", "leadingProperty": "StOtherExpense", "sortProperty": "StOtherExpense", "filterProperty": "StOtherExpense", "columnIndex": "34"\}'/>
+                            </t:customData>
+                            <Label id="labelStOtherExpense" labelFor="textStOtherExpense" text="{i18n>StOtherExpense}"></Label>
+                            <t:template>
+                                <Text id="textStOtherExpense" text="{StOtherExpense}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colActualCost" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "ActualCost", "leadingProperty": "ActualCost", "sortProperty": "ActualCost", "filterProperty": "ActualCost", "columnIndex": "35"\}'/>
+                            </t:customData>
+                            <Label id="labelActualCost" labelFor="textActualCost" text="{i18n>ActualCost}"></Label>
+                            <t:template>
+                                <Text id="textActualCost" text="{ActualCost}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colAcPerUnit" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "AcPerUnit", "leadingProperty": "AcPerUnit", "sortProperty": "AcPerUnit", "filterProperty": "AcPerUnit", "columnIndex": "36"\}'/>
+                            </t:customData>
+                            <Label id="labelAcPerUnit" labelFor="textAcPerUnit" text="{i18n>AcPerUnit}"></Label>
+                            <t:template>
+                                <Text id="textAcPerUnit" text="{AcPerUnit}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colAcGrossProfit" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "AcGrossProfit", "leadingProperty": "AcGrossProfit", "sortProperty": "AcGrossProfit", "filterProperty": "AcGrossProfit", "columnIndex": "37"\}'/>
+                            </t:customData>
+                            <Label id="labelAcGrossProfit" labelFor="textAcGrossProfit" text="{i18n>AcGrossProfit}"></Label>
+                            <t:template>
+                                <Text id="textAcGrossProfit" text="{AcGrossProfit}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colAcGrossProfitMargin" width="10rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "AcGrossProfitMargin", "leadingProperty": "AcGrossProfitMargin", "sortProperty": "AcGrossProfitMargin", "filterProperty": "AcGrossProfitMargin", "columnIndex": "38"\}'/>
+                            </t:customData>
+                            <Label id="labelAcGrossProfitMargin" labelFor="textAcGrossProfitMargin" text="{i18n>AcGrossProfitMargin}"></Label>
+                            <t:template>
+                                <Text id="textAcGrossProfitMargin" text="{AcGrossProfitMargin}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colAcMaterialCost" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "AcMaterialCost", "leadingProperty": "AcMaterialCost", "sortProperty": "AcMaterialCost", "filterProperty": "AcMaterialCost", "columnIndex": "39"\}'/>
+                            </t:customData>
+                            <Label id="labelAcMaterialCost" labelFor="textAcMaterialCost" text="{i18n>AcMaterialCost}"></Label>
+                            <t:template>
+                                <Text id="textAcMaterialCost" text="{AcMaterialCost}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colAcPrimaryMaterial" width="10rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "AcPrimaryMaterial", "leadingProperty": "AcPrimaryMaterial", "sortProperty": "AcPrimaryMaterial", "filterProperty": "AcPrimaryMaterial", "columnIndex": "40"\}'/>
+                            </t:customData>
+                            <Label id="labelAcPrimaryMaterial" labelFor="textAcPrimaryMaterial" text="{i18n>AcPrimaryMaterial}"></Label>
+                            <t:template>
+                                <Text id="textAcPrimaryMaterial" text="{AcPrimaryMaterial}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colAcAuxiliaryMaterial" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "AcAuxiliaryMaterial", "leadingProperty": "AcAuxiliaryMaterial", "sortProperty": "AcAuxiliaryMaterial", "filterProperty": "AcAuxiliaryMaterial", "columnIndex": "41"\}'/>
+                            </t:customData>
+                            <Label id="labelAcAuxiliaryMaterial" labelFor="textAcAuxiliaryMaterial" text="{i18n>AcAuxiliaryMaterial}"></Label>
+                            <t:template>
+                                <Text id="textAcAuxiliaryMaterial" text="{AcAuxiliaryMaterial}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colAcSubcontractingCost" width="11rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "AcSubcontractingCost", "leadingProperty": "AcSubcontractingCost", "sortProperty": "AcSubcontractingCost", "filterProperty": "AcSubcontractingCost", "columnIndex": "42"\}'/>
+                            </t:customData>
+                            <Label id="labelAcSubcontractingCost" labelFor="textAcSubcontractingCost" text="{i18n>AcSubcontractingCost}"></Label>
+                            <t:template>
+                                <Text id="textAcSubcontractingCost" text="{AcSubcontractingCost}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colAcDirectLaborCost" width="11rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "AcDirectLaborCost", "leadingProperty": "AcDirectLaborCost", "sortProperty": "AcDirectLaborCost", "filterProperty": "AcDirectLaborCost", "columnIndex": "43"\}'/>
+                            </t:customData>
+                            <Label id="labelAcDirectLaborCost" labelFor="textAcDirectLaborCost" text="{i18n>AcDirectLaborCost}"></Label>
+                            <t:template>
+                                <Text id="textAcDirectLaborCost" text="{AcDirectLaborCost}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colAcEquipmentDepreciation" width="11rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "AcEquipmentDepreciation", "leadingProperty": "AcEquipmentDepreciation", "sortProperty": "AcEquipmentDepreciation", "filterProperty": "AcEquipmentDepreciation", "columnIndex": "44"\}'/>
+                            </t:customData>
+                            <Label id="labelAcEquipmentDepreciation" labelFor="textAcEquipmentDepreciation" text="{i18n>AcEquipmentDepreciation}"></Label>
+                            <t:template>
+                                <Text id="textAcEquipmentDepreciation" text="{AcEquipmentDepreciation}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colAcSetupCost" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "AcSetupCost", "leadingProperty": "AcSetupCost", "sortProperty": "AcSetupCost", "filterProperty": "AcSetupCost", "columnIndex": "45"\}'/>
+                            </t:customData>
+                            <Label id="labelAcSetupCost" labelFor="textAcSetupCost" text="{i18n>AcSetupCost}"></Label>
+                            <t:template>
+                                <Text id="textAcSetupCost" text="{AcSetupCost}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colAcPowerCost" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "AcPowerCost", "leadingProperty": "AcPowerCost", "sortProperty": "AcPowerCost", "filterProperty": "AcPowerCost", "columnIndex": "46"\}'/>
+                            </t:customData>
+                            <Label id="labelAcPowerCost" labelFor="textAcPowerCost" text="{i18n>AcPowerCost}"></Label>
+                            <t:template>
+                                <Text id="textAcPowerCost" text="{AcPowerCost}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colAcTransportationCost" width="8rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "AcTransportationCost", "leadingProperty": "AcTransportationCost", "sortProperty": "AcTransportationCost", "filterProperty": "AcTransportationCost", "columnIndex": "47"\}'/>
+                            </t:customData>
+                            <Label id="labelAcTransportationCost" labelFor="textAcTransportationCost" text="{i18n>AcTransportationCost}"></Label>
+                            <t:template>
+                                <Text id="textAcTransportationCost" text="{AcTransportationCost}"></Text>
+                            </t:template>
+                        </t:Column>
+                        <t:Column id="colAcOtherExpense" width="11rem">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "AcOtherExpense", "leadingProperty": "AcOtherExpense", "sortProperty": "AcOtherExpense", "filterProperty": "AcOtherExpense", "columnIndex": "48"\}'/>
+                            </t:customData>
+                            <Label id="labelAcOtherExpense" labelFor="textAcOtherExpense" text="{i18n>AcOtherExpense}"></Label>
+                            <t:template>
+                                <Text id="textAcOtherExpense" text="{AcOtherExpense}"></Text>
+                            </t:template>
+                        </t:Column>              
+                    </t:columns>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
