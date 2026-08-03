@@ -22,7 +22,6 @@ sap.ui.define([
             this._BusyDialog = new BusyDialog();
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-            sEmail = 'xinlei.xu@sh.shin-china.com';
             var oContextBinding = this.getView().getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -195,7 +194,17 @@ sap.ui.define([
                     CompanyCode: this._getRowFieldValue(oContext, "CompanyCode"),
                     MaterialDocumentYear: this._getRowFieldValue(oContext, "MaterialDocumentYear"),
                     MaterialDocument: this._getRowFieldValue(oContext, "MaterialDocument"),
-                    MaterialDocumentItem: this._getRowFieldValue(oContext, "MaterialDocumentItem")
+                    MaterialDocumentItem: this._getRowFieldValue(oContext, "MaterialDocumentItem"),
+                    TaxCode: this._getRowFieldValue(oContext, "TaxCode"),
+                    TaxPriceQualifiedQty: this._getRowFieldValue(oContext, "TaxPriceQualifiedQty"),
+                    Vendor: this._getRowFieldValue(oContext, "Vendor"),
+                    PurchaseOrderItemCategory: this._getRowFieldValue(oContext, "PurchaseOrderItemCategory"),
+                    Currency: this._getRowFieldValue(oContext, "Currency"),
+                    POQuantity: this._getRowFieldValue(oContext, "POQuantity"),
+                    POUnit: this._getRowFieldValue(oContext, "POUnit"),
+                    PurchaseOrder: this._getRowFieldValue(oContext, "PurchaseOrder"),
+                    PurchaseOrderItem: this._getRowFieldValue(oContext, "PurchaseOrderItem")
+
                 });
             });
 
@@ -246,6 +255,8 @@ sap.ui.define([
                 MessageBox.error(error);
                 this._BusyDialog.close();
             }
+
+            this._BusyDialog.close();
         },
 
         onExport: function () {
