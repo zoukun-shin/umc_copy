@@ -405,7 +405,7 @@
                         <Text text="{BomHeaderQuantityInBaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="20rem" label="{i18n>YY1_CUSTOMERMATERIAL_PRD}" sortProperty="YY1_CUSTOMERMATERIAL_PRD" filterProperty="YY1_CUSTOMERMATERIAL_PRD" hAlign="End" visible="false">
+                <table:Column width="20rem" label="{i18n>YY1_CUSTOMERMATERIAL_PRD}" sortProperty="YY1_CUSTOMERMATERIAL_PRD" filterProperty="YY1_CUSTOMERMATERIAL_PRD" visible="false">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"YY1_CUSTOMERMATERIAL_PRD", "leadingProperty":"YY1_CUSTOMERMATERIAL_PRD"}'/>
                     </table:customData>
@@ -413,7 +413,7 @@
                         <Text text="{YY1_CUSTOMERMATERIAL_PRD}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="20rem" label="{i18n>YY1_BPCODE_PRD_PRD}" sortProperty="YY1_BPCODE_PRD_PRD" filterProperty="YY1_BPCODE_PRD_PRD" hAlign="End" visible="false">
+                <table:Column width="8rem" label="{i18n>YY1_BPCODE_PRD_PRD}" sortProperty="YY1_BPCODE_PRD_PRD" filterProperty="YY1_BPCODE_PRD_PRD" visible="false">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"YY1_BPCODE_PRD_PRD", "leadingProperty":"YY1_BPCODE_PRD_PRD"}'/>
                     </table:customData>
