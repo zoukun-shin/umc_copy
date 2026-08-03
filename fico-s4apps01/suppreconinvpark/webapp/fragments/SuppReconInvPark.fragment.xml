@@ -21,6 +21,22 @@
             </OverflowToolbar>
         </smartTable:customToolbar>
         <table:Table id="idTable" selectionMode="Multi" rowMode="Auto">
+            <table:Column  label="{i18n>Status}" width="7rem" sortProperty="Status" filterProperty="Status" autoResizable="true" >
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"Status", "leadingProperty":"Status", "sortProperty":"Status", "filterProperty": "Status"}'/>
+                </table:customData>
+                <table:template>
+                    <ObjectStatus state="{ path:'Status',formatter:'.formatter.formatState' }" icon="{ path:'Status', formatter:'.formatter.formatStateIcon'}"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="8rem" label="{i18n>Message}" sortProperty="Message" filterProperty="Message">
+                <table:customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"Message", "leadingProperty":"Message"\}'/>
+                </table:customData>
+                <table:template>
+                    <Text text="{Message}" wrapping="false" />
+                </table:template>
+            </table:Column>
             <table:Column width="8rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
                 <table:customData>
                     <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode", "leadingProperty":"CompanyCode"\}'/>

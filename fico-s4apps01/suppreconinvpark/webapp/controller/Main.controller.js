@@ -186,6 +186,8 @@ sap.ui.define([
                 aRequestData.push({
                     InvoiceNo: '',
                     InvoiceYear: '',
+                    Status: '',
+                    Message: '',
                     InvoiceDate: this._getRowFieldValue(oContext, "InvoiceDate"),
                     MIROVendorInvoiceNo: this._getRowFieldValue(oContext, "MIROVendorInvoiceNo"),
                     MIROText: this._getRowFieldValue(oContext, "MIROText"),
@@ -241,6 +243,16 @@ sap.ui.define([
                                 oContext.getModel().setProperty(
                                     oContext.getPath() + "/InvoiceYear",
                                     oResult.INVOICEYEAR
+                                );
+
+                                oContext.getModel().setProperty(
+                                    oContext.getPath() + "/Status",
+                                    oResult.STATUS
+                                );
+
+                                oContext.getModel().setProperty(
+                                    oContext.getPath() + "/Message",
+                                    oResult.MESSAGE
                                 );
                             }
                         });
