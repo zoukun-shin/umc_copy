@@ -21,8 +21,8 @@
                     <FlexBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ProductionVerRep" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
-                                <smartFilterBar:ControlConfiguration index='20' key="MRPResponsible" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}"/>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="MRPResponsible" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}"/>
                                 <smartFilterBar:ControlConfiguration index='30' key="ProcurementType" visibleInAdvancedArea="true" label="{i18n>ProcurementType}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="SpecialProcurementType" visibleInAdvancedArea="true" label="{i18n>SpecialProcurementType}"/>
                                 <smartFilterBar:ControlConfiguration index='50' key="ProductionSupervisor" visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}"/>

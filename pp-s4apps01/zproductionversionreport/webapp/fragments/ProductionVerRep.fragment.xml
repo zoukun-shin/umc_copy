@@ -170,6 +170,22 @@
                         <Text text="{OperationText}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <table:Column width="12rem" label="{i18n>WorkCenterInternalID}" sortProperty="WorkCenterInternalID" filterProperty="WorkCenterInternalID">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"WorkCenterInternalID", "leadingProperty":"WorkCenterInternalID"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{WorkCenterInternalID}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>BillOfOperationsDesc}" sortProperty="BillOfOperationsDesc" filterProperty="BillOfOperationsDesc">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillOfOperationsDesc", "leadingProperty":"BillOfOperationsDesc"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BillOfOperationsDesc}" wrapping="false" />
+                    </table:template>
+                </table:Column>
                 <table:Column width="12rem" label="{i18n>WorkCenter}" sortProperty="WorkCenter" filterProperty="WorkCenter">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"WorkCenter", "leadingProperty":"WorkCenter"}'/>
