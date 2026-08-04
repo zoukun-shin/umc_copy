@@ -22,11 +22,11 @@
                 <f:content>
                     <smartFilterBar:SmartFilterBar id="SFBSemiFinStockRetention" useToolbar="false" entitySet="SemiFinStockRetention" smartVariant="__SVM01" persistencyKey="SemiFinStockRetentionBar" search="onSearch">
                         <smartFilterBar:controlConfiguration>
-                            <smartFilterBar:ControlConfiguration index="1" key="Plant"                   visibleInAdvancedArea="true" label="{i18n>Plant}"                    mandatory="mandatory"/>
-                            <smartFilterBar:ControlConfiguration index="2" key="MrpController"           visibleInAdvancedArea="true" label="{i18n>MrpController}"           />
-                            <smartFilterBar:ControlConfiguration index="3" key="ProductionSupervisor"    visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}"     mandatory="mandatory"  />
-                            <smartFilterBar:ControlConfiguration index="4" key="Product"                 visibleInAdvancedArea="true" label="{i18n>Product}"                 />
-                            <smartFilterBar:ControlConfiguration index="5" key="ManufacturingOrder"      visibleInAdvancedArea="true" label="{i18n>ManufacturingOrder}"      />
+                            <smartFilterBar:ControlConfiguration index="1" key="Plant"                   displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"                    mandatory="mandatory"/>
+                            <smartFilterBar:ControlConfiguration index="2" key="MrpController"           displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MrpController}"           />
+                            <smartFilterBar:ControlConfiguration index="3" key="ProductionSupervisor"    displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}"     mandatory="mandatory"  />
+                            <smartFilterBar:ControlConfiguration index="4" key="Product"                 displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Product}"                 />
+                            <smartFilterBar:ControlConfiguration index="5" key="ManufacturingOrder"      displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ManufacturingOrder}"      />
                             <smartFilterBar:ControlConfiguration
                                 index="6"
                                 key="MfgOrderPlannedStartDate"
@@ -143,6 +143,17 @@
                         <t:template>
                             <Text text="{
                                 path: 'RetentionHours',
+                                type: 'sap.ui.model.type.Float',
+                                formatOptions: { minFractionDigits: 3, maxFractionDigits: 3 }
+                            }" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column id="RealTimeRetentionHours" label="{i18n>RealTimeRetentionHours}" width="8rem" sortProperty="RealTimeRetentionHours" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"RealTimeRetentionHours","leadingProperty":"RealTimeRetentionHours","sortProperty":"RealTimeRetentionHours"}'/></t:customData>
+                        <t:template>
+                            <Text text="{
+                                path: 'RealTimeRetentionHours',
                                 type: 'sap.ui.model.type.Float',
                                 formatOptions: { minFractionDigits: 3, maxFractionDigits: 3 }
                             }" wrapping="false"/>
