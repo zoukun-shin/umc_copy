@@ -38,11 +38,11 @@
                             <smartFilterBar:ControlConfiguration id="sfCustomer" index="5" key="Customer" visibleInAdvancedArea="true" label="{i18n>Customer}"/>
                             <smartFilterBar:ControlConfiguration id="idReportType" index="6" key="ReportType" visibleInAdvancedArea="true" label="{i18n>ReportType}" mandatory="mandatory">
                                 <smartFilterBar:customControl>
-                                    <ComboBox id="comboReportType"  selectedKey="3" change="onReportTypeChange">
+                                    <ComboBox id="comboReportType" selectedKey="3" showSecondaryValues="true">
                                         <items>
-                                            <core:ListItem id="listPosted" key="1" text="{i18n>ReportTypePost}"></core:ListItem>
-                                            <core:ListItem id="listNotPosted" key="2" text="{i18n>ReportTypeNotPost}"></core:ListItem>
-                                            <core:ListItem id="listAll" key="3" text="{i18n>ReportTypeAll}"></core:ListItem>
+                                            <core:ListItem id="listPosted" key="1" text="{i18n>ReportTypePost}" additionalText="1"></core:ListItem>
+                                            <core:ListItem id="listNotPosted" key="2" text="{i18n>ReportTypeNotPost}" additionalText="2"></core:ListItem>
+                                            <core:ListItem id="listAll" key="3" text="{i18n>ReportTypeAll}" additionalText="3"></core:ListItem>
                                         </items>
                                     </ComboBox>
                                 </smartFilterBar:customControl> 
@@ -58,7 +58,7 @@
             persistencyKey="pkPLTable" header="{i18n>title}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable">
                 <smartTable:customToolbar>
                 </smartTable:customToolbar>
-                <t:Table id="idPlTable">
+                <t:Table id="idPlTable" selectionMode="None">
                      <t:rowMode>
                         <rm:Auto id="rowMode" minRowCount="5"/>
                     </t:rowMode>
@@ -123,7 +123,7 @@
                             </t:customData>
                             <Label id="labelCostDetermination" labelFor="textCostDetermination" text="{i18n>CostDetermination}"></Label>
                             <t:template>
-                                <Text id="textCostDetermination" text="{CostDetermination}"></Text>
+                                <Text id="textCostDetermination" text="{parts:[{path:'CostDetermination'}], formatter:'.formatter.formatCostDetermination'}"></Text>
                             </t:template>
                         </t:Column>
                         <t:Column id="colCustomer" width="8rem">

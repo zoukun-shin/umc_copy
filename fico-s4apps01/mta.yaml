@@ -182,7 +182,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficopaidpaycalculation
@@ -192,7 +191,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficopaidpaydocument
@@ -202,7 +200,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficofixedassetprint
@@ -212,7 +209,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozmfgorder
@@ -222,7 +218,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozaccountingdoc
@@ -232,7 +227,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozpaymentmethod
@@ -242,7 +236,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozdaystocktrans
@@ -252,7 +245,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozinventoryaging
@@ -262,7 +254,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozbindglupload
@@ -272,7 +263,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozstockageupload
@@ -282,7 +272,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficopaidpaylist
@@ -292,7 +281,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozbindglaccountlist
@@ -302,7 +290,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozagencypurchasingnew
@@ -312,7 +299,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozsalespurchaseprice
@@ -322,7 +308,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozcosttransfer
@@ -332,7 +317,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficocostingresult
@@ -342,7 +326,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficogeneralledger
@@ -352,7 +335,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozbalancesheet
@@ -362,7 +344,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficovat
@@ -372,7 +353,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficocustomerlineitem
@@ -382,7 +362,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozvendorlineitemreport
@@ -392,7 +371,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozprofitandloss
@@ -402,7 +380,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozmpnstdcost
@@ -412,7 +389,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficosalesbillingposting
@@ -422,7 +398,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozproxyjournal
@@ -432,7 +407,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozecpartsstats
@@ -442,7 +416,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozgrircogstrf
@@ -452,7 +425,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozprocfeetrf
@@ -462,7 +434,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozaccountmapping
@@ -472,7 +443,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozmpnmovavgprice
@@ -482,7 +452,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficosuppreconinvpark
@@ -492,7 +461,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 - name: ficozcustmatsaleslossprofit
@@ -502,7 +470,6 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
     - npm run build:cf
     supported-platforms: []
 resources:
