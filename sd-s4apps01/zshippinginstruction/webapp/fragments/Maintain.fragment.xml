@@ -3,7 +3,7 @@
     xmlns="sap.m"
     xmlns:layout="sap.ui.layout"
     xmlns:table="sap.ui.table">
-    <Dialog title="{i18n>Maintain}" draggable="true" stretch="true" class="sapUiSizeCompact">
+    <Dialog title="{i18n>Maintain}({local>/Header/BillingDocument})" draggable="true" stretch="true" class="sapUiSizeCompact">
         <Bar>
             <contentRight>
                 <Button type="Ghost" icon="sap-icon://synchronize" text="{i18n>LoadDelivery}" press="onPressAction('LoadDelivery')" enabled="{= ${local>/authorityCheck/button/LoadDelivery} &amp;&amp; ${local>/Header/IsApproved} === false}"/>
@@ -17,11 +17,11 @@
             <HBox>
                 <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>SalesOrganization}:"/>
-                    <Input value="{local>/Header/SalesOrganization} {local>/Header/SalesOrganizationName}" editable="false" width="20rem"/>
+                    <Input value="{local>/Header/SalesOrganization} {local>/Header/SalesOrganizationName}" editable="false" width="13rem" tooltip="{local>/Header/SalesOrganizationName}"/>
                     <Label text="{i18n>SoldToParty}:"/>
-                    <Input value="{local>/Header/SoldToParty} {local>/Header/SoldToPartyName}" editable="false" width="20rem"/>
+                    <Input value="{local>/Header/SoldToParty} {local>/Header/SoldToPartyName}" editable="false" width="13rem" tooltip="{local>/Header/SoldToPartyName}"/>
                     <Label text="{i18n>ShipToParty}:"/>
-                    <Input value="{local>/Header/ShipToParty} {local>/Header/ShipToPartyName}" editable="false" width="20rem"/>
+                    <Input value="{local>/Header/ShipToParty} {local>/Header/ShipToPartyName}" editable="false" width="13rem" tooltip="{local>/Header/ShipToPartyName}"/>
                 </VBox>
                 <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>ShippingType}:"/>
@@ -35,7 +35,7 @@
                 </VBox>
                 <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>RequestedDeliveryDate}:"/>
-                    <DatePicker width="12rem" editable="false" value="{
+                    <DatePicker width="10rem" editable="false" value="{
 						'path':'local>/Header/RequestedDeliveryDate',
 						'type':'sap.ui.model.type.Date',
 						'formatOptions': {
@@ -44,7 +44,7 @@
 						} 
                     }"/>
                     <Label text="{i18n>PlannedGoodsMovementDate}:"/>
-                    <DatePicker width="12rem" editable="{local>/MaintainEditable}" value="{
+                    <DatePicker width="10rem" editable="{local>/MaintainEditable}" value="{
 						'path':'local>/Header/PlannedGoodsMovementDate',
 						'type':'sap.ui.model.type.Date',
 						'formatOptions': {
@@ -53,11 +53,11 @@
 						} 
                     }"/>
                     <Label text="{i18n>TruckNumber}:"/>
-                    <Input value="{local>/Header/TruckNumber}" width="12rem" maxLength="20" editable="{local>/MaintainEditable}"/>
+                    <Input value="{local>/Header/TruckNumber}" width="10rem" maxLength="20" editable="{local>/MaintainEditable}"/>
                 </VBox>
                 <VBox class="sapUiSmallMarginEnd">
                     <Label text="{i18n>PlannedGoodsIssueDate}:"/>
-                    <DatePicker width="12rem" editable="{local>/MaintainEditable}" value="{
+                    <DatePicker width="10rem" editable="{local>/MaintainEditable}" value="{
 						'path':'local>/Header/PlannedGoodsIssueDate',
 						'type':'sap.ui.model.type.Date',
 						'formatOptions': {
@@ -66,7 +66,7 @@
 						}
                     }"/>
                     <Label text="{i18n>PlannedCustomsDeclarationDate}:"/>
-                    <DatePicker width="12rem" editable="{local>/MaintainEditable}" value="{
+                    <DatePicker width="10rem" editable="{local>/MaintainEditable}" value="{
 						'path':'local>/Header/PlannedCustomsDeclarationDate',
 						'type':'sap.ui.model.type.Date',
 						'formatOptions': {
@@ -75,33 +75,37 @@
 						} 
                     }"/>
                     <Label text="{i18n>Driver}:"/>
-                    <Input value="{local>/Header/Driver}" width="12rem" maxLength="20" editable="{local>/MaintainEditable}"/>
+                    <Input value="{local>/Header/Driver}" width="10rem" maxLength="20" editable="{local>/MaintainEditable}"/>
                 </VBox>
                 <VBox class="sapUiSmallMarginEnd">
                     <HBox>
                         <VBox class="sapUiSmallMarginEnd">
-                            <Label text="{i18n>IsApproved}:" width="5rem"/>
+                            <Label text="{i18n>IsApproved}:" width="10rem"/>
                             <CheckBox selected="{local>/Header/IsApproved}" editable="false"/>
                         </VBox>
                         <VBox>
                             <Label text="{i18n>ApproverName}:"/>
-                            <Input value="{local>/Header/ApproverName}" width="15rem" editable="false"/>
+                            <Input value="{local>/Header/ApproverName}" width="13rem" editable="false" tooltip="{local>/Header/ApproverName}"/>
                         </VBox>
                     </HBox>
                     <HBox>
                         <VBox class="sapUiSmallMarginEnd">
                             <Label text="{i18n>IncotermsClassification}:" />
-                            <Input value="{local>/Header/IncotermsClassification}" editable="false" width="5rem"/>
+                            <Input value="{local>/Header/IncotermsClassification}" editable="false" width="10rem"/>
                         </VBox>
                         <VBox>
                             <Label text="{i18n>IncotermsTransferLocation}:"/>
-                            <Input value="{local>/Header/IncotermsTransferLocation}" editable="{local>/MaintainEditable}" maxLength="28" width="15rem"/>
+                            <Input value="{local>/Header/IncotermsTransferLocation}" editable="{local>/MaintainEditable}" maxLength="28" width="13rem" tooltip="{local>/Header/IncotermsTransferLocation}"/>
                         </VBox>
                     </HBox>
                     <HBox>
                         <VBox class="sapUiSmallMarginEnd">
+                            <Label text="{i18n>WayBill}:"/>
+                            <Input value="{local>/Header/WayBill}" editable="{local>/MaintainEditable}" maxLength="20" width="10rem" tooltip="{local>/Header/WayBill}"/>
+                        </VBox>
+                        <VBox>
                             <Label text="{i18n>Remarks}:"/>
-                            <TextArea value="{local>/Header/Remarks}" width="21rem" maxLength="100" rows="2" editable="{local>/MaintainEditable}"/>
+                            <TextArea value="{local>/Header/Remarks}" width="13rem" maxLength="100" rows="1" editable="{local>/MaintainEditable}" tooltip="{local>/Header/Remarks}"/>
                         </VBox>
                     </HBox>
                 </VBox>
@@ -308,17 +312,17 @@
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>BoxNumberRange}">
                         <table:template>
-                            <Input value="{local>BoxNumberRange}" maxLength="10" liveChange="onLiveChangeRange"/>
+                            <Input value="{local>BoxNumberRange}" maxLength="10" liveChange="onLiveChangeRange" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>BeginBoxNo}">
                         <table:template>
-                            <Input value="{local>BeginBoxNo}" maxLength="10" liveChange="onLiveChangePositiveInteger"/>
+                            <Input value="{local>BeginBoxNo}" maxLength="10" liveChange="onLiveChangePositiveInteger" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>EndBoxNo}">
                         <table:template>
-                            <Input value="{local>EndBoxNo}" maxLength="10" liveChange="onLiveChangePositiveInteger"/>
+                            <Input value="{local>EndBoxNo}" maxLength="10" liveChange="onLiveChangePositiveInteger" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>BoxQty}">
@@ -334,7 +338,7 @@
                                                showMeasure: false,
                                                decimals: 3
                                            } 
-                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal"/>
+                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>HandlingUnitTareWeight}">
@@ -345,7 +349,7 @@
                                                showMeasure: false,
                                                decimals: 3
                                            } 
-                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal"/>
+                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>HandlingUnitGrossWeight}">
@@ -356,7 +360,7 @@
                                                showMeasure: false,
                                                decimals: 3
                                            } 
-                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal"/>
+                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <!-- <table:Column width="8rem" label="{i18n>HandlingUnitWeightUnit}">
@@ -366,7 +370,7 @@
                     </table:Column> -->
                     <table:Column width="10rem" label="{i18n>BoxMeasureSize}">
                         <table:template>
-                            <Input value="{local>BoxMeasureSize}" maxLength="20"/>
+                            <Input value="{local>BoxMeasureSize}" maxLength="20" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <!-- <table:Column width="8rem" label="{i18n>MeasureUnit}">
@@ -376,12 +380,12 @@
                     </table:Column> -->
                     <table:Column width="12rem" label="{i18n>CommodityCode}">
                         <table:template>
-                            <Input value="{local>CommodityCode}" maxLength="15"/>
+                            <Input value="{local>CommodityCode}" maxLength="15" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="15rem" label="{i18n>CommodityName}">
                         <table:template>
-                            <Input value="{local>CommodityName}" maxLength="30"/>
+                            <Input value="{local>CommodityName}" maxLength="30" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="10rem" label="{i18n>MaterialByCustomer}">
@@ -462,27 +466,27 @@
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>PerPalletTargetQty}">
                         <table:template>
-                            <Input value="{local>PerPalletTargetQty}" maxLength="15" liveChange="onLiveChangePositiveDecimal"/>
+                            <Input value="{local>PerPalletTargetQty}" maxLength="15" liveChange="onLiveChangePositiveDecimal" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>PalletQty}">
                         <table:template>
-                            <Input value="{local>PalletQty}" maxLength="15" liveChange="onLiveChangePositiveInteger"/>
+                            <Input value="{local>PalletQty}" maxLength="15" liveChange="onLiveChangePositiveInteger" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>PalletNumberRange}">
                         <table:template>
-                            <Input value="{local>PalletNumberRange}" maxLength="10" liveChange="onLiveChangeRange"/>
+                            <Input value="{local>PalletNumberRange}" maxLength="10" liveChange="onLiveChangeRange" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>BeginPalletNo}">
                         <table:template>
-                            <Input value="{local>BeginPalletNo}" maxLength="10" liveChange="onLiveChangePositiveInteger"/>
+                            <Input value="{local>BeginPalletNo}" maxLength="10" liveChange="onLiveChangePositiveInteger" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>EndPalletNo}">
                         <table:template>
-                            <Input value="{local>EndPalletNo}" maxLength="10" liveChange="onLiveChangePositiveInteger"/>
+                            <Input value="{local>EndPalletNo}" maxLength="10" liveChange="onLiveChangePositiveInteger" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>PalletLoadWeight}">
@@ -493,7 +497,7 @@
                                                showMeasure: false,
                                                decimals: 3
                                            } 
-                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal"/>
+                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>PalletTareWeight}">
@@ -504,7 +508,7 @@
                                                showMeasure: false,
                                                decimals: 3
                                            } 
-                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal"/>
+                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>PalletGrossWeight}">
@@ -515,7 +519,7 @@
                                                showMeasure: false,
                                                decimals: 3
                                            } 
-                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal"/>
+                                          }" maxLength="15" liveChange="onLiveChangePositiveDecimal" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <!-- <table:Column width="8rem" label="{i18n>PalletWeightUnit}">
@@ -531,7 +535,7 @@
                                                showMeasure: false,
                                                decimals: 3
                                            } 
-                                          }" maxLength="13" liveChange="onLiveChangePositiveDecimal"/>
+                                          }" maxLength="13" liveChange="onLiveChangePositiveDecimal" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>PalletWidth}">
@@ -542,7 +546,7 @@
                                                showMeasure: false,
                                                decimals: 3
                                            } 
-                                          }" maxLength="13" liveChange="onLiveChangePositiveDecimal"/>
+                                          }" maxLength="13" liveChange="onLiveChangePositiveDecimal" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="8rem" label="{i18n>PalletHeight}">
@@ -553,7 +557,7 @@
                                                showMeasure: false,
                                                decimals: 3
                                            } 
-                                          }" maxLength="13" liveChange="onLiveChangePositiveDecimal"/>
+                                          }" maxLength="13" liveChange="onLiveChangePositiveDecimal" editable="{= !${local>/Header/IsApproved}}"/>
                         </table:template>
                     </table:Column>
                     <table:Column width="10rem" label="{i18n>PalletMeasureSize}">

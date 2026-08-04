@@ -234,16 +234,16 @@ sap.ui.define([
          * Convenience method for show warning dialog
          * @public
          * @param {string} sMessage message content
-         * @param {string} fnContinue Processing when IGNORE is pressed
-         * @param {string} fnCancel Processing when CANCEL is pressed
+         * @param {string} fnContinue Processing when YES is pressed
+         * @param {string} fnCancel Processing when NO is pressed
          */
         showWarningDialog: function (sMessage, fnContinue, fnCancel) {
             MessageBox.warning(sMessage, {
-                actions: [MessageBox.Action.IGNORE, MessageBox.Action.CANCEL],
-                emphasizedAction: MessageBox.Action.CANCEL,
+                actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+                emphasizedAction: MessageBox.Action.NO,
                 onClose: function (sAction) {
-                    // Execute CallBack when IGNORE button is pressed
-                    if (sAction === MessageBox.Action.IGNORE) {
+                    // Execute CallBack when YES button is pressed
+                    if (sAction === MessageBox.Action.YES) {
                         fnContinue(this);
                     } else {
                         fnCancel(this);
@@ -483,6 +483,32 @@ sap.ui.define([
                 }
             });
             return aFinalArray;
+        },
+
+        _calculateVolume: function (sMeasureSize, iQuantity) {
+            // 1. 校验入参
+            if (!sMeasureSize || !iQuantity) {
+                return "0.000";
+            }
+            // 2. 按 '*' 拆分长宽高字符串 (支持 '*' 或 'x' / 'X' 分隔符，增强容错)
+            var aDimensions = sMeasureSize.toString().toLowerCase().split(/[*x]/);
+            // 校验拆分出来的是否为 3 个数字
+            if (aDimensions.length !== 3) {
+                return "0.000";
+            }
+            var fLength = parseFloat(aDimensions[0]); // 长 (mm)
+            var fWidth = parseFloat(aDimensions[1]); // 宽 (mm)
+            var fHeight = parseFloat(aDimensions[2]); // 高 (mm)
+            var iQty = parseFloat(iQuantity) || 0; // 数量
+            if (isNaN(fLength) || isNaN(fWidth) || isNaN(fHeight)) {
+                return "0.000";
+            }
+            // 3. 计算总体积：
+            // 单件体积(m³) = (长mm / 1000) * (宽mm / 1000) * (高mm / 1000)
+            // 总体积(m³)   = 单件体积 * 数量
+            var fTotalVolumeM3 = (fLength * fWidth * fHeight * iQty) / 1000000000;
+            // 4. 保留 3 位小数
+            return fTotalVolumeM3.toFixed(3);
         }
     })
 });
