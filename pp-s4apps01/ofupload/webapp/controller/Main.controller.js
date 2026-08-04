@@ -123,22 +123,67 @@ sap.ui.define([
 
         readSheet: function (aSheet1) {
             let aExcelSet = [];
-            let oItem;
+
+            // 检测是否为横版模板：检查数据行中是否存在日期格式的键名（如 "2024/5/6"）
+            const DATE_KEY_PATTERN = /^\d{4}[\/\-\.]\d{1,2}[\/\-\.]\d{1,2}$/;
+            const bIsHorizontal = aSheet1.length > 5 &&
+                aSheet1.slice(5).some(row =>
+                    Object.keys(row).some(key => DATE_KEY_PATTERN.test(key))
+                );
+
             for (var i = 5; i < aSheet1.length; i++) {
-                oItem = {
-                    Type: "",
-                    Message: "",
-                    Tabix: i,
-                    Customer: aSheet1[i]["Customer"] || "",
-                    Version: aSheet1[i]["Version"] || "",
-                    Material: aSheet1[i]["Material"] || "",
-                    Plant: aSheet1[i]["Plant"] || "",
-                    RequirementDate: formatter.dateFormatter(aSheet1[i]["RequirementDate"], "yyyyMMdd") || "",
-                    RequirementQty: aSheet1[i]["RequirementQty"] || "",
-                    Remark: aSheet1[i]["Remark"] || "",
-                };
-                aExcelSet.push(oItem);
+                let oRow = aSheet1[i];
+
+                if (bIsHorizontal) {
+                    // 横版模板：提取固定属性，将日期列逐一转换为竖版行
+                    const oFixedProps = {
+                        Customer: oRow["Customer"] || "",
+                        Version: oRow["Version"] || "",
+                        Material: oRow["Material"] || "",
+                        Plant: oRow["Plant"] || "",
+                        Remark: oRow["Remark"] || "",
+                    };
+
+                    // 筛选日期列：排除固定属性列和 __EMPTY_N 列
+                    const aDateKeys = Object.keys(oRow).filter(key => {
+                        return key !== "Customer" &&
+                            key !== "Version" &&
+                            key !== "Material" &&
+                            key !== "Plant" &&
+                            key !== "Remark" &&
+                            !/^__EMPTY_\d+$/.test(key);
+                    });
+
+                    aDateKeys.forEach(dateKey => {
+                        const sQty = oRow[dateKey];
+                        if (sQty && String(sQty).trim() !== "") {
+                            aExcelSet.push({
+                                Type: "",
+                                Message: "",
+                                Tabix: i,
+                                ...oFixedProps,
+                                RequirementDate: formatter.dateFormatter(dateKey, "yyyyMMdd") || "",
+                                RequirementQty: sQty || "",
+                            });
+                        }
+                    });
+                } else {
+                    // 竖版模板（原有逻辑）
+                    aExcelSet.push({
+                        Type: "",
+                        Message: "",
+                        Tabix: i,
+                        Customer: oRow["Customer"] || "",
+                        Version: oRow["Version"] || "",
+                        Material: oRow["Material"] || "",
+                        Plant: oRow["Plant"] || "",
+                        RequirementDate: formatter.dateFormatter(oRow["RequirementDate"], "yyyyMMdd") || "",
+                        RequirementQty: oRow["RequirementQty"] || "",
+                        Remark: oRow["Remark"] || "",
+                    });
+                }
             }
+
             if (aExcelSet.length === 0) {
                 return;
             }
