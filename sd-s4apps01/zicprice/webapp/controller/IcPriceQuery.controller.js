@@ -102,7 +102,9 @@ sap.ui.define([
                 if (p) {
                     var d = oResult[sKey]._dyn;
                     d["PurPrice_" + p]    = item.DynPurPrice;
+                    d["PurCrcy_" + p]     = item.DynPurCurrency;
                     d["SlsPrice_" + p]    = item.DynSlsPrice;
+                    d["SlsCrcy_" + p]     = item.DynSlsCurrency;
                     d["Status_" + p]      = item.DynExecStatus;
                     d["Msg_" + p]         = item.DynMessage;
                     d["LabelPur_" + p]    = item.DynColLabelPur;
@@ -130,9 +132,16 @@ sap.ui.define([
                 .map(function (k) { return k.substring("PurPrice_".length); })
                 .sort();
 
+            // 每工厂6列：采购价格/采购货币/销售价格/销售货币/状态/消息。
+            // 货币列头由价格列头替换"价格"→"货币"得到（同一列不同行币别可能不同，
+            // 所以货币按行单独成列，价格列头不再带币别）
             aPlants.forEach(function (p) {
-                this._addNumCol("PurPrice_" + p, oRow0["LabelPur_" + p]);
-                this._addNumCol("SlsPrice_" + p, oRow0["LabelSls_" + p]);
+                var sLabelPur = oRow0["LabelPur_" + p] || "";
+                var sLabelSls = oRow0["LabelSls_" + p] || "";
+                this._addNumCol("PurPrice_" + p, sLabelPur);
+                this._addTextCol("PurCrcy_" + p, sLabelPur.replace("价格", "货币"), "7rem");
+                this._addNumCol("SlsPrice_" + p, sLabelSls);
+                this._addTextCol("SlsCrcy_" + p, sLabelSls.replace("价格", "货币"), "7rem");
                 this._addStatusCol("Status_" + p, oRow0["LabelStatus_" + p]);
                 this._addTextCol("Msg_" + p, oRow0["LabelMsg_" + p], "22rem");
             }.bind(this));
