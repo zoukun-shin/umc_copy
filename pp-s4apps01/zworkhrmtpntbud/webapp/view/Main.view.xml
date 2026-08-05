@@ -1,0 +1,61 @@
+<mvc:View controllerName="pp.zworkhrmtpntbud.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="WorkHrMtPntBudSVM" showShare="true" showExecuteOnSelection="true" entitySet="WorkHrMtPntBud"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="WorkHrMtPntBud" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onSmartFilterBarInitialized" search="onSearch">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="MRPResponsible" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="ProductionSupervisor" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="Material" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="Customer" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Customer}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="ProductionStartDate" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ProductionStartDate}">
+                                    <smartFilterBar:customControl>
+                                        <DateRangeSelection id="idDateRangeSelection" valueFormat="yyyy/MM/dd" displayFormat="yyyy/MM/dd" />
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='70' key="PlndIndepRqmtVersion" filterType="single" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PlndIndepRqmtVersion}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="WorkingDaysMonth1" filterType="single" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>WorkingDaysMonth1}"/>
+                                <smartFilterBar:ControlConfiguration index='90' key="WorkingDaysMonth2" filterType="single" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>WorkingDaysMonth2}"/>
+                                <smartFilterBar:ControlConfiguration index='100' key="WorkingDaysMonth3" filterType="single" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>WorkingDaysMonth3}"/>
+                                <smartFilterBar:ControlConfiguration index='110' key="WorkingDaysMonth4" filterType="single" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>WorkingDaysMonth4}"/>
+                                <smartFilterBar:ControlConfiguration index='120' key="WorkingDaysMonth5" filterType="single" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>WorkingDaysMonth5}"/>
+                                <smartFilterBar:ControlConfiguration index='130' key="WorkingDaysMonth6" filterType="single" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>WorkingDaysMonth6}"/>
+                                <smartFilterBar:ControlConfiguration index='140' key="WorkingHoursMonth1" filterType="single" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>WorkingHoursMonth1}"/>
+                                <smartFilterBar:ControlConfiguration index='150' key="WorkingHoursMonth2" filterType="single" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>WorkingHoursMonth2}"/>
+                                <smartFilterBar:ControlConfiguration index='160' key="WorkingHoursMonth3" filterType="single" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>WorkingHoursMonth3}"/>
+                                <smartFilterBar:ControlConfiguration index='170' key="WorkingHoursMonth4" filterType="single" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>WorkingHoursMonth4}"/>
+                                <smartFilterBar:ControlConfiguration index='180' key="WorkingHoursMonth5" filterType="single" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>WorkingHoursMonth5}"/>
+                                <smartFilterBar:ControlConfiguration index='190' key="WorkingHoursMonth6" filterType="single" mandatory="mandatory" visibleInAdvancedArea="true" label="{i18n>WorkingHoursMonth6}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="DynamicData" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <!-- <FlexBox fitContainer="true">¯ -->
+                <core:Fragment fragmentName="pp.zworkhrmtpntbud.fragments.WorkHrMtPntBud" type="XML"/>
+            <!-- </FlexBox> -->
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

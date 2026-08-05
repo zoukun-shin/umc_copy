@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc">
+    <table:Table id="idTable" rows="{local>/resultSet}" selectionMode="None" rowMode="Auto">
+        <table:extension>
+            <OverflowToolbar>
+                <Text text="{i18n>Results}" visible="{= ${local>/resultSet}.length === 0}"/>
+                <Text text="{i18n>Results}({= ${local>/resultSet}.length})" visible="{= ${local>/resultSet}.length > 0}"/>
+                <ToolbarSpacer/>
+                <Button icon="sap-icon://sum" type="Ghost" text="{i18n>summaryBtn}" press="onSummary" visible="{local>/summaryBtnVisible}" enabled="{= ${local>/authorityCheck/button/Summary}}"/>
+                <Button icon="sap-icon://excel-attachment" type="Ghost" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/resultSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/>
+            </OverflowToolbar>
+        </table:extension>
+    </table:Table>
+</core:FragmentDefinition>

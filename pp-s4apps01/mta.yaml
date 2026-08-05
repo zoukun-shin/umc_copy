@@ -251,6 +251,10 @@ modules:
       - ppzmaterialreadiness.zip
       name: ppzmaterialreadiness
       target-path: resources/
+    - artifacts:
+      - ppzworkhrmtpntbud.zip
+      name: ppzworkhrmtpntbud
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -713,6 +717,15 @@ modules:
 - name: ppzmaterialreadiness
   type: html5
   path: zmaterialreadiness
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppzworkhrmtpntbud
+  type: html5
+  path: zworkhrmtpntbud
   build-parameters:
     build-result: dist
     builder: custom
