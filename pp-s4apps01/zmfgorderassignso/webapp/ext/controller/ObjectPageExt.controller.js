@@ -281,6 +281,7 @@ sap.ui.define([
             var that = this;
             this._myBusyDialog.open();
             this.getView().getModel("local").setProperty("/visibleSave", true);
+            this.getView().getModel("local").setProperty("/ShowDelivered", true); // ADD BY XINLEI XU 2026/07/13 CN 需求 No.400
             Fragment.load({
                 name: "pp.zmfgorderassignso.ext.fragments." + sFragmentName,
                 controller: this
@@ -289,34 +290,140 @@ sap.ui.define([
                 this._oDialog = oDialog;
                 //ダイアログからモデルを使用できるようにする
                 this.getView().addDependent(this._oDialog);
-                this._oDialog.addButton(new sap.m.Button({
-                    text: "{i18n>SaveBtn}",
-                    visible: "{local>/visibleSave}",
-                    press: function () {
-                        switch (sEvent) {
-                            case "AssignSalesOrder":
-                                that._saveAssignSalesOrder();
-                                break;
-                            case "ChangeAssignQty":
-                                that._saveChange(sEvent);
-                                break;
-                            case "ChangeAssignMaterial":
-                                that._saveChange(sEvent);
-                                break;
-                            case "ChangeAssignSalesOrder":
-                                that._saveChangeAssignSalesOrder();
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }));
-                this._oDialog.addButton(new sap.m.Button({
-                    text: "{i18n>CloseBtn}",
-                    press: function () {
-                        that._oDialog.destroy();
-                    }
-                }));
+                // MOD BEGIN BY XINLEI XU 2026/07/13 CN 需求 No.400
+                // this._oDialog.addButton(new sap.m.Button({
+                //     text: "{i18n>SaveBtn}",
+                //     visible: "{local>/visibleSave}",
+                //     press: function () {
+                //         switch (sEvent) {
+                //             case "AssignSalesOrder":
+                //                 that._saveAssignSalesOrder();
+                //                 break;
+                //             case "ChangeAssignQty":
+                //                 that._saveChange(sEvent);
+                //                 break;
+                //             case "ChangeAssignMaterial":
+                //                 that._saveChange(sEvent);
+                //                 break;
+                //             case "ChangeAssignSalesOrder":
+                //                 that._saveChangeAssignSalesOrder();
+                //                 break;
+                //             default:
+                //                 break;
+                //         }
+                //     }
+                // }));
+                // this._oDialog.addButton(new sap.m.Button({
+                //     text: "{i18n>CloseBtn}",
+                //     press: function () {
+                //         that._oDialog.destroy();
+                //     }
+                // }));
+                var oFooterToolbar = new sap.m.OverflowToolbar({
+                    content: [
+                        new sap.m.Button({
+                            text: "{i18n>ShowDelivered}",
+                            visible: "{local>/ShowDelivered}",
+                            press: function () {
+                                var sPlant, sMaterial, iAvailableAssignQty;
+                                that.getView().getModel("local").setProperty("/ShowDelivered", false);
+                                switch (sEvent) {
+                                    case "AssignSalesOrder":
+                                        sPlant = that._oBindingData.ProductionPlant;
+                                        sMaterial = that._oBindingData.Material;
+                                        iAvailableAssignQty = that._oBindingData.AvailableAssignQty;
+                                        break;
+                                    case "ChangeAssignSalesOrder":
+                                        sPlant = that.getView().getModel("local").getProperty("/SelectedItem/Plant");
+                                        sMaterial = that.getView().getModel("local").getProperty("/SelectedItem/Material");
+                                        iAvailableAssignQty = that.getView().getModel("local").getProperty("/SelectedItem/AssignQty");
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                that._CallODataV2("ACTION", "/getSalesOrderList", [], {
+                                    "Event": "",
+                                    "Zzkey": JSON.stringify({
+                                        ProductionPlant: sPlant,
+                                        Material: sMaterial,
+                                        AvailableAssignQty: iAvailableAssignQty,
+                                        CheckDeliveryStatus: true
+                                    }),
+                                    "RecordUUID": ""
+                                }, {}).then(function (oResponse) {
+                                    var result = JSON.parse(oResponse.getSalesOrderList.Zzkey);
+                                    that.getView().getModel("local").setProperty("/SalesOrderList", result);
+                                }.bind(that));
+                            }
+                        }),
+                        new sap.m.Button({
+                            text: "{i18n>ShowUndelivered}",
+                            visible: "{= !${local>/ShowDelivered} }",
+                            press: function () {
+                                var sPlant, sMaterial, iAvailableAssignQty;
+                                that.getView().getModel("local").setProperty("/ShowDelivered", true);
+                                switch (sEvent) {
+                                    case "AssignSalesOrder":
+                                        sPlant = that._oBindingData.ProductionPlant;
+                                        sMaterial = that._oBindingData.Material;
+                                        iAvailableAssignQty = that._oBindingData.AvailableAssignQty;
+                                        break;
+                                    case "ChangeAssignSalesOrder":
+                                        sPlant = that.getView().getModel("local").getProperty("/SelectedItem/Plant");
+                                        sMaterial = that.getView().getModel("local").getProperty("/SelectedItem/Material");
+                                        iAvailableAssignQty = that.getView().getModel("local").getProperty("/SelectedItem/AvailableAssignQty");
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                that._CallODataV2("ACTION", "/getSalesOrderList", [], {
+                                    "Event": "",
+                                    "Zzkey": JSON.stringify({
+                                        ProductionPlant: sPlant,
+                                        Material: sMaterial,
+                                        AvailableAssignQty: iAvailableAssignQty,
+                                        CheckDeliveryStatus: false
+                                    }),
+                                    "RecordUUID": ""
+                                }, {}).then(function (oResponse) {
+                                    var result = JSON.parse(oResponse.getSalesOrderList.Zzkey);
+                                    that.getView().getModel("local").setProperty("/SalesOrderList", result);
+                                }.bind(that));
+                            }
+                        }),
+                        new sap.m.ToolbarSpacer(),
+                        new sap.m.Button({
+                            text: "{i18n>SaveBtn}",
+                            visible: "{local>/visibleSave}",
+                            press: function () {
+                                switch (sEvent) {
+                                    case "AssignSalesOrder":
+                                        that._saveAssignSalesOrder();
+                                        break;
+                                    case "ChangeAssignQty":
+                                        that._saveChange(sEvent);
+                                        break;
+                                    case "ChangeAssignMaterial":
+                                        that._saveChange(sEvent);
+                                        break;
+                                    case "ChangeAssignSalesOrder":
+                                        that._saveChangeAssignSalesOrder();
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }),
+                        new sap.m.Button({
+                            text: "{i18n>CloseBtn}",
+                            press: function () {
+                                that._oDialog.destroy();
+                            }
+                        })
+                    ]
+                });
+                this._oDialog.setFooter(oFooterToolbar);
+                // MOD END BY XINLEI XU 2026/07/13 CN 需求 No.400
                 this._myBusyDialog.close();
                 this._oDialog.open();
             }.bind(this));
