@@ -103,6 +103,10 @@ modules:
       - mmretmatscrapdisp.zip
       name: mmretmatscrapdisp
       target-path: resources/
+    - artifacts:
+      - mmreturnmatpackprint.zip
+      name: mmreturnmatpackprint
+      target-path: resources/
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -232,6 +236,15 @@ modules:
 - name: mmretmatscrapdisp
   type: html5
   path: retmatscrapdisp
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmreturnmatpackprint
+  type: html5
+  path: returnmatpackprint
   build-parameters:
     build-result: dist
     builder: custom
