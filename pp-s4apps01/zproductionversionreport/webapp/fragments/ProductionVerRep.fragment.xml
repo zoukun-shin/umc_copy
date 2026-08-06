@@ -7,7 +7,7 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
     <smartTable:SmartTable entitySet="ProductionVerRep" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
-        showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" 
+        showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" 
         persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
         beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="NoDisplayNonProduct,DisplayPurchasingInfo">
