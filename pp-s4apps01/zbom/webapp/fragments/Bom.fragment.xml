@@ -421,6 +421,14 @@
                         <Text text="{YY1_BPCODE_PRD_PRD}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <table:Column width="8rem" label="{i18n>BillOfMaterialComponentMPN}" sortProperty="BillOfMaterialComponentMPN" filterProperty="BillOfMaterialComponentMPN" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialComponentMPN", "leadingProperty":"BillOfMaterialComponentMPN"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BillOfMaterialComponentMPN}" wrapping="false" />
+                    </table:template>
+                </table:Column>
             </table:columns>
         </table:Table>
     </smartTable:SmartTable>

@@ -86,6 +86,7 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="BomHeaderQuantityInBaseUnit" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="YY1_CUSTOMERMATERIAL_PRD" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="YY1_BPCODE_PRD_PRD" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialComponentMPN" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
