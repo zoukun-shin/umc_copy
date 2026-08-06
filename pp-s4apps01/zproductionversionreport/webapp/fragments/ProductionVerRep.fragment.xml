@@ -194,14 +194,6 @@
                         <Text text="{WorkCenter}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>RoutingText}" sortProperty="RoutingText" filterProperty="RoutingText">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"RoutingText", "leadingProperty":"RoutingText"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{RoutingText}" wrapping="false" />
-                    </table:template>
-                </table:Column>
                 <table:Column width="12rem" label="{i18n>ValidityStartDate}" sortProperty="ValidityStartDate" filterProperty="ValidityStartDate">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ValidityStartDate", "leadingProperty":"ValidityStartDate"}'/>

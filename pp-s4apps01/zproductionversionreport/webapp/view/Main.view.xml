@@ -46,7 +46,6 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="ReceivingStorageLocation" visible="false" />
                                 <smartFilterBar:ControlConfiguration index='999' key="Operation" visible="false" />
                                 <smartFilterBar:ControlConfiguration index='999' key="OperationText" visible="false" />
-                                <smartFilterBar:ControlConfiguration index='999' key="RoutingText" visible="false" />
                                 <smartFilterBar:ControlConfiguration index='999' key="ValidityStartDate" visible="false" />
                                 <smartFilterBar:ControlConfiguration index='999' key="ValidityEndDate" visible="false" />
                                 <smartFilterBar:ControlConfiguration index='999' key="ProductionVersionIsLocked" visible="false" />
