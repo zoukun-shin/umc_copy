@@ -23,11 +23,17 @@ sap.ui.define([
         _initialize: function () {
             // var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             // var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-
+            var oNewFilter,
+                aNewFilters = [];
             var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
-            var oFilter = new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.EQ, "ZUPLOAD_OFUPLOAD");
+            aNewFilters.push(new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.StartsWith, "ZUPLOAD_OFUPLOAD_"));
+            aNewFilters.push(new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.EndsWith, sLanguage));
+            oNewFilter = new sap.ui.model.Filter({
+                filters: aNewFilters,
+                and: true
+            });
             var oControlBinding = this.byId("idTemplateCollection").getBinding("items");
-            oControlBinding.filter(oFilter);
+            oControlBinding.filter(oNewFilter);
 
             // var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
             //     "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
@@ -104,6 +110,8 @@ sap.ui.define([
                 return;
             }
 
+            var sFileName = oFile ? oFile.name : "";
+
             var oReader = new FileReader();
             oReader.readAsArrayBuffer(oFile);
             oReader.onload = function (e) {
@@ -116,26 +124,50 @@ sap.ui.define([
                 });
                 var oSheet1 = oWB.Sheets[oWB.SheetNames[0]];
                 var aSheet1 = XLSX.utils.sheet_to_row_object_array(oSheet1, { raw: false });
-                this.readSheet(aSheet1);
+                this.readSheet(aSheet1, sFileName);
 
             }.bind(this);
         },
 
-        readSheet: function (aSheet1) {
+        readSheet: function (aSheet1, sFileName) {
             let aExcelSet = [];
 
-            // 检测是否为横版模板：检查数据行中是否存在日期格式的键名（如 "2024/5/6"）
-            const DATE_KEY_PATTERN = /^\d{4}[\/\-\.]\d{1,2}[\/\-\.]\d{1,2}$/;
-            const bIsHorizontal = aSheet1.length > 5 &&
-                aSheet1.slice(5).some(row =>
-                    Object.keys(row).some(key => DATE_KEY_PATTERN.test(key))
-                );
+            // 横版/竖版模板文件名后缀常量（覆盖中/英/日三种语言）
+            const HORIZONTAL_SUFFIXES = ["横", "Horizontal"];
+            const VERTICAL_SUFFIXES   = ["竖", "縦", "Vertical"];
+
+            const sName = sFileName || "";
+            let bIsHorizontal;
+            if (HORIZONTAL_SUFFIXES.some(suffix => sName.indexOf(suffix) >= 0)) {
+                bIsHorizontal = true;
+            } else if (VERTICAL_SUFFIXES.some(suffix => sName.indexOf(suffix) >= 0)) {
+                bIsHorizontal = false;
+            } else {
+                // 兜底：文件名不含任何识别后缀时，默认按竖版处理
+                bIsHorizontal = false;
+            }
+
+            // 横版模板：从 aSheet1[1]（Excel第3行）读取 __EMPTY_N 列对应的日期值，建立列到日期的映射
+            let mColumnDateMap = {};
+            if (bIsHorizontal && aSheet1.length > 1) {
+                const oDateRow = aSheet1[1];
+                if (oDateRow) {
+                    Object.keys(oDateRow).forEach(function (key) {
+                        if (/^__EMPTY_\d*$/.test(key)) {
+                            var sValue = oDateRow[key];
+                            if (sValue && typeof sValue === "string" && sValue.trim() !== "" && this.isValidDate(sValue)) {
+                                mColumnDateMap[key] = sValue;
+                            }
+                        }
+                    }.bind(this));
+                }
+            }
 
             for (var i = 5; i < aSheet1.length; i++) {
                 let oRow = aSheet1[i];
 
                 if (bIsHorizontal) {
-                    // 横版模板：提取固定属性，将日期列逐一转换为竖版行
+                    // 横版模板：提取固定属性，遍历 mColumnDateMap 将每个日期列转换为一行竖版数据
                     const oFixedProps = {
                         Customer: oRow["Customer"] || "",
                         Version: oRow["Version"] || "",
@@ -144,25 +176,17 @@ sap.ui.define([
                         Remark: oRow["Remark"] || "",
                     };
 
-                    // 筛选日期列：排除固定属性列和 __EMPTY_N 列
-                    const aDateKeys = Object.keys(oRow).filter(key => {
-                        return key !== "Customer" &&
-                            key !== "Version" &&
-                            key !== "Material" &&
-                            key !== "Plant" &&
-                            key !== "Remark" &&
-                            !/^__EMPTY_\d+$/.test(key);
-                    });
-
-                    aDateKeys.forEach(dateKey => {
-                        const sQty = oRow[dateKey];
-                        if (sQty && String(sQty).trim() !== "") {
+                    // 遍历日期映射表中的 __EMPTY_N 列，从数据行取数量值
+                    Object.keys(mColumnDateMap).forEach(function (emptyKey) {
+                        const sQty = oRow[emptyKey];
+                        const sDate = mColumnDateMap[emptyKey];
+                        if (sQty && String(sQty).trim() !== "" && sDate) {
                             aExcelSet.push({
                                 Type: "",
                                 Message: "",
                                 Tabix: i,
                                 ...oFixedProps,
-                                RequirementDate: formatter.dateFormatter(dateKey, "yyyyMMdd") || "",
+                                RequirementDate: formatter.dateFormatter(sDate, "yyyyMMdd") || "",
                                 RequirementQty: sQty || "",
                             });
                         }

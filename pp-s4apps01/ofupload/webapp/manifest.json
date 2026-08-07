@@ -101,7 +101,9 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "pp.ofupload.i18n.i18n"
+          "bundleName": "pp.ofupload.i18n.i18n",
+          "supportedLocales": ["", "zh", "en", "ja"],
+          "fallbackLocale": ""
         }
       },
       "": {
