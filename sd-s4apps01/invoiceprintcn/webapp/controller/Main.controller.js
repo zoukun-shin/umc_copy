@@ -198,7 +198,9 @@ sap.ui.define([
                     Saleman: oData.Saleman,
                     Transportation: oData.Transportation,
                     PaymentTerm: oData.PaymentTerm,
-                    DelieryTerm: oData.DelieryTerm,
+                    DeliveryTerm: oData.DeliveryTerm,
+                    VehicleNo: oData.VehicleNo,
+                    WaybillNo: oData.WaybillNo,
                     to_Items: {results: []}
                 });
                 var aItems = oData[sExpandNav] ? oData[sExpandNav].results : [];
@@ -220,6 +222,7 @@ sap.ui.define([
                 var oTotalNetWeight = new Decimal(0);
                 var oTotalGrossWeight = new Decimal(0);
                 aItems.forEach(function (oItem, index) {
+                    // 共通的字段
                     var oPrintItem = {
                         No: (index + 1).toString(),
                         ItemNo: oItem.ItemNo,
@@ -229,6 +232,7 @@ sap.ui.define([
                         Uom: oItem.Uom,
                         Quantity: oItem.Quantity
                     };
+                    // 每个模板特殊的字段
                     if (sExpandNav === "to_ItemCH") {
                         oPrintItem.SoNo = oItem.SoNo;
                         oPrintItem.DnNo = oItem.DnNo;
@@ -247,15 +251,14 @@ sap.ui.define([
                         oPrintItem.NetWeight = oItem.NetWeight;
                         oPrintItem.GrossWeight = oItem.GrossWeight;
                         oPrintItem.WeightUnit = oItem.WeightUnit;
+                        oPrintItem.CtnNo = oItem.CtnNo;
+                        oPrintItem.BoxMeasureSize = oItem.BoxMeasureSize;
+                        oPrintItem.BoxQty = oItem.BoxQty;
                     }
                     if (sExpandNav === "to_ItemCRED") {
-                        oPrintItem.SoNo = oItem.SoNo;
                         oPrintItem.RemarkItem = oItem.RemarkItem;
                         oPrintItem.UnitPrice = oItem.UnitPrice;
                         oPrintItem.Amount = oItem.Amount;
-                        oPrintItem.NetWeight = oItem.NetWeight;
-                        oPrintItem.GrossWeight = oItem.GrossWeight;
-                        oPrintItem.WeightUnit = oItem.WeightUnit;
                     }
                     aPrintContent[aPrintContent.length - 1].to_Items.results.push(oPrintItem);
                     // 累加汇总
@@ -265,6 +268,38 @@ sap.ui.define([
                     oTotalNetWeight = Decimal.add(oTotalNetWeight, oItem.NetWeight || 0);
                     oTotalGrossWeight = Decimal.add(oTotalGrossWeight, oItem.GrossWeight || 0);
                 });
+
+                // --- 抬头级聚合字段（基于行项目数据）---
+                // PackingSize: 去重拼接 BoxMeasureSize*BoxQty
+                var oPackingSet = new Set();
+                aItems.forEach(function (oItem) {
+                    if (oItem.BoxMeasureSize && oItem.BoxQty) {
+                        oPackingSet.add(oItem.BoxMeasureSize + "*" + oItem.BoxQty);
+                    }
+                });
+                if (oPackingSet.size > 0) {
+                    oContent.PackingSize = Array.from(oPackingSet).join("; ");
+                }
+
+                // PackagesGW: SUM(BoxQty * GrossWeight)
+                var iTotalBoxQty = 0;
+                var oTotalGWCalc = new Decimal(0);
+                aItems.forEach(function (oItem) {
+                    var iQty = parseInt(oItem.BoxQty) || 0;
+                    var fGW  = parseFloat(oItem.GrossWeight) || 0;
+                    iTotalBoxQty += iQty;
+                    oTotalGWCalc = Decimal.add(oTotalGWCalc, new Decimal(iQty).times(fGW));
+                });
+                oContent.PackagesGW = iTotalBoxQty + " Packages,GW(Include Pallet):" + oTotalGWCalc.toFixed(2) + " KG";
+
+                // SapPackageInfo: 物料 + 尺寸*数量（每个行项目一行）
+                var aPackageLines = [];
+                aItems.forEach(function (oItem) {
+                    if (oItem.ItemNo && oItem.BoxMeasureSize && oItem.BoxQty) {
+                        aPackageLines.push(oItem.ItemNo + " " + oItem.BoxMeasureSize + "*" + oItem.BoxQty);
+                    }
+                });
+                oContent.SapPackageInfo = aPackageLines.join("\n");
 
                 // 按模板ID添加汇总字段
                 var oContent = aPrintContent[aPrintContent.length - 1];
