@@ -786,6 +786,78 @@
                         <Text text="{YY1_ManagementNo_3_SDI}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <table:Column width="12rem" label="{i18n>StorageLocation}" sortProperty="StorageLocation" filterProperty="StorageLocation">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"StorageLocation", "leadingProperty":"StorageLocation"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{StorageLocation}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>DetSpecificationPRD}" sortProperty="DetSpecificationPRD" filterProperty="DetSpecificationPRD">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"DetSpecificationPRD", "leadingProperty":"DetSpecificationPRD"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{DetSpecificationPRD}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>MfgOrderPlannedTotalQty}" sortProperty="MfgOrderPlannedTotalQty" filterProperty="MfgOrderPlannedTotalQty" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"MfgOrderPlannedTotalQty", "leadingProperty":"MfgOrderPlannedTotalQty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{MfgOrderPlannedTotalQty} {OrderQuantityUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>MfgOrderGoodsReceiptQty}" sortProperty="MfgOrderGoodsReceiptQty" filterProperty="MfgOrderGoodsReceiptQty" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"MfgOrderGoodsReceiptQty", "leadingProperty":"MfgOrderGoodsReceiptQty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{MfgOrderGoodsReceiptQty} {OrderQuantityUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>UserDescription}" sortProperty="UserDescription" filterProperty="UserDescription">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"UserDescription", "leadingProperty":"UserDescription"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{UserDescription}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>BillingDocument}" sortProperty="BillingDocument" filterProperty="BillingDocument">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillingDocument", "leadingProperty":"BillingDocument"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BillingDocument}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ShippingType1}" sortProperty="ShippingType1" filterProperty="ShippingType1">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShippingType1", "leadingProperty":"ShippingType1"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ShippingType1}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>ShippingType1Desc}" sortProperty="ShippingType1Desc" filterProperty="ShippingType1Desc">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShippingType1Desc", "leadingProperty":"ShippingType1Desc"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ShippingType1Desc}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>TaxIncludedUnitPrice}" sortProperty="TaxIncludedUnitPrice" filterProperty="TaxIncludedUnitPrice" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"TaxIncludedUnitPrice", "leadingProperty":"TaxIncludedUnitPrice"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{TaxIncludedUnitPrice}" wrapping="false" />
+                    </table:template>
+                </table:Column>
             </table:columns>
         </table:Table>
     </smartTable:SmartTable>

@@ -23,7 +23,8 @@
                     <CheckBox id = 'idCB3' text="{i18n>Indicator3}" width="13rem" select="onSelect"/> 
                     <CheckBox id = 'idCB4' text="{i18n>Indicator4}" width="12rem" select="onSelect"/> 
                     <CheckBox id = 'idCB5' text="{i18n>Indicator5}" width="12rem" select="onSelect"/> 
-                    <CheckBox id = 'idCB6' text="{i18n>Indicator6}" width="12rem" select="onSelect"/> 
+                    <CheckBox id = 'idCB6' text="{i18n>Indicator6}" width="12rem" select="onSelect"/>
+                    <CheckBox id = 'idCB7' text="{i18n>Indicator7}" width="13rem" select="onSelect"/>
                 </f:content>  
                 <f:content>
                     <FlexBox fitContainer="true">
@@ -42,6 +43,11 @@
                                 <smartFilterBar:ControlConfiguration index='110' key="SalesDocumentDate" visibleInAdvancedArea="true" label="{i18n>SalesDocumentDate}"/>
                                 <smartFilterBar:ControlConfiguration index='120' key="ConfirmedDeliveryDate" visibleInAdvancedArea="true" label="{i18n>ConfirmedDeliveryDate}"/>
                                 <smartFilterBar:ControlConfiguration index='130' key="CreationDateItem" visibleInAdvancedArea="true" label="{i18n>CreationDateItem}"/>
+                                <smartFilterBar:ControlConfiguration index='140' key="BillToParty" visibleInAdvancedArea="true" label="{i18n>BillToParty}"/>
+                                <smartFilterBar:ControlConfiguration index='150' key="PurchaseOrderByCustomerItem" visibleInAdvancedArea="true" label="{i18n>PurchaseOrderByCustomerItem}"/>
+                                <smartFilterBar:ControlConfiguration index='150' key="PlannedDlvyDateSDI" visibleInAdvancedArea="true" label="{i18n>PlannedDlvyDateSDI}"/>
+                                <smartFilterBar:ControlConfiguration index='150' key="LastChangeDate" visibleInAdvancedArea="true" label="{i18n>LastChangeDate}"/>
+                                <smartFilterBar:ControlConfiguration index='150' key="BillingDocument" visibleInAdvancedArea="true" label="{i18n>BillingDocument}"/>
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="Indicator1" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Indicator2" visible="false"/>
@@ -59,7 +65,6 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="SoldToPartyName" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="SoldToPartySearchTerm1" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="SoldToPartySearchTerm2" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="BillToParty" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="BillToPartyName" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="BillToPartySearchTerm1" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="BillToPartySearchTerm2" visible="false"/>
@@ -69,7 +74,6 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="ShipToPartySearchTerm2" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentItemText" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MaterialByCustomer" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderByCustomerItem" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="UnderlyingPurchaseOrderItem" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="OrderQuantity" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="OrderQuantityUnit" visible="false"/>
@@ -127,7 +131,6 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="BillingQuantityInBaseUnit" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="NoBillingQuantityInBaseUnit" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="CreationDate" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="LastChangeDate" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="CreatedByUser" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentRjcnReason" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="SalesDocumentRjcnReasonName" visible="false"/>

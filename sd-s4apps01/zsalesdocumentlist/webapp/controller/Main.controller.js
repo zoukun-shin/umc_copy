@@ -178,13 +178,24 @@ sap.ui.define([
                 filters.push(oIndicator5Filter);
             }
 
-            if (sIndicator6 === true) { 
+            if (sIndicator6 === true) {
                 var oIndicator6Filter = new sap.ui.model.Filter({
                     path: "Indicator6",
                     operator: "EQ",
                     value1: sIndicator6
                 });
                 filters.push(oIndicator6Filter);
+            }
+
+            var sLastDelivery = this.byId("idCB7").getSelected();
+
+            if (sLastDelivery === true) {
+                var oLastDeliveryFilter = new sap.ui.model.Filter({
+                    path: "LastDelivery",
+                    operator: "EQ",
+                    value1: sLastDelivery
+                });
+                filters.push(oLastDeliveryFilter);
             }
         },
 
