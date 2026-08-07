@@ -12,10 +12,10 @@
                 applyContentPadding="false"
                 class="sapUiNoContentPadding">
                 <items>
-                    <IconTabFilter text="内销发票明细" key="InvoiceDetail">
+                    <IconTabFilter text="{i18n>tabInvoiceDetail}" key="InvoiceDetail">
                         <mvc:XMLView viewName="sd.invoicedomestic.view.InvoiceDetail" height="100%"/>
                     </IconTabFilter>
-                    <IconTabFilter text="FXMFG专用格式" key="InvoiceFxmfgs">
+                    <IconTabFilter text="{i18n>tabInvoiceFxmfgs}" key="InvoiceFxmfgs">
                         <mvc:XMLView viewName="sd.invoicedomestic.view.InvoiceFxmfgs" height="100%"/>
                     </IconTabFilter>
                 </items>

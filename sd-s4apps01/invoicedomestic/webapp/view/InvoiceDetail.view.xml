@@ -1716,6 +1716,64 @@
                                 />
                             </t:template>
                         </t:Column>
+                        <t:Column
+                            width="10rem"
+                            label="{/#InvoiceDetailType/HSCode/@sap:label}"
+                            sortProperty="HSCode"
+                            filterProperty="HSCode"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"HSCode","leadingProperty":"HSCode","sortProperty":"HSCode","filterProperty":"HSCode"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{HSCode}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="12rem"
+                            label="{/#InvoiceDetailType/HSCodeName/@sap:label}"
+                            sortProperty="HSCodeName"
+                            filterProperty="HSCodeName"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"HSCodeName","leadingProperty":"HSCodeName","sortProperty":"HSCodeName","filterProperty":"HSCodeName"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{HSCodeName}"
+                                    tooltip="{HSCodeName}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="12rem"
+                            label="{/#InvoiceDetailType/DetSpecification/@sap:label}"
+                            sortProperty="DetSpecification"
+                            filterProperty="DetSpecification"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"DetSpecification","leadingProperty":"DetSpecification","sortProperty":"DetSpecification","filterProperty":"DetSpecification"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{DetSpecification}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
                     </t:columns>
                 </t:Table>
             </smartTable:SmartTable>
