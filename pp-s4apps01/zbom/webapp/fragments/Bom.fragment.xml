@@ -16,6 +16,7 @@
                 <ToolbarSpacer/>
                 <Button text="{i18n>PrintTH}" type="Transparent" press="onPrint('PrintBom')" enabled="{= ${local>/authorityCheck/button/Print}}"/>
                 <Button text="{i18n>PrintVN}" type="Transparent" press="onPrintVN('PrintBom')" enabled="{= ${local>/authorityCheck/button/PrintVN}}"/>
+                <Button text="{i18n>PrintCN}" type="Transparent" press="onPrintCN('PrintCN')" enabled="{= ${local>/authorityCheck/button/PrintCN}}"/>
                 <Button text="{i18n>Download}" type="Transparent" press="onExport" enabled="{= ${local>/Bom}.length > 0}"/>
             </OverflowToolbar>
         </smartTable:customToolbar>

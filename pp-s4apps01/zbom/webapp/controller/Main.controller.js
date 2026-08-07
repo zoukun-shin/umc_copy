@@ -72,7 +72,8 @@ sap.ui.define([
                     button: {
                         View: aAllAccessBtns.some(btn => btn.AccessId === "zbom-View"),
                         Print: aAllAccessBtns.some(btn => btn.AccessId === "zbom-Print"),
-                        PrintVN: aAllAccessBtns.some(btn => btn.AccessId === "zbom-PrintVN")
+                        PrintVN: aAllAccessBtns.some(btn => btn.AccessId === "zbom-PrintVN"),
+                        PrintCN: aAllAccessBtns.some(btn => btn.AccessId === "zbom-PrintCN")
                     },
                     data: {
                         PlantSet: context._AssignPlant,
@@ -140,6 +141,16 @@ sap.ui.define([
             }, {}));
 
             return aPromise;
+        },
+
+        _callProcessLogic: function (sEvent, aItems) {
+            return this._CallODataV2("ACTION", "/processLogic", [], {
+                "Event": sEvent,
+                "Zzkey": JSON.stringify(aItems)
+            }, {}).then(function (oResponse) {
+                var sZzkey = oResponse && oResponse.processLogic ? oResponse.processLogic.Zzkey : "[]";
+                return JSON.parse(sZzkey || "[]");
+            });
         },
 
         getItems: function (oSelected, aAllData) {
@@ -249,6 +260,473 @@ sap.ui.define([
             } catch (error) {
                 MessageBox.error(error);
             }
+        },
+
+        onPrintCN: function () {
+            var that = this;
+            var oBusyDialog = new BusyDialog();
+            var aSelectedIndices = this.byId("idTable").getSelectedIndices();
+            if (aSelectedIndices.length === 0) {
+                return;
+            } else if (aSelectedIndices.length > 1) {
+                MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("onlyCanSelectOne"));
+                return;
+            }
+
+            var oTable = this.byId("idTable");
+            var oBinding = oTable.getBinding();
+            var aAllContexts = oBinding.getContexts();
+            var aAllData = aAllContexts.map(ctx => ctx.getObject());
+            var oSelected = oTable.getContextByIndex(aSelectedIndices[0]).getObject();
+            var HeaderValidityStartDate = oSelected.HeaderValidityStartDate;
+            var aItems = that.getItems(oSelected, aAllData);
+
+            var aCNEvents = ["PrintCNStep1", "PrintCNStep2", "PrintCNStep3"];
+            var aTemplateByStep = ["YY1_BOMPRINT_CO", "YY1_BOMPRINT_CH", "YY1_BOMPRINT_CN"];
+            var aBuilders = [
+                that.processPrintContentCNStep1.bind(that),
+                that.processPrintContentCNStep2.bind(that),
+                that.processPrintContentCNStep3.bind(that)
+            ];
+
+            that._openCNDateDialog().then(function (sCNValidPeriod) {
+                if (sCNValidPeriod === null) {
+                    return;
+                }
+
+                oBusyDialog.open();
+                return that._runCNPrintStepsSequentially(aCNEvents, aTemplateByStep, aBuilders, oSelected, aItems, HeaderValidityStartDate, sCNValidPeriod).then(function (aRecordUUIDs) {
+                    return that._mergeCNAndOpenPdf(aRecordUUIDs);
+                }).catch(function (oError) {
+                    MessageBox.error(oError.message || JSON.stringify(oError));
+                }).finally(function () {
+                    oBusyDialog.close();
+                });
+            });
+        },
+
+        _openCNDateDialog: function () {
+            return new Promise(function (resolve) {
+                var bResolved = false;
+                var oDatePicker = new sap.m.DatePicker({
+                    width: "100%",
+                    placeholder: "请选择日期",
+                    valueFormat: "yyyyMMdd",
+                    displayFormat: "yyyy-MM-dd"
+                });
+
+                var oDialog = new sap.m.Dialog({
+                    title: "CN打印日期",
+                    contentWidth: "460px",
+                    content: [
+                        new sap.m.VBox({
+                            items: [
+                                oDatePicker,
+                                new sap.m.Text({
+                                    text: "PS:不指定日期时，封面显示【长期有效】"
+                                })
+                            ]
+                        })
+                    ],
+                    beginButton: new sap.m.Button({
+                        text: "确定",
+                        press: function () {
+                            bResolved = true;
+                            var sSelectedDate = oDatePicker.getValue();
+                            oDialog.close();
+                            resolve(sSelectedDate || "长期有效");
+                        }
+                    }),
+                    endButton: new sap.m.Button({
+                        text: "取消",
+                        press: function () {
+                            bResolved = true;
+                            oDialog.close();
+                            resolve(null);
+                        }
+                    }),
+                    afterClose: function () {
+                        if (!bResolved) {
+                            resolve(null);
+                        }
+                        oDialog.destroy();
+                    }
+                });
+
+                oDialog.open();
+            });
+        },
+
+        _runCNPrintStepsSequentially: function (aCNEvents, aTemplateByStep, aBuilders, oSelected, aItems, HeaderValidityStartDate, sCNValidPeriod) {
+            var that = this;
+            var aRecordUUIDs = [];
+
+            return aCNEvents.reduce(function (oChain, sCNEvent, iIndex) {
+                return oChain.then(function () {
+                    return that._callProcessLogic(sCNEvent, aItems).then(function (aStepData) {
+                        var oPdfContent = aBuilders[iIndex](oSelected, aStepData, HeaderValidityStartDate, sCNValidPeriod);
+                        return that._createPrintRecordOnly(oPdfContent, aTemplateByStep[iIndex], iIndex + 1).then(function (sRecordUUID) {
+                            aRecordUUIDs.push(sRecordUUID);
+                        });
+                    });
+                });
+            }, Promise.resolve()).then(function () {
+                return aRecordUUIDs;
+            });
+        },
+
+        _createPrintRecordOnly: function (pdfContent, sTemplateID, iStepNo) {
+            var that = this;
+            var sStepSuffix = iStepNo ? ("_STEP" + iStepNo) : "";
+            var sFileName = this.getView().getModel("i18n").getResourceBundle().getText("appTitle") + sStepSuffix + "_" + new Date().getTime() + "_" + Math.floor(Math.random() * 10000);
+
+            return new Promise(function (resolve, reject) {
+                var createPrintRecord = that.getModel("Print").bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord(...)");
+                createPrintRecord.setParameter("TemplateID", sTemplateID || "YY1_BOMPRINT");
+                createPrintRecord.setParameter("IsExternalProvidedData", true);
+                var oXMLData = json2xml(pdfContent, {
+                    compact: true,
+                    ignoreComment: true,
+                    spaces: 4
+                });
+                var pdfData = btoa(unescape(encodeURIComponent("<?xml version=\"1.0\" encoding=\"UTF-8\"?><form>" + oXMLData + "</form>")));
+                createPrintRecord.setParameter("ExternalProvidedData", pdfData);
+                createPrintRecord.setParameter("ProvidedKeys", "");
+                createPrintRecord.setParameter("ResultIsActiveEntity", true);
+                createPrintRecord.setParameter("FileName", sFileName);
+                createPrintRecord.execute("$auto", false, null, false).then(function () {
+                    var oObject = createPrintRecord.getBoundContext().getObject();
+                    resolve(oObject.RecordUUID);
+                }).catch(function (oError) {
+                    reject(oError);
+                });
+            });
+        },
+
+        _mergeCNAndOpenPdf: function (aRecordUUIDs) {
+            var that = this;
+            var aValidUUIDs = (aRecordUUIDs || []).filter(function (sUUID) {
+                return !!sUUID;
+            });
+
+            if (aValidUUIDs.length === 0) {
+                return Promise.reject(new Error("No print records created for CN print."));
+            }
+
+            return this._ensurePdfLibLoaded().then(function () {
+                var aFetchPromises = aValidUUIDs.map(function (sUUID) {
+                    return that._fetchPdfAsArrayBuffer(sUUID);
+                });
+                return Promise.all(aFetchPromises);
+            }).then(function (aPdfBuffers) {
+                return that._openMergedPdfFromBuffers(aPdfBuffers);
+            });
+        },
+
+        processPrintContentCNStep1: function (oSelected, aAllData, HeaderValidityStartDate, sCNValidPeriod) {
+            var oHeadSource = (aAllData && aAllData.length > 0) ? aAllData[0] : (oSelected || {});
+            
+            var pdfContent = {
+                PrintData: {
+                    results: []
+                }
+            };
+            
+            var RetPrint = {
+                FileNo: oHeadSource.FILENO,
+                CreateDate: oHeadSource.CREATEDATE,
+                ValidPeriod: sCNValidPeriod || oHeadSource.VALIDPERIOD || "长期有效",
+                BarCode: oHeadSource.BARCODE,
+                Customer: oHeadSource.CUSTOMER,
+                EndUser: oHeadSource.ENDUSER,
+                ProjectName: oHeadSource.PROJECTNAME,
+                ProjectCode: oHeadSource.PROJECTCODE,
+                CreateBy: oHeadSource.CREATEBY,
+                Special: oHeadSource.SPECIAL,
+                Version: oHeadSource.VERSION,
+                ROHS: oHeadSource.ROHS,
+                NoROHS: oHeadSource.NOROHS,
+                Car: oHeadSource.CAR,
+                NoCar: oHeadSource.NOCAR,
+                RHF: oHeadSource.RHF,
+                GP: oHeadSource.GP,
+            };
+
+            pdfContent = {
+                PrintData: RetPrint
+            };
+
+            return pdfContent;
+        },
+
+        processPrintContentCNStep2: function (oSelected, aAllData) {
+            var oHeadSource = (aAllData && aAllData.length > 0) ? aAllData[0] : (oSelected || {});
+            
+            var pdfContent = {
+                PrintData: {
+                    results: []
+                }
+            };  
+
+            var oStep2PrintData = {
+                // Step2: 头表 + 明细
+                ProjectName: oHeadSource.PROJECTNAME,
+                ProjectCode: oHeadSource.PROJECTCODE,
+                FileNo: oHeadSource.FILENO,
+                to_Item: {
+                    results: (aAllData || []).map(function (item) {
+                        return {
+                            Number: item.NUMBER,
+                            Date: item.DATE,
+                            BomVer: item.BOMVER,
+                            EcoNo: item.ECONO,
+                            RevisionDetails: item.REVISIONDETAILS,
+                            DocumentNo: item.DOCUMENTNO,
+                            MioLotNo: item.MIOLOTNO,
+                        };
+                    })
+                }
+            };
+
+            pdfContent = {
+                PrintData: oStep2PrintData
+            };
+
+            return pdfContent;  
+        },
+
+        processPrintContentCNStep3: function (oSelected, aAllData) {
+            var oHeadSource = (aAllData && aAllData.length > 0) ? aAllData[0] : (oSelected || {});
+            
+            var pdfContent = {
+                PrintData: {
+                    results: []
+                }
+            };
+
+            var oStep3PrintData = {
+                // Step3: 与原有 CN 明细结构一致
+                Document: oHeadSource.DOCUMENT,
+                ValidfromDate: oHeadSource.VALIDFROMDATE,
+                History: oHeadSource.HISTORY,
+                Revision: oHeadSource.REVISION,
+                Model: oHeadSource.MODEL,
+                Formula: oHeadSource.FORMULA,
+                Description: oHeadSource.DESCRIPTION,
+                Customer: oHeadSource.CUSTOMER,
+                to_Item: {
+                    results: (aAllData || []).map(function (item) {
+                        return {
+                            Material: item.MATERIAL,
+                            BOMlevel: item.BOMLEVEL,
+                            AltGrp: item.ALTGRP,
+                            FolGrp: item.FOLGRP,
+                            PartNo: item.PARTNO,
+                            PartName: item.PARTNAME,
+                            Specification: item.SPECIFICATION,
+                            MakerPartNo: item.MAKERPARTNO,
+                            Boi: item.BOI,
+                            RefNo: item.REFNO,
+                            Qty: item.QTY,
+                            Unit: item.UNIT,
+                            Loc: item.LOC,
+                            SaftyCERT: item.SAFTYCERT,
+                            ValidPeriod: item.VALIDPERIOD,
+                            Sup: item.SUP,
+                            Remark: item.REMARK,
+                            CustomerPartNo: item.CUSTOMERPARTNO,
+                            RoHS: item.ROHS
+                        };
+                    })
+                }
+            };
+
+            pdfContent = {
+                PrintData: oStep3PrintData
+            };
+
+            return pdfContent; 
+        },
+
+        _ensurePdfLibLoaded: function () {
+            if (window.PDFLib && window.PDFLib.PDFDocument) {
+                return Promise.resolve();
+            }
+
+            if (this._pdfLibLoadPromise) {
+                return this._pdfLibLoadPromise;
+            }
+
+            this._pdfLibLoadPromise = new Promise(function (resolve, reject) {
+                var oScript = document.createElement("script");
+                oScript.src = "https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js";
+                oScript.async = true;
+                oScript.onload = function () {
+                    if (window.PDFLib && window.PDFLib.PDFDocument) {
+                        resolve();
+                    } else {
+                        reject(new Error("PDF merge library loaded but unavailable."));
+                    }
+                };
+                oScript.onerror = function () {
+                    reject(new Error("Failed to load PDF merge library from CDN."));
+                };
+                document.head.appendChild(oScript);
+            });
+
+            return this._pdfLibLoadPromise;
+        },
+
+        _fetchPdfAsArrayBuffer: function (sRecordUUID) {
+            var iMaxRetries = 120;
+            var iRetryIntervalMs = 3000;
+
+            var sKeyPredicate = this.getModel("Print").getKeyPredicate("/PrintRecord", {
+                RecordUUID: sRecordUUID,
+                IsActiveEntity: true
+            });
+            var sURL = this.getModel("Print").getServiceUrl() + "PrintRecord" + sKeyPredicate + "/PDFContent";
+
+            function doFetch(iAttempt) {
+                return fetch(sURL, {
+                    method: "GET",
+                    credentials: "include",
+                    headers: {
+                        Accept: "application/pdf,application/json,text/plain,*/*"
+                    }
+                }).then(function (oResponse) {
+                    // Some backends return 400/404 until async render finishes.
+                    if (!oResponse.ok && oResponse.status !== 400 && oResponse.status !== 404) {
+                        throw new Error("Failed to load PDF content for record " + sRecordUUID + " (HTTP " + oResponse.status + ").");
+                    }
+
+                    if (!oResponse.ok) {
+                        if (iAttempt < iMaxRetries) {
+                            return new Promise(function (resolve) {
+                                setTimeout(function () { resolve(doFetch(iAttempt + 1)); }, iRetryIntervalMs);
+                            });
+                        }
+                        throw new Error("PDF not ready after " + iMaxRetries + " retries for record " + sRecordUUID + ".");
+                    }
+
+                    var sContentType = (oResponse.headers.get("content-type") || "").toLowerCase();
+
+                    // Binary PDF directly returned
+                    if (sContentType.indexOf("application/pdf") > -1) {
+                        return oResponse.arrayBuffer().then(function (oBuffer) {
+                            if (oBuffer && oBuffer.byteLength > 0) {
+                                return oBuffer;
+                            }
+                            if (iAttempt < iMaxRetries) {
+                                return new Promise(function (resolve) {
+                                    setTimeout(function () { resolve(doFetch(iAttempt + 1)); }, iRetryIntervalMs);
+                                });
+                            }
+                            throw new Error("Empty PDF content after " + iMaxRetries + " retries for record " + sRecordUUID + ".");
+                        });
+                    }
+
+                    return oResponse.text().then(function (sText) {
+                        var sTrimmed = (sText || "").trim();
+                        var sBase64 = "";
+
+                        if (sContentType.indexOf("application/json") > -1 || sTrimmed.indexOf("{") === 0) {
+                            try {
+                                var oJson = JSON.parse(sTrimmed || "{}");
+                                sBase64 = oJson.PDFContent || oJson.value || "";
+                            } catch (e) {
+                                // not parseable, fall through to retry
+                            }
+                        } else {
+                            sBase64 = sTrimmed;
+                        }
+
+                        // Content is empty — backend hasn't rendered yet, retry
+                        if (!sBase64) {
+                            if (iAttempt < iMaxRetries) {
+                                return new Promise(function (resolve) {
+                                    setTimeout(function () { resolve(doFetch(iAttempt + 1)); }, iRetryIntervalMs);
+                                });
+                            }
+                            throw new Error("PDF not ready after " + iMaxRetries + " retries for record " + sRecordUUID + ".");
+                        }
+
+                        var sNormalized = sBase64.replace(/^data:application\/pdf;base64,/, "").replace(/\s+/g, "");
+
+                        // Plain-text PDF bytes (rare)
+                        if (sTrimmed.indexOf("%PDF-") === 0) {
+                            return new TextEncoder().encode(sTrimmed).buffer;
+                        }
+
+                        // Validate it looks like base64-encoded PDF
+                        if (sNormalized.indexOf("JVBERi0") !== 0) {
+                            if (iAttempt < iMaxRetries) {
+                                return new Promise(function (resolve) {
+                                    setTimeout(function () { resolve(doFetch(iAttempt + 1)); }, iRetryIntervalMs);
+                                });
+                            }
+                            throw new Error("Record " + sRecordUUID + " still returns non-PDF content after " + iMaxRetries + " retries.");
+                        }
+
+                        var sBinary = atob(sNormalized);
+                        var aBytes = new Uint8Array(sBinary.length);
+                        for (var i = 0; i < sBinary.length; i++) {
+                            aBytes[i] = sBinary.charCodeAt(i);
+                        }
+                        return aBytes.buffer;
+                    });
+                });
+            }
+
+            return doFetch(1);
+        },
+
+        _openMergedPdfFromBuffers: function (aPdfBuffers) {
+            return new Promise(function (resolve, reject) {
+                try {
+                    (async function () {
+                        var PDFDocument = window.PDFLib.PDFDocument;
+                        var oMergedPdf = await PDFDocument.create();
+
+                        for (var i = 0; i < aPdfBuffers.length; i++) {
+                            var oSourcePdf = await PDFDocument.load(aPdfBuffers[i]);
+                            var aPageIndices = oSourcePdf.getPageIndices();
+                            var aCopiedPages = await oMergedPdf.copyPages(oSourcePdf, aPageIndices);
+                            aCopiedPages.forEach(function (oPage) {
+                                oMergedPdf.addPage(oPage);
+                            });
+                        }
+
+                        var aMergedBytes = await oMergedPdf.save();
+                        var oBlob = new Blob([aMergedBytes], {
+                            type: "application/pdf"
+                        });
+                        var sBlobUrl = URL.createObjectURL(oBlob);
+
+                        var oOpenedWindow = window.open(sBlobUrl, "_blank");
+                        if (!oOpenedWindow) {
+                            var oLink = document.createElement("a");
+                            oLink.href = sBlobUrl;
+                            oLink.target = "_blank";
+                            oLink.rel = "noopener noreferrer";
+                            document.body.appendChild(oLink);
+                            oLink.click();
+                            document.body.removeChild(oLink);
+                        }
+
+                        setTimeout(function () {
+                            URL.revokeObjectURL(sBlobUrl);
+                        }, 10000);
+
+                        sap.m.MessageToast.show("Print Success");
+                        resolve();
+                    })().catch(function (oError) {
+                        reject(oError);
+                    });
+                } catch (oError) {
+                    reject(oError);
+                }
+            });
         },
 
         getPDF: function (pdfContent, sTemplateID) {
