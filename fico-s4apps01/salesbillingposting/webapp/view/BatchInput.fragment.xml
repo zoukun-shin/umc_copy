@@ -10,7 +10,7 @@
 			<Button text="{i18n>bConfirm}" press="onDialogConfirm" />
 		</beginButton>
 		<endButton>
-			<Button text="{i18n>bClose}" press="onDialogClose" />
+			<Button text="{i18n>bCancel}" press="onDialogClose" />
 		</endButton>
 	</Dialog>
 </core:FragmentDefinition>

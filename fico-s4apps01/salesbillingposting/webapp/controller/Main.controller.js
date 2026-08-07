@@ -18,7 +18,6 @@ sap.ui.define([
             this._oDataModel = this.getOwnerComponent().getModel();
             this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             this._BusyDialog = new BusyDialog();
-            this._suppressRowSelection = false;
             var oTable = this.byId("reportTable1");
             if (oTable) {
                 oTable.attachRowSelectionChange(this.onRowSelectionChange.bind(this));
@@ -26,6 +25,9 @@ sap.ui.define([
         },
 
         onBeforeRebindTable: function (oEvent) {
+            this._oDataModel.resetChanges();
+            this._oDataModel.refresh(true);
+
             var oFilter = oEvent.getParameter("bindingParams").filters;
 			var oNewFilter, aNewFilter = [], aNewFilterOR = [];
             var oBillingDocumentDate = this.byId("idDatePickerBillingDocumentDate");
@@ -44,8 +46,8 @@ sap.ui.define([
                 });
                 aNewFilter.push(oFilterOR);
             } else if (sKey === "NotPosted") {
-                aNewFilter.push(new Filter("AccountingPostingStatus", "NE", "H"));
                 aNewFilter.push(new Filter("AccountingPostingStatus", "NE", "C"));
+                aNewFilter.push(new Filter("AccountingPostingStatus", "NE", "H"));
             }
 
             var sCancelKey = this.byId("idCancellationStatusSelect").getSelectedKey();
@@ -63,7 +65,31 @@ sap.ui.define([
         },
 
         onDialogPress: function (oEvent) {
-            this.aSelectedData = this.getSelectedRows(oEvent);
+            var oButton = oEvent.getSource();
+            var oTable = oButton.getParent();
+            while (oTable && !(oTable instanceof sap.ui.table.Table || oTable instanceof sap.m.Table)) {
+                oTable = oTable.getParent();
+            }
+            if (!oTable) {
+                return;
+            }
+            var aSelectedIndices = oTable.getSelectedIndices();
+            if (aSelectedIndices.length === 0) {
+                messages.showError(this._ResourceBundle.getText("msgNoSelect"));
+                return;
+            }
+            // 检查选中行中是否有已过账数据
+            var oModel = oTable.getModel();
+            for (var i = 0; i < aSelectedIndices.length; i++) {
+                var oContext = oTable.getContextByIndex(aSelectedIndices[i]);
+                if (!oContext) { continue; }
+                var oData = oModel.getProperty(oContext.getPath());
+                if (oData && (oData.AccountingPostingStatus === "C" || oData.AccountingPostingStatus === "H")) {
+                    messages.showError(this._ResourceBundle.getText("msgCantSelectPosted"));
+                    return;
+                }
+            }
+            this.aSelectedData = this.getSelectedRows(aSelectedIndices, oTable);
             if (this.aSelectedData.length === 0) {
                 return;
             }
@@ -133,44 +159,13 @@ sap.ui.define([
             oModel.submitChanges();
         },
 
-        getSelectedRows: function (oEvent) {
-            var that = this;
-            // 获取按钮的上下文
-            var oButton = oEvent.getSource();
-
-            // 获取按钮所在的表格（假设是 sap.ui.table.Table）
-            var oTable = oButton.getParent();
-
-            // 遍历父控件找到 SmartTable 控件
-            while (oTable && !(oTable instanceof sap.ui.table.Table || oTable instanceof sap.m.Table)) {
-                oTable = oTable.getParent();
-            }
-
-            // 确保找到了表格控件
-            if (!oTable) {
-                console.log("未找到表格控件");
-                return;
-            }
-
-            // 获取选中的行索引
-            var aSelectedIndices = oTable.getSelectedIndices();
-
-            if (aSelectedIndices.length === 0) {
-                messages.showError(this._ResourceBundle.getText("msgNoSelect"));
-                return [];
-            }
-
-            // 获取表格绑定的模型
+        getSelectedRows: function (aSelectedIndices, oTable) {
             var oModel = oTable.getModel();
-
-            // 存储选中的行数据
             var aSelectedData = [];
 
-            // 遍历选中的行索引，获取行数据
             aSelectedIndices.forEach(function (iIndex) {
                 var oContext = oTable.getContextByIndex(iIndex);
                 var oRowData = oModel.getProperty(oContext.getPath());
-                // var oCopyRowData = JSON.parse(JSON.stringify(oRowData));
                 var oCopyRowData = {
                     BillingDocument: oRowData.BillingDocument,
                     BillingDocumentItem: oRowData.BillingDocumentItem,
@@ -182,9 +177,6 @@ sap.ui.define([
         },
 
         onRowSelectionChange: function (oEvent) {
-            if (this._suppressRowSelection) {
-                return;
-            }
             var oTable = oEvent.getSource();
             var iRowIndex = oEvent.getParameter("rowIndex");
             if (typeof iRowIndex !== "number") {
@@ -211,9 +203,8 @@ sap.ui.define([
                 iLength = oTable.getBinding("rows").getContexts ? oTable.getBinding("rows").getContexts().length : 0;
             }
 
-            this._suppressRowSelection = true;
             for (var i = 0; i < iLength; i++) {
-                var oCtx = oTable.getContextByIndex(i); 
+                var oCtx = oTable.getContextByIndex(i);
                 // 由于odata分页查询，oTable中并不会包含所有数据，所以需要判断oCtx是否存在（目前也不处理所有数据，只处理当前页数据）
                 if (!oCtx) {
                     continue;
@@ -227,7 +218,6 @@ sap.ui.define([
                     }
                 }
             }
-            this._suppressRowSelection = false;
         },
     });
 });

@@ -140,6 +140,7 @@
                 header="{i18n>tableHeaderTitle}"
                 placeToolbarInTable="true"
                 beforeRebindTable="onBeforeRebindTable"
+                ignoredFields="CancellationStatus"
             >
                 <smartTable:customToolbar>
                     <OverflowToolbar id="idOverflowToolbar">
@@ -559,19 +560,19 @@
                         </t:Column>
                         <t:Column
                             width="10rem"
-                            label="{/#SalesBillingType/ExternalItemID/@sap:label}"
-                            sortProperty="ExternalItemID"
-                            filterProperty="ExternalItemID"
+                            label="{/#SalesBillingType/UnderlyingPurchaseOrderItem/@sap:label}"
+                            sortProperty="UnderlyingPurchaseOrderItem"
+                            filterProperty="UnderlyingPurchaseOrderItem"
                         >
                             <t:customData>
                                 <core:CustomData
                                     key="p13nData"
-                                    value='\{"columnKey":"ExternalItemID","leadingProperty":"ExternalItemID","sortProperty":"ExternalItemID","filterProperty":"ExternalItemID"}'
+                                    value='\{"columnKey":"UnderlyingPurchaseOrderItem","leadingProperty":"UnderlyingPurchaseOrderItem","sortProperty":"UnderlyingPurchaseOrderItem","filterProperty":"UnderlyingPurchaseOrderItem"}'
                                 />
                             </t:customData>
                             <t:template>
                                 <Text
-                                    text="{ExternalItemID}"
+                                    text="{UnderlyingPurchaseOrderItem}"
                                     wrapping="false"
                                 />
                             </t:template>
