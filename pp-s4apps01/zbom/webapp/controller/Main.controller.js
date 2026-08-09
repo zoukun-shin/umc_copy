@@ -73,7 +73,8 @@ sap.ui.define([
                         View: aAllAccessBtns.some(btn => btn.AccessId === "zbom-View"),
                         Print: aAllAccessBtns.some(btn => btn.AccessId === "zbom-Print"),
                         PrintVN: aAllAccessBtns.some(btn => btn.AccessId === "zbom-PrintVN"),
-                        PrintCN: aAllAccessBtns.some(btn => btn.AccessId === "zbom-PrintCN")
+                        PrintCN: aAllAccessBtns.some(btn => btn.AccessId === "zbom-PrintCN"),
+                        Print2400: aAllAccessBtns.some(btn => btn.AccessId === "zbom-Print2400")
                     },
                     data: {
                         PlantSet: context._AssignPlant,
@@ -302,6 +303,44 @@ sap.ui.define([
                 }).finally(function () {
                     oBusyDialog.close();
                 });
+            });
+        },
+
+        onPrint2400: function () {
+            var that = this;
+            var oBusyDialog = new BusyDialog();
+            var sPrint2400Event = "Print2400";
+            var sPrint2400TemplateId = "YY1_BOM_2400";
+            var aSelectedIndices = this.byId("idTable").getSelectedIndices();
+            if (aSelectedIndices.length === 0) {
+                return;
+            } else if (aSelectedIndices.length > 1) {
+                MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("onlyCanSelectOne"));
+                return;
+            }
+
+            var oTable = this.byId("idTable");
+            var oBinding = oTable.getBinding();
+            var aAllContexts = oBinding.getContexts();
+            var aAllData = aAllContexts.map(ctx => ctx.getObject());
+            var oSelected = oTable.getContextByIndex(aSelectedIndices[0]).getObject();
+            var aItems = that.getItems(oSelected, aAllData);
+
+            oBusyDialog.open();
+            return that._callProcessLogic(sPrint2400Event, aItems).then(function (aStepData) {
+                var oPdfContent = that.processPrintContent2400(oSelected, aStepData);
+                return that._createPrintRecordOnly(oPdfContent, sPrint2400TemplateId);
+            }).then(function (sRecordUUID) {
+                if (!sRecordUUID) {
+                    return Promise.reject(new Error("No print record created for Print2400."));
+                }
+                return that._fetchPdfAsArrayBuffer(sRecordUUID).then(function (oPdfBuffer) {
+                    return that._openPdfFromBuffer(oPdfBuffer);
+                });
+            }).catch(function (oError) {
+                MessageBox.error(oError.message || JSON.stringify(oError));
+            }).finally(function () {
+                oBusyDialog.close();
             });
         },
 
@@ -548,6 +587,89 @@ sap.ui.define([
             return pdfContent; 
         },
 
+        processPrintContent2400: function (oSelected, aAllData) {
+            var oPayload = Array.isArray(aAllData) ? ((aAllData[0]) || {}) : (aAllData || {});
+            var aItem1 = Array.isArray(oPayload.ITEM1) ? oPayload.ITEM1 : [];
+            var aItem2 = Array.isArray(oPayload.ITEM2) ? oPayload.ITEM2 : [];
+
+            function getField(oItem, sKey) {
+                if (!oItem) {
+                    return "";
+                }
+                return oItem[sKey] !== undefined ? oItem[sKey] : "";
+            }
+
+            function mapItem1(oItem) {
+                return {
+                    NUMBER: getField(oItem, "NUMBER"),
+                    ALTGRP: getField(oItem, "ALTGRP"),
+                    FOLGRP: getField(oItem, "FOLGRP"),
+                    PARTNAME: getField(oItem, "PARTNAME"),
+                    SPECIFICATION: getField(oItem, "SPECIFICATION"),
+                    MAKERPARTNO: getField(oItem, "MAKERPARTNO"),
+                    VIRGINMATERIALRATIO: getField(oItem, "VIRGINMATERIALRATIO"),
+                    RECYCLEDMATERIALRATIO: getField(oItem, "RECYCLEDMATERIALRATIO"),
+                    NETWEIGHTOFCOMPONENT: getField(oItem, "NETWEIGHTOFCOMPONENT"),
+                    RUNNERWEIGHTPERSHOT: getField(oItem, "RUNNERWEIGHTPERSHOT"),
+                    SINGLERUNNERWEIGHT: getField(oItem, "SINGLERUNNERWEIGHT"),
+                    UNITCONSUMPTIONWEIGHT: getField(oItem, "UNITCONSUMPTIONWEIGHT"),
+                    UNIT: getField(oItem, "UNIT"),
+                    LOC: getField(oItem, "LOC"),
+                    STATUS: getField(oItem, "STATUS"),
+                    VALIDITYPERIOD: getField(oItem, "VALIDITYPERIOD"),
+                    PROCUREMENTMETHOD: getField(oItem, "PROCUREMENTMETHOD"),
+                    REMARKS: getField(oItem, "REMARKS"),
+                    CUSTOMERPARTNO: getField(oItem, "CUSTOMERPARTNO"),
+                    ROHS: getField(oItem, "ROHS")
+                };
+            }
+
+            function mapItem2(oItem) {
+                return {
+                    NUMBER: getField(oItem, "NUMBER"),
+                    ALTGRP: getField(oItem, "ALTGRP"),
+                    FOLGRP: getField(oItem, "FOLGRP"),
+                    PARTNAME: getField(oItem, "PARTNAME"),
+                    SPECIFICATION: getField(oItem, "SPECIFICATION"),
+                    SUPPLIERMATERIAL: getField(oItem, "SUPPLIERMATERIAL"),
+                    PACKQUANTITY: getField(oItem, "PACKQUANTITY"),
+                    UNITPACKAGINGWEIGHT: getField(oItem, "UNITPACKAGINGWEIGHT"),
+                    PACKAGINGCONSUMPTIONQUANTITY: getField(oItem, "PACKAGINGCONSUMPTIONQUANTITY"),
+                    UNIT: getField(oItem, "UNIT"),
+                    TOTALWEIGHT: getField(oItem, "TOTALWEIGHT"),
+                    LOC: getField(oItem, "LOC"),
+                    STATUS: getField(oItem, "STATUS"),
+                    VALIDITYPERIOD: getField(oItem, "VALIDITYPERIOD"),
+                    PROCUREMENTMETHOD: getField(oItem, "PROCUREMENTMETHOD"),
+                    REMARKS: getField(oItem, "REMARKS"),
+                    CUSTOMERPARTNUMBER: getField(oItem, "CUSTOMERPARTNUMBER"),
+                    ROHS: getField(oItem, "ROHS")
+                };
+            }
+
+            return {
+                PrintData: {
+                    FILENAME: oPayload.FILENAME,
+                    CREATEBY: oPayload.CREATEBY,
+                    SPECIAL: oPayload.SPECIAL,
+                    VERSION: oPayload.VERSION,
+                    CREATEDATE: oPayload.CREATEDATE,
+                    PROJECTNO: oPayload.PROJECTNO,
+                    MATERIAL: oPayload.MATERIAL,
+                    CUSTOMER: oPayload.CUSTOMER,
+                    ENDUSER: oPayload.ENDUSER,
+                    STANDARDDATAEXT: oPayload.STANDARDDATAEXT,
+                    MACHINE: oPayload.MACHINE,
+                    MODELNO: oPayload.MODELNO,
+                    MOLDINGCYCLETIME: oPayload.MOLDINGCYCLETIME,
+                    OPERATORS: oPayload.OPERATORS,
+                    MOLDNO: oPayload.MOLDNO,
+                    ITEM1: aItem1.map(mapItem1),
+                    ITEM2: aItem2.map(mapItem2)
+                }
+            };
+        },
+
         _ensurePdfLibLoaded: function () {
             if (window.PDFLib && window.PDFLib.PDFDocument) {
                 return Promise.resolve();
@@ -679,6 +801,37 @@ sap.ui.define([
             }
 
             return doFetch(1);
+        },
+
+        _openPdfFromBuffer: function (oPdfBuffer) {
+            return new Promise(function (resolve, reject) {
+                try {
+                    var oBlob = new Blob([oPdfBuffer], {
+                        type: "application/pdf"
+                    });
+                    var sBlobUrl = URL.createObjectURL(oBlob);
+
+                    var oOpenedWindow = window.open(sBlobUrl, "_blank");
+                    if (!oOpenedWindow) {
+                        var oLink = document.createElement("a");
+                        oLink.href = sBlobUrl;
+                        oLink.target = "_blank";
+                        oLink.rel = "noopener noreferrer";
+                        document.body.appendChild(oLink);
+                        oLink.click();
+                        document.body.removeChild(oLink);
+                    }
+
+                    setTimeout(function () {
+                        URL.revokeObjectURL(sBlobUrl);
+                    }, 10000);
+
+                    sap.m.MessageToast.show("Print Success");
+                    resolve();
+                } catch (oError) {
+                    reject(oError);
+                }
+            });
         },
 
         _openMergedPdfFromBuffers: function (aPdfBuffers) {
