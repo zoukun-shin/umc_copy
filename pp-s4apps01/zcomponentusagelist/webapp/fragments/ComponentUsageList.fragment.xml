@@ -178,7 +178,7 @@
                         <Text text="{UsageProbabilityPercent}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>MRPType}" sortProperty="MRPType" filterProperty="MRPType" visible="false">
+                <table:Column width="12rem" label="{i18n>MRPType}" sortProperty="MRPType" filterProperty="MRPType" visible="{local>/showFlag}">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"MRPType", "leadingProperty":"MRPType"}'/>
                     </table:customData>
@@ -186,23 +186,23 @@
                         <Text text="{MRPType}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>BomHeaderQuantityInBaseUnit}" sortProperty="BomHeaderQuantityInBaseUnit" filterProperty="BomHeaderQuantityInBaseUnit" visible="false">
+                <table:Column width="12rem" label="{i18n>BomHeaderQuantityInBaseUnit}" sortProperty="BomHeaderQuantityInBaseUnit" filterProperty="BomHeaderQuantityInBaseUnit" visible="{local>/showFlag}">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BomHeaderQuantityInBaseUnit", "leadingProperty":"BomHeaderQuantityInBaseUnit"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{BomHeaderQuantityInBaseUnit}" wrapping="false" />
+                        <Text text="{path:'BomHeaderQuantityInBaseUnit', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ComponentQuantityInBaseUoM}" sortProperty="ComponentQuantityInBaseUoM" filterProperty="ComponentQuantityInBaseUoM" visible="false">
+                <table:Column width="12rem" label="{i18n>ComponentQuantityInBaseUoM}" sortProperty="ComponentQuantityInBaseUoM" filterProperty="ComponentQuantityInBaseUoM" visible="{local>/showFlag}">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ComponentQuantityInBaseUoM", "leadingProperty":"ComponentQuantityInBaseUoM"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ComponentQuantityInBaseUoM}" wrapping="false" />
+                        <Text text="{path:'ComponentQuantityInBaseUoM', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>BillOfMaterialItemBaseUnit}" sortProperty="BillOfMaterialItemBaseUnit" filterProperty="BillOfMaterialItemBaseUnit" visible="false">
+                <table:Column width="12rem" label="{i18n>BillOfMaterialItemBaseUnit}" sortProperty="BillOfMaterialItemBaseUnit" filterProperty="BillOfMaterialItemBaseUnit" visible="{local>/showFlag}">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialItemBaseUnit", "leadingProperty":"BillOfMaterialItemBaseUnit"}'/>
                     </table:customData>
@@ -210,7 +210,7 @@
                         <Text text="{BillOfMaterialItemBaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ChgToEngineeringChgDocument}" sortProperty="ChgToEngineeringChgDocument" filterProperty="ChgToEngineeringChgDocument" visible="false">
+                <table:Column width="12rem" label="{i18n>ChgToEngineeringChgDocument}" sortProperty="ChgToEngineeringChgDocument" filterProperty="ChgToEngineeringChgDocument" visible="{local>/showFlag}">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ChgToEngineeringChgDocument", "leadingProperty":"ChgToEngineeringChgDocument"}'/>
                     </table:customData>

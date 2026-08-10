@@ -1,10 +1,13 @@
 sap.ui.define([
     "./Base",
+    "../model/formatter",
     "sap/ui/core/UIComponent"
-], function (Base, UIComponent) {
+], function (Base, formatter, UIComponent) {
     "use strict";
 
     return Base.extend("pp.zcomponentusagelist.controller.Main", {
+        formatter: formatter,
+
         onInit: function () {
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
@@ -85,20 +88,22 @@ sap.ui.define([
             // 获取 DisplayPurchasingInfo 的值
             // var oSmartFilterBar = this.byId("idSmartFilterBar");
             // var sDisplayPurchasingInfo = oSmartFilterBar.getFilterData().DisplayPurchasingInfo;
-            var sDisplayPurchasingInfo = this.byId("idCB2").getSelected();
+            var bDisplayPurchasingInfo = this.byId("idCB2").getSelected();
+            var bDisplayComponentQtyInBaseUnit = this.byId("idCB3").getSelected();
 
             // 动态显示或隐藏列
             var oColumns = oTable.getColumns();
-            var bShowColumn = sDisplayPurchasingInfo === true ? true : false; // 有值时显示，没值时隐藏
-
             oColumns.forEach(function (oColumn) {
                 if (oColumn.getSortProperty() === "SupplierMaterialNumber" || oColumn.getSortProperty() === "ProductManufacturerNumber") {
-                    oColumn.setVisible(bShowColumn);
+                    oColumn.setVisible(bDisplayPurchasingInfo);
                 }
             });
 
+            this.getView().getModel("local").setProperty("/showFlag", bDisplayComponentQtyInBaseUnit);
+
             // 根据选择框，添加过滤条件传值到后端
-            var filters = oEvent.getParameters().bindingParams.filters;
+            var oBindingParams = oEvent.getParameter("bindingParams");
+            var filters = oBindingParams.filters;
             if (!filters) {
                 filters = [];
             }
@@ -113,7 +118,6 @@ sap.ui.define([
                 filters.push(oIndicator1Filter);
             }
 
-            var bDisplayComponentQtyInBaseUnit = this.byId("idCB3").getSelected();
             if (bDisplayComponentQtyInBaseUnit === true) {
                 var oDisplayComponentQtyInBaseUnit = new sap.ui.model.Filter({
                     path: "DisplayComponentQtyInBaseUnit",
@@ -121,6 +125,21 @@ sap.ui.define([
                     value1: bDisplayComponentQtyInBaseUnit
                 });
                 filters.push(oDisplayComponentQtyInBaseUnit);
+
+                //只有勾选之后才从后端取值的情况，需要下列逻辑
+                if (oBindingParams.parameters && oBindingParams.parameters.select) {
+                    var sSelect = oBindingParams.parameters.select;
+
+                    if (!sSelect.includes("ComponentQuantityInBaseUoM")) {
+                        sSelect += ",ComponentQuantityInBaseUoM";
+                    }
+
+                    if (!sSelect.includes("BillOfMaterialItemBaseUnit")) {
+                        sSelect += ",BillOfMaterialItemBaseUnit";
+                    }
+
+                    oBindingParams.parameters.select = sSelect;
+                }
             }
         },
 
