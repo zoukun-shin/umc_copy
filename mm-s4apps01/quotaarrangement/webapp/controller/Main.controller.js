@@ -134,15 +134,15 @@ sap.ui.define([
                     Material: aSheet1[i]["Material"] || "",
                     Plant: aSheet1[i]["Plant"] || "",
                     QuotaArrangement: aSheet1[i]["QuotaArrangement"] || "",
-                    ValidityStartDate: aSheet1[i]["ValidityStartDate"] || "",
-                    ValidityEndDate: aSheet1[i]["ValidityEndDate"] || "",
+                    ValidityStartDate: formatter.odataDate(aSheet1[i]["ValidityStartDate"]) || "",
+                    ValidityEndDate: formatter.odataDate(aSheet1[i]["ValidityEndDate"]) || "",
                     QuotaArrangementItem: aSheet1[i]["QuotaArrangementItem"] || "",
                     MaterialProcurementCategory: aSheet1[i]["MaterialProcurementCategory"] || "",
                     MaterialProcurementType: aSheet1[i]["MaterialProcurementType"] || "",
                     Supplier: aSheet1[i]["Supplier"] || "",
                     PurchasingSourceQuota: aSheet1[i]["PurchasingSourceQuota"] || "",
-                    ManufacturerMaterial: aSheet1[i]["ManufacturerMaterial"] || "",
-                }
+                    ManufacturerMaterial: aSheet1[i]["ManufacturerMaterial"] || ""
+                };
                 aExcelSet.push(oItem);
             }
             if (aExcelSet.length === 0) {
@@ -170,6 +170,29 @@ sap.ui.define([
             }
 
             // 如果一致，确保界面显示最新校验结果
+            this._LocalData.setProperty("/excelSet", aExcelSet);
+
+            // 检查同组 PurchasingSourceQuota 总和是否大于100
+            const oGroupSum = {};
+            aExcelSet.forEach(function (item) {
+                const sKey = [item.Material, item.Plant, item.QuotaArrangement, item.ValidityStartDate, item.ValidityEndDate].join("|");
+                if (!oGroupSum[sKey]) {
+                    oGroupSum[sKey] = 0;
+                }
+                oGroupSum[sKey] += parseFloat(item.PurchasingSourceQuota) || 0;
+            });
+            for (const sKey in oGroupSum) {
+                if (oGroupSum[sKey] > 100) {
+                    aExcelSet.forEach(function (item) {
+                        const sItemKey = [item.Material, item.Plant, item.QuotaArrangement, item.ValidityStartDate, item.ValidityEndDate].join("|");
+                        if (sItemKey === sKey) {
+                            item.Type = "E";
+                            item.Message = this._ResourceBundle.getText("msg03");
+                        }
+                    }.bind(this));
+                }
+            }
+
             this._LocalData.setProperty("/excelSet", aExcelSet);
             this.getErrorCount(aExcelSet, "check");
         },
@@ -209,6 +232,7 @@ sap.ui.define([
                         }
                     });
                     this._LocalData.setProperty("/excelSet", aExcelSet);
+                    this.getErrorCount(aExcelSet, "save");
                     this._BusyDialog.close();
                 }.bind(this),
                 error: function (oError) {
