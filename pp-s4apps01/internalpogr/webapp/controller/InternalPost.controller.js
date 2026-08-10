@@ -244,26 +244,16 @@ sap.ui.define([
                 PLANT: "Plant",
                 DELIVERYNOTENO: "DeliveryNoteNo",
                 DELIVERYNOTEITEMNO: "DeliveryNoteItemNo",
-                DELIVERYMATERIAL: "DeliveryMaterial",
                 RECEIPTMATERIAL: "ReceiptMaterial",
                 PROCESSRESULT: "ProcessResult",
                 PROCESSSTATUS: "ProcessStatus",
-                PONO: "PoNo",
-                POITEMNO: "PoItemNo",
-                MATERIALDOCUMENTNO: "MaterialDocumentNo",
-                MATERIALDOCUMENTITEMNO: "MaterialDocumentItemNo",
-                POSTQTY: "PostQty",
-                DELIVERYQUANTITYUNIT: "DeliveryQuantityUnit",
-                MATERIALDOCUMENTYEAR: "MaterialDocumentYear",
-                DDSTORAGELOCATION: "DDStorageLocation",
+                PURCHASEORDER: "PurchaseOrder",
+                PURCHASEORDERITEM: "PurchaseOrderItem",
                 POSTORAGELOCATION: "POStorageLocation",
-                REVERSEDIND: "ReversedInd",
-                REVERSEDMATDOCUMENT: "ReversedMatDocument",
-                POSTINGDATE: "PostingDate",
-                REVERSEDPOSTINGDATE: "ReversedPostingDate",
-                ORDERQUANTITY: "OrderQuantity",
-                PURCHASEORDERQUANTITYUNIT: "PurchaseOrderQuantityUnit",
-                TOTALQUANTITY: "TotalQuantity"
+                POQUANTITY: "POQuantity",
+                TOTALQUANTITY: "TotalQuantity",
+                MATERIALDOCUMENTNO: "MaterialDocumentNo",
+                MATERIALDOCUMENTITEMNO: "MaterialDocumentItemNo"
             };
 
             var out = {};

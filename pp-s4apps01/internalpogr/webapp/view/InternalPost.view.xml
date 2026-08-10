@@ -46,26 +46,16 @@
                             <smartFilterBar:ControlConfiguration index='999' key="DeliveryMaterial" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="ReceiptMaterial" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="ProcessResult" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="PoNo" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="PoItemNo" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrder" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderItem" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="DeliveryNoteItemNo" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="MaterialDocumentNo" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="MaterialDocumentItemNo" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="PostQty" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="POQuantity" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="DeliveryQuantityUnit" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="MaterialDocumentYear" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="DDStorageLocation" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="DNStorageLocation" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="POStorageLocation" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="ReversedInd" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="ReversedMatDocument" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="PostingDate" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="ReversedPostingDate" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="OrderQuantity" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderQuantityUnit" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="TotalQuantity" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="DisplayCancel" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="DisplayDNLongText" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="OriginalDeliveryQuantity" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="DNLongtext" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="ProcessStatus" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="UUID" visible="false"/>
@@ -89,7 +79,7 @@
                 <t:extension>
                     <OverflowToolbar id="idOverflowToolbar">
                         <Title
-                            text="Line Items ({= ${local>/InternalPOGR}.length})"
+                            text="{i18n>Results} ({= ${local>/InternalPOGR}.length})"
                             visible="{= ${local>/InternalPOGR}.length > 0}"
                         />
                         <ToolbarSpacer id="idToolbarSpacer" />
@@ -113,7 +103,7 @@
                 </t:extension>
                 <t:columns>
 
-                    <t:Column id="idstatusColumn" width="6rem" sortProperty="Type" label="{i18n>Status}">
+                    <t:Column id="idstatusColumn" width="6rem" sortProperty="Type" label="{i18n>1ProcessStatus}">
                         <t:template>
                             <ObjectStatus id="idObjectStatus" state="{
                                     path: 'local>ProcessStatus',
@@ -128,7 +118,7 @@
                     <t:Column
                         width="10rem"
                         sortProperty="ProcessResult"
-                        label="{i18n>ProcessResult}"
+                        label="{i18n>1ProcessResult}"
                     >
                         <t:template>
                             <Text
@@ -142,7 +132,7 @@
                     <t:Column
                         width="10rem"
                         sortProperty="Plant"
-                        label="{i18n>Plant}"
+                        label="{i18n>1Plant}"
                     >
                         <t:template>
                             <Text
@@ -154,60 +144,8 @@
                     </t:Column>
                     <t:Column
                         width="10rem"
-                        sortProperty="DeliveryMaterial"
-                        label="{i18n>DeliveryMaterial}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>DeliveryMaterial}"
-                                tooltip="{local>DeliveryMaterial}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="10rem"
-                        sortProperty="ReceiptMaterial"
-                        label="{i18n>ReceiptMaterial}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>ReceiptMaterial}"
-                                tooltip="{local>ReceiptMaterial}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="10rem"
-                        sortProperty="PoNo"
-                        label="{i18n>PoNo}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>PoNo}"
-                                tooltip="{local>PoNo}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="8rem"
-                        sortProperty="PoItemNo"
-                        label="{i18n>PoItemNo}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>PoItemNo}"
-                                tooltip="{local>PoItemNo}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="10rem"
                         sortProperty="DeliveryNoteNo"
-                        label="{i18n>DeliveryNoteNo}"
+                        label="{i18n>1DeliveryNoteNo}"
                     >
                         <t:template>
                             <Text
@@ -220,20 +158,136 @@
                     <t:Column
                         width="8rem"
                         sortProperty="DeliveryNoteItemNo"
-                        label="{i18n>DeliveryNoteItemNo}"
+                        label="{i18n>1DeliveryNoteItemNo}"
                     >
                         <t:template>
                             <Text
                                 text="{local>DeliveryNoteItemNo}"
-                                tooltip="{local>DeliveryNoteItemNo}"
                                 wrapping="false"
                             />
                         </t:template>
                     </t:Column>
                     <t:Column
                         width="10rem"
+                        sortProperty="DeliveryMaterial"
+                        label="{i18n>1DeliveryMaterial}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>DeliveryMaterial}"
+                                tooltip="{local>DeliveryMaterial}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        sortProperty="DeliveryQty"
+                        label="{i18n>1DeliveryQty}"
+                    >
+                        <t:template>
+                            <Text text="{ path: 'local>DeliveryQty', formatter: '.formatter.formatQuantity' }" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        sortProperty="DNStorageLocation"
+                        label="{i18n>1DNStorageLocation}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>DNStorageLocation}"
+                                tooltip="{local>DNStorageLocation}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        sortProperty="DNLongtext"
+                        label="{i18n>1DNLongtext}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>DNLongtext}"
+                                tooltip="{local>DNLongtext}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        sortProperty="PurchaseOrder"
+                        label="{i18n>1PurchaseOrder}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>PurchaseOrder}"
+                                tooltip="{local>PurchaseOrder}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="8rem"
+                        sortProperty="PurchaseOrderItem"
+                        label="{i18n>1PurchaseOrderItem}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>PurchaseOrderItem}"
+                            
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>    
+                    <t:Column
+                        width="10rem"
+                        sortProperty="ReceiptMaterial"
+                        label="{i18n>1ReceiptMaterial}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>ReceiptMaterial}"
+                                tooltip="{local>ReceiptMaterial}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        sortProperty="POStorageLocation"
+                        label="{i18n>1POStorageLocation}"
+                    >
+                        <t:template>
+                            <Text
+                                text="{local>POStorageLocation}"
+                                tooltip="{local>POStorageLocation}"
+                                wrapping="false"
+                            />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        sortProperty="POQuantity"
+                        label="{i18n>1POQuantity}"
+                    >
+                        <t:template>
+                            <Text text="{ path: 'local>POQuantity', formatter: '.formatter.formatQuantity' }" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
+                        sortProperty="TotalQuantity"
+                        label="{i18n>1TotalQuantity}">
+                        <t:template>
+                            <Text text="{ path: 'local>TotalQuantity', formatter: '.formatter.formatQuantity' }" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                        width="10rem"
                         sortProperty="MaterialDocumentNo"
-                        label="{i18n>MaterialDocumentNo}"
+                        label="{i18n>1MaterialDocumentNo}"
                     >
                         <t:template>
                             <Text
@@ -246,7 +300,7 @@
                     <t:Column
                         width="10rem"
                         sortProperty="MaterialDocumentItemNo"
-                        label="{i18n>MaterialDocumentItemNo}"
+                        label="{i18n>1MaterialDocumentItemNo}"
                     >
                         <t:template>
                             <Text
@@ -256,162 +310,7 @@
                             />
                         </t:template>
                     </t:Column>
-                    <t:Column
-                        width="10rem"
-                        sortProperty="PostQty"
-                        label="{i18n>PostQty}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>PostQty}"
-                                tooltip="{local>PostQty}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="10rem"
-                        sortProperty="DeliveryQuantityUnit"
-                        label="{i18n>DeliveryQuantityUnit}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>DeliveryQuantityUnit}"
-                                tooltip="{local>DeliveryQuantityUnit}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="10rem"
-                        sortProperty="MaterialDocumentYear"
-                        label="{i18n>MaterialDocumentYear}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>MaterialDocumentYear}"
-                                tooltip="{local>MaterialDocumentYear}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="10rem"
-                        sortProperty="DDStorageLocation"
-                        label="{i18n>DDStorageLocation}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>DDStorageLocation}"
-                                tooltip="{local>DDStorageLocation}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="10rem"
-                        sortProperty="POStorageLocation"
-                        label="{i18n>POStorageLocation}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>POStorageLocation}"
-                                tooltip="{local>POStorageLocation}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="10rem"
-                        sortProperty="ReversedInd"
-                        label="{i18n>ReversedInd}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>ReversedInd}"
-                                tooltip="{local>ReversedInd}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="10rem"
-                        sortProperty="ReversedMatDocument"
-                        label="{i18n>ReversedMatDocument}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>ReversedMatDocument}"
-                                tooltip="{local>ReversedMatDocument}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="10rem"
-                        sortProperty="PostingDate"
-                        label="{i18n>PostingDate}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>PostingDate}"
-                                tooltip="{local>PostingDate}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="10rem"
-                        sortProperty="ReversedPostingDate"
-                        label="{i18n>ReversedPostingDate}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>ReversedPostingDate}"
-                                tooltip="{local>ReversedPostingDate}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="10rem"
-                        sortProperty="OrderQuantity"
-                        label="{i18n>OrderQuantity}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>OrderQuantity}"
-                                tooltip="{local>OrderQuantity}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="10rem"
-                        sortProperty="PurchaseOrderQuantityUnit"
-                        label="{i18n>PurchaseOrderQuantityUnit}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>PurchaseOrderQuantityUnit}"
-                                tooltip="{local>PurchaseOrderQuantityUnit}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
-                    <t:Column
-                        width="10rem"
-                        sortProperty="TotalQuantity"
-                        label="{i18n>TotalQuantity}"
-                    >
-                        <t:template>
-                            <Text
-                                text="{local>TotalQuantity}"
-                                tooltip="{local>TotalQuantity}"
-                                wrapping="false"
-                            />
-                        </t:template>
-                    </t:Column>
+                    
                 </t:columns>
             </t:Table>
         </f:content>
