@@ -1,0 +1,23 @@
+{
+  "generationParameters": {
+    "generationDate": "Tue Aug 04 2026 09:42:23 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_BANKPAYFILE_O2",
+    "appName": "zbankpayfile",
+    "appTitle": "网银付款文件格式导出",
+    "appDescription": "网银付款文件格式导出",
+    "appNamespace": "fico",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.38",
+    "enableEslint": true,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.30.0",
+    "template": "Basic V2",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}

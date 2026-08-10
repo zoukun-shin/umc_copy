@@ -175,6 +175,10 @@ modules:
       - ficozcustmatsaleslossprofit.zip
       name: ficozcustmatsaleslossprofit
       target-path: resources/
+    - artifacts:
+      - ficozbankpayfile.zip
+      name: ficozbankpayfile
+      target-path: resources/      
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -466,6 +470,15 @@ modules:
 - name: ficozcustmatsaleslossprofit
   type: html5
   path: zcustmatsaleslossprofit
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozbankpayfile
+  type: html5
+  path: zbankpayfile
   build-parameters:
     build-result: dist
     builder: custom
