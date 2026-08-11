@@ -17,10 +17,6 @@
         </f:title>
         <f:header>
             <f:DynamicPageHeader pinnable="true">
-                <f:content> 
-                    <CheckBox id ="idCB1" text="{i18n>OnlyInstPosComparison}" width="12rem" selected="true" select="onSelect"/> 
-                    <CheckBox id ="idCB2" text="{i18n>BOMExplosionIsMultilevel}" width="11rem" selected="true"/> 
-                </f:content>  
                 <f:content>
                     <FlexBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="InstPosComparison" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
@@ -57,26 +53,29 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="PriorityOrPercent" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="DiscOrFollowUp" visible="false"/>
                             </smartFilterBar:controlConfiguration>
+
+	                        <VBox>
+                                <CheckBox id ="idCB1" text="{i18n>OnlyInstPosComparison}" selected="true" select="onSelect"/> 
+                                <CheckBox id ="idCB2" text="{i18n>BOMExplosionIsMultilevel}" selected="true"/> 
+                                <CheckBox id ="idCB3" text="{i18n>PrioPctDiscFollowUp}" selected="true" select="onSelect"/> 
+                                <HBox id ="idHB1">
+                                    <VBox class="sapUiMediumMarginEnd">
+                                        <RadioButtonGroup id="idRBG1" selectedIndex="1">
+                                            <RadioButton id="idRBG1-1" text="{i18n>Discontinuation}"/>
+                                            <RadioButton id="idRBG1-2" text="{i18n>FollowUp}"/>
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                    <VBox class="sapUiMediumMarginEnd">
+                                        <RadioButtonGroup id="idRBG2" selectedIndex="1">
+                                            <RadioButton id="idRBG2-1" text="{i18n>Priority}"/>
+                                            <RadioButton id="idRBG2-2" text="{i18n>Percent}"/>
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                </HBox>
+                            </VBox>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>
                 </f:content>
-                <f:content> 
-                    <CheckBox id ="idCB3" text="{i18n>PrioPctDiscFollowUp}" width="12rem" selected="true" select="onSelect"/> 
-                    <HBox id ="idHB1">
-                        <VBox class="sapUiMediumMarginEnd">
-                            <RadioButtonGroup id="idRBG1" >
-                                <RadioButton id="idRBG1-1" text="{i18n>Discontinuation}"/>
-                                <RadioButton id="idRBG1-2" text="{i18n>FollowUp}" selected="true"/>
-                            </RadioButtonGroup>
-                        </VBox>
-                        <VBox class="sapUiMediumMarginEnd">
-                            <RadioButtonGroup id="idRBG2">
-                                <RadioButton id="idRBG2-1" text="{i18n>Priority}"/>
-                                <RadioButton id="idRBG2-2" text="{i18n>Percent}" selected="true"/>
-                            </RadioButtonGroup>
-                        </VBox>
-                    </HBox>
-                </f:content>  
             </f:DynamicPageHeader>
         </f:header>
         <f:content>

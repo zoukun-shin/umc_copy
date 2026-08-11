@@ -176,9 +176,9 @@ sap.ui.define([
             if (sDate) {
                 //替换成0时区，而不是转化成0时区（为了保持日期不变）
                 var oUTCDate = this.converttoUTCDateTime(sDate);
-                var oFiltersPlant = filters[0].aFilters.find(Filters => Filters.sPath === "ValidityStartDate_A");
-                if (oFiltersPlant) {
-                    oFiltersPlant.oValue1 = oUTCDate;
+                var oValidityStartDate_A = filters[0].aFilters.find(Filters => Filters.sPath === "ValidityStartDate_A");
+                if (oValidityStartDate_A) {
+                    oValidityStartDate_A.oValue1 = oUTCDate;
                 }
             };
 
@@ -186,9 +186,9 @@ sap.ui.define([
             if (sDate) {
                 //替换成0时区，而不是转化成0时区（为了保持日期不变）
                 oUTCDate = this.converttoUTCDateTime(sDate);
-                var oFiltersPlant = filters[0].aFilters.find(Filters => Filters.sPath === "ValidityStartDate_B");
-                if (oFiltersPlant) {
-                    oFiltersPlant.oValue1 = oUTCDate;
+                var oValidityStartDate_B = filters[0].aFilters.find(Filters => Filters.sPath === "ValidityStartDate_B");
+                if (oValidityStartDate_B) {
+                    oValidityStartDate_B.oValue1 = oUTCDate;
                 }
             };
 
@@ -267,7 +267,33 @@ sap.ui.define([
                 });
             });
         },
-        
+
+        onRowsUpdated: function (oEvent) {
+            var oTable = oEvent.getSource();
+            var aRows = oTable.getRows();
+            var aColumns = oTable.getColumns();
+
+            aRows.forEach(function (oRow) {
+                var oContext = oRow.getBindingContext();
+                if (!oContext) {
+                    return;
+                }
+
+                var sResult = oContext.getProperty("ComparisonResult");
+                var aCells = oRow.getCells();
+                aCells.forEach(function (oCell, iIndex) {
+                    var oColumn = aColumns[iIndex];
+                    var sProperty = oColumn.getSortProperty();
+                    if (sProperty === "ComparisonResult") {
+                        oCell.removeStyleClass("red");
+                        if (sResult === "NG") {
+                            oCell.addStyleClass("red");
+                        }
+                    }
+                });
+            });
+        },
+
         onBeforeExport: function (oEvent) {
             var mExcelSettings = oEvent.getParameter("exportSettings");
             var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
