@@ -3,7 +3,7 @@ sap.ui.define([
 ], (Controller) => {
     "use strict";
 
-    return Controller.extend("pp.zsupplydemand.controller.Main", {
+    return Controller.extend("pp.zsupplydemand.controller.App", {
         onInit() {
         }
     });
