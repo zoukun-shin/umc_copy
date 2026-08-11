@@ -23,8 +23,8 @@
                     <!--数据查询-->
                     <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="materialcrossref" entitySet="MaterialCrossRef" useToolbar="false" class="sapUiResponsiveMargin">
                         <smartFilterBar:controlConfiguration>   
-                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration" key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="notMandatory" index="20" />
-                            <smartFilterBar:ControlConfiguration id="id4ControlConfiguration" key="DeliveryMaterial" visibleInAdvancedArea="true" label="{i18n>DeliveryMaterial}" mandatory="notMandatory" index="30" />
+                            <smartFilterBar:ControlConfiguration id="id3ControlConfiguration" key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="mandatory" index="20" />
+                            <smartFilterBar:ControlConfiguration id="id4ControlConfiguration" key="DeliveryMaterial" visibleInAdvancedArea="true" label="{i18n>DeliveryMaterial}" mandatory="mandatory" index="30" />
                             <smartFilterBar:ControlConfiguration id="id5ControlConfiguration" key="ReceiptMaterial" visibleInAdvancedArea="true" label="{i18n>ReceiptMaterial}" mandatory="notMandatory" index="40" />
                             <smartFilterBar:ControlConfiguration id="id6ControlConfiguration" key="PurchaseOrder" visibleInAdvancedArea="true" label="{i18n>PurchaseOrder}" mandatory="notMandatory" index="50" />
                             <smartFilterBar:ControlConfiguration id="id7ControlConfiguration" key="DelFlag" visibleInAdvancedArea="true" label="{i18n>DelFlag}" mandatory="notMandatory" index="60" />
@@ -36,7 +36,7 @@
                             <smartFilterBar:ControlConfiguration id="id12ControlConfiguration" key="CreateBy" visible="false" />
                             <smartFilterBar:ControlConfiguration id="id13ControlConfiguration" key="CreateAt" visible="false" />
                             <smartFilterBar:ControlConfiguration id="id14ControlConfiguration" key="ChangeBy" visible="false" />
-                            <smartFilterBar:ControlConfiguration id="id15ControlConfiguration" key="ChnageAt" visible="false" />
+                            <smartFilterBar:ControlConfiguration id="id15ControlConfiguration" key="ChangeAt" visible="false" />
                             
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
@@ -154,12 +154,12 @@
                                 <Text id="idChangeByText" text="{ChangeBy}" wrapping="false"/>
                             </t:template>
                         </t:Column>
-                        <t:Column id="id18Column" width="10rem" label="{i18n>ChnageAt}" sortProperty="ChnageAt" filterProperty="ChnageAt">
+                        <t:Column id="id18Column" width="10rem" label="{i18n>ChangeAt}" sortProperty="ChangeAt" filterProperty="ChangeAt">
                             <t:customData>
-                                <core:CustomData id="id18CustomData" key="p13nData" value='\{"columnKey":"ChnageAt", "leadingProperty":"ChnageAt", "sortProperty":"ChnageAt", "filterProperty": "ChnageAt"}'/>
+                                <core:CustomData id="id18CustomData" key="p13nData" value='\{"columnKey":"ChangeAt", "leadingProperty":"ChangeAt", "sortProperty":"ChangeAt", "filterProperty": "ChangeAt"}'/>
                             </t:customData>
                             <t:template>
-                                <Text id="idChnageAtText" text="{ path: 'ChnageAt', type: 'sap.ui.model.type.DateTime' }" wrapping="false"/>
+                                <Text id="idChangeAtText" text="{ path: 'ChangeAt', type: 'sap.ui.model.type.DateTime' }" wrapping="false"/>
                             </t:template>
                         </t:Column>
                     </t:columns>

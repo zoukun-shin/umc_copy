@@ -8,28 +8,32 @@
 
         <VBox class="sapUiSmallMargin">
 
-            <Label text="{i18n>Plant}"/>
+            <Label text="{i18n>Plant}" required="true"/>
             <Input
                 value="{dialog>/Plant}"
+                required="true"
                 />
 
-            <Label text="{i18n>DeliveryMaterial}"/>
+            <Label text="{i18n>DeliveryMaterial}" required="true"/>
             <Input
                 value="{dialog>/DeliveryMaterial}"
+                required="true"
                 />
 
-            <Label text="{i18n>ReceiptMaterial}"/>
+            <Label text="{i18n>ReceiptMaterial}" required="true"/>
             <Input
                 value="{dialog>/ReceiptMaterial}"
+                required="true"
                 />
 
-            <Label text="{i18n>PurchaseOrder}"/>
+            <Label text="{i18n>PurchaseOrder}" required="true"/>
             <Input
                 value="{dialog>/PurchaseOrder}"
+                required="true"
                 />
 
-            <Label text="{i18n>PurchaseOrderItem}"/>
-            <Input value="{dialog>/PurchaseOrderItem}"/>
+            <Label text="{i18n>PurchaseOrderItem}" required="true"/>
+            <Input value="{dialog>/PurchaseOrderItem}" required="true"/>
 
         </VBox>
 

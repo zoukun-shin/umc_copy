@@ -259,7 +259,7 @@ sap.ui.define([
 				switch (oColumn.property) {
 					// Date
 					case "CreateAt":
-					case "ChnageAt":
+					case "ChangeAt":
 						oColumn.type = sap.ui.export.EdmType.DateTime;
 						break;
 				}
