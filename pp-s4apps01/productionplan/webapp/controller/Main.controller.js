@@ -7,8 +7,9 @@ sap.ui.define([
     "sap/m/MessageBox",
     "sap/ui/table/Column",
     "sap/m/plugins/CellSelector",
-    "sap/m/plugins/CopyProvider"
-], function (Base, formatter, Filter, FilterOperator, BusyDialog, MessageBox, Column, CellSelector, CopyProvider) {
+    "sap/m/plugins/CopyProvider",
+    "sap/ui/export/Spreadsheet"
+], function (Base, formatter, Filter, FilterOperator, BusyDialog, MessageBox, Column, CellSelector, CopyProvider, Spreadsheet) {
     "use strict";
 
     let oCellSelector;
@@ -298,6 +299,11 @@ sap.ui.define([
                 mBindingParams.filters.push(newFilter);
             };
 
+            // ADD BEGIN BY XINLEI XU 2026/07/17 VN CR#6718 
+            var bFromBOMTable = this.getModel("local").getProperty("/filter/FromBOMTable");
+            mBindingParams.filters.push(new Filter("FromBOMTable", FilterOperator.EQ, bFromBOMTable));
+            // ADD END BY XINLEI XU 2026/07/17 VN CR#6718 
+
             var oModel = this.getOwnerComponent().getModel();
             if (oModel.hasPendingChanges()) {
                 // 重置未保存的更改
@@ -335,6 +341,19 @@ sap.ui.define([
             if (sOption === true) {
                 aFilters.push(new Filter("exOut", FilterOperator.EQ, "X"));
             };
+
+            // ADD BEGIN BY XINLEI XU 2026/07/17 VN CR#6718
+            var bFromBOMTable = this.getModel("local").getProperty("/filter/FromBOMTable");
+            aFilters.push(new Filter("FromBOMTable", FilterOperator.EQ, bFromBOMTable));
+            this._loadAllData("/ProductionPlan", aFilters).then(function (aResults) {
+                if (aResults.length > 0) {
+                    this.getModel("local").setProperty("/resultSet", aResults);
+                }
+            }.bind(this), function (oError) {
+                MessageBox.error(oError);
+            }.bind(this));
+            // ADD END BY XINLEI XU 2026/07/17 VN CR#6718
+
             var oModel = this.getOwnerComponent().getModel();
             if (oModel.hasPendingChanges()) {
                 // 重置未保存的更改
@@ -650,6 +669,80 @@ sap.ui.define([
             );
         },
 
+        // ADD BEGIN BY XINLEI XU 2026/07/17 VN CR#6718
+        onExport: function () {
+            var oTable = this.byId("ReportTable");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("title");
+            this._exportExcel(oTable, sFileName);
+        },
 
+        _exportExcel: function (oTable, sFileName) {
+            var aExcelSet = this.getModel("local").getProperty("/resultSet") ? this.getModel("local").getProperty("/resultSet") : [];
+            var aExcelCol = [];
+            var aTableCol = oTable.getColumns();
+            for (var i = 0; i < aTableCol.length; i++) {
+                if (aTableCol[i].getVisible()) {
+                    var sLabelText = aTableCol[i].getAggregation("label").getText();
+                    var sType, sTextAlign, bDelimiter, iScale;
+                    var sFieldName = "";
+                    if (aTableCol[i].getAggregation("template").mBindingInfos && aTableCol[i].getAggregation("template").mBindingInfos.text) {
+                        sFieldName = aTableCol[i].getAggregation("template").mBindingInfos.text.parts[0].path;
+                    } else if (aTableCol[i].getAggregation("template").getItems() && aTableCol[i].getAggregation("template").getItems()[0].mBindingInfos) {
+                        sFieldName = aTableCol[i].getAggregation("template").getItems()[0].mBindingInfos.text.parts[0].path;
+                    }
+                    switch (sFieldName) {
+                        //  Number 分隔符
+                        case "SupplierPrice":
+                        case "StandardPrice":
+                        case "RequiredQty":
+                        case "StockQty":
+                        case "SuppliedQty":
+                        case "AvailableStock":
+                        case "RemainingQty":
+                        case "SafetyStock":
+                        case "ShipmentNoticeQty":
+                        case "PastQty":
+                        case "FutureQty":
+                        case "TotalQty":
+                        case "OrderQuantity":
+                        case "Balance":
+                        case "MinimumPurchaseOrderQty":
+                        case "MaterialPlannedDeliveryDurn":
+                        case "MaterialPlannedDeliveryDurn":
+                            sType = sap.ui.export.EdmType.Number;
+                            bDelimiter = true;
+                            sTextAlign = "End";
+                            break;
+                        default:
+                            sType = sap.ui.export.EdmType.String;
+                            sTextAlign = "Begin";
+                            break;
+                    }
+                    var oExcelCol = {
+                        label: sLabelText,
+                        type: sType,
+                        property: sFieldName,
+                        width: parseFloat(aTableCol[i].getWidth()),
+                        textAlign: sTextAlign,
+                        delimiter: bDelimiter,
+                        scale: iScale
+                    };
+                    aExcelCol.push(oExcelCol);
+                }
+            }
+            var oSettings = {
+                workbook: {
+                    columns: aExcelCol,
+                    context: {
+                        version: "1.54",
+                        hierarchyLevel: "level"
+                    }
+                },
+                dataSource: aExcelSet,
+                fileName: sFileName + "_" + this.getCurrentDateTime() + ".xlsx"
+            };
+            new Spreadsheet(oSettings).build();
+        },
+        // ADD END BY XINLEI XU 2026/07/17 VN CR#6718
     });
 });

@@ -17,16 +17,26 @@
         </f:heading>
       </f:DynamicPageTitle>
     </f:title>
-
     <f:header>
       <f:DynamicPageHeader pinnable="true">
         <f:content>
           <smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="ProductionPlan" persistencyKey="headFilterBar" useToolbar="false" search="onSearch" smartVariant="__SVM01">
             <smartFilterBar:controlConfiguration>
-              <smartFilterBar:ControlConfiguration index="10" key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="mandatory"/>
-              <smartFilterBar:ControlConfiguration index="20" key="MRPResponsible" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}" mandatory="mandatory"/>
-              <smartFilterBar:ControlConfiguration index="30" key="ProductionSupervisor" visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}" />
-              <smartFilterBar:ControlConfiguration index="40" key="Product" visibleInAdvancedArea="true" label="{i18n>Product}" />
+              <smartFilterBar:ControlConfiguration index="10" key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="mandatory" displayBehaviour="idAndDescription" />
+              <smartFilterBar:ControlConfiguration index="20" key="MRPResponsible" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}" mandatory="mandatory" displayBehaviour="idAndDescription" />
+              <smartFilterBar:ControlConfiguration index="30" key="ProductionSupervisor" visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}" displayBehaviour="idAndDescription" />
+              <smartFilterBar:ControlConfiguration index="40" key="Product" visibleInAdvancedArea="true" label="{i18n>Product}" displayBehaviour="idAndDescription" />
+              <!-- ADD BEGIN BY XINLEI XU 2026/07/17 VN CR#6718 -->
+              <smartFilterBar:ControlConfiguration index='50' key="FromBOMTable" visibleInAdvancedArea="true" label="{i18n>FromBOMTable}">
+                <smartFilterBar:customControl>
+                  <Switch state="{local>/filter/FromBOMTable}" customTextOn=" " customTextOff=" ">
+                    <layoutData>
+                      <FlexItemData growFactor="1" />
+                    </layoutData>
+                  </Switch>
+                </smartFilterBar:customControl>
+              </smartFilterBar:ControlConfiguration>
+              <!-- ADD END BY XINLEIX XU 2026/07/17 VN CR#6718 -->
               <!-- visible -->
               <smartFilterBar:ControlConfiguration index='999' key="Idnrk" visible="false"/>
               <smartFilterBar:ControlConfiguration index='999' key="DetSpec" visible="false"/>
@@ -171,7 +181,7 @@
       </f:DynamicPageHeader>
     </f:header>
     <f:content>
-      <smartTable:SmartTable id="smartTable" entitySet="ProductionPlan" smartFilterId="smartFilterBar" tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" fitContainer="false" height="100%" ignoredFields="Delete_mc,Update_mc,Status,Message,Expand,Theory,ECN,exOut,PlanCheck,WO">
+      <smartTable:SmartTable id="smartTable" entitySet="ProductionPlan" smartFilterId="smartFilterBar" tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="false" beforeExport="onBeforeExport" fitContainer="false" height="100%" ignoredFields="Delete_mc,Update_mc,Status,Message,Expand,Theory,ECN,exOut,PlanCheck,WO,FromBOMTable">
         <smartTable:customToolbar>
           <OverflowToolbar width="100%">
             <ToolbarSpacer/>
@@ -183,9 +193,12 @@
             <Button id="web4" icon="sap-icon://internet-browser" text="{i18n>web4ButtonText}" tooltip="{i18n>web4ButtonText}" press="onWeb4" enabled="{= ${local>/authorityCheck/button/COOIS}}"/>
             <Button id="web5" icon="sap-icon://internet-browser" text="{i18n>web5ButtonText}" tooltip="{i18n>web5ButtonText}" press="onWeb5" enabled="{= ${local>/authorityCheck/button/CS13}}"/>
             <Button id="web6" icon="sap-icon://internet-browser" text="{i18n>web6ButtonText}" tooltip="{i18n>web6ButtonText}" press="onWeb6" enabled="{= ${local>/authorityCheck/button/CA03}}"/>
+            <!-- ADD BEGIN BY XINLEI XU 2026/07/17 VN CR#6718 -->
+            <Button icon="sap-icon://excel-attachment" text="{i18n>Download}" press="onExport" enabled="{= ${local>/resultSet}.length > 0}"/>
+            <!-- ADD END BY XINLEI XU 2026/07/17 VN CR#6718 -->
           </OverflowToolbar>
         </smartTable:customToolbar>
-        <t:Table id="ReportTable" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" rowMode="Auto" enableColumnFreeze="true" paste="onPaste">
+        <t:Table id="ReportTable" selectionMode="MultiToggle" rowsUpdated="onUITableRowsUpdated" rowMode="Auto" enableColumnFreeze="true" paste="onPaste" threshold="5000">
           <t:extension>
             <OverflowToolbar id="toolbar" style="Clear">
               <ToolbarSpacer/>
@@ -243,7 +256,7 @@
             <t:template>
               <Text text="{DetSpec}" tooltip="{DetSpec}" wrapping="false"/>
             </t:template>
-          </t:Column>                      
+          </t:Column>
           <!-- TH/VN add end 20251112 -->
           <t:Column id="Stufe" label="{i18n>Stufe}" width="6rem" sortProperty="Stufe" filterProperty="Stufe" visible="true" autoResizable="true">
             <t:customData>
@@ -396,8 +409,7 @@
             <t:template>
               <VBox id="VBox001">
                 <Text id="D001T" text="{D001}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}" />
-                <Input id="D001I" value="{D001}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D001')"/>
+                <Input id="D001I" value="{D001}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D001')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -408,8 +420,7 @@
             <t:template>
               <VBox id="VBox002">
                 <Text id="D002T" text="{D002}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D002I" value="{D002}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D002')"/>
+                <Input id="D002I" value="{D002}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D002')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -420,8 +431,7 @@
             <t:template>
               <VBox id="VBox003">
                 <Text id="D003T" text="{D003}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D003I" value="{D003}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D003')"/>
+                <Input id="D003I" value="{D003}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D003')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -432,8 +442,7 @@
             <t:template>
               <VBox id="VBox004">
                 <Text id="D004T" text="{D004}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D004I" value="{D004}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D004')"/>
+                <Input id="D004I" value="{D004}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D004')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -444,8 +453,7 @@
             <t:template>
               <VBox id="VBox005">
                 <Text id="D005T" text="{D005}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D005I" value="{D005}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D005')"/>
+                <Input id="D005I" value="{D005}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D005')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -456,8 +464,7 @@
             <t:template>
               <VBox id="VBox006">
                 <Text id="D006T" text="{D006}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D006I" value="{D006}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D006')"/>
+                <Input id="D006I" value="{D006}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D006')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -468,8 +475,7 @@
             <t:template>
               <VBox id="VBox007">
                 <Text id="D007T" text="{D007}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D007I" value="{D007}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D007')"/>
+                <Input id="D007I" value="{D007}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D007')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -491,8 +497,7 @@
             <t:template>
               <VBox id="VBox009">
                 <Text id="D009T" text="{D009}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D009I" value="{D009}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D009')"/>
+                <Input id="D009I" value="{D009}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D009')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -503,8 +508,7 @@
             <t:template>
               <VBox id="VBox010">
                 <Text id="D010T" text="{D010}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D010I" value="{D010}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D010')"/>
+                <Input id="D010I" value="{D010}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D010')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -515,8 +519,7 @@
             <t:template>
               <VBox id="VBox011">
                 <Text id="D011T" text="{D011}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D011I" value="{D011}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D011')"/>
+                <Input id="D011I" value="{D011}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D011')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -527,8 +530,7 @@
             <t:template>
               <VBox id="VBox012">
                 <Text id="D012T" text="{D012}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D012I" value="{D012}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D012')"/>
+                <Input id="D012I" value="{D012}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D012')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -539,8 +541,7 @@
             <t:template>
               <VBox id="VBox013">
                 <Text id="D013T" text="{D013}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D013I" value="{D013}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D013')"/>
+                <Input id="D013I" value="{D013}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D013')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -551,8 +552,7 @@
             <t:template>
               <VBox id="VBox014">
                 <Text id="D014T" text="{D014}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D014I" value="{D014}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D014')"/>
+                <Input id="D014I" value="{D014}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D014')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -574,8 +574,7 @@
             <t:template>
               <VBox id="VBox016">
                 <Text id="D016T" text="{D016}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D016I" value="{D016}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D016')"/>
+                <Input id="D016I" value="{D016}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D016')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -586,8 +585,7 @@
             <t:template>
               <VBox id="VBox017">
                 <Text id="D017T" text="{D017}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D017I" value="{D017}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D017')"/>
+                <Input id="D017I" value="{D017}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D017')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -598,8 +596,7 @@
             <t:template>
               <VBox id="VBox018">
                 <Text id="D018T" text="{D018}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D018I" value="{D018}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D018')"/>
+                <Input id="D018I" value="{D018}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D018')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -610,8 +607,7 @@
             <t:template>
               <VBox id="VBox019">
                 <Text id="D019T" text="{D019}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D019I" value="{D019}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D019')"/>
+                <Input id="D019I" value="{D019}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D019')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -622,8 +618,7 @@
             <t:template>
               <VBox id="VBox020">
                 <Text id="D020T" text="{D020}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D020I" value="{D020}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D020')"/>
+                <Input id="D020I" value="{D020}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D020')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -634,8 +629,7 @@
             <t:template>
               <VBox id="VBox021">
                 <Text id="D021T" text="{D021}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D021I" value="{D021}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D021')"/>
+                <Input id="D021I" value="{D021}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D021')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -646,8 +640,7 @@
             <t:template>
               <VBox id="VBox022">
                 <Text id="D022T" text="{D022}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D022I" value="{D022}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D022')"/>
+                <Input id="D022I" value="{D022}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D022')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -658,8 +651,7 @@
             <t:template>
               <VBox id="VBox023">
                 <Text id="D023T" text="{D023}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D023I" value="{D023}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D023')"/>
+                <Input id="D023I" value="{D023}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D023')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -670,8 +662,7 @@
             <t:template>
               <VBox id="VBox024">
                 <Text id="D024T" text="{D024}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D024I" value="{D024}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D024')"/>
+                <Input id="D024I" value="{D024}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D024')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -682,8 +673,7 @@
             <t:template>
               <VBox id="VBox025">
                 <Text id="D025T" text="{D025}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D025I" value="{D025}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D025')"/>
+                <Input id="D025I" value="{D025}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D025')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -694,8 +684,7 @@
             <t:template>
               <VBox id="VBox026">
                 <Text id="D026T" text="{D026}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D026I" value="{D026}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D026')"/>
+                <Input id="D026I" value="{D026}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D026')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -706,8 +695,7 @@
             <t:template>
               <VBox id="VBox027">
                 <Text id="D027T" text="{D027}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D027I" value="{D027}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D027')"/>
+                <Input id="D027I" value="{D027}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D027')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -718,8 +706,7 @@
             <t:template>
               <VBox id="VBox028">
                 <Text id="D028T" text="{D028}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D028I" value="{D028}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D028')"/>
+                <Input id="D028I" value="{D028}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D028')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -730,8 +717,7 @@
             <t:template>
               <VBox id="VBox029">
                 <Text id="D029T" text="{D029}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D029I" value="{D029}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D029')"/>
+                <Input id="D029I" value="{D029}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D029')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -742,8 +728,7 @@
             <t:template>
               <VBox id="VBox030">
                 <Text id="D030T" text="{D030}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D030I" value="{D030}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D030')"/>
+                <Input id="D030I" value="{D030}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D030')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -765,8 +750,7 @@
             <t:template>
               <VBox id="VBox032">
                 <Text id="D032T" text="{D032}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D032I" value="{D032}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D032')"/>
+                <Input id="D032I" value="{D032}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D032')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -777,8 +761,7 @@
             <t:template>
               <VBox id="VBox033">
                 <Text id="D033T" text="{D033}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D033I" value="{D033}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D033')"/>
+                <Input id="D033I" value="{D033}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D033')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -789,8 +772,7 @@
             <t:template>
               <VBox id="VBox034">
                 <Text id="D034T" text="{D034}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D034I" value="{D034}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D034')"/>
+                <Input id="D034I" value="{D034}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D034')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -801,8 +783,7 @@
             <t:template>
               <VBox id="VBox035">
                 <Text id="D035T" text="{D035}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D035I" value="{D035}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D035')"/>
+                <Input id="D035I" value="{D035}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D035')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -813,8 +794,7 @@
             <t:template>
               <VBox id="VBox036">
                 <Text id="D036T" text="{D036}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D036I" value="{D036}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D036')"/>
+                <Input id="D036I" value="{D036}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D036')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -825,8 +805,7 @@
             <t:template>
               <VBox id="VBox037">
                 <Text id="D037T" text="{D037}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D037I" value="{D037}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D037')"/>
+                <Input id="D037I" value="{D037}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D037')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -837,8 +816,7 @@
             <t:template>
               <VBox id="VBox038">
                 <Text id="D038T" text="{D038}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D038I" value="{D038}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D038')"/>
+                <Input id="D038I" value="{D038}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D038')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -849,8 +827,7 @@
             <t:template>
               <VBox id="VBox039">
                 <Text id="D039T" text="{D039}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D039I" value="{D039}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D039')"/>
+                <Input id="D039I" value="{D039}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D039')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -861,8 +838,7 @@
             <t:template>
               <VBox id="VBox040">
                 <Text id="D040T" text="{D040}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D040I" value="{D040}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D040')"/>
+                <Input id="D040I" value="{D040}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D040')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -873,8 +849,7 @@
             <t:template>
               <VBox id="VBox041">
                 <Text id="D041T" text="{D041}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D041I" value="{D041}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D041')"/>
+                <Input id="D041I" value="{D041}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D041')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -885,8 +860,7 @@
             <t:template>
               <VBox id="VBox042">
                 <Text id="D042T" text="{D042}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D042I" value="{D042}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D042')"/>
+                <Input id="D042I" value="{D042}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D042')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -897,8 +871,7 @@
             <t:template>
               <VBox id="VBox043">
                 <Text id="D043T" text="{D043}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D043I" value="{D043}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D043')"/>
+                <Input id="D043I" value="{D043}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D043')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -909,8 +882,7 @@
             <t:template>
               <VBox id="VBox044">
                 <Text id="D044T" text="{D044}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D044I" value="{D044}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D044')"/>
+                <Input id="D044I" value="{D044}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D044')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -921,8 +893,7 @@
             <t:template>
               <VBox id="VBox045">
                 <Text id="D045T" text="{D045}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D045I" value="{D045}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D045')"/>
+                <Input id="D045I" value="{D045}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D045')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -933,8 +904,7 @@
             <t:template>
               <VBox id="VBox046">
                 <Text id="D046T" text="{D046}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D046I" value="{D046}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D046')"/>
+                <Input id="D046I" value="{D046}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D046')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -945,8 +915,7 @@
             <t:template>
               <VBox id="VBox047">
                 <Text id="D047T" text="{D047}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D047I" value="{D047}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D047')"/>
+                <Input id="D047I" value="{D047}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D047')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -957,8 +926,7 @@
             <t:template>
               <VBox id="VBox048">
                 <Text id="D048T" text="{D048}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D048I" value="{D048}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D048')"/>
+                <Input id="D048I" value="{D048}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D048')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -969,8 +937,7 @@
             <t:template>
               <VBox id="VBox049">
                 <Text id="D049T" text="{D049}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D049I" value="{D049}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D049')"/>
+                <Input id="D049I" value="{D049}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D049')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -981,8 +948,7 @@
             <t:template>
               <VBox id="VBox050">
                 <Text id="D050T" text="{D050}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D050I" value="{D050}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D050')"/>
+                <Input id="D050I" value="{D050}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D050')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -993,8 +959,7 @@
             <t:template>
               <VBox id="VBox051">
                 <Text id="D051T" text="{D051}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D051I" value="{D051}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D051')"/>
+                <Input id="D051I" value="{D051}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D051')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1005,8 +970,7 @@
             <t:template>
               <VBox id="VBox052">
                 <Text id="D052T" text="{D052}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D052I" value="{D052}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D052')"/>
+                <Input id="D052I" value="{D052}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D052')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1017,8 +981,7 @@
             <t:template>
               <VBox id="VBox053">
                 <Text id="D053T" text="{D053}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D053I" value="{D053}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D053')"/>
+                <Input id="D053I" value="{D053}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D053')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1029,8 +992,7 @@
             <t:template>
               <VBox id="VBox054">
                 <Text id="D054T" text="{D054}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D054I" value="{D054}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D054')"/>
+                <Input id="D054I" value="{D054}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D054')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1041,8 +1003,7 @@
             <t:template>
               <VBox id="VBox055">
                 <Text id="D055T" text="{D055}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D055I" value="{D055}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D055')"/>
+                <Input id="D055I" value="{D055}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D055')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1053,8 +1014,7 @@
             <t:template>
               <VBox id="VBox056">
                 <Text id="D056T" text="{D056}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D056I" value="{D056}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D056')"/>
+                <Input id="D056I" value="{D056}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D056')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1065,8 +1025,7 @@
             <t:template>
               <VBox id="VBox057">
                 <Text id="D057T" text="{D057}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D057I" value="{D057}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D057')"/>
+                <Input id="D057I" value="{D057}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D057')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1077,8 +1036,7 @@
             <t:template>
               <VBox id="VBox058">
                 <Text id="D058T" text="{D058}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D058I" value="{D058}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D058')"/>
+                <Input id="D058I" value="{D058}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D058')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1089,8 +1047,7 @@
             <t:template>
               <VBox id="VBox059">
                 <Text id="D059T" text="{D059}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D059I" value="{D059}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D059')"/>
+                <Input id="D059I" value="{D059}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D059')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1101,8 +1058,7 @@
             <t:template>
               <VBox id="VBox060">
                 <Text id="D060T" text="{D060}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D060I" value="{D060}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D060')"/>
+                <Input id="D060I" value="{D060}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D060')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1113,8 +1069,7 @@
             <t:template>
               <VBox id="VBox061">
                 <Text id="D061T" text="{D061}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D061I" value="{D061}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D061')"/>
+                <Input id="D061I" value="{D061}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D061')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1125,8 +1080,7 @@
             <t:template>
               <VBox id="VBox062">
                 <Text id="D062T" text="{D062}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D062I" value="{D062}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D062')"/>
+                <Input id="D062I" value="{D062}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D062')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1137,8 +1091,7 @@
             <t:template>
               <VBox id="VBox063">
                 <Text id="D063T" text="{D063}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D063I" value="{D063}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D063')"/>
+                <Input id="D063I" value="{D063}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D063')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1149,8 +1102,7 @@
             <t:template>
               <VBox id="VBox064">
                 <Text id="D064T" text="{D064}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D064I" value="{D064}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D064')"/>
+                <Input id="D064I" value="{D064}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D064')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1161,8 +1113,7 @@
             <t:template>
               <VBox id="VBox065">
                 <Text id="D065T" text="{D065}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D065I" value="{D065}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D065')"/>
+                <Input id="D065I" value="{D065}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D065')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1173,8 +1124,7 @@
             <t:template>
               <VBox id="VBox066">
                 <Text id="D066T" text="{D066}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D066I" value="{D066}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D066')"/>
+                <Input id="D066I" value="{D066}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D066')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1185,8 +1135,7 @@
             <t:template>
               <VBox id="VBox067">
                 <Text id="D067T" text="{D067}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D067I" value="{D067}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D067')"/>
+                <Input id="D067I" value="{D067}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D067')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1197,8 +1146,7 @@
             <t:template>
               <VBox id="VBox068">
                 <Text id="D068T" text="{D068}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D068I" value="{D068}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D068')"/>
+                <Input id="D068I" value="{D068}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D068')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1209,8 +1157,7 @@
             <t:template>
               <VBox id="VBox069">
                 <Text id="D069T" text="{D069}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D069I" value="{D069}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D069')"/>
+                <Input id="D069I" value="{D069}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D069')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1221,8 +1168,7 @@
             <t:template>
               <VBox id="VBox070">
                 <Text id="D070T" text="{D070}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D070I" value="{D070}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D070')"/>
+                <Input id="D070I" value="{D070}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D070')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1233,8 +1179,7 @@
             <t:template>
               <VBox id="VBox071">
                 <Text id="D071T" text="{D071}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D071I" value="{D071}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D071')"/>
+                <Input id="D071I" value="{D071}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D071')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1245,8 +1190,7 @@
             <t:template>
               <VBox id="VBox072">
                 <Text id="D072T" text="{D072}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D072I" value="{D072}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D072')"/>
+                <Input id="D072I" value="{D072}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D072')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1257,8 +1201,7 @@
             <t:template>
               <VBox id="VBox073">
                 <Text id="D073T" text="{D073}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D073I" value="{D073}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D073')"/>
+                <Input id="D073I" value="{D073}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D073')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1269,8 +1212,7 @@
             <t:template>
               <VBox id="VBox074">
                 <Text id="D074T" text="{D074}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D074I" value="{D074}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D074')"/>
+                <Input id="D074I" value="{D074}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D074')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1281,8 +1223,7 @@
             <t:template>
               <VBox id="VBox075">
                 <Text id="D075T" text="{D075}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D075I" value="{D075}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D075')"/>
+                <Input id="D075I" value="{D075}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D075')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1293,8 +1234,7 @@
             <t:template>
               <VBox id="VBox076">
                 <Text id="D076T" text="{D076}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D076I" value="{D076}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D076')"/>
+                <Input id="D076I" value="{D076}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D076')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1305,8 +1245,7 @@
             <t:template>
               <VBox id="VBox077">
                 <Text id="D077T" text="{D077}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D077I" value="{D077}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D077')"/>
+                <Input id="D077I" value="{D077}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D077')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1317,8 +1256,7 @@
             <t:template>
               <VBox id="VBox078">
                 <Text id="D078T" text="{D078}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D078I" value="{D078}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D078')"/>
+                <Input id="D078I" value="{D078}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D078')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1329,8 +1267,7 @@
             <t:template>
               <VBox id="VBox079">
                 <Text id="D079T" text="{D079}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D079I" value="{D079}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D079')"/>
+                <Input id="D079I" value="{D079}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D079')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1341,8 +1278,7 @@
             <t:template>
               <VBox id="VBox080">
                 <Text id="D080T" text="{D080}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D080I" value="{D080}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D080')"/>
+                <Input id="D080I" value="{D080}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D080')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1353,8 +1289,7 @@
             <t:template>
               <VBox id="VBox081">
                 <Text id="D081T" text="{D081}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D081I" value="{D081}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D081')"/>
+                <Input id="D081I" value="{D081}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D081')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1365,8 +1300,7 @@
             <t:template>
               <VBox id="VBox082">
                 <Text id="D082T" text="{D082}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D082I" value="{D082}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D082')"/>
+                <Input id="D082I" value="{D082}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D082')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1377,8 +1311,7 @@
             <t:template>
               <VBox id="VBox083">
                 <Text id="D083T" text="{D083}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D083I" value="{D083}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D083')"/>
+                <Input id="D083I" value="{D083}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D083')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1389,8 +1322,7 @@
             <t:template>
               <VBox id="VBox084">
                 <Text id="D084T" text="{D084}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D084I" value="{D084}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D084')"/>
+                <Input id="D084I" value="{D084}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D084')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1401,8 +1333,7 @@
             <t:template>
               <VBox id="VBox085">
                 <Text id="D085T" text="{D085}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D085I" value="{D085}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D085')"/>
+                <Input id="D085I" value="{D085}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D085')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1413,8 +1344,7 @@
             <t:template>
               <VBox id="VBox086">
                 <Text id="D086T" text="{D086}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D086I" value="{D086}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D086')"/>
+                <Input id="D086I" value="{D086}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D086')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1425,8 +1355,7 @@
             <t:template>
               <VBox id="VBox087">
                 <Text id="D087T" text="{D087}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D087I" value="{D087}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D087')"/>
+                <Input id="D087I" value="{D087}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D087')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1437,8 +1366,7 @@
             <t:template>
               <VBox id="VBox088">
                 <Text id="D088T" text="{D088}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D088I" value="{D088}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D088')"/>
+                <Input id="D088I" value="{D088}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D088')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1449,8 +1377,7 @@
             <t:template>
               <VBox id="VBox089">
                 <Text id="D089T" text="{D089}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D089I" value="{D089}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D089')"/>
+                <Input id="D089I" value="{D089}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D089')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1461,8 +1388,7 @@
             <t:template>
               <VBox id="VBox090">
                 <Text id="D090T" text="{D090}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D090I" value="{D090}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D090')"/>
+                <Input id="D090I" value="{D090}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D090')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1473,8 +1399,7 @@
             <t:template>
               <VBox id="VBox091">
                 <Text id="D091T" text="{D091}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D091I" value="{D091}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D091')"/>
+                <Input id="D091I" value="{D091}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D091')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1485,8 +1410,7 @@
             <t:template>
               <VBox id="VBox092">
                 <Text id="D092T" text="{D092}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D092I" value="{D092}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D092')"/>
+                <Input id="D092I" value="{D092}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D092')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1497,8 +1421,7 @@
             <t:template>
               <VBox id="VBox093">
                 <Text id="D093T" text="{D093}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D093I" value="{D093}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D093')"/>
+                <Input id="D093I" value="{D093}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D093')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1509,8 +1432,7 @@
             <t:template>
               <VBox id="VBox094">
                 <Text id="D094T" text="{D094}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D094I" value="{D094}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D094')"/>
+                <Input id="D094I" value="{D094}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D094')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1521,8 +1443,7 @@
             <t:template>
               <VBox id="VBox095">
                 <Text id="D095T" text="{D095}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D095I" value="{D095}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D095')"/>
+                <Input id="D095I" value="{D095}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D095')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1533,8 +1454,7 @@
             <t:template>
               <VBox id="VBox096">
                 <Text id="D096T" text="{D096}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D096I" value="{D096}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D096')"/>
+                <Input id="D096I" value="{D096}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D096')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1545,8 +1465,7 @@
             <t:template>
               <VBox id="VBox097">
                 <Text id="D097T" text="{D097}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D097I" value="{D097}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D097')"/>
+                <Input id="D097I" value="{D097}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D097')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1557,8 +1476,7 @@
             <t:template>
               <VBox id="VBox098">
                 <Text id="D098T" text="{D098}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D098I" value="{D098}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D098')"/>
+                <Input id="D098I" value="{D098}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D098')"/>
               </VBox>
             </t:template>
           </t:Column>
@@ -1569,8 +1487,7 @@
             <t:template>
               <VBox id="VBox099">
                 <Text id="D099T" text="{D099}" visible="{parts:['PlanType'], formatter:'.formatter.setTextVisible'}"/>
-                <Input id="D099I" value="{D099}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }"
-                 change="onInputChange($event,'D099')"/>
+                <Input id="D099I" value="{D099}" visible="{parts:['PlanType'], formatter:'.formatter.setInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ( ${PlanType} === 'I'  || ( ${PlanType} === 'P' &amp;&amp; ${Sobmx} !== '52' ) ) }" change="onInputChange($event,'D099')"/>
               </VBox>
             </t:template>
           </t:Column>

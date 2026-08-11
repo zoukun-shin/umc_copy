@@ -262,6 +262,86 @@ sap.ui.define([
                     }
                 }.bind(this)
             });
-        }
+        },
+
+        // ADD BEGIN BY XINLEI XU 2026/07/17 VN CR#6718
+        _CallODataV2: function (sMethod, sPath, aFilters, mUrlParameter, oRequestData) {
+            var that = this;
+            var oBusyDialog = new sap.m.BusyDialog();
+            oBusyDialog.open();
+            return new Promise(function (resolve, reject) {
+                var mParameters = {
+                    method: sMethod === "READ" ? "GET" : "POST",
+                    filters: aFilters,
+                    urlParameters: mUrlParameter,
+                    success: function (oResponse) {
+                        oBusyDialog.close();
+                        resolve(oResponse);
+                    },
+                    error: function (oErr) {
+                        oBusyDialog.close();
+                        if (oErr.responseText.includes("?xml")) {
+                            reject(oErr.responseText);
+                        } else {
+                            reject(JSON.parse(oErr.responseText));
+                        }
+                    }
+                };
+                switch (sMethod) {
+                    case "READ":
+                        that.getModel().read(sPath, mParameters);
+                        break;
+                    case "CREATE":
+                        that.getModel().create(sPath, oRequestData, mParameters);
+                        break;
+                    case "UPDATE":
+                        that.getModel().update(sPath, oRequestData, mParameters);
+                        break;
+                    case "DELETE":
+                        that.getModel().remove(sPath, mParameters);
+                        break;
+                    case "ACTION":
+                        that.getModel().callFunction(sPath, mParameters);
+                        break;
+                    default:
+                        break;
+                }
+            });
+        },
+
+        _loadAllData: function (sPath, aFilters) {
+            var that = this;
+            var iPageSize = 5000;
+            var aAllData = [];
+            return new Promise(function (resolve, reject) {
+                // 定义内部递归函数
+                function fetchBatch(iSkip) {
+                    // 分页参数
+                    var oUrlParameters = {
+                        "$top": iPageSize,
+                        "$skip": iSkip
+                    };
+                    that._CallODataV2("READ", sPath, aFilters, oUrlParameters, {}).then(function (oResponse) {
+                        if (oResponse && oResponse.results) {
+                            var aCurrentBatch = oResponse.results;
+                            // 将当前批次的数据合并到总容器中
+                            aAllData = aAllData.concat(aCurrentBatch);
+                            if (aCurrentBatch.length === iPageSize) {
+                                fetchBatch(iSkip + iPageSize); // 递归调用，skip 增加 5000
+                            } else {
+                                resolve(aAllData);
+                            }
+                        } else {
+                            resolve(aAllData);
+                        }
+                    }).catch(function (oError) {
+                        reject(oError);
+                    });
+                }
+                // 从 skip = 0 (第一页) 开始启动
+                fetchBatch(0);
+            });
+        },
+        // ADD END BY XINLEI XU 2026/07/17 VN CR#6718
     })
 });
