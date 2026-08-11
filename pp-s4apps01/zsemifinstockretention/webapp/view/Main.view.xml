@@ -22,11 +22,11 @@
                 <f:content>
                     <smartFilterBar:SmartFilterBar id="SFBSemiFinStockRetention" useToolbar="false" entitySet="SemiFinStockRetention" smartVariant="__SVM01" persistencyKey="SemiFinStockRetentionBar" search="onSearch">
                         <smartFilterBar:controlConfiguration>
-                            <smartFilterBar:ControlConfiguration index="1" key="Plant"                   displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"                    mandatory="mandatory"/>
-                            <smartFilterBar:ControlConfiguration index="2" key="MrpController"           displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MrpController}"           />
-                            <smartFilterBar:ControlConfiguration index="3" key="ProductionSupervisor"    displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}"     mandatory="mandatory"  />
-                            <smartFilterBar:ControlConfiguration index="4" key="Product"                 displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Product}"                 />
-                            <smartFilterBar:ControlConfiguration index="5" key="ManufacturingOrder"      displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ManufacturingOrder}"      />
+                            <smartFilterBar:ControlConfiguration index="1" key="Plant"                   visibleInAdvancedArea="true" label="{i18n>Plant}"                    mandatory="mandatory"/>
+                            <smartFilterBar:ControlConfiguration index="2" key="MrpController"           visibleInAdvancedArea="true" label="{i18n>MrpController}"           />
+                            <smartFilterBar:ControlConfiguration index="3" key="ProductionSupervisor"    visibleInAdvancedArea="true" label="{i18n>ProductionSupervisor}"     mandatory="mandatory"  />
+                            <smartFilterBar:ControlConfiguration index="4" key="Product"                 visibleInAdvancedArea="true" label="{i18n>Product}"                 />
+                            <smartFilterBar:ControlConfiguration index="5" key="ManufacturingOrder"      visibleInAdvancedArea="true" label="{i18n>ManufacturingOrder}"      />
                             <smartFilterBar:ControlConfiguration
                                 index="6"
                                 key="MfgOrderPlannedStartDate"
@@ -63,8 +63,8 @@
                         <t:template><Text text="{ManufacturingOrder}" tooltip="{ManufacturingOrder}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="MfgOrderPlannedStartDate" label="{i18n>MfgOrderPlannedStartDate}" width="10rem" sortProperty="MfgOrderPlannedStartDate" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"MfgOrderPlannedStartDate","leadingProperty":"MfgOrderPlannedStartDate","sortProperty":"MfgOrderPlannedStartDate"}'/></t:customData>
+                    <t:Column id="MfgOrderPlannedStartDate" label="{i18n>MfgOrderPlannedStartDate}" width="10rem" sortProperty="MfgOrderPlannedStartDate" filterProperty="MfgOrderPlannedStartDate" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"MfgOrderPlannedStartDate","leadingProperty":"MfgOrderPlannedStartDate","sortProperty":"MfgOrderPlannedStartDate","filterProperty":"MfgOrderPlannedStartDate"}'/></t:customData>
                         <t:template><Text text="{path:'MfgOrderPlannedStartDate', formatter:'.formatter.date'}" wrapping="false"/></t:template>
                     </t:Column>
 
@@ -73,8 +73,8 @@
                         <t:template><Text text="{Product}" tooltip="{Product}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="ProductName" label="{i18n>ProductName}" width="14rem" sortProperty="ProductName" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ProductName","leadingProperty":"ProductName","sortProperty":"ProductName"}'/></t:customData>
+                    <t:Column id="ProductName" label="{i18n>ProductName}" width="14rem" sortProperty="ProductName" filterProperty="ProductName" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ProductName","leadingProperty":"ProductName","sortProperty":"ProductName","filterProperty":"ProductName"}'/></t:customData>
                         <t:template><Text text="{ProductName}" tooltip="{ProductName}" wrapping="false"/></t:template>
                     </t:Column>
 
@@ -88,58 +88,64 @@
                         <t:template><Text text="{ProductionSupervisor}" tooltip="{ProductionSupervisor}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="ProductionLine" label="{i18n>ProductionLine}" width="8rem" sortProperty="ProductionLine" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ProductionLine","leadingProperty":"ProductionLine","sortProperty":"ProductionLine"}'/></t:customData>
+                    <t:Column id="ProductionLine" label="{i18n>ProductionLine}" width="8rem" sortProperty="ProductionLine" filterProperty="ProductionLine" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ProductionLine","leadingProperty":"ProductionLine","sortProperty":"ProductionLine","filterProperty":"ProductionLine"}'/></t:customData>
                         <t:template><Text text="{ProductionLine}" tooltip="{ProductionLine}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="Capacity" label="{i18n>Capacity}" width="8rem" sortProperty="Capacity" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Capacity","leadingProperty":"Capacity","sortProperty":"Capacity"}'/></t:customData>
-                        <t:template><Text text="{path:'Capacity', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
+                    <t:Column id="Capacity" label="{i18n>Capacity}" width="8rem" sortProperty="Capacity" filterProperty="Capacity" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Capacity","leadingProperty":"Capacity","sortProperty":"Capacity","filterProperty":"Capacity"}'/></t:customData>
+                        <t:template>
+                            <Text text="{
+                                path: 'Capacity',
+                                type: 'sap.ui.model.type.Float',
+                                formatOptions: { minFractionDigits: 3, maxFractionDigits: 3 }
+                            }" wrapping="false"/>
+                        </t:template>
                     </t:Column>
 
-                    <t:Column id="SemiFinishedComponent" label="{i18n>SemiFinishedComponent}" width="10rem" sortProperty="SemiFinishedComponent" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SemiFinishedComponent","leadingProperty":"SemiFinishedComponent","sortProperty":"SemiFinishedComponent"}'/></t:customData>
+                    <t:Column id="SemiFinishedComponent" label="{i18n>SemiFinishedComponent}" width="10rem" sortProperty="SemiFinishedComponent" filterProperty="SemiFinishedComponent" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SemiFinishedComponent","leadingProperty":"SemiFinishedComponent","sortProperty":"SemiFinishedComponent","filterProperty":"SemiFinishedComponent"}'/></t:customData>
                         <t:template><Text text="{SemiFinishedComponent}" tooltip="{SemiFinishedComponent}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="SemiFinComponentName" label="{i18n>SemiFinComponentName}" width="14rem" sortProperty="SemiFinComponentName" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SemiFinComponentName","leadingProperty":"SemiFinComponentName","sortProperty":"SemiFinComponentName"}'/></t:customData>
+                    <t:Column id="SemiFinComponentName" label="{i18n>SemiFinComponentName}" width="14rem" sortProperty="SemiFinComponentName" filterProperty="SemiFinComponentName" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SemiFinComponentName","leadingProperty":"SemiFinComponentName","sortProperty":"SemiFinComponentName","filterProperty":"SemiFinComponentName"}'/></t:customData>
                         <t:template><Text text="{SemiFinComponentName}" tooltip="{SemiFinComponentName}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="SemiFinRealTimeStock" label="{i18n>SemiFinRealTimeStock}" width="10rem" sortProperty="SemiFinRealTimeStock" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SemiFinRealTimeStock","leadingProperty":"SemiFinRealTimeStock","sortProperty":"SemiFinRealTimeStock"}'/></t:customData>
+                    <t:Column id="SemiFinRealTimeStock" label="{i18n>SemiFinRealTimeStock}" width="10rem" sortProperty="SemiFinRealTimeStock" filterProperty="SemiFinRealTimeStock" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SemiFinRealTimeStock","leadingProperty":"SemiFinRealTimeStock","sortProperty":"SemiFinRealTimeStock","filterProperty":"SemiFinRealTimeStock"}'/></t:customData>
                         <t:template><Text text="{path:'SemiFinRealTimeStock', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="SemiFinNotIssuedQty" label="{i18n>SemiFinNotIssuedQty}" width="10rem" sortProperty="SemiFinNotIssuedQty" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SemiFinNotIssuedQty","leadingProperty":"SemiFinNotIssuedQty","sortProperty":"SemiFinNotIssuedQty"}'/></t:customData>
+                    <t:Column id="SemiFinNotIssuedQty" label="{i18n>SemiFinNotIssuedQty}" width="10rem" sortProperty="SemiFinNotIssuedQty" filterProperty="SemiFinNotIssuedQty" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SemiFinNotIssuedQty","leadingProperty":"SemiFinNotIssuedQty","sortProperty":"SemiFinNotIssuedQty","filterProperty":"SemiFinNotIssuedQty"}'/></t:customData>
                         <t:template><Text text="{path:'SemiFinNotIssuedQty', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="SemiFinStockQty" label="{i18n>SemiFinStockQty}" width="10rem" sortProperty="SemiFinStockQty" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SemiFinStockQty","leadingProperty":"SemiFinStockQty","sortProperty":"SemiFinStockQty"}'/></t:customData>
+                    <t:Column id="SemiFinStockQty" label="{i18n>SemiFinStockQty}" width="10rem" sortProperty="SemiFinStockQty" filterProperty="SemiFinStockQty" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SemiFinStockQty","leadingProperty":"SemiFinStockQty","sortProperty":"SemiFinStockQty","filterProperty":"SemiFinStockQty"}'/></t:customData>
                         <t:template><Text text="{path:'SemiFinStockQty', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="FinishedGoodRealTimeStock" label="{i18n>FinishedGoodRealTimeStock}" width="10rem" sortProperty="FinishedGoodRealTimeStock" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FinishedGoodRealTimeStock","leadingProperty":"FinishedGoodRealTimeStock","sortProperty":"FinishedGoodRealTimeStock"}'/></t:customData>
+                    <t:Column id="FinishedGoodRealTimeStock" label="{i18n>FinishedGoodRealTimeStock}" width="10rem" sortProperty="FinishedGoodRealTimeStock" filterProperty="FinishedGoodRealTimeStock" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FinishedGoodRealTimeStock","leadingProperty":"FinishedGoodRealTimeStock","sortProperty":"FinishedGoodRealTimeStock","filterProperty":"FinishedGoodRealTimeStock"}'/></t:customData>
                         <t:template><Text text="{path:'FinishedGoodRealTimeStock', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="FinishedGoodNotReceivedQty" label="{i18n>FinishedGoodNotReceivedQty}" width="10rem" sortProperty="FinishedGoodNotReceivedQty" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FinishedGoodNotReceivedQty","leadingProperty":"FinishedGoodNotReceivedQty","sortProperty":"FinishedGoodNotReceivedQty"}'/></t:customData>
+                    <t:Column id="FinishedGoodNotReceivedQty" label="{i18n>FinishedGoodNotReceivedQty}" width="10rem" sortProperty="FinishedGoodNotReceivedQty" filterProperty="FinishedGoodNotReceivedQty" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FinishedGoodNotReceivedQty","leadingProperty":"FinishedGoodNotReceivedQty","sortProperty":"FinishedGoodNotReceivedQty","filterProperty":"FinishedGoodNotReceivedQty"}'/></t:customData>
                         <t:template><Text text="{path:'FinishedGoodNotReceivedQty', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="FinishedGoodStockQty" label="{i18n>FinishedGoodStockQty}" width="10rem" sortProperty="FinishedGoodStockQty" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FinishedGoodStockQty","leadingProperty":"FinishedGoodStockQty","sortProperty":"FinishedGoodStockQty"}'/></t:customData>
+                    <t:Column id="FinishedGoodStockQty" label="{i18n>FinishedGoodStockQty}" width="10rem" sortProperty="FinishedGoodStockQty" filterProperty="FinishedGoodStockQty" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FinishedGoodStockQty","leadingProperty":"FinishedGoodStockQty","sortProperty":"FinishedGoodStockQty","filterProperty":"FinishedGoodStockQty"}'/></t:customData>
                         <t:template><Text text="{path:'FinishedGoodStockQty', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="RetentionHours" label="{i18n>RetentionHours}" width="8rem" sortProperty="RetentionHours" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"RetentionHours","leadingProperty":"RetentionHours","sortProperty":"RetentionHours"}'/></t:customData>
+                    <t:Column id="RetentionHours" label="{i18n>RetentionHours}" width="8rem" sortProperty="RetentionHours" filterProperty="RetentionHours" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"RetentionHours","leadingProperty":"RetentionHours","sortProperty":"RetentionHours","filterProperty":"RetentionHours"}'/></t:customData>
                         <t:template>
                             <Text text="{
                                 path: 'RetentionHours',
@@ -149,8 +155,8 @@
                         </t:template>
                     </t:Column>
 
-                    <t:Column id="RealTimeRetentionHours" label="{i18n>RealTimeRetentionHours}" width="8rem" sortProperty="RealTimeRetentionHours" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"RealTimeRetentionHours","leadingProperty":"RealTimeRetentionHours","sortProperty":"RealTimeRetentionHours"}'/></t:customData>
+                    <t:Column id="RealTimeRetentionHours" label="{i18n>RealTimeRetentionHours}" width="8rem" sortProperty="RealTimeRetentionHours" filterProperty="RealTimeRetentionHours" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"RealTimeRetentionHours","leadingProperty":"RealTimeRetentionHours","sortProperty":"RealTimeRetentionHours","filterProperty":"RealTimeRetentionHours"}'/></t:customData>
                         <t:template>
                             <Text text="{
                                 path: 'RealTimeRetentionHours',
@@ -160,8 +166,8 @@
                         </t:template>
                     </t:Column>
 
-                    <t:Column id="BaseUnit" label="{i18n>BaseUnit}" width="6rem" sortProperty="BaseUnit" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BaseUnit","leadingProperty":"BaseUnit","sortProperty":"BaseUnit"}'/></t:customData>
+                    <t:Column id="BaseUnit" label="{i18n>BaseUnit}" width="6rem" sortProperty="BaseUnit" filterProperty="BaseUnit" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BaseUnit","leadingProperty":"BaseUnit","sortProperty":"BaseUnit","filterProperty":"BaseUnit"}'/></t:customData>
                         <t:template><Text text="{BaseUnit}" wrapping="false"/></t:template>
                     </t:Column>
 
