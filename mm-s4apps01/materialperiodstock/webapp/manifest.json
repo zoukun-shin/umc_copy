@@ -75,7 +75,10 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
+    "config": {
+      "fullWidth": true
+    },
     "dependencies": {
       "minUI5Version": "1.120.38",
       "libs": {
@@ -131,17 +134,17 @@
       },
       "routes": [
         {
-          "name": "MainView",
-          "pattern": ":?query:",
+          "name": "Main",
+          "pattern": "",
           "target": [
-            "TargetMainView"
+            "Main"
           ]
         }
       ],
       "targets": {
-        "TargetMainView": {
-          "id": "MainView",
-          "name": "MainView"
+        "Main": {
+          "id": "Main",
+          "name": "Main"
         }
       }
     },

@@ -1,0 +1,64 @@
+<mvc:View controllerName="mm.materialperiodstock.controller.Main" displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants">
+    <f:DynamicPage id="idDynamicPage" headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle id="idDynamicPageTitle">
+                <f:heading>
+                    <sv:SmartVariantManagement id="idSmartVariantManagement" showShare="true" persistencyKey="pkMaterialPeriodStock" showExecuteOnSelection="true" entitySet="ZC_MATERIALPERIODSTOCK" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="idDynamicPageHeader">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <!--数据查询-->
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="pkCustMatPL" entitySet="ZC_MATERIALPERIODSTOCK" useToolbar="false">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration id="sfPlant" index="1" key="Plant" visibleInAdvancedArea="true" mandatory="mandatory" displayBehaviour="idAndDescription" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration id="sfStorageLocation" index="2" key="StorageLocation" visibleInAdvancedArea="true" displayBehaviour="idAndDescription" label="{i18n>StorageLocation}"/>
+                                <smartFilterBar:ControlConfiguration id="sfMaterial" index="3" key="Material" visibleInAdvancedArea="true" displayBehaviour="idAndDescription" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration id="sfSupplier" index="4" key="Supplier" visibleInAdvancedArea="true" displayBehaviour="idAndDescription" label="{i18n>Supplier}"/>
+                                <smartFilterBar:ControlConfiguration id="sfMaterialType" index="5" key="MaterialType" visibleInAdvancedArea="true" displayBehaviour="idAndDescription" label="{i18n>MaterialType}"/>
+                                <smartFilterBar:ControlConfiguration id="sfProductionSupervisor" index="6" key="ProductionSupervisor" visibleInAdvancedArea="true" displayBehaviour="idAndDescription" label="{i18n>ProductionSupervisor}"/>
+                                <smartFilterBar:ControlConfiguration id="sfMRPResponsible" index="7" key="MRPResponsible" visibleInAdvancedArea="true" displayBehaviour="idAndDescription" label="{i18n>MRPResponsible}"/>
+                                <smartFilterBar:ControlConfiguration id="sfYearMonth" index="8" key="YearMonth" visibleInAdvancedArea="true" mandatory="mandatory" label="{i18n>YearMonth}">
+                                    <smartFilterBar:customControl>
+                                        <DatePicker id="monthPicker" displayFormat="yyyyMM" valueFormat="yyyyMM"/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration id="idBomExplosion" index="9" key="BomExplosion" visibleInAdvancedArea="true" label="{i18n>BomExplosion}">
+                                    <smartFilterBar:customControl>
+                                        <CheckBox id="chkBomExplosion"></CheckBox>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <!-- visable -->
+                                <smartFilterBar:ControlConfiguration index="999" key="ProcurementType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="MatlWrhsStkQtyInMatlBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="MaterialBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="UnitPrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="TotalAmountCNY" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="ProductDescription" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="TotalAmountUSD" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="ReportMonth" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="ABC" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="HsCodeName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="NetWeight" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="WeightUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="UserEmail" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <core:Fragment fragmentName="mm.materialperiodstock.fragments.List" type="XML"/>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

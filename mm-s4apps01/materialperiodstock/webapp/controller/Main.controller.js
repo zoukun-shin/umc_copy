@@ -4,10 +4,10 @@ sap.ui.define([
 ], (Base, Controller) => {
     "use strict";
 
-    return Base.extend("mm.materialperiodstock.controller.MainView", {
+    return Base.extend("mm.materialperiodstock.controller.Main", {
         onInit() {
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
-            this.getRouter().getRoute("MainView").attachMatched(this._initialize, this);
+            this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
         },
 
         _initialize: function () {

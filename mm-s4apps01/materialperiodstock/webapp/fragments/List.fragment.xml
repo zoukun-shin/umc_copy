@@ -1,0 +1,201 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <smartTable:SmartTable id="idSmartTable" entitySet="ZC_MATERIALPERIODSTOCK" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="pkPLTable" header="{i18n>Results}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" ignoredFields="ReportMonth,UserEmail" requestAtLeastFields="ReportMonth,UserEmail">
+        <smartTable:customToolbar>
+            <OverflowToolbar design="Transparent">
+                <ToolbarSpacer/>
+            </OverflowToolbar>
+        </smartTable:customToolbar>
+        <table:Table id="idPlTable" selectionMode="MultiToggle" rowMode="Auto">
+            <table:columns>
+                <table:Column id="colPlant" width="6rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "Plant", "leadingProperty": "Plant", "sortProperty": "Plant", "filterProperty": "Plant", "columnIndex": "0"\}'/>
+                    </table:customData>
+                    <Label id="labelPlant" labelFor="textPlant" text="{i18n>Plant}"/>
+                    <table:template>
+                        <Text id="textPlant" text="{Plant}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colStorageLocation" width="8rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "StorageLocation", "leadingProperty": "StorageLocation", "sortProperty": "StorageLocation", "filterProperty": "StorageLocation", "columnIndex": "1"\}'/>
+                    </table:customData>
+                    <Label id="labelStorageLocation" labelFor="textStorageLocation" text="{i18n>StorageLocation}"/>
+                    <table:template>
+                        <Text id="textStorageLocation" text="{StorageLocation}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colMaterial" width="12rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "Material", "leadingProperty": "Material", "sortProperty": "Material", "filterProperty": "Material", "columnIndex": "2"\}'/>
+                    </table:customData>
+                    <Label id="labelMaterial" labelFor="textMaterial" text="{i18n>Material}"/>
+                    <table:template>
+                        <Text id="textMaterial" text="{Material}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colProductDescription" width="15rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "ProductDescription", "leadingProperty": "ProductDescription", "sortProperty": "ProductDescription", "filterProperty": "ProductDescription", "columnIndex": "14"\}'/>
+                    </table:customData>
+                    <Label id="labelProductDescription" labelFor="textProductDescription" text="{i18n>ProductDescription}"/>
+                    <table:template>
+                        <Text id="textProductDescription" text="{ProductDescription}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colSupplier" width="8rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "Supplier", "leadingProperty": "Supplier", "sortProperty": "Supplier", "filterProperty": "Supplier", "columnIndex": "3"\}'/>
+                    </table:customData>
+                    <Label id="labelSupplier" labelFor="textSupplier" text="{i18n>Supplier}"/>
+                    <table:template>
+                        <Text id="textSupplier" text="{Supplier}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colMaterialType" width="8rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "MaterialType", "leadingProperty": "MaterialType", "sortProperty": "MaterialType", "filterProperty": "MaterialType", "columnIndex": "4"\}'/>
+                    </table:customData>
+                    <Label id="labelMaterialType" labelFor="textMaterialType" text="{i18n>MaterialType}"/>
+                    <table:template>
+                        <Text id="textMaterialType" text="{MaterialType}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colProductionSupervisor" width="8rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "ProductionSupervisor", "leadingProperty": "ProductionSupervisor", "sortProperty": "ProductionSupervisor", "filterProperty": "ProductionSupervisor", "columnIndex": "5"\}'/>
+                    </table:customData>
+                    <Label id="labelProductionSupervisor" labelFor="textProductionSupervisor" text="{i18n>ProductionSupervisor}"/>
+                    <table:template>
+                        <Text id="textProductionSupervisor" text="{ProductionSupervisor}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colMRPResponsible" width="8rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "MRPResponsible", "leadingProperty": "MRPResponsible", "sortProperty": "MRPResponsible", "filterProperty": "MRPResponsible", "columnIndex": "6"\}'/>
+                    </table:customData>
+                    <Label id="labelMRPResponsible" labelFor="textMRPResponsible" text="{i18n>MRPResponsible}"/>
+                    <table:template>
+                        <Text id="textMRPResponsible" text="{MRPResponsible}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colYearMonth" width="8rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "YearMonth", "leadingProperty": "YearMonth", "sortProperty": "YearMonth", "filterProperty": "YearMonth", "columnIndex": "7"\}'/>
+                    </table:customData>
+                    <Label id="labelYearMonth" labelFor="textYearMonth" text="{i18n>YearMonth}"/>
+                    <table:template>
+                        <Text id="textYearMonth" text="{YearMonth}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colBomExplosion" width="8rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "BomExplosion", "leadingProperty": "BomExplosion", "sortProperty": "BomExplosion", "filterProperty": "BomExplosion", "columnIndex": "8"\}'/>
+                    </table:customData>
+                    <Label id="labelBomExplosion" labelFor="textBomExplosion" text="{i18n>BomExplosion}"/>
+                    <table:template>
+                        <Text id="textBomExplosion" text="{BomExplosion}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colProcurementType" width="8rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "ProcurementType", "leadingProperty": "ProcurementType", "sortProperty": "ProcurementType", "filterProperty": "ProcurementType", "columnIndex": "9"\}'/>
+                    </table:customData>
+                    <Label id="labelProcurementType" labelFor="textProcurementType" text="{i18n>ProcurementType}"/>
+                    <table:template>
+                        <Text id="textProcurementType" text="{ProcurementType}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colMatlWrhsStkQtyInMatlBaseUnit" width="12rem" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "MatlWrhsStkQtyInMatlBaseUnit", "leadingProperty": "MatlWrhsStkQtyInMatlBaseUnit", "sortProperty": "MatlWrhsStkQtyInMatlBaseUnit", "filterProperty": "MatlWrhsStkQtyInMatlBaseUnit", "columnIndex": "10"\}'/>
+                    </table:customData>
+                    <Label id="labelMatlWrhsStkQtyInMatlBaseUnit" labelFor="textMatlWrhsStkQtyInMatlBaseUnit" text="{i18n>MatlWrhsStkQtyInMatlBaseUnit}"/>
+                    <table:template>
+                        <Text id="textMatlWrhsStkQtyInMatlBaseUnit" text="{path: 'MatlWrhsStkQtyInMatlBaseUnit', type: 'sap.ui.model.odata.type.Decimal', constraints: {precision: 13, scale: 3}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colMaterialBaseUnit" width="6rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "MaterialBaseUnit", "leadingProperty": "MaterialBaseUnit", "sortProperty": "MaterialBaseUnit", "filterProperty": "MaterialBaseUnit", "columnIndex": "11"\}'/>
+                    </table:customData>
+                    <Label id="labelMaterialBaseUnit" labelFor="textMaterialBaseUnit" text="{i18n>MaterialBaseUnit}"/>
+                    <table:template>
+                        <Text id="textMaterialBaseUnit" text="{MaterialBaseUnit}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colUnitPrice" width="12rem" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "UnitPrice", "leadingProperty": "UnitPrice", "sortProperty": "UnitPrice", "filterProperty": "UnitPrice", "columnIndex": "12"\}'/>
+                    </table:customData>
+                    <Label id="labelUnitPrice" labelFor="textUnitPrice" text="{i18n>UnitPrice}"/>
+                    <table:template>
+                        <Text id="textUnitPrice" text="{path: 'UnitPrice', type: 'sap.ui.model.odata.type.Decimal', constraints: {precision: 23, scale: 6}, formatOptions: {groupingEnabled: true, groupingSeparator: ',', decimalSeparator: '.'}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colTotalAmountCNY" width="12rem" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "TotalAmountCNY", "leadingProperty": "TotalAmountCNY", "sortProperty": "TotalAmountCNY", "filterProperty": "TotalAmountCNY", "columnIndex": "13"\}'/>
+                    </table:customData>
+                    <Label id="labelTotalAmountCNY" labelFor="textTotalAmountCNY" text="{i18n>TotalAmountCNY}"/>
+                    <table:template>
+                        <Text id="textTotalAmountCNY" text="{path: 'TotalAmountCNY', type: 'sap.ui.model.odata.type.Decimal', constraints: {precision: 23, scale: 6}, formatOptions: {groupingEnabled: true, groupingSeparator: ',', decimalSeparator: '.'}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colTotalAmountUSD" width="12rem" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "TotalAmountUSD", "leadingProperty": "TotalAmountUSD", "sortProperty": "TotalAmountUSD", "filterProperty": "TotalAmountUSD", "columnIndex": "15"\}'/>
+                    </table:customData>
+                    <Label id="labelTotalAmountUSD" labelFor="textTotalAmountUSD" text="{i18n>TotalAmountUSD}"/>
+                    <table:template>
+                        <Text id="textTotalAmountUSD" text="{path: 'TotalAmountUSD', type: 'sap.ui.model.odata.type.Decimal', constraints: {precision: 23, scale: 6}, formatOptions: {groupingEnabled: true, groupingSeparator: ',', decimalSeparator: '.'}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colABC" width="8rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "ABC", "leadingProperty": "ABC", "sortProperty": "ABC", "filterProperty": "ABC", "columnIndex": "17"\}'/>
+                    </table:customData>
+                    <Label id="labelABC" labelFor="textABC" text="{i18n>ABC}"/>
+                    <table:template>
+                        <Text id="textABC" text="{ABC}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colHsCodeName" width="15rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "HsCodeName", "leadingProperty": "HsCodeName", "sortProperty": "HsCodeName", "filterProperty": "HsCodeName", "columnIndex": "18"\}'/>
+                    </table:customData>
+                    <Label id="labelHsCodeName" labelFor="textHsCodeName" text="{i18n>HsCodeName}"/>
+                    <table:template>
+                        <Text id="textHsCodeName" text="{HsCodeName}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colNetWeight" width="10rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "NetWeight", "leadingProperty": "NetWeight", "sortProperty": "NetWeight", "filterProperty": "NetWeight", "columnIndex": "19"\}'/>
+                    </table:customData>
+                    <Label id="labelNetWeight" labelFor="textNetWeight" text="{i18n>NetWeight}"/>
+                    <table:template>
+                        <Text id="textNetWeight" text="{path: 'NetWeight', type: 'sap.ui.model.odata.type.Decimal', constraints: {precision: 13, scale: 3}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column id="colWeightUnit" width="6rem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey": "WeightUnit", "leadingProperty": "WeightUnit", "sortProperty": "WeightUnit", "filterProperty": "WeightUnit", "columnIndex": "20"\}'/>
+                    </table:customData>
+                    <Label id="labelWeightUnit" labelFor="textWeightUnit" text="{i18n>WeightUnit}"/>
+                    <table:template>
+                        <Text id="textWeightUnit" text="{WeightUnit}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </smartTable:SmartTable>
+</core:FragmentDefinition>
