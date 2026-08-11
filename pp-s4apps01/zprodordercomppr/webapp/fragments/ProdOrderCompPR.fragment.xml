@@ -267,7 +267,7 @@
                     <core:CustomData key="p13nData" value='\{"columnKey":"LocalCreatedAt", "leadingProperty":"LocalCreatedAt"}'/>
                 </table:customData>
                 <table:template>
-                    <Text text="{LocalCreatedAt}" wrapping="false" />
+                    <Text text="{path:'LocalCreatedAt', type:'sap.ui.model.type.DateTime', formatOptions:{pattern:'yyyy/MM/dd HH:mm:ss'}}"  wrapping="false" />
                 </table:template>
             </table:Column>
             <table:Column width="8rem" label="{i18n>Reservation}" sortProperty="Reservation" filterProperty="Reservation" visible="false">

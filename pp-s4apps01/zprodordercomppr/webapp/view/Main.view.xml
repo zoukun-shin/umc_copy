@@ -26,6 +26,7 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="Plant" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Assembly" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Material" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ProductDescription" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="GoodsMovementEntryQty" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="EntryUnit" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="PrNo" visible="false"/>
