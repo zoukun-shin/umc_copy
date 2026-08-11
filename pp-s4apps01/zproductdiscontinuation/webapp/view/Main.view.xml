@@ -32,11 +32,11 @@
                         persistencyKey="ProductDiscontinuationBar"
                         search="onSearch">
                         <smartFilterBar:controlConfiguration>
-                            <smartFilterBar:ControlConfiguration index="1" key="Plant"               visibleInAdvancedArea="true" label="{i18n>Plant}"               mandatory="mandatory"/>
-                            <smartFilterBar:ControlConfiguration index="2" key="MrpController"       visibleInAdvancedArea="true" label="{i18n>MrpController}"       mandatory="mandatory"/>
-                            <smartFilterBar:ControlConfiguration index="3" key="MrpArea"             visibleInAdvancedArea="true" label="{i18n>MrpArea}"             />
-                            <smartFilterBar:ControlConfiguration index="4" key="Product"             visibleInAdvancedArea="true" label="{i18n>Product}"             />
-                            <smartFilterBar:ControlConfiguration index="5" key="DiscontinuationCode" visibleInAdvancedArea="true" label="{i18n>DiscontinuationCode}" />
+                            <smartFilterBar:ControlConfiguration index="1" key="Plant"              displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"               mandatory="mandatory"/>
+                            <smartFilterBar:ControlConfiguration index="2" key="MrpController"      displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MrpController}"       mandatory="mandatory"/>
+                            <smartFilterBar:ControlConfiguration index="3" key="MrpArea"            displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MrpArea}"             />
+                            <smartFilterBar:ControlConfiguration index="4" key="Product"            displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Product}"             />
+                            <smartFilterBar:ControlConfiguration index="5" key="DiscontinuationCode" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>DiscontinuationCode}" />
                             <smartFilterBar:ControlConfiguration
                                 index="6"
                                 key="IncludeMrpArea"
@@ -92,56 +92,67 @@
                         <t:template><Text text="{Product}" tooltip="{Product}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="ProductName" label="{i18n>ProductName}" width="14rem" sortProperty="ProductName" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ProductName","leadingProperty":"ProductName","sortProperty":"ProductName"}'/></t:customData>
+                    <t:Column id="ProductName" label="{i18n>ProductName}" width="14rem" sortProperty="ProductName" filterProperty="ProductName" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ProductName","leadingProperty":"ProductName","sortProperty":"ProductName","filterProperty":"ProductName"}'/></t:customData>
                         <t:template><Text text="{ProductName}" tooltip="{ProductName}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="ProfileCode" label="{i18n>ProfileCode}" width="8rem" sortProperty="ProfileCode" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ProfileCode","leadingProperty":"ProfileCode","sortProperty":"ProfileCode"}'/></t:customData>
+                    <t:Column id="ProfileCode" label="{i18n>ProfileCode}" width="8rem" sortProperty="ProfileCode" filterProperty="ProfileCode" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ProfileCode","leadingProperty":"ProfileCode","sortProperty":"ProfileCode","filterProperty":"ProfileCode"}'/></t:customData>
                         <t:template><Text text="{ProfileCode}" tooltip="{ProfileCode}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="DiscontinuationCode" label="{i18n>DiscontinuationCode}" width="8rem" sortProperty="DiscontinuationCode" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"DiscontinuationCode","leadingProperty":"DiscontinuationCode","sortProperty":"DiscontinuationCode"}'/></t:customData>
+                    <t:Column id="DiscontinuationCodeText" label="{i18n>DiscontinuationCode}" width="8rem" sortProperty="DiscontinuationCodeText" filterProperty="DiscontinuationCodeText" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"DiscontinuationCodeText","leadingProperty":"DiscontinuationCodeText","sortProperty":"DiscontinuationCodeText","filterProperty":"DiscontinuationCodeText"}'/></t:customData>
                         <t:template><Text text="{DiscontinuationCodeText}" tooltip="{DiscontinuationCodeText}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="EffectiveOutDate" label="{i18n>EffectiveOutDate}" width="10rem" sortProperty="EffectiveOutDate" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"EffectiveOutDate","leadingProperty":"EffectiveOutDate","sortProperty":"EffectiveOutDate"}'/></t:customData>
+                    <t:Column id="EffectiveOutDate" label="{i18n>EffectiveOutDate}" width="10rem" sortProperty="EffectiveOutDate" filterProperty="EffectiveOutDate" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"EffectiveOutDate","leadingProperty":"EffectiveOutDate","sortProperty":"EffectiveOutDate","filterProperty":"EffectiveOutDate"}'/></t:customData>
                         <t:template><Text text="{path:'EffectiveOutDate', formatter:'.formatter.date'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="FollowUpProduct" label="{i18n>FollowUpProduct}" width="10rem" sortProperty="FollowUpProduct" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FollowUpProduct","leadingProperty":"FollowUpProduct","sortProperty":"FollowUpProduct"}'/></t:customData>
+                    <t:Column id="FollowUpProduct" label="{i18n>FollowUpProduct}" width="10rem" sortProperty="FollowUpProduct" filterProperty="FollowUpProduct" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FollowUpProduct","leadingProperty":"FollowUpProduct","sortProperty":"FollowUpProduct","filterProperty":"FollowUpProduct"}'/></t:customData>
                         <t:template><Text text="{FollowUpProduct}" tooltip="{FollowUpProduct}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="FollowUpProductName" label="{i18n>FollowUpProductName}" width="14rem" sortProperty="FollowUpProductName" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FollowUpProductName","leadingProperty":"FollowUpProductName","sortProperty":"FollowUpProductName"}'/></t:customData>
+                    <t:Column id="FollowUpProductName" label="{i18n>FollowUpProductName}" width="14rem" sortProperty="FollowUpProductName" filterProperty="FollowUpProductName" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FollowUpProductName","leadingProperty":"FollowUpProductName","sortProperty":"FollowUpProductName","filterProperty":"FollowUpProductName"}'/></t:customData>
                         <t:template><Text text="{FollowUpProductName}" tooltip="{FollowUpProductName}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="StockQty" label="{i18n>StockQty}" width="10rem" sortProperty="StockQty" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"StockQty","leadingProperty":"StockQty","sortProperty":"StockQty","unit":"BaseUnit"}'/></t:customData>
+                    <t:Column id="StockQty" label="{i18n>StockQty}" width="10rem" sortProperty="StockQty" filterProperty="StockQty" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"StockQty","leadingProperty":"StockQty","sortProperty":"StockQty","filterProperty":"StockQty","unit":"BaseUnit"}'/></t:customData>
                         <t:template><Text text="{path:'StockQty', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="PoQty" label="{i18n>PoQty}" width="10rem" sortProperty="PoQty" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PoQty","leadingProperty":"PoQty","sortProperty":"PoQty","unit":"BaseUnit"}'/></t:customData>
+                    <t:Column id="PoQty" label="{i18n>PoQty}" width="10rem" sortProperty="PoQty" filterProperty="PoQty" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PoQty","leadingProperty":"PoQty","sortProperty":"PoQty","filterProperty":"PoQty","unit":"BaseUnit"}'/></t:customData>
                         <t:template><Text text="{path:'PoQty', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="BaseUnit" label="{i18n>BaseUnit}" width="6rem" sortProperty="BaseUnit" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BaseUnit","leadingProperty":"BaseUnit","sortProperty":"BaseUnit"}'/></t:customData>
+                    <t:Column id="BaseUnit" label="{i18n>BaseUnit}" width="6rem" sortProperty="BaseUnit" filterProperty="BaseUnit" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BaseUnit","leadingProperty":"BaseUnit","sortProperty":"BaseUnit","filterProperty":"BaseUnit"}'/></t:customData>
                         <t:template><Text text="{BaseUnit}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="Remark" label="{i18n>Remark}" width="14rem" sortProperty="Remark" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Remark","leadingProperty":"Remark","sortProperty":"Remark"}'/></t:customData>
+                    <t:Column id="Remark" label="{i18n>Remark}" width="14rem" sortProperty="Remark" filterProperty="Remark" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Remark","leadingProperty":"Remark","sortProperty":"Remark","filterProperty":"Remark"}'/></t:customData>
                         <t:template><Text text="{Remark}" tooltip="{Remark}" wrapping="false"/></t:template>
                     </t:Column>
 
+                    <!-- 是否包含MRP区域：隐藏列 -->
+                    <t:Column id="IncludeMrpArea" label="{i18n>IncludeMrpArea}" width="8rem" visible="false" sortProperty="IncludeMrpArea" filterProperty="IncludeMrpArea" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"IncludeMrpArea","leadingProperty":"IncludeMrpArea","sortProperty":"IncludeMrpArea","filterProperty":"IncludeMrpArea"}'/></t:customData>
+                        <t:template><Text text="{IncludeMrpArea}" tooltip="{IncludeMrpArea}" wrapping="false"/></t:template>
+                    </t:Column>
+
+                    <!-- 中止指示符（原始代码）：隐藏列 -->
+                    <t:Column id="DiscontinuationCode" label="{i18n>DiscontinuationCode}" width="8rem" visible="false" sortProperty="DiscontinuationCode" filterProperty="DiscontinuationCode" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"DiscontinuationCode","leadingProperty":"DiscontinuationCode","sortProperty":"DiscontinuationCode","filterProperty":"DiscontinuationCode"}'/></t:customData>
+                        <t:template><Text text="{DiscontinuationCode}" tooltip="{DiscontinuationCode}" wrapping="false"/></t:template>
+                    </t:Column>
                 </t:Table>
             </smartTable:SmartTable>
         </f:content>
