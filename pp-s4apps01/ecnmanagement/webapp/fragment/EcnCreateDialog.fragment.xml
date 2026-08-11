@@ -57,7 +57,7 @@
                         value="{local>/CompanyCode}"
                         showValueHelp="true"
                         valueHelpRequest="handler.onValueHelpRequested(
-                                        $event, $controller, '/I_CompanyCodeStdVH',
+                                        $event, $controller, '/ZC_CompanyCodeVH',
                                         ['CompanyCode','CompanyCodeName'])"
                     />
                 </VBox>

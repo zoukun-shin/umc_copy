@@ -739,10 +739,11 @@ sap.ui.define([
 			);
 		},
 
-		onCancel: function() {
+		onCancel: async function() {
 			this._oDataModel.resetChanges();
 			let sPath = this.getEntitykey(this.byId("idSmartFormHead").getBindingContext().getObject());
-			this.readOdataV2(sPath);
+			await this.readOdataV2(sPath);
+			this.changeDetail(sPath);
 		},
 
 		onEventPublish: function(oEvent) {	

@@ -41,7 +41,7 @@ sap.ui.define([
                 var aFilters = [];
                 var aNewFilters = [];
                 let aCompanyCode = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
-                if (this._sValueHelpPath === "/I_CompanyCodeStdVH") {
+                if (this._sValueHelpPath === "/ZC_CompanyCodeVH") {
                     aCompanyCode.forEach(item => {
                         aNewFilters.push(new Filter({
                             path: "CompanyCode",
@@ -228,7 +228,7 @@ sap.ui.define([
             var headSet = this.getModel("local").getProperty("/headSet");
 
             // let aCompanyCode = this.getModel("local").getProperty("/authorityCheck/data/CompanySet");
-            // if (this._sValueHelpPath === "/I_CompanyCodeStdVH") {
+            // if (this._sValueHelpPath === "/ZC_CompanyCodeVH") {
             //     aCompanyCode.forEach(e => {
 
             //     });

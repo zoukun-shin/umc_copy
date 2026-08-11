@@ -433,8 +433,8 @@
                     press="onMessagePopoverPress" />
                 <ToolbarSpacer/>
                 <!-- <Button type="Transparent" text="{i18n>SaveToS4}" press="onSaveToS4"/> -->
-                <Button type="Transparent" enabled="{local>/btPrint}" text="{i18n>Save}" press="onCheckRecords"/>
-                <Button type="Transparent" text="{i18n>Cancel}" press="onCancel"/>
+                <Button type="Transparent" visible="{local>/viewEditable}" text="{i18n>Save}" press="onCheckRecords"/>
+                <Button type="Transparent" visible="{local>/viewEditable}" text="{i18n>Cancel}" press="onCancel"/>
             </OverflowToolbar>
         </uxap:footer>
     </uxap:ObjectPageLayout>
