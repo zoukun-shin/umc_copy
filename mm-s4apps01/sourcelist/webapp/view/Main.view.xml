@@ -25,18 +25,19 @@
                                 <smartFilterBar:ControlConfiguration index='20' key="Material" visibleInAdvancedArea="true" label="{i18n>Material}"/>
                                 <smartFilterBar:ControlConfiguration index='30' key="PurchasingGroup" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="MRPResponsible" visibleInAdvancedArea="true" label="{i18n>MRPResponsible}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="Supplier" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="CreationDate" visibleInAdvancedArea="true" label="{i18n>CreationDate}"/>
+
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="QuotaArrangement" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ValidityEndDate" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ValidityStartDate" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="CreationDate" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="CreatedByUser" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MinQtyForSpltQuota" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="LastChangeDateTime" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="QuotaArrangementItem" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MaterialProcurementCategory" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MaterialProcurementType" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="Supplier" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="SupplyingPlant" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="PurchasingSourceQuota" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="QuotaBaseQuantity" visible="false"/>
