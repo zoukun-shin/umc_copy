@@ -22,8 +22,9 @@ sap.ui.define([
                     PurchaseList: ""
                 },
                 filter: {
-                    DisplayDimension: "H", // 横表示
-                    ShowInformation: "X",  // はい
+                    DisplayDimension: "V", // 纵表示
+                    ShowInformation: "X",  
+                    ShowInclude: "X",      
                 },
                 resultSet: []
             });
