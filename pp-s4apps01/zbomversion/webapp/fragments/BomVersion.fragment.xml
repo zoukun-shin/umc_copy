@@ -7,7 +7,7 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
     <smartTable:SmartTable id="idSmartTable" entitySet="BomVersion" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
-        showRowCount="true" smartVariant="__SVM01" useVariantManagement="false" useTablePersonalisation="true"
+        showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true"
         persistencyKey="BomVersionST" header="{i18n>Results}" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable"
         beforeExport="onBeforeExport" showFullScreenButton="true" 
@@ -98,12 +98,12 @@
                     <Text text="{YY1_BOMHistory_BMH}" wrapping="false" />
                 </table:template>
             </table:Column>
-            <table:Column width="12rem" label="{i18n>YY1_ProjectCode}" sortProperty="YY1_ProjectCode" filterProperty="YY1_ProjectCode">
+            <table:Column width="12rem" label="{i18n>YY1_ProjectCode_PRD}" sortProperty="YY1_ProjectCode_PRD" filterProperty="YY1_ProjectCode_PRD">
                 <table:customData>
-                    <core:CustomData key="p13nData" value='\{"columnKey":"YY1_ProjectCode", "leadingProperty":"YY1_ProjectCode"}'/>
+                    <core:CustomData key="p13nData" value='\{"columnKey":"YY1_ProjectCode_PRD", "leadingProperty":"YY1_ProjectCode_PRD"}'/>
                 </table:customData>
                 <table:template>
-                    <Text text="{YY1_ProjectCode}" wrapping="false" />
+                    <Text text="{YY1_ProjectCode_PRD}" wrapping="false" />
                 </table:template>
             </table:Column>
             <table:Column width="12rem" label="{i18n>YY1_DetSpecification_PRD}" sortProperty="YY1_DetSpecification_PRD" filterProperty="YY1_DetSpecification_PRD">

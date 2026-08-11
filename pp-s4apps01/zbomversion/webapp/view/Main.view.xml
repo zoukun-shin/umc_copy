@@ -33,7 +33,7 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="BOMHeaderText" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="BOMAlternativeText" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="YY1_BOMHistory_BMH" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="YY1_ProjectCode" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="YY1_ProjectCode_PRD" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="YY1_DetSpecification_PRD" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="valid_from_date" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ChangeNumberStatusText" visible="false"/>

@@ -3,7 +3,7 @@ sap.ui.define([
 ], (Controller) => {
     "use strict";
 
-    return Controller.extend("pp.zbomversion.controller.Main", {
+    return Controller.extend("pp.zbomversion.controller.App", {
         onInit() {
         }
     });
