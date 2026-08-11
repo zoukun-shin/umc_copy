@@ -9,7 +9,7 @@
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:sv="sap.ui.comp.smartvariants" height="100%" busyIndicatorDelay="0">
-    <f:DynamicPage id="idDynamicPage" fitContent="true" class="sapUiNoContentPadding">
+    <f:DynamicPage id="idDynamicPage">
         <f:title>
             <f:DynamicPageTitle id="idDynamicPageTitle">
                 <f:heading>
@@ -21,49 +21,91 @@
             <f:DynamicPageHeader id="idDynamicPageHeader">
                 <f:content>
                     <!--数据查询-->
-                    <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="pkCustMatPL" entitySet="ZC_CUSTMATSALESLOSSPROFIT" useToolbar="false">
-                        <smartFilterBar:controlConfiguration>
-                            <smartFilterBar:ControlConfiguration id="sfPlant" index="1" key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
-                            <smartFilterBar:ControlConfiguration id="sfYearMonth" index="2" key="YearMonth" visibleInAdvancedArea="true" mandatory="mandatory" label="{i18n>YearMonth}">
-                                <smartFilterBar:customControl>
-                                    <DatePicker
-                                        id="monthPicker"
-                                        displayFormat="yyyyMM"
-                                        valueFormat="yyyyMM"
-                                        change="onYearMonthChange"/>
-                                </smartFilterBar:customControl>
-                            </smartFilterBar:ControlConfiguration>
-                            <smartFilterBar:ControlConfiguration id="sfSalesOrg" index="3" key="SalesOrg" visibleInAdvancedArea="true" label="{i18n>SalesOrg}"/>
-                            <smartFilterBar:ControlConfiguration id="sfMaterial" index="4" key="Material" visibleInAdvancedArea="true" label="{i18n>Material}"/>
-                            <smartFilterBar:ControlConfiguration id="sfCustomer" index="5" key="Customer" visibleInAdvancedArea="true" label="{i18n>Customer}"/>
-                            <smartFilterBar:ControlConfiguration id="idReportType" index="6" key="ReportType" visibleInAdvancedArea="true" label="{i18n>ReportType}" mandatory="mandatory">
-                                <smartFilterBar:customControl>
-                                    <ComboBox id="comboReportType" selectedKey="3" showSecondaryValues="true">
-                                        <items>
-                                            <core:ListItem id="listPosted" key="1" text="{i18n>ReportTypePost}" additionalText="1"></core:ListItem>
-                                            <core:ListItem id="listNotPosted" key="2" text="{i18n>ReportTypeNotPost}" additionalText="2"></core:ListItem>
-                                            <core:ListItem id="listAll" key="3" text="{i18n>ReportTypeAll}" additionalText="3"></core:ListItem>
-                                        </items>
-                                    </ComboBox>
-                                </smartFilterBar:customControl> 
-                            </smartFilterBar:ControlConfiguration>
-                        </smartFilterBar:controlConfiguration>
-                    </smartFilterBar:SmartFilterBar>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="pkCustMatPL" entitySet="ZC_CUSTMATSALESLOSSPROFIT" useToolbar="false">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration id="sfPlant" index="1" key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration id="sfYearMonth" index="2" key="YearMonth" visibleInAdvancedArea="true" mandatory="mandatory" label="{i18n>YearMonth}">
+                                    <smartFilterBar:customControl>
+                                        <DatePicker id="monthPicker" displayFormat="yyyyMM" valueFormat="yyyyMM" change="onYearMonthChange"/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration id="sfSalesOrg" index="3" key="SalesOrg" visibleInAdvancedArea="true" label="{i18n>SalesOrg}"/>
+                                <smartFilterBar:ControlConfiguration id="sfMaterial" index="4" key="Material" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration id="sfCustomer" index="5" key="Customer" visibleInAdvancedArea="true" label="{i18n>Customer}"/>
+                                <smartFilterBar:ControlConfiguration id="idReportType" index="6" key="ReportType" visibleInAdvancedArea="true" label="{i18n>ReportType}" mandatory="mandatory">
+                                    <smartFilterBar:customControl>
+                                        <ComboBox id="comboReportType" selectedKey="3" showSecondaryValues="true">
+                                            <items>
+                                                <core:ListItem id="listPosted" key="1" text="{i18n>ReportTypePost}" additionalText="1"></core:ListItem>
+                                                <core:ListItem id="listNotPosted" key="2" text="{i18n>ReportTypeNotPost}" additionalText="2"></core:ListItem>
+                                                <core:ListItem id="listAll" key="3" text="{i18n>ReportTypeAll}" additionalText="3"></core:ListItem>
+                                            </items>
+                                        </ComboBox>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <!-- visable -->
+                                <smartFilterBar:ControlConfiguration index="999" key="BillingDocument" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="BillingDocumentItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="CompanyCode" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="CostDetermination" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="CustomerName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="MaterialName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="MaterialType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="MaterialGroup" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="RevenueCurrency" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="TargetCurrency" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="RevenueExchangeRate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="CostExchangeRate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="InvoiceQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="UnitOfMeasure" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="SellingPricePerUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="SalesRevenue" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="StandardCost" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="StPerUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="StGrossProfit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="StGrossProfitMargin" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="StMaterialCost" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="StPrimaryMaterial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="StAuxiliaryMaterial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="StSubcontractingCost" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="StDirectLaborCost" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="StEquipmentDepreciation" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="StSetupCost" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="StPowerCost" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="StTransportationCost" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="StOtherExpense" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="ActualCost" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="AcPerUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="AcGrossProfit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="AcGrossProfitMargin" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="AcMaterialCost" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="AcPrimaryMaterial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="AcAuxiliaryMaterial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="AcSubcontractingCost" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="AcDirectLaborCost" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="AcEquipmentDepreciation" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="AcSetupCost" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="AcPowerCost" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="AcTransportationCost" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="AcOtherExpense" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index="999" key="UserEmail" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <smartTable:SmartTable id="idSmartTable" entitySet="ZC_CUSTMATSALESLOSSPROFIT" 
-            smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement"
-            persistencyKey="pkPLTable" header="{i18n>title}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable">
+            <smartTable:SmartTable id="idSmartTable" entitySet="ZC_CUSTMATSALESLOSSPROFIT" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="pkPLTable" header="{i18n>Results}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" ignoredFields="UserEmail,ReportType" requestAtLeastFields="UserEmail,ReportType">
                 <smartTable:customToolbar>
                 </smartTable:customToolbar>
                 <t:Table id="idPlTable" selectionMode="None">
-                     <t:rowMode>
+                    <t:rowMode>
                         <rm:Auto id="rowMode" minRowCount="5"/>
                     </t:rowMode>
                     <t:columns>
-                         <t:Column id="colBillingDocument" width="8rem">
+                        <t:Column id="colBillingDocument" width="10rem">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "BillingDocument", "leadingProperty": "BillingDocument", "sortProperty": "BillingDocument", "filterProperty": "BillingDocument", "columnIndex": "0"\}'/>
                             </t:customData>
@@ -81,7 +123,7 @@
                                 <Text id="textBillingDocumentItem" text="{BillingDocumentItem}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colCompanyCode" width="6rem">
+                        <t:Column id="colCompanyCode" width="8rem">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "CompanyCode", "leadingProperty": "CompanyCode", "sortProperty": "CompanyCode", "filterProperty": "CompanyCode", "columnIndex": "2"\}'/>
                             </t:customData>
@@ -90,7 +132,7 @@
                                 <Text id="textCompanyCode" text="{CompanyCode}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colPlant" width="6rem">
+                        <t:Column id="colPlant" width="8rem">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "Plant", "leadingProperty": "Plant", "sortProperty": "Plant", "filterProperty": "Plant", "columnIndex": "3"\}'/>
                             </t:customData>
@@ -99,7 +141,7 @@
                                 <Text id="textPlant" text="{Plant}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colSalesOrg" width="6rem">
+                        <t:Column id="colSalesOrg" width="8rem">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "SalesOrg", "leadingProperty": "SalesOrg", "sortProperty": "SalesOrg", "filterProperty": "SalesOrg", "columnIndex": "4"\}'/>
                             </t:customData>
@@ -108,7 +150,7 @@
                                 <Text id="textSalesOrg" text="{SalesOrg}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colYearMonth" width="6rem">
+                        <t:Column id="colYearMonth" width="8rem">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "YearMonth", "leadingProperty": "YearMonth", "sortProperty": "YearMonth", "filterProperty": "YearMonth", "columnIndex": "5"\}'/>
                             </t:customData>
@@ -126,7 +168,7 @@
                                 <Text id="textCostDetermination" text="{parts:[{path:'CostDetermination'}], formatter:'.formatter.formatCostDetermination'}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colCustomer" width="8rem">
+                        <t:Column id="colCustomer" width="10rem">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "Customer", "leadingProperty": "Customer", "sortProperty": "Customer", "filterProperty": "Customer", "columnIndex": "7"\}'/>
                             </t:customData>
@@ -135,7 +177,7 @@
                                 <Text id="textCustomer" text="{Customer}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colCustomerName" width="10rem">
+                        <t:Column id="colCustomerName" width="12rem">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "CustomerName", "leadingProperty": "CustomerName", "sortProperty": "CustomerName", "filterProperty": "CustomerName", "columnIndex": "8"\}'/>
                             </t:customData>
@@ -144,7 +186,7 @@
                                 <Text id="textCustomerName" text="{CustomerName}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colMaterial" width="8rem">
+                        <t:Column id="colMaterial" width="12rem">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "Material", "leadingProperty": "Material", "sortProperty": "Material", "filterProperty": "Material", "columnIndex": "9"\}'/>
                             </t:customData>
@@ -153,7 +195,7 @@
                                 <Text id="textMaterial" text="{Material}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colMaterialType" width="8rem">
+                        <t:Column id="colMaterialType" width="10rem">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "MaterialType", "leadingProperty": "MaterialType", "sortProperty": "MaterialType", "filterProperty": "MaterialType", "columnIndex": "10"\}'/>
                             </t:customData>
@@ -162,7 +204,7 @@
                                 <Text id="textMaterialType" text="{MaterialType}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colMaterialName" width="10rem">
+                        <t:Column id="colMaterialName" width="15rem">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "MaterialName", "leadingProperty": "MaterialName", "sortProperty": "MaterialName", "filterProperty": "MaterialName", "columnIndex": "11"\}'/>
                             </t:customData>
@@ -198,7 +240,7 @@
                                 <Text id="textTargetCurrency" text="{TargetCurrency}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colRevenueExchangeRate" width="8rem">
+                        <t:Column id="colRevenueExchangeRate" width="8rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "RevenueExchangeRate", "leadingProperty": "RevenueExchangeRate", "sortProperty": "RevenueExchangeRate", "filterProperty": "RevenueExchangeRate", "columnIndex": "15"\}'/>
                             </t:customData>
@@ -207,7 +249,7 @@
                                 <Text id="textRevenueExchangeRate" text="{RevenueExchangeRate}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colCostExchangeRate" width="8rem">
+                        <t:Column id="colCostExchangeRate" width="8rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "CostExchangeRate", "leadingProperty": "CostExchangeRate", "sortProperty": "CostExchangeRate", "filterProperty": "CostExchangeRate", "columnIndex": "16"\}'/>
                             </t:customData>
@@ -216,7 +258,7 @@
                                 <Text id="textCostExchangeRate" text="{CostExchangeRate}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colInvoiceQuantity" width="8rem">
+                        <t:Column id="colInvoiceQuantity" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "InvoiceQuantity", "leadingProperty": "InvoiceQuantity", "sortProperty": "InvoiceQuantity", "filterProperty": "InvoiceQuantity", "columnIndex": "17"\}'/>
                             </t:customData>
@@ -225,7 +267,7 @@
                                 <Text id="textInvoiceQuantity" text="{InvoiceQuantity}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colUnitOfMeasure" width="4rem">
+                        <t:Column id="colUnitOfMeasure" width="6rem">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "UnitOfMeasure", "leadingProperty": "UnitOfMeasure", "sortProperty": "UnitOfMeasure", "filterProperty": "UnitOfMeasure", "columnIndex": "18"\}'/>
                             </t:customData>
@@ -234,7 +276,7 @@
                                 <Text id="textUnitOfMeasure" text="{UnitOfMeasure}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colSellingPricePerUnit" width="8rem">
+                        <t:Column id="colSellingPricePerUnit" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "SellingPricePerUnit", "leadingProperty": "SellingPricePerUnit", "sortProperty": "SellingPricePerUnit", "filterProperty": "SellingPricePerUnit", "columnIndex": "19"\}'/>
                             </t:customData>
@@ -243,7 +285,7 @@
                                 <Text id="textSellingPricePerUnit" text="{SellingPricePerUnit}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colSalesRevenue" width="8rem">
+                        <t:Column id="colSalesRevenue" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "SalesRevenue", "leadingProperty": "SalesRevenue", "sortProperty": "SalesRevenue", "filterProperty": "SalesRevenue", "columnIndex": "20"\}'/>
                             </t:customData>
@@ -252,7 +294,7 @@
                                 <Text id="textSalesRevenue" text="{SalesRevenue}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colStandardCost" width="8rem">
+                        <t:Column id="colStandardCost" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "StandardCost", "leadingProperty": "StandardCost", "sortProperty": "StandardCost", "filterProperty": "StandardCost", "columnIndex": "21"\}'/>
                             </t:customData>
@@ -261,7 +303,7 @@
                                 <Text id="textStandardCost" text="{StandardCost}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colStPerUnit" width="8rem">
+                        <t:Column id="colStPerUnit" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "StPerUnit", "leadingProperty": "StPerUnit", "sortProperty": "StPerUnit", "filterProperty": "StPerUnit", "columnIndex": "22"\}'/>
                             </t:customData>
@@ -270,7 +312,7 @@
                                 <Text id="textStPerUnit" text="{StPerUnit}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colStGrossProfit" width="8rem">
+                        <t:Column id="colStGrossProfit" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "StGrossProfit", "leadingProperty": "StGrossProfit", "sortProperty": "StGrossProfit", "filterProperty": "StGrossProfit", "columnIndex": "23"\}'/>
                             </t:customData>
@@ -279,7 +321,7 @@
                                 <Text id="textStGrossProfit" text="{StGrossProfit}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colStGrossProfitMargin" width="10rem">
+                        <t:Column id="colStGrossProfitMargin" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "StGrossProfitMargin", "leadingProperty": "StGrossProfitMargin", "sortProperty": "StGrossProfitMargin", "filterProperty": "StGrossProfitMargin", "columnIndex": "24"\}'/>
                             </t:customData>
@@ -288,7 +330,7 @@
                                 <Text id="textStGrossProfitMargin" text="{StGrossProfitMargin}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colStMaterialCost" width="8rem">
+                        <t:Column id="colStMaterialCost" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "StMaterialCost", "leadingProperty": "StMaterialCost", "sortProperty": "StMaterialCost", "filterProperty": "StMaterialCost", "columnIndex": "25"\}'/>
                             </t:customData>
@@ -297,7 +339,7 @@
                                 <Text id="textStMaterialCost" text="{StMaterialCost}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colStPrimaryMaterial" width="8rem">
+                        <t:Column id="colStPrimaryMaterial" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "StPrimaryMaterial", "leadingProperty": "StPrimaryMaterial", "sortProperty": "StPrimaryMaterial", "filterProperty": "StPrimaryMaterial", "columnIndex": "26"\}'/>
                             </t:customData>
@@ -306,7 +348,7 @@
                                 <Text id="textStPrimaryMaterial" text="{StPrimaryMaterial}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colStAuxiliaryMaterial" width="8rem">
+                        <t:Column id="colStAuxiliaryMaterial" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "StAuxiliaryMaterial", "leadingProperty": "StAuxiliaryMaterial", "sortProperty": "StAuxiliaryMaterial", "filterProperty": "StAuxiliaryMaterial", "columnIndex": "27"\}'/>
                             </t:customData>
@@ -315,7 +357,7 @@
                                 <Text id="textStAuxiliaryMaterial" text="{StAuxiliaryMaterial}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colStSubcontractingCost" width="11rem">
+                        <t:Column id="colStSubcontractingCost" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "StSubcontractingCost", "leadingProperty": "StSubcontractingCost", "sortProperty": "StSubcontractingCost", "filterProperty": "StSubcontractingCost", "columnIndex": "28"\}'/>
                             </t:customData>
@@ -324,7 +366,7 @@
                                 <Text id="textStSubcontractingCost" text="{StSubcontractingCost}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colStDirectLaborCost" width="11rem">
+                        <t:Column id="colStDirectLaborCost" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "StDirectLaborCost", "leadingProperty": "StDirectLaborCost", "sortProperty": "StDirectLaborCost", "filterProperty": "StDirectLaborCost", "columnIndex": "29"\}'/>
                             </t:customData>
@@ -333,7 +375,7 @@
                                 <Text id="textStDirectLaborCost" text="{StDirectLaborCost}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colStEquipmentDepreciation" width="11rem">
+                        <t:Column id="colStEquipmentDepreciation" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "StEquipmentDepreciation", "leadingProperty": "StEquipmentDepreciation", "sortProperty": "StEquipmentDepreciation", "filterProperty": "StEquipmentDepreciation", "columnIndex": "30"\}'/>
                             </t:customData>
@@ -342,7 +384,7 @@
                                 <Text id="textStEquipmentDepreciation" text="{StEquipmentDepreciation}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colStSetupCost" width="8rem">
+                        <t:Column id="colStSetupCost" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "StSetupCost", "leadingProperty": "StSetupCost", "sortProperty": "StSetupCost", "filterProperty": "StSetupCost", "columnIndex": "31"\}'/>
                             </t:customData>
@@ -351,7 +393,7 @@
                                 <Text id="textStSetupCost" text="{StSetupCost}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colStPowerCost" width="8rem">
+                        <t:Column id="colStPowerCost" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "StPowerCost", "leadingProperty": "StPowerCost", "sortProperty": "StPowerCost", "filterProperty": "StPowerCost", "columnIndex": "32"\}'/>
                             </t:customData>
@@ -360,7 +402,7 @@
                                 <Text id="textStPowerCost" text="{StPowerCost}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colStTransportationCost" width="8rem">
+                        <t:Column id="colStTransportationCost" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "StTransportationCost", "leadingProperty": "StTransportationCost", "sortProperty": "StTransportationCost", "filterProperty": "StTransportationCost", "columnIndex": "33"\}'/>
                             </t:customData>
@@ -369,7 +411,7 @@
                                 <Text id="textStTransportationCost" text="{StTransportationCost}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colStOtherExpense" width="11rem">
+                        <t:Column id="colStOtherExpense" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "StOtherExpense", "leadingProperty": "StOtherExpense", "sortProperty": "StOtherExpense", "filterProperty": "StOtherExpense", "columnIndex": "34"\}'/>
                             </t:customData>
@@ -378,7 +420,7 @@
                                 <Text id="textStOtherExpense" text="{StOtherExpense}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colActualCost" width="8rem">
+                        <t:Column id="colActualCost" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "ActualCost", "leadingProperty": "ActualCost", "sortProperty": "ActualCost", "filterProperty": "ActualCost", "columnIndex": "35"\}'/>
                             </t:customData>
@@ -387,7 +429,7 @@
                                 <Text id="textActualCost" text="{ActualCost}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colAcPerUnit" width="8rem">
+                        <t:Column id="colAcPerUnit" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "AcPerUnit", "leadingProperty": "AcPerUnit", "sortProperty": "AcPerUnit", "filterProperty": "AcPerUnit", "columnIndex": "36"\}'/>
                             </t:customData>
@@ -396,7 +438,7 @@
                                 <Text id="textAcPerUnit" text="{AcPerUnit}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colAcGrossProfit" width="8rem">
+                        <t:Column id="colAcGrossProfit" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "AcGrossProfit", "leadingProperty": "AcGrossProfit", "sortProperty": "AcGrossProfit", "filterProperty": "AcGrossProfit", "columnIndex": "37"\}'/>
                             </t:customData>
@@ -405,7 +447,7 @@
                                 <Text id="textAcGrossProfit" text="{AcGrossProfit}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colAcGrossProfitMargin" width="10rem">
+                        <t:Column id="colAcGrossProfitMargin" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "AcGrossProfitMargin", "leadingProperty": "AcGrossProfitMargin", "sortProperty": "AcGrossProfitMargin", "filterProperty": "AcGrossProfitMargin", "columnIndex": "38"\}'/>
                             </t:customData>
@@ -414,7 +456,7 @@
                                 <Text id="textAcGrossProfitMargin" text="{AcGrossProfitMargin}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colAcMaterialCost" width="8rem">
+                        <t:Column id="colAcMaterialCost" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "AcMaterialCost", "leadingProperty": "AcMaterialCost", "sortProperty": "AcMaterialCost", "filterProperty": "AcMaterialCost", "columnIndex": "39"\}'/>
                             </t:customData>
@@ -423,7 +465,7 @@
                                 <Text id="textAcMaterialCost" text="{AcMaterialCost}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colAcPrimaryMaterial" width="10rem">
+                        <t:Column id="colAcPrimaryMaterial" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "AcPrimaryMaterial", "leadingProperty": "AcPrimaryMaterial", "sortProperty": "AcPrimaryMaterial", "filterProperty": "AcPrimaryMaterial", "columnIndex": "40"\}'/>
                             </t:customData>
@@ -432,7 +474,7 @@
                                 <Text id="textAcPrimaryMaterial" text="{AcPrimaryMaterial}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colAcAuxiliaryMaterial" width="8rem">
+                        <t:Column id="colAcAuxiliaryMaterial" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "AcAuxiliaryMaterial", "leadingProperty": "AcAuxiliaryMaterial", "sortProperty": "AcAuxiliaryMaterial", "filterProperty": "AcAuxiliaryMaterial", "columnIndex": "41"\}'/>
                             </t:customData>
@@ -441,7 +483,7 @@
                                 <Text id="textAcAuxiliaryMaterial" text="{AcAuxiliaryMaterial}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colAcSubcontractingCost" width="11rem">
+                        <t:Column id="colAcSubcontractingCost" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "AcSubcontractingCost", "leadingProperty": "AcSubcontractingCost", "sortProperty": "AcSubcontractingCost", "filterProperty": "AcSubcontractingCost", "columnIndex": "42"\}'/>
                             </t:customData>
@@ -450,7 +492,7 @@
                                 <Text id="textAcSubcontractingCost" text="{AcSubcontractingCost}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colAcDirectLaborCost" width="11rem">
+                        <t:Column id="colAcDirectLaborCost" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "AcDirectLaborCost", "leadingProperty": "AcDirectLaborCost", "sortProperty": "AcDirectLaborCost", "filterProperty": "AcDirectLaborCost", "columnIndex": "43"\}'/>
                             </t:customData>
@@ -459,7 +501,7 @@
                                 <Text id="textAcDirectLaborCost" text="{AcDirectLaborCost}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colAcEquipmentDepreciation" width="11rem">
+                        <t:Column id="colAcEquipmentDepreciation" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "AcEquipmentDepreciation", "leadingProperty": "AcEquipmentDepreciation", "sortProperty": "AcEquipmentDepreciation", "filterProperty": "AcEquipmentDepreciation", "columnIndex": "44"\}'/>
                             </t:customData>
@@ -468,7 +510,7 @@
                                 <Text id="textAcEquipmentDepreciation" text="{AcEquipmentDepreciation}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colAcSetupCost" width="8rem">
+                        <t:Column id="colAcSetupCost" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "AcSetupCost", "leadingProperty": "AcSetupCost", "sortProperty": "AcSetupCost", "filterProperty": "AcSetupCost", "columnIndex": "45"\}'/>
                             </t:customData>
@@ -477,7 +519,7 @@
                                 <Text id="textAcSetupCost" text="{AcSetupCost}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colAcPowerCost" width="8rem">
+                        <t:Column id="colAcPowerCost" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "AcPowerCost", "leadingProperty": "AcPowerCost", "sortProperty": "AcPowerCost", "filterProperty": "AcPowerCost", "columnIndex": "46"\}'/>
                             </t:customData>
@@ -486,7 +528,7 @@
                                 <Text id="textAcPowerCost" text="{AcPowerCost}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colAcTransportationCost" width="8rem">
+                        <t:Column id="colAcTransportationCost" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "AcTransportationCost", "leadingProperty": "AcTransportationCost", "sortProperty": "AcTransportationCost", "filterProperty": "AcTransportationCost", "columnIndex": "47"\}'/>
                             </t:customData>
@@ -495,7 +537,7 @@
                                 <Text id="textAcTransportationCost" text="{AcTransportationCost}"></Text>
                             </t:template>
                         </t:Column>
-                        <t:Column id="colAcOtherExpense" width="11rem">
+                        <t:Column id="colAcOtherExpense" width="12rem" hAlign="End">
                             <t:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "AcOtherExpense", "leadingProperty": "AcOtherExpense", "sortProperty": "AcOtherExpense", "filterProperty": "AcOtherExpense", "columnIndex": "48"\}'/>
                             </t:customData>
@@ -503,7 +545,7 @@
                             <t:template>
                                 <Text id="textAcOtherExpense" text="{AcOtherExpense}"></Text>
                             </t:template>
-                        </t:Column>              
+                        </t:Column>
                     </t:columns>
                 </t:Table>
             </smartTable:SmartTable>

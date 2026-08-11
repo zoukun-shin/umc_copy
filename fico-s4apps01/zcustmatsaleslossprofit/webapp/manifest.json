@@ -50,7 +50,6 @@
           "semanticObject": "zcustmatsaleslossprofit",
           "action": "display",
           "title": "{{flpTitle}}",
-          "icon": "sap-icon://request",
           "signature": {
             "parameters": {},
             "additionalParameters": "allowed"
@@ -76,7 +75,10 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
+    "config": {
+      "fullWidth": true
+    },
     "dependencies": {
       "minUI5Version": "1.120.38",
       "libs": {
