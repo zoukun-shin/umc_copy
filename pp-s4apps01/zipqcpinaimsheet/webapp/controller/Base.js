@@ -9,7 +9,7 @@ sap.ui.define([
 ], function (Controller, UIComponent, History, MessageBox, Fragment, Filter, FilterOperator) {
     "use strict";
 
-    return Controller.extend("pp.zalterandmainmater.controller.Base", {
+    return Controller.extend("pp.zipqcpinaimsheet.controller.Base", {
 
         /**
          * Convenience method for accessing the router in every controller of the application.
@@ -324,6 +324,40 @@ sap.ui.define([
                     default:
                         break;
                 }
+            });
+        },
+
+        _loadAllData: function (sPath, aFilters) {
+            var that = this;
+            var iPageSize = 5000;
+            var aAllData = [];
+            return new Promise(function (resolve, reject) {
+                // 定义内部递归函数
+                function fetchBatch(iSkip) {
+                    // 分页参数
+                    var oUrlParameters = {
+                        "$top": iPageSize,
+                        "$skip": iSkip
+                    };
+                    that._CallODataV2("READ", sPath, aFilters, oUrlParameters, {}).then(function (oResponse) {
+                        if (oResponse && oResponse.results) {
+                            var aCurrentBatch = oResponse.results;
+                            // 将当前批次的数据合并到总容器中
+                            aAllData = aAllData.concat(aCurrentBatch);
+                            if (aCurrentBatch.length === iPageSize) {
+                                fetchBatch(iSkip + iPageSize); // 递归调用，skip 增加 5000
+                            } else {
+                                resolve(aAllData);
+                            }
+                        } else {
+                            resolve(aAllData);
+                        }
+                    }).catch(function (oError) {
+                        reject(oError);
+                    });
+                }
+                // 从 skip = 0 (第一页) 开始启动
+                fetchBatch(0);
             });
         },
 

@@ -97,24 +97,35 @@ sap.ui.define([
         onExport: function () {
             var afilters = this.getFilters();
             if (afilters && afilters.length > 0) {
-                this._CallODataV2("READ", "/IPQCPInAIMSheet", afilters, { "$top": 999999999 }, {}).then(function (oResponse) {
-                    var aResults = oResponse.results;
-                    if (aResults.length > 0) {
-                        // var oRequestData = {
-                        //     items: aResults
-                        // }
-                        //
-                        // this._CallODataV2("ACTION", "/processLogic", [], {"Event": "Export", "Zzkey": JSON.stringify(oRequestData), "RecordUUID": ""}, {}).then(function (oResponse) {
-                        //     if (oResponse.processLogic.RecordUUID) {
-                        //         var sURL = this.getView().getModel("Print").getServiceUrl() + "PrintRecord(RecordUUID=" + oResponse.processLogic.RecordUUID + ",IsActiveEntity=true)/PDFContent";
-                        //         sap.m.URLHelper.redirect(sURL, true);
-                        //     }
-                        // }.bind(this), function (oError) {
-                        //     MessageBox.error(oError);
-                        // }.bind(this));
+                // this._CallODataV2("READ", "/IPQCPInAIMSheet", afilters, { "$top": 999999999 }, {}).then(function (oResponse) {
+                //     var aResults = oResponse.results;
+                //     if (aResults.length > 0) {
+                //         // var oRequestData = {
+                //         //     items: aResults
+                //         // }
+                //         //
+                //         // this._CallODataV2("ACTION", "/processLogic", [], {"Event": "Export", "Zzkey": JSON.stringify(oRequestData), "RecordUUID": ""}, {}).then(function (oResponse) {
+                //         //     if (oResponse.processLogic.RecordUUID) {
+                //         //         var sURL = this.getView().getModel("Print").getServiceUrl() + "PrintRecord(RecordUUID=" + oResponse.processLogic.RecordUUID + ",IsActiveEntity=true)/PDFContent";
+                //         //         sap.m.URLHelper.redirect(sURL, true);
+                //         //     }
+                //         // }.bind(this), function (oError) {
+                //         //     MessageBox.error(oError);
+                //         // }.bind(this));
 
+                //         // ExcelJS导出
+                //         this.exportExcel(aResults);
+                //     } else {
+                //         MessageBox.error(this.getModel("i18n").getResourceBundle().getText("noData"));
+                //     }
+                // }.bind(this), function (oError) {
+                //     MessageBox.error(oError);
+                // }.bind(this));
+
+                this._loadAllData("/IPQCPInAIMSheet", afilters).then(function (aAllData) {
+                    if (aAllData.length > 0) {
                         // ExcelJS导出
-                        this.exportExcel(aResults);
+                        this.exportExcel(aAllData);
                     } else {
                         MessageBox.error(this.getModel("i18n").getResourceBundle().getText("noData"));
                     }
@@ -585,8 +596,8 @@ sap.ui.define([
                     break;
             }
 
-            sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
-            sFilename = "ZDOWNLOAD_IPQCPI_N_AIM_SHEET_" + sTemplateType + "_" + sLanguage;
+            // sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
+            sFilename = "ZDOWNLOAD_IPQCPI_N_AIM_SHEET_" + sTemplateType + "_EN";
             aFilters.push(new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.EQ, sFilename));
             var oModel = this.getOwnerComponent().getModel("Attach");
             var oBinding = oModel.bindList("/Configuration",null,null,aFilters);
