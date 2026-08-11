@@ -7,31 +7,32 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
     <smartTable:SmartTable entitySet="SoUpdateAndPoAss" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
-        showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" 
+        showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" 
         persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
         beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="NoDisplayNonProduct,DisplayPurchasingInfo">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
+                <Button icon="sap-icon://save" text="{i18n>postBtn}" type="Transparent" press="onPost" visible="true" enabled="{= ${local>/authorityCheck/button/Post}}"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
-       <table:Table id="idTable" selectionMode="None" rowMode="Auto">
+       <table:Table id="idTable" rows="{local>/resultSet}" selectionMode="None" rowMode="Auto">
             <table:columns>
                 <table:Column width="6rem" label="{i18n>ResultType}" sortProperty="ResultType" filterProperty="ResultType">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ResultType", "leadingProperty":"ResultType"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ResultType}" />
+                        <Text text="{local>ResultType}" />
                     </table:template>
                 </table:Column>
                 <table:Column width="15rem" label="{i18n>Message}" sortProperty="Message" filterProperty="Message">
                     <table:customData>
-                        <core:CustomData key="Message" value='\{"columnKey":"Message", "leadingProperty":"Message"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Message", "leadingProperty":"Message"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{Message}" />
+                        <Text text="{local>Message}" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>ProcessingType}" sortProperty="ProcessingType" filterProperty="ProcessingType">
@@ -39,7 +40,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"ProcessingType", "leadingProperty":"ProcessingType"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ProcessingType}" />
+                        <Text text="{local>ProcessingType}" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>ProductionOrder}" sortProperty="ProductionOrder" filterProperty="ProductionOrder">
@@ -47,7 +48,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"ProductionOrder", "leadingProperty":"ProductionOrder"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ProductionOrder}" />
+                        <Text text="{local>ProductionOrder}" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material">
@@ -55,7 +56,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"Material", "leadingProperty":"Material"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{Material}" />
+                        <Text text="{local>Material}" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>StartDate}" sortProperty="StartDate" filterProperty="StartDate">
@@ -63,7 +64,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"StartDate", "leadingProperty":"StartDate"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{path:'StartDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}" />
+                        <Text text="{path:'local>StartDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
@@ -71,7 +72,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{Plant}" />
+                        <Text text="{local>Plant}" />
                     </table:template>
                 </table:Column>
                 <table:Column width="8rem" label="{i18n>Unit}" sortProperty="Unit" filterProperty="Unit">
@@ -79,7 +80,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"Unit", "leadingProperty":"Unit"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{Unit}" />
+                        <Text text="{local>Unit}" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>PlannedQty}" sortProperty="PlannedQty" filterProperty="PlannedQty">
@@ -87,7 +88,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"PlannedQty", "leadingProperty":"PlannedQty"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{PlannedQty}" />
+                        <Text text="{local>PlannedQty}" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>SalesOrder}" sortProperty="SalesOrder" filterProperty="SalesOrder">
@@ -95,7 +96,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"SalesOrder", "leadingProperty":"SalesOrder"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{SalesOrder}" />
+                        <Text text="{local>SalesOrder}" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>SalesOrderItem}" sortProperty="SalesOrderItem" filterProperty="SalesOrderItem">
@@ -103,7 +104,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"SalesOrderItem", "leadingProperty":"SalesOrderItem"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{SalesOrderItem}" />
+                        <Text text="{local>SalesOrderItem}" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>DeliveryDate}" sortProperty="DeliveryDate" filterProperty="DeliveryDate">
@@ -111,7 +112,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"DeliveryDate", "leadingProperty":"DeliveryDate"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{path:'DeliveryDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}" />
+                        <Text text="{path:'local>DeliveryDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>AssignedQtyBefore}" sortProperty="AssignedQtyBefore" filterProperty="AssignedQtyBefore">
@@ -119,7 +120,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AssignedQtyBefore", "leadingProperty":"AssignedQtyBefore"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AssignedQtyBefore}" />
+                        <Text text="{local>AssignedQtyBefore}" />
                     </table:template>
                 </table:Column>
                 <table:Column width="12rem" label="{i18n>AssignedQtyAfter}" sortProperty="AssignedQtyAfter" filterProperty="AssignedQtyAfter">
@@ -127,7 +128,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"AssignedQtyAfter", "leadingProperty":"AssignedQtyAfter"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{AssignedQtyAfter}" />
+                        <Text text="{local>AssignedQtyAfter}" />
                     </table:template>
                 </table:Column>
             </table:columns>

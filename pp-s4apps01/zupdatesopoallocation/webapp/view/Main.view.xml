@@ -19,7 +19,7 @@
             <f:DynamicPageHeader pinnable="true">
                 <f:content>
                     <FlexBox fitContainer="true">
-                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="SoUpdateAndPoAss" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="SoUpdateAndPoAss" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onsMrilterBarInitialized" search="onSearch">
                             <smartFilterBar:controlConfiguration>
                                 <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="Material" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}"/>
