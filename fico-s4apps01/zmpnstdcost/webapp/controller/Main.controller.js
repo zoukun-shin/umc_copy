@@ -83,7 +83,9 @@ sap.ui.define([
                  } else {
                      this.getView().getModel("local").setProperty("/showB", true);
                  }
- 
+
+                 // 查询模式：物料非必输；更新模式：物料必输
+                 this._setProductMandatory(sOption1 !== true);
             },
 
             onAfterRendering: function (oEvent) {
@@ -98,22 +100,73 @@ sap.ui.define([
                     }, 100);
                 }
 
+                setTimeout(() => {
+                    this._setProductMandatory(bOption1Selected !== true);
+                }, 100);
+
+            },
+
+            /**
+             * 切换物料过滤字段的必输状态
+             * 必输时 SmartFilterBar 自己会在点【执行】时拦截并提示，不会发起取数
+             * @param {boolean} bMandatory 是否必输
+             */
+            _setProductMandatory: function (bMandatory) {
+                var oSFB = this.byId("SFBMPNSTDCost");
+                if (!oSFB) {
+                    return;
+                }
+                var oItem = oSFB.determineFilterItemByName("OwninventoryManagedProduct");
+                if (!oItem) {
+                    // 元数据未加载完时 determineFilterItemByName 取不到，兜底再找一次
+                    oItem = (oSFB.getAllFilterItems() || []).find(function (o) {
+                        return o.getName() === "OwninventoryManagedProduct";
+                    });
+                }
+                if (oItem) {
+                    oItem.setMandatory(bMandatory);
+                }
+            },
+
+            /**
+             * 物料过滤条件是否已输入
+             * 单值时 getFilterData 返回字符串，多值时返回 {value, items, ranges}
+             * @returns {boolean} 已输入返回true
+             */
+            _hasProductFilter: function () {
+                var oFilterData = this.byId("SFBMPNSTDCost").getFilterData() || {};
+                var vProduct = oFilterData.OwninventoryManagedProduct;
+                if (!vProduct) {
+                    return false;
+                }
+                if (typeof vProduct === "string") {
+                    return vProduct.trim() !== "";
+                }
+                return !!(vProduct.value && String(vProduct.value).trim() !== "")
+                    || (Array.isArray(vProduct.items) && vProduct.items.length > 0)
+                    || (Array.isArray(vProduct.ranges) && vProduct.ranges.length > 0);
             },
 
             onBeforeRebindTable: function (oEvent) {
-			var bHasError = false;
-			var sMessage = "";
-			var sPlant = this.byId("SFBMPNSTDCost").getFilterData().Plant; 
-			var aAuthorityPlantSet = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
-			if (!aAuthorityPlantSet.some(data => data.Plant === sPlant)) {
-				bHasError = true;
-				sMessage = sPlant;
-			}
-			if (bHasError) {
-				MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("noAuthorityPlant", [sMessage]));
-				return;
-			}else {
                 var mBindingParams = oEvent.getParameter("bindingParams");
+
+                // 每次重新取数前，丢弃客户端未提交的修改。
+                // onChange 里用 setProperty 回写的 Status/Message 在 OData V2 模型中
+                // 是 pending change，刷新时不会被服务端返回的空值覆盖，
+                // 不 reset 的话上次【修改】的消息会一直残留在表格上。
+                if (this._oDataModel.hasPendingChanges()) {
+                    this._oDataModel.resetChanges();
+                }
+
+                var sPlant = this.byId("SFBMPNSTDCost").getFilterData().Plant;
+                var aAuthorityPlantSet = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
+                if (!aAuthorityPlantSet.some(data => data.Plant === sPlant)) {
+                    // 无该工厂权限：取消本次绑定，表格不去取数
+                    mBindingParams.preventTableBind = true;
+                    MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("noAuthorityPlant", [sPlant]));
+                    return;
+                }
+
                 var bOption2 = this.byId("Option2").getSelected();
                 var oTable = this.byId("Table_MPNSTDCost");
 
@@ -135,13 +188,18 @@ sap.ui.define([
                         oColumn.setVisible(bOption2);
                     }
                 });
-            }
             },
 
             onChange: function (oEvent) {
                 var that = this;
                 var bEvent = "CHANGE";
- 
+
+                // 更新必须指定物料。
+                // 挡住这种情况：先在查询模式不带物料取数，再切到更新模式对整个工厂批量更新
+                if (!this._hasProductFilter()) {
+                    MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("mandatoryProduct"));
+                    return;
+                }
 
                 let postDocs = this.preparePostBody();
                 this._BusyDialog.open();
@@ -194,7 +252,7 @@ sap.ui.define([
                                 resolve(oData);
                             },
                             error: function (oError) {
-                                resolve(reject);
+                                reject(oError);
                             },
                             method: "POST",
                             urlParameters: {

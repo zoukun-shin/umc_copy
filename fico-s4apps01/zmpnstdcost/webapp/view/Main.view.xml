@@ -28,7 +28,8 @@
                              </RadioButtonGroup>
                         <smartFilterBar:controlConfiguration>
                             <smartFilterBar:ControlConfiguration index="1" key="Plant"                      displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"                      filterType="single" mandatory="mandatory"/>
-                            <smartFilterBar:ControlConfiguration index="2" key="OwninventoryManagedProduct" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>OwninventoryManagedProduct}" mandatory="mandatory" />
+                            <!-- 物料必输与否跟着模式走：查询=非必输，更新=必输，见 Main.controller.js 的 _setProductMandatory -->
+                            <smartFilterBar:ControlConfiguration index="2" key="OwninventoryManagedProduct" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>OwninventoryManagedProduct}" mandatory="notMandatory" />
                             <!-- <smartFilterBar:ControlConfiguration index="3" key="Product"                    visibleInAdvancedArea="true" label="{i18n>Product}"                                        /> -->
                             <smartFilterBar:ControlConfiguration index="4" key="PurchasingOrganization"     displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PurchasingOrganization}"     filterType="single" mandatory="mandatory" />
                         </smartFilterBar:controlConfiguration>
@@ -56,12 +57,11 @@
                         width="6rem"
                         label="{i18n>Status}"
                         sortProperty="Status"
-                        filterProperty="Status"
                     >
                         <t:customData>
                             <core:CustomData
                                 key="p13nData"
-                                value='\{"columnKey":"Status", "leadingProperty":"Status", "sortProperty":"Status", "filterProperty": "Status"}'
+                                value='\{"columnKey":"Status", "leadingProperty":"Status", "sortProperty":"Status"}'
                             />
                         </t:customData>
                         <t:template>
@@ -109,84 +109,84 @@
                     </t:Column>
 
                     <!-- 上次数据 -->
-                    <t:Column id="LastPriceBeforeMarkup" label="{i18n>LastPriceBeforeMarkup}" width="10rem" sortProperty="LastPriceBeforeMarkup" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastPriceBeforeMarkup","leadingProperty":"LastPriceBeforeMarkup","sortProperty":"LastPriceBeforeMarkup"}'/></t:customData>
+                    <t:Column id="LastPriceBeforeMarkup" label="{i18n>LastPriceBeforeMarkup}" width="10rem" sortProperty="LastPriceBeforeMarkup" filterProperty="LastPriceBeforeMarkup" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastPriceBeforeMarkup","leadingProperty":"LastPriceBeforeMarkup","sortProperty":"LastPriceBeforeMarkup","filterProperty":"LastPriceBeforeMarkup"}'/></t:customData>
                         <t:template><Text text="{path:'LastPriceBeforeMarkup', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="LastMarkupPercentage" label="{i18n>LastMarkupPercentage}" width="8rem" sortProperty="LastMarkupPercentage" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastMarkupPercentage","leadingProperty":"LastMarkupPercentage","sortProperty":"LastMarkupPercentage"}'/></t:customData>
+                    <t:Column id="LastMarkupPercentage" label="{i18n>LastMarkupPercentage}" width="8rem" sortProperty="LastMarkupPercentage" filterProperty="LastMarkupPercentage" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastMarkupPercentage","leadingProperty":"LastMarkupPercentage","sortProperty":"LastMarkupPercentage","filterProperty":"LastMarkupPercentage"}'/></t:customData>
                         <t:template><Text text="{LastMarkupPercentage}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="LastChangedPrice" label="{i18n>LastChangedPrice}" width="10rem" sortProperty="LastChangedPrice" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastChangedPrice","leadingProperty":"LastChangedPrice","sortProperty":"LastChangedPrice"}'/></t:customData>
+                    <t:Column id="LastChangedPrice" label="{i18n>LastChangedPrice}" width="10rem" sortProperty="LastChangedPrice" filterProperty="LastChangedPrice" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastChangedPrice","leadingProperty":"LastChangedPrice","sortProperty":"LastChangedPrice","filterProperty":"LastChangedPrice"}'/></t:customData>
                         <t:template><Text text="{path:'LastChangedPrice', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="LastPriceUnit" label="{i18n>LastPriceUnit}" width="6rem" sortProperty="LastPriceUnit" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastPriceUnit","leadingProperty":"LastPriceUnit","sortProperty":"LastPriceUnit"}'/></t:customData>
+                    <t:Column id="LastPriceUnit" label="{i18n>LastPriceUnit}" width="6rem" sortProperty="LastPriceUnit" filterProperty="LastPriceUnit" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastPriceUnit","leadingProperty":"LastPriceUnit","sortProperty":"LastPriceUnit","filterProperty":"LastPriceUnit"}'/></t:customData>
                         <t:template><Text text="{LastPriceUnit}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="LastPurchasingInfoRecord" label="{i18n>LastPurchasingInfoRecord}" width="10rem" sortProperty="LastPurchasingInfoRecord" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastPurchasingInfoRecord","leadingProperty":"LastPurchasingInfoRecord","sortProperty":"LastPurchasingInfoRecord"}'/></t:customData>
+                    <t:Column id="LastPurchasingInfoRecord" label="{i18n>LastPurchasingInfoRecord}" width="10rem" sortProperty="LastPurchasingInfoRecord" filterProperty="LastPurchasingInfoRecord" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastPurchasingInfoRecord","leadingProperty":"LastPurchasingInfoRecord","sortProperty":"LastPurchasingInfoRecord","filterProperty":"LastPurchasingInfoRecord"}'/></t:customData>
                         <t:template><Text text="{LastPurchasingInfoRecord}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="LastSupplier" label="{i18n>LastSupplier}" width="8rem" sortProperty="LastSupplier" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastSupplier","leadingProperty":"LastSupplier","sortProperty":"LastSupplier"}'/></t:customData>
+                    <t:Column id="LastSupplier" label="{i18n>LastSupplier}" width="8rem" sortProperty="LastSupplier" filterProperty="LastSupplier" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastSupplier","leadingProperty":"LastSupplier","sortProperty":"LastSupplier","filterProperty":"LastSupplier"}'/></t:customData>
                         <t:template><Text text="{LastSupplier}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="LastValidityDate" label="{i18n>LastValidityDate}" width="8rem" sortProperty="LastValidityDate" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastValidityDate","leadingProperty":"LastValidityDate","sortProperty":"LastValidityDate"}'/></t:customData>
+                    <t:Column id="LastValidityDate" label="{i18n>LastValidityDate}" width="8rem" sortProperty="LastValidityDate" filterProperty="LastValidityDate" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastValidityDate","leadingProperty":"LastValidityDate","sortProperty":"LastValidityDate","filterProperty":"LastValidityDate"}'/></t:customData>
                         <t:template><Text text="{ path:'LastValidityDate', formatter: '.formatter.date'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="LastCurrency" label="{i18n>LastCurrency}" width="6rem" sortProperty="LastCurrency" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastCurrency","leadingProperty":"LastCurrency","sortProperty":"LastCurrency"}'/></t:customData>
+                    <t:Column id="LastCurrency" label="{i18n>LastCurrency}" width="6rem" sortProperty="LastCurrency" filterProperty="LastCurrency" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"LastCurrency","leadingProperty":"LastCurrency","sortProperty":"LastCurrency","filterProperty":"LastCurrency"}'/></t:customData>
                         <t:template><Text text="{LastCurrency}" wrapping="false"/></t:template>
                     </t:Column>
 
                     <!-- 本次数据 -->
-                    <t:Column id="CurrentPriceBeforeMarkup" visible="{local>/showB}"  label="{i18n>CurrentPriceBeforeMarkup}" width="10rem" sortProperty="CurrentPriceBeforeMarkup" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentPriceBeforeMarkup","leadingProperty":"CurrentPriceBeforeMarkup","sortProperty":"CurrentPriceBeforeMarkup"}'/></t:customData>
+                    <t:Column id="CurrentPriceBeforeMarkup" visible="{local>/showB}"  label="{i18n>CurrentPriceBeforeMarkup}" width="10rem" sortProperty="CurrentPriceBeforeMarkup" filterProperty="CurrentPriceBeforeMarkup" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentPriceBeforeMarkup","leadingProperty":"CurrentPriceBeforeMarkup","sortProperty":"CurrentPriceBeforeMarkup","filterProperty":"CurrentPriceBeforeMarkup"}'/></t:customData>
                         <t:template><Text text="{path:'CurrentPriceBeforeMarkup', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="CurrentMarkupPercentage"  visible="{local>/showB}" label="{i18n>CurrentMarkupPercentage}" width="8rem" sortProperty="CurrentMarkupPercentage" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentMarkupPercentage","leadingProperty":"CurrentMarkupPercentage","sortProperty":"CurrentMarkupPercentage"}'/></t:customData>
+                    <t:Column id="CurrentMarkupPercentage"  visible="{local>/showB}" label="{i18n>CurrentMarkupPercentage}" width="8rem" sortProperty="CurrentMarkupPercentage" filterProperty="CurrentMarkupPercentage" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentMarkupPercentage","leadingProperty":"CurrentMarkupPercentage","sortProperty":"CurrentMarkupPercentage","filterProperty":"CurrentMarkupPercentage"}'/></t:customData>
                         <t:template><Text text="{CurrentMarkupPercentage}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="CurrentChangedPrice" visible="{local>/showB}" label="{i18n>CurrentChangedPrice}" width="10rem" sortProperty="CurrentChangedPrice" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentChangedPrice","leadingProperty":"CurrentChangedPrice","sortProperty":"CurrentChangedPrice"}'/></t:customData>
+                    <t:Column id="CurrentChangedPrice" visible="{local>/showB}" label="{i18n>CurrentChangedPrice}" width="10rem" sortProperty="CurrentChangedPrice" filterProperty="CurrentChangedPrice" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentChangedPrice","leadingProperty":"CurrentChangedPrice","sortProperty":"CurrentChangedPrice","filterProperty":"CurrentChangedPrice"}'/></t:customData>
                         <t:template><Text text="{path:'CurrentChangedPrice', formatter:'.formatter.formatFloat'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="CurrentPriceUnit" visible="{local>/showB}" label="{i18n>CurrentPriceUnit}" width="6rem" sortProperty="CurrentPriceUnit" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentPriceUnit","leadingProperty":"CurrentPriceUnit","sortProperty":"CurrentPriceUnit"}'/></t:customData>
+                    <t:Column id="CurrentPriceUnit" visible="{local>/showB}" label="{i18n>CurrentPriceUnit}" width="6rem" sortProperty="CurrentPriceUnit" filterProperty="CurrentPriceUnit" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentPriceUnit","leadingProperty":"CurrentPriceUnit","sortProperty":"CurrentPriceUnit","filterProperty":"CurrentPriceUnit"}'/></t:customData>
                         <t:template><Text text="{CurrentPriceUnit}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="CurrentPurchasingInfoRecord" visible="{local>/showB}" label="{i18n>CurrentPurchasingInfoRecord}" width="10rem" sortProperty="CurrentPurchasingInfoRecord" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentPurchasingInfoRecord","leadingProperty":"CurrentPurchasingInfoRecord","sortProperty":"CurrentPurchasingInfoRecord"}'/></t:customData>
+                    <t:Column id="CurrentPurchasingInfoRecord" visible="{local>/showB}" label="{i18n>CurrentPurchasingInfoRecord}" width="10rem" sortProperty="CurrentPurchasingInfoRecord" filterProperty="CurrentPurchasingInfoRecord" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentPurchasingInfoRecord","leadingProperty":"CurrentPurchasingInfoRecord","sortProperty":"CurrentPurchasingInfoRecord","filterProperty":"CurrentPurchasingInfoRecord"}'/></t:customData>
                         <t:template><Text text="{CurrentPurchasingInfoRecord}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="CurrentSupplier" visible="{local>/showB}" label="{i18n>CurrentSupplier}" width="8rem" sortProperty="CurrentSupplier" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentSupplier","leadingProperty":"CurrentSupplier","sortProperty":"CurrentSupplier"}'/></t:customData>
+                    <t:Column id="CurrentSupplier" visible="{local>/showB}" label="{i18n>CurrentSupplier}" width="8rem" sortProperty="CurrentSupplier" filterProperty="CurrentSupplier" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentSupplier","leadingProperty":"CurrentSupplier","sortProperty":"CurrentSupplier","filterProperty":"CurrentSupplier"}'/></t:customData>
                         <t:template><Text text="{CurrentSupplier}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="CurrentValidityDate" visible="{local>/showB}" label="{i18n>CurrentValidityDate}" width="8rem" sortProperty="CurrentValidityDate" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentValidityDate","leadingProperty":"CurrentValidityDate","sortProperty":"CurrentValidityDate"}'/></t:customData>
+                    <t:Column id="CurrentValidityDate" visible="{local>/showB}" label="{i18n>CurrentValidityDate}" width="8rem" sortProperty="CurrentValidityDate" filterProperty="CurrentValidityDate" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CurrentValidityDate","leadingProperty":"CurrentValidityDate","sortProperty":"CurrentValidityDate","filterProperty":"CurrentValidityDate"}'/></t:customData>
                         <t:template><Text text="{ path:'CurrentValidityDate', formatter: '.formatter.date'}" wrapping="false"/></t:template>
                     </t:Column>
 
-                    <t:Column id="Currency" visible="{local>/showB}" label="{i18n>Currency}" width="6rem" sortProperty="Currency" autoResizable="true">
-                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Currency","leadingProperty":"Currency","sortProperty":"Currency"}'/></t:customData>
+                    <t:Column id="Currency" visible="{local>/showB}" label="{i18n>Currency}" width="6rem" sortProperty="Currency" filterProperty="Currency" autoResizable="true">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Currency","leadingProperty":"Currency","sortProperty":"Currency","filterProperty":"Currency"}'/></t:customData>
                         <t:template><Text text="{Currency}" wrapping="false"/></t:template>
                     </t:Column>
 
