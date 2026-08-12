@@ -281,13 +281,14 @@ sap.ui.define([
             var oSelected = oTable.getContextByIndex(aSelectedIndices[0]).getObject();
             var HeaderValidityStartDate = oSelected.HeaderValidityStartDate;
             var aItems = that.getItems(oSelected, aAllData);
+            var bUse2400AsCNThirdPage = oSelected && oSelected.Plant === "2400";
 
-            var aCNEvents = ["PrintCNStep1", "PrintCNStep2", "PrintCNStep3"];
-            var aTemplateByStep = ["YY1_BOMPRINT_CO", "YY1_BOMPRINT_CH", "YY1_BOMPRINT_CN"];
+            var aCNEvents = ["PrintCNStep1", "PrintCNStep2", bUse2400AsCNThirdPage ? "PrintCN2400" : "PrintCNStep3"];
+            var aTemplateByStep = ["YY1_BOMPRINT_CO", "YY1_BOMPRINT_CH", bUse2400AsCNThirdPage ? "YY1_BOM_2400" : "YY1_BOMPRINT_CN"];
             var aBuilders = [
                 that.processPrintContentCNStep1.bind(that),
                 that.processPrintContentCNStep2.bind(that),
-                that.processPrintContentCNStep3.bind(that)
+                (bUse2400AsCNThirdPage ? that.processPrintContent2400 : that.processPrintContentCNStep3).bind(that)
             ];
 
             that._openCNDateDialog().then(function (sCNValidPeriod) {
