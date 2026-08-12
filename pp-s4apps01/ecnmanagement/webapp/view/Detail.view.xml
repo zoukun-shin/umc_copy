@@ -30,7 +30,7 @@
                                     <smartForm:ColumnLayout columnsM="2" columnsL="3" columnsXL="6" />
                                 </smartForm:layout> -->
                                 <smartForm:layout>
-                                    <smartForm:Layout labelSpanM="6" labelSpanL="6" labelSpanXL="6"/>
+                                    <smartForm:Layout labelSpanM="5" labelSpanL="5" labelSpanXL="5"/>
                                 </smartForm:layout>
                                 <smartForm:Group>
                                     <smartForm:layoutData>
@@ -40,13 +40,13 @@
                                         <smartField:SmartField textLabel="{i18n>ChangeNumberSF}" value="{ChangeNumber}" editableChanged="onChangeNumberEditableChanged" editable="false"/>
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement>
-                                        <smartField:SmartField textLabel="{i18n>ChangeNumberDescSF}" value="{ChangeNumberDesc}" change="onInputChange"/>
+                                        <smartField:SmartField textLabel="{i18n>EcoTypeSF}" value="{EcoType}" change="onInputChange" width="100%"/>
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement>
-                                        <smartField:SmartField textLabel="{i18n>EcoTypeSF}" value="{EcoType}" change="onInputChange"/>
+                                        <smartField:SmartField textLabel="{i18n>ChangeNumberDescSF}" value="{ChangeNumberDesc}" change="onInputChange" app:multiLineSettings="{rows: 5}" width="100%"/>
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement>
-                                        <smartField:SmartField textLabel="{i18n>ChangeNodeSF}" value="{ChangeNode}" change="onInputChange"/>
+                                        <smartField:SmartField textLabel="{i18n>ChangeNodeSF}" value="{ChangeNode}" change="onInputChange" app:multiLineSettings="{rows: 5}" width="100%"/>
                                     </smartForm:GroupElement>
                                 </smartForm:Group>
                                 <smartForm:Group>
@@ -57,13 +57,10 @@
                                         <smartField:SmartField textLabel="{i18n>DeleteFlagSF}" value="{DeleteFlag}" change="onInputChange"/>
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement>
-                                        <smartField:SmartField textLabel="{i18n>ReasonForChangeSF}" value="{ReasonForChange}" change="onInputChange"/>
+                                        <smartField:SmartField textLabel="{i18n>ReasonForChangeSF}" value="{ReasonForChange}" change="onInputChange" app:multiLineSettings="{rows: 5}" width="100%"/>
                                     </smartForm:GroupElement>
                                      <smartForm:GroupElement>
-                                        <smartField:SmartField textLabel="{i18n>AttachedDocumentsT}" value="{AttachedDocuments}" change="onInputChange"/>
-                                    </smartForm:GroupElement>
-                                    <smartForm:GroupElement>
-                                        <smartField:SmartField textLabel="{i18n>ChangeBasisSF}" value="{ChangeBasis}" change="onInputChange"/>
+                                        <smartField:SmartField textLabel="{i18n>AttachedDocumentsT}" value="{AttachedDocuments}" change="onInputChange" app:multiLineSettings="{rows: 5}" width="100%"/>
                                     </smartForm:GroupElement>
                                 </smartForm:Group>
                                 <smartForm:Group>
@@ -75,6 +72,9 @@
                                     </smartForm:GroupElement>
                                     <smartForm:GroupElement>
                                         <smartField:SmartField textLabel="{i18n>ChangeNumberStatusSF}" value="{ChangeNumberStatus}" change="onInputChange"/>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField textLabel="{i18n>ChangeBasisSF}" value="{ChangeBasis}" change="onInputChange" app:multiLineSettings="{rows: 5}" width="100%"/>
                                     </smartForm:GroupElement>
                                 </smartForm:Group>
                                 <smartForm:Group title="{i18n>RequestedByF}">
