@@ -1,0 +1,97 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:plugins="sap.ui.table.plugins"
+    xmlns:mvc="sap.ui.core.mvc"
+    
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <smartTable:SmartTable id="idAdditionalCustMatSmartTable" entitySet="AdditionalCustomerMaterial" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
+        showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" 
+        persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" 
+        placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
+        beforeExport="onBeforeExport" showFullScreenButton="false" ignoredFields="">
+        <smartTable:customToolbar>
+            <OverflowToolbar id="idAdditionalCustMatToolbar" design="Transparent">
+                <ToolbarSpacer id="idAdditionalCustMatToolbarSpacer"/>
+                <Button id="idEditBtn" icon="sap-icon://edit" type="Transparent" text="{i18n>editBtn}" press=".onEdit" enabled="{= ${local>/authorityCheck/button/Edit}}"/>
+                <Button id="idDeleteBtn" icon="sap-icon://delete" type="Transparent" text="{i18n>deleteBtn}" press=".onDelete" enabled="{= ${local>/authorityCheck/button/Delete}}"/>
+            </OverflowToolbar>
+        </smartTable:customToolbar>
+        <table:Table id="idAdditionalCustMatTable" columnResize="onAfterRendering" columnMove="onAfterRendering">
+                    <table:dependents>
+						<plugins:MultiSelectionPlugin
+                            id="idAdditionalCustMatSelectionPlugin"
+							limit="0"
+							enableNotification="true"
+							showHeaderSelector="true"
+							selectionMode="MultiToggle"
+						/>
+					</table:dependents>
+                    <table:rowMode>
+                        <rm:Auto id="idAdditionalCustMatAuto" />
+                    </table:rowMode>
+            <table:columns>
+                <table:Column id="colSalesOrganization" width="6rem" label="{i18n>salesorganization}" sortProperty="salesorganization" filterProperty="salesorganization">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"salesorganization", "leadingProperty":"salesorganization"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text id="txtSalesOrganization" text="{salesorganization}" />
+                    </table:template>
+                </table:Column>
+                <table:Column id="colDistributionChannel" width="6rem" label="{i18n>distributionchannel}" sortProperty="distributionchannel" filterProperty="distributionchannel">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"distributionchannel", "leadingProperty":"distributionchannel"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text id="txtDistributionChannel" text="{distributionchannel}" />
+                    </table:template>
+                </table:Column>
+                <table:Column id="colCustomer" width="6rem" label="{i18n>customer}" sortProperty="customer" filterProperty="customer">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"customer", "leadingProperty":"customer"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text id="txtCustomer" text="{customer}" />
+                    </table:template>
+                </table:Column>
+                <table:Column id="colProduct" width="6rem" label="{i18n>product}" sortProperty="product" filterProperty="product">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"product", "leadingProperty":"product"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text id="txtProduct" text="{product}" />
+                    </table:template>
+                </table:Column>
+                <table:Column id="colAdditionalCustMatMaterialByCustomer" width="6rem" label="{i18n>materialbycustomer}" sortProperty="materialbycustomer" filterProperty="materialbycustomer">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"materialbycustomer", "leadingProperty":"materialbycustomer"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text id="txtAdditionalCustMatMaterialByCustomer" text="{materialbycustomer}" />
+                    </table:template>
+                </table:Column>
+                <table:Column id="colAdditionalCustomerMaterial" width="15rem" label="{i18n>additionalcustomermaterial}" sortProperty="additionalcustomermaterial" filterProperty="additionalcustomermaterial">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"additionalcustomermaterial", "leadingProperty":"additionalcustomermaterial"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Input id="inpAdditionalCustomerMaterial" value="{additionalcustomermaterial}" valueLiveUpdate="true" />
+                    </table:template>
+                </table:Column>
+                <table:Column id="colAdditionalCustomerMaterialText" width="15rem" label="{i18n>additionalcustomermaterialtext}" sortProperty="additionalcustomermaterialtext" filterProperty="additionalcustomermaterialtext">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"additionalcustomermaterialtext", "leadingProperty":"additionalcustomermaterialtext"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Input id="inpAdditionalCustomerMaterialText" value="{additionalcustomermaterialtext}" valueLiveUpdate="true" />
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </smartTable:SmartTable>
+</core:FragmentDefinition>

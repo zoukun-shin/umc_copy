@@ -9,15 +9,15 @@
     xmlns:mvc="sap.ui.core.mvc"
     
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="Mark" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
-        showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" 
+    <smartTable:SmartTable id="idMarkSmartTable" entitySet="Mark" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" 
+        showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" 
         persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="">
+        beforeExport="onBeforeExport" showFullScreenButton="false" ignoredFields="">
         <smartTable:customToolbar>
-            <OverflowToolbar design="Transparent">
-                <ToolbarSpacer/>
-                <Button id="idPrintBtn" icon="sap-icon://print" type="Transparent" text="{i18n>Print}" press=".onPrint" enabled="true" visible="{= ${local>/authorityCheck/button/Print}}"/>
+            <OverflowToolbar id="idMarkToolbar" design="Transparent">
+                <ToolbarSpacer id="idMarkToolbarSpacer"/>
+                <Button id="idPrintBtn" icon="sap-icon://print" type="Transparent" text="{i18n>Print}" press=".onPrint" enabled="{= ${local>/authorityCheck/button/Print}}"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
         <table:Table id="ReportTable" columnResize="onAfterRendering" columnMove="onAfterRendering">
@@ -34,116 +34,108 @@
                         <rm:Auto id="idAuto" />
                     </table:rowMode>
             <table:columns>
-                <table:Column width="6rem" label="{i18n>BillingDocument}" sortProperty="BillingDocument" filterProperty="BillingDocument">
+                <table:Column id="colBillingDocument" width="6rem" label="{i18n>BillingDocument}" sortProperty="BillingDocument" filterProperty="BillingDocument">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BillingDocument", "leadingProperty":"BillingDocument"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{BillingDocument}" />
+                        <Text id="txtBillingDocument" text="{BillingDocument}" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>PurchaseOrderByCustomer}" sortProperty="PurchaseOrderByCustomer" filterProperty="PurchaseOrderByCustomer">
+                <table:Column id="colPurchaseOrderByCustomer" width="12rem" label="{i18n>PurchaseOrderByCustomer}" sortProperty="PurchaseOrderByCustomer" filterProperty="PurchaseOrderByCustomer">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderByCustomer", "leadingProperty":"PurchaseOrderByCustomer"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{PurchaseOrderByCustomer}" wrapping="false" />
+                        <Text id="txtPurchaseOrderByCustomer" text="{PurchaseOrderByCustomer}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>CustomerPurchaseOrderItem}" sortProperty="CustomerPurchaseOrderItem" filterProperty="CustomerPurchaseOrderItem">
+                <table:Column id="colCustomerPurchaseOrderItem" width="12rem" label="{i18n>CustomerPurchaseOrderItem}" sortProperty="CustomerPurchaseOrderItem" filterProperty="CustomerPurchaseOrderItem">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"CustomerPurchaseOrderItem", "leadingProperty":"CustomerPurchaseOrderItem"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{CustomerPurchaseOrderItem}" wrapping="false" />
+                        <Text id="txtCustomerPurchaseOrderItem" text="{CustomerPurchaseOrderItem}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>MaterialByCustomer}" sortProperty="MaterialByCustomer" filterProperty="MaterialByCustomer">
+                <table:Column id="colMaterialByCustomer" width="12rem" label="{i18n>MaterialByCustomer}" sortProperty="MaterialByCustomer" filterProperty="MaterialByCustomer">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"MaterialByCustomer", "leadingProperty":"MaterialByCustomer"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{MaterialByCustomer}" wrapping="false" />
+                        <Text id="txtMaterialByCustomer" text="{MaterialByCustomer}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ActualDeliveryQuantity}" sortProperty="ActualDeliveryQuantity" filterProperty="ActualDeliveryQuantity">
+                <table:Column id="colActualDeliveryQuantity" width="12rem" label="{i18n>ActualDeliveryQuantity}" sortProperty="ActualDeliveryQuantity" filterProperty="ActualDeliveryQuantity">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ActualDeliveryQuantity", "leadingProperty":"ActualDeliveryQuantity"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ActualDeliveryQuantity}" wrapping="false" />
+                        <Text id="txtActualDeliveryQuantity" text="{ActualDeliveryQuantity}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>PerBoxTargetQty}" sortProperty="PerBoxTargetQty" filterProperty="PerBoxTargetQty">
+                <table:Column id="colPerBoxTargetQty" width="12rem" label="{i18n>PerBoxTargetQty}" sortProperty="PerBoxTargetQty" filterProperty="PerBoxTargetQty">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PerBoxTargetQty", "leadingProperty":"PerBoxTargetQty"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{PerBoxTargetQty}" wrapping="false" />
+                        <Text id="txtPerBoxTargetQty" text="{PerBoxTargetQty}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>TotalPallet}" sortProperty="TotalPallet" filterProperty="TotalPallet">
+                <table:Column id="colTotalPallet" width="12rem" label="{i18n>TotalPallet}" sortProperty="TotalPallet" filterProperty="TotalPallet">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"TotalPallet", "leadingProperty":"TotalPallet"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{TotalPallet}" wrapping="false" />
+                        <Text id="txtTotalPallet" text="{TotalPallet}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>PerPalletTargetQty}" sortProperty="PerPalletTargetQty" filterProperty="PerPalletTargetQty">
+                <table:Column id="colPerPalletTargetQty" width="12rem" label="{i18n>PerPalletTargetQty}" sortProperty="PerPalletTargetQty" filterProperty="PerPalletTargetQty">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PerPalletTargetQty", "leadingProperty":"PerPalletTargetQty"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{PerPalletTargetQty}" wrapping="false" />
+                        <Text id="txtPerPalletTargetQty" text="{PerPalletTargetQty}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>PalletQty}" sortProperty="PalletQty" filterProperty="PalletQty">
+                <table:Column id="colPalletQty" width="12rem" label="{i18n>PalletQty}" sortProperty="PalletQty" filterProperty="PalletQty">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PalletQty", "leadingProperty":"PalletQty"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{PalletQty}" wrapping="false" />
+                        <Text id="txtPalletQty" text="{PalletQty}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>PalletGrossWeight}" sortProperty="PalletGrossWeight" filterProperty="PalletGrossWeight">
+                <table:Column id="colPalletGrossWeight" width="12rem" label="{i18n>PalletGrossWeight}" sortProperty="PalletGrossWeight" filterProperty="PalletGrossWeight">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PalletGrossWeight", "leadingProperty":"PalletGrossWeight"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{PalletGrossWeight}" wrapping="false" />
+                        <Text id="txtPalletGrossWeight" text="{PalletGrossWeight}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>PlannedGoodsIssueDate}" sortProperty="PlannedGoodsIssueDate" filterProperty="PlannedGoodsIssueDate">
+                <table:Column id="colPlannedGoodsIssueDate" width="12rem" label="{i18n>PlannedGoodsIssueDate}" sortProperty="PlannedGoodsIssueDate" filterProperty="PlannedGoodsIssueDate">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PlannedGoodsIssueDate", "leadingProperty":"PlannedGoodsIssueDate"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{path:'PlannedGoodsIssueDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}"  wrapping="false" />
+                        <Text id="txtPlannedGoodsIssueDate" text="{path:'PlannedGoodsIssueDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}"  wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>BeginBoxNo}" sortProperty="BeginBoxNo" filterProperty="BeginBoxNo">
+                <table:Column id="colBeginBoxNo" width="12rem" label="{i18n>BeginBoxNo}" sortProperty="BeginBoxNo" filterProperty="BeginBoxNo">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BeginBoxNo", "leadingProperty":"BeginBoxNo"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{BeginBoxNo}" wrapping="false" />
+                        <Text id="txtBeginBoxNo" text="{BeginBoxNo}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>EndBoxNo}" sortProperty="EndBoxNo" filterProperty="EndBoxNo">
+                <table:Column id="colEndBoxNo" width="12rem" label="{i18n>EndBoxNo}" sortProperty="EndBoxNo" filterProperty="EndBoxNo">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"EndBoxNo", "leadingProperty":"EndBoxNo"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{EndBoxNo}" wrapping="false" />
-                    </table:template>
-                </table:Column>
-                <table:Column width="12rem" label="{i18n>MaterialByCustomer}" sortProperty="MaterialByCustomer" filterProperty="MaterialByCustomer">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"MaterialByCustomer", "leadingProperty":"MaterialByCustomer"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{MaterialByCustomer}" wrapping="false" />
+                        <Text id="txtEndBoxNo" text="{EndBoxNo}" wrapping="false" />
                     </table:template>
                 </table:Column>
             </table:columns>

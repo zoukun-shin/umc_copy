@@ -15,6 +15,27 @@ function (JSONModel, Device) {
             return oModel;
         },
 
+        // 初始化本地数据集
+		_initialLocalData: function () {
+			var localData = {
+				busy: false,
+				hasUIChanges: false,
+				errors: "",
+				excelSet: [],
+				upload: [{}],
+				recordCheckSuccessed: false,
+				objectPageEditable: false,
+				uploadFiles: []
+			};
+			return localData;
+		},
+		// 创建本地模型
+		createLocalModel: function () {
+			var oModel = new JSONModel(this._initialLocalData());
+			oModel.setSizeLimit(9999);
+			return oModel;
+		},
+
         // Create local Model
         createLocalModel: function () {
             var oModel = new JSONModel({
