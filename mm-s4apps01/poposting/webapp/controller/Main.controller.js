@@ -115,6 +115,7 @@ sap.ui.define([
                         "PostingDate": aSheetData[i]["POSTINGDATE"] === undefined ? new Date(this.formatDateString(new Date(Date.now()).toUTCString())) : this.convertLocalDateToUTCDate(aSheetData[i]["POSTINGDATE"]),
                         // MOD BEGIN BY XINLEI XU 2025/04/08
                         "MaterialDocumentHeaderText": aSheetData[i]["MATERIALDOCUMENTHEADERTEXT"] === undefined ? "" : aSheetData[i]["MATERIALDOCUMENTHEADERTEXT"],
+                        "DeliveryDocument": aSheetData[i]["DELIVERYDOCUMENT"] === undefined ? "" : aSheetData[i]["DELIVERYDOCUMENT"],
                         "OrderKey": aSheetData[i]["PURCHASEORDER"] === undefined ? "" : aSheetData[i]["PURCHASEORDER"],
                         "QuantityInEntryUnit": aSheetData[i]["QUANTITYINENTRY"] === undefined ? "" : aSheetData[i]["QUANTITYINENTRY"],
                         "Batch": aSheetData[i]["BATCH"] === undefined ? "" : aSheetData[i]["BATCH"],
