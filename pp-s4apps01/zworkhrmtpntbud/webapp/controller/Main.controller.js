@@ -209,7 +209,7 @@ sap.ui.define([
                 var oSummary = mSummary.get(sKey);
 
                 aQtyFields.forEach(function (field) {
-                    oSummary[field] = (Number(oSummary[field]) || 0) + (Number(item[field]) || 0);
+                    oSummary[field] = Number(((Number(oSummary[field]) || 0) + (Number(item[field]) || 0)).toFixed(3));
                 });
             });
 
