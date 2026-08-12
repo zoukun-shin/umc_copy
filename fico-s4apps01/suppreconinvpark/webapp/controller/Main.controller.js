@@ -125,9 +125,20 @@ sap.ui.define([
                 return;
             }
 
-            var vValue = oEvent.getParameter("value");
-            if (vValue === undefined && typeof oSource.getValue === "function") {
-                vValue = oSource.getValue();
+            var vValue;
+            // For InvoiceDate (DatePicker), store the Date object so that
+            // writing it back to the OData model (which has type:'sap.ui.model.type.Date')
+            // works correctly and the displayed value is not cleared.
+            if (sFieldName === "InvoiceDate" && typeof oSource.getDateValue === "function") {
+                vValue = oEvent.getParameter("dateValue");
+                if (vValue === undefined) {
+                    vValue = oSource.getDateValue();
+                }
+            } else {
+                vValue = oEvent.getParameter("value");
+                if (vValue === undefined && typeof oSource.getValue === "function") {
+                    vValue = oSource.getValue();
+                }
             }
 
             this._setDraftFieldValue(oContext, sFieldName, vValue);
@@ -209,6 +220,37 @@ sap.ui.define([
 
                 });
             });
+
+            // Validate required fields before sending to backend
+            var oBundle = this.getView().getModel("i18n").getResourceBundle();
+            var aErrors = [];
+            var oFirstRowByInvoiceNo = {};
+
+            aRequestData.forEach(function (oRow, iIdx) {
+                var iTableRowNum = aSelectedIndices[iIdx] + 1;
+
+                if (!oRow.MIROVendorInvoiceNo) {
+                    aErrors.push(oBundle.getText("validationMIROVendorInvoiceNoRequired", [iTableRowNum]));
+                } else {
+                    if (!oFirstRowByInvoiceNo.hasOwnProperty(oRow.MIROVendorInvoiceNo)) {
+                        oFirstRowByInvoiceNo[oRow.MIROVendorInvoiceNo] = iIdx;
+                        if (!oRow.InvoiceDate) {
+                            aErrors.push(oBundle.getText("validationInvoiceDateRequired", [oRow.MIROVendorInvoiceNo]));
+                        }
+                        if (!oRow.MIROText) {
+                            aErrors.push(oBundle.getText("validationMIROTextRequired", [oRow.MIROVendorInvoiceNo]));
+                        }
+                        if (!oRow.MIROHeaderText) {
+                            aErrors.push(oBundle.getText("validationMIROHeaderTextRequired", [oRow.MIROVendorInvoiceNo]));
+                        }
+                    }
+                }
+            });
+
+            if (aErrors.length > 0) {
+                MessageBox.error(aErrors.join("\n"));
+                return;
+            }
 
             var aPromise = [];
             aPromise.push(this._CallODataV2("ACTION", "/processLogic", [], {
