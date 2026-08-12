@@ -223,6 +223,17 @@
                                 />
                             </table:template>
                         </table:Column>
+                        <table:Column
+                            width="14rem"
+                            label="{i18n>MatDocItemText}"
+                        >
+                            <table:template>
+                                <Text
+                                    text="{local>MatDocItemText}"
+                                    wrapping="false"
+                                />
+                            </table:template>
+                        </table:Column>
                     </table:columns>
                 </table:Table>
             </Panel>

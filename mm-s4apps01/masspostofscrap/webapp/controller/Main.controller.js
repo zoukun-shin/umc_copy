@@ -29,7 +29,6 @@ sap.ui.define([
             var oControlBinding = this.byId("idTemplateCollection").getBinding("items");
             oControlBinding.filter(oFilter);
 
-			// sEmail = "xinlei.xu@sh.shin-china.com";
             var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -132,6 +131,7 @@ sap.ui.define([
                     // GLAccount: aSheet1[i]["GLAccount"] || "",
                     HeaderText: aSheet1[i]["MaterialDocumentHeaderText"] || "",
                     ReasonCode: aSheet1[i]["GoodsMovementReasonCode"] || "",
+                    MatDocItemText: aSheet1[i]["MaterialDocumentItemText"] || "",
 
                 }
                 aExcelSet.push(oItem);
@@ -204,11 +204,11 @@ sap.ui.define([
             let aExcelSet = this._LocalData.getProperty("/excelSet");
             let isExistError = false;
             let aRequiredFields = ["Plant","MovementType","Material","ScrapQuantity","StorageLocation"];
-
+            let sMsg = this._ResourceBundle.getText("msg02");
             for (let i = 0; i < aExcelSet.length; i++) {
                 let oItem = aExcelSet[i];
                 oItem.Type = "S"; 
-                oItem.Message = "";
+                oItem.Message = sMsg;
                 for (let field of aRequiredFields) {
                     if (!oItem[field]) {
                         oItem.Type = "E";
