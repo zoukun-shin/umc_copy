@@ -28,7 +28,7 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="distributionchannel" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="materialbycustomer" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="additionalcustomermaterial" visible="false"/>
-
+                                <smartFilterBar:ControlConfiguration index='999' key="product" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>

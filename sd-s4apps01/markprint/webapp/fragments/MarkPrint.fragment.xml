@@ -58,6 +58,14 @@
                         <Text id="txtCustomerPurchaseOrderItem" text="{CustomerPurchaseOrderItem}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <table:Column id="colMaterial" width="12rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Material", "leadingProperty":"Material"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text id="txtMaterial" text="{Material}" wrapping="false" />
+                    </table:template>
+                </table:Column>
                 <table:Column id="colMaterialByCustomer" width="12rem" label="{i18n>MaterialByCustomer}" sortProperty="MaterialByCustomer" filterProperty="MaterialByCustomer">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"MaterialByCustomer", "leadingProperty":"MaterialByCustomer"}'/>
@@ -138,6 +146,7 @@
                         <Text id="txtEndBoxNo" text="{EndBoxNo}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                
             </table:columns>
         </table:Table>
     </smartTable:SmartTable>

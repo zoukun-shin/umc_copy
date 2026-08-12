@@ -39,6 +39,7 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="BeginBoxNo" visible="false" />
                                 <smartFilterBar:ControlConfiguration index='999' key="EndBoxNo" visible="false" />
                                 <smartFilterBar:ControlConfiguration index='999' key="MaterialByCustomer" visible="false" />
+                                <smartFilterBar:ControlConfiguration index='999' key="Material" visible="false" />
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>

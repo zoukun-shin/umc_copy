@@ -17,8 +17,9 @@
         <smartTable:customToolbar>
             <OverflowToolbar id="idAdditionalCustMatToolbar" design="Transparent">
                 <ToolbarSpacer id="idAdditionalCustMatToolbarSpacer"/>
-                <Button id="idEditBtn" icon="sap-icon://edit" type="Transparent" text="{i18n>editBtn}" press=".onEdit" enabled="{= ${local>/authorityCheck/button/Edit}}"/>
-                <Button id="idDeleteBtn" icon="sap-icon://delete" type="Transparent" text="{i18n>deleteBtn}" press=".onDelete" enabled="{= ${local>/authorityCheck/button/Delete}}"/>
+                <Button id="idEditBtn" icon="sap-icon://edit" type="Transparent" text="{i18n>editBtn}" press=".onEdit" enabled="{= ${local>/authorityCheck/button/Edit}}" visible="true"/>
+                <Button id="idSaveBtn" icon="sap-icon://save" type="Emphasized" text="{i18n>saveBtn}" press=".onSave" visible="false"/>
+                <Button id="idDeleteBtn" icon="sap-icon://delete" type="Transparent" text="{i18n>deleteBtn}" press=".onDelete" enabled="{= ${local>/authorityCheck/button/Delete}}" visible="true"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
         <table:Table id="idAdditionalCustMatTable" columnResize="onAfterRendering" columnMove="onAfterRendering">
@@ -80,7 +81,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"additionalcustomermaterial", "leadingProperty":"additionalcustomermaterial"}'/>
                     </table:customData>
                     <table:template>
-                        <Input id="inpAdditionalCustomerMaterial" value="{additionalcustomermaterial}" valueLiveUpdate="true" />
+                        <Input id="inpAdditionalCustomerMaterial" value="{additionalcustomermaterial}" valueLiveUpdate="true" editable="false" />
                     </table:template>
                 </table:Column>
                 <table:Column id="colAdditionalCustomerMaterialText" width="15rem" label="{i18n>additionalcustomermaterialtext}" sortProperty="additionalcustomermaterialtext" filterProperty="additionalcustomermaterialtext">
@@ -88,7 +89,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"additionalcustomermaterialtext", "leadingProperty":"additionalcustomermaterialtext"}'/>
                     </table:customData>
                     <table:template>
-                        <Input id="inpAdditionalCustomerMaterialText" value="{additionalcustomermaterialtext}" valueLiveUpdate="true" />
+                        <Input id="inpAdditionalCustomerMaterialText" value="{additionalcustomermaterialtext}" valueLiveUpdate="true" editable="false" />
                     </table:template>
                 </table:Column>
             </table:columns>

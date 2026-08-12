@@ -34,7 +34,7 @@ sap.ui.define([
 
         _initialize: function () {
             var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
-            var oFilter = new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.EQ, "ZUPLOAD_SO_" + sLanguage);
+            var oFilter = new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.EQ, "ZUPLOAD_CUSTMAT_" + sLanguage);
             var oControlBinding = this.byId("idTemplateCollection").getBinding("items");
             oControlBinding.filter(oFilter);
         },
