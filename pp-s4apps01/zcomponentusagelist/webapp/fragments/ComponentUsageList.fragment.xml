@@ -16,7 +16,7 @@
                 <ToolbarSpacer/>
             </OverflowToolbar>
         </smartTable:customToolbar>
-       <table:Table id="idTable" selectionMode="None" rowMode="Auto">
+       <table:Table id="idTable" selectionMode="None" rowMode="Auto" rowsUpdated="onUITableRowsUpdated">
             <table:columns>
                 <table:Column width="6rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
                     <table:customData>
@@ -42,7 +42,7 @@
                         <Text text="{ComponentDescription}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="13rem" label="{i18n>SupplierMaterialNumber}" sortProperty="SupplierMaterialNumber" filterProperty="SupplierMaterialNumber">
+                <table:Column width="13rem" label="{i18n>SupplierMaterialNumber}" sortProperty="SupplierMaterialNumber" filterProperty="SupplierMaterialNumber" visible="{local>/displayPurchasingInfo}">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"SupplierMaterialNumber", "leadingProperty":"SupplierMaterialNumber"}'/>
                     </table:customData>
@@ -50,7 +50,7 @@
                         <Text text="{SupplierMaterialNumber}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="13rem" label="{i18n>ProductManufacturerNumber}" sortProperty="ProductManufacturerNumber" filterProperty="ProductManufacturerNumber">
+                <table:Column width="13rem" label="{i18n>ProductManufacturerNumber}" sortProperty="ProductManufacturerNumber" filterProperty="ProductManufacturerNumber" visible="{local>/displayPurchasingInfo}">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ProductManufacturerNumber", "leadingProperty":"ProductManufacturerNumber"}'/>
                     </table:customData>
@@ -178,7 +178,15 @@
                         <Text text="{UsageProbabilityPercent}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>MRPType}" sortProperty="MRPType" filterProperty="MRPType" visible="{local>/showFlag}">
+                <table:Column width="12rem" label="{i18n>HighLevelMatValidityEndDate}" sortProperty="HighLevelMatValidityEndDate" filterProperty="HighLevelMatValidityEndDate" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"HighLevelMatValidityEndDate", "leadingProperty":"HighLevelMatValidityEndDate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{path:'HighLevelMatValidityEndDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}"  wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>MRPType}" sortProperty="MRPType" filterProperty="MRPType" visible="false">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"MRPType", "leadingProperty":"MRPType"}'/>
                     </table:customData>
@@ -186,7 +194,7 @@
                         <Text text="{MRPType}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>BomHeaderQuantityInBaseUnit}" sortProperty="BomHeaderQuantityInBaseUnit" filterProperty="BomHeaderQuantityInBaseUnit" visible="{local>/showFlag}">
+                <table:Column width="12rem" label="{i18n>BomHeaderQuantityInBaseUnit}" sortProperty="BomHeaderQuantityInBaseUnit" filterProperty="BomHeaderQuantityInBaseUnit" visible="false">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BomHeaderQuantityInBaseUnit", "leadingProperty":"BomHeaderQuantityInBaseUnit"}'/>
                     </table:customData>
@@ -194,7 +202,7 @@
                         <Text text="{path:'BomHeaderQuantityInBaseUnit', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ComponentQuantityInBaseUoM}" sortProperty="ComponentQuantityInBaseUoM" filterProperty="ComponentQuantityInBaseUoM" visible="{local>/showFlag}">
+                <table:Column width="12rem" label="{i18n>ComponentQuantityInBaseUoM}" sortProperty="ComponentQuantityInBaseUoM" filterProperty="ComponentQuantityInBaseUoM" visible="{local>/displayComponentQtyInBaseUnit}">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ComponentQuantityInBaseUoM", "leadingProperty":"ComponentQuantityInBaseUoM"}'/>
                     </table:customData>
@@ -202,7 +210,7 @@
                         <Text text="{path:'ComponentQuantityInBaseUoM', formatter:'.formatter.formatNumber'}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>BillOfMaterialItemBaseUnit}" sortProperty="BillOfMaterialItemBaseUnit" filterProperty="BillOfMaterialItemBaseUnit" visible="{local>/showFlag}">
+                <table:Column width="12rem" label="{i18n>BillOfMaterialItemBaseUnit}" sortProperty="BillOfMaterialItemBaseUnit" filterProperty="BillOfMaterialItemBaseUnit" visible="{local>/displayComponentQtyInBaseUnit}">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialItemBaseUnit", "leadingProperty":"BillOfMaterialItemBaseUnit"}'/>
                     </table:customData>
@@ -210,7 +218,7 @@
                         <Text text="{BillOfMaterialItemBaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="12rem" label="{i18n>ChgToEngineeringChgDocument}" sortProperty="ChgToEngineeringChgDocument" filterProperty="ChgToEngineeringChgDocument" visible="{local>/showFlag}">
+                <table:Column width="12rem" label="{i18n>ChgToEngineeringChgDocument}" sortProperty="ChgToEngineeringChgDocument" filterProperty="ChgToEngineeringChgDocument" visible="false">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ChgToEngineeringChgDocument", "leadingProperty":"ChgToEngineeringChgDocument"}'/>
                     </table:customData>

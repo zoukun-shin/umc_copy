@@ -18,7 +18,8 @@ function (JSONModel, Device) {
         // Create local Model
         createLocalModel: function () {
             var oModel = new JSONModel({
-                showFlag: true
+                displayPurchasingInfo:false,
+                displayComponentQtyInBaseUnit:false
             });
             return oModel;
         }

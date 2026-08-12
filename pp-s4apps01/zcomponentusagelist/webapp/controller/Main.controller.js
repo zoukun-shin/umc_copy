@@ -81,25 +81,41 @@ sap.ui.define([
             });
         },
 
+        // onSelect: function (oEvent) {
+        //     var sId = oEvent.getSource().getId();
+        //     var bSelected = oEvent.getSource().getSelected();
+        //     this.toggleCheckBox(sId, bSelected);
+        // },
+
+        // toggleCheckBox: function (sId, bSelected) {
+        //     if (sId.includes("idCB2")) {
+        //             this.getModel("local").setProperty("/displayPurchasingInfo",bSelected);
+        //     }
+
+        //     if (sId.includes("idCB3")) {
+        //             this.getModel("local").setProperty("/displayComponentQtyInBaseUnit",bSelected);
+        //     }
+        // },
+
         onBeforeRebindTable: function (oEvent) {
             // 获取表格对象
-            var oTable = this.byId("idTable");
-
+            // var oTable = this.byId("idTable");
             // 获取 DisplayPurchasingInfo 的值
             // var oSmartFilterBar = this.byId("idSmartFilterBar");
             // var sDisplayPurchasingInfo = oSmartFilterBar.getFilterData().DisplayPurchasingInfo;
+            // var bDisplayPurchasingInfo = this.byId("idCB2").getSelected();
+            // 动态显示或隐藏列
+            // var oColumns = oTable.getColumns();
+            // oColumns.forEach(function (oColumn) {
+            //     if (oColumn.getSortProperty() === "SupplierMaterialNumber" || oColumn.getSortProperty() === "ProductManufacturerNumber") {
+            //         oColumn.setVisible(bDisplayPurchasingInfo);
+            //     }
+            // });
+
             var bDisplayPurchasingInfo = this.byId("idCB2").getSelected();
             var bDisplayComponentQtyInBaseUnit = this.byId("idCB3").getSelected();
-
-            // 动态显示或隐藏列
-            var oColumns = oTable.getColumns();
-            oColumns.forEach(function (oColumn) {
-                if (oColumn.getSortProperty() === "SupplierMaterialNumber" || oColumn.getSortProperty() === "ProductManufacturerNumber") {
-                    oColumn.setVisible(bDisplayPurchasingInfo);
-                }
-            });
-
-            this.getView().getModel("local").setProperty("/showFlag", bDisplayComponentQtyInBaseUnit);
+            this.getModel("local").setProperty("/displayPurchasingInfo",bDisplayPurchasingInfo);
+            this.getModel("local").setProperty("/displayComponentQtyInBaseUnit",bDisplayComponentQtyInBaseUnit);
 
             // 根据选择框，添加过滤条件传值到后端
             var oBindingParams = oEvent.getParameter("bindingParams");
@@ -126,7 +142,7 @@ sap.ui.define([
                 });
                 filters.push(oDisplayComponentQtyInBaseUnit);
 
-                //只有勾选之后才从后端取值的情况，需要下列逻辑
+                //当不勾选，后端不取值；勾选后，后端才取值 需要下列逻辑
                 if (oBindingParams.parameters && oBindingParams.parameters.select) {
                     var sSelect = oBindingParams.parameters.select;
 
@@ -143,6 +159,13 @@ sap.ui.define([
             }
         },
 
+        onUITableRowsUpdated: function (oEvent) {
+            var bDisplayPurchasingInfo = this.byId("idCB2").getSelected();
+            var bDisplayComponentQtyInBaseUnit = this.byId("idCB3").getSelected();
+            this.getModel("local").setProperty("/displayPurchasingInfo",bDisplayPurchasingInfo);
+            this.getModel("local").setProperty("/displayComponentQtyInBaseUnit",bDisplayComponentQtyInBaseUnit);
+        },
+
         // ADD BEGIN BY XINLEI XU 2025/07/29
         onBeforeExport: function (oEvent) {
             var mExcelSettings = oEvent.getParameter("exportSettings");
@@ -155,6 +178,7 @@ sap.ui.define([
                 switch (oColumn.property) {
                     //  Date
                     case "HighLevelMatValidityStartDate":
+                    case "HighLevelMatValidityEndDate":
                         oColumn.type = sap.ui.export.EdmType.Date;
                         break;
                     case "BillOfMaterialItemQuantity":
