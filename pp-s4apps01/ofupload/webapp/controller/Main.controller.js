@@ -147,19 +147,28 @@ sap.ui.define([
                 bIsHorizontal = false;
             }
 
+            // 日期格式正则：yyyy/MM/dd 或 yyyy-M-d 等，用于判断是否需要做格式转换
+            const DATE_FORMAT_REGEX = /^\d{4}[\/\-]\d{1,2}[\/\-]\d{1,2}$/;
+
             // 横版模板：从 aSheet1[1]（Excel第3行）读取 __EMPTY_N 列对应的日期值，建立列到日期的映射
+            // Object.keys 前7个（index 0-6）为固定字段，index 7 起为日期列
             let mColumnDateMap = {};
             if (bIsHorizontal && aSheet1.length > 1) {
                 const oDateRow = aSheet1[1];
                 if (oDateRow) {
-                    Object.keys(oDateRow).forEach(function (key) {
+                    const aKeys = Object.keys(oDateRow);
+                    aKeys.forEach(function (key, iKeyIndex) {
                         if (/^__EMPTY_\d*$/.test(key)) {
-                            var sValue = oDateRow[key];
-                            if (sValue && typeof sValue === "string" && sValue.trim() !== "" && this.isValidDate(sValue)) {
-                                mColumnDateMap[key] = sValue;
+                            if (iKeyIndex >= 7) {
+                                var sValue = oDateRow[key];
+                                if (sValue && typeof sValue === "string" && sValue.trim() !== "") {
+                                    // 无论日期格式是否合法都纳入映射，校验放到 onCheck 中
+                                    mColumnDateMap[key] = sValue;
+                                }
                             }
+                            // index < 7 的 __EMPTY_N 列为非日期列（如数量等），忽略
                         }
-                    }.bind(this));
+                    });
                 }
             }
 
@@ -181,18 +190,21 @@ sap.ui.define([
                         const sQty = oRow[emptyKey];
                         const sDate = mColumnDateMap[emptyKey];
                         if (sQty && String(sQty).trim() !== "" && sDate) {
+                            const bDateValid = DATE_FORMAT_REGEX.test(sDate);
                             aExcelSet.push({
                                 Type: "",
                                 Message: "",
-                                Tabix: i,
+                                Tabix: aExcelSet.length,
                                 ...oFixedProps,
-                                RequirementDate: formatter.dateFormatter(sDate, "yyyyMMdd") || "",
+                                RequirementDate: bDateValid ? (formatter.dateFormatter(sDate, "yyyy/MM/dd") || "") : sDate,
                                 RequirementQty: sQty || "",
                             });
                         }
                     });
                 } else {
                     // 竖版模板（原有逻辑）
+                    const sRawDate = oRow["RequirementDate"] || "";
+                    const bDateValid = DATE_FORMAT_REGEX.test(sRawDate);
                     aExcelSet.push({
                         Type: "",
                         Message: "",
@@ -201,27 +213,43 @@ sap.ui.define([
                         Version: oRow["Version"] || "",
                         Material: oRow["Material"] || "",
                         Plant: oRow["Plant"] || "",
-                        RequirementDate: formatter.dateFormatter(oRow["RequirementDate"], "yyyyMMdd") || "",
+                        RequirementDate: bDateValid ? (formatter.dateFormatter(sRawDate, "yyyy/MM/dd") || "") : sRawDate,
                         RequirementQty: oRow["RequirementQty"] || "",
                         Remark: oRow["Remark"] || "",
                     });
                 }
             }
 
-            if (aExcelSet.length === 0) {
-                return;
-            }
             this._LocalData.setProperty("/excelSet", aExcelSet);
             // this.getErrorCount(aExcelSet, "check");
         },
 
         onCheck: function (oEvent) {
-            // ofupload does not perform frontend checks; delegate to backend CHECK action
-            let aPostBody = this.preparePostBody();
-            if (!aPostBody || aPostBody.length === 0) {
+            let aExcelSet = this._LocalData.getProperty("/excelSet");
+            if (!aExcelSet || aExcelSet.length === 0) {
                 return;
             }
-            this.postAction("processLogic", "CHECK", JSON.stringify(aPostBody));
+
+            // 本地日期格式校验：经过 dateFormatter 转换后应为 yyyy/MM/dd 格式，否则说明原始日期格式不合法
+            const DATE_FORMATTED_REGEX = /^\d{4}\/\d{2}\/\d{2}$/;
+            const sInvalidDateMsg = this._ResourceBundle.getText("invalidReqDate");
+            let bHasError = false;
+            aExcelSet.forEach(function (item) {
+                const sDate = item.RequirementDate;
+                if (sDate && String(sDate).trim() !== "" && !DATE_FORMATTED_REGEX.test(sDate)) {
+                    item.Type = "E";
+                    item.Message = sInvalidDateMsg;
+                    bHasError = true;
+                }
+            });
+
+            if (bHasError) {
+                this._LocalData.setProperty("/excelSet", aExcelSet);
+                this.getErrorCount(aExcelSet, "check");
+                return;
+            }
+
+            this.postAction("processLogic", "CHECK", JSON.stringify(aExcelSet));
         },
 
         onExcute: function (oEvent) {
@@ -235,6 +263,10 @@ sap.ui.define([
         },
 
         postAction: function (sAction, sEvent, postData) {
+            let aPostData = JSON.parse(postData);
+            aPostData.forEach(function (line) {
+                line.RequirementDate = formatter.odataDate(line.RequirementDate);
+            });
             this._BusyDialog.open();
             var aExcelSet = this._LocalData.getProperty("/excelSet");
             var oModel = this._oDataModel;
@@ -243,20 +275,22 @@ sap.ui.define([
                 changeSetId: 1,
                 urlParameters: {
                     Event: sEvent,
-                    Zzkey: postData
+                    Zzkey: JSON.stringify(aPostData)
                 },
                 success: function (oData) {
                     let object = JSON.parse(oData[sAction].Zzkey);
                     object.forEach(function (line) {
                         let searchKey = `${line.TABIX}`;
-                        let item = aExcelSet.find(item => {
-                            const key = `${item.Tabix}`;
-                            return key === searchKey;
-                        });
-                        if (item) {
+                        // let aItems = aExcelSet.filter(item => `${item.Tabix}` === searchKey);
+                        // aItems.forEach(function (item) {
+                        //     item.Type = line.TYPE;
+                        //     item.Message = line.MESSAGE;
+                        // });
+                        let aItems = aExcelSet.filter(item => `${item.Tabix}` === searchKey);
+                        aItems.forEach(function (item) {
                             item.Type = line.TYPE;
                             item.Message = line.MESSAGE;
-                        }
+                        });
                     });
                     this._LocalData.setProperty("/excelSet", aExcelSet);
                     switch (sEvent) {
