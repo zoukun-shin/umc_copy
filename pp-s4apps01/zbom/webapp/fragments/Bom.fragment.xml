@@ -10,7 +10,7 @@
         showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" 
         persistencyKey="BOMST" header="{i18n>Results}" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-        beforeExport="onBeforeExport" showFullScreenButton="false" ignoredFields="RequiredQuantity,BOMExplosionType,LocalPosition,ShowSubParts,BOMExplosionIsMultilevel,BOMExplosionApplication,DisplayMpn">
+        beforeExport="onBeforeExport" showFullScreenButton="false" ignoredFields="RequiredQuantity,BOMExplosionType,LocalPosition,ShowSubParts,BOMExplosionIsMultilevel,BOMExplosionApplication,DisplayMpn,ExternalProductGroup,AvailabilityCheckType,NoDisplayLCAComponent">
         <smartTable:customToolbar>
             <OverflowToolbar id="idToolBar" design="Transparent">
                 <ToolbarSpacer/>
@@ -429,6 +429,38 @@
                     </table:customData>
                     <table:template>
                         <Text text="{BillOfMaterialComponentMPN}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>SpecialProcurementType}" sortProperty="SpecialProcurementType" filterProperty="SpecialProcurementType" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SpecialProcurementType", "leadingProperty":"SpecialProcurementType"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SpecialProcurementType}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>YY1_SAFTYCERT_PRD}" sortProperty="YY1_SAFTYCERT_PRD" filterProperty="YY1_SAFTYCERT_PRD" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"YY1_SAFTYCERT_PRD", "leadingProperty":"YY1_SAFTYCERT_PRD"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{YY1_SAFTYCERT_PRD}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>YY1_ROHSMARK_PRD}" sortProperty="YY1_ROHSMARK_PRD" filterProperty="YY1_ROHSMARK_PRD" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"YY1_ROHSMARK_PRD", "leadingProperty":"YY1_ROHSMARK_PRD"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{YY1_ROHSMARK_PRD}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>YY1_OPENINGTIME_PRD}" sortProperty="YY1_OPENINGTIME_PRD" filterProperty="YY1_OPENINGTIME_PRD" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"YY1_OPENINGTIME_PRD", "leadingProperty":"YY1_OPENINGTIME_PRD"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{YY1_OPENINGTIME_PRD}" wrapping="false" />
                     </table:template>
                 </table:Column>
             </table:columns>
