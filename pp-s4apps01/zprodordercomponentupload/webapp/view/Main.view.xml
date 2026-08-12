@@ -17,7 +17,7 @@
                 <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileChange" width="40%" class="sapUiSmallMargin"/>
             </Panel>
             <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
-                <table:Table id="idTable" rows="{local>/excelSet}" fixedColumnCount="4" selectionMode="None" rowMode="Auto" class="sapUiSizeCompact">
+                <table:Table id="idTable" rows="{local>/excelSet}"  selectionMode="None"  fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
                     <table:extension>
                         <OverflowToolbar>
                             <Text text="{local>/logInfo}"/>

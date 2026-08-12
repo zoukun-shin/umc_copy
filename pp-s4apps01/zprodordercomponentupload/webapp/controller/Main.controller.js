@@ -101,8 +101,8 @@ sap.ui.define([
                 var oSheet = oWorkBook.Sheets[Object.getOwnPropertyNames(oWorkBook.Sheets)[0]];
                 var aSheetData = XLSX.utils.sheet_to_row_object_array(oSheet);
                 var iRowNo = 0;
-                // Read valid data starting from line 2
-                for (var i = 0; i < aSheetData.length; i++) {
+                // Read valid data starting from line 3
+                for (var i = 1; i < aSheetData.length; i++) {
                     iRowNo += 1;
                     var item = {
                         "Status": "",
