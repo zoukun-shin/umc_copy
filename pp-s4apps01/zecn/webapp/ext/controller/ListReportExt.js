@@ -110,6 +110,7 @@ sap.ui.define([
                 });
             }
 
+            _oFunctions.sFieldECO = "";
             // 为每个唯一 ECN 并行生成 PDF
             var aPromises = aUniqueLines.map(function (oLine) {
                 return _oFunctions._processSinglePrint(oLine, sType);
@@ -117,6 +118,9 @@ sap.ui.define([
 
             Promise.all(aPromises).finally(function () {
                 oBusyDialog.close();
+                if (_oFunctions.sFieldECO) {
+                    MessageBox.error(_ResourceBundle.getText("getPrintDataFailed",[_oFunctions.sFieldECO]));
+                }
             });
         },
         _processSinglePrint: function (oSelectedLine, sType) {
@@ -359,6 +363,12 @@ sap.ui.define([
                         }
                         if ( pdfContent.PrintData.UnitFg ) {
                             pdfContent.PrintData.StockOfFg = pdfContent.PrintData.StockOfFg + " " + pdfContent.PrintData.UnitFg;
+                        }
+                    } else {
+                        if (_oFunctions.sFieldECO === "") {
+                            _oFunctions.sFieldECO = oSelectedLine.ECNNo;
+                        } else {
+                            _oFunctions.sFieldECO = _oFunctions.sFieldECO + "," + oSelectedLine.ECNNo;
                         }
                     }
 
