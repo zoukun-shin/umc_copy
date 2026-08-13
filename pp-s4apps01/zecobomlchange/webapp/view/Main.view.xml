@@ -80,7 +80,9 @@
             <smartTable:SmartTable id="smartTable_ECOBOMLChange" entitySet="ECOBOMLChange" smartVariant="__SVM01" smartFilterId="SFBECOBOMLChange"
                 tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true"
                 persistencyKey="ECOBOMLChangeTable" header="{i18n>Result}" enableAutoBinding="false"
-                useExportToExcel="true" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable"
+                useExportToExcel="true" placeToolbarInTable="true"
+                beforeRebindTable="onBeforeRebindTable"
+                beforeExport="onBeforeExport"
                 fitContainer="true" height="100%">
 
                 <t:Table id="Table_ECOBOMLChange" selectionMode="None" rowMode="Auto">

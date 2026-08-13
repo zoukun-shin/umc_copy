@@ -80,7 +80,7 @@ sap.ui.define([
                 return;
             }
 
-            // ※ 假设_AssignPlant行项目字段名为Plant，与CompanySet-CompanyCode同结构，请confirm
+            //  行项目字段名为Plant，与CompanySet-CompanyCode同结构 
             var aPlants = aPlantSet.map(function (oData) {
                 return oData.Plant;
             }).sort();
@@ -153,6 +153,28 @@ sap.ui.define([
                 return vValue.length > 0;
             }
             return true;
+        },
+
+        onBeforeExport: function (oEvent) {
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
+            this._exportExcel(mExcelSettings, sFileName);
+        },
+
+        _exportExcel: function (mExcelSettings, sFileName) {
+            // 日期列格式转换：把 /Date(...)/ 原始值导出为 yyyy/MM/dd
+            mExcelSettings.workbook.columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    case "ValidityStartDate":
+                    case "ValidityEndDate":
+                    case "ValidDate":
+                        oColumn.type = sap.ui.export.EdmType.Date;
+                        oColumn.format = "yyyy/MM/dd";
+                        break;
+                }
+            });
+            // 下载文件名：程序名 + 时间戳，与其他报表统一
+            mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
         }
     });
 });
