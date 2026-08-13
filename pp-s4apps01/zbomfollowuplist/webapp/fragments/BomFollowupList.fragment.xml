@@ -77,14 +77,7 @@
                         <Text text="{path:'EffectiveOutDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}"  wrapping="false" />
                     </table:template>
                 </table:Column>
-                 <table:Column width="12rem" label="{i18n>MatlWrhsStkQtyInMatlBaseUnit}" sortProperty="MatlWrhsStkQtyInMatlBaseUnit" filterProperty="MatlWrhsStkQtyInMatlBaseUnit">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"MatlWrhsStkQtyInMatlBaseUnit", "leadingProperty":"MatlWrhsStkQtyInMatlBaseUnit"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{MatlWrhsStkQtyInMatlBaseUnit}" wrapping="false" />
-                    </table:template>
-                </table:Column>
+                 
                  <!-- <table:Column width="12rem" label="{i18n>MaterialBaseUnit}" sortProperty="MaterialBaseUnit" filterProperty="MaterialBaseUnit">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"MaterialBaseUnit", "leadingProperty":"MaterialBaseUnit"}'/>
@@ -157,12 +150,12 @@
                         <Text text="{path:'ValidityEndDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}"  wrapping="false" />
                     </table:template>
                 </table:Column>
-                 <table:Column width="12rem" label="{i18n>DisplayStockQty}" sortProperty="DisplayStockQty" filterProperty="DisplayStockQty">
+                <table:Column width="12rem" label="{i18n>MatlWrhsStkQtyInMatlBaseUnit}" sortProperty="MatlWrhsStkQtyInMatlBaseUnit" filterProperty="MatlWrhsStkQtyInMatlBaseUnit" visible="{local>/DisplayStockQty}">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"DisplayStockQty", "leadingProperty":"DisplayStockQty"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"MatlWrhsStkQtyInMatlBaseUnit", "leadingProperty":"MatlWrhsStkQtyInMatlBaseUnit"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{DisplayStockQty}" wrapping="false" />
+                        <Text text="{MatlWrhsStkQtyInMatlBaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
             </table:columns>

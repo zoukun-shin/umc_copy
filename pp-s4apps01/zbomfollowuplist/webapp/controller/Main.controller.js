@@ -86,6 +86,7 @@ sap.ui.define([
             }
 
             var sDisplayStockQty = this.byId("idCB1").getSelected();
+            this.getModel("local").setProperty("/DisplayStockQty", sDisplayStockQty);
 
             if (sDisplayStockQty === true) {
                 var oIndicator1Filter = new sap.ui.model.Filter({
