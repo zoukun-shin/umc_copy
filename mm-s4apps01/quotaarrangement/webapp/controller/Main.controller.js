@@ -25,7 +25,7 @@ sap.ui.define([
             // var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
 
             var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
-            var oFilter = new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.EQ, "ZUPLOAD_QUOTAARRGMT");
+            var oFilter = new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.EQ, "ZUPLOAD_QUOTAARRGMT_" + sLanguage);
             var oControlBinding = this.byId("idTemplateCollection").getBinding("items");
             oControlBinding.filter(oFilter);
 

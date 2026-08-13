@@ -183,7 +183,7 @@
                         >
                             <table:template>
                                 <Text
-                                    text="{path:'local>ValidityStartDate', type:'sap.ui.model.type.Date'}"
+                                    text="{path:'local>ValidityStartDate',type:'sap.ui.model.type.Date',formatOptions:{UTC: true}}"
                                     wrapping="false"
                                 />
                             </table:template>
@@ -194,7 +194,7 @@
                         >
                             <table:template>
                                 <Text
-                                    text="{path:'local>ValidityEndDate', type:'sap.ui.model.type.Date'}"
+                                    text="{path:'local>ValidityEndDate',type:'sap.ui.model.type.Date',formatOptions:{UTC: true}}"
                                     wrapping="false"
                                 />
                             </table:template>
