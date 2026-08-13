@@ -1007,15 +1007,21 @@ sap.ui.define([
                         case "HeaderValidityStartDate":
                             sType = sap.ui.export.EdmType.Date;
                             break;
-                        //  Number 
-                        case "ComponentQuantityInCompUoM":
+                        //  Number
                         case "BillOfMaterialSubItemQuantity":
                         case "NetWeight":
-                        case "ComponentQuantityInBaseUoM":
                         case "BomHeaderQuantityInBaseUnit":
                             sType = sap.ui.export.EdmType.Number;
                             bDelimiter = true;
-                            // iScale = 3;
+                            iScale = 3;
+                            sTextAlign = "End";
+                            break;
+                        //  Number 6Scale
+                        case "ComponentQuantityInCompUoM":
+                        case "ComponentQuantityInBaseUoM":
+                            sType = sap.ui.export.EdmType.Number;
+                            bDelimiter = true;
+                            iScale = 6;
                             sTextAlign = "End";
                             // sUnitProperty = "";
                             break;
