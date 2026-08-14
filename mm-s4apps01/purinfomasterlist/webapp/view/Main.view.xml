@@ -101,6 +101,15 @@
 								<smartFilterBar:ControlConfiguration index="999" key="InvoiceIsGoodsReceiptBased" visible="false"/>
 								<smartFilterBar:ControlConfiguration index="999" key="LotSizeRoundingQuantity" visible="false"/>
 								<!-- ADD END BY XINLEI XU 2025/11/23 VN CR#5432 -->
+								<!-- ADD BEGIN BY XINLEI XU 2026/07/09 CN 需求 No.210 -->
+								<smartFilterBar:ControlConfiguration index="999" key="Manufacturer" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="ManufacturerName" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="YY1_HSCODE_PRD" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="YY1_TARIFFRATE_PRD" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="YY1_DIFFUSEDCOUNTRY_PRD" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="YY1_CHIPCOUNTRY_PRD" visible="false"/>
+								<smartFilterBar:ControlConfiguration index="999" key="YY1_VALUEADDRATIO_PRD" visible="false"/>
+								<!-- ADD END BY XINLEI XU 2026/07/09 CN 需求 No.210 -->
 							</smartFilterBar:controlConfiguration>
 						</smartFilterBar:SmartFilterBar>
 					</FlexBox>
@@ -108,8 +117,8 @@
 			</f:DynamicPageHeader>
 		</f:header>
 		<f:content>
-			<smartTable:SmartTable id="smartTable_Mast" smartVariant="__SVM01" persistencyKey="PurInfoMasterST" entitySet="PurInfoMaster" smartFilterId="idSmartFilterBar" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="true" showRowCount="true" placeToolbarInTable="true" header="{i18n>Results}" enableAutoBinding="false" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" requestAtLeastFields="uuid,Ztype1,Ztype2,zvalue2,OrganizationBPName1,PlusDay,productsalesorg,orderpriceunittoorderunitnmrtr,isdeleted,ismarkedfordeletion,UserEmail,Currency_record" ignoredFields="uuid,Ztype1,Ztype2,zvalue2,OrganizationBPName1,PlusDay,productsalesorg,orderpriceunittoorderunitnmrtr,isdeleted,ismarkedfordeletion,UserEmail,Currency_record">
-				<table:Table id="Table_Calc" selectionMode="MultiToggle" selectionBehavior="Row" rowMode="Auto">
+			<smartTable:SmartTable id="smartTable_Mast" smartVariant="__SVM01" persistencyKey="PurInfoMasterST" entitySet="PurInfoMaster" smartFilterId="idSmartFilterBar" tableType="Table" enableExport="true" useVariantManagement="true" useTablePersonalisation="true" showRowCount="true" placeToolbarInTable="true" header="{i18n>Results}" enableAutoBinding="false" beforeExport="onBeforeExport" beforeRebindTable="onBeforeRebindTable" requestAtLeastFields="uuid,Ztype1,Ztype2,zvalue2,OrganizationBPName1,PlusDay,productsalesorg,orderpriceunittoorderunitnmrtr,isdeleted,ismarkedfordeletion,UserEmail,Currency_record,Manufacturer" ignoredFields="uuid,Ztype1,Ztype2,zvalue2,OrganizationBPName1,PlusDay,productsalesorg,orderpriceunittoorderunitnmrtr,isdeleted,ismarkedfordeletion,UserEmail,Currency_record,Manufacturer">
+				<table:Table id="Table_Calc" selectionMode="MultiToggle" selectionBehavior="Row" rowMode="Auto" threshold="5000">
 					<table:columns>
 						<table:Column id="purchasinginforecord" width="12rem" visible="true" autoResizable="true" sortProperty="purchasinginforecord" filterProperty="purchasinginforecord">
 							<table:customData>
@@ -438,7 +447,10 @@
 								<Label text="{i18n>standardpurchaseorderquantity}"/>
 							</table:label>
 							<table:template>
-								<Label text="{ parts: [ 'standardpurchaseorderquantity', 'Currency_plnt' ],formatter:'.formatter.formatFloat'}" wrapping="false"/>
+								<!-- MOD BEGIN BY XINLEI XU 2026/08/14 CN GAP#75 -->
+								<!-- <Label text="{ parts: [ 'standardpurchaseorderquantity', 'Currency_plnt' ],formatter:'.formatter.formatFloat'}" wrapping="false"/> -->
+								<Label text="{ parts: [ 'standardpurchaseorderquantity', 'Currency_plnt' ],formatter:'.formatter.formatFloatDecimal6'}" wrapping="false"/>
+								<!-- MOD END BY XINLEI XU 2026/08/14 CN GAP#75 -->
 							</table:template>
 						</table:Column>
 						<table:Column id="Taxprice" width="10rem" visible="true" autoResizable="true" sortProperty="Taxprice" filterProperty="Taxprice" hAlign="End">
@@ -449,7 +461,10 @@
 								<Label text="{i18n>Taxprice}"/>
 							</table:label>
 							<table:template>
-								<Label text="{ parts: [ 'Taxprice', 'Currency_plnt' ],formatter:'.formatter.formatFloat'}" wrapping="false"/>
+								<!-- MOD BEGIN BY XINLEI XU 2026/08/14 CN GAP#75 -->
+								<!-- <Label text="{ parts: [ 'Taxprice', 'Currency_plnt' ],formatter:'.formatter.formatFloat'}" wrapping="false"/> -->
+								<Label text="{ parts: [ 'Taxprice', 'Currency_plnt' ],formatter:'.formatter.formatFloatDecimal6'}" wrapping="false"/>
+								<!-- MOD END BY XINLEI XU 2026/08/14 CN GAP#75 -->
 							</table:template>
 						</table:Column>
 						<table:Column id="UnitPricePlnt" width="10rem" visible="true" autoResizable="true" sortProperty="UnitPrice_plnt" filterProperty="UnitPrice_plnt" hAlign="End">
@@ -804,6 +819,74 @@
 							</table:template>
 						</table:Column>
 						<!-- ADD END BY XINLEI XU 2025/11/23 VN CR#5432 -->
+						<!-- ADD BEGIN BY XINLEI XU 2026/07/09 CN 需求 No.210 -->
+						<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="ManufacturerName" filterProperty="ManufacturerName">
+							<table:customData>
+								<core:CustomData key="p13nData" value='\{"columnKey":"ManufacturerName", "leadingProperty":"ManufacturerName", "sortProperty": "ManufacturerName", "filterProperty": "ManufacturerName"}'/>
+							</table:customData>
+							<table:label>
+								<Label text="{i18n>ManufacturerName}"/>
+							</table:label>
+							<table:template>
+								<Label text="{ManufacturerName}" wrapping="false"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="YY1_HSCODE_PRD" filterProperty="YY1_HSCODE_PRD">
+							<table:customData>
+								<core:CustomData key="p13nData" value='\{"columnKey":"YY1_HSCODE_PRD", "leadingProperty":"YY1_HSCODE_PRD", "sortProperty": "YY1_HSCODE_PRD", "filterProperty": "YY1_HSCODE_PRD"}'/>
+							</table:customData>
+							<table:label>
+								<Label text="{i18n>YY1_HSCODE_PRD}"/>
+							</table:label>
+							<table:template>
+								<Label text="{YY1_HSCODE_PRD}" wrapping="false"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="YY1_TARIFFRATE_PRD" filterProperty="YY1_TARIFFRATE_PRD">
+							<table:customData>
+								<core:CustomData key="p13nData" value='\{"columnKey":"YY1_TARIFFRATE_PRD", "leadingProperty":"YY1_TARIFFRATE_PRD", "sortProperty": "YY1_TARIFFRATE_PRD", "filterProperty": "YY1_TARIFFRATE_PRD"}'/>
+							</table:customData>
+							<table:label>
+								<Label text="{i18n>YY1_TARIFFRATE_PRD}"/>
+							</table:label>
+							<table:template>
+								<Label text="{YY1_TARIFFRATE_PRD}" wrapping="false"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="YY1_DIFFUSEDCOUNTRY_PRD" filterProperty="YY1_DIFFUSEDCOUNTRY_PRD">
+							<table:customData>
+								<core:CustomData key="p13nData" value='\{"columnKey":"YY1_DIFFUSEDCOUNTRY_PRD", "leadingProperty":"YY1_DIFFUSEDCOUNTRY_PRD", "sortProperty": "YY1_DIFFUSEDCOUNTRY_PRD", "filterProperty": "YY1_DIFFUSEDCOUNTRY_PRD"}'/>
+							</table:customData>
+							<table:label>
+								<Label text="{i18n>YY1_DIFFUSEDCOUNTRY_PRD}"/>
+							</table:label>
+							<table:template>
+								<Label text="{YY1_DIFFUSEDCOUNTRY_PRD}" wrapping="false"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="YY1_CHIPCOUNTRY_PRD" filterProperty="YY1_CHIPCOUNTRY_PRD">
+							<table:customData>
+								<core:CustomData key="p13nData" value='\{"columnKey":"YY1_CHIPCOUNTRY_PRD", "leadingProperty":"YY1_CHIPCOUNTRY_PRD", "sortProperty": "YY1_CHIPCOUNTRY_PRD", "filterProperty": "YY1_CHIPCOUNTRY_PRD"}'/>
+							</table:customData>
+							<table:label>
+								<Label text="{i18n>YY1_CHIPCOUNTRY_PRD}"/>
+							</table:label>
+							<table:template>
+								<Label text="{YY1_CHIPCOUNTRY_PRD}" wrapping="false"/>
+							</table:template>
+						</table:Column>
+						<table:Column width="10rem" visible="true" autoResizable="true" sortProperty="YY1_VALUEADDRATIO_PRD" filterProperty="YY1_VALUEADDRATIO_PRD">
+							<table:customData>
+								<core:CustomData key="p13nData" value='\{"columnKey":"YY1_VALUEADDRATIO_PRD", "leadingProperty":"YY1_VALUEADDRATIO_PRD", "sortProperty": "YY1_VALUEADDRATIO_PRD", "filterProperty": "YY1_VALUEADDRATIO_PRD"}'/>
+							</table:customData>
+							<table:label>
+								<Label text="{i18n>YY1_VALUEADDRATIO_PRD}"/>
+							</table:label>
+							<table:template>
+								<Label text="{YY1_VALUEADDRATIO_PRD}" wrapping="false"/>
+							</table:template>
+						</table:Column>
+						<!-- ADD END BY XINLEI XU 2026/07/09 CN 需求 No.210 -->
 					</table:columns>
 				</table:Table>
 			</smartTable:SmartTable>

@@ -153,6 +153,39 @@ sap.ui.define([
                 sDesc = "";
             }
             return sDesc;
-        }
+        },
+
+        // ADD BEGIN BY XINLEI XU 2026/08/14 CN GAP#75
+        formatFloatDecimal6: function (n, currency) {
+            if (n) {
+                if (parseFloat(n) === 0) {
+                    return "";
+                }
+                var sign = "";
+                var decimal = 6;
+                if (typeof n === "string") {
+                    var bNegative = n.endsWith("-");
+                    if (bNegative) {
+                        n = "-" + n.substring(0, n.length - 1);
+                    }
+                }
+                var num = Number(n).toFixed(decimal);
+                if (num < 0) {
+                    num = num.substring(1);
+                    sign = "-";
+                }
+                var re = /\d{1,3}(?=(\d{3})+$)/g;
+                var n1 = num.toString().replace(/^(\d+)((\.\d+)?)$/, function (s, s1, s2) {
+                    return s1.replace(re, "$&,") + s2;
+                });
+                if (sign === "-") {
+                    n1 = sign + n1;
+                }
+                return n1;
+            } else {
+                return n;
+            }
+        },
+        // ADD BEGIN BY XINLEI XU 2026/08/14 CN GAP#75
     };
 });

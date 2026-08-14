@@ -123,6 +123,13 @@ sap.ui.define([
                     //     break;
                     case "standardpurchaseorderquantity":
                     case "Taxprice":
+                        // ADD BEGIN BY XINLEI XU 2026/08/14 CN GAP#75
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.scale = 6;
+                        oColumn.delimiter = true;
+                        oColumn.textAlign = "End";
+                        break;
+                        // ADD END BY XINLEI XU 2026/08/14 CN GAP#75
                     case "UnitPrice_standard":
                     case "NetPriceAmount": // ADD BY XINLEI XU 2026/01/23 AMO#5794
                     case "ConditionRateValue": // ADD BY XINLEI XU 2026/01/23 AMO#5794
