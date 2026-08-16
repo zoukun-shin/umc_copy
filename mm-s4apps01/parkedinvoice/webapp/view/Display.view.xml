@@ -34,6 +34,7 @@
                             <smartFilterBar:ControlConfiguration id="id8ControlConfiguration"  key="PostingDate"                displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PostingDate}" mandatory="mandatory" index="9" />
                             <smartFilterBar:ControlConfiguration id="idC9ontrolConfiguration"  key="MaterialDocumentHeaderText" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MaterialDocumentHeaderText}" mandatory="notMandatory" index="10" />
                             <smartFilterBar:ControlConfiguration id="idC10ontrolConfiguration" key="InvoiceStatus"              displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>InvoiceStatus}" mandatory="notMandatory" index="11" />
+                            
                             <!-- visible -->
                             <smartFilterBar:ControlConfiguration key="NotParkedQuantity" visible="false"/>
                             <smartFilterBar:ControlConfiguration key="UserEmail" visible="false"/>
@@ -85,6 +86,7 @@
                             <smartFilterBar:ControlConfiguration key="FiscalYearRef" visible="false"/>
                             <smartFilterBar:ControlConfiguration key="INVOICERECEIVEDBYFI" visible="false"/>
                             <smartFilterBar:ControlConfiguration key="Country" visible="false"/>
+                            <smartFilterBar:ControlConfiguration key="PaymentStatus" visible="false"/>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -564,6 +566,22 @@
                             </t:customData>
                             <t:template>
                                 <Text text="{INVOICERECEIVEDBYFI}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>InvoiceStatus}" sortProperty="InvoiceStatus" filterProperty="InvoiceStatus" visible="false">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"InvoiceStatus", "leadingProperty":"InvoiceStatus", "sortProperty":"InvoiceStatus", "filterProperty": "InvoiceStatus"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{InvoiceStatus}" wrapping="false" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{i18n>PaymentStatus}" sortProperty="PaymentStatus" filterProperty="PaymentStatus">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PaymentStatus", "leadingProperty":"PaymentStatus", "sortProperty":"PaymentStatus", "filterProperty": "PaymentStatus"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PaymentStatus}" wrapping="false" />
                             </t:template>
                         </t:Column>
                     </t:columns>
