@@ -39,9 +39,9 @@
                                 <smartFilterBar:ControlConfiguration index='100' key="LocalPosition" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>LocalPosition}"/>
                                 <smartFilterBar:ControlConfiguration index='110' key="YY1_Privilege_PRD" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>YY1_Privilege_PRD}"/>
                                 <smartFilterBar:ControlConfiguration index='120' key="DisplayMpn" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>DisplayMpn}"/>
-                                <!-- <smartFilterBar:ControlConfiguration index='130' key="ExternalProductGroup" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ExternalProductGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='130' key="ExternalProductGroup" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ExternalProductGroup}"/>
                                 <smartFilterBar:ControlConfiguration index='140' key="NoDisplayLCAComponent" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>NoDisplayLCAComponent}"/>
-                                <smartFilterBar:ControlConfiguration index='150' key="AvailabilityCheckType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>AvailabilityCheckType}"/> -->
+                                <smartFilterBar:ControlConfiguration index='150' key="AvailabilityCheckType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>AvailabilityCheckType}"/>
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemGroup" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="AlternativeItemPriority" visible="false"/>
@@ -90,10 +90,10 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="YY1_CUSTOMERMATERIAL_PRD" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="YY1_BPCODE_PRD_PRD" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialComponentMPN" visible="false"/>
-                                <!-- <smartFilterBar:ControlConfiguration index='999' key="SpecialProcurementType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SpecialProcurementType" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="YY1_SAFTYCERT_PRD" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="YY1_ROHSMARK_PRD" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="YY1_OPENINGTIME_PRD" visible="false"/> -->
+                                <smartFilterBar:ControlConfiguration index='999' key="YY1_OPENINGTIME_PRD" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>

@@ -10,15 +10,14 @@
         showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" 
         persistencyKey="BOMST" header="{i18n>Results}" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-        beforeExport="onBeforeExport" showFullScreenButton="false" ignoredFields="RequiredQuantity,BOMExplosionType,LocalPosition,ShowSubParts,BOMExplosionIsMultilevel,BOMExplosionApplication,DisplayMpn">
-        <!-- beforeExport="onBeforeExport" showFullScreenButton="false" ignoredFields="RequiredQuantity,BOMExplosionType,LocalPosition,ShowSubParts,BOMExplosionIsMultilevel,BOMExplosionApplication,DisplayMpn,ExternalProductGroup,AvailabilityCheckType,NoDisplayLCAComponent"> -->
+        beforeExport="onBeforeExport" showFullScreenButton="false" ignoredFields="RequiredQuantity,BOMExplosionType,LocalPosition,ShowSubParts,BOMExplosionIsMultilevel,BOMExplosionApplication,DisplayMpn,NoDisplayLCAComponent">
         <smartTable:customToolbar>
             <OverflowToolbar id="idToolBar" design="Transparent">
                 <ToolbarSpacer/>
                 <Button text="{i18n>PrintTH}" type="Transparent" press="onPrint('PrintBom')" enabled="{= ${local>/authorityCheck/button/Print}}"/>
                 <Button text="{i18n>PrintVN}" type="Transparent" press="onPrintVN('PrintBom')" enabled="{= ${local>/authorityCheck/button/PrintVN}}"/>
-                <!-- <Button text="{i18n>PrintCN}" type="Transparent" press="onPrintCN('PrintCN')" enabled="{= ${local>/authorityCheck/button/PrintCN}}"/>
-                <Button text="{i18n>Print2400}" type="Transparent" press="onPrint2400" enabled="{= ${local>/authorityCheck/button/Print2400}}"/> -->
+                <Button text="{i18n>PrintCN}" type="Transparent" press="onPrintCN('PrintCN')" enabled="{= ${local>/authorityCheck/button/PrintCN}}"/>
+                <Button text="{i18n>Print2400}" type="Transparent" press="onPrint2400" enabled="{= ${local>/authorityCheck/button/Print2400}}"/>
                 <Button text="{i18n>Download}" type="Transparent" press="onExport" enabled="{= ${local>/Bom}.length > 0}"/>
             </OverflowToolbar>
         </smartTable:customToolbar>
@@ -432,7 +431,23 @@
                         <Text text="{BillOfMaterialComponentMPN}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <!-- <table:Column width="15rem" label="{i18n>SpecialProcurementType}" sortProperty="SpecialProcurementType" filterProperty="SpecialProcurementType" visible="false">
+                <table:Column width="15rem" label="{i18n>ExternalProductGroup}" sortProperty="ExternalProductGroup" filterProperty="ExternalProductGroup" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ExternalProductGroup", "leadingProperty":"ExternalProductGroup"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ExternalProductGroup}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>AvailabilityCheckType}" sortProperty="AvailabilityCheckType" filterProperty="AvailabilityCheckType" visible="false">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AvailabilityCheckType", "leadingProperty":"AvailabilityCheckType"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{AvailabilityCheckType}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="15rem" label="{i18n>SpecialProcurementType}" sortProperty="SpecialProcurementType" filterProperty="SpecialProcurementType" visible="false">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"SpecialProcurementType", "leadingProperty":"SpecialProcurementType"}'/>
                     </table:customData>
@@ -463,7 +478,7 @@
                     <table:template>
                         <Text text="{YY1_OPENINGTIME_PRD}" wrapping="false" />
                     </table:template>
-                </table:Column> -->
+                </table:Column>
             </table:columns>
         </table:Table>
     </smartTable:SmartTable>
