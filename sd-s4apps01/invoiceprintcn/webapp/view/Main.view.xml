@@ -133,11 +133,13 @@
                             id="idBtnInvoicePrint"
                             text="{i18n>btnInvoicePrint}"
                             press="onInvoicePrint"
+                            enabled="{= ${local>/authorityCheck/button/Print}}"
                         />
                         <Button
                             id="idBtnInvoicePrintToyota"
                             text="{i18n>btnInvoicePrintToyota}"
                             press="onInvoicePrintToyota"
+                            enabled="{= ${local>/authorityCheck/button/PrintToyota}}"
                         />
                     </OverflowToolbar>
                 </smartTable:customToolbar>

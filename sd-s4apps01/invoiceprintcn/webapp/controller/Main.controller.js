@@ -1,5 +1,5 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "./Base",
     "./messages",
     "sap/ui/model/Filter",
     "../model/formatter",
@@ -8,10 +8,10 @@ sap.ui.define([
     "../lib/xml-js",
     "../lib/decimal",
     "sap/ui/core/Fragment"
-], (Controller, messages, Filter, formatter, BusyDialog, MessageToast, xml, decimal, Fragment) => {
+], (Base, messages, Filter, formatter, BusyDialog, MessageToast, xml, decimal, Fragment) => {
     "use strict";
 
-    return Controller.extend("sd.invoiceprintcn.controller.Main", {
+    return Base.extend("sd.invoiceprintcn.controller.Main", {
         formatter: formatter,
         onInit() {
             this._LocalData = this.getOwnerComponent().getModel("local");
@@ -19,6 +19,67 @@ sap.ui.define([
             this._oPrintModel = this.getOwnerComponent().getModel("Print");
             this._ResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             this._BusyDialog = new sap.m.BusyDialog();
+
+            // 权限校验
+            this._UserInfo = sap.ushell.Container.getService("UserInfo");
+            this.getRouter().getRoute("RouteMain").attachMatched(this._initialize, this);
+        },
+
+        _initialize: function () {
+            var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+            var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
+                "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
+            });
+            oContextBinding.requestObject().then(function (context) {
+                var aAccessBtns = [],
+                    aAllAccessBtns = [];
+                if (context._AssignRole && context._AssignRole.length > 0) {
+                    context._AssignRole.forEach(role => {
+                        aAccessBtns.push(role._UserRoleAccessBtn);
+                    });
+                    aAllAccessBtns = aAccessBtns.flat();
+                }
+                if (!aAllAccessBtns.some(btn => btn.AccessId === "invoiceprintcn-View")) {
+                    if (!this.oErrorMessageDialog) {
+                        this.oErrorMessageDialog = new sap.m.Dialog({
+                            type: sap.m.DialogType.Message,
+                            state: "Error",
+                            content: new sap.m.Text({
+                                text: this.getModel("i18n").getResourceBundle().getText("noAuthorityView", [sUser])
+                            })
+                        });
+                    }
+                    this.getView().destroy();
+                    this.oErrorMessageDialog.open();
+                }
+                this.getModel("local").setProperty("/authorityCheck", {
+                    button: {
+                        View: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprintcn-View"),
+                        Print: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprintcn-Print"),
+                        PrintToyota: aAllAccessBtns.some(btn => btn.AccessId === "invoiceprintcn-PrintToyota")
+                    },
+                    data: {
+                        PlantSet: context._AssignPlant,
+                        CompanySet: context._AssignCompany,
+                        SalesOrgSet: context._AssignSalesOrg,
+                        PurchOrgSet: context._AssignPurchOrg,
+                        RoleSet: context._AssignRole
+                    }
+                });
+            }.bind(this), function (oError) {
+                if (!this.oErrorMessageDialog) {
+                    this.oErrorMessageDialog = new sap.m.Dialog({
+                        type: sap.m.DialogType.Message,
+                        state: "Error",
+                        content: new sap.m.Text({
+                            text: this.getModel("i18n").getResourceBundle().getText("getAuthorityFailed")
+                        })
+                    });
+                }
+                this.getView().destroy();
+                this.oErrorMessageDialog.open();
+            }.bind(this));
         },
         onBeforeRebindTable: function (oEvent) {
             var oFilter = oEvent.getParameter("bindingParams").filters;
@@ -270,6 +331,7 @@ sap.ui.define([
                 });
 
                 // --- 抬头级聚合字段（基于行项目数据）---
+                var oContent = aPrintContent[aPrintContent.length - 1];
                 // PackingSize: 去重拼接 BoxMeasureSize*BoxQty
                 var oPackingSet = new Set();
                 aItems.forEach(function (oItem) {
@@ -302,7 +364,6 @@ sap.ui.define([
                 oContent.SapPackageInfo = aPackageLines.join("\n");
 
                 // 按模板ID添加汇总字段
-                var oContent = aPrintContent[aPrintContent.length - 1];
                 if (sTemplateID === "YY1_SD052_PACK") {
                     oContent.TotalQty = oTotalQty.valueOf();
                     oContent.TotalNetWeight = oTotalNetWeight.valueOf();
