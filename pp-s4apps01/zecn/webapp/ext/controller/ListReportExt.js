@@ -5,11 +5,13 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "../../lib/xml-js",
+    "../../lib/pdf-lib",
     "sap/m/MessageToast"
-], function (BusyDialog, MessageBox, Fragment, Filter, FilterOperator,xml,MessageToast) {
+], function (BusyDialog, MessageBox, Fragment, Filter, FilterOperator, xml, pdf, MessageToast) {
     'use strict';
 
     var _oFunctions, _ResourceBundle, _oDataModel, _oPrintModel, _UserInfo;
+    var _PDFLib = pdf || window.PDFLib;
     return {
 
         init: function (oModels, oViews) {
@@ -116,7 +118,15 @@ sap.ui.define([
                 return _oFunctions._processSinglePrint(oLine, sType);
             });
 
-            Promise.all(aPromises).finally(function () {
+            Promise.all(aPromises).then(function (aBlobs) {
+                // 过滤出成功生成的 PDF，合并为一个文件
+                var aValidBlobs = aBlobs.filter(function (oBlob) {
+                    return oBlob;
+                });
+                if (aValidBlobs.length > 0) {
+                    _oFunctions._mergePDF(aValidBlobs);
+                }
+            }).finally(function () {
                 oBusyDialog.close();
                 if (_oFunctions.sFieldECO) {
                     MessageBox.error(_ResourceBundle.getText("getPrintDataFailed",[_oFunctions.sFieldECO]));
@@ -380,29 +390,39 @@ sap.ui.define([
                         pdfContent.PrintData.to_Items = { results: aPrintItem };
                         pdfContent.PrintData.CreatedDate = aPrintItem[0]?.ECNCreateAt;
                         pdfContent.PrintData.CreatedDateFooter = aPrintItem[0]?.ECNValidFrom;
+                        var sTemplate;
                         if (sType === "CN") {
-                            _oFunctions.getPDF(pdfContent,"YY1_PP008_CN");
+                            sTemplate = "YY1_PP008_CN";
                         } else {
                             switch (pdfContent.PrintData.Plant) {
                                 case "3000":
-                                    _oFunctions.getPDF(pdfContent,"YY1_PP008_VN");break;
+                                    sTemplate = "YY1_PP008_VN";break;
                                 case "4000":
-                                    _oFunctions.getPDF(pdfContent,"YY1_PP008_TH");break;
+                                    sTemplate = "YY1_PP008_TH";break;
                             }
                         }
+                        if (sTemplate) {
+                            // 生成 PDF 并返回二进制内容，供后续合并
+                            _oFunctions.getPDF(pdfContent, sTemplate).then(function (oBlob) {
+                                resolve(oBlob);
+                            }).catch(function () {
+                                resolve(null);
+                            });
+                        } else {
+                            resolve(null);
+                        }
+                    } else {
+                        resolve(null);
                     }
-                    resolve();
                 }).catch(function () {
-                    resolve(); // 单个 ECN 失败不阻塞其他
+                    resolve(null); // 单个 ECN 失败不阻塞其他
                 });
             });
         },
 
         getPDF: function (pdfContent,template) {
-            var oBusyDialog = new BusyDialog();
-            var aRecordCreated = [];
             var sFileName = _ResourceBundle.getText("appTitle") + new Date().getTime();
-            var promise = new Promise((resolve, reject) => {
+            return new Promise(function (resolve, reject) {
                 var createPrintRecord = _oPrintModel.bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord(...)");
                 createPrintRecord.setParameter("TemplateID", template);
                 createPrintRecord.setParameter("IsExternalProvidedData", true);
@@ -418,33 +438,82 @@ sap.ui.define([
                 createPrintRecord.setParameter("ProvidedKeys", "");
                 createPrintRecord.setParameter("ResultIsActiveEntity", true);
                 createPrintRecord.setParameter("FileName", sFileName);
-                createPrintRecord.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
-                    resolve(createPrintRecord);
-                }).catch((oError) => {
+                createPrintRecord.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(function () {
+                    // 创建打印记录成功后，读取该 PDF 的二进制内容
+                    var boundContext = createPrintRecord.getBoundContext();
+                    var object = boundContext.getObject();
+                    var sPath = _oPrintModel.getKeyPredicate("/PrintRecord", object);
+                    var sURL = _oPrintModel.getServiceUrl() + "PrintRecord" + sPath + '/PDFContent';
+                    _oFunctions._fetchPDFBlob(sURL).then(resolve, reject);
+                }).catch(function (oError) {
                     reject(oError);
                 });
             });
-            aRecordCreated.push(promise);
+        },
 
-            oBusyDialog.open();
-            try {
-                Promise.all(aRecordCreated).then((aContext) => {
-                    oBusyDialog.close();
-                    var sURL;
-                    for (const activeContext of aContext) {
-                        var boundContext = activeContext.getBoundContext();
-                        var object = boundContext.getObject();
-                        var sPath = _oPrintModel.getKeyPredicate("/PrintRecord", object);
-                        sURL = activeContext.getModel("Print").getServiceUrl() + "PrintRecord" + sPath + '/PDFContent';
-                        sap.m.URLHelper.redirect(sURL, true);
+        _fetchPDFBlob: function (sURL) {
+            return new Promise(function (resolve, reject) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", sURL, true);
+                xhr.responseType = "blob";
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        resolve(xhr.response);
+                    } else {
+                        reject(new Error("PDF fetch error: " + xhr.status));
                     }
-                    MessageToast.show("Print Success");
-                }).finally(() => {
-                    oBusyDialog.close();
-                });;
+                };
+                xhr.onerror = function () {
+                    reject(new Error("PDF fetch error"));
+                };
+                xhr.send();
+            });
+        },
+
+        _mergePDF: async function (aBlobs) {
+            try {
+                // 新建 PDF 文档，依次追加每一份 ECO 的页面
+                const mergedPdf = await _PDFLib.PDFDocument.create();
+                for (let i = 0; i < aBlobs.length; i++) {
+                    const fileContents = await new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = function (event) {
+                            resolve(event.target.result);
+                        };
+                        reader.onerror = function () {
+                            reject(new Error("PDF merging error"));
+                        };
+                        reader.readAsArrayBuffer(aBlobs[i]);
+                    });
+                    const pdf = await _PDFLib.PDFDocument.load(fileContents);
+                    const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                    copiedPages.forEach(function (page) {
+                        mergedPdf.addPage(page);
+                    });
+                }
+                const mergedPdfBytes = await mergedPdf.save();
+                const mergedPdfBlob = new Blob([mergedPdfBytes], { type: "application/pdf" });
+                var sFileName = _ResourceBundle.getText("appTitle") + new Date().getTime() + ".pdf";
+                _oFunctions._saveAs(mergedPdfBlob, sFileName);
+                MessageToast.show("Print Success");
             } catch (error) {
-                MessageToast.show(error);
-                oBusyDialog.close();
+                MessageToast.show("PDF merge error");
+            }
+        },
+
+        _saveAs: function (blob, filename) {
+            if (window.navigator.msSaveOrOpenBlob) {
+                navigator.msSaveBlob(blob, filename);
+            } else {
+                const link = document.createElement('a');
+                const body = document.querySelector('body');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = filename;
+                link.style.display = 'none';
+                body.appendChild(link);
+                link.click();
+                body.removeChild(link);
+                window.URL.revokeObjectURL(link.href);
             }
         },
         // 定义等待函数
