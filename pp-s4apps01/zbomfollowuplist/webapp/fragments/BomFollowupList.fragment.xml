@@ -158,6 +158,14 @@
                         <Text text="{MatlWrhsStkQtyInMatlBaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <table:Column width="12rem" label="{i18n>MaterialBaseUnit}" sortProperty="MaterialBaseUnit" filterProperty="MaterialBaseUnit" visible="{local>/DisplayStockQty}">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"MaterialBaseUnit", "leadingProperty":"MaterialBaseUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{MaterialBaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
             </table:columns>
         </table:Table>
     </smartTable:SmartTable>
