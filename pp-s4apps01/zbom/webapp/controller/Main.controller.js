@@ -557,7 +557,7 @@ sap.ui.define([
                 EndUser: oHeadSource.ENDUSER,
                 CreateBy: oHeadSource.CREATEBY,
                 PrintUser: oHeadSource.PRINTUSER,
-                PohsTag: oHeadSource.POHSTAG,
+                RohsTag: oHeadSource.ROHSTAG,
                 to_Item: {
                     results: (aAllData || []).map(function (item) {
                         return {
@@ -669,6 +669,7 @@ sap.ui.define([
                     MOLDINGCYCLETIME: oPayload.MOLDINGCYCLETIME,
                     OPERATORS: oPayload.OPERATORS,
                     MOLDNO: oPayload.MOLDNO,
+                    ROHSTAG: oPayload.ROHSTAG,
                     ITEM1: aItem1.map(mapItem1),
                     ITEM2: aItem2.map(mapItem2)
                 }
