@@ -554,6 +554,10 @@ sap.ui.define([
                 Formula: oHeadSource.FORMULA,
                 Description: oHeadSource.DESCRIPTION,
                 Customer: oHeadSource.CUSTOMER,
+                EndUser: oHeadSource.ENDUSER,
+                CreateBy: oHeadSource.CREATEBY,
+                PrintUser: oHeadSource.PRINTUSER,
+                PohsTag: oHeadSource.POHSTAG,
                 to_Item: {
                     results: (aAllData || []).map(function (item) {
                         return {
