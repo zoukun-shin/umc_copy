@@ -46,7 +46,7 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="PurchasingHistoryDocumentItem" visible="false"/>   
                                 <smartFilterBar:ControlConfiguration index='999' key="DocumentDate" visible="false"/>   
                                 <smartFilterBar:ControlConfiguration index='999' key="BaseUnit" visible="false"/>   
-                                <smartFilterBar:ControlConfiguration index='999' key="QuantityinBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QuantityInBaseUnit" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderAmount" visible="false"/>   
                                 <smartFilterBar:ControlConfiguration index='999' key="Currency" visible="false"/>   
                                 <smartFilterBar:ControlConfiguration index='999' key="HKAutoInbStatus" visible="false"/>   
@@ -54,6 +54,7 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="DocumentItem551" visible="false"/>   
                                 <smartFilterBar:ControlConfiguration index='999' key="DocumentYear551" visible="false"/>   
                                 <smartFilterBar:ControlConfiguration index='999' key="DocumentDate551" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Plant" visible="false"/>
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>

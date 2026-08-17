@@ -11,7 +11,7 @@
         persistencyKey="RetMatScrapDispST" header="{i18n>Results}" enableAutoBinding="false"
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable"
         beforeExport="onBeforeExport" showFullScreenButton="true" 
-        ignoredFields="" requestAtLeastFields="">
+        ignoredFields="Scrapped" requestAtLeastFields="">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
