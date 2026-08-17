@@ -187,14 +187,18 @@ sap.ui.define([
 			let that = this;
 			let sUser = this.getUser();
 			let sEmail = this.getEmail();
-			if (!sEmail) {
-				sEmail = "siyun.yao@sh.shin-china.com";
-			}
+			// if (!sEmail) {
+			// 	sEmail = "siyun.yao@sh.shin-china.com";
+			// }
+			var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
 			var oHeadContext = this.createEntryWithPromise("/EcnManagement", 
 				{ 
 					ChangeNumber: oArgs.changeNumber,
 					CompanyCode: oArgs["?queryParameter"].companyCode,
 					Plant: oArgs["?queryParameter"].plant,
+					ReasonForChange: sLanguage === "ZH" ? "客户要求更改" : "",
+					ValidFromDate: sLanguage === "ZH" ? new Date() : undefined,
+					ChangeNumberStatus: sLanguage === "ZH" ? "1" : undefined,
 					UnitSfgSmt: 'PC',
 					UnitSfgFat: 'PC',
 					UnitNcgSmt: 'PC',

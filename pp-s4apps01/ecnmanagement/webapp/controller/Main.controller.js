@@ -348,6 +348,42 @@ sap.ui.define([
 			if ( this.byId("idPlant").getValueState() ===  "Error") {
 				return true;
 			}
-		}
+		},
+		onBeforeExport: function(oEvent) {
+            var that = this;
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+
+			var oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern: "yyyyMMdd"});
+			var oTimeFormat = sap.ui.core.format.DateFormat.getTimeInstance({pattern: "HHmmss"});
+			var sFileName = this._ResourceBundle.getText("appTitle") + "_" + 
+				oDateFormat.format(new Date()) + oTimeFormat.format(new Date());
+
+
+            mExcelSettings.fileName = sFileName;
+
+            mExcelSettings.workbook.columns.forEach(function(oColumn) {
+                switch (oColumn.property) {
+                    case "RequestedByCustomer": 
+                    case "RequestedByJp": 
+                    case "RequestedByCn": 
+                    case "RequestedByHk": 
+                    case "RequestedByVn": 
+                    case "RequestedByOther": 
+                    case "OldNewNotTogether": 
+                    case "OldStockDelivery": 
+                    case "ReworkSfg": 
+                    case "ReworkFg": 
+                    case "Other": 
+                    case "ObjectTypeActive": 
+                    case "ObjectFlag": 
+                    case "DeleteFlag": 
+                        oColumn.type = sap.ui.export.EdmType.Boolean;
+                        oColumn.trueValue = 'X';
+                        oColumn.falseValue = ' ';
+                        break;	
+                }
+            });
+        },
+
     });
 });
