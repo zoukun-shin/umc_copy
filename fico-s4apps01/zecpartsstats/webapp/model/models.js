@@ -18,10 +18,7 @@ function (JSONModel, Device) {
         // Create local Model
         createLocalModel: function () {
             var oModel = new JSONModel({
-                selectIndex: 0,
-                std_mode: "display",
-                tab_mode: "display",
-                detailSet: []
+                resultSet: []
             });
             return oModel;
         }

@@ -3,7 +3,7 @@ sap.ui.define([
 ], (Controller) => {
     "use strict";
 
-    return Controller.extend("fico.zecpartsstats.controller.Main", {
+    return Controller.extend("fico.zecpartsstats.controller.App", {
         onInit() {
         }
     });
