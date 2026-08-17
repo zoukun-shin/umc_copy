@@ -39,7 +39,7 @@ sap.ui.define([
         _initialize: function () {
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
-            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail(); 
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
             var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -137,6 +137,16 @@ sap.ui.define([
                 mBindingParams.filters.push(new Filter("UpdateMode", FilterOperator.EQ, oUpdateMode.getSelectedKey()));
             }
 
+            // 刷新状态开关（隐藏传参，不在 SmartFilterBar 上）
+            //   只在「刷新状态」按钮 / 「更新」执行成功后的自动刷新 时带 X，
+            //   后端 ZCL 据此决定是否把 ZTFI_1036 最近一次执行结果回填到行。
+            //   用完即清 —— 用户下一次手点执行不能残留
+            this._removeFilterByPath(mBindingParams.filters, "RefreshStatusFlag");
+            if (this._bRefreshStatus) {
+                mBindingParams.filters.push(new Filter("RefreshStatusFlag", FilterOperator.EQ, "X"));
+            }
+            this._bRefreshStatus = false;
+
             this._setActionButtonsByUpdateMode();
         },
 
@@ -196,15 +206,16 @@ sap.ui.define([
             this._setActionButtonsByUpdateMode();
         },
 
-        // 更新方式=2（更新）才显示更新/更新JOB按钮；=1（查询）隐藏
-        // 更新方式=2（更新）：显示更新/更新JOB按钮，隐藏「创建日期」，五个检索条件必输
+        // 更新方式=2（更新）才显示 更新/更新JOB/刷新状态 按钮；=1（查询）隐藏
+        // 更新方式=2（更新）：显示三个按钮，隐藏「创建日期」，五个检索条件必输
         // 更新方式=1（查询）：隐藏按钮，显示「创建日期」，只有「工厂」必输
         // 「创建日期」过滤的是 ZTFI_1036 历史日志的创建时间，只对查询模式有意义；
         //   更新模式是实时取数+改价，不接收该条件，故隐藏避免误导
         _setActionButtonsByUpdateMode: function () {
-            var oModeSelect   = this.byId("idUpdateMode");
-            var oUpdateButton = this.byId("btnUpdate");
-            var oJobButton    = this.byId("btnUpdateJob");
+            var oModeSelect    = this.byId("idUpdateMode");
+            var oUpdateButton  = this.byId("btnUpdate");
+            var oJobButton     = this.byId("btnUpdateJob");
+            var oRefreshButton = this.byId("btnRefreshStatus");
 
             if (!oModeSelect) {
                 return;
@@ -212,8 +223,9 @@ sap.ui.define([
 
             var bIsUpdateMode = oModeSelect.getSelectedKey() === "2";
 
-            if (oUpdateButton) { oUpdateButton.setVisible(bIsUpdateMode); }
-            if (oJobButton)    { oJobButton.setVisible(bIsUpdateMode); }
+            if (oUpdateButton)  { oUpdateButton.setVisible(bIsUpdateMode); }
+            if (oJobButton)     { oJobButton.setVisible(bIsUpdateMode); }
+            if (oRefreshButton) { oRefreshButton.setVisible(bIsUpdateMode); }
 
             this._setCreatedOnFilterVisible(!bIsUpdateMode);
             this._setMandatoryByUpdateMode(bIsUpdateMode);
@@ -375,6 +387,35 @@ sap.ui.define([
             );
         },
 
+        //========================================================
+        //  刷新状态：按当前检索条件重新取数，并带 RefreshStatusFlag=X，
+        //   由 ZCL 把 ZTFI_1036 最近一次执行结果（Status/Message/凭证/创建时间）
+        //   回填到每一行。
+        //   用户手点「执行」不带该开关 → 只取数不回填；
+        //   典型场景：排了更新JOB之后，过一会点这个看 JOB 跑完没有
+        //========================================================
+        onRefreshStatus: function () {
+            var oBundle = this.getModel("i18n").getResourceBundle();
+
+            // 更新执行中不允许刷新（避免刷出中间状态）
+            if (this._bUpdating) {
+                return;
+            }
+
+            // 还没查询过就没什么可刷新的
+            if (!this._hasTableData()) {
+                MessageBox.error(oBundle.getText("noDataMsg"));
+                return;
+            }
+
+            // 工厂权限校验（防止用户查询后改了工厂再点刷新）
+            if (!this._checkPlantAuthority()) {
+                return;
+            }
+
+            this._refreshTable(true);
+        },
+
         // sEvent    : "CHANGE"（立即改价）/ "JOB"（排后台JOB）
         // bRefresh  : 执行完是否重新触发 go（JOB 传 false）
         _executeAction: function (sEvent, oFilterPayload, bRefresh) {
@@ -394,12 +435,14 @@ sap.ui.define([
 
                 //  后端只回一句执行摘要；
                 //   CHANGE：明细靠重新触发 go 从 ZTFI_1036 读回来
-                //           （ZCL 更新方式=2 会把最近一次执行的 Status/Message 回填到每一行）
+                //           —— 这次 go 必须带 RefreshStatusFlag=X（bWithStatus=true），
+                //              ZCL 才会把本次执行的 Status/Message/凭证 回填到每一行；
+                //              不带的话用户点完更新看到的是空白状态
                 //   JOB   ：异步执行，此时还没有结果，不刷新
                 MessageBox.information(oRes && oRes.Zzkey ? oRes.Zzkey : "", {
                     onClose: function () {
                         if (bRefresh !== false) {
-                            that._refreshTable();
+                            that._refreshTable(true);
                         }
                     }
                 });
@@ -425,14 +468,20 @@ sap.ui.define([
         },
 
         _setUpdateButtonEnabled: function (bEnabled) {
-            var oBtn = this.byId("btnUpdate");
-            var oJob = this.byId("btnUpdateJob");
-            if (oBtn) { oBtn.setEnabled(bEnabled); }
-            if (oJob) { oJob.setEnabled(bEnabled); }
+            var oBtn     = this.byId("btnUpdate");
+            var oJob     = this.byId("btnUpdateJob");
+            var oRefresh = this.byId("btnRefreshStatus");
+            if (oBtn)     { oBtn.setEnabled(bEnabled); }
+            if (oJob)     { oJob.setEnabled(bEnabled); }
+            if (oRefresh) { oRefresh.setEnabled(bEnabled); }
         },
 
-        //  执行完重新触发 go（等同于用户再点一次查询）
-        _refreshTable: function () {
+        //  重新触发 go（等同于用户再点一次查询）
+        //   bWithStatus = true ：本次 go 带 RefreshStatusFlag=X，后端回填最近一次执行结果
+        //   bWithStatus = false/省略：只取数不回填
+        //   ※ 标志在 onBeforeRebindTable 里消费并清掉，只对紧接着的这一次 go 生效
+        _refreshTable: function (bWithStatus) {
+            this._bRefreshStatus = !!bWithStatus;
             var oSmartTable = this.byId("smartTable_MpnMovAvgPrice");
             if (oSmartTable) {
                 oSmartTable.rebindTable();

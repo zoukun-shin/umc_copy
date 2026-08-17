@@ -65,6 +65,10 @@
                         <!--  UpdateJob：只排JOB，改价由后台异步执行 -->
                         <Button id="btnUpdateJob" text="{i18n>UpdateJob}" icon="sap-icon://add-calendar"
                             visible="false" press="onUpdateJob"/>
+                        <!--  RefreshStatus：重新取数 + 回填 ZTFI_1036 最近一次执行结果（Status/Message/凭证/创建时间）
+                              「执行」按钮不回填，只有这个按钮 / 更新执行后的自动刷新 才回填 -->
+                        <Button id="btnRefreshStatus" text="{i18n>RefreshStatus}" icon="sap-icon://refresh"
+                            visible="false" press="onRefreshStatus"/>
                     </OverflowToolbar>
                 </smartTable:customToolbar>
 
