@@ -192,7 +192,7 @@ sap.ui.define([
 
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
-            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail(); 
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
             var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -294,11 +294,12 @@ sap.ui.define([
             this._removeFilterByPath(mBindingParams.filters, "DataSource");
             mBindingParams.filters.push(new Filter("DataSource", FilterOperator.EQ, sDataSource));
 
+            // 自定义日期控件的值都要转UTC后再进filter, 否则序列化时会偏移一天
             // 付款运行日期/ID只对数据源=付款建议生效
             if (sDataSource === "2") {
                 var oRunDate = this.byId("idPaymentRunDate").getDateValue();
                 if (oRunDate) {
-                    mBindingParams.filters.push(new Filter("PaymentRunDate", FilterOperator.EQ, oRunDate));
+                    mBindingParams.filters.push(new Filter("PaymentRunDate", FilterOperator.EQ, this._toUtcDate(oRunDate)));
                 }
             } else {
                 this._removeFilterByPath(mBindingParams.filters, "PaymentRunID");
@@ -310,13 +311,13 @@ sap.ui.define([
             if (oPostingDate && oPostingDate.getDateValue()) {
                 var oFrom = oPostingDate.getDateValue();
                 var oTo = oPostingDate.getSecondDateValue() || oFrom;
-                mBindingParams.filters.push(new Filter("PostingDate", FilterOperator.BT, oFrom, oTo));
+                mBindingParams.filters.push(new Filter("PostingDate", FilterOperator.BT, this._toUtcDate(oFrom), this._toUtcDate(oTo)));
             }
 
             // 到期日 <= 屏幕输入值
             var oDueDate = this.byId("idNetDueDate").getDateValue();
             if (oDueDate) {
-                mBindingParams.filters.push(new Filter("NetDueDate", FilterOperator.LE, oDueDate));
+                mBindingParams.filters.push(new Filter("NetDueDate", FilterOperator.LE, this._toUtcDate(oDueDate)));
             }
 
             // 指定付款日期, 未输入时默认当日
@@ -326,7 +327,12 @@ sap.ui.define([
                 oPayDate = new Date();
                 oPayDatePicker.setDateValue(oPayDate);
             }
-            mBindingParams.filters.push(new Filter("PaymentDate", FilterOperator.EQ, oPayDate));
+            mBindingParams.filters.push(new Filter("PaymentDate", FilterOperator.EQ, this._toUtcDate(oPayDate)));
+        },
+
+        // 本地日期 -> UTC 0点, OData V2 按UTC序列化时日期才不会前移一天
+        _toUtcDate: function (oDate) {
+            return new Date(Date.UTC(oDate.getFullYear(), oDate.getMonth(), oDate.getDate()));
         },
 
         // 公司代码权限校验, 返回false=校验不通过(已弹错误框)
