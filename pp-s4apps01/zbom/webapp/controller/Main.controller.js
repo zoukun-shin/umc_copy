@@ -979,7 +979,7 @@ sap.ui.define([
                 };
             // }
             // 并行处理 优化速度
-            this.getModel().setUseBatch(false);
+            // this.getModel().setUseBatch(false);
             // this._CallODataV2("READ", sPath, aFilters, { "$top": 999999999 }, {}).then(function (oResponse) {
             //     if (oResponse) {
             //         this.getModel("local").setProperty("/Bom", oResponse.results);
@@ -988,9 +988,9 @@ sap.ui.define([
                 if (aAllData.length > 0) {
                     this.getModel("local").setProperty("/Bom", aAllData);
                 }
-                this.getModel().setUseBatch(true);
+                // this.getModel().setUseBatch(true);
             }.bind(this)), function (oError) {
-                this.getModel().setUseBatch(true);
+                // this.getModel().setUseBatch(true);
             }.bind(this);
         },
 
