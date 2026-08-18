@@ -23,7 +23,6 @@ sap.ui.define([
         _initialize: function () {
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-
             var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
             var oFilter = new sap.ui.model.Filter("Object", sap.ui.model.FilterOperator.EQ, "ZUPLOAD_MPOS_" + sLanguage);
             var oControlBinding = this.byId("idTemplateCollection").getBinding("items");
@@ -89,7 +88,6 @@ sap.ui.define([
             /*global XLSX*/
             this._LocalData.setProperty("/logInfo", "");
             this._LocalData.setProperty("/recordCheckSuccessed", false);
-            this._LocalData.setProperty("/authorityCheck",{"button":{"Excute":true}});
             var oFile = oEvent.getParameter("files")[0];
             if (!oFile) {
                 this._LocalData.setProperty("/excelSet", []);
