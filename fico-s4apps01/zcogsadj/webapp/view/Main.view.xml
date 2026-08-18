@@ -1,0 +1,136 @@
+<mvc:View controllerName="fico.zcogsadj.controller.Main" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:t="sap.ui.table" height="100%">
+
+    <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="true" busy="{local>/busy}" fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="cogsAdjVariant" persistencyKey="cogsAdjVariant" showShare="true" showExecuteOnSelection="true" entitySet="CogsAdj"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar id="cogsAdjFilterBar" useToolbar="false" entitySet="CogsAdj" smartVariant="cogsAdjVariant" persistencyKey="cogsAdjFilterBar" search="onSearch">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration index="1" key="SalesOrganization" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}" filterType="single" mandatory="mandatory"/>
+                            <smartFilterBar:ControlConfiguration index="2" key="Plant" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}" filterType="multiple" mandatory="mandatory"/>
+                            <smartFilterBar:ControlConfiguration index="3" key="FiscalYear" visibleInAdvancedArea="true" filterType="single" label="{i18n>FiscalYear}" mandatory="mandatory">
+                                <smartFilterBar:customControl>
+                                    <DatePicker id="idGjahr" displayFormat="yyyy"/>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration index="4" key="FiscalMonth" visibleInAdvancedArea="true" filterType="single" label="{i18n>FiscalMonth}" mandatory="mandatory">
+                                <smartFilterBar:customControl>
+                                    <Select id="idMonat">
+                                        <core:Item id="M01" key="01" text="01"/>
+                                        <core:Item id="M02" key="02" text="02"/>
+                                        <core:Item id="M03" key="03" text="03"/>
+                                        <core:Item id="M04" key="04" text="04"/>
+                                        <core:Item id="M05" key="05" text="05"/>
+                                        <core:Item id="M06" key="06" text="06"/>
+                                        <core:Item id="M07" key="07" text="07"/>
+                                        <core:Item id="M08" key="08" text="08"/>
+                                        <core:Item id="M09" key="09" text="09"/>
+                                        <core:Item id="M10" key="10" text="10"/>
+                                        <core:Item id="M11" key="11" text="11"/>
+                                        <core:Item id="M12" key="12" text="12"/>
+                                    </Select>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration index="5" key="ExecFunction" visibleInAdvancedArea="true" filterType="single" label="{i18n>ExecFunction}" mandatory="mandatory">
+                                <smartFilterBar:customControl>
+                                    <Select id="idExecFunction" selectedKey="1" change="onExecFunctionChange">
+                                        <core:Item key="1" text="1 - {i18n>ExecUpdate}"/>
+                                        <core:Item key="2" text="2 - {i18n>ExecQuery}"/>
+                                    </Select>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <smartTable:SmartTable id="cogsAdjTable" entitySet="CogsAdj" smartVariant="cogsAdjVariant" smartFilterId="cogsAdjFilterBar"
+                tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true"
+                persistencyKey="cogsAdjTable" header="{i18n>Result}" enableAutoBinding="false"
+                placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable"
+                fitContainer="true" height="100%">
+
+                <smartTable:customToolbar>
+                    <OverflowToolbar id="toolbar" width="100%">
+                        <ToolbarSpacer/>
+                        <!-- 执行功能=1更新: 营业确认/营业取消确认/财务过账; =2查询: 财务冲销 -->
+                        <Button id="btnConfirm" icon="sap-icon://accept" text="{i18n>ConfirmBtn}" tooltip="{i18n>ConfirmBtn}" press="onConfirm" visible="{local>/showUpdate}" enabled="{= ${local>/authorityCheck/button/Confirm} !== false}"/>
+                        <Button id="btnUnconfirm" icon="sap-icon://decline" text="{i18n>UnconfirmBtn}" tooltip="{i18n>UnconfirmBtn}" press="onUnconfirm" visible="{local>/showUpdate}" enabled="{= ${local>/authorityCheck/button/Unconfirm} !== false}"/>
+                        <Button id="btnPost" icon="sap-icon://add-calendar" text="{i18n>PostBtn}" tooltip="{i18n>PostBtn}" press="onPost" visible="{local>/showUpdate}" enabled="{= ${local>/authorityCheck/button/Post} !== false}"/>
+                        <Button id="btnCancel" icon="sap-icon://add-calendar" text="{i18n>CancelBtn}" tooltip="{i18n>CancelBtn}" press="onCancel" visible="{local>/showCancel}" enabled="{= ${local>/authorityCheck/button/Cancel} !== false}"/>
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+
+                <!-- 四个按钮都按检索条件整批处理, 不需要选行 -->
+                <t:Table id="tableCogsAdj" selectionMode="None" rowMode="Auto">
+                    <t:Column id="Status" width="6rem" label="{i18n>Status}" sortProperty="Status" filterProperty="Status">
+                        <t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Status","leadingProperty":"Status","sortProperty":"Status","filterProperty":"Status"}'/></t:customData>
+                        <t:template><ObjectStatus state="{path:'Status', formatter:'.formatter.setState'}" icon="{path:'Status', formatter:'.formatter.setStateIcon'}"/></t:template>
+                    </t:Column>
+                    <t:Column id="Message" label="{i18n>Message}" width="20rem" sortProperty="Message"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Message","leadingProperty":"Message","sortProperty":"Message"}'/></t:customData><t:template><Text text="{Message}" tooltip="{Message}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="CompanyCode" label="{i18n>CompanyCode}" width="7rem" sortProperty="CompanyCode" filterProperty="CompanyCode"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode","leadingProperty":"CompanyCode","sortProperty":"CompanyCode","filterProperty":"CompanyCode"}'/></t:customData><t:template><Text text="{CompanyCode}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="FiscalYear" label="{i18n>FiscalYear}" width="6rem" sortProperty="FiscalYear" filterProperty="FiscalYear"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FiscalYear","leadingProperty":"FiscalYear","sortProperty":"FiscalYear","filterProperty":"FiscalYear"}'/></t:customData><t:template><Text text="{FiscalYear}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="FiscalMonth" label="{i18n>FiscalMonth}" width="6rem" sortProperty="FiscalMonth" filterProperty="FiscalMonth"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"FiscalMonth","leadingProperty":"FiscalMonth","sortProperty":"FiscalMonth","filterProperty":"FiscalMonth"}'/></t:customData><t:template><Text text="{FiscalMonth}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="OutboundDelivery" label="{i18n>OutboundDelivery}" width="9rem" sortProperty="OutboundDelivery" filterProperty="OutboundDelivery"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"OutboundDelivery","leadingProperty":"OutboundDelivery","sortProperty":"OutboundDelivery","filterProperty":"OutboundDelivery"}'/></t:customData><t:template><Text text="{OutboundDelivery}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="OutboundDeliveryItem" label="{i18n>OutboundDeliveryItem}" width="7rem" sortProperty="OutboundDeliveryItem" filterProperty="OutboundDeliveryItem"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"OutboundDeliveryItem","leadingProperty":"OutboundDeliveryItem","sortProperty":"OutboundDeliveryItem","filterProperty":"OutboundDeliveryItem"}'/></t:customData><t:template><Text text="{OutboundDeliveryItem}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="DNCreationDate" label="{i18n>DNCreationDate}" width="8rem" sortProperty="DNCreationDate" filterProperty="DNCreationDate"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"DNCreationDate","leadingProperty":"DNCreationDate","sortProperty":"DNCreationDate","filterProperty":"DNCreationDate"}'/></t:customData><t:template><Text text="{path:'DNCreationDate', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="DNDeliveryDate" label="{i18n>DNDeliveryDate}" width="8rem" sortProperty="DNDeliveryDate" filterProperty="DNDeliveryDate"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"DNDeliveryDate","leadingProperty":"DNDeliveryDate","sortProperty":"DNDeliveryDate","filterProperty":"DNDeliveryDate"}'/></t:customData><t:template><Text text="{path:'DNDeliveryDate', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="DNTransferDate" label="{i18n>DNTransferDate}" width="9rem" sortProperty="DNTransferDate" filterProperty="DNTransferDate"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"DNTransferDate","leadingProperty":"DNTransferDate","sortProperty":"DNTransferDate","filterProperty":"DNTransferDate"}'/></t:customData><t:template><Text text="{path:'DNTransferDate', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="DNTransferYearMonth" label="{i18n>DNTransferYearMonth}" width="9rem" sortProperty="DNTransferYearMonth" filterProperty="DNTransferYearMonth"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"DNTransferYearMonth","leadingProperty":"DNTransferYearMonth","sortProperty":"DNTransferYearMonth","filterProperty":"DNTransferYearMonth"}'/></t:customData><t:template><Text text="{path:'DNTransferYearMonth', formatter:'.formatter.allZeroToBlank'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="SalesOrganization" label="{i18n>SalesOrganization}" width="7rem" sortProperty="SalesOrganization" filterProperty="SalesOrganization"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesOrganization","leadingProperty":"SalesOrganization","sortProperty":"SalesOrganization","filterProperty":"SalesOrganization"}'/></t:customData><t:template><Text text="{SalesOrganization}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ShippingPoint" label="{i18n>ShippingPoint}" width="7rem" sortProperty="ShippingPoint" filterProperty="ShippingPoint"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ShippingPoint","leadingProperty":"ShippingPoint","sortProperty":"ShippingPoint","filterProperty":"ShippingPoint"}'/></t:customData><t:template><Text text="{ShippingPoint}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="SalesOrder" label="{i18n>SalesOrder}" width="9rem" sortProperty="SalesOrder" filterProperty="SalesOrder"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesOrder","leadingProperty":"SalesOrder","sortProperty":"SalesOrder","filterProperty":"SalesOrder"}'/></t:customData><t:template><Text text="{SalesOrder}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="SalesOrderItem" label="{i18n>SalesOrderItem}" width="7rem" sortProperty="SalesOrderItem" filterProperty="SalesOrderItem"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesOrderItem","leadingProperty":"SalesOrderItem","sortProperty":"SalesOrderItem","filterProperty":"SalesOrderItem"}'/></t:customData><t:template><Text text="{SalesOrderItem}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="SoldToParty" label="{i18n>SoldToParty}" width="8rem" sortProperty="SoldToParty" filterProperty="SoldToParty"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SoldToParty","leadingProperty":"SoldToParty","sortProperty":"SoldToParty","filterProperty":"SoldToParty"}'/></t:customData><t:template><Text text="{SoldToParty}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="SoldToPartyName" label="{i18n>SoldToPartyName}" width="14rem" sortProperty="SoldToPartyName" filterProperty="SoldToPartyName"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SoldToPartyName","leadingProperty":"SoldToPartyName","sortProperty":"SoldToPartyName","filterProperty":"SoldToPartyName"}'/></t:customData><t:template><Text text="{SoldToPartyName}" tooltip="{SoldToPartyName}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="Product" label="{i18n>Product}" width="12rem" sortProperty="Product" filterProperty="Product"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Product","leadingProperty":"Product","sortProperty":"Product","filterProperty":"Product"}'/></t:customData><t:template><Text text="{Product}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="ProductName" label="{i18n>ProductName}" width="14rem" sortProperty="ProductName" filterProperty="ProductName"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"ProductName","leadingProperty":"ProductName","sortProperty":"ProductName","filterProperty":"ProductName"}'/></t:customData><t:template><Text text="{ProductName}" tooltip="{ProductName}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="TransferQuantity" label="{i18n>TransferQuantity}" width="9rem" hAlign="End" sortProperty="TransferQuantity" filterProperty="TransferQuantity"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"TransferQuantity","leadingProperty":"TransferQuantity","sortProperty":"TransferQuantity","filterProperty":"TransferQuantity"}'/></t:customData><t:template><Text text="{TransferQuantity}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BilledQuantity" label="{i18n>BilledQuantity}" width="9rem" hAlign="End" sortProperty="BilledQuantity" filterProperty="BilledQuantity"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BilledQuantity","leadingProperty":"BilledQuantity","sortProperty":"BilledQuantity","filterProperty":"BilledQuantity"}'/></t:customData><t:template><Text text="{BilledQuantity}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="UnbilledQuantity" label="{i18n>UnbilledQuantity}" width="10rem" hAlign="End" sortProperty="UnbilledQuantity" filterProperty="UnbilledQuantity"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"UnbilledQuantity","leadingProperty":"UnbilledQuantity","sortProperty":"UnbilledQuantity","filterProperty":"UnbilledQuantity"}'/></t:customData><t:template><Text text="{UnbilledQuantity}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="CumAdjQtyPrevMonth" label="{i18n>CumAdjQtyPrevMonth}" width="11rem" hAlign="End" sortProperty="CumAdjQtyPrevMonth" filterProperty="CumAdjQtyPrevMonth"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"CumAdjQtyPrevMonth","leadingProperty":"CumAdjQtyPrevMonth","sortProperty":"CumAdjQtyPrevMonth","filterProperty":"CumAdjQtyPrevMonth"}'/></t:customData><t:template><Text text="{CumAdjQtyPrevMonth}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AdjQtyMonth" label="{i18n>AdjQtyMonth}" width="10rem" hAlign="End" sortProperty="AdjQtyMonth" filterProperty="AdjQtyMonth"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AdjQtyMonth","leadingProperty":"AdjQtyMonth","sortProperty":"AdjQtyMonth","filterProperty":"AdjQtyMonth"}'/></t:customData><t:template><Text text="{AdjQtyMonth}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="BaseUnit" label="{i18n>BaseUnit}" width="5rem" sortProperty="BaseUnit" filterProperty="BaseUnit"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"BaseUnit","leadingProperty":"BaseUnit","sortProperty":"BaseUnit","filterProperty":"BaseUnit"}'/></t:customData><t:template><Text text="{BaseUnit}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="SalesConfirmStatus" label="{i18n>SalesConfirmStatus}" width="9rem" sortProperty="SalesConfirmStatus" filterProperty="SalesConfirmStatus"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesConfirmStatus","leadingProperty":"SalesConfirmStatus","sortProperty":"SalesConfirmStatus","filterProperty":"SalesConfirmStatus"}'/></t:customData><t:template><Text text="{path:'SalesConfirmStatus', formatter:'.formatConfirmStatus'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="SalesConfirmer" label="{i18n>SalesConfirmer}" width="8rem" sortProperty="SalesConfirmer" filterProperty="SalesConfirmer"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesConfirmer","leadingProperty":"SalesConfirmer","sortProperty":"SalesConfirmer","filterProperty":"SalesConfirmer"}'/></t:customData><t:template><Text text="{SalesConfirmer}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="SalesConfirmDate" label="{i18n>SalesConfirmDate}" width="8rem" sortProperty="SalesConfirmDate" filterProperty="SalesConfirmDate"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"SalesConfirmDate","leadingProperty":"SalesConfirmDate","sortProperty":"SalesConfirmDate","filterProperty":"SalesConfirmDate"}'/></t:customData><t:template><Text text="{path:'SalesConfirmDate', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AdjAmountMonth" label="{i18n>AdjAmountMonth}" width="10rem" hAlign="End" sortProperty="AdjAmountMonth" filterProperty="AdjAmountMonth"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AdjAmountMonth","leadingProperty":"AdjAmountMonth","sortProperty":"AdjAmountMonth","filterProperty":"AdjAmountMonth"}'/></t:customData><t:template><Text text="{AdjAmountMonth}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AmountMainMaterial" label="{i18n>AmountMainMaterial}" width="9rem" hAlign="End" sortProperty="AmountMainMaterial" filterProperty="AmountMainMaterial"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AmountMainMaterial","leadingProperty":"AmountMainMaterial","sortProperty":"AmountMainMaterial","filterProperty":"AmountMainMaterial"}'/></t:customData><t:template><Text text="{AmountMainMaterial}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AmountAuxMaterial" label="{i18n>AmountAuxMaterial}" width="9rem" hAlign="End" sortProperty="AmountAuxMaterial" filterProperty="AmountAuxMaterial"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AmountAuxMaterial","leadingProperty":"AmountAuxMaterial","sortProperty":"AmountAuxMaterial","filterProperty":"AmountAuxMaterial"}'/></t:customData><t:template><Text text="{AmountAuxMaterial}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AmountSubcontract" label="{i18n>AmountSubcontract}" width="9rem" hAlign="End" sortProperty="AmountSubcontract" filterProperty="AmountSubcontract"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AmountSubcontract","leadingProperty":"AmountSubcontract","sortProperty":"AmountSubcontract","filterProperty":"AmountSubcontract"}'/></t:customData><t:template><Text text="{AmountSubcontract}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AmountDirectLabor" label="{i18n>AmountDirectLabor}" width="9rem" hAlign="End" sortProperty="AmountDirectLabor" filterProperty="AmountDirectLabor"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AmountDirectLabor","leadingProperty":"AmountDirectLabor","sortProperty":"AmountDirectLabor","filterProperty":"AmountDirectLabor"}'/></t:customData><t:template><Text text="{AmountDirectLabor}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AmountDepreciation" label="{i18n>AmountDepreciation}" width="9rem" hAlign="End" sortProperty="AmountDepreciation" filterProperty="AmountDepreciation"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AmountDepreciation","leadingProperty":"AmountDepreciation","sortProperty":"AmountDepreciation","filterProperty":"AmountDepreciation"}'/></t:customData><t:template><Text text="{AmountDepreciation}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AmountSetup" label="{i18n>AmountSetup}" width="9rem" hAlign="End" sortProperty="AmountSetup" filterProperty="AmountSetup"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AmountSetup","leadingProperty":"AmountSetup","sortProperty":"AmountSetup","filterProperty":"AmountSetup"}'/></t:customData><t:template><Text text="{AmountSetup}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AmountPower" label="{i18n>AmountPower}" width="9rem" hAlign="End" sortProperty="AmountPower" filterProperty="AmountPower"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AmountPower","leadingProperty":"AmountPower","sortProperty":"AmountPower","filterProperty":"AmountPower"}'/></t:customData><t:template><Text text="{AmountPower}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AmountTransport" label="{i18n>AmountTransport}" width="9rem" hAlign="End" sortProperty="AmountTransport" filterProperty="AmountTransport"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AmountTransport","leadingProperty":"AmountTransport","sortProperty":"AmountTransport","filterProperty":"AmountTransport"}'/></t:customData><t:template><Text text="{AmountTransport}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="AmountOtherMfg" label="{i18n>AmountOtherMfg}" width="9rem" hAlign="End" sortProperty="AmountOtherMfg" filterProperty="AmountOtherMfg"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"AmountOtherMfg","leadingProperty":"AmountOtherMfg","sortProperty":"AmountOtherMfg","filterProperty":"AmountOtherMfg"}'/></t:customData><t:template><Text text="{AmountOtherMfg}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="Currency" label="{i18n>Currency}" width="5rem" sortProperty="Currency" filterProperty="Currency"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Currency","leadingProperty":"Currency","sortProperty":"Currency","filterProperty":"Currency"}'/></t:customData><t:template><Text text="{Currency}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PostedCompanyCode" label="{i18n>PostedCompanyCode}" width="8rem" sortProperty="PostedCompanyCode" filterProperty="PostedCompanyCode"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PostedCompanyCode","leadingProperty":"PostedCompanyCode","sortProperty":"PostedCompanyCode","filterProperty":"PostedCompanyCode"}'/></t:customData><t:template><Text text="{PostedCompanyCode}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PostedPostingDate" label="{i18n>PostedPostingDate}" width="9rem" sortProperty="PostedPostingDate" filterProperty="PostedPostingDate"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PostedPostingDate","leadingProperty":"PostedPostingDate","sortProperty":"PostedPostingDate","filterProperty":"PostedPostingDate"}'/></t:customData><t:template><Text text="{path:'PostedPostingDate', formatter:'.formatter.date'}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PostedAccountingDocument" label="{i18n>PostedAccountingDocument}" width="11rem" sortProperty="PostedAccountingDocument" filterProperty="PostedAccountingDocument"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PostedAccountingDocument","leadingProperty":"PostedAccountingDocument","sortProperty":"PostedAccountingDocument","filterProperty":"PostedAccountingDocument"}'/></t:customData><t:template><Text text="{PostedAccountingDocument}" wrapping="false"/></t:template></t:Column>
+                    <!-- 默认隐藏列: 检索用的工厂和内部过账状态, 个性化里可勾出来 -->
+                    <t:Column id="Plant" label="{i18n>Plant}" width="6rem" visible="false" sortProperty="Plant" filterProperty="Plant"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"Plant","leadingProperty":"Plant","sortProperty":"Plant","filterProperty":"Plant"}'/></t:customData><t:template><Text text="{Plant}" wrapping="false"/></t:template></t:Column>
+                    <t:Column id="PostingStatus" label="{i18n>PostingStatusFlag}" width="8rem" visible="false" sortProperty="PostingStatus" filterProperty="PostingStatus"><t:customData><core:CustomData key="p13nData" value='\{"columnKey":"PostingStatus","leadingProperty":"PostingStatus","sortProperty":"PostingStatus","filterProperty":"PostingStatus"}'/></t:customData><t:template><Text text="{path:'PostingStatus', formatter:'.formatPostingStatus'}" wrapping="false"/></t:template></t:Column>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

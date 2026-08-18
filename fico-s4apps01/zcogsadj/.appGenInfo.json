@@ -1,0 +1,23 @@
+{
+  "generationParameters": {
+    "generationDate": "Thu Aug 13 2026 09:03:18 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_COGSADJ_O2",
+    "appName": "zcogsadj",
+    "appTitle": "库存已记账COGS金额调整（未开票）",
+    "appDescription": "库存已记账COGS金额调整（未开票）",
+    "appNamespace": "fico",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.38",
+    "enableEslint": true,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.30.0",
+    "template": "Basic V2",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}
