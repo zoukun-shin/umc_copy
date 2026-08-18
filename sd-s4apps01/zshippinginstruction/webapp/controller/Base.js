@@ -133,6 +133,17 @@ sap.ui.define([
                 this._pad2(date.getSeconds());
             return sTime;
         },
+        getCurrentDateTimeLong: function () {
+            var date = new Date();
+            var sTime = date.getFullYear().toString() +
+                this._pad2(date.getMonth() + 1) +
+                this._pad2(date.getDate()) +
+                this._pad2(date.getHours()) +
+                this._pad2(date.getMinutes()) +
+                this._pad2(date.getSeconds()) +
+                this._pad2(date.getMilliseconds());
+            return sTime;
+        },
         getCurrentUTCDateTime: function () {
             var date = new Date();
             var sTime = date.getUTCFullYear().toString() +

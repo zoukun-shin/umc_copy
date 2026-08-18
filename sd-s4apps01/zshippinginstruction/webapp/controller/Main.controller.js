@@ -2,6 +2,7 @@
 sap.ui.define([
     "./Base",
     "../lib/exceljs.min",
+    "../lib/xml-js",
     "sap/m/BusyDialog",
     "sap/m/MessageBox",
     "sap/m/MessageToast",
@@ -15,7 +16,7 @@ sap.ui.define([
     "sap/m/library",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator"
-], (Base, xlsx, BusyDialog, MessageBox, MessageToast, Fragment, Dialog, RadioButtonGroup, RadioButton, Button, Label, Input, library, Filter, FilterOperator) => {
+], (Base, xlsx, xml, BusyDialog, MessageBox, MessageToast, Fragment, Dialog, RadioButtonGroup, RadioButton, Button, Label, Input, library, Filter, FilterOperator) => {
     "use strict";
 
     var ButtonType = library.ButtonType;
@@ -41,6 +42,7 @@ sap.ui.define([
     return Base.extend("sd.zshippinginstruction.controller.Main", {
 
         onInit() {
+            this._oPrintModel = this.getOwnerComponent().getModel("Print");
             this._myBusyDialog = new BusyDialog();
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             this.getRouter().getRoute("Main").attachMatched(this._initialize, this);
@@ -765,6 +767,9 @@ sap.ui.define([
             Promise.all(aPromises).then(function (res) {
                 switch (sAction) {
                     case "Print":
+                        res.forEach(data => {
+                            this._printPDF(iOutputOption, data);
+                        });
                         break;
                     case "Export":
                         res.forEach(data => {
@@ -777,6 +782,565 @@ sap.ui.define([
             }.bind(this)).catch(function (error) {
                 MessageBox.error(error);
             }.bind(this));
+        },
+
+        _printPDF: async function (iOutputOption, oDataSource) {
+            var sTemplateID, pdfContent;
+            switch (iOutputOption) {
+                case 0: // PL(FUJIFILM)
+                    pdfContent = this._getPDFContent0(oDataSource);
+                    sTemplateID = "YY1_SD046_1";
+                    break;
+                case 1: // PL(保税区)
+                    pdfContent = this._getPDFContent1(oDataSource);
+                    sTemplateID = "YY1_SD046_2";
+                    break;
+                case 2: // PL(福保)
+                    pdfContent = this._getPDFContent2(oDataSource);
+                    sTemplateID = "YY1_SD046_3";
+                    break;
+                case 3: // PL(通常)
+                    pdfContent = this._getPDFContent3(oDataSource);
+                    sTemplateID = "YY1_SD046_4";
+                    break;
+                default:
+                    break;
+            }
+
+            this.getPDF(pdfContent, sTemplateID, iOutputOption);
+        },
+
+        _getPDFContent0: function (oDataSource) {
+            var oprintData = {
+                TelFax: "Tel.: " + oDataSource.CompanyPhone + "   Fax: " + oDataSource.CompanyFax,
+                Title: "Transportation Order",
+                SoldToPartyName: oDataSource.SoldToPartyName,
+                ShipToPartyName: oDataSource.ShipToPartyName,
+                BillingDocument: oDataSource.BillingDocument,
+                TransportType: oDataSource.TransportType,
+                SoldToPartyAddress: oDataSource.SoldToPartyAddress,
+                ShipToPartyAddress: oDataSource.ShipToPartyAddress,
+                PlannedCustomsDeclarationDate: oDataSource.PlannedCustomsDeclarationDate == null ? "" : oDataSource.PlannedCustomsDeclarationDate.getFullYear().toString() + ( oDataSource.PlannedCustomsDeclarationDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.PlannedCustomsDeclarationDate.getDate().toString().padStart(2, "0"),
+                Incoterms: oDataSource.IncotermsClassification + " " + oDataSource.IncotermsTransferLocation,
+                PlannedGoodsIssueDate: oDataSource.PlannedGoodsIssueDate == null ? "" : oDataSource.PlannedGoodsIssueDate.getFullYear().toString() + ( oDataSource.PlannedGoodsIssueDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.PlannedGoodsIssueDate.getDate().toString().padStart(2, "0"),
+                PlannedGoodsMovementDate: oDataSource.PlannedGoodsMovementDate == null ? "" : oDataSource.PlannedGoodsMovementDate.getFullYear().toString() + ( oDataSource.PlannedGoodsMovementDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.PlannedGoodsMovementDate.getDate().toString().padStart(2, "0"),
+                SoldToPartyContact: oDataSource.SoldToPartyContact,
+                ShipToPartyContact: oDataSource.ShipToPartyContact,
+                RequestedDeliveryDate: oDataSource.RequestedDeliveryDate == null ? "" : oDataSource.RequestedDeliveryDate.getFullYear().toString() + ( oDataSource.RequestedDeliveryDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.RequestedDeliveryDate.getDate().toString().padStart(2, "0"),
+                SoldToPartyContact: oDataSource.SoldToPartyContact,
+                SoldToPartyPhone: oDataSource.SoldToPartyPhone,
+                ShipToPartyPhone: oDataSource.ShipToPartyPhone,
+                CreatedAt: oDataSource.CreatedAt == null ? "" : oDataSource.CreatedAt.getFullYear().toString() + ( oDataSource.CreatedAt.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.CreatedAt.getDate().toString().padStart(2, "0"),
+                SoldToPartyFax: oDataSource.SoldToPartyFax,
+                ShipToPartyFax: oDataSource.ShipToPartyFax,
+                Items: [],
+                ActualDeliveryQuantityTotal: 0,
+                HandlingUnitLoadWeightTotal: 0,
+                HandlingUnitGrossWeightTotal:0,
+                PalletLoadWeightTotal: 0,
+                PalletGrossWeightTotal: 0,
+                BoxQtyTotal:0,
+                CBMTotal:0,
+                PackageSize: "",
+                TOTAL: "",
+                WayBill: oDataSource.WayBill
+            }
+
+            var iTotalQuantity = 0,
+                iTotalNetWeight = 0,
+                iTotalGrossWeight = 0,
+                iTotalPalletNetWeight = 0,
+                iTotalPalletGrossWeight = 0,
+                iTotalCTNQTY = 0,
+                iTotalCBM = 0,
+                iItemPrice = 0,
+                iItemCBM = 0,
+                iTotalPackages = 0;
+            var aGroupedMap = new Map();
+            var aItems = [];
+
+            oDataSource.to_ShippingInstructionDelivery.results.forEach((item) => {
+                var oBoxItem = oDataSource.to_ShippingInstructionBox.results.find(p => p.BillingDocument === item.BillingDocument &&
+                    p.BillingDocumentItem === item.BillingDocumentItem && p.SerialNumber === item.SerialNumber);
+                var oPalletItem = oDataSource.to_ShippingInstructionPallet.results.find(p => p.BillingDocument === item.BillingDocument &&
+                    p.BillingDocumentItem === item.BillingDocumentItem && p.SerialNumber === item.SerialNumber);
+
+                // 单价
+                iItemPrice = parseFloat(item.UnitPriceUSD) * parseFloat(item.ActualDeliveryQuantity);
+                // 体积
+                iItemCBM = this._calculateVolume(oBoxItem.BoxMeasureSize, oBoxItem.BoxQty);
+                var sMeasure = (oBoxItem.BoxMeasureSize || "").trim(); // 尺寸字符串, 如 '505*505*510'
+                var iCtnQty = parseInt(oBoxItem.BoxQty, 10) || 0;      // 箱数/件数
+                if (sMeasure && iCtnQty > 0) {
+                    // 累加总件数
+                    iTotalPackages += iCtnQty;
+                    // 如果已经存在该尺寸，则累加 Qty；不存在则初始化
+                    if (aGroupedMap.has(sMeasure)) {
+                        aGroupedMap.set(sMeasure, aGroupedMap.get(sMeasure) + iCtnQty);
+                    } else {
+                        aGroupedMap.set(sMeasure, iCtnQty);
+                    }
+                }
+
+                iTotalQuantity += parseFloat(oBoxItem.ActualDeliveryQuantity);
+                iTotalNetWeight += parseFloat(oBoxItem.HandlingUnitLoadWeight);
+                iTotalGrossWeight += parseFloat(oBoxItem.HandlingUnitGrossWeight);
+                iTotalPalletNetWeight += parseFloat(oPalletItem.PalletLoadWeight);
+                iTotalPalletGrossWeight += parseFloat(oPalletItem.PalletGrossWeight);
+                iTotalCTNQTY += parseFloat(oBoxItem.BoxQty);
+                iTotalCBM += parseFloat(iItemCBM);
+
+                oprintData.Items.push({
+                    SerialNumber: item.SerialNumber,
+                    Product: item.Product,
+                    MaterialByCustomer: item.MaterialByCustomer,
+                    PurchaseOrderByCustomer: item.PurchaseOrderByCustomer,
+                    CustomerPurchaseOrderItem: item.CustomerPurchaseOrderItem,
+                    BoxNumberRange: oBoxItem.BoxNumberRange,
+                    ActualDeliveryQuantity: oBoxItem.ActualDeliveryQuantity,
+                    PerBoxTargetQty: oBoxItem.PerBoxTargetQty,
+                    HandlingUnitLoadWeight: oBoxItem.HandlingUnitLoadWeight,
+                    HandlingUnitGrossWeight: oBoxItem.HandlingUnitGrossWeight,
+                    BoxMeasureSize: oBoxItem.BoxMeasureSize,
+                    PalletNumberRange: oPalletItem.PalletNumberRange,
+                    PalletLoadWeight: oPalletItem.PalletLoadWeight,
+                    PalletGrossWeight: oPalletItem.PalletGrossWeight,
+                    BoxQty: oBoxItem.BoxQty,
+                    CBM: iItemCBM
+                });
+            });
+
+            aGroupedMap.forEach(function (iQty, sMeasure) {
+                if (oprintData.PackageSize === "") {
+                    oprintData.PackageSize = sMeasure + "MM*" + iQty;
+                } else {
+                    oprintData.PackageSize = oprintData.PackageSize + '\n' + sMeasure + "MM*" + iQty;
+                }
+            });
+
+            iTotalNetWeight = iTotalNetWeight.toFixed(3);
+            iTotalGrossWeight = iTotalGrossWeight.toFixed(3);
+            iTotalPalletNetWeight = iTotalPalletNetWeight.toFixed(3);
+            iTotalPalletGrossWeight = iTotalPalletGrossWeight.toFixed(3);
+            iTotalCBM = iTotalCBM.toFixed(3);
+
+            oprintData.ActualDeliveryQuantityTotal = iTotalQuantity;
+            oprintData.HandlingUnitLoadWeightTotal = iTotalNetWeight;
+            oprintData.HandlingUnitGrossWeightTotal = iTotalGrossWeight;
+            oprintData.PalletLoadWeightTotal = iTotalPalletNetWeight;
+            oprintData.PalletGrossWeightTotal = iTotalPalletGrossWeight;
+            oprintData.BoxQtyTotal = iTotalCTNQTY;
+            oprintData.CBMTotal = iTotalCBM;
+            oprintData.TOTAL = iTotalPackages + " Packages, W.G(Include Pallet):" + iTotalPalletGrossWeight + " KG";
+            oprintData.WayBill = oDataSource.WayBill;
+
+            var pdfContent = {
+                PrintData: oprintData
+            };
+
+            return pdfContent;
+        },
+
+        _getPDFContent1: function (oDataSource) {
+            var oprintData = {
+                TelFax: "Tel.: " + oDataSource.CompanyPhone + "   Fax: " + oDataSource.CompanyFax,
+                Title: "Transportation Order",
+                SoldToPartyName: oDataSource.SoldToPartyName,
+                ShipToPartyName: oDataSource.ShipToPartyName,
+                BillingDocument: oDataSource.BillingDocument,
+                TransportType: oDataSource.TransportType,
+                SoldToPartyAddress: oDataSource.SoldToPartyAddress,
+                ShipToPartyAddress: oDataSource.ShipToPartyAddress,
+                PlannedCustomsDeclarationDate: oDataSource.PlannedCustomsDeclarationDate == null ? "" : oDataSource.PlannedCustomsDeclarationDate.getFullYear().toString() + ( oDataSource.PlannedCustomsDeclarationDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.PlannedCustomsDeclarationDate.getDate().toString().padStart(2, "0"),
+                Incoterms: oDataSource.IncotermsClassification + " " + oDataSource.IncotermsTransferLocation,
+                PlannedGoodsIssueDate: oDataSource.PlannedGoodsIssueDate == null ? "" : oDataSource.PlannedGoodsIssueDate.getFullYear().toString() + ( oDataSource.PlannedGoodsIssueDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.PlannedGoodsIssueDate.getDate().toString().padStart(2, "0"),
+                PlannedGoodsMovementDate: oDataSource.PlannedGoodsMovementDate == null ? "" : oDataSource.PlannedGoodsMovementDate.getFullYear().toString() + ( oDataSource.PlannedGoodsMovementDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.PlannedGoodsMovementDate.getDate().toString().padStart(2, "0"),
+                SoldToPartyContact: oDataSource.SoldToPartyContact,
+                ShipToPartyContact: oDataSource.ShipToPartyContact,
+                RequestedDeliveryDate: oDataSource.RequestedDeliveryDate == null ? "" : oDataSource.RequestedDeliveryDate.getFullYear().toString() + ( oDataSource.RequestedDeliveryDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.RequestedDeliveryDate.getDate().toString().padStart(2, "0"),
+                SoldToPartyPhone: oDataSource.SoldToPartyPhone,
+                ShipToPartyPhone: oDataSource.ShipToPartyPhone,
+                CreatedAt: oDataSource.CreatedAt == null ? "" : oDataSource.CreatedAt.getFullYear().toString() + ( oDataSource.CreatedAt.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.CreatedAt.getDate().toString().padStart(2, "0"),
+                SoldToPartyFax: oDataSource.SoldToPartyFax,
+                ShipToPartyFax: oDataSource.ShipToPartyFax,
+                Items: [],
+                BoxQtyTotal:0,
+                CBMTotal:0,
+                ActualDeliveryQuantityTotal: 0,
+                PalletLoadWeightTotal: 0,
+                PalletGrossWeightTotal: 0,
+                TotalPriceUSDTotal: 0,
+                PackageSize: "",
+                TOTAL: "",
+                WayBill: oDataSource.WayBill
+            }
+
+            var iTotalQuantity = 0,
+                iTotalPalletNetWeight = 0,
+                iTotalPalletGrossWeight = 0,
+                iTotalCTNQTY = 0,
+                iTotalCBM = 0,
+                iTotalPrice = 0,
+                iItemPrice = 0,
+                iItemCBM = 0,
+                iTotalPackages = 0;
+            var aGroupedMap = new Map();
+            var aItems = [];
+            oDataSource.to_ShippingInstructionDelivery.results.forEach((item) => {
+                var oBoxItem = oDataSource.to_ShippingInstructionBox.results.find(p => p.BillingDocument === item.BillingDocument &&
+                    p.BillingDocumentItem === item.BillingDocumentItem && p.SerialNumber === item.SerialNumber);
+                var oPalletItem = oDataSource.to_ShippingInstructionPallet.results.find(p => p.BillingDocument === item.BillingDocument &&
+                    p.BillingDocumentItem === item.BillingDocumentItem && p.SerialNumber === item.SerialNumber);
+
+                // 单价
+                iItemPrice = parseFloat(item.UnitPriceUSD) * parseFloat(item.ActualDeliveryQuantity);
+                // 体积
+                iItemCBM = this._calculateVolume(oBoxItem.BoxMeasureSize, oBoxItem.BoxQty);
+                var sMeasure = (oBoxItem.BoxMeasureSize || "").trim(); // 尺寸字符串, 如 '505*505*510'
+                var iCtnQty = parseInt(oBoxItem.BoxQty, 10) || 0;      // 箱数/件数
+                if (sMeasure && iCtnQty > 0) {
+                    // 累加总件数
+                    iTotalPackages += iCtnQty;
+                    // 如果已经存在该尺寸，则累加 Qty；不存在则初始化
+                    if (aGroupedMap.has(sMeasure)) {
+                        aGroupedMap.set(sMeasure, aGroupedMap.get(sMeasure) + iCtnQty);
+                    } else {
+                        aGroupedMap.set(sMeasure, iCtnQty);
+                    }
+                }
+
+                iTotalCTNQTY += parseFloat(oBoxItem.BoxQty);
+                iTotalCBM += parseFloat(iItemCBM);
+                iTotalQuantity += parseFloat(oBoxItem.ActualDeliveryQuantity);
+                iTotalPalletNetWeight += parseFloat(oPalletItem.PalletLoadWeight);
+                iTotalPalletGrossWeight += parseFloat(oPalletItem.PalletGrossWeight);
+                iTotalPrice += parseFloat(iItemPrice);
+
+                oprintData.Items.push({
+                    SerialNumber: item.SerialNumber,
+                    Product: item.Product,
+                    MaterialByCustomer: item.MaterialByCustomer,
+                    DeliveryDocumentItemText: oBoxItem.DeliveryDocumentItemText,
+                    CommodityCode: oBoxItem.CommodityCode,
+                    PurchaseOrderByCustomer: item.PurchaseOrderByCustomer,
+                    CustomerPurchaseOrderItem: item.CustomerPurchaseOrderItem,
+                    BoxNumberRange: oBoxItem.BoxNumberRange,
+                    BoxQty: oBoxItem.BoxQty,
+                    CBM: iItemCBM,
+                    ActualDeliveryQuantity: oBoxItem.ActualDeliveryQuantity,
+                    PerBoxTargetQty: oBoxItem.PerBoxTargetQty,
+                    PalletLoadWeight: oPalletItem.PalletLoadWeight,
+                    PalletGrossWeight: oPalletItem.PalletGrossWeight,
+                    UnitPriceUSD: item.UnitPriceUSD,
+                    TotalPriceUSD: iItemPrice.toFixed(4),
+                    BoxMeasureSize: oBoxItem.BoxMeasureSize
+                });
+            });
+
+            aGroupedMap.forEach(function (iQty, sMeasure) {
+                if (oprintData.PackageSize === "") {
+                    oprintData.PackageSize = sMeasure + "MM*" + iQty;
+                } else {
+                    oprintData.PackageSize = oprintData.PackageSize + '\n' + sMeasure + "MM*" + iQty;
+                }
+            });
+
+            iTotalCBM = iTotalCBM.toFixed(3);
+            iTotalPalletNetWeight = iTotalPalletNetWeight.toFixed(3);
+            iTotalPalletGrossWeight = iTotalPalletGrossWeight.toFixed(3);
+            iTotalPrice = iTotalPrice.toFixed(4);
+
+            oprintData.BoxQtyTotal = iTotalCTNQTY;
+            oprintData.CBMTotal = iTotalCBM;
+            oprintData.ActualDeliveryQuantityTotal = iTotalQuantity;
+            oprintData.PalletLoadWeightTotal = iTotalPalletNetWeight;
+            oprintData.PalletGrossWeightTotal = iTotalPalletGrossWeight;
+            oprintData.TotalPriceUSDTotal = iTotalPrice;
+            oprintData.TOTAL = iTotalPackages + " Packages, W.G(Include Pallet):" + iTotalPalletGrossWeight + " KG";
+            oprintData.WayBill = oDataSource.WayBill;
+
+            var pdfContent = {
+                PrintData: oprintData
+            };
+
+            return pdfContent;
+        },
+
+        _getPDFContent2: function (oDataSource) {
+            var oprintData = {
+                TelFax: "Tel.: " + oDataSource.CompanyPhone + "   Fax: " + oDataSource.CompanyFax,
+                Title: "Invoice & PL",
+                SoldToPartyName: oDataSource.SoldToPartyName,
+                ShipToPartyName: oDataSource.ShipToPartyName,
+                BillingDocument: oDataSource.BillingDocument,
+                TransportType: oDataSource.TransportType,
+                SoldToPartyAddress: oDataSource.SoldToPartyAddress,
+                ShipToPartyAddress: oDataSource.ShipToPartyAddress,
+                PlannedCustomsDeclarationDate: oDataSource.PlannedCustomsDeclarationDate == null ? "" : oDataSource.PlannedCustomsDeclarationDate.getFullYear().toString() + ( oDataSource.PlannedCustomsDeclarationDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.PlannedCustomsDeclarationDate.getDate().toString().padStart(2, "0"),
+                Incoterms: oDataSource.IncotermsClassification + " " + oDataSource.IncotermsTransferLocation,
+                PlannedGoodsIssueDate: oDataSource.PlannedGoodsIssueDate == null ? "" : oDataSource.PlannedGoodsIssueDate.getFullYear().toString() + ( oDataSource.PlannedGoodsIssueDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.PlannedGoodsIssueDate.getDate().toString().padStart(2, "0"),
+                PlannedGoodsMovementDate: oDataSource.PlannedGoodsMovementDate == null ? "" : oDataSource.PlannedGoodsMovementDate.getFullYear().toString() + ( oDataSource.PlannedGoodsMovementDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.PlannedGoodsMovementDate.getDate().toString().padStart(2, "0"),
+                SoldToPartyContact: oDataSource.SoldToPartyContact,
+                ShipToPartyContact: oDataSource.ShipToPartyContact,
+                RequestedDeliveryDate: oDataSource.RequestedDeliveryDate == null ? "" : oDataSource.RequestedDeliveryDate.getFullYear().toString() + ( oDataSource.RequestedDeliveryDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.RequestedDeliveryDate.getDate().toString().padStart(2, "0"),
+                SoldToPartyPhone: oDataSource.SoldToPartyPhone,
+                ShipToPartyPhone: oDataSource.ShipToPartyPhone,
+                CreatedAt: oDataSource.CreatedAt == null ? "" : oDataSource.CreatedAt.getFullYear().toString() + ( oDataSource.CreatedAt.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.CreatedAt.getDate().toString().padStart(2, "0"),
+                SoldToPartyFax: oDataSource.SoldToPartyFax,
+                ShipToPartyFax: oDataSource.ShipToPartyFax,
+                Items: [],
+                BoxQtyTotal:0,
+                CBMTotal:0,
+                ActualDeliveryQuantityTotal: 0,
+                PalletLoadWeightTotal: 0,
+                PalletGrossWeightTotal: 0,
+                TotalPriceUSDTotal: 0,
+                PackageSize: "",
+                TOTAL: "",
+                WayBill: oDataSource.WayBill
+            }
+
+            var iTotalQuantity = 0,
+                iTotalPalletNetWeight = 0,
+                iTotalPalletGrossWeight = 0,
+                iTotalCTNQTY = 0,
+                iTotalCBM = 0,
+                iTotalPrice = 0,
+                iItemPrice = 0,
+                iItemCBM = 0,
+                iTotalPackages = 0;
+            var aGroupedMap = new Map();
+            var aItems = [];
+            oDataSource.to_ShippingInstructionDelivery.results.forEach((item) => {
+                var oBoxItem = oDataSource.to_ShippingInstructionBox.results.find(p => p.BillingDocument === item.BillingDocument &&
+                    p.BillingDocumentItem === item.BillingDocumentItem && p.SerialNumber === item.SerialNumber);
+                var oPalletItem = oDataSource.to_ShippingInstructionPallet.results.find(p => p.BillingDocument === item.BillingDocument &&
+                    p.BillingDocumentItem === item.BillingDocumentItem && p.SerialNumber === item.SerialNumber);
+
+                // 单价
+                iItemPrice = parseFloat(item.UnitPriceUSD) * parseFloat(item.ActualDeliveryQuantity);
+                // 体积
+                iItemCBM = this._calculateVolume(oBoxItem.BoxMeasureSize, oBoxItem.BoxQty);
+                var sMeasure = (oBoxItem.BoxMeasureSize || "").trim(); // 尺寸字符串, 如 '505*505*510'
+                var iCtnQty = parseInt(oBoxItem.BoxQty, 10) || 0;      // 箱数/件数
+                if (sMeasure && iCtnQty > 0) {
+                    // 累加总件数
+                    iTotalPackages += iCtnQty;
+                    // 如果已经存在该尺寸，则累加 Qty；不存在则初始化
+                    if (aGroupedMap.has(sMeasure)) {
+                        aGroupedMap.set(sMeasure, aGroupedMap.get(sMeasure) + iCtnQty);
+                    } else {
+                        aGroupedMap.set(sMeasure, iCtnQty);
+                    }
+                }
+
+                iTotalCTNQTY += parseFloat(oBoxItem.BoxQty);
+                iTotalCBM += parseFloat(iItemCBM);
+                iTotalQuantity += parseFloat(oBoxItem.ActualDeliveryQuantity);
+                iTotalPalletNetWeight += parseFloat(oPalletItem.PalletLoadWeight);
+                iTotalPalletGrossWeight += parseFloat(oPalletItem.PalletGrossWeight);
+                iTotalPrice += parseFloat(iItemPrice);
+
+                oprintData.Items.push({
+                    SerialNumber: item.SerialNumber,
+                    Product: item.Product,
+                    MaterialByCustomer: item.MaterialByCustomer,
+                    DeliveryDocumentItemText: oBoxItem.DeliveryDocumentItemText,
+                    CommodityCode: oBoxItem.CommodityCode,
+                    PurchaseOrderByCustomer: item.PurchaseOrderByCustomer,
+                    CustomerPurchaseOrderItem: item.CustomerPurchaseOrderItem,
+                    BoxNumberRange: oBoxItem.BoxNumberRange,
+                    BoxQty: oBoxItem.BoxQty,
+                    CBM: iItemCBM,
+                    ActualDeliveryQuantity: oBoxItem.ActualDeliveryQuantity,
+                    PerBoxTargetQty: oBoxItem.PerBoxTargetQty,
+                    PalletLoadWeight: oPalletItem.PalletLoadWeight,
+                    PalletGrossWeight: oPalletItem.PalletGrossWeight,
+                    UnitPriceUSD: item.UnitPriceUSD,
+                    TotalPriceUSD: iItemPrice.toFixed(4),
+                    BoxMeasureSize: oBoxItem.BoxMeasureSize
+                });
+            });
+
+            aGroupedMap.forEach(function (iQty, sMeasure) {
+                if (oprintData.PackageSize === "") {
+                    oprintData.PackageSize = sMeasure + "MM*" + iQty;
+                } else {
+                    oprintData.PackageSize = oprintData.PackageSize + '\n' + sMeasure + "MM*" + iQty;
+                }
+            });
+
+            iTotalCBM = iTotalCBM.toFixed(3);
+            iTotalPalletNetWeight = iTotalPalletNetWeight.toFixed(3);
+            iTotalPalletGrossWeight = iTotalPalletGrossWeight.toFixed(3);
+            iTotalPrice = iTotalPrice.toFixed(4);
+
+            oprintData.BoxQtyTotal = iTotalCTNQTY;
+            oprintData.CBMTotal = iTotalCBM;
+            oprintData.ActualDeliveryQuantityTotal = iTotalQuantity;
+            oprintData.PalletLoadWeightTotal = iTotalPalletNetWeight;
+            oprintData.PalletGrossWeightTotal = iTotalPalletGrossWeight;
+            oprintData.TotalPriceUSDTotal = iTotalPrice;
+            oprintData.TOTAL = iTotalPackages + " Packages, W.G(Include Pallet):" + iTotalPalletGrossWeight + " KG";
+            oprintData.WayBill = oDataSource.WayBill;
+
+            var pdfContent = {
+                PrintData: oprintData
+            };
+
+            return pdfContent;
+        },
+
+        _getPDFContent3: function (oDataSource) {
+            var oprintData = {
+                TelFax: "Tel.: " + oDataSource.CompanyPhone + "   Fax: " + oDataSource.CompanyFax,
+                Title: "Transportation Order",
+                SoldToPartyName: oDataSource.SoldToPartyName,
+                ShipToPartyName: oDataSource.ShipToPartyName,
+                BillingDocument: oDataSource.BillingDocument,
+                TransportType: oDataSource.TransportType,
+                SoldToPartyAddress: oDataSource.SoldToPartyAddress,
+                ShipToPartyAddress: oDataSource.ShipToPartyAddress,
+                PlannedCustomsDeclarationDate: oDataSource.PlannedCustomsDeclarationDate == null ? "" : oDataSource.PlannedCustomsDeclarationDate.getFullYear().toString() + ( oDataSource.PlannedCustomsDeclarationDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.PlannedCustomsDeclarationDate.getDate().toString().padStart(2, "0"),
+                Incoterms: oDataSource.IncotermsClassification + " " + oDataSource.IncotermsTransferLocation,
+                PlannedGoodsIssueDate: oDataSource.PlannedGoodsIssueDate == null ? "" : oDataSource.PlannedGoodsIssueDate.getFullYear().toString() + ( oDataSource.PlannedGoodsIssueDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.PlannedGoodsIssueDate.getDate().toString().padStart(2, "0"),
+                PlannedGoodsMovementDate: oDataSource.PlannedGoodsMovementDate == null ? "" : oDataSource.PlannedGoodsMovementDate.getFullYear().toString() + ( oDataSource.PlannedGoodsMovementDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.PlannedGoodsMovementDate.getDate().toString().padStart(2, "0"),
+                SoldToPartyContact: oDataSource.SoldToPartyContact,
+                ShipToPartyContact: oDataSource.ShipToPartyContact,
+                RequestedDeliveryDate: oDataSource.RequestedDeliveryDate == null ? "" : oDataSource.RequestedDeliveryDate.getFullYear().toString() + ( oDataSource.RequestedDeliveryDate.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.RequestedDeliveryDate.getDate().toString().padStart(2, "0"),
+                SoldToPartyPhone: oDataSource.SoldToPartyPhone,
+                ShipToPartyPhone: oDataSource.ShipToPartyPhone,
+                CreatedAt: oDataSource.CreatedAt == null ? "" : oDataSource.CreatedAt.getFullYear().toString() + ( oDataSource.CreatedAt.getMonth() + 1 ).toString().padStart(2, "0")+ oDataSource.CreatedAt.getDate().toString().padStart(2, "0"),
+                SoldToPartyFax: oDataSource.SoldToPartyFax,
+                ShipToPartyFax: oDataSource.ShipToPartyFax,
+                Items: [],
+                ActualDeliveryQuantityTotal: 0,
+                PalletLoadWeightTotal: 0,
+                PalletGrossWeightTotal: 0,
+                PackageSize: "",
+                TOTAL: "",
+                WayBill: oDataSource.WayBill
+            }
+
+            var iTotalQuantity = 0,
+                iTotalPalletNetWeight = 0,
+                iTotalPalletGrossWeight = 0,
+                iTotalPackages = 0;
+            var aGroupedMap = new Map();
+            var aItems = [];
+            oDataSource.to_ShippingInstructionDelivery.results.forEach((item) => {
+                var oBoxItem = oDataSource.to_ShippingInstructionBox.results.find(p => p.BillingDocument === item.BillingDocument &&
+                    p.BillingDocumentItem === item.BillingDocumentItem && p.SerialNumber === item.SerialNumber);
+                var oPalletItem = oDataSource.to_ShippingInstructionPallet.results.find(p => p.BillingDocument === item.BillingDocument &&
+                    p.BillingDocumentItem === item.BillingDocumentItem && p.SerialNumber === item.SerialNumber);
+
+                var sMeasure = (oBoxItem.BoxMeasureSize || "").trim(); // 尺寸字符串, 如 '505*505*510'
+                var iCtnQty = parseInt(oBoxItem.BoxQty, 10) || 0;      // 箱数/件数
+                if (sMeasure && iCtnQty > 0) {
+                    // 累加总件数
+                    iTotalPackages += iCtnQty;
+                    // 如果已经存在该尺寸，则累加 Qty；不存在则初始化
+                    if (aGroupedMap.has(sMeasure)) {
+                        aGroupedMap.set(sMeasure, aGroupedMap.get(sMeasure) + iCtnQty);
+                    } else {
+                        aGroupedMap.set(sMeasure, iCtnQty);
+                    }
+                }
+
+                iTotalQuantity += parseFloat(oBoxItem.ActualDeliveryQuantity);
+                iTotalPalletNetWeight += parseFloat(oPalletItem.PalletLoadWeight);
+                iTotalPalletGrossWeight += parseFloat(oPalletItem.PalletGrossWeight);
+
+                oprintData.Items.push({
+                    SerialNumber: item.SerialNumber,
+                    Product: item.Product,
+                    MaterialByCustomer: item.MaterialByCustomer,
+                    DeliveryDocumentItemText: oBoxItem.DeliveryDocumentItemText,
+                    CommodityCode: oBoxItem.CommodityCode,
+                    PurchaseOrderByCustomer: item.PurchaseOrderByCustomer,
+                    CustomerPurchaseOrderItem: item.CustomerPurchaseOrderItem,
+                    BoxNumberRange: oBoxItem.BoxNumberRange,
+                    ActualDeliveryQuantity: oBoxItem.ActualDeliveryQuantity,
+                    PerBoxTargetQty: oBoxItem.PerBoxTargetQty,
+                    PalletLoadWeight: oPalletItem.PalletLoadWeight,
+                    PalletGrossWeight: oPalletItem.PalletGrossWeight,
+                    BoxMeasureSize: oBoxItem.BoxMeasureSize
+                });
+            });
+
+            aGroupedMap.forEach(function (iQty, sMeasure) {
+                if (oprintData.PackageSize === "") {
+                    oprintData.PackageSize = sMeasure + "MM*" + iQty;
+                } else {
+                    oprintData.PackageSize = oprintData.PackageSize + '\n' + sMeasure + "MM*" + iQty;
+                }
+            });
+
+            iTotalPalletNetWeight = iTotalPalletNetWeight.toFixed(3);
+            iTotalPalletGrossWeight = iTotalPalletGrossWeight.toFixed(3);
+
+            oprintData.ActualDeliveryQuantityTotal = iTotalQuantity;
+            oprintData.PalletLoadWeightTotal = iTotalPalletNetWeight;
+            oprintData.PalletGrossWeightTotal = iTotalPalletGrossWeight;
+            oprintData.TOTAL = iTotalPackages + " Packages, W.G(Include Pallet):" + iTotalPalletGrossWeight + " KG";
+            oprintData.WayBill = oDataSource.WayBill;
+
+            var pdfContent = {
+                PrintData: oprintData
+            };
+
+            return pdfContent;
+        },
+
+        getPDF: function (pdfContent, sTemplateID, iOutputOption) {
+            var that = this;
+            var oBusyDialog = new BusyDialog();
+            var aRecordCreated = [];
+            var sFileName = this.getResourceBundle().getText("Option" + (iOutputOption + 1)) + "_" + this.getCurrentDateTimeLong();
+            var promise = new Promise((resolve, reject) => {
+                var createPrintRecord = that._oPrintModel.bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord(...)");
+                createPrintRecord.setParameter("TemplateID", sTemplateID);
+                createPrintRecord.setParameter("IsExternalProvidedData", true);
+                var oXMLData = json2xml(pdfContent, {
+                    compact: true,
+                    ignoreComment: true,
+                    spaces: 4
+                });
+                // var pdfData =  btoa(unescape(encodeURIComponent(oXMLData)));
+                var pdfData = btoa(unescape(encodeURIComponent("<?xml version=\"1.0\" encoding=\"UTF-8\"?><form>" + oXMLData + "</form>")));
+                createPrintRecord.setParameter("ExternalProvidedData", pdfData);
+                // var uuidx16 = context.getObject().Uuid.replace(/-/g, '');
+                createPrintRecord.setParameter("ProvidedKeys", "");
+                createPrintRecord.setParameter("ResultIsActiveEntity", true);
+                createPrintRecord.setParameter("FileName", sFileName);
+                createPrintRecord.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
+                    resolve(createPrintRecord);
+                }).catch((oError) => {
+                    reject(oError);
+                });
+            });
+            aRecordCreated.push(promise);
+
+            oBusyDialog.open();
+            try {
+                Promise.all(aRecordCreated).then((aContext) => {
+                    oBusyDialog.close();
+                    var sURL;
+                    for (const activeContext of aContext) {
+                        var boundContext = activeContext.getBoundContext();
+                        var object = boundContext.getObject();
+                        var sPath = that._oPrintModel.getKeyPredicate("/PrintRecord", object);
+                        sURL = activeContext.getModel("Print").getServiceUrl() + "PrintRecord" + sPath + '/PDFContent';
+                        sap.m.URLHelper.redirect(sURL, true);
+                    }
+                    MessageToast.show(this.getResourceBundle().getText("PrintSuccess"));
+                }).finally(() => {
+                    oBusyDialog.close();
+                });
+            } catch (error) {
+                MessageToast.show(error);
+                oBusyDialog.close();
+            }
         },
 
         _ExportExcel: async function (iOutputOption, oDataSource) {
@@ -967,7 +1531,7 @@ sap.ui.define([
             const blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = this.getResourceBundle().getText("Option" + (iOutputOption + 1)) + "_" + this.getCurrentDateTime() + ".xlsx";
+            link.download = this.getResourceBundle().getText("Option" + (iOutputOption + 1)) + "_" + this.getCurrentDateTimeLong() + ".xlsx";
             link.click();
             URL.revokeObjectURL(link.href);
         },
@@ -1247,5 +1811,8 @@ sap.ui.define([
             cellData.push({ cell: "O" + iRow, v: "Authorized Signature", font: fontLabel, align: alignCenter });
             mergeRanges.push("O" + iRow + ":Q" + iRow);
         }
+
+
+
     });
 });
