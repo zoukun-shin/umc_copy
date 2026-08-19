@@ -274,6 +274,7 @@ sap.ui.define([
                     method: sMethod === "READ" ? "GET" : "POST",
                     filters: aFilters,
                     urlParameters: mUrlParameter,
+                    groupId: "mySeparateRequestGroup", // 指定非 'deferred' 或默认 group
                     success: function (oResponse) {
                         oBusyDialog.close();
                         resolve(oResponse);

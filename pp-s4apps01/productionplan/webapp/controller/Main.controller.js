@@ -346,14 +346,11 @@ sap.ui.define([
             var bFromBOMTable = this.getModel("local").getProperty("/filter/FromBOMTable");
             aFilters.push(new Filter("FromBOMTable", FilterOperator.EQ, bFromBOMTable));
             // 并行处理 优化速度
-            this.getModel().setUseBatch(false);
             this._loadAllData("/ProductionPlan", aFilters).then(function (aResults) {
                 if (aResults.length > 0) {
                     this.getModel("local").setProperty("/resultSet", aResults);
                 }
-                this.getModel().setUseBatch(true);
             }.bind(this), function (oError) {
-                this.getModel().setUseBatch(true);
                 MessageBox.error(oError);
             }.bind(this));
             // ADD END BY XINLEI XU 2026/07/17 VN CR#6718
