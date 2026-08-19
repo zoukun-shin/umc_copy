@@ -10,7 +10,7 @@
         showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" 
         persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" 
         placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" 
-        beforeExport="onBeforeExport" showFullScreenButton="true" ignoredFields="NoDisplayNonProduct,DisplayPurchasingInfo">
+        beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="Sequence" ignoredFields="TecoUPD,DelUPD,CRTDUPD">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>

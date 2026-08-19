@@ -137,6 +137,7 @@ sap.ui.define([
                     Plant: oRow.Plant,
                     SalesOrder: oRow.SalesOrder,
                     SalesOrderItem: oRow.SalesOrderItem,
+                    Sequence: oRow.Sequence,
                     AssignedQtyAfter: oRow.AssignedQtyAfter
                 };
             });
@@ -161,7 +162,8 @@ sap.ui.define([
                                 String(oItem.PROCESSINGTYPE),
                                 String(oItem.PLANT),
                                 String(oItem.SALESORDER),
-                                String(oItem.SALESORDERITEM)
+                                String(oItem.SALESORDERITEM),
+                                String(oItem.SEQUENCE)
                             ].join("|");
                             mResultByKey[sKey] = oItem;
                         });
@@ -172,7 +174,8 @@ sap.ui.define([
                                 String(oRow.ProcessingType),
                                 String(oRow.Plant),
                                 String(oRow.SalesOrder),
-                                String(oRow.SalesOrderItem)
+                                String(oRow.SalesOrderItem),
+                                String(oRow.Sequence)
                             ].join("|");
                             var oResult = mResultByKey[sKey];
 
