@@ -111,15 +111,15 @@
         </f:content>
     </f:DynamicPage>
 
-    <smarttable:SmartTable id="table5" class="smartTablePadding" header="{i18n>title5}" smartVariant="__SVM05" beforeRebindTable="onBeforeRebindTable" entitySet="ZC_BI003_REPORT_005" persistencyKey="Report5SMT" enableAutoBinding="false" beforeExport="onBeforeExport" showRowCount="true" smartFilterId="report05Filter" tableType="Table" ignoredFields="BillingProductText,CompanyCodeName,TransactionCurrency,CustomerName,FiscalYear,FiscalMonth,GLAccountName,ProductName,ProfitCenterName" requestAtLeastFields="BillingProductText,CompanyCodeName,TransactionCurrency,CustomerName,FiscalYear,FiscalMonth,GLAccountName,ProductName,ProfitCenterName">
+    <smarttable:SmartTable id="table5" class="smartTablePadding" header="{i18n>title5}" smartVariant="__SVM05" beforeRebindTable="onBeforeRebindTable" entitySet="ZC_BI003_REPORT_005" persistencyKey="Report5SMT" enableAutoBinding="false" beforeExport="onBeforeExport" showRowCount="true" smartFilterId="report05Filter" tableType="Table" ignoredFields="BillingProductText,CompanyCodeName,TransactionCurrency,CustomerName,FiscalYear,FiscalMonth,GLAccountName,ProductName,ProfitCenterName,BillingCurrency" requestAtLeastFields="BillingProductText,CompanyCodeName,TransactionCurrency,CustomerName,FiscalYear,FiscalMonth,GLAccountName,ProductName,ProfitCenterName,BillingCurrency">
         <smarttable:customToolbar>
             <OverflowToolbar>
                 <ToolbarSpacer/>
             </OverflowToolbar>
         </smarttable:customToolbar>
-        <table:Table id="tableReport05" threshold="20" selectionMode="None" fixedColumnCount="3">
+        <table:Table id="tableReport05" threshold="200" selectionMode="None" fixedColumnCount="3">
             <table:rowMode>
-                <rowmodes:Auto id="idReport05Auto" minRowCount="15"></rowmodes:Auto>
+                <rowmodes:Auto id="idReport05Auto" minRowCount="13"></rowmodes:Auto>
             </table:rowMode>
             <table:columns>
                 <table:Column id="idRep05FiscalYearPeriod" width="12em" label="{i18n>FiscalYearPeriod}" sortProperty="FiscalYearPeriod" filterProperty="FiscalYearPeriod" visible="true">
@@ -202,20 +202,20 @@
                         <smartfield:SmartField id="sfRep05EntryUnit" value="{EntryUnit}" wrapping="false" editable="false"/>
                     </table:template>
                 </table:Column>
+                <table:Column id="idRep05CompanyCurrency" width="6em" label="{i18n>CompanyCurrency}" sortProperty="CompanyCurrency" filterProperty="CompanyCurrency" visible="true">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCurrency",  "leadingProperty":"CompanyCurrency", "sortProperty":"CompanyCurrency", "filterProperty": "CompanyCurrency"}'/>
+                    </table:customData>
+                    <table:template>
+                        <smartfield:SmartField id="sfRep05CompanyCurrency" value="{CompanyCurrency}" wrapping="false" editable="false"/>
+                    </table:template>
+                </table:Column>
                 <table:Column id="idRep05SSAmount" width="13em" label="{i18n>RecoveryNecessaryAmount}" sortProperty="RecoveryNecessaryAmount" filterProperty="RecoveryNecessaryAmount" visible="true" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryNecessaryAmount", "unit":"CompanyCurrency",  "leadingProperty":"RecoveryNecessaryAmount", "sortProperty":"RecoveryNecessaryAmount", "filterProperty": "RecoveryNecessaryAmount"}'/>
                     </table:customData>
                     <table:template>
                         <Text id="sfRep05SSAmount" text="{parts: [{path: 'RecoveryNecessaryAmount'}, {path: 'CompanyCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
-                    </table:template>
-                </table:Column>
-                <table:Column id="idRep05CompanyCurrency" width="6em" label="{i18n>currency}" sortProperty="CompanyCurrency" filterProperty="CompanyCurrency" visible="true">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCurrency",  "leadingProperty":"CompanyCurrency", "sortProperty":"CompanyCurrency", "filterProperty": "CompanyCurrency"}'/>
-                    </table:customData>
-                    <table:template>
-                        <smartfield:SmartField id="sfRep05CompanyCurrency" value="{CompanyCurrency}" wrapping="false" editable="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column id="idRep05BillingDocument" width="10em" label="{i18n>BillingDocument}" sortProperty="BillingDocument" filterProperty="BillingDocument" visible="true">
@@ -306,14 +306,14 @@
                         <Text id="sfRep05RecoveryAmount" text="{parts: [{path: 'RecoveryAmount'}, {path: 'BillingCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column id="idRep05BillingCurrency" width="6em" label="{i18n>BillingCurrency}" sortProperty="BillingCurrency" filterProperty="BillingCurrency" visible="true">
+                <!-- <table:Column id="idRep05BillingCurrency" width="6em" label="{i18n>BillingCurrency}" sortProperty="BillingCurrency" filterProperty="BillingCurrency" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BillingCurrency",  "leadingProperty":"BillingCurrency", "sortProperty":"BillingCurrency", "filterProperty": "BillingCurrency"}'/>
                     </table:customData>
                     <table:template>
                         <smartfield:SmartField id="sfRep05BillingCurrency" value="{BillingCurrency}" wrapping="false" editable="false"/>
                     </table:template>
-                </table:Column>
+                </table:Column> -->
                 <table:Column id="idRep05SalesDocument" width="10em" label="{i18n>SalesDocument}" sortProperty="SalesOrderDocument" filterProperty="SalesOrderDocument" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"SalesOrderDocument", "leadingProperty":"SalesOrderDocument", "sortProperty":"SalesOrderDocument", "filterProperty": "SalesOrderDocument"}'/>

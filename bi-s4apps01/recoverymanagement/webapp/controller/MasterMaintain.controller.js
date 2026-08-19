@@ -47,6 +47,7 @@ sap.ui.define([
             var sYear = oBindingContext.getProperty("RecoveryYear");
             var sType = oBindingContext.getProperty("RecoveryType");
             var sCustomer = oBindingContext.getProperty("Customer");
+            var sMachine = oBindingContext.getProperty("Machine"); // ADD BY XINLEI XU 2026/08/05 CN GAP No.48
 
             var aAuthorityCompanySet = this.getView().getModel("local").getProperty("/authorityCheck/data/CompanySet");
 
@@ -72,6 +73,13 @@ sap.ui.define([
                 MessageBox.error(this._getI18nBundle().getText("customerEmpty"));
                 return;
             }
+
+            // ADD BEGIN BY XINLEI XU 2026/08/05 CN GAP No.48
+            if (!sMachine || sMachine === '') {
+                MessageBox.error(this._getI18nBundle().getText("machineEmpty"));
+                return;
+            }
+            // ADD END BY XINLEI XU 2026/08/05 CN GAP No.48
 
             var oModel = this.getView().getModel();
 

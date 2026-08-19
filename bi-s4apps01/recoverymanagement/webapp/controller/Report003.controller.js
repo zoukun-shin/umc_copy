@@ -73,6 +73,7 @@ sap.ui.define([
             mExcelSettings.workbook.columns.forEach(function (oColumn) {
                 switch (oColumn.property) {
                     //  Date
+                    case "PostingDate":
                     case "BillingDocumentDate":
                         oColumn.type = sap.ui.export.EdmType.Date;
                         break;

@@ -86,6 +86,17 @@
                                 <smartfilterbar:ControlConfiguration key="CompanyCurrency" visible="false"/>
                                 <smartfilterbar:ControlConfiguration key="TransactionCurrency" visible="false"/>
                                 <smartfilterbar:ControlConfiguration key="OldMaterialPrice" visible="false"/>
+                                <!-- ADD BEGIN BY XINLEI XU 2026/08/13 CN GAP No.48 -->
+                                <smartfilterbar:ControlConfiguration key="NetPriceAmountByTransCurr" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="OldMaterialPriceByTransCurr" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="NetPriceDiffByTransCurr" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="RecoveryNecesAmtByTransCurr" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="BillingPriceByTransCurr" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="ConditionRateAmountTransCurr" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="ConditionRateAmountByTransCurr" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="RecoveryAmountTransCurr" visible="false"/>
+                                <smartfilterbar:ControlConfiguration key="RecoveryAmountByTransCurr" visible="false"/>
+                                <!-- ADD END BY XINLEI XU 2026/08/13 CN GAP No.48 -->
                             </smartfilterbar:controlConfiguration>
                         </smartfilterbar:SmartFilterBar>
                     </FlexBox>
@@ -99,15 +110,15 @@
         </f:content>
     </f:DynamicPage>
 
-    <smarttable:SmartTable id="table2" class="smartTablePadding" header="{i18n>title2}" smartVariant="__SVM02" beforeRebindTable="onBeforeRebindTable" entitySet="ZC_BI003_REPORT_002" persistencyKey="Report2SMT" enableAutoBinding="false" beforeExport="onBeforeExport" showRowCount="true" smartFilterId="report02Filter" tableType="Table" ignoredFields="FiscalYear,FiscalMonth,BillingProductText,TransactionCurrency" requestAtLeastFields="FiscalYear,FiscalMonth,BillingProductText,TransactionCurrency">
+    <smarttable:SmartTable id="table2" class="smartTablePadding" header="{i18n>title2}" smartVariant="__SVM02" beforeRebindTable="onBeforeRebindTable" entitySet="ZC_BI003_REPORT_002" persistencyKey="Report2SMT" enableAutoBinding="false" beforeExport="onBeforeExport" showRowCount="true" smartFilterId="report02Filter" tableType="Table" ignoredFields="FiscalYear,FiscalMonth,BillingProductText,TransactionCurrency,BillingCurrency" requestAtLeastFields="FiscalYear,FiscalMonth,BillingProductText,TransactionCurrency,BillingCurrency">
         <smarttable:customToolbar>
             <OverflowToolbar>
                 <ToolbarSpacer/>
             </OverflowToolbar>
         </smarttable:customToolbar>
-        <table:Table id="tableReport02" threshold="20" selectionMode="None" fixedColumnCount="3">
+        <table:Table id="tableReport02" threshold="200" selectionMode="None" fixedColumnCount="3">
             <table:rowMode>
-                <rowmodes:Auto id="idReport02Auto" minRowCount="15"></rowmodes:Auto>
+                <rowmodes:Auto id="idReport02Auto" minRowCount="13"></rowmodes:Auto>
             </table:rowMode>
             <table:columns>
                 <table:Column id="idRep02FiscalYearPeriod" width="12rem" label="{i18n>FiscalYearPeriod}" sortProperty="FiscalYearPeriod" filterProperty="FiscalYearPeriod" visible="true">
@@ -166,6 +177,24 @@
                         <smartfield:SmartField id="sfRep02ProductOldID" value="{ProductOldID}" wrapping="false" editable="false"/>
                     </table:template>
                 </table:Column>
+                <table:Column id="idRep02CompanyCurrency" width="8rem" label="{i18n>CompanyCurrency}" sortProperty="CompanyCurrency" filterProperty="CompanyCurrency" visible="true">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCurrency",  "leadingProperty":"CompanyCurrency", "sortProperty":"CompanyCurrency", "filterProperty": "CompanyCurrency"}'/>
+                    </table:customData>
+                    <table:template>
+                        <smartfield:SmartField id="sfRep02CompanyCurrency" value="{CompanyCurrency}" wrapping="false" editable="false"/>
+                    </table:template>
+                </table:Column>
+                <!-- ADD BEGIN BY XINLEI XU 2026/08/13 CN GAP No.48 -->
+                <table:Column width="6rem" label="{i18n>TransactionCurrency}" sortProperty="TransactionCurrency" filterProperty="TransactionCurrency" visible="true" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"TransactionCurrency","unit":"TransactionCurrency", "leadingProperty":"TransactionCurrency", "sortProperty":"TransactionCurrency", "filterProperty": "TransactionCurrency"}'/>
+                    </table:customData>
+                    <table:template>
+                        <smartfield:SmartField value="{TransactionCurrency}" wrapping="false" editable="false"/>
+                    </table:template>
+                </table:Column>
+                <!-- ADD END BY XINLEI XU 2026/08/13 CN GAP No.48 -->
                 <table:Column id="idRep02SpotbuyMaterialPrice" width="13rem" label="{i18n>SpotbuyMaterialPrice}" sortProperty="NetPriceAmount" filterProperty="NetPriceAmount" visible="true" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"NetPriceAmount","unit":"CompanyCurrency", "leadingProperty":"NetPriceAmount", "sortProperty":"NetPriceAmount", "filterProperty": "NetPriceAmount"}'/>
@@ -174,6 +203,16 @@
                         <Text id="sfRep02SpotbuyMaterialPrice" text="{parts: [{path: 'NetPriceAmount'}, {path: 'CompanyCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <!-- ADD BEGIN BY XINLEI XU 2026/08/13 CN GAP No.48 -->
+                <table:Column width="13rem" label="{i18n>NetPriceAmountByTransCurr}" sortProperty="NetPriceAmountByTransCurr" filterProperty="NetPriceAmountByTransCurr" visible="true" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"NetPriceAmountByTransCurr","unit":"TransactionCurrency", "leadingProperty":"NetPriceAmountByTransCurr", "sortProperty":"NetPriceAmountByTransCurr", "filterProperty": "NetPriceAmountByTransCurr"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'NetPriceAmountByTransCurr'}, {path: 'TransactionCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <!-- ADD END BY XINLEI XU 2026/08/13 CN GAP No.48 -->
                 <table:Column id="idRep02OldMaterialPrice" width="13rem" label="{i18n>OldMaterialPrice}" sortProperty="OldMaterialPrice" filterProperty="OldMaterialPrice" visible="true" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"OldMaterialPrice", "unit":"CompanyCurrency",  "leadingProperty":"OldMaterialPrice", "sortProperty":"OldMaterialPrice", "filterProperty": "OldMaterialPrice"}'/>
@@ -182,6 +221,16 @@
                         <Text id="sfRep02OldMaterialPrice" text="{parts: [{path: 'OldMaterialPrice'}, {path: 'CompanyCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <!-- ADD BEGIN BY XINLEI XU 2026/08/13 CN GAP No.48 -->
+                <table:Column width="13rem" label="{i18n>OldMaterialPriceByTransCurr}" sortProperty="OldMaterialPriceByTransCurr" filterProperty="OldMaterialPriceByTransCurr" visible="true" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"OldMaterialPriceByTransCurr","unit":"TransactionCurrency", "leadingProperty":"OldMaterialPriceByTransCurr", "sortProperty":"OldMaterialPriceByTransCurr", "filterProperty": "OldMaterialPriceByTransCurr"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'OldMaterialPriceByTransCurr'}, {path: 'TransactionCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <!-- ADD END BY XINLEI XU 2026/08/13 CN GAP No.48 -->
                 <table:Column id="idRep02OrderQuantity" width="15rem" label="{i18n>OrderQuantity}" sortProperty="OrderQuantity" filterProperty="OrderQuantity" visible="true" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"OrderQuantity", "unit":"BaseUnit",  "leadingProperty":"OrderQuantity", "sortProperty":"OrderQuantity", "filterProperty": "OrderQuantity"}'/>
@@ -206,6 +255,16 @@
                         <Text id="sfRep02NetPriceDiff" text="{parts: [{path: 'NetPriceDiff'}, {path: 'CompanyCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <!-- ADD BEGIN BY XINLEI XU 2026/08/13 CN GAP No.48 -->
+                <table:Column width="13rem" label="{i18n>NetPriceDiffByTransCurr}" sortProperty="NetPriceDiffByTransCurr" filterProperty="NetPriceDiffByTransCurr" visible="true" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"NetPriceDiffByTransCurr","unit":"TransactionCurrency", "leadingProperty":"NetPriceDiffByTransCurr", "sortProperty":"NetPriceDiffByTransCurr", "filterProperty": "NetPriceDiffByTransCurr"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'NetPriceDiffByTransCurr'}, {path: 'TransactionCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <!-- ADD END BY XINLEI XU 2026/08/13 CN GAP No.48 -->
                 <table:Column id="idRep02PriceDiffTotal" width="13rem" label="{i18n>PriceDiffTotal}" sortProperty="RecoveryNecessaryAmount" filterProperty="RecoveryNecessaryAmount" visible="true" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryNecessaryAmount", "unit":"CompanyCurrency",  "leadingProperty":"RecoveryNecessaryAmount", "sortProperty":"RecoveryNecessaryAmount", "filterProperty": "RecoveryNecessaryAmount"}'/>
@@ -214,14 +273,16 @@
                         <Text id="sfRep02PriceDiffTotal" text="{parts: [{path: 'RecoveryNecessaryAmount'}, {path: 'CompanyCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column id="idRep02CompanyCurrency" width="6rem" label="{i18n>currency}" sortProperty="CompanyCurrency" filterProperty="CompanyCurrency" visible="true">
+                <!-- ADD BEGIN BY XINLEI XU 2026/08/13 CN GAP No.48 -->
+                <table:Column width="13rem" label="{i18n>PriceDiffTotalByTransCurr}" sortProperty="RecoveryNecesAmtByTransCurr" filterProperty="RecoveryNecesAmtByTransCurr" visible="true" hAlign="End">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCurrency",  "leadingProperty":"CompanyCurrency", "sortProperty":"CompanyCurrency", "filterProperty": "CompanyCurrency"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryNecesAmtByTransCurr","unit":"TransactionCurrency", "leadingProperty":"RecoveryNecesAmtByTransCurr", "sortProperty":"RecoveryNecesAmtByTransCurr", "filterProperty": "RecoveryNecesAmtByTransCurr"}'/>
                     </table:customData>
                     <table:template>
-                        <smartfield:SmartField id="sfRep02CompanyCurrency" value="{CompanyCurrency}" wrapping="false" editable="false"/>
+                        <Text text="{parts: [{path: 'RecoveryNecesAmtByTransCurr'}, {path: 'TransactionCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <!-- ADD END BY XINLEI XU 2026/08/13 CN GAP No.48 -->
                 <table:Column id="idRep02BillingDocument" width="10rem" label="{i18n>BillingDocument}" sortProperty="BillingDocument" filterProperty="BillingDocument" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BillingDocument", "leadingProperty":"BillingDocument", "sortProperty":"BillingDocument", "filterProperty": "BillingDocument"}'/>
@@ -275,15 +336,51 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateAmount", "leadingProperty":"ConditionRateAmount", "sortProperty":"ConditionRateAmount", "filterProperty": "ConditionRateAmount"}'/>
                     </table:customData>
                     <table:template>
-                        <Text id="sfRep02ConditionRateAmount" text="{parts: [{path: 'ConditionRateAmount'}, {path: 'BillingCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                        <Text id="sfRep02ConditionRateAmount" text="{parts: [{path: 'ConditionRateAmount'}, {path: 'CompanyCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <!-- ADD BEGIN BY XINLEI XU 2026/08/13 CN GAP No.48 -->
+                <table:Column width="13rem" label="{i18n>ConditionRateAmountByTransCurr}" sortProperty="ConditionRateAmountByTransCurr" filterProperty="ConditionRateAmountByTransCurr" visible="true" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateAmountByTransCurr","unit":"ConditionRateAmountTransCurr", "leadingProperty":"ConditionRateAmountByTransCurr", "sortProperty":"ConditionRateAmountByTransCurr", "filterProperty": "ConditionRateAmountByTransCurr"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'ConditionRateAmountByTransCurr'}, {path: 'ConditionRateAmountTransCurr'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="6rem" label="{i18n>ConditionRateAmountTransCurr}" sortProperty="ConditionRateAmountTransCurr" filterProperty="ConditionRateAmountTransCurr" visible="true" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ConditionRateAmountTransCurr", "leadingProperty":"ConditionRateAmountTransCurr", "sortProperty":"ConditionRateAmountTransCurr", "filterProperty": "ConditionRateAmountTransCurr"}'/>
+                    </table:customData>
+                    <table:template>
+                        <smartfield:SmartField value="{ConditionRateAmountTransCurr}" wrapping="false" editable="false"/>
+                    </table:template>
+                </table:Column>
+                <!-- ADD END BY XINLEI XU 2026/08/13 CN GAP No.48 -->
                 <table:Column id="idRep02BillingPrice" width="13rem" label="{i18n>BillingPrice}" sortProperty="BillingPrice" filterProperty="BillingPrice" visible="true" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"BillingPrice", "leadingProperty":"BillingPrice", "sortProperty":"BillingPrice", "filterProperty": "BillingPrice"}'/>
                     </table:customData>
                     <table:template>
-                        <Text id="sfRep02BillingPrice" text="{parts: [{path: 'BillingPrice'}, {path: 'BillingCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                        <Text id="sfRep02BillingPrice" text="{parts: [{path: 'BillingPrice'}, {path: 'CompanyCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <!-- ADD BEGIN BY XINLEI XU 2026/08/13 CN GAP No.48 -->
+                <table:Column width="13rem" label="{i18n>BillingPriceByTransCurr}" sortProperty="BillingPriceByTransCurr" filterProperty="BillingPriceByTransCurr" visible="true" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillingPriceByTransCurr","unit":"BillingCurrency", "leadingProperty":"BillingPriceByTransCurr", "sortProperty":"BillingPriceByTransCurr", "filterProperty": "BillingPriceByTransCurr"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'BillingPriceByTransCurr'}, {path: 'BillingCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <!-- ADD END BY XINLEI XU 2026/08/13 CN GAP No.48 -->
+                <table:Column id="idRep02BillingCurrency" width="6rem" label="{i18n>BillingCurrency}" sortProperty="BillingCurrency" filterProperty="BillingCurrency" visible="true">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BillingCurrency",  "leadingProperty":"BillingCurrency", "sortProperty":"BillingCurrency", "filterProperty": "BillingCurrency"}'/>
+                    </table:customData>
+                    <table:template>
+                        <smartfield:SmartField id="sfRep02BillingCurrency" value="{BillingCurrency}" wrapping="false" editable="false"/>
                     </table:template>
                 </table:Column>
                 <table:Column id="idRep02BillingQuantity" width="13rem" label="{i18n>BillingQuantity}" sortProperty="BillingQuantity" filterProperty="BillingQuantity" visible="true" hAlign="End">
@@ -307,17 +404,27 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryAmount", "leadingProperty":"RecoveryAmount", "sortProperty":"RecoveryAmount", "filterProperty": "RecoveryAmount"}'/>
                     </table:customData>
                     <table:template>
-                        <Text id="sfRep02RecoveryAmount" text="{parts: [{path: 'RecoveryAmount'}, {path: 'BillingCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
+                        <Text id="sfRep02RecoveryAmount" text="{parts: [{path: 'RecoveryAmount'}, {path: 'CompanyCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column id="idRep02BillingCurrency" width="6rem" label="{i18n>BillingCurrency}" sortProperty="BillingCurrency" filterProperty="BillingCurrency" visible="true">
+                <!-- ADD BEGIN BY XINLEI XU 2026/08/13 CN GAP No.48 -->
+                <table:Column width="13rem" label="{i18n>RecoveryAmountByTransCurr}" sortProperty="RecoveryAmountByTransCurr" filterProperty="RecoveryAmountByTransCurr" visible="true" hAlign="End">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"BillingCurrency",  "leadingProperty":"BillingCurrency", "sortProperty":"BillingCurrency", "filterProperty": "BillingCurrency"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryAmountByTransCurr","unit":"RecoveryAmountTransCurr", "leadingProperty":"RecoveryAmountByTransCurr", "sortProperty":"RecoveryAmountByTransCurr", "filterProperty": "RecoveryAmountByTransCurr"}'/>
                     </table:customData>
                     <table:template>
-                        <smartfield:SmartField id="sfRep02BillingCurrency" value="{BillingCurrency}" wrapping="false" editable="false"/>
+                        <Text text="{parts: [{path: 'RecoveryAmountByTransCurr'}, {path: 'RecoveryAmountTransCurr'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false}}" wrapping="false" />
                     </table:template>
                 </table:Column>
+                <table:Column width="6rem" label="{i18n>RecoveryAmountTransCurr}" sortProperty="RecoveryAmountTransCurr" filterProperty="RecoveryAmountTransCurr" visible="true" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryAmountTransCurr", "leadingProperty":"RecoveryAmountTransCurr", "sortProperty":"RecoveryAmountTransCurr", "filterProperty": "RecoveryAmountTransCurr"}'/>
+                    </table:customData>
+                    <table:template>
+                        <smartfield:SmartField value="{RecoveryAmountTransCurr}" wrapping="false" editable="false"/>
+                    </table:template>
+                </table:Column>
+                <!-- ADD END BY XINLEI XU 2026/08/13 CN GAP No.48 -->
                 <table:Column id="idRep02SalesDocument" width="10rem" label="{i18n>SalesDocument}" sortProperty="SalesOrderDocument" filterProperty="SalesOrderDocument" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"SalesOrderDocument", "leadingProperty":"SalesOrderDocument", "sortProperty":"SalesOrderDocument", "filterProperty": "SalesOrderDocument"}'/>

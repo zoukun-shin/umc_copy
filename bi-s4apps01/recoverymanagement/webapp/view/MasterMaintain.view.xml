@@ -67,9 +67,9 @@
                 <Button id="btnSave" text="{i18n>save}" type="Transparent" press="onSave" enabled="{= ${local>/authorityCheck/button/Report1_Save}}"/>
             </OverflowToolbar>
         </smarttable:customToolbar>
-        <table:Table id="tableMaster" threshold="20" fixedColumnCount="4" selectionMode="Single">
+        <table:Table id="tableMaster" threshold="200" fixedColumnCount="4" selectionMode="Single">
             <table:rowMode>
-                <rowmodes:Auto id="idAuto" minRowCount="15"></rowmodes:Auto>
+                <rowmodes:Auto id="idAuto" minRowCount="13"></rowmodes:Auto>
             </table:rowMode>
             <table:columns>
                 <table:Column id="idrecoverType" width="13rem" label="{i18n>recoverType}" sortProperty="RecoveryType" filterProperty="RecoveryType" visible="true">
