@@ -15,13 +15,24 @@ sap.ui.define([
         
         onInit: function () {
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
+            this._aPasteFieldOrder = ["InvoiceDate", "MIROVendorInvoiceNo", "MIROText", "MIROHeaderText"];
+            this._fnTablePasteHandler = this._handleTablePaste.bind(this);
             this.getRouter().getRoute("RouteMain").attachMatched(this._initialize, this);
+        },
+
+        onAfterRendering: function () {
+            this._attachTablePasteHandler();
+        },
+
+        onExit: function () {
+            this._detachTablePasteHandler();
         },
 
         _initialize: function () {
             this._BusyDialog = new BusyDialog();
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+            sEmail = "xinlei.xu@sh.shin-china.com";
             var oContextBinding = this.getView().getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -80,14 +91,12 @@ sap.ui.define([
             var oBinding = this.byId("idTable").getBinding("rows");
             if (oBinding) {
                 oBinding.getContexts().forEach(function(oContext){
-                    oContext.getModel().setProperty(
-                        oContext.getPath()+"/InvoiceNo",
-                        ""
-                    );
-                    oContext.getModel().setProperty(
-                        oContext.getPath()+"/InvoiceYear",
-                        ""
-                    );
+                    ["InvoiceDate", "MIROVendorInvoiceNo", "MIROText", "MIROHeaderText", "InvoiceNo", "InvoiceYear", "Status", "Message"].forEach(function (sFieldName) {
+                        oContext.getModel().setProperty(
+                            oContext.getPath() + "/" + sFieldName,
+                            ""
+                        );
+                    });
                 });
             }
             this.getModel("local").setProperty("/draftEdits", {});
@@ -444,6 +453,182 @@ sap.ui.define([
 
         exportExcel: function (mExcelSettings, sFileName) {
             mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
+        },
+
+        _attachTablePasteHandler: function () {
+            var oTable = this.byId("idTable");
+            var oTableDomRef = oTable && oTable.getDomRef();
+
+            if (!oTableDomRef || !this._fnTablePasteHandler) {
+                return;
+            }
+
+            oTableDomRef.removeEventListener("paste", this._fnTablePasteHandler);
+            oTableDomRef.addEventListener("paste", this._fnTablePasteHandler);
+        },
+
+        _detachTablePasteHandler: function () {
+            var oTable = this.byId("idTable");
+            var oTableDomRef = oTable && oTable.getDomRef();
+
+            if (!oTableDomRef || !this._fnTablePasteHandler) {
+                return;
+            }
+
+            oTableDomRef.removeEventListener("paste", this._fnTablePasteHandler);
+        },
+
+        _handleTablePaste: function (oEvent) {
+            var oClipboardData = oEvent.clipboardData || window.clipboardData;
+            var sClipboardText = oClipboardData && oClipboardData.getData("text");
+            var aPasteMatrix = this._parseClipboardMatrix(sClipboardText);
+            var oTargetControl = this._getPasteTargetControl(oEvent.target);
+            var sStartFieldName = this._getEditableFieldName(oTargetControl);
+            var oTargetContext = oTargetControl && oTargetControl.getBindingContext();
+            var iStartRowIndex = this._getTableRowIndex(oTargetControl);
+
+            if (!sStartFieldName || !oTargetContext || iStartRowIndex < 0 || aPasteMatrix.length === 0) {
+                return;
+            }
+
+            if (aPasteMatrix.length === 1 && aPasteMatrix[0].length === 1) {
+                return;
+            }
+
+            oEvent.preventDefault();
+            this._applyPasteMatrix(iStartRowIndex, sStartFieldName, aPasteMatrix);
+            sap.ui.getCore().applyChanges();
+        },
+
+        _parseClipboardMatrix: function (sClipboardText) {
+            if (!sClipboardText) {
+                return [];
+            }
+
+            var sNormalizedText = sClipboardText.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+            var aRows = sNormalizedText.split("\n");
+
+            while (aRows.length > 0 && aRows[aRows.length - 1] === "") {
+                aRows.pop();
+            }
+
+            return aRows.map(function (sRow) {
+                return sRow.split("\t");
+            });
+        },
+
+        _getPasteTargetControl: function (oDomTarget) {
+            var sTargetId = oDomTarget && oDomTarget.id;
+            var aCandidateIds;
+            var i;
+            var oControl;
+
+            if (!sTargetId) {
+                return null;
+            }
+
+            aCandidateIds = [
+                sTargetId,
+                sTargetId.replace(/-inner$/, ""),
+                sTargetId.replace(/-content$/, "")
+            ];
+
+            for (i = 0; i < aCandidateIds.length; i += 1) {
+                oControl = sap.ui.getCore().byId(aCandidateIds[i]);
+                if (oControl) {
+                    return oControl;
+                }
+            }
+
+            return null;
+        },
+
+        _getEditableFieldName: function (oControl) {
+            var oBindingInfo = oControl && oControl.getBindingInfo && oControl.getBindingInfo("value");
+            return oBindingInfo && oBindingInfo.parts && oBindingInfo.parts[0] && oBindingInfo.parts[0].path;
+        },
+
+        _getTableRowIndex: function (oControl) {
+            var oParent = oControl;
+
+            while (oParent) {
+                if (typeof oParent.getIndex === "function" && typeof oParent.getCells === "function") {
+                    return oParent.getIndex();
+                }
+                oParent = oParent.getParent && oParent.getParent();
+            }
+
+            return -1;
+        },
+
+        _applyPasteMatrix: function (iStartRowIndex, sStartFieldName, aPasteMatrix) {
+            var oTable = this.byId("idTable");
+            var iStartFieldIndex = this._aPasteFieldOrder.indexOf(sStartFieldName);
+
+            if (iStartFieldIndex < 0) {
+                return;
+            }
+
+            aPasteMatrix.forEach(function (aPasteRow, iRowOffset) {
+                var oContext = oTable.getContextByIndex(iStartRowIndex + iRowOffset);
+
+                if (!oContext) {
+                    return;
+                }
+
+                aPasteRow.forEach(function (sCellValue, iColOffset) {
+                    var sFieldName = this._aPasteFieldOrder[iStartFieldIndex + iColOffset];
+                    var vFieldValue;
+
+                    if (!sFieldName) {
+                        return;
+                    }
+
+                    vFieldValue = this._normalizePastedValue(sFieldName, sCellValue);
+                    this._setDraftFieldValue(oContext, sFieldName, vFieldValue);
+                    oContext.getModel().setProperty(oContext.getPath() + "/" + sFieldName, vFieldValue);
+                }.bind(this));
+            }.bind(this));
+        },
+
+        _normalizePastedValue: function (sFieldName, sValue) {
+            var sNormalizedValue = typeof sValue === "string" ? sValue.trim() : sValue;
+
+            if (sFieldName !== "InvoiceDate") {
+                return sNormalizedValue;
+            }
+
+            return this._parsePastedDateValue(sNormalizedValue);
+        },
+
+        _parsePastedDateValue: function (vValue) {
+            var sValue;
+            var aDateParts;
+            var oDate;
+
+            if (vValue === "" || vValue === null || vValue === undefined) {
+                return null;
+            }
+
+            if (vValue instanceof Date && !isNaN(vValue.getTime())) {
+                return vValue;
+            }
+
+            sValue = String(vValue).trim();
+            if (!sValue) {
+                return null;
+            }
+
+            aDateParts = sValue.match(/^(\d{4})[\/-]?(\d{1,2})[\/-]?(\d{1,2})$/);
+            if (aDateParts) {
+                oDate = new Date(Number(aDateParts[1]), Number(aDateParts[2]) - 1, Number(aDateParts[3]));
+                if (!isNaN(oDate.getTime())) {
+                    return oDate;
+                }
+            }
+
+            oDate = new Date(sValue);
+            return isNaN(oDate.getTime()) ? null : oDate;
         },
 
         _syncActiveEditorValue: function () {
