@@ -12,7 +12,7 @@ sap.ui.define([
 ], function (Base, ValueHelpDialog, formatter, BusyDialog, MessageBox, MessageToast, Filter, FilterOperator, Fragment, Spreadsheet) {
     "use strict";
 
-    return Base.extend("pp.zpickinglistwowo.controller.Main", {
+    return Base.extend("pp.zpickinglistwo.controller.Main", {
 
         ValueHelpDialog: ValueHelpDialog,
         formatter: formatter,
