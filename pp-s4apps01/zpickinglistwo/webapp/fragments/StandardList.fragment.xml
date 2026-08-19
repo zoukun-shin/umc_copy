@@ -6,7 +6,7 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_WO" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="PickingListWO_ST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="true" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="BaseUnit,Reservation_261,ReservationItem_261,Status,Message,GoodsMovementEntryQty,EntryUnit" ignoredFields="BaseUnit,Status,Message,ManufacturingOrder_Filter1,ManufacturingOrder_Filter2,CreatedDate_Filter1,CreatedDate_Filter2,IsReport">
+    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_WO" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="PickingListWO_ST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="true" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="BaseUnit,Reservation_261,ReservationItem_261,Status,Message,GoodsMovementEntryQty,EntryUnit" ignoredFields="BaseUnit,Status,Message,ManufacturingOrder_Filter1,ManufacturingOrder_Filter2,CreatedDate_Filter1,CreatedDate_Filter2,IsReport,NoOrder">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
@@ -148,7 +148,7 @@
                         <Text text="{ path:'RequisitionDate', formatter:'.formatter.formatDate' }" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="11rem" label="{i18n>RequiredQuantity}" sortProperty="RequiredQuantity" filterProperty="RequiredQuantity" hAlign="End">
+                <table:Column width="15rem" label="{i18n>RequiredQuantity}" sortProperty="RequiredQuantity" filterProperty="RequiredQuantity" hAlign="End">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"RequiredQuantity", "leadingProperty":"RequiredQuantity"}'/>
                     </table:customData>
@@ -276,6 +276,24 @@
                         <Text text="{ path:'DeletedTime', formatter:'.formatter.formatTime' }" wrapping="false"/>
                     </table:template>
                 </table:Column>
+                <!-- ADD BEGIN BY XINLEI XU 2026/07/27 CN 需求 No.113 -->
+                <table:Column width="10rem" label="{i18n>ProductionSupervisor}" sortProperty="ProductionSupervisor" filterProperty="ProductionSupervisor">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ProductionSupervisor", "leadingProperty":"ProductionSupervisor"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ProductionSupervisor}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>SizeOrDimensionText}" sortProperty="SizeOrDimensionText" filterProperty="SizeOrDimensionText">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SizeOrDimensionText", "leadingProperty":"SizeOrDimensionText"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SizeOrDimensionText}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <!-- ADD END BY XINLEI XU 2026/07/27 CN 需求 No.113 -->
             </table:columns>
         </table:Table>
     </smartTable:SmartTable>

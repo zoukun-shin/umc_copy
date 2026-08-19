@@ -134,21 +134,68 @@ sap.ui.define([
             var aFilters = oEvent.getParameter("bindingParams").filters;
             var oNewFilter, aNewFilter = [];
 
+            var bIsReport = this.getModel("local").getProperty("/IsReport");
+            aNewFilter.push(new Filter("IsReport", "EQ", bIsReport));
+
             var oSmartFilterBar = this.byId("idSmartFilterBar");
             var oManufacturingOrder = oSmartFilterBar.getFilterData().ManufacturingOrder;
             var oCreatedDate = oSmartFilterBar.getFilterData().CreatedDate;
-            if (!oManufacturingOrder && !oCreatedDate) {
-                MessageBox.error(this.getResourceBundle().getText("AtLeastOne"));
-                this.removeFilterByPath(aFilters, "Plant");
-                return;
-            };
+            // MOD BEGIN BY XINLEI XU 2026/07/27 CN 需求 No.113
+            // if (!oManufacturingOrder && !oCreatedDate) {
+            //     MessageBox.error(this.getResourceBundle().getText("AtLeastOne"));
+            //     this.removeFilterByPath(aFilters, "Plant");
+            //     return;
+            // };
+            var bNoOrder = this.getModel("local").getProperty("/NoOrder");
+            var oRequisitionDate = oSmartFilterBar.getFilterData().RequisitionDate;
+            var oStorageLocationTo = oSmartFilterBar.getFilterData().StorageLocationTo;
+            if (bIsReport) {
+                // if (bNoOrder) {
+                //     if (!oCreatedDate) {
+                //         MessageBox.error(this.getResourceBundle().getText("CreateDateMandatory"));
+                //         this.removeFilterByPath(aFilters, "Plant");
+                //         return;
+                //     }
+                //     if (!oRequisitionDate) {
+                //         MessageBox.error(this.getResourceBundle().getText("RequisitionDateMandatory"));
+                //         this.removeFilterByPath(aFilters, "Plant");
+                //         return;
+                //     }
+                //     if (!oStorageLocationTo) {
+                //         MessageBox.error(this.getResourceBundle().getText("StorageLocationToMandatory"));
+                //         this.removeFilterByPath(aFilters, "Plant");
+                //         return;
+                //     }
+                // } else
+                if (!oCreatedDate) {
+                    MessageBox.error(this.getResourceBundle().getText("CreateDateMandatory"));
+                    this.removeFilterByPath(aFilters, "Plant");
+                    return;
+                }
+            } else {
+                if (bNoOrder) {
+                    if (!oRequisitionDate) {
+                        MessageBox.error(this.getResourceBundle().getText("RequisitionDateMandatory"));
+                        this.removeFilterByPath(aFilters, "Plant");
+                        return;
+                    }
+                    if (!oStorageLocationTo) {
+                        MessageBox.error(this.getResourceBundle().getText("StorageLocationToMandatory"));
+                        this.removeFilterByPath(aFilters, "Plant");
+                        return;
+                    }
+                } else if (!oManufacturingOrder) {
+                    MessageBox.error(this.getResourceBundle().getText("OrderMandatory"));
+                    this.removeFilterByPath(aFilters, "Plant");
+                    return;
+                }
+            }
+            // MOD END BY XINLEI XU 2026/07/27 CN 需求 No.113
 
             var sPostingStatus = this.byId("idPostingStatusSelect").getSelectedKey();
             if (sPostingStatus) {
                 aNewFilter.push(new Filter("PostingStatus", "EQ", sPostingStatus));
             }
-            var bIsReport = this.getModel("local").getProperty("/IsReport");
-            aNewFilter.push(new Filter("IsReport", "EQ", bIsReport));
 
             if (aNewFilter.length > 0) {
                 oNewFilter = new Filter({
