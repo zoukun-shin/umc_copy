@@ -30,11 +30,23 @@
                 </heading>
                 <ObjectPageSubSection id="idNG_Header_SS" title="{i18n>NG_Header}" titleUppercase="false">
                     <blocks>
-                        <f:SimpleForm id="idNG_Header_SF" editable="true" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="4">
+                        <f:SimpleForm id="idNG_Header_SF" editable="true" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="5">
                             <f:content>
                                 <core:Title text="{i18n>General}" />
                                 <m:Label text="{i18n>Plant}" required="true"/>
                                 <m:Text text="{ parts:[ 'local>/NG_Header/Plant','local>/NG_Header/PlantName'], formatter:'.formatter.formatCodeName' }"/>
+
+                                <!-- ADD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392 -->
+                                <m:Label text="{i18n>NGType}" required="true"/>
+                                <m:Select id="idNGType" items="{ path: 'local>/NGTypeVH', sorter: { path: 'NGType' } }" selectedKey="{local>/NG_Header/NGType}" showSecondaryValues="true">
+                                    <m:items>
+                                        <core:Item key="{local>NGType}" text="{local>NGType} ({local>NGTypeText})" />
+                                    </m:items>
+                                </m:Select>
+
+                                <m:Label text="{i18n>NoNeedIQCConfirm}"/>
+                                <m:CheckBox id="idNoNeedIQCConfirm" selected="{local>/NG_Header/NoNeedIQCConfirm}" select="onNoNeedIQCConfirmSelect"/>
+                                <!-- ADD END BY XINLEI XU 2026/07/21 CN 需求 No.392 -->
 
                                 <m:Label text="{i18n>MoveType}" required="true"/>
                                 <m:Select id="idMoveType" items="{ path: 'local>/MoveTypeVH', sorter: { path: 'MoveType' } }" selectedKey="{local>/NG_Header/MoveType}" showSecondaryValues="true" change="onMoveTypeChange">
@@ -53,7 +65,7 @@
                                 <m:Label text="{i18n>LocationFrom}" required="true"/>
                                 <m:Text id="idLocationFromText" text="{ parts:[ 'local>/NG_Header/LocationFrom','local>/NG_Header/LocationFromName'], formatter:'.formatter.formatCodeName' }"/>
                                 <m:Input id="idLocationFromInput" value="{local>/NG_Header/LocationFrom}" required="true" maxLength="4" change="onInputChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
-                                $event, $controller, '/I_StorageLocationStdVH', ['StorageLocation', 'StorageLocationName'], ['StorageLocation', 'StorageLocationName'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }">
+                                $event, $controller, '/I_StorageLocationStdVH', ['StorageLocation', 'StorageLocationName'], ['StorageLocation', 'StorageLocationName'],'LocationFrom')" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }">
                                     <m:suggestionColumns>
                                         <m:Column>
                                             <m:Label text="{i18n>StorageLocation}"/>
@@ -73,7 +85,7 @@
                                 <m:Label text="{i18n>LocationTo1}" required="true" />
                                 <m:Text id="idLocationTo1Text" text="{ parts:[ 'local>/NG_Header/LocationTo1','local>/NG_Header/LocationTo1Name'], formatter:'.formatter.formatCodeName' }" />
                                 <m:Input id="idLocationTo1Input" value="{local>/NG_Header/LocationTo1}" required="true" maxLength="4" change="onInputChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
-                                $event, $controller, '/I_StorageLocationStdVH', ['StorageLocation', 'StorageLocationName'], ['StorageLocation', 'StorageLocationName'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }">
+                                $event, $controller, '/I_StorageLocationStdVH', ['StorageLocation', 'StorageLocationName'], ['StorageLocation', 'StorageLocationName'],'LocationTo1')" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }">
                                     <m:suggestionColumns>
                                         <m:Column>
                                             <m:Label text="{i18n>StorageLocation}"/>
@@ -93,7 +105,7 @@
                                 <m:Label id="idLocationTo2Label" text="{i18n>LocationTo2}" />
                                 <m:Text id="idLocationTo2Text" text="{ parts:[ 'local>/NG_Header/LocationTo2','local>/NG_Header/LocationTo2Name'], formatter:'.formatter.formatCodeName' }" />
                                 <m:Input id="idLocationTo2Input" value="{local>/NG_Header/LocationTo2}" maxLength="4" change="onInputChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
-                                $event, $controller, '/I_StorageLocationStdVH', ['StorageLocation', 'StorageLocationName'], ['StorageLocation', 'StorageLocationName'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }">
+                                $event, $controller, '/I_StorageLocationStdVH', ['StorageLocation', 'StorageLocationName'], ['StorageLocation', 'StorageLocationName'],'LocationTo2')" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/I_StorageLocationStdVH', length: 4 }">
                                     <m:suggestionColumns>
                                         <m:Column>
                                             <m:Label text="{i18n>StorageLocation}"/>
@@ -134,7 +146,7 @@
                     </blocks>
                 </ObjectPageSubSection>
             </ObjectPageSection>
-            <ObjectPageSection id="idNG_ItemIQC" titleUppercase="false" title="{i18n>NG_ItemIQC}" visible="{= ${local>/NG_Header/MoveType} === '2'}">
+            <ObjectPageSection id="idNG_ItemIQC" titleUppercase="false" title="{i18n>NG_ItemIQC}" visible="{= ${local>/NG_Header/MoveType} === '2' &amp;&amp; ${local>/NG_Header/NoNeedIQCConfirm} === false}">
                 <subSections>
                     <ObjectPageSubSection id="idNG_ItemIQC_SS" titleUppercase="false" title="{i18n>NG_ItemIQC}">
                         <blocks>

@@ -22,6 +22,9 @@
                                 <!-- mandatory="mandatory" -->
                                 <smartFilterBar:ControlConfiguration index='10' key="Plant" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}" mandatory="mandatory"/>
                                 <smartFilterBar:ControlConfiguration index='20' key="NG_No" visibleInAdvancedArea="true" label="{i18n>NG_No}"/>
+                                <!-- ADD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392 -->
+                                <smartFilterBar:ControlConfiguration index='21' key="NGType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>NGType}"/>
+                                <!-- ADD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392 -->
                                 <smartFilterBar:ControlConfiguration index='30' key="MoveType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MoveType}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="MaterialType" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MaterialType}"/>
                                 <smartFilterBar:ControlConfiguration index='50' key="LocationFrom" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>LocationFrom}"/>
@@ -84,6 +87,19 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="CustomerName" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="WorkCenterText" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="FactorText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ItemCreatedByName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ItemLastChangedByName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Move1PostByName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IQC_CreatedByName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IQC_PostByName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IQC_LastChangedByName" visible="false"/>
+                                <!-- ADD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392 & No.394 -->
+                                <smartFilterBar:ControlConfiguration index='999' key="NGTypeText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NoNeedIQCConfirm" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="RefMaterial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Batch" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="FGMaterial" visible="false"/>
+                                <!-- ADD END BY XINLEI XU 2026/07/21 CN 需求 No.392 & No.394 -->
                             </smartFilterBar:controlConfiguration>
                         </smartFilterBar:SmartFilterBar>
                     </FlexBox>

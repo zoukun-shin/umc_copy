@@ -14,7 +14,7 @@ sap.ui.define([
 
     return {
 
-        onValueHelpRequested: function (oEvent, that, sPath, aVHFields, aFilterFields) {
+        onValueHelpRequested: function (oEvent, that, sPath, aVHFields, aFilterFields, sTitle) {
             Messaging.removeAllMessages();
             that._oInput = oEvent.getSource();
             that._aVHFields = aVHFields;
@@ -32,7 +32,7 @@ sap.ui.define([
                 that._oVHD = oDialog;
                 that.getView().addDependent(oDialog);
 
-                oDialog.setTitle(that.getModel("i18n").getResourceBundle().getText(that._aVHFields[0]));
+                oDialog.setTitle(that.getModel("i18n").getResourceBundle().getText(sTitle));
                 oDialog.setKey(that._aVHFields[0]);
                 if (that._aVHFields[0] === "ManufacturingOrder") {
                     oDialog.setDescriptionKey("Item");
@@ -51,7 +51,7 @@ sap.ui.define([
                         }));
                     }
                 }
-                if (sPath === "/I_StorageLocationStdVH" || sPath === "/ZC_ProductVH" || sPath === "/ZC_WorkCenterVH" || sPath === "/ZC_CustomerCompanyByPlant") {
+                if (sPath === "/I_StorageLocationStdVH" || sPath === "/ZC_ProductVH" || sPath === "/ZC_WorkCenterVH" || sPath === "/ZC_CustomerCompanyByPlant" || sPath === "/I_BatchStdVH") {
                     if (headSet.Plant) {
                         aFilters.push(new Filter({
                             path: "Plant",
@@ -61,17 +61,60 @@ sap.ui.define([
                     }
                 }
 
+                // ADD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392
+                var sInputPath = that._oInput.mBindingInfos.value.parts[0].path;
+                if (sInputPath === "/ItemEdit/FGMaterial") {
+                    aFilters.push(new Filter({
+                        path: "ProductType",
+                        operator: FilterOperator.EQ,
+                        value1: "ZFRT"
+                    }));
+                }
+                if (sPath === "/I_BatchStdVH") {
+                    if (headSet.Material) {
+                        aFilters.push(new Filter({
+                            path: "Material",
+                            operator: FilterOperator.EQ,
+                            value1: headSet.Material
+                        }));
+                    }
+                }
+                // ADD END BY XINLEI XU 2026/07/21 CN 需求 No.392
+
                 // Set filter group items
                 that._aFilterFields.forEach(fieldName => {
                     if (fieldName !== "UUID") {
                         var oControl;
+                        // MOD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392
+                        // var oFilterGroupItem = new FilterGroupItem({
+                        //     groupName: "__$INTERNAL$",
+                        //     visibleInFilterBar: true,
+                        //     name: fieldName,
+                        //     label: "{i18n>" + fieldName + "}"
+                        // });
+                        // oControl = new Input({ name: fieldName });
+                        var sLabel = "";
+                        if ((sPath === "/ZC_ProductVH" && (sInputPath === "/ItemEdit/RefMaterial" || sInputPath === "/ItemEdit/FGMaterial")) || sPath === "/ZC_ManufacturingOrderProductVH" || sPath === "/I_BatchStdVH") {
+                            if (fieldName.includes("Material")) {
+                                sLabel = "{i18n>" + fieldName + "1}";
+                            } else {
+                                sLabel = "{i18n>" + fieldName + "}";
+                            }
+                        } else {
+                            sLabel = "{i18n>" + fieldName + "}";
+                        }
                         var oFilterGroupItem = new FilterGroupItem({
                             groupName: "__$INTERNAL$",
                             visibleInFilterBar: true,
                             name: fieldName,
-                            label: "{i18n>" + fieldName + "}"
+                            label: sLabel
                         });
-                        oControl = new Input({ name: fieldName });
+                        if (sInputPath === "/ItemEdit/FGMaterial" && fieldName === "ProductType") {
+                            oControl = new Input({ name: fieldName, value: "ZFRT" });
+                        } else {
+                            oControl = new Input({ name: fieldName });
+                        }
+                        // MOD END BY XINLEI XU 2026/07/21 CN 需求 No.392
                         oFilterGroupItem.setControl(oControl);
                         oFilterBar.addFilterGroupItem(oFilterGroupItem);
                     }
@@ -106,14 +149,21 @@ sap.ui.define([
                         var sWidth = "";
                         var sLabel = "";
                         that._aVHFields.forEach(fieldName => {
-                            if (sPath === "/ZC_ProductVH") {
-                                sLabel = "{i18n>" + fieldName + "1}";
+                            if ((sPath === "/ZC_ProductVH" && (sInputPath === "/ItemEdit/RefMaterial" || sInputPath === "/ItemEdit/FGMaterial")) || sPath === "/ZC_ManufacturingOrderProductVH" || sPath === "/I_BatchStdVH") {
+                                if (fieldName.includes("Material")) {
+                                    sLabel = "{i18n>" + fieldName + "1}";
+                                } else {
+                                    sLabel = "{i18n>" + fieldName + "}";
+                                }
                             } else {
                                 sLabel = "{i18n>" + fieldName + "}";
                             }
                             switch (fieldName) {
                                 case "PlantName":
                                 case "StorageLocationName":
+                                case "CustomerName":
+                                case "Material":
+                                case "MaterialDescription":
                                     sWidth = "20rem";
                                     break;
                                 default:
@@ -239,9 +289,13 @@ sap.ui.define([
 
                 switch (sInputPath) {
                     case "/ItemEdit/ProductionOrder":
-                        sODataPath = "/ZC_ManufacturingOrderProductVH" + "(ManufacturingOrder='" + sKey + "',Item='" + sText + "',ProductionPlant='" + sPlant + "')";
+                        var sManufacturingOrder = sKey === undefined ? "" : sKey.padStart(10, '0');
+                        var sItem = sText === undefined ? "0001" : sText.padStart(4, '0');
+                        sODataPath = "/ZC_ManufacturingOrderProductVH" + "(ManufacturingOrder='" + sManufacturingOrder + "',Item='" + sItem + "',ProductionPlant='" + sPlant + "')";
                         break;
                     case "/ItemEdit/Material":
+                    case "/ItemEdit/RefMaterial":
+                    case "/ItemEdit/FGMaterial":
                         sODataPath = "/ZC_ProductVH(Material='" + encodeURIComponent(sKey) + "',Plant='" + sPlant + "')";
                         break;
                     case "/ItemEdit/WorkCenter":
@@ -286,6 +340,14 @@ sap.ui.define([
                                     this.getModel("local").setProperty("/ItemEdit/MaterialName", context["MaterialDescription"]);
                                     this.getModel("local").setProperty("/ItemEdit/BaseUnit", context["BaseUnit"]);
                                     break;
+                                // ADD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392
+                                case "/ItemEdit/RefMaterial":
+                                    this.getModel("local").setProperty("/ItemEdit/RefMaterial", context["Material"]);
+                                    break;
+                                case "/ItemEdit/FGMaterial":
+                                    this.getModel("local").setProperty("/ItemEdit/FGMaterial", context["Material"]);
+                                    break;
+                                // ADD END BY XINLEI XU 2026/07/21 CN 需求 No.392
                                 case "/ItemEdit/WorkCenter":
                                     this.getModel("local").setProperty("/ItemEdit/WorkCenter", context["WorkCenter"]);
                                     this.getModel("local").setProperty("/ItemEdit/WorkCenterText", context["WorkCenterText"]);
@@ -339,7 +401,9 @@ sap.ui.define([
             var sMaterialType = this.getModel("local").getProperty("/NG_Header/MaterialType");
             switch (sPath) {
                 case "/ZC_ManufacturingOrderProductVH":
-                    sODataPath = sPath + "(ManufacturingOrder='" + sValue.split('/')[0].padStart(10, '0') + "',Item='" + sValue.split('/')[1] + "',ProductionPlant='" + sPlant + "')";
+                    var sManufacturingOrder = sValue.split('/')[0] === undefined ? "" : sValue.split('/')[0].padStart(10, '0');
+                    var sItem = sValue.split('/')[1] === undefined ? "0001" : sValue.split('/')[1].padStart(4, '0');
+                    sODataPath = sPath + "(ManufacturingOrder='" + sManufacturingOrder + "',Item='" + sItem + "',ProductionPlant='" + sPlant + "')";
                     break;
                 case "/ZC_ProductVH":
                     sODataPath = sPath + "(Material='" + encodeURIComponent(sValue) + "',Plant='" + sPlant + "')";
@@ -374,16 +438,19 @@ sap.ui.define([
                                     this.getModel("local").setProperty("/ItemEdit/Material", context["Material"]);
                                     this.getModel("local").setProperty("/ItemEdit/MaterialName", context["MaterialDescription"]);
                                 }
+                                this.getModel("local").setProperty("/ItemEdit/ProductionOrder", context["ManufacturingOrder"]);
                                 this.getModel("local").setProperty("/ItemEdit/Assembly", context["Assembly"]);
                                 this.getModel("local").setProperty("/ItemEdit/WorkCenter", context["WorkCenter"]);
                                 this.getModel("local").setProperty("/ItemEdit/WorkCenterText", context["WorkCenterText"]);
                                 this.getModel("local").setProperty("/ItemEdit/BaseUnit", context["BaseUnit"]);
                                 break;
-                            case "/ZC_ProductVH":
-                                this.getModel("local").setProperty("/ItemEdit/Material", context["Material"]);
-                                this.getModel("local").setProperty("/ItemEdit/MaterialName", context["MaterialDescription"]);
-                                this.getModel("local").setProperty("/ItemEdit/BaseUnit", context["BaseUnit"]);
-                                break;
+                            // DEL BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392
+                            // case "/ZC_ProductVH":
+                            //     this.getModel("local").setProperty("/ItemEdit/Material", context["Material"]);
+                            //     this.getModel("local").setProperty("/ItemEdit/MaterialName", context["MaterialDescription"]);
+                            //     this.getModel("local").setProperty("/ItemEdit/BaseUnit", context["BaseUnit"]);
+                            //     break;
+                            // DEL BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392
                             case "/ZC_WorkCenterVH":
                                 this.getModel("local").setProperty("/ItemEdit/WorkCenter", context["WorkCenter"]);
                                 this.getModel("local").setProperty("/ItemEdit/WorkCenterText", context["WorkCenterText"]);
@@ -399,6 +466,23 @@ sap.ui.define([
                             default:
                                 break;
                         }
+                        // ADD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392
+                        switch (sInputBindingPath) {
+                            case "/ItemEdit/Material":
+                                this.getModel("local").setProperty("/ItemEdit/Material", context["Material"]);
+                                this.getModel("local").setProperty("/ItemEdit/MaterialName", context["MaterialDescription"]);
+                                this.getModel("local").setProperty("/ItemEdit/BaseUnit", context["BaseUnit"]);
+                                break;
+                            case "/ItemEdit/RefMaterial":
+                                this.getModel("local").setProperty("/ItemEdit/RefMaterial", context["Material"]);
+                                break;
+                            case "/ItemEdit/FGMaterial":
+                                this.getModel("local").setProperty("/ItemEdit/FGMaterial", context["Material"]);
+                                break;
+                            default:
+                                break;
+                        }
+                        // ADD END BY XINLEI XU 2026/07/21 CN 需求 No.392
                     }
                 }.bind(this), function (oError) {
                     _myBusyDialog.close();
@@ -406,10 +490,12 @@ sap.ui.define([
                         case "/ZC_ManufacturingOrderProductVH":
                             this.getModel("local").setProperty("/ItemEdit/Assembly", "");
                             break;
-                        case "/ZC_ProductVH":
-                            this.getModel("local").setProperty("/ItemEdit/MaterialName", "");
-                            this.getModel("local").setProperty("/ItemEdit/BaseUnit", "");
-                            break;
+                        // DEL BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392    
+                        // case "/ZC_ProductVH":
+                        //     this.getModel("local").setProperty("/ItemEdit/MaterialName", "");
+                        //     this.getModel("local").setProperty("/ItemEdit/BaseUnit", "");
+                        //     break;
+                        // DEL END BY XINLEI XU 2026/07/21 CN 需求 No.392
                         case "/ZC_WorkCenterVH":
                             this.getModel("local").setProperty("/ItemEdit/WorkCenterText", "");
                             break;
@@ -422,6 +508,22 @@ sap.ui.define([
                         default:
                             break;
                     }
+                    // ADD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392
+                    switch (sInputBindingPath) {
+                        case "/ItemEdit/Material":
+                            this.getModel("local").setProperty("/ItemEdit/MaterialName", "");
+                            this.getModel("local").setProperty("/ItemEdit/BaseUnit", "");
+                            break;
+                        case "/ItemEdit/RefMaterial":
+                            this.getModel("local").setProperty("/ItemEdit/RefMaterial", "");
+                            break;
+                        case "/ItemEdit/FGMaterial":
+                            this.getModel("local").setProperty("/ItemEdit/FGMaterial", "");
+                            break;
+                        default:
+                            break;
+                    }
+                    // ADD END BY XINLEI XU 2026/07/21 CN 需求 No.392
                 }.bind(this));
             } else {
                 _myBusyDialog.close();
@@ -430,11 +532,13 @@ sap.ui.define([
                     case "/ZC_ManufacturingOrderProductVH":
                         this.getModel("local").setProperty("/ItemEdit/Assembly", "");
                         break;
-                    case "/ZC_ProductVH":
-                        this.getModel("local").setProperty("/ItemEdit/Material", "");
-                        this.getModel("local").setProperty("/ItemEdit/MaterialName", "");
-                        this.getModel("local").setProperty("/ItemEdit/BaseUnit", "");
-                        break;
+                    // DEL BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392
+                    // case "/ZC_ProductVH":
+                    //     this.getModel("local").setProperty("/ItemEdit/Material", "");
+                    //     this.getModel("local").setProperty("/ItemEdit/MaterialName", "");
+                    //     this.getModel("local").setProperty("/ItemEdit/BaseUnit", "");
+                    //     break;
+                    // DEL END BY XINLEI XU 2026/07/21 CN 需求 No.392
                     case "/ZC_WorkCenterVH":
                         this.getModel("local").setProperty("/ItemEdit/WorkCenter", "");
                         this.getModel("local").setProperty("/ItemEdit/WorkCenterText", "");
@@ -450,6 +554,22 @@ sap.ui.define([
                     default:
                         break;
                 }
+                // ADD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392
+                switch (sInputBindingPath) {
+                    case "/ItemEdit/Material":
+                        this.getModel("local").setProperty("/ItemEdit/MaterialName", "");
+                        this.getModel("local").setProperty("/ItemEdit/BaseUnit", "");
+                        break;
+                    case "/ItemEdit/RefMaterial":
+                        this.getModel("local").setProperty("/ItemEdit/RefMaterial", "");
+                        break;
+                    case "/ItemEdit/FGMaterial":
+                        this.getModel("local").setProperty("/ItemEdit/FGMaterial", "");
+                        break;
+                    default:
+                        break;
+                }
+                // ADD END BY XINLEI XU 2026/07/21 CN 需求 No.392
             }
         }
     };

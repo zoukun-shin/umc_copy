@@ -42,6 +42,15 @@
           "localUri": "localService/ZUI_PERMISSION_ACCESS_O4/metadata.xml",
           "odataVersion": "4.0"
         }
+      },
+      "PrintService": {
+        "uri": "/sap/opu/odata4/sap/zui_prt_record_o4/srvd/sap/zui_prt_record_o4/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZUI_PRT_RECORD_O4/metadata.xml",
+          "odataVersion": "4.0"
+        }
       }
     },
     "crossNavigation": {
@@ -108,6 +117,16 @@
       },
       "Authority": {
         "dataSource": "AuthorityService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "Print": {
+        "dataSource": "PrintService",
         "preload": true,
         "settings": {
           "synchronizationMode": "None",

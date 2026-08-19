@@ -87,6 +87,23 @@
                     <Text text="{local>CounterMeasure}" wrapping="false"/>
                 </table:template>
             </table:Column>
+            <!-- ADD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392 & No.394 -->
+            <table:Column width="12rem" label="{i18n>RefMaterial}">
+                <table:template>
+                    <Text text="{ parts:[ 'local>RefMaterial','local>RefMaterialName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="10rem" label="{i18n>Batch}">
+                <table:template>
+                    <Text text="{local>Batch}" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <table:Column width="12rem" label="{i18n>FGMaterial}">
+                <table:template>
+                    <Text text="{ parts:[ 'local>FGMaterial','local>FGMaterialName'], formatter:'.formatter.formatCodeName' }" wrapping="false"/>
+                </table:template>
+            </table:Column>
+            <!-- ADD END BY XINLEI XU 2026/07/21 CN 需求 No.392 & No.394 -->
             <table:Column width="10rem" label="{i18n>Move1PostStatus}">
                 <table:template>
                     <Text text="{local>Move1PostStatus}" wrapping="false"/>

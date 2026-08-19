@@ -28,6 +28,14 @@ sap.ui.define([
             this.getView().setModel(Messaging.getMessageModel(), "message");
             Messaging.registerObject(this.getView(), true);
 
+            // ADD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392
+            this._CallODataV2("READ", "/ZC_NG_TYPEVH", [], {}, {}).then(function (oResponse) {
+                this.getModel("local").setProperty("/NGTypeVH", oResponse.results);
+            }.bind(this), function (oError) {
+                MessageBox.error(oError);
+            }.bind(this));
+            // ADD END BY XINLEI XU 2026/07/21 CN 需求 No.392
+
             this._CallODataV2("READ", "/ZC_NG_MOVETYPEVH", [], {}, {}).then(function (oResponse) {
                 this.getModel("local").setProperty("/MoveTypeVH", oResponse.results);
             }.bind(this), function (oError) {
@@ -63,6 +71,8 @@ sap.ui.define([
                     this.byId("idMessageStrip").setVisible(false);
                     this.byId("idButtonEdit").setVisible(false);
                     this.byId("idButtonDelete").setVisible(false);
+                    this.byId("idNGType").setEditable(true);
+                    this.byId("idNoNeedIQCConfirm").setEditable(true);
                     this.byId("idMoveType").setEditable(true);
                     this.byId("idMaterialType").setEditable(true);
                     this.byId("idLocationFromText").setVisible(false);
@@ -94,6 +104,8 @@ sap.ui.define([
 
                 // Display View Control
                 this.byId("idMessageStrip").setVisible(false);
+                this.byId("idNGType").setEditable(false);
+                this.byId("idNoNeedIQCConfirm").setEditable(false);
                 this.byId("idMoveType").setEditable(false);
                 this.byId("idMaterialType").setEditable(false);
                 this.byId("idLocationFromText").setVisible(true);
@@ -146,6 +158,7 @@ sap.ui.define([
                         Move1Cancel: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-Move1Cancel"),
                         Move2Post: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-Move2Post"),
                         Move2Cancel: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-Move2Cancel"),
+                        Print: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-Print"), // ADD BY XINLEI XU 2026/07/21 CN 需求 No.139
                         Edit: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-Edit"),
                         DeleteNG: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-DeleteNG"),
                         Save: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-Save")
@@ -178,6 +191,8 @@ sap.ui.define([
             var bItemNotPosted = this.getModel("local").getProperty("/Control/itemNotPosted");
             // View Control
             if (bItemNotPosted) {
+                this.byId("idNGType").setEditable(true);
+                this.byId("idNoNeedIQCConfirm").setEditable(true);
                 this.byId("idMoveType").setEditable(true);
                 this.byId("idMaterialType").setEditable(true);
                 this.byId("idLocationFromText").setVisible(false);
@@ -192,6 +207,8 @@ sap.ui.define([
                     this.byId("idLocationTo2Input").setVisible(false);
                 }
             } else {
+                this.byId("idNGType").setEditable(false);
+                this.byId("idNoNeedIQCConfirm").setEditable(false);
                 this.byId("idMoveType").setEditable(false);
                 this.byId("idMaterialType").setEditable(false);
                 this.byId("idLocationFromText").setVisible(true);
@@ -215,8 +232,10 @@ sap.ui.define([
                     NG_No: "INITIAL",
                     Plant: sPlant,
                     PlantName: sPlantName,
+                    NGType: "P",
                     MoveType: "1",
                     MaterialType: "1",
+                    NoNeedIQCConfirm: false,
                     to_NG_Item: { results: [] }
                 });
             } else {
@@ -225,6 +244,8 @@ sap.ui.define([
                 this._refreshData(oBusyDialog);
             }
             // View Control
+            this.byId("idNGType").setEditable(false);
+            this.byId("idNoNeedIQCConfirm").setEditable(false);
             this.byId("idMoveType").setEditable(false);
             this.byId("idMaterialType").setEditable(false);
             this.byId("idButtonEdit").setVisible(true);
@@ -329,7 +350,11 @@ sap.ui.define([
             var aFilters = [];
             var oBinding = oEvent.getSource().getBinding("suggestionRows");
             var sPlant = this.getModel("local").getProperty("/NG_Header/Plant");
-            aFilters.push(new sap.ui.model.Filter("Plant", FilterOperator.EQ, sPlant));
+            if (oBinding.getPath() === "/ZC_ManufacturingOrderProductVH") {
+                aFilters.push(new sap.ui.model.Filter("ProductionPlant", FilterOperator.EQ, sPlant));
+            } else {
+                aFilters.push(new sap.ui.model.Filter("Plant", FilterOperator.EQ, sPlant));
+            }
             oBinding.filter(aFilters);
         },
 
@@ -371,6 +396,13 @@ sap.ui.define([
                     CounterMeasure: "",
                     RootCause: "",
                     Factor: "",
+                    // ADD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.392 & No.394
+                    RefMaterial: "",
+                    RefMaterialName: "",
+                    Batch: "",
+                    FGMaterial: "",
+                    FGMaterialName: "",
+                    // ADD END BY XINLEI XU 2026/07/21 CN 需求 No.392 & No.394
                     Move1PostStatus: "",
                     IQC_NG_Quantity: "",
                     IQC_OK_Quantity: "",
@@ -400,15 +432,15 @@ sap.ui.define([
                             if (!copyItem["BaseUnit"]) {
                                 newItem["BaseUnit"] = "PC";
                             }
-                            if (key.includes("__metadata") &&
-                                key.includes("NG_ItemNo") &&
-                                key.includes("DeleteFlag") &&
-                                key.includes("CreatedBy") &&
-                                key.includes("CreatedAt") &&
-                                key.includes("LastChangedBy") &&
-                                key.includes("LastChangedAt") &&
-                                key.includes("Move1") &&
-                                key.includes("IQC") &&
+                            if (key.includes("__metadata") ||
+                                key.includes("NG_ItemNo") ||
+                                key.includes("DeleteFlag") ||
+                                key.includes("CreatedBy") ||
+                                key.includes("CreatedAt") ||
+                                key.includes("LastChangedBy") ||
+                                key.includes("LastChangedAt") ||
+                                key.includes("Move1") ||
+                                key.includes("IQC") ||
                                 key.includes("LocalLastChangedAt")) {
                                 newItem[key] = "";
                             }
@@ -541,7 +573,7 @@ sap.ui.define([
             Messaging.removeAllMessages();
             var that = this;
             var sMsg = "";
-            var oNG_Data = this.getModel("local").getProperty("/NG_Header");;
+            var oNG_Data = this.getModel("local").getProperty("/NG_Header");
             if (sEvent === "Save") {
                 sMsg = this.getModel("i18n").getResourceBundle().getText(sEvent);
                 if (this._checkRequiredFields()) {
@@ -666,6 +698,8 @@ sap.ui.define([
             if (sEvent === "Save") {
                 this.byId("idButtonEdit").setVisible(true);
                 this.byId("idButtonDelete").setVisible(true);
+                this.byId("idNGType").setEditable(false);
+                this.byId("idNoNeedIQCConfirm").setEditable(false);
                 this.byId("idMoveType").setEditable(false);
                 this.byId("idMaterialType").setEditable(false);
                 this.byId("idLocationFromText").setVisible(true);
@@ -690,6 +724,7 @@ sap.ui.define([
                 oResponse.to_NG_Item.results.sort(function (a, b) {
                     return a.NG_ItemNo - b.NG_ItemNo;
                 });
+                oResponse.NoNeedIQCConfirm = oResponse.NoNeedIQCConfirm === "X" ? true : false;
                 this.getModel("local").setProperty("/NG_Header", oResponse);
 
                 var obj = oResponse.to_NG_Item.results.find(element => element.Move1PostStatus === 'P');

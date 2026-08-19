@@ -21,8 +21,10 @@ sap.ui.define([
                     NG_No: "",
                     Plant: "",
                     PlantName: "",
+                    NGType: "P",
                     MoveType: "1",
                     MaterialType: "1",
+                    NoNeedIQCConfirm: false,
                     to_NG_Item: {
                         results: []
                     }

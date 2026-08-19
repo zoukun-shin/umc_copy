@@ -10,7 +10,7 @@
                     <Label text="{i18n>ProductionOrder}" class="sapUiSmallMarginEnd"/>
                     <Input value="{local>/ItemEdit/ProductionOrder}" editable="{= ${local>/ItemEdit/Move1PostStatus} === ''}" suggestionItemSelected="true" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
                                 $event, $controller, '/ZC_ManufacturingOrderProductVH', 
-                                ['ManufacturingOrder','Material','MaterialDescription','Assembly','ProductionPlant'],['ManufacturingOrder','Material','MaterialDescription','Assembly'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_ManufacturingOrderProductVH', length: 12 }" width="15rem">
+                                ['ManufacturingOrder','Material','MaterialDescription','Assembly','ProductionPlant'],['ManufacturingOrder','Material','MaterialDescription','Assembly'],'ProductionOrder')" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_ManufacturingOrderProductVH', length: 12 }" width="15rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>ManufacturingOrder}"/>
@@ -39,7 +39,7 @@
                     <Label text="{i18n>NG_Material}" class="sapUiSmallMarginEnd" required="true"/>
                     <Input value="{local>/ItemEdit/Material}" editable="{= ${local>/ItemEdit/Move1PostStatus} === ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
                                 $event, $controller, '/ZC_ProductVH',
-                                ['Material','MaterialDescription'],['Material','MaterialDescription'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_ProductVH', length: 40 }" required="true" width="15rem">
+                                ['Material','MaterialDescription'],['Material','MaterialDescription'],'NG_Material')" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_ProductVH', length: 40 }" required="true" width="15rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>Material1}"/>
@@ -70,7 +70,7 @@
                     <Label text="{i18n>NG_WorkCenter}" class="sapUiSmallMarginEnd"/>
                     <Input value="{local>/ItemEdit/WorkCenter}" editable="{= ${local>/ItemEdit/Move1PostStatus} === ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
                         $event, $controller, '/ZC_WorkCenterVH',
-                        ['WorkCenter','WorkCenterText'],['WorkCenter','WorkCenterText'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_WorkCenterVH', length: 10 }" required="true" width="15rem">
+                        ['WorkCenter','WorkCenterText'],['WorkCenter','WorkCenterText'],'NG_WorkCenter')" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_WorkCenterVH', length: 10 }" required="true" width="15rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>WorkCenter}"/>
@@ -95,7 +95,7 @@
                     <Label text="{i18n>Factor}" class="sapUiSmallMarginEnd" required="true"/>
                     <Input value="{local>/ItemEdit/Factor}" editable="{= ${local>/ItemEdit/Move1PostStatus} === ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
                         $event, $controller, '/ZC_NG_FACTORVH',
-                        ['Factor','FactorText'],['Factor','FactorText'])" showSuggestion="true" suggestionRows="{ path: '/ZC_NG_FACTORVH', length: 1 }" required="true" width="15rem">
+                        ['Factor','FactorText'],['Factor','FactorText'],'Factor')" showSuggestion="true" suggestionRows="{ path: '/ZC_NG_FACTORVH', length: 1 }" required="true" width="15rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>Factor}"/>
@@ -121,7 +121,7 @@
                 <VBox class="sapUiTinyMargin" width="33%">
                     <Label text="{i18n>Customer}" class="sapUiSmallMarginEnd"/>
                     <Input value="{local>/ItemEdit/Customer}" editable="{= ${local>/ItemEdit/Move1PostStatus} === ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
-                        $event, $controller, '/ZC_CustomerCompanyByPlant', ['Customer','CustomerName'])" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_CustomerCompanyByPlant', length: 10 }" width="15rem">
+                        $event, $controller, '/ZC_CustomerCompanyByPlant', ['Customer','CustomerName'], ['Customer','CustomerName'], 'Customer')" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_CustomerCompanyByPlant', length: 10 }" width="15rem">
                         <suggestionColumns>
                             <Column>
                                 <Label text="{i18n>Customer}"/>
@@ -152,14 +152,14 @@
                 </VBox>
             </HBox>
             <HBox>
-                <VBox class="sapUiTinyMargin">
+                <VBox class="sapUiTinyMargin" width="33%">
                     <Label text="{i18n>FoundDate}" class="sapUiSmallMarginEnd" required="true"/>
                     <DatePicker value="{
 						path:'local>/ItemEdit/FoundDate',
 						type:'sap.ui.model.type.Date'
 					}" editable="{= ${local>/ItemEdit/Move1PostStatus} === ''}" required="true" width="15rem" change="onDatePickerChange"/>
                 </VBox>
-                <VBox class="sapUiTinyMargin">
+                <VBox class="sapUiTinyMargin" width="33%">
                     <Label text="{i18n>Quantity}" class="sapUiSmallMarginEnd" required="true"/>
                     <Input value="{ path: 'local>/ItemEdit/Quantity',
                                     type: 'sap.ui.model.type.Float',
@@ -167,9 +167,86 @@
                                         groupingEnabled: true,
                                         groupingSeparator: ',',
                                         decimalSeparator: '.'
-                                    } }" editable="{= ${local>/ItemEdit/Move1PostStatus} === ''}" required="true" width="200%" description="{local>/ItemEdit/BaseUnit}"/>
+                                    } }" editable="{= ${local>/ItemEdit/Move1PostStatus} === ''}" required="true" width="150%" description="{local>/ItemEdit/BaseUnit}"/>
+                </VBox>
+                <!-- ADD BEGIN BY XINLEI XU 2026/07/22 CN 需求 No.392 & No.394 -->
+                <VBox class="sapUiTinyMargin" width="33%">
+                    <Label text="{i18n>RefMaterial}" class="sapUiSmallMarginEnd"/>
+                    <Input value="{local>/ItemEdit/RefMaterial}" editable="{= ${local>/ItemEdit/Move1PostStatus} === ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
+                                $event, $controller, '/ZC_ProductVH',
+                                ['Material','MaterialDescription','ProductType'],['Material','MaterialDescription','ProductType'],'RefMaterial')" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_ProductVH', length: 40 }" width="15rem" maxLength="40">
+                        <suggestionColumns>
+                            <Column>
+                                <Label text="{i18n>Material1}"/>
+                            </Column>
+                            <Column>
+                                <Label text="{i18n>MaterialDescription1}"/>
+                            </Column>
+                            <Column>
+                                <Label text="{i18n>ProductType}"/>
+                            </Column>
+                        </suggestionColumns>
+                        <suggestionRows>
+                            <ColumnListItem>
+                                <Label text="{Material}" />
+                                <Label text="{MaterialDescription}" />
+                            </ColumnListItem>
+                        </suggestionRows>
+                    </Input>
+                </VBox>
+                <VBox class="sapUiTinyMargin" width="33%">
+                    <Label text="{i18n>Batch}" class="sapUiSmallMarginEnd"/>
+                    <Input value="{local>/ItemEdit/Batch}" editable="{= ${local>/ItemEdit/Move1PostStatus} === ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
+                                $event, $controller, '/I_BatchStdVH',
+                                ['Batch','Plant','Material'],['Batch','Plant','Material'],'Batch')" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/I_BatchStdVH', length: 10 }" width="15rem" maxLength="10">
+                        <suggestionColumns>
+                            <Column>
+                                <Label text="{i18n>Plant}"/>
+                            </Column>
+                            <Column>
+                                <Label text="{i18n>Material1}"/>
+                            </Column>
+                            <Column>
+                                <Label text="{i18n>Batch}"/>
+                            </Column>
+                        </suggestionColumns>
+                        <suggestionRows>
+                            <ColumnListItem>
+                                <Label text="{Plant}" />
+                                <Label text="{Material}" />
+                                <Label text="{Batch}" />
+                            </ColumnListItem>
+                        </suggestionRows>
+                    </Input>
                 </VBox>
             </HBox>
+            <HBox>
+                <VBox class="sapUiTinyMargin">
+                    <Label text="{i18n>FGMaterial}" class="sapUiSmallMarginEnd"/>
+                    <Input value="{local>/ItemEdit/FGMaterial}" editable="{= ${local>/ItemEdit/Move1PostStatus} === ''}" change="handler.handleChange" showValueHelp="true" valueHelpRequest="handler.onValueHelpRequested(
+                                $event, $controller, '/ZC_ProductVH',
+                                ['Material','MaterialDescription','ProductType'],['Material','MaterialDescription','ProductType'],'FGMaterial')" showSuggestion="true" suggest="handleSuggest" suggestionRows="{ path: '/ZC_ProductVH', length: 40 }" width="15rem" maxLength="40">
+                        <suggestionColumns>
+                            <Column>
+                                <Label text="{i18n>Material1}"/>
+                            </Column>
+                            <Column>
+                                <Label text="{i18n>MaterialDescription1}"/>
+                            </Column>
+                            <Column>
+                                <Label text="{i18n>ProductType}"/>
+                            </Column>
+                        </suggestionColumns>
+                        <suggestionRows>
+                            <ColumnListItem>
+                                <Label text="{Material}" />
+                                <Label text="{MaterialDescription}" />
+                            </ColumnListItem>
+                        </suggestionRows>
+                    </Input>
+                </VBox>
+            </HBox>
+            <!-- ADD END BY XINLEI XU 2026/07/22 CN 需求 No.392 & No.394 -->
             <HBox renderType="Bare">
                 <VBox class="sapUiTinyMarginBegin sapUiTinyMarginEnd" width="100%">
                     <Label text="{i18n>Symptom}" class="sapUiSmallMarginEnd"/>

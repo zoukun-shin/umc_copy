@@ -41,6 +41,13 @@
                             <Text text="{local>MaterialDocument}" wrapping="false"/>
                         </table:template>
                     </table:Column>
+                    <!-- ADD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.394 -->
+                    <table:Column width="10rem" label="{i18n>Batch}">
+                        <table:template>
+                            <Text text="{local>Batch}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- ADD END BY XINLEI XU 2026/07/21 CN 需求 No.394 -->
                     <!-- <table:Column width="8rem" label="{i18n>LocationFrom}">
                         <table:template>
                             <Text text="{local>LocationFrom}" wrapping="false"/>

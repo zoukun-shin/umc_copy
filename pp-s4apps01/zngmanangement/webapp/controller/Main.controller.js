@@ -114,6 +114,7 @@ sap.ui.define([
                         Move1Cancel: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-Move1Cancel"),
                         Move2Post: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-Move2Post"),
                         Move2Cancel: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-Move2Cancel"),
+                        Print: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-Print"), // ADD BY XINLEI XU 2026/07/21 CN 需求 No.139
                         Edit: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-Edit"),
                         DeleteNG: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-DeleteNG"),
                         Save: aAllAccessBtns.some(btn => btn.AccessId === "zngmanangement-Save")
@@ -247,7 +248,9 @@ sap.ui.define([
                 case "Move1Cancel":
                 case "Move2Post":
                 case "Move2Cancel":
+                case "Print": // ADD BY XINLEI XU 2026/07/21 CN 需求 No.139
                     this._processRequest(sEvent);
+                    break;
                 default:
                     break;
             }
@@ -260,8 +263,10 @@ sap.ui.define([
                 NG_No: "INITIAL",
                 Plant: "",
                 PlantName: "",
+                NGType: "P",
                 MoveType: "1",
                 MaterialType: "1",
+                NoNeedIQCConfirm: false,
                 to_NG_Item: { results: [] }
             });
             if (aPlantSet.length > 0) {
@@ -269,7 +274,7 @@ sap.ui.define([
                 this.getModel("local").setProperty("/NG_Header/PlantName", aPlantSet[0].PlantName);
                 bEnabled = true;
             }
-            this.getModel("local").getProperty("/Control/itemNotPosted", true);
+            this.getModel("local").setProperty("/Control/itemNotPosted", true);
             Fragment.load({
                 name: "pp.zngmanangement.fragments.CreateDialog",
                 controller: this
@@ -404,6 +409,50 @@ sap.ui.define([
                             if (result.MESSAGEITEMS.length === 1 && result.MESSAGEITEMS[0].TYPE === "Success") {
                                 oTable.clearSelection();
                             }
+                            // ADD BEGIN BY XINLEI XU 2026/07/21 CN 需求 No.139
+                            if (sEvent === "Print") {
+                                if (!result.MESSAGEITEMS.find(item => item.TYPE === "Error")) {
+                                    var aPrintRecords = [];
+                                    var sLanguage = sap.ui.getCore().getConfiguration().getLanguage().substring(0, 2).toUpperCase();
+                                    result.TO_NG_ITEM.RESULTS.forEach(element => {
+                                        if (element.RECORDUUID) {
+                                            aPrintRecords.push({
+                                                idx: element.RECORDINDEX,
+                                                uuid: element.RECORDUUID
+                                            });
+                                        }
+                                    });
+                                    aPrintRecords = that._removeDuplicates(aPrintRecords, ["uuid"]);
+                                    aPrintRecords.sort(function (a, b) {
+                                        return a.idx - b.idx;
+                                    });
+                                    if (aPrintRecords.length > 1) {
+                                        // Merger PDF Begin
+                                        var mergerPDF = that.getModel("Print").bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.mergerPDF(...)");
+                                        mergerPDF.setParameter("TemplateID", "YY1_NGPRINT_" + sLanguage);
+                                        mergerPDF.setParameter("Zzkey", JSON.stringify(aPrintRecords));
+                                        mergerPDF.setParameter("RecordUUID", "");
+                                        mergerPDF.setParameter("FileName", "NG_PRINT_" + that.getCurrentDateTime() + ".pdf");
+                                        mergerPDF.setParameter("ResultIsActiveEntity", true);
+                                        mergerPDF.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
+                                            var object = mergerPDF.getBoundContext().getObject();
+                                            var sPath = "(RecordUUID=" + object.RecordUUID + ",IsActiveEntity=true)";
+                                            var sURL = mergerPDF.getModel("Print").getServiceUrl() + "PrintRecord" + sPath + '/PDFContent';
+                                            sap.m.URLHelper.redirect(sURL, true);
+                                        }).catch((oError) => {
+                                            reject(oError);
+                                        });
+                                        // Merger PDF End
+                                    } else {
+                                        aPrintRecords.forEach(element => {
+                                            var sPath = "PrintRecord(RecordUUID=" + element.uuid + ",IsActiveEntity=true)";
+                                            var sURL = that.getModel("Print").getServiceUrl() + sPath + '/PDFContent';
+                                            sap.m.URLHelper.redirect(sURL, true);
+                                        });
+                                    }
+                                }
+                            }
+                            // ADD END BY XINLEI XU 2026/07/21 CN 需求 No.139
                             if (aMessageItems.length > 0) {
                                 _myMessageView.setModel(that.getModel("local"));
                                 that.getModel("local").setProperty("/MessageItems", aMessageItems);
