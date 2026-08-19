@@ -108,6 +108,7 @@ sap.ui.define([
                         "SalesOrderItem": aSheetData[i]["ITEM_NO"] === undefined ? "" : aSheetData[i]["ITEM_NO"],
                         "OrderQuantity": aSheetData[i]["Order_Qty"] === undefined ? "" : aSheetData[i]["Order_Qty"],
                         "Material": aSheetData[i]["SAP_MAT_ID"] === undefined ? "" : aSheetData[i]["SAP_MAT_ID"],
+                        "DeliveryDate": aSheetData[i]["Delivery_DATE"] === undefined ? "" : aSheetData[i]["Delivery_DATE"]
                     };
                     aExcelSet.push(item);
                 }

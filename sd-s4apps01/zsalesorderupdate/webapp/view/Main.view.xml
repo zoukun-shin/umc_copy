@@ -59,6 +59,11 @@
                                 <Text text="{local>Material}" wrapping="false"/>
                             </table:template>
                         </table:Column>
+                        <table:Column width="15rem" label="{i18n>DeliveryDate}">
+                            <table:template>
+                                <Text text="{local>DeliveryDate}" wrapping="false"/>
+                            </table:template>
+                        </table:Column>
                     </table:columns>
                 </table:Table>
             </Panel>
