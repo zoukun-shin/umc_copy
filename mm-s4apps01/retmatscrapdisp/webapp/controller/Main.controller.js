@@ -125,23 +125,19 @@ sap.ui.define([
         },
 
         _openPostInputDialog: function () {
+
             var oCostCenterInput = new Input({
                 width: "100%"
             });
-            var oDocumentDatePicker = new DatePicker({
-                width: "100%",
-                valueFormat: "yyyyMMdd",
-                displayFormat: "yyyy-MM-dd"
-            });
+
             var oPostingDatePicker = new DatePicker({
                 width: "100%",
                 valueFormat: "yyyyMMdd",
                 displayFormat: "yyyy-MM-dd"
             });
-            var oGoodsReceiptDatePicker = new DatePicker({
-                width: "100%",
-                valueFormat: "yyyyMMdd",
-                displayFormat: "yyyy-MM-dd"
+
+            var oReceiverInput = new Input({
+                width: "100%"
             });
 
             var oDialog = new Dialog({
@@ -151,21 +147,17 @@ sap.ui.define([
                     width: "100%",
                     items: [
                         new Label({
-                            text: "Cost Center"
+                            text: this.getModel("i18n").getResourceBundle().getText("CostCenter")
                         }),
                         oCostCenterInput,
                         new Label({
-                            text: "Document Date"
-                        }),
-                        oDocumentDatePicker,
-                        new Label({
-                            text: "Posting Date"
+                            text: this.getModel("i18n").getResourceBundle().getText("PostingDate")
                         }),
                         oPostingDatePicker,
                         new Label({
-                            text: "Goods Receipt Date"
+                            text: this.getModel("i18n").getResourceBundle().getText("Receiver")
                         }),
-                        oGoodsReceiptDatePicker
+                        oReceiverInput
                     ]
                 }),
                 beginButton: new Button({
@@ -173,21 +165,19 @@ sap.ui.define([
                     type: "Emphasized",
                     press: function () {
                         var sCostCenter = oCostCenterInput.getValue().trim();
-                        var sDocumentDate = this._formatDateForBackend(oDocumentDatePicker.getDateValue());
                         var sPostingDate = this._formatDateForBackend(oPostingDatePicker.getDateValue());
-                        var sGoodsReceiptDate = this._formatDateForBackend(oGoodsReceiptDatePicker.getDateValue());
+                        var sReceiver = oReceiverInput.getValue().trim();
 
-                        if (!sCostCenter || !sDocumentDate || !sPostingDate || !sGoodsReceiptDate) {
-                            MessageBox.error("Please input Cost Center, Document Date, Posting Date and Goods Receipt Date.");
+                        if (!sCostCenter || !sPostingDate || !sReceiver) {
+                            MessageBox.error("Please input Cost Center, Posting Date and Receiver.");
                             return;
                         }
 
                         oDialog.close();
                         this._callOData("Post", {
                             CostCenter: sCostCenter,
-                            DocumentDate: sDocumentDate,
                             PostingDate: sPostingDate,
-                            GoodsReceiptDate: sGoodsReceiptDate
+                            Receiver: sReceiver
                         });
                     }.bind(this)
                 }),
@@ -227,9 +217,8 @@ sap.ui.define([
                     PurchaseOrder: oContext.getObject().PurchaseOrder,
                     PurchaseOrderItem: oContext.getObject().PurchaseOrderItem,
                     CostCenter: oPostInputValues ? oPostInputValues.CostCenter : "",
-                    DocumentDate: oPostInputValues ? oPostInputValues.DocumentDate : "",
                     PostingDate: oPostInputValues ? oPostInputValues.PostingDate : "",
-                    GoodsReceiptDate: oPostInputValues ? oPostInputValues.GoodsReceiptDate : "",
+                    Receiver: oPostInputValues ? oPostInputValues.Receiver : "",
                 });
             });
 
