@@ -151,12 +151,20 @@ sap.ui.define([
                 }
                 oSmartFilterBar = this.byId("idSmartFilterBar1");
                 aFilterPlant.push(oSmartFilterBar.getControlByKey("Plant").getProperty("value").split(' ')[0]);
+                // ADD BEGIN BY XINLEI XU 2026/07/28 CN 需求 No.181
+                var bOnlyTrialOrder1 = this.getModel("local").getProperty("/OnlyTrialOrder1") === true ? "X" : "";
+                aFilters.push(new Filter("OnlyTrialOrder", FilterOperator.EQ, bOnlyTrialOrder1));
+                // ADD END BY XINLEI XU 2026/07/28 CN 需求 No.181
             } else {
                 oSmartFilterBar = this.byId("idSmartFilterBar2");
                 var aTokens = oSmartFilterBar.getControlByKey("Plant").getTokens();
                 aTokens.forEach(token => {
                     aFilterPlant.push(token.getKey());
                 });
+                // ADD BEGIN BY XINLEI XU 2026/07/28 CN 需求 No.181
+                var bOnlyTrialOrder2 = this.getModel("local").getProperty("/OnlyTrialOrder2") === true ? "X" : "";
+                aFilters.push(new Filter("OnlyTrialOrder", FilterOperator.EQ, bOnlyTrialOrder2));
+                // ADD END BY XINLEI XU 2026/07/28 CN 需求 No.181
             }
 
             var bHasError = false;
@@ -199,24 +207,41 @@ sap.ui.define([
                     });
                     aFilters.push(oNewFilter);
                 }
+                // ADD BEGIN BY XINLEI XU 2026/07/28 CN 需求 No.181
+                var bOnlyTrialOrder1 = this.getModel("local").getProperty("/OnlyTrialOrder1") === true ? "X" : "";
+                aFilters.push(new Filter("OnlyTrialOrder", FilterOperator.EQ, bOnlyTrialOrder1));
+                // ADD END BY XINLEI XU 2026/07/28 CN 需求 No.181
             } else {
                 sPath = "/ZC_PICKINGLIST_TAB";
                 aFilters = this.byId("idSmartFilterBar2").getFilters()[0].aFilters;
+                // ADD BEGIN BY XINLEI XU 2026/07/28 CN 需求 No.181
+                var bOnlyTrialOrder2 = this.getModel("local").getProperty("/OnlyTrialOrder2") === true ? "X" : "";
+                aFilters.push(new Filter("OnlyTrialOrder", FilterOperator.EQ, bOnlyTrialOrder2));
+                // ADD END BY XINLEI XU 2026/07/28 CN 需求 No.181
             }
             // 并行处理 优化速度
-            this.getModel().setUseBatch(false);
-            this._CallODataV2("READ", sPath, aFilters, { "$top": 999999999 }, {}).then(function (oResponse) {
-                if (oResponse) {
-                    if (iSelectIndex === 0) {
-                        this.getModel("local").setProperty("/StandardList", oResponse.results);
-                    } else {
-                        this.getModel("local").setProperty("/CustomList", oResponse.results);
-                    }
+            // this.getModel().setUseBatch(false);
+            // this._CallODataV2("READ", sPath, aFilters, { "$top": 999999999 }, {}).then(function (oResponse) {
+            //     if (oResponse) {
+            //         if (iSelectIndex === 0) {
+            //             this.getModel("local").setProperty("/StandardList", oResponse.results);
+            //         } else {
+            //             this.getModel("local").setProperty("/CustomList", oResponse.results);
+            //         }
+            //     }
+            //     this.getModel().setUseBatch(true);
+            // }.bind(this)), function (oError) {
+            //     this.getModel().setUseBatch(true);
+            // }.bind(this);
+            this._loadAllData(sPath, aFilters).then(function (aAllResults) {
+                if (iSelectIndex === 0) {
+                    this.getModel("local").setProperty("/StandardList", aAllResults);
+                } else {
+                    this.getModel("local").setProperty("/CustomList", aAllResults);
                 }
-                this.getModel().setUseBatch(true);
-            }.bind(this)), function (oError) {
-                this.getModel().setUseBatch(true);
-            }.bind(this);
+            }.bind(this)).catch(function (oError) {
+
+            }.bind(this));
             // ADD END BY XINLEI XU 2025/04/16 导出性能优化
         },
 
@@ -277,7 +302,7 @@ sap.ui.define([
                 while (iLen--) {
                     var sPath = this._oTable.getContextByIndex(aSelectedItems[iLen]).getPath();
                     var oRow = this.getModel().getObject(sPath);
-                    if (oRow.PostingStatus === "転記済") {
+                    if (oRow.PostingStatus === this.getModel("i18n").getResourceBundle().getText("POSTED")) { // "転記済") {
                         // 入出庫予定 {0} 明細 {1} は転記待データではありません。
                         aMessageItems.push({
                             type: "Error",
@@ -286,6 +311,7 @@ sap.ui.define([
                             subtitle: this.getModel("i18n").getResourceBundle().getText("Message8", [oRow.Reservation, oRow.ReservationItem])
                         });
                     }
+                    oRow["OnlyTrialOrder"] = this.getModel("local").getProperty("/OnlyTrialOrder");
                     aItems.push(oRow);
                     if (oRow.DetailsJson) {
                         aDetails.push(JSON.parse(oRow.DetailsJson));
@@ -592,6 +618,12 @@ sap.ui.define([
                     case "StorageLocationFromStock":
                     case "GR_SlipsQuantity":
                     case "PostingQuantity":
+                    case "QCStock":
+                    case "PalletQty":
+                    case "ActualStock":
+                    case "OpenResvertionQty":
+                    case "ShortageDifference":
+                    case "LotSizeRoundingQuantity":
                         oColumn.type = sap.ui.export.EdmType.Number;
                         oColumn.delimiter = true;
                         oColumn.scale = 3;
@@ -703,6 +735,11 @@ sap.ui.define([
                         case "TotalTransferQuantity":
                         case "StorageLocationFromStock":
                         case "GR_SlipsQuantity":
+                        case "QCStock":
+                        case "PalletQty":
+                        case "ActualStock":
+                        case "OpenResvertionQty":
+                        case "ShortageDifference":
                             sType = sap.ui.export.EdmType.Number;
                             bDelimiter = true;
                             iScale = 3;
@@ -770,6 +807,11 @@ sap.ui.define([
                         case "TotalTransferQuantity":
                         case "StorageLocationFromStock":
                         case "GR_SlipsQuantity":
+                        case "QCStock":
+                        case "PalletQty":
+                        case "ActualStock":
+                        case "OpenResvertionQty":
+                        case "ShortageDifference":
                             sType = sap.ui.export.EdmType.Number;
                             bDelimiter = true;
                             iScale = 3;

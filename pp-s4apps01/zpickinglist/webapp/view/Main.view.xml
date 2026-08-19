@@ -46,6 +46,20 @@
                                 <smartFilterBar:ControlConfiguration index='80' key="LaboratoryOrDesignOffice" visibleInAdvancedArea="true" label="{i18n>LaboratoryOrDesignOffice}"/>
                                 <smartFilterBar:ControlConfiguration index='90' key="ExternalProductGroup" visibleInAdvancedArea="true" label="{i18n>ExternalProductGroup}" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='100' key="SizeOrDimensionText" visibleInAdvancedArea="true" label="{i18n>SizeOrDimensionText}"/>
+                                <!-- ADD BEGIN BY XINLEI XU 2026/07/28 CN 需求 No.180、181 -->
+                                <smartFilterBar:ControlConfiguration index='110' key="SmartWH" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>SmartWH}"/>
+                                <smartFilterBar:ControlConfiguration index='120' key="OnlyTrialOrder" visibleInAdvancedArea="true" label="{i18n>OnlyTrialOrder}">
+                                    <smartFilterBar:customControl>
+                                        <CheckBox selected="{local>/OnlyTrialOrder1}"/>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='999' key="ShelfUWMS" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QCStock" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PalletQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ActualStock" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="OpenResvertionQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ShortageDifference" visible="false"/>
+                                <!-- ADD END BY XINLEI XU 2026/07/28 CN 需求 No.180、181 -->
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MaterialName" visible="false"/>
@@ -80,6 +94,22 @@
                                 <smartFilterBar:ControlConfiguration index='140' key="LastChangedByUser" visibleInAdvancedArea="true" label="{i18n>LastChangedByUser}"/>
                                 <smartFilterBar:ControlConfiguration index='150' key="SizeOrDimensionText" visibleInAdvancedArea="true" label="{i18n>SizeOrDimensionText}"/>
                                 <smartFilterBar:ControlConfiguration index='160' key="DeleteFlag" visibleInAdvancedArea="true" label="{i18n>DeleteFlag}"/>
+                                <!-- ADD BEGIN BY XINLEI XU 2026/07/28 CN 需求 No.180、181 -->
+                                <smartFilterBar:ControlConfiguration index='170' key="SmartWH" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>SmartWH}"/>
+                                <smartFilterBar:ControlConfiguration index='180' key="ShelfUWMS" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ShelfUWMS}"/>
+                                <smartFilterBar:ControlConfiguration index='190' key="OnlyTrialOrder" visibleInAdvancedArea="true" label="{i18n>OnlyTrialOrder}">
+                                    <smartFilterBar:customControl>
+                                        <CheckBox selected="{local>/OnlyTrialOrder2}" />
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='999' key="ShelfUWMS" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QCStock" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PalletQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ActualStock" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="OpenResvertionQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ShortageDifference" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CompletedFlag" visible="false"/>
+                                <!-- ADD END BY XINLEI XU 2026/07/28 CN 需求 No.180、181 -->
                                 <!-- visible -->
                                 <smartFilterBar:ControlConfiguration index='999' key="RowNo" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="MaterialName" visible="false"/>

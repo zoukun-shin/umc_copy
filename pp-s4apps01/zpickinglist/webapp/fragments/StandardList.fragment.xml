@@ -6,7 +6,7 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_STD" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 0}" beforeRebindTable="onBeforeRebindTable" enableExport="false" beforeExport="onBeforeExportStandardList" showFullScreenButton="true" requestAtLeastFields="BaseUnit,LaboratoryOrDesignOfficeName,DetailsJson" ignoredFields="BaseUnit,LaboratoryOrDesignOfficeName,RequisitionDate,MRPController,ProductionSupervisor,DetailsJson,ExternalProductGroup">
+    <smartTable:SmartTable entitySet="ZC_PICKINGLIST_STD" smartFilterId="idSmartFilterBar1" tableType="Table" width="100%" showRowCount="true" useVariantManagement="false" useTablePersonalisation="true" persistencyKey="StandardListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" visible="{= ${local>/selectIndex} === 0}" beforeRebindTable="onBeforeRebindTable" enableExport="false" beforeExport="onBeforeExportStandardList" showFullScreenButton="true" requestAtLeastFields="BaseUnit,LaboratoryOrDesignOfficeName,DetailsJson" ignoredFields="BaseUnit,LaboratoryOrDesignOfficeName,RequisitionDate,MRPController,ProductionSupervisor,DetailsJson,ExternalProductGroup,OnlyTrialOrder">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
@@ -179,7 +179,7 @@
                         <Text text="{M_CARD}" wrapping="false"/>
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>LaboratoryOrDesignOffice}" sortProperty="LaboratoryOrDesignOffice" filterProperty="LaboratoryOrDesignOffice">
+                <table:Column width="12rem" label="{i18n>LaboratoryOrDesignOffice}" sortProperty="LaboratoryOrDesignOffice" filterProperty="LaboratoryOrDesignOffice">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"LaboratoryOrDesignOffice", "leadingProperty":"LaboratoryOrDesignOffice"}'/>
                     </table:customData>
@@ -203,6 +203,72 @@
                         <Text text="{MaterialGroup}" wrapping="false"/>
                     </table:template>
                 </table:Column>
+                <!-- ADD BEGIN BY XINLEI XU 2026/07/28 CN 需求 No.114、179、405 -->
+                <table:Column width="10rem" label="{i18n>ShelfUWMS}" sortProperty="ShelfUWMS" filterProperty="ShelfUWMS">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShelfUWMS", "leadingProperty":"ShelfUWMS"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ShelfUWMS}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>SmartWH}" sortProperty="SmartWH" filterProperty="SmartWH">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SmartWH", "leadingProperty":"SmartWH"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SmartWH}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>QCStock}" sortProperty="QCStock" filterProperty="QCStock" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QCStock", "leadingProperty":"QCStock"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ parts:[ 'QCStock','3'], formatter:'.formatter.formatFloat' } {BaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>PalletQty}" sortProperty="PalletQty" filterProperty="PalletQty" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PalletQty", "leadingProperty":"PalletQty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ parts:[ 'PalletQty','3'], formatter:'.formatter.formatFloat' } {BaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>ActualStock}" sortProperty="ActualStock" filterProperty="ActualStock" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ActualStock", "leadingProperty":"ActualStock"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ parts:[ 'ActualStock','3'], formatter:'.formatter.formatFloat' } {BaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>OpenResvertionQty}" sortProperty="OpenResvertionQty" filterProperty="OpenResvertionQty" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"OpenResvertionQty", "leadingProperty":"OpenResvertionQty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ parts:[ 'OpenResvertionQty','3'], formatter:'.formatter.formatFloat' } {BaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>ShortageDifference}" sortProperty="ShortageDifference" filterProperty="ShortageDifference" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShortageDifference", "leadingProperty":"ShortageDifference"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ parts:[ 'ShortageDifference','3'], formatter:'.formatter.formatFloat' } {BaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>LotSizeRoundingQuantity}" sortProperty="LotSizeRoundingQuantity" filterProperty="LotSizeRoundingQuantity" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"LotSizeRoundingQuantity", "leadingProperty":"LotSizeRoundingQuantity"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ parts:[ 'LotSizeRoundingQuantity','3'], formatter:'.formatter.formatFloat' } {BaseUnit}" wrapping="false" />
+                    </table:template>
+                </table:Column>
+                <!-- ADD END BY XINLEI XU 2026/07/28 CN 需求 No.114、179、405 -->
             </table:columns>
         </table:Table>
     </smartTable:SmartTable>

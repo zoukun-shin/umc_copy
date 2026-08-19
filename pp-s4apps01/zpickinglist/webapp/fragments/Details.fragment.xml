@@ -217,6 +217,13 @@
                             <Text text="{local>PRODUCTION_SUPERVISOR}" wrapping="false"/>
                         </table:template>
                     </table:Column>
+                    <!-- ADD BEGIN BY XINLEI XU 2026/07/28 CN 需求No.181 -->
+                    <table:Column width="10rem" label="{i18n>ManufacturingOrderType}">
+                        <table:template>
+                            <Text text="{local>MANUFACTURING_ORDER_TYPE}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- ADD END BY XINLEI XU 2026/07/28 CN 需求No.181 -->
                 </table:columns>
             </table:Table>
         </Panel>
