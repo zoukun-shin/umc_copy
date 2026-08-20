@@ -41,14 +41,14 @@ sap.ui.define([
 			this._oDataModel.resetChanges();
             let aFilters = oEvent.getParameters().bindingParams.filters;
             let oSmartFilterBar = this.byId("idSmartFilterBar");
-            let sDel1 = this.byId("cbDeleteCancel").getSelectedKey();    
+            let sDel1 = this.byId("cbDisplayCancel").getSelectedKey();    
             let oDel = new sap.ui.model.Filter({
                 path: "DisplayCancel",
                 operator: "EQ",
                 value1: sDel1
             });
-            aFilters.push(oDel);
-            let sDel2 = this.byId("cbDeleteText").getSelectedKey(); 
+			aFilters.push(oDel);
+            let sDel2 = this.byId("cbDisplayDNLongText").getSelectedKey(); 
             let oDel2 = new sap.ui.model.Filter({
                 path: "DisplayDNLongText",
                 operator: "EQ",
@@ -58,19 +58,22 @@ sap.ui.define([
 		},
 
 		onPostCancel: function () {
-			var aSelectedItems = this.preparePostBody();
-			if (aSelectedItems.length === 0) {
+			var listItems = this.byId("idMultiSelectionPlugin").getSelectedIndices();
+			if (listItems.length === 0) {
+				messages.showError(this._ResourceBundle.getText("postNoSelection"));
 				return;
 			}
-			this.postAction("PostCancel", JSON.stringify(aSelectedItems));
+			var aSelectedItems = this.preparePostBody();
+			this.postAction("PostCancel", aSelectedItems);
 		},
 
 		preparePostBody: function () {
-            var that = this;
             var listItems = this.byId("idMultiSelectionPlugin").getSelectedIndices();
             var selectedRows = [];
+            this._aSelectedPaths = [];
             listItems.forEach((item) => {
                 var sPath = this.byId("HistoryTable").getContextByIndex(item).getPath();
+                this._aSelectedPaths.push(sPath);
                 var oRow = this.getModel().getObject(sPath);
                 delete oRow.__metadata;
                 selectedRows.push(oRow);
@@ -79,12 +82,23 @@ sap.ui.define([
             return postDocs;
         },
 
+		_updateProcessResult: function (result) {
+            var oModel = this.getModel();
+            var aPaths = this._aSelectedPaths || [];
+            result.forEach(function (item, idx) {
+                var sPath = aPaths[idx];
+                if (sPath) {
+                    oModel.setProperty(sPath + "/ProcessResult", item.PROCESSRESULT || "");
+                }
+            });
+        },
+
 		postAction: function (sAction, postData) {
 			this._BusyDialog.open();
 			var oModel = this._oDataModel;
 			var i = 0;
 
-			oModel.callFunction("/processLogic", {
+			oModel.callFunction("/processLogic1", {
 				method: "POST",
 				changeSetId: i,
 				urlParameters: {
@@ -96,7 +110,7 @@ sap.ui.define([
 					try {
 						let result = [];
 						try {
-							result = JSON.parse(oData["processLogic"].Zzkey || "[]");
+							result = JSON.parse(oData["processLogic1"].Zzkey || "[]");
 						} catch (e) {
 							messages.showError(this._ResourceBundle.getText("BackError"));
 							return;
@@ -115,22 +129,7 @@ sap.ui.define([
 									);
 								}
 							}.bind(this));
-
-							if (aFailed.length === 0) {
-								var sMsgKey = (sAction === "PostCancel")
-									? "PostCancelSuccess"
-									: "PostCancelSuccess";
-								messages.showSuccess(this._ResourceBundle.getText(sMsgKey));
-							} else {
-								var sPrefixKey = (sAction === "PostCancel")
-									? "PostCancelFailedPrefix"
-									: "PostCancelFailedPrefix";
-								messages.showError(
-									this._ResourceBundle.getText(sPrefixKey, [
-										aFailed.join(this._ResourceBundle.getText("ListSeparator"))
-									])
-								);
-							}
+							this._updateProcessResult(result);
 						}
 
 						this.getView().getModel().refresh();

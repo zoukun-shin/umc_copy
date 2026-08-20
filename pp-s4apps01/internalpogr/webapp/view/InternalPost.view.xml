@@ -59,6 +59,7 @@
                             <smartFilterBar:ControlConfiguration index='999' key="DNLongtext" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="ProcessStatus" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="UUID" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="DeliveryQty" visible="false"/>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>

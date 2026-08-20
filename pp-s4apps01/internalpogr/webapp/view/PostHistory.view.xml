@@ -26,7 +26,7 @@
                         <smartFilterBar:controlConfiguration>
                             <!-- Filter -->
                             <smartFilterBar:ControlConfiguration index='10' key="Plant" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
-                            <smartFilterBar:ControlConfiguration index='20' key="DeliveryMaterial" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                            <smartFilterBar:ControlConfiguration index='20' key="DeliveryMaterial" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>DeliveryMaterial}"/>
                             <smartFilterBar:ControlConfiguration index='30' key="ReceiptMaterial" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>ReceiptMaterial}"/>
                             <smartFilterBar:ControlConfiguration index='40' key="PoNo" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>PoNo}"/>
                             <smartFilterBar:ControlConfiguration index='60' key="DeliveryNoteNo" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>DeliveryNoteNo}"/>
@@ -38,7 +38,7 @@
 
                             <smartFilterBar:ControlConfiguration index='90' key="DisplayCancel" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>DisplayCancel}">
                                 <smartFilterBar:customControl>
-                                    <ComboBox id="cbDeleteCancel" selectedKey="{/DeleteCancel}">
+                                    <ComboBox id="cbDisplayCancel" selectedKey="{local>/DisplayCancel}">
                                         <items>
                                             <core:Item key="1" text="" />
                                             <core:Item key="2" text="{i18n>No}" />
@@ -49,7 +49,7 @@
                             </smartFilterBar:ControlConfiguration>
                             <smartFilterBar:ControlConfiguration index='90' key="DisplayDNLongText" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>DisplayDNLongText}">
                                 <smartFilterBar:customControl>
-                                    <ComboBox id="cbDeleteText" selectedKey="{/DeleteText}">
+                                    <ComboBox id="cbDisplayDNLongText" selectedKey="{local>/DisplayDNLongText}">
                                         <items>
                                             <core:Item key="1" text="" />
                                             <core:Item key="2" text="{i18n>No}" />
@@ -79,6 +79,8 @@
                             <smartFilterBar:ControlConfiguration index='999' key="CreateAt" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="ChangeBy" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="ChangeAt" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="delflag" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="DeliveryQty" visible="false"/>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -86,7 +88,7 @@
         </f:header>
         <f:content>
             <smartTable:SmartTable id="idsmartTable" entitySet="InternalPOGRHistory" smartFilterId="idSmartFilterBar" smartVariant="__SVM02" tableType="Table" persistencyKey="smartTable" header="{i18n>Results}" 
-                        placeToolbarInTable="true" showRowCount="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" ignoredFields="UserEmail">
+                        placeToolbarInTable="true" showRowCount="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" ignoredFields="delflag,DisplayCancel,DisplayDNLongText,DeliveryQty" enableAutoBinding="false" useExportToExcel="true" showFullScreenButton="true">
                 <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
                     <ToolbarSpacer/>
@@ -107,6 +109,14 @@
                         <rm:Auto id="idAuto" />
                     </table:rowMode>
                     <table:columns>
+                       <table:Column id="ph_col_ProcessResult" width="6rem" label="{i18n>ProcessResult}" sortProperty="ProcessResult" filterProperty="ProcessResult">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ProcessResult", "leadingProperty":"ProcessResult"}'/>
+                            </table:customData>
+                            <table:template>
+                                <Text text="{ProcessResult}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
                         <table:Column id="ph_col_Plant" width="6rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant"}'/>

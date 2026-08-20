@@ -18,6 +18,8 @@ sap.ui.define([
             var localData = {
                 InternalPOGR: [],
                 InternalPOGRTemp: [],
+                DisplayCancel: "1",
+                DisplayDNLongText: "1",
             };
             return localData;
         },

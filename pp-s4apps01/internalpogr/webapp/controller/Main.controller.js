@@ -12,27 +12,7 @@ sap.ui.define([
 
         _initialize: function () {
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
-
-            // detect preview environment: can be forced via ?env=preview or inferred from hostname
-            function isPreviewEnv() {
-                try {
-                    var search = window.location.search || "";
-                    if (search.indexOf('env=preview') !== -1) { return true; }
-                    var hash = window.location.hash || "";
-                    if (hash.indexOf('#app-preview') === 0) { return true; }
-                    var host = window.location.hostname || "";
-                    var indicators = ["localhost", "127.0.0.1", "preview", "webide", "sapappstudio"];
-                    return indicators.some(function (p) { return host.indexOf(p) !== -1; });
-                } catch (e) {
-                    return false;
-                }
-            }
-
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-            if (isPreviewEnv()) {
-                // In preview environment use fixed test email
-                sEmail = "xinlei.xu@sh.shin-china.com";
-            }
             var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
