@@ -13,7 +13,6 @@ sap.ui.define([
         _initialize: function () {
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
-            sEmail = 'xinlei.xu@sh.shin-china.com';
             var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignPlant,_AssignCompany,_AssignSalesOrg,_AssignPurchOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -85,6 +84,31 @@ sap.ui.define([
             // 用于数据权限过滤
             var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
             oBindingParams.filters.push(new sap.ui.model.Filter("UserEmail", "EQ", sEmail));
+        },
+
+        onBeforeExport: function (oEvent) {
+            var mExcelSettings = oEvent.getParameter("exportSettings");
+            mExcelSettings.workbook.columns.forEach(function (oColumn) {
+                switch (oColumn.property) {
+                    case "MatlWrhsStkQtyInMatlBaseUnit":
+                    case "NetWeight":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 3;
+                        oColumn.textAlign = "End";
+                        break;
+                    case "UnitPrice":
+                    case "TotalAmountCNY":
+                    case "TotalAmountUSD":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.delimiter = true;
+                        oColumn.scale = 6;
+                        oColumn.textAlign = "End";
+                        break;
+                }
+            });
+            var sFileName = this.getModel("i18n").getResourceBundle().getText("appTitle");
+            mExcelSettings.fileName = sFileName + "_" + this.getCurrentDateTime();
         }
     });
 });

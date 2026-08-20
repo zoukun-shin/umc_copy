@@ -7,7 +7,7 @@
     xmlns:rm="sap.ui.table.rowmodes"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable id="idSmartTable" entitySet="ZC_MATERIALPERIODSTOCK" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="pkPLTable" header="{i18n>Results}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" ignoredFields="ReportMonth,UserEmail" requestAtLeastFields="ReportMonth,UserEmail">
+    <smartTable:SmartTable id="idSmartTable" entitySet="ZC_MATERIALPERIODSTOCK" smartFilterId="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="pkPLTable" header="{i18n>Results}" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" ignoredFields="ReportMonth,BomExplosion,ProductionSupervisor,MaterialType,Supplier,UserEmail" requestAtLeastFields="ReportMonth,BomExplosion,ProductionSupervisor,MaterialType,Supplier,UserEmail">
         <smartTable:customToolbar>
             <OverflowToolbar design="Transparent">
                 <ToolbarSpacer/>
