@@ -72,9 +72,9 @@
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
                             <smartFilterBar:ControlConfiguration
-                                key="InvoiceBillingDocument"
+                                key="InvoiceNo"
                                 visibleInAdvancedArea="true"
-                                label="{/#PackSummaryType/InvoiceBillingDocument/@sap:label}"
+                                label="{/#PackSummaryType/InvoiceNo/@sap:label}"
                                 mandatory="notMandatory"
                                 index="7"
                             />
@@ -93,9 +93,26 @@
                 placeToolbarInTable="true"
                 beforeRebindTable="onBeforeRebindTable"
                 header="{i18n>tableHeaderPackSummary}"
-                ignoredFields="InvoiceBillingDocument,QuantityUnit,WeightUnit,TransactionCurrency"
+                ignoredFields="InvoiceNo,QuantityUnit,WeightUnit,TransactionCurrency"
                 requestAtLeastFields="BillingDocument"
             >
+                <smartTable:customToolbar>
+                    <OverflowToolbar id="idOverflowToolbar">
+                        <ToolbarSpacer />
+                        <Button
+                            id="idBtnEditPackSummary"
+                            text="{= ${local>/packSummaryEditMode} ? ${i18n>btnDisplay} : ${i18n>btnEdit} }"
+                            press="onEditPress"
+                            enabled="{= ${local>/authorityCheck/button/SummaryEdit}}"
+                        />
+                        <Button
+                            id="idBtnSavePackSummary"
+                            text="{i18n>btnSave}"
+                            press="onSavePress"
+                            enabled="{= ${local>/authorityCheck/button/SummarySave}}"
+                        />
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
                 <t:Table
                     id="reportTablePackSummary"
                     selectionMode="Multi"
@@ -621,7 +638,19 @@
                                 />
                             </t:customData>
                             <t:template>
-                                <Text text="{path:'ActualFreight', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false" />
+                                <HBox fitContainer="true" justifyContent="End" alignItems="Center">
+                                    <Text
+                                        text="{path:'ActualFreight', type:'sap.ui.model.odata.type.String'}"
+                                        wrapping="false"
+                                        visible="{= !${local>/packSummaryEditMode}}"
+                                    />
+                                    <Input
+                                        value="{path:'ActualFreight', type:'sap.ui.model.odata.type.String'}"
+                                        visible="{local>/packSummaryEditMode}"
+                                        change="onChange"
+                                        width="100%"
+                                    />
+                                </HBox>
                             </t:template>
                         </t:Column>
                         <t:Column
@@ -638,7 +667,19 @@
                                 />
                             </t:customData>
                             <t:template>
-                                <Text text="{path:'FreightRate', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false" />
+                                <HBox fitContainer="true" justifyContent="End" alignItems="Center">
+                                    <Text
+                                        text="{path:'FreightRate', type:'sap.ui.model.odata.type.String'}"
+                                        wrapping="false"
+                                        visible="{= !${local>/packSummaryEditMode}}"
+                                    />
+                                    <Input
+                                        value="{path:'FreightRate', type:'sap.ui.model.odata.type.String'}"
+                                        visible="{local>/packSummaryEditMode}"
+                                        change="onChange"
+                                        width="100%"
+                                    />
+                                </HBox>
                             </t:template>
                         </t:Column>
                         <t:Column

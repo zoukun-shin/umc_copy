@@ -87,7 +87,9 @@ sap.ui.define([
                 ],
                 onClose: function (sResult) {
                     oContext._result = sResult;
-                    oContext.getEventBus().publish(sChannelId, sEventId, oContext);
+                    if (sResult === MessageBox.Action.YES) {
+                        oContext.getOwnerComponent().getEventBus().publish(sChannelId, sEventId, oContext);
+                    }
                 }
             });
         }

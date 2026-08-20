@@ -96,6 +96,23 @@
                 ignoredFields="InvoiceBillingDocument,QuantityUnit"
                 requestAtLeastFields="BillingDocument,BillingDocumentItem"
             >
+                <smartTable:customToolbar>
+                    <OverflowToolbar id="idOverflowToolbarPackDetail">
+                        <ToolbarSpacer />
+                        <Button
+                            id="idBtnEditPackDetail"
+                            text="{= ${local>/packDetailEditMode} ? ${i18n>btnDisplay} : ${i18n>btnEdit} }"
+                            press="onEditPress"
+                            enabled="{= ${local>/authorityCheck/button/DetailEdit}}"
+                        />
+                        <Button
+                            id="idBtnSavePackDetail"
+                            text="{i18n>btnSave}"
+                            press="onSavePress"
+                            enabled="{= ${local>/authorityCheck/button/DetailSave}}"
+                        />
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
                 <t:Table
                     id="reportTablePackDetail"
                     selectionMode="Multi"
@@ -538,7 +555,19 @@
                                 />
                             </t:customData>
                             <t:template>
-                                <Text text="{path:'ActualFreightUnitPrice', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false" />
+                                <HBox fitContainer="true" justifyContent="End" alignItems="Center">
+                                    <Text
+                                        text="{path:'ActualFreightUnitPrice', type:'sap.ui.model.odata.type.String'}"
+                                        wrapping="false"
+                                        visible="{= !${local>/packDetailEditMode}}"
+                                    />
+                                    <Input
+                                        value="{path:'ActualFreightUnitPrice', type:'sap.ui.model.odata.type.String'}"
+                                        visible="{local>/packDetailEditMode}"
+                                        change="onChange"
+                                        width="100%"
+                                    />
+                                </HBox>
                             </t:template>
                         </t:Column>
                         <t:Column
@@ -555,7 +584,19 @@
                                 />
                             </t:customData>
                             <t:template>
-                                <Text text="{path:'ActualFreightCost', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false" />
+                                <HBox fitContainer="true" justifyContent="End" alignItems="Center">
+                                    <Text
+                                        text="{path:'ActualFreightCost', type:'sap.ui.model.odata.type.String'}"
+                                        wrapping="false"
+                                        visible="{= !${local>/packDetailEditMode}}"
+                                    />
+                                    <Input
+                                        value="{path:'ActualFreightCost', type:'sap.ui.model.odata.type.String'}"
+                                        visible="{local>/packDetailEditMode}"
+                                        change="onChange"
+                                        width="100%"
+                                    />
+                                </HBox>
                             </t:template>
                         </t:Column>
                         <t:Column
