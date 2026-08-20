@@ -27,6 +27,7 @@ sap.ui.define([
                     ShowInformation: "X",  // はい
                     ShowDetailLines: "X",  // はい
                     ShowDEMAND: "X",       // はい
+                    ExcludeZeroSupplyDemand: "X", // ADD BY XINLEI XU 2026/08/17 CN 需求 No.317
                     FromMRPTable: true     // はい
                 },
                 resultSet: [],

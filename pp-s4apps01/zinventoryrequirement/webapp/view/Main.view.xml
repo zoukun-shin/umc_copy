@@ -77,6 +77,17 @@
                                         </Select>
                                     </smartFilterBar:customControl>
                                 </smartFilterBar:ControlConfiguration>
+                                <!-- ADD BEGIN BY XINLEI XU 2026/08/17 CN 需求 No.317、401 -->
+                                <smartFilterBar:ControlConfiguration index='161' key="ExcludeZeroSupplyDemand" visibleInAdvancedArea="true" label="{i18n>ExcludeZeroSupplyDemand}">
+                                    <smartFilterBar:customControl>
+                                        <Select change="removeAllColumns" forceSelection="true" selectedKey="{local>/filter/ExcludeZeroSupplyDemand}">
+                                            <core:Item key="X" text="{i18n>Yes}"/>
+                                            <core:Item key="" text="{i18n>No}"/>
+                                        </Select>
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='162' key="AdvanceConfDays" controlType="input" hasValueHelpDialog="false" visibleInAdvancedArea="true" label="{i18n>AdvanceConfDays}"/>
+                                <!-- ADD END BY XINLEI XU 2026/08/17 CN 需求 No.317、401 -->
                                 <smartFilterBar:ControlConfiguration index='170' key="FromMRPTable" visibleInAdvancedArea="true" label="{i18n>FromMRPTable}">
                                     <smartFilterBar:customControl>
                                         <Switch state="{local>/filter/FromMRPTable}" customTextOn=" " customTextOff=" ">

@@ -289,15 +289,11 @@ sap.ui.define([
                     },
                     error: function (oErr) {
                         oBusyDialog.close();
-                        // var oError = JSON.parse(oErr.responseText);
-                        // var sMsg;
-                        // if (oError.error.innererror.errordetails.length > 0) {
-                        //     sMsg = oError.error.innererror.errordetails[0].message;
-                        // } else {
-                        //     sMsg = oError.error.message.value;
-                        // }
-                        // MessageBox.error(sMsg);
-                        reject(JSON.parse(oErr.responseText));
+                        if (oErr.responseText.includes("?xml")) {
+                            reject(oErr.responseText);
+                        } else {
+                            reject(JSON.parse(oErr.responseText));
+                        }
                     }
                 };
                 switch (sMethod) {

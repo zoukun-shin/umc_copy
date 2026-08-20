@@ -160,6 +160,7 @@ sap.ui.define([
             var sShowDetailLines = this.getModel("local").getProperty("/filter/ShowDetailLines");
             var sShowDEMAND = this.getModel("local").getProperty("/filter/ShowDEMAND");
             var bFromMRPTable = this.getModel("local").getProperty("/filter/FromMRPTable"); // ADD BY XINLEI XU 2025/03/14
+            var bExcludeZeroSupplyDemand = this.getModel("local").getProperty("/filter/ExcludeZeroSupplyDemand"); // ADD BY XINLEI XU 2026/08/17 CN 需求 No.317
 
             aFilters.push(new Filter("DisplayUnit", FilterOperator.EQ, sDisplayUnit));
             aFilters.push(new Filter("DisplayDimension", FilterOperator.EQ, sDisplayDimension));
@@ -170,6 +171,7 @@ sap.ui.define([
             // ADD BEGIN BY XINLEI XU 2025/03/14
             aFilters.push(new Filter("FromMRPTable", FilterOperator.EQ, bFromMRPTable));
             // ADD END BY XINLEI XU 2025/03/14
+            aFilters.push(new Filter("ExcludeZeroSupplyDemand", FilterOperator.EQ, bExcludeZeroSupplyDemand === "X" ? true : false)); // ADD BY XINLEI XU 2026/08/17 CN 需求 No.317
 
             this.removeAllColumns();
             this._CallODataV2("READ", "/ZC_InventoryRequirement", aFilters, {}, {}).then(function (oResponse) {
@@ -639,6 +641,7 @@ sap.ui.define([
                 "Zzkey": JSON.stringify({
                     Plant: sPlant,
                     PlantName: sPlantName,
+                    MRPController: this.byId("idSmartFilterBar").getFilterData().MRPController, // ADD BEGIN BY XINLEI XU 2026/08/17 CN 需求 No.320
                     User: this._UserInfo.getLastName() + " " + this._UserInfo.getFirstName()
                 }),
                 "RecordUUID": ""
@@ -662,9 +665,15 @@ sap.ui.define([
                 this._myBusyDialog.close();
                 var aResult = JSON.parse(oResponse.GetMRPSynchronousTime.Zzkey);
                 var aPlantSet = this.getModel("local").getProperty("/authorityCheck/data/PlantSet");
+                var sPlant = this.byId("idSmartFilterBar").getFilterData().Plant; // ADD BEGIN BY XINLEI XU 2026/08/20 CN 需求 No.320
                 aResult = aResult.filter(resultItem =>
                     aPlantSet.some(plantItem => plantItem.Plant === resultItem.PLANT)
                 );
+                // ADD BEGIN BY XINLEI XU 2026/08/20 CN 需求 No.320
+                aResult = aResult.filter(resultItem =>
+                    resultItem.PLANT === sPlant
+                );
+                // ADD END BY XINLEI XU 2026/08/20 CN 需求 No.320
                 for (var i = 0; i < aResult.length; i++) {
                     if (aResult[i].SCHEDULE_BEGIN) {
                         var sDateTime = aResult[i].SCHEDULE_BEGIN.toString();
@@ -692,9 +701,20 @@ sap.ui.define([
                     }
                     aResult[i]["Plant"] = aResult[i].PLANT;
                     aResult[i]["SyncUser"] = aResult[i].SCHEDULE_USER;
+                    // ADD BEGIN BY XINLEI XU 2026/08/17 CN 需求 No.320
+                    aResult[i]["MRPController"] = aResult[i].M_R_P_CONTROLLER;
+                    aResult[i]["TotalCount"] = aResult[i].TOTAL_COUNT;
+                    // ADD END BY XINLEI XU 2026/08/17 CN 需求 No.320
                 }
                 aResult.sort(function (a, b) {
-                    return a.Plant - b.Plant;
+                    // MOD BEGIN BY XINLEI XU 2026/08/17 CN 需求 No.320
+                    // return a.Plant - b.Plant;
+                    var iPlantCompare = (a.Plant || "").localeCompare(b.Plant || "");
+                    if (iPlantCompare !== 0) {
+                        return iPlantCompare;
+                    }
+                    return (a.MRPController || "").localeCompare(b.MRPController || "");
+                    // MOD END BY XINLEI XU 2026/08/17 CN 需求 No.320
                 });
                 this.getModel("local").setProperty("/filteredMRPsyncHistory", aResult);
 

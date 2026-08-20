@@ -1,8 +1,10 @@
 <core:FragmentDefinition xmlns="sap.m"
+    xmlns:table="sap.ui.table"
     xmlns:core="sap.ui.core">
-    <Dialog id="syncHistoryDialog" title="{i18n>SyncHistory}" contentWidth="70%" draggable="true" resizable="true">
+    <Dialog id="syncHistoryDialog" title="{i18n>SyncHistory}({= ${local>/filteredMRPsyncHistory}.length })" contentWidth="75%" draggable="true" resizable="true">
         <content>
-            <Table id="syncHistoryTable" items="{local>/filteredMRPsyncHistory}">
+            <!-- MOD BEGIN BY XINLEI XU 2026/08/17 CN 需求 No.320 -->
+            <!-- <Table id="syncHistoryTable" items="{local>/filteredMRPsyncHistory}">
                 <columns>
                     <Column width="10%">
                         <Text text="{i18n>Plant}" />
@@ -30,7 +32,45 @@
                         </cells>
                     </ColumnListItem>
                 </items>
-            </Table>
+            </Table> -->
+            <table:Table id="syncHistoryTable" rows="{local>/filteredMRPsyncHistory}" selectionMode="Multi" rowMode="Interactive" class="sapUiSizeCompact">
+                <table:columns>
+                    <table:Column label="{i18n>Plant}" width="6rem">
+                        <table:template>
+                            <Text text="{local>Plant}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column label="{i18n>MRPController}" width="8rem">
+                        <table:template>
+                            <Text text="{local>MRPController}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column label="{i18n>SyncUser}" width="12rem">
+                        <table:template>
+                            <Text text="{local>SyncUser}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column label="{i18n>StartTime}" width="25rem">
+                        <table:template>
+                            <Text text="{local>StartTime}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column label="{i18n>EndTime}" width="25rem">
+                        <table:template>
+                            <HBox alignItems="Center">
+                                <BusyIndicator visible="{= ${local>EndTime} === '' }" class="sapUiTinyMarginEnd" />
+                                <ObjectStatus text="{= ${local>EndTime} === '' ? ${i18n>Running} : ${local>EndTime} }" state="{= ${local>EndTime} === '' ? 'Information' : (${local>EndTime} === ${i18n>TimeOut} ? 'Error' : 'Success') }" />
+                            </HBox>
+                        </table:template>
+                    </table:Column>
+                    <table:Column label="{i18n>TotalCount}" width="8rem">
+                        <table:template>
+                            <Text text="{ path:'local>TotalCount',formatter:'.formatter.formatNumber' }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+            <!-- MOD END BY XINLEI XU 2026/08/17 CN 需求 No.320 -->
         </content>
         <beginButton>
             <Button text="{i18n>Close}" press=".onCloseDialog" />
