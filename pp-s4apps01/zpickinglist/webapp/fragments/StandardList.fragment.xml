@@ -260,14 +260,6 @@
                         <Text text="{ parts:[ 'ShortageDifference','3'], formatter:'.formatter.formatFloat' } {BaseUnit}" wrapping="false" />
                     </table:template>
                 </table:Column>
-                <table:Column width="10rem" label="{i18n>LotSizeRoundingQuantity}" sortProperty="LotSizeRoundingQuantity" filterProperty="LotSizeRoundingQuantity" hAlign="End">
-                    <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"LotSizeRoundingQuantity", "leadingProperty":"LotSizeRoundingQuantity"}'/>
-                    </table:customData>
-                    <table:template>
-                        <Text text="{ parts:[ 'LotSizeRoundingQuantity','3'], formatter:'.formatter.formatFloat' } {BaseUnit}" wrapping="false" />
-                    </table:template>
-                </table:Column>
                 <!-- ADD END BY XINLEI XU 2026/07/28 CN 需求 No.114、179、405 -->
             </table:columns>
         </table:Table>
