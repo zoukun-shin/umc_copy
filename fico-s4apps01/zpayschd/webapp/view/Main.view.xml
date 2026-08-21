@@ -1,0 +1,563 @@
+<mvc:View controllerName="fico.zpayschd.controller.Main"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:t="sap.ui.table"
+    xmlns:core="sap.ui.core">
+    <!-- FICO-059 支付计划书:共用检索栏 + 两页签(明细只读 / 汇总可编辑调整付款日) -->
+    <f:DynamicPage id="idDynamicPage" headerExpanded="true" fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement
+                        id="idPageVariant"
+                        persistencyKey="payschdFilter"
+                        showShare="true"
+                        showExecuteOnSelection="true"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <smartFilterBar:SmartFilterBar
+                    id="idFilterBar"
+                    entitySet="PaySchdDtl"
+                    persistencyKey="payschdSmartFilter"
+                    smartVariant="idPageVariant"
+                    useToolbar="false">
+                    <smartFilterBar:controlConfiguration>
+                        <!-- 公司代码:单选 + 必输 -->
+                        <smartFilterBar:ControlConfiguration
+                            key="CompanyCode"
+                            visibleInAdvancedArea="true"
+                            displayBehaviour="idAndDescription"
+                            label="{i18n>lblCompanyCode}"
+                            mandatory="mandatory"
+                            filterType="single"
+                            index="5"/>
+                        <!-- 会计年度期间:连续区间(月份范围选择),必输(自定义控件在 controller 里校验) -->
+                        <smartFilterBar:ControlConfiguration
+                            key="FiscalYearPeriod"
+                            visibleInAdvancedArea="true"
+                            label="{i18n>lblFiscalYearPeriod}"
+                            mandatory="mandatory"
+                            index="10">
+                            <smartFilterBar:customControl>
+                                <DateRangeSelection
+                                    id="idDRFiscalPeriod"
+                                    displayFormat="yyyy/MM"
+                                    valueFormat="yyyyMM"/>
+                            </smartFilterBar:customControl>
+                        </smartFilterBar:ControlConfiguration>
+                        <!-- 工厂:单选 -->
+                        <smartFilterBar:ControlConfiguration
+                            key="Plant"
+                            visibleInAdvancedArea="true"
+                            displayBehaviour="idAndDescription"
+                            label="{i18n>lblPlant}"
+                            mandatory="notMandatory"
+                            filterType="single"
+                            index="15"/>
+                        <smartFilterBar:ControlConfiguration
+                            key="TransactionCurrency"
+                            visibleInAdvancedArea="true"
+                            displayBehaviour="idAndDescription"
+                            label="{i18n>lblTransactionCurrency}"
+                            mandatory="notMandatory"
+                            filterType="multiple"
+                            index="20"/>
+                        <smartFilterBar:ControlConfiguration
+                            key="Supplier"
+                            visibleInAdvancedArea="true"
+                            displayBehaviour="idAndDescription"
+                            label="{i18n>lblSupplier}"
+                            mandatory="notMandatory"
+                            filterType="multiple"
+                            index="25"/>
+                        <smartFilterBar:ControlConfiguration
+                            key="Product"
+                            visibleInAdvancedArea="true"
+                            displayBehaviour="idAndDescription"
+                            label="{i18n>lblProduct}"
+                            mandatory="notMandatory"
+                            filterType="multiple"
+                            index="30"/>
+                        <smartFilterBar:ControlConfiguration
+                            key="Paymentterms"
+                            visibleInAdvancedArea="true"
+                            displayBehaviour="idAndDescription"
+                            label="{i18n>lblPaymentterms}"
+                            mandatory="notMandatory"
+                            filterType="multiple"
+                            index="35"/>
+                        <!-- 理论付款日:区间(计算字段,后端结果侧过滤) -->
+                        <smartFilterBar:ControlConfiguration
+                            key="NetDueDate"
+                            visibleInAdvancedArea="true"
+                            label="{i18n>lblNetDueDate}"
+                            mandatory="notMandatory"
+                            index="40">
+                            <smartFilterBar:customControl>
+                                <DateRangeSelection
+                                    id="idDRNetDueDate"
+                                    valueFormat="yyyy/MM/dd"
+                                    displayFormat="yyyy/MM/dd"/>
+                            </smartFilterBar:customControl>
+                        </smartFilterBar:ControlConfiguration>
+                    </smartFilterBar:controlConfiguration>
+                </smartFilterBar:SmartFilterBar>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <IconTabBar
+                id="idIconTabBar"
+                stretchContentHeight="true"
+                backgroundDesign="Transparent"
+                applyContentPadding="false"
+                class="sapUiNoContentPadding">
+                <items>
+                    <!-- 页签1:支付计划书明细(只读) -->
+                    <IconTabFilter text="{i18n>tabDetail}" key="Detail">
+                        <smartTable:SmartTable
+                            id="idDtlTable"
+                            entitySet="PaySchdDtl"
+                            smartFilterId="idFilterBar"
+                            persistencyKey="payschdDtlTable"
+                            header="{i18n>tableHeaderDtl}"
+                            showRowCount="true"
+                            useExportToExcel="true"
+                            useVariantManagement="false"
+                            useTablePersonalisation="true"
+                            enableAutoBinding="false"
+                            beforeRebindTable="onBeforeRebindDtl"
+                            requestAtLeastFields="CompanyCode,FiscalYearPeriod,AccountingDocument,LedgerGLLineItem">
+                            <t:Table
+                                selectionMode="None"
+                                visibleRowCountMode="Auto"
+                                minAutoRowCount="10">
+                                <t:columns>
+                                    <t:Column width="8rem" sortProperty="FiscalYearPeriod" filterProperty="FiscalYearPeriod">
+                                        <Label text="{i18n>colFiscalYearPeriod}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"FiscalYearPeriod","leadingProperty":"FiscalYearPeriod","sortProperty":"FiscalYearPeriod","filterProperty":"FiscalYearPeriod"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{FiscalYearPeriod}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem" sortProperty="CompanyCode" filterProperty="CompanyCode">
+                                        <Label text="{i18n>colCompanyCode}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode","leadingProperty":"CompanyCode","sortProperty":"CompanyCode","filterProperty":"CompanyCode"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{CompanyCode}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="10rem" sortProperty="CompanyCodeText" filterProperty="CompanyCodeText">
+                                        <Label text="{i18n>colCompanyCodeText}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCodeText","leadingProperty":"CompanyCodeText","sortProperty":"CompanyCodeText","filterProperty":"CompanyCodeText"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{CompanyCodeText}" wrapping="false" tooltip="{CompanyCodeText}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="6rem" sortProperty="Plant" filterProperty="Plant">
+                                        <Label text="{i18n>colPlant}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"Plant","leadingProperty":"Plant","sortProperty":"Plant","filterProperty":"Plant"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{Plant}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="10rem" sortProperty="PlantText" filterProperty="PlantText">
+                                        <Label text="{i18n>colPlantText}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"PlantText","leadingProperty":"PlantText","sortProperty":"PlantText","filterProperty":"PlantText"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{PlantText}" wrapping="false" tooltip="{PlantText}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem" sortProperty="AccountingDocument" filterProperty="AccountingDocument">
+                                        <Label text="{i18n>colAccountingDocument}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"AccountingDocument","leadingProperty":"AccountingDocument","sortProperty":"AccountingDocument","filterProperty":"AccountingDocument"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{AccountingDocument}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem" sortProperty="LedgerGLLineItem" filterProperty="LedgerGLLineItem">
+                                        <Label text="{i18n>colLedgerGLLineItem}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"LedgerGLLineItem","leadingProperty":"LedgerGLLineItem","sortProperty":"LedgerGLLineItem","filterProperty":"LedgerGLLineItem"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{LedgerGLLineItem}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem" sortProperty="PostingDate" filterProperty="PostingDate">
+                                        <Label text="{i18n>colPostingDate}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"PostingDate","leadingProperty":"PostingDate","sortProperty":"PostingDate","filterProperty":"PostingDate","type":"date"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{path:'PostingDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd', UTC:true}}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem" sortProperty="MaterialDocument" filterProperty="MaterialDocument">
+                                        <Label text="{i18n>colMaterialDocument}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"MaterialDocument","leadingProperty":"MaterialDocument","sortProperty":"MaterialDocument","filterProperty":"MaterialDocument"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{MaterialDocument}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder">
+                                        <Label text="{i18n>colPurchaseOrder}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrder","leadingProperty":"PurchaseOrder","sortProperty":"PurchaseOrder","filterProperty":"PurchaseOrder"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{PurchaseOrder}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem" sortProperty="PurchaseOrderItem" filterProperty="PurchaseOrderItem">
+                                        <Label text="{i18n>colPurchaseOrderItem}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderItem","leadingProperty":"PurchaseOrderItem","sortProperty":"PurchaseOrderItem","filterProperty":"PurchaseOrderItem"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{PurchaseOrderItem}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="6rem" sortProperty="PurchasingGroup" filterProperty="PurchasingGroup">
+                                        <Label text="{i18n>colPurchasingGroup}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"PurchasingGroup","leadingProperty":"PurchasingGroup","sortProperty":"PurchasingGroup","filterProperty":"PurchasingGroup"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{PurchasingGroup}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="10rem" sortProperty="PurchasingGroupText" filterProperty="PurchasingGroupText">
+                                        <Label text="{i18n>colPurchasingGroupText}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"PurchasingGroupText","leadingProperty":"PurchasingGroupText","sortProperty":"PurchasingGroupText","filterProperty":"PurchasingGroupText"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{PurchasingGroupText}" wrapping="false" tooltip="{PurchasingGroupText}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem" sortProperty="Supplier" filterProperty="Supplier">
+                                        <Label text="{i18n>colSupplier}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"Supplier","leadingProperty":"Supplier","sortProperty":"Supplier","filterProperty":"Supplier"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{Supplier}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="14rem" sortProperty="SupplierText" filterProperty="SupplierText">
+                                        <Label text="{i18n>colSupplierText}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"SupplierText","leadingProperty":"SupplierText","sortProperty":"SupplierText","filterProperty":"SupplierText"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{SupplierText}" wrapping="false" tooltip="{SupplierText}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="12rem" sortProperty="Product" filterProperty="Product">
+                                        <Label text="{i18n>colProduct}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"Product","leadingProperty":"Product","sortProperty":"Product","filterProperty":"Product"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{Product}" wrapping="false" tooltip="{Product}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="14rem" sortProperty="ProductText" filterProperty="ProductText">
+                                        <Label text="{i18n>colProductText}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"ProductText","leadingProperty":"ProductText","sortProperty":"ProductText","filterProperty":"ProductText"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{ProductText}" wrapping="false" tooltip="{ProductText}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="10rem" hAlign="Right" sortProperty="AmountInTransactionCurrency" filterProperty="AmountInTransactionCurrency">
+                                        <Label text="{i18n>colAmountInTransactionCurrency}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"AmountInTransactionCurrency","leadingProperty":"AmountInTransactionCurrency","sortProperty":"AmountInTransactionCurrency","filterProperty":"AmountInTransactionCurrency"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{path:'AmountInTransactionCurrency', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="6rem" sortProperty="TransactionCurrency" filterProperty="TransactionCurrency">
+                                        <Label text="{i18n>colTransactionCurrency}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"TransactionCurrency","leadingProperty":"TransactionCurrency","sortProperty":"TransactionCurrency","filterProperty":"TransactionCurrency"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{TransactionCurrency}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="10rem" hAlign="Right" sortProperty="AmountInCompanyCodeCurrency" filterProperty="AmountInCompanyCodeCurrency">
+                                        <Label text="{i18n>colAmountInCompanyCodeCurrency}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"AmountInCompanyCodeCurrency","leadingProperty":"AmountInCompanyCodeCurrency","sortProperty":"AmountInCompanyCodeCurrency","filterProperty":"AmountInCompanyCodeCurrency"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{path:'AmountInCompanyCodeCurrency', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem" sortProperty="CompanyCodeCurrency" filterProperty="CompanyCodeCurrency">
+                                        <Label text="{i18n>colCompanyCodeCurrency}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCodeCurrency","leadingProperty":"CompanyCodeCurrency","sortProperty":"CompanyCodeCurrency","filterProperty":"CompanyCodeCurrency"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{CompanyCodeCurrency}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem" hAlign="Right" sortProperty="ActualQuantityInBaseUnit" filterProperty="ActualQuantityInBaseUnit">
+                                        <Label text="{i18n>colActualQuantityInBaseUnit}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"ActualQuantityInBaseUnit","leadingProperty":"ActualQuantityInBaseUnit","sortProperty":"ActualQuantityInBaseUnit","filterProperty":"ActualQuantityInBaseUnit"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{path:'ActualQuantityInBaseUnit', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="6rem" sortProperty="BaseUnit" filterProperty="BaseUnit">
+                                        <Label text="{i18n>colBaseUnit}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"BaseUnit","leadingProperty":"BaseUnit","sortProperty":"BaseUnit","filterProperty":"BaseUnit"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{BaseUnit}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem" sortProperty="HKDeliveryDate" filterProperty="HKDeliveryDate">
+                                        <Label text="{i18n>colHKDeliveryDate}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"HKDeliveryDate","leadingProperty":"HKDeliveryDate","sortProperty":"HKDeliveryDate","filterProperty":"HKDeliveryDate","type":"date"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{path:'HKDeliveryDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd', UTC:true}}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem" sortProperty="Paymentterms" filterProperty="Paymentterms">
+                                        <Label text="{i18n>colPaymentterms}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"Paymentterms","leadingProperty":"Paymentterms","sortProperty":"Paymentterms","filterProperty":"Paymentterms"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{Paymentterms}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="10rem" sortProperty="PaymenttermsText" filterProperty="PaymenttermsText">
+                                        <Label text="{i18n>colPaymenttermsText}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"PaymenttermsText","leadingProperty":"PaymenttermsText","sortProperty":"PaymenttermsText","filterProperty":"PaymenttermsText"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{PaymenttermsText}" wrapping="false" tooltip="{PaymenttermsText}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem" sortProperty="BaselineDate" filterProperty="BaselineDate">
+                                        <Label text="{i18n>colBaselineDate}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"BaselineDate","leadingProperty":"BaselineDate","sortProperty":"BaselineDate","filterProperty":"BaselineDate","type":"date"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{path:'BaselineDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd', UTC:true}}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem" sortProperty="NetDueDate" filterProperty="NetDueDate">
+                                        <Label text="{i18n>colNetDueDate}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"NetDueDate","leadingProperty":"NetDueDate","sortProperty":"NetDueDate","filterProperty":"NetDueDate","type":"date"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{path:'NetDueDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd', UTC:true}}"/>
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+                        </smartTable:SmartTable>
+                    </IconTabFilter>
+                    <!-- 页签2:支付计划书汇总(调整付款日可编辑 + 保存) -->
+                    <IconTabFilter text="{i18n>tabSummary}" key="Summary">
+                        <smartTable:SmartTable
+                            id="idSumTable"
+                            entitySet="PaySchdSum"
+                            smartFilterId="idFilterBar"
+                            persistencyKey="payschdSumTable"
+                            header="{i18n>tableHeaderSum}"
+                            showRowCount="true"
+                            useExportToExcel="true"
+                            useVariantManagement="false"
+                            useTablePersonalisation="true"
+                            enableAutoBinding="false"
+                            beforeRebindTable="onBeforeRebindSum"
+                            requestAtLeastFields="CompanyCode,Supplier,Paymentterms,NetDueDate,TransactionCurrency">
+                            <smartTable:customToolbar>
+                                <OverflowToolbar>
+                                    <ToolbarSpacer/>
+                                    <Button
+                                        id="idBtnEdit"
+                                        text="{i18n>btnEdit}"
+                                        icon="sap-icon://edit"
+                                        enabled="{local>/authorityCheck/button/Save}"
+                                        visible="{= !${local>/editMode}}"
+                                        press="onEdit"/>
+                                    <Button
+                                        id="idBtnSave"
+                                        text="{i18n>btnSave}"
+                                        icon="sap-icon://save"
+                                        type="Emphasized"
+                                        visible="{local>/editMode}"
+                                        press="onSave"/>
+                                    <Button
+                                        id="idBtnCancel"
+                                        text="{i18n>btnCancel}"
+                                        visible="{local>/editMode}"
+                                        press="onCancelEdit"/>
+                                </OverflowToolbar>
+                            </smartTable:customToolbar>
+                            <t:Table
+                                selectionMode="None"
+                                visibleRowCountMode="Auto"
+                                minAutoRowCount="10">
+                                <t:columns>
+                                    <t:Column width="7rem" sortProperty="CompanyCode" filterProperty="CompanyCode">
+                                        <Label text="{i18n>colCompanyCode}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode","leadingProperty":"CompanyCode","sortProperty":"CompanyCode","filterProperty":"CompanyCode"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{CompanyCode}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="10rem" sortProperty="CompanyCodeText" filterProperty="CompanyCodeText">
+                                        <Label text="{i18n>colCompanyCodeText}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCodeText","leadingProperty":"CompanyCodeText","sortProperty":"CompanyCodeText","filterProperty":"CompanyCodeText"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{CompanyCodeText}" wrapping="false" tooltip="{CompanyCodeText}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem" sortProperty="Supplier" filterProperty="Supplier">
+                                        <Label text="{i18n>colSupplier}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"Supplier","leadingProperty":"Supplier","sortProperty":"Supplier","filterProperty":"Supplier"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{Supplier}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="14rem" sortProperty="SupplierText" filterProperty="SupplierText">
+                                        <Label text="{i18n>colSupplierText}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"SupplierText","leadingProperty":"SupplierText","sortProperty":"SupplierText","filterProperty":"SupplierText"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{SupplierText}" wrapping="false" tooltip="{SupplierText}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="10rem" hAlign="Right" sortProperty="AmountInTransactionCurrency" filterProperty="AmountInTransactionCurrency">
+                                        <Label text="{i18n>colAmountInTransactionCurrency}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"AmountInTransactionCurrency","leadingProperty":"AmountInTransactionCurrency","sortProperty":"AmountInTransactionCurrency","filterProperty":"AmountInTransactionCurrency"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{path:'AmountInTransactionCurrency', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="6rem" sortProperty="TransactionCurrency" filterProperty="TransactionCurrency">
+                                        <Label text="{i18n>colTransactionCurrency}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"TransactionCurrency","leadingProperty":"TransactionCurrency","sortProperty":"TransactionCurrency","filterProperty":"TransactionCurrency"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{TransactionCurrency}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="10rem" hAlign="Right" sortProperty="AmountInCompanyCodeCurrency" filterProperty="AmountInCompanyCodeCurrency">
+                                        <Label text="{i18n>colAmountInCompanyCodeCurrency}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"AmountInCompanyCodeCurrency","leadingProperty":"AmountInCompanyCodeCurrency","sortProperty":"AmountInCompanyCodeCurrency","filterProperty":"AmountInCompanyCodeCurrency"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{path:'AmountInCompanyCodeCurrency', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem" sortProperty="CompanyCodeCurrency" filterProperty="CompanyCodeCurrency">
+                                        <Label text="{i18n>colCompanyCodeCurrency}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCodeCurrency","leadingProperty":"CompanyCodeCurrency","sortProperty":"CompanyCodeCurrency","filterProperty":"CompanyCodeCurrency"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{CompanyCodeCurrency}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem" sortProperty="Paymentterms" filterProperty="Paymentterms">
+                                        <Label text="{i18n>colPaymentterms}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"Paymentterms","leadingProperty":"Paymentterms","sortProperty":"Paymentterms","filterProperty":"Paymentterms"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{Paymentterms}" wrapping="false"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="10rem" sortProperty="PaymenttermsText" filterProperty="PaymenttermsText">
+                                        <Label text="{i18n>colPaymenttermsText}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"PaymenttermsText","leadingProperty":"PaymenttermsText","sortProperty":"PaymenttermsText","filterProperty":"PaymenttermsText"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{PaymenttermsText}" wrapping="false" tooltip="{PaymenttermsText}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem" sortProperty="NetDueDate" filterProperty="NetDueDate">
+                                        <Label text="{i18n>colNetDueDate}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"NetDueDate","leadingProperty":"NetDueDate","sortProperty":"NetDueDate","filterProperty":"NetDueDate","type":"date"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{path:'NetDueDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd', UTC:true}}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="10rem" sortProperty="AdjustPaymentDate" filterProperty="AdjustPaymentDate">
+                                        <Label text="{i18n>colAdjustPaymentDate}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"AdjustPaymentDate","leadingProperty":"AdjustPaymentDate","sortProperty":"AdjustPaymentDate","filterProperty":"AdjustPaymentDate","type":"date"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <DatePicker
+                                                value="{path:'AdjustPaymentDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd', UTC:true}}"
+                                                editable="{local>/editMode}"
+                                                displayFormat="yyyy/MM/dd"
+                                                change="onAdjustDateChange"/>
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+                        </smartTable:SmartTable>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

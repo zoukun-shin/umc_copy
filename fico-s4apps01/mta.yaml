@@ -183,6 +183,10 @@ modules:
       - ficozcogsadj.zip
       name: ficozcogsadj
       target-path: resources/
+    - artifacts:
+      - ficozpayschd.zip
+      name: ficozpayschd
+      target-path: resources/      
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -492,6 +496,15 @@ modules:
 - name: ficozcogsadj
   type: html5
   path: zcogsadj
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozpayschd
+  type: html5
+  path: zpayschd
   build-parameters:
     build-result: dist
     builder: custom
