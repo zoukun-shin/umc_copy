@@ -89,25 +89,29 @@ sap.ui.define([
                 return Promise.reject(new Error(this.getModel("i18n").getResourceBundle().getText("selectPrintRowFirst")));
             }
 
-            var sPath = this.byId("ReportTable").getContextByIndex(listItems[0]).getPath();
-            var oSelectedRow = this.getModel().getObject(sPath);
-            if (!oSelectedRow || !oSelectedRow.PurchaseOrder) {
-                return Promise.reject(new Error(this.getModel("i18n").getResourceBundle().getText("selectPrintRowFirst")));
-            }
+            var that = this;
+            var aSelectedRows = [];
 
-            return this._loadAllData("/ReturnMatPackPrint", [
-                new Filter("PurchaseOrder", FilterOperator.EQ, oSelectedRow.PurchaseOrder)
-            ]).then(function (aRows) {
-                var aSelectedRows = aRows.map(function (oItem) {
-                    var oRow = Object.assign({}, oItem);
+            // Collect all selected items
+            listItems.forEach(function (iIndex) {
+                var sPath = that.byId("ReportTable").getContextByIndex(iIndex).getPath();
+                var oSelectedRow = that.getModel().getObject(sPath);
+                if (oSelectedRow) {
+                    var oRow = Object.assign({}, oSelectedRow);
                     delete oRow.__metadata;
                     oRow.FILENO = oPrintInputValues ? oPrintInputValues.FILENO : "";
                     oRow.DCMTNO = oPrintInputValues ? oPrintInputValues.DCMTNO : "";
                     oRow.MEMO = oPrintInputValues ? oPrintInputValues.MEMO : "";
-                    return oRow;
-                });
-                return [JSON.stringify(aSelectedRows)];
+                    aSelectedRows.push(oRow);
+                }
             });
+
+            if (aSelectedRows.length === 0) {
+                return Promise.reject(new Error(this.getModel("i18n").getResourceBundle().getText("selectPrintRowFirst")));
+            }
+
+            // Send all selected rows to backend in one request
+            return Promise.resolve([JSON.stringify(aSelectedRows)]);
         },
 
         onPrint: function (oEvent) {
@@ -156,11 +160,6 @@ sap.ui.define([
                             MEMO: oMemoInput.getValue().trim()
                         };
 
-                        if (!oPrintInputValues.FILENO || !oPrintInputValues.DCMTNO || !oPrintInputValues.MEMO) {
-                            MessageBox.error(oBundle.getText("printDialogFieldsRequired"));
-                            return;
-                        }
-
                         oDialog.close();
                         _ResourceBundle = this.getModel("i18n").getResourceBundle();
                         _oPrintModel = this.getModel("Print");
@@ -186,10 +185,40 @@ sap.ui.define([
         },
 
         onCustomAction: function (aSelectedContexts, sActionName , sTemplate) {
-            _oFunctions.printAction(aSelectedContexts, sActionName , sTemplate)
+            var oBusyDialog = new BusyDialog();
+            oBusyDialog.open();
+
+            // aSelectedContexts is an array with one element (the stringified JSON from preparePostBody)
+            _oFunctions.printAction(aSelectedContexts, sActionName)
                 .then(function (records) {
-                    const pdfContent = _oFunctions.porcessPrintContent(records);
-                    _oFunctions.getPDF(records, pdfContent, sTemplate);
+                    // Group records by RTNO (Return Material Number)
+                    var mRTNumbers = {};
+                    records.forEach(function(record) {
+                        if (!mRTNumbers[record.RTNO]) {
+                            mRTNumbers[record.RTNO] = [];
+                        }
+                        mRTNumbers[record.RTNO].push(record);
+                    });
+
+                    // Create PDF for each RTNO group
+                    var aPromises = [];
+                    Object.keys(mRTNumbers).forEach(function(sRTNO) {
+                        var aGroupedRecords = mRTNumbers[sRTNO];
+                        var pdfContent = _oFunctions.porcessPrintContent(aGroupedRecords);
+                        var promise = _oFunctions.getPDF(aGroupedRecords, pdfContent, sTemplate);
+                        aPromises.push(promise);
+                    });
+
+                    return Promise.all(aPromises);
+                })
+                .then(function() {
+                    oBusyDialog.close();
+                    MessageToast.show("All prints completed successfully");
+                    _oFunctions._updatePrintInfo();
+                })
+                .catch(function(oError) {
+                    oBusyDialog.close();
+                    MessageBox.error(oError.message || oError);
                 });
         },
 
@@ -254,10 +283,9 @@ sap.ui.define([
         },
         getPDF: function (record, pdfContent, sTemplate) {
             var that = this;
-            var oBusyDialog = new BusyDialog();
-            var aRecordCreated = [];
-            var sFileName = _ResourceBundle.getText("appTitle") + this.getCurrentDateTime() + sTemplate;
-            var promise = new Promise((resolve, reject) => {
+            var sFileName = _ResourceBundle.getText("appTitle") + "_" + this.getCurrentDateTime();
+            
+            return new Promise((resolve, reject) => {
                 var createPrintRecord = _oPrintModel.bindContext("/PrintRecord/com.sap.gateway.srvd.zui_prt_record_o4.v0001.createPrintRecord(...)");
                 createPrintRecord.setParameter("TemplateID", sTemplate);
                 createPrintRecord.setParameter("IsExternalProvidedData", true);
@@ -274,34 +302,16 @@ sap.ui.define([
                 createPrintRecord.setParameter("ResultIsActiveEntity", true);
                 createPrintRecord.setParameter("FileName", sFileName);
                 createPrintRecord.execute("$auto", false, null, /*bReplaceWithRVC*/false).then(() => {
-                    resolve(createPrintRecord);
+                    var boundContext = createPrintRecord.getBoundContext();
+                    var object = boundContext.getObject();
+                    var sPath = _oPrintModel.getKeyPredicate("/PrintRecord", object);
+                    var sURL = createPrintRecord.getModel("Print").getServiceUrl() + "PrintRecord" + sPath + '/PDFContent';
+                    sap.m.URLHelper.redirect(sURL, true);
+                    resolve();
                 }).catch((oError) => {
                     reject(oError);
                 });
             });
-            aRecordCreated.push(promise);
-
-            oBusyDialog.open();
-            try {
-                Promise.all(aRecordCreated).then((aContext) => {
-                    oBusyDialog.close();
-                    var sURL;
-                    for (const activeContext of aContext) {
-                        var boundContext = activeContext.getBoundContext();
-                        var object = boundContext.getObject();
-                        var sPath = _oPrintModel.getKeyPredicate("/PrintRecord", object);
-                        sURL = activeContext.getModel("Print").getServiceUrl() + "PrintRecord" + sPath + '/PDFContent';
-                        sap.m.URLHelper.redirect(sURL, true);
-                    };
-                    that._updatePrintInfo();
-                    MessageToast.show("Print Success");
-                }).finally(() => {
-                    oBusyDialog.close();
-                });;
-            } catch (error) {
-                MessageToast.show(error);
-                oBusyDialog.close();
-            };
         },
         _updatePrintInfo: function () {
             this.getView().byId("idSmartFilterBar").search();

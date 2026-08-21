@@ -65,7 +65,7 @@
 							limit="0"
 							enableNotification="true"
 							showHeaderSelector="true"
-							selectionMode="Single"
+							selectionMode="Multiple"
 						/>
 					</table:dependents>
                     <table:rowMode>
