@@ -263,20 +263,87 @@ sap.ui.define([
             return out;
         },
 
-        _updateLocalModelByResult: function (result) {
+        _normalizeMatchValue: function (v) {
+            return v === undefined || v === null ? "" : String(v).trim();
+        },
+
+        _isSameBusinessRow: function (oLocalRow, oBackendRow, sAction) {
+            if (!oLocalRow || !oBackendRow) {
+                return false;
+            }
+
+            if (this._normalizeMatchValue(oLocalRow.Plant) !== this._normalizeMatchValue(oBackendRow.PLANT)) {
+                return false;
+            }
+
+            if (this._normalizeMatchValue(oLocalRow.DeliveryNoteNo) !== this._normalizeMatchValue(oBackendRow.DELIVERYNOTENO)) {
+                return false;
+            }
+
+            if (this._normalizeMatchValue(oLocalRow.DeliveryNoteItemNo) !== this._normalizeMatchValue(oBackendRow.DELIVERYNOTEITEMNO)) {
+                return false;
+            }
+
+            if (sAction === "Check") {
+                return true;
+            }
+
+            var sLocalPo = this._normalizeMatchValue(oLocalRow.PurchaseOrder);
+            var sBackendPo = this._normalizeMatchValue(oBackendRow.PURCHASEORDER);
+            if (sLocalPo !== sBackendPo) {
+                return false;
+            }
+
+            var sLocalPoItem = this._normalizeMatchValue(oLocalRow.PurchaseOrderItem);
+            var sBackendPoItem = this._normalizeMatchValue(oBackendRow.PURCHASEORDERITEM);
+            if (sLocalPoItem !== sBackendPoItem) {
+                return false;
+            }
+
+            return true;
+        },
+
+        _findMatchedDataIndex: function (r, aNewRows, aSelectedDataIndex, oUsedIndices, sAction) {
+            var i;
+            var iDataIndex;
+            var oRow;
+
+            for (i = 0; i < aSelectedDataIndex.length; i++) {
+                iDataIndex = aSelectedDataIndex[i];
+                if (oUsedIndices[iDataIndex]) {
+                    continue;
+                }
+
+                oRow = aNewRows[iDataIndex];
+                if (this._isSameBusinessRow(oRow, r, sAction)) {
+                    return iDataIndex;
+                }
+            }
+
+            return undefined;
+        },
+
+        _updateLocalModelByResult: function (result, sAction) {
             var oLocalModel = this.getModel("local");
             var aAllRows = oLocalModel.getProperty("/InternalPOGR") || [];
             var aSelectedDataIndex = this._aSelectedDataIndexForAction || [];
             var aNewRows = aAllRows.slice();
+            var oUsedIndices = {};
 
             result.forEach(function (r, i) {
-                var iDataIndex = aSelectedDataIndex[i];
+                var iDataIndex = this._findMatchedDataIndex(r, aNewRows, aSelectedDataIndex, oUsedIndices, sAction);
+
+                if (iDataIndex === undefined) {
+                    iDataIndex = aSelectedDataIndex[i];
+                }
+
                 if (iDataIndex === undefined || !aNewRows[iDataIndex]) {
                     return;
                 }
 
                 var oMapped = this._mapBackendRow(r);
                 aNewRows[iDataIndex] = Object.assign({}, aNewRows[iDataIndex], oMapped);
+                oUsedIndices[iDataIndex] = true;
             }.bind(this));
 
             oLocalModel.setProperty("/InternalPOGR", aNewRows);
@@ -306,7 +373,7 @@ sap.ui.define([
                             return;
                         }
 
-                        this._updateLocalModelByResult(result);
+                        this._updateLocalModelByResult(result, sAction);
 
                     } finally {
                         this._BusyDialog.close();
