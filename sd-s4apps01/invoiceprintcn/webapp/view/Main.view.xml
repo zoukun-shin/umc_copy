@@ -125,6 +125,7 @@
                 placeToolbarInTable="true"
                 beforeRebindTable="onBeforeRebindTable"
                 requestAtLeastFields="BillingDocument,SoldToParty"
+                ignoredFields="TO_Reference"
             >
                 <smartTable:customToolbar>
                     <OverflowToolbar id="idOverflowToolbar">
@@ -288,26 +289,6 @@
                                 <Text
                                     text="{BillToParty}"
                                     tooltip="{BillToParty}"
-                                    wrapping="false"
-                                />
-                            </t:template>
-                        </t:Column>
-                        <t:Column
-                            width="10rem"
-                            label="{/#InvoiceListType/TO_Reference/@sap:label}"
-                            sortProperty="TO_Reference"
-                            filterProperty="TO_Reference"
-                        >
-                            <t:customData>
-                                <core:CustomData
-                                    key="p13nData"
-                                    value='\{"columnKey":"TO_Reference", "leadingProperty":"TO_Reference", "sortProperty":"TO_Reference", "filterProperty": "TO_Reference"}'
-                                />
-                            </t:customData>
-                            <t:template>
-                                <Text
-                                    text="{TO_Reference}"
-                                    tooltip="{TO_Reference}"
                                     wrapping="false"
                                 />
                             </t:template>
