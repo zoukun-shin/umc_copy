@@ -367,82 +367,204 @@ sap.ui.define([
             var oTable = this.byId("ReportTable");
             var aRows = oTable.getRows();
             var aColumns = oTable.getColumns();
-            let sType = "";
-            let sSobmx = "";
-            let sColor = "";
-            let s1 = "";
-            let sNum = Number(this.byId("zdays").getValue());
-            for (var j = 0; j < aColumns.length; j++) {
-                var sColName = aColumns[j].getSortProperty() || aColumns[j].getFilterProperty();
-                if (sColName === "DetSpec") {
-                    if (aColumns[j].getVisible()) {  //VN
-                        var iCell1 = 9;
-                        var iCell2 = 8;
-                        var iStart = 20;
-                        sNum = 19 + sNum;
-                    } else {
-                        var iCell1 = 8;
-                        var iCell2 = 7;
-                        var iStart = 19;
-                        sNum = 18 + sNum;
+            //CN mod start 2026.08.18 #需求号55
+            aRows.forEach(function (oRow) {
+                var $row = $("#" + oRow.getId());
+                var aCells = oRow.getCells();
+                // 清除原来的颜色
+                $row.css("background-color", "");
+                var iVisibleCellIndex = 0;
+                aColumns.forEach(function (oColumn, iColumnIndex) {
+                    var sProperty = oColumn.getSortProperty();
+                    if (!sProperty || !/^D\d+$/.test(sProperty)) {
+                        return;
                     }
-                    break;
+                    var oCell = aCells[iVisibleCellIndex];
+                    iVisibleCellIndex++;
+                    if (oCell) {
+                        oCell.$().parent().parent().css("background-color", "");
+                    }
+                });
+                //开始处理当前行
+                var oContext = oRow.getBindingContext();
+                if (!oContext) {
+                    return;
                 }
-            }
-
-            aRows.forEach(function (oRow, index) {
-                let c7Cell = oRow.getCells()[iCell1];
-                sType = c7Cell.getText();
-                if (sType === 'I') {
-                    $("#" + oRow.getId()).css("background-color", "#FFFDBF");
-                } else if (sType === 'O') {
-                    $("#" + oRow.getId()).css("background-color", "#C6F9C1");
-                } else if (sType === 'P') {
-                    let c6Cell = oRow.getCells()[iCell2];
-                    sSobmx = c6Cell.getText();
-                    if (sSobmx === '52') {
-                        $("#" + oRow.getId()).css("background-color", "#fc794a");
-                    } else {
-                        $("#" + oRow.getId()).css("background-color", "");
-                    }
+                var sType = oContext.getProperty("PlanType");
+                var sSobmx = oContext.getProperty("Sobmx");
+                // 设置整行背景色
+                var $row = $("#" + oRow.getId());
+                if (sType === "I") {
+                    $row.css("background-color", "#FFFDBF");
+                } else if (sType === "O") {
+                    $row.css("background-color", "#C6F9C1");
+                } else if (sType === "P" && sSobmx === "52") {
+                    $row.css("background-color", "#fc794a");
                 } else {
-                    $("#" + oRow.getId()).css("background-color", "");
+                    $row.css("background-color", "");
                 };
+                // 处理当前显示的日期列
+                var iVisibleCellIndex = 0;
+                aColumns.forEach(function (oColumn, iColumnIndex) {
+                    var sProperty = oColumn.getSortProperty();
+                    // 只处理 D001、D002、D003... 日期字段
+                    if (!sProperty || !/^D\d+$/.test(sProperty)) {
+                        return;
+                    };
+                    // Column 隐藏，不处理
+                    if (!oColumn.getVisible()) {
+                        return;
+                    };
+                    var oCell = aCells[iVisibleCellIndex];
+                    // 当前 Column 对应当前可见 Cell
+                    iVisibleCellIndex++;
+                    if (!oCell) {
+                        return;
+                    };
+                    var aItems = oCell.getItems && oCell.getItems();
+                    var oText = aItems[0];
+                    var oInput = aItems[1];
 
-                if (sType === "W") {
-                    for (let j = iStart; j <= sNum; j++) {
-                        let cColor = oRow.getCells()[j];
-                        let CellId = cColor.getId();
-                        let oItems = cColor.getItems();
-                        let sValue = oItems[1].getValue();
-                        sColor = sValue;
-                        s1 = sValue.charAt(0);
-                        switch (s1) {
+                    // 不是 W/P 类型，清除日期 Cell 颜色
+                    if (sType !== "W" && sType !== "P") {
+                        oCell.$().parent().parent().css("background-color", "");
+                        return;
+                    };
+
+                    // 根据首字母设置颜色
+                    if (sType === "P") {
+                        // 已计划，text一直保留首字母用于判断
+                        var sValue = oText.getText();
+                        if (!sValue) {
+                            oCell.$().parent().parent().css("background-color", "");
+                            return;
+                        };
+                        var sFirstChar = sValue.charAt(0);
+                        switch (sFirstChar) {
+                            case "B":
+                                oInput.setValue(sValue.slice(1));
+                                oCell.$().parent().parent().css("background-color", "#6495ED");
+                                oInput.$().find(".sapMInputBaseContentWrapper").css("background-color", "#6495ED");
+                                break;
                             case "R":
-                                oItems[0].setText(sColor.slice(1));
-                                $("#" + CellId).parent().parent().css("background-color", "#ff0000");
+                                oInput.setValue(sValue.slice(1));
+                                oCell.$().parent().parent().css("background-color", "#ff0000");
+                                oInput.$().find(".sapMInputBaseContentWrapper").css("background-color", "#ff0000");
                                 break;
                             case "Y":
-                                oItems[0].setText(sColor.slice(1));
-                                $("#" + CellId).parent().parent().css("background-color", "#FFFF00");
-                                break;
-                            case "G":
-                                oItems[0].setText(sColor.slice(1));
-                                $("#" + CellId).parent().parent().css("background-color", "#008000");
+                                oInput.setValue(sValue.slice(1));
+                                oCell.$().parent().parent().css("background-color", "#FFFF00");
+                                oInput.$().find(".sapMInputBaseContentWrapper").css("background-color", "#FFFF00");
                                 break;
                             default:
-                                $("#" + CellId).parent().parent().css("background-color", "");
+                                oCell.$().parent().parent().css("background-color", "");
+                                break;
+                        }
+                    } else {
+                        //未分配，input一直保留首字母用于判断
+                        var sValue = oInput.getValue();
+                        if (!sValue) {
+                            oCell.$().parent().parent().css("background-color", "");
+                            return;
+                        };
+                        var sFirstChar = sValue.charAt(0);
+                        switch (sFirstChar) {
+                            case "R":
+                                oText.setText(sValue.slice(1));
+                                oCell.$().parent().parent().css("background-color", "#ff0000");
+                                break;
+                            case "Y":
+                                oText.setText(sValue.slice(1));
+                                oCell.$().parent().parent().css("background-color", "#FFFF00");
+                                break;
+                            case "G":
+                                oText.setText(sValue.slice(1));
+                                oCell.$().parent().parent().css("background-color", "#008000");
+                                break;
+                            default:
+                                oCell.$().parent().parent().css("background-color", "");
                                 break;
                         }
                     }
-                } else {
-                    for (let j = iStart; j <= sNum; j++) {
-                        let cColor = oRow.getCells()[j];
-                        let CellId = cColor.getId();
-                        $("#" + CellId).parent().parent().css("background-color", "");
-                    }
-                }
+                });
             });
+            // let sType = "";
+            // let sSobmx = "";
+            // let sColor = "";
+            // let s1 = "";
+            // let sNum = Number(this.byId("zdays").getValue());
+            // for (var j = 0; j < aColumns.length; j++) {
+            //     var sColName = aColumns[j].getSortProperty() || aColumns[j].getFilterProperty();
+            //     if (sColName === "DetSpec") {
+            //         if (aColumns[j].getVisible()) {  //VN
+            //             var iCell1 = 9;
+            //             var iCell2 = 8;
+            //             var iStart = 20;
+            //             sNum = 19 + sNum;
+            //         } else {
+            //             var iCell1 = 8;
+            //             var iCell2 = 7;
+            //             var iStart = 19;
+            //             sNum = 18 + sNum;
+            //         }
+            //         break;
+            //     }
+            // }
+
+            // aRows.forEach(function (oRow, index) {
+            //     let c7Cell = oRow.getCells()[iCell1];
+            //     sType = c7Cell.getText();
+            //     if (sType === 'I') {
+            //         $("#" + oRow.getId()).css("background-color", "#FFFDBF");
+            //     } else if (sType === 'O') {
+            //         $("#" + oRow.getId()).css("background-color", "#C6F9C1");
+            //     } else if (sType === 'P') {
+            //         let c6Cell = oRow.getCells()[iCell2];
+            //         sSobmx = c6Cell.getText();
+            //         if (sSobmx === '52') {
+            //             $("#" + oRow.getId()).css("background-color", "#fc794a");
+            //         } else {
+            //             $("#" + oRow.getId()).css("background-color", "");
+            //         }
+            //     } else {
+            //         $("#" + oRow.getId()).css("background-color", "");
+            //     };
+
+            //     if (sType === "W") {
+            //         for (let j = iStart; j <= sNum; j++) {
+            //             let cColor = oRow.getCells()[j];
+            //             let CellId = cColor.getId();
+            //             let oItems = cColor.getItems();
+            //             let sValue = oItems[1].getValue();
+            //             sColor = sValue;
+            //             s1 = sValue.charAt(0);
+            //             switch (s1) {
+            //                 case "R":
+            //                     oItems[0].setText(sColor.slice(1));
+            //                     $("#" + CellId).parent().parent().css("background-color", "#ff0000");
+            //                     break;
+            //                 case "Y":
+            //                     oItems[0].setText(sColor.slice(1));
+            //                     $("#" + CellId).parent().parent().css("background-color", "#FFFF00");
+            //                     break;
+            //                 case "G":
+            //                     oItems[0].setText(sColor.slice(1));
+            //                     $("#" + CellId).parent().parent().css("background-color", "#008000");
+            //                     break;
+            //                 default:
+            //                     $("#" + CellId).parent().parent().css("background-color", "");
+            //                     break;
+            //             }
+            //         }
+            //     } else {
+            //         for (let j = iStart; j <= sNum; j++) {
+            //             let cColor = oRow.getCells()[j];
+            //             let CellId = cColor.getId();
+            //             $("#" + CellId).parent().parent().css("background-color", "");
+            //         }
+            //     }
+            // });
+            //CN mod end 2026.08.18 #需求号55
         },
 
         onEdit: function (oEvent) {
@@ -550,38 +672,48 @@ sap.ui.define([
         onPost: function (oEvent) {
             var that = this;
             var bEvent = "POST";
-            let result = this.preparePostBody();
-            let postDocs = result.postDocs;
-            let msg = result.msg;
-            if (msg !== "") {
-                MessageBox.error(msg + " " + this.getResourceBundle().getText("msg001"));
-                return;
-            };
-
+            //CN mod start 2026.08.18 #需求号55
+            //数量检查放到后端检查
+            //let result = this.preparePostBody();
+            //let postDocs = result.postDocs;
+            // let msg = result.msg;
+            // if (msg !== "") {
+            //     MessageBox.error(msg + " " + this.getResourceBundle().getText("msg001"));
+            //     return;
+            // };
+            let postDocs = this.preparePostBody();
+            //CN mod end 2026.08.18 #需求号55
             this._BusyDialog.open();
             var aPromise = [];
             aPromise.push(this.callAction(postDocs, bEvent, ""));
 
             Promise.all(aPromise).then((oData) => {
-                that.getView().byId("smartFilterBar").search();
                 oData.forEach((item) => {
                     let result = JSON.parse(item["processLogic"].Zzkey);
-                    result.forEach(function (line) {
-                        let sPath = that.getModel().createKey("/ProductionPlan", {
-                            Plant: line.PLANT,
-                            MRPResponsible: line.MRPRESPONSIBLE,
-                            Product: line.PRODUCT,
-                            Idnrk: line.IDNRK,
-                            Stufe: line.STUFE,
-                            Verid: line.VERID,
-                            Mdv01: line.MDV01,
-                            PlanType: line.PLANTYPE
-                        });
-                        that.getModel().setProperty(sPath + "/Status", line.STATUS);
-                        that.getModel().setProperty(sPath + "/Message", line.MESSAGE);
-
-                    });
+                    if (result !== "") {
+                        MessageBox.error(result);
+                    } else {
+                        that.getView().byId("smartFilterBar").search();
+                    }
                 });
+                // oData.forEach((item) => {
+                //     let result = JSON.parse(item["processLogic"].Zzkey);
+                //     result.forEach(function (line) {
+                //         let sPath = that.getModel().createKey("/ProductionPlan", {
+                //             Plant: line.PLANT,
+                //             MRPResponsible: line.MRPRESPONSIBLE,
+                //             Product: line.PRODUCT,
+                //             Idnrk: line.IDNRK,
+                //             Stufe: line.STUFE,
+                //             Verid: line.VERID,
+                //             Mdv01: line.MDV01,
+                //             PlanType: line.PLANTYPE
+                //         });
+                //         that.getModel().setProperty(sPath + "/Status", line.STATUS);
+                //         that.getModel().setProperty(sPath + "/Message", line.MESSAGE);
+
+                //     });
+                // });
 
             }).catch((error) => {
                 MessageBox.error(error.message);
@@ -599,49 +731,60 @@ sap.ui.define([
                 var oRow = this.getModel().getObject(sPath);
                 delete oRow.__metadata;
                 if (oRow.PlanType === "P" || oRow.PlanType === "W" || oRow.PlanType === "I") {
+                    // 去掉首字母
+                    Object.keys(oRow).forEach(function (sKey) {
+                        if (!/^D\d+$/.test(sKey)) {
+                            return;
+                        }
+                        var sValue = oRow[sKey];
+                        if (typeof sValue === "string" && /^[RYG]/.test(sValue)) {
+                            oRow[sKey] = sValue.slice(1);
+                        }
+                    });
                     selectedRows.push(oRow);
                 };
             });
             let postDocs = [JSON.stringify(selectedRows)];
-            //判断：是否計画数＞未処分数
-            var oGrouped = {};
-            var msg = "";
-            var days = Number(this.byId("zdays").getValue());
-            selectedRows.forEach(function (row) {
-                var mat = row.Idnrk;
-                if (!oGrouped[mat]) {
-                    oGrouped[mat] = { P: [], W: null };
-                }
-                if (row.PlanType === "P") {
-                    oGrouped[mat].P.push(row);
-                } else if (row.PlanType === "W") {
-                    oGrouped[mat].W = row;
-                }
-            });
-            Object.keys(oGrouped).forEach(function (Idnrk) {
-                var pRow = oGrouped[Idnrk].P;
-                var wRow = oGrouped[Idnrk].W;
-                var total = 0;
-                var unPlan = parseFloat(wRow.Summary) || 0;
-                for (var i = 1; i <= days; i++) {
-                    var sKey = "D" + String(i).padStart(3, "0");
-                    pRow.forEach(function (rowP) {
-                        total += parseFloat(rowP[sKey]) || 0;
-                    });
-                };
-                pRow.forEach(function (rowP) {
-                    total -= rowP.Summary;
-                });
+            return postDocs;
+            // //判断：是否計画数＞未処分数
+            // var oGrouped = {};
+            // var msg = "";
+            // var days = Number(this.byId("zdays").getValue());
+            // selectedRows.forEach(function (row) {
+            //     var mat = row.Idnrk;
+            //     if (!oGrouped[mat]) {
+            //         oGrouped[mat] = { P: [], W: null };
+            //     }
+            //     if (row.PlanType === "P") {
+            //         oGrouped[mat].P.push(row);
+            //     } else if (row.PlanType === "W") {
+            //         oGrouped[mat].W = row;
+            //     }
+            // });
+            // Object.keys(oGrouped).forEach(function (Idnrk) {
+            //     var pRow = oGrouped[Idnrk].P;
+            //     var wRow = oGrouped[Idnrk].W;
+            //     var total = 0;
+            //     var unPlan = parseFloat(wRow.Summary) || 0;
+            //     for (var i = 1; i <= days; i++) {
+            //         var sKey = "D" + String(i).padStart(3, "0");
+            //         pRow.forEach(function (rowP) {
+            //             total += parseFloat(rowP[sKey]) || 0;
+            //         });
+            //     };
+            //     pRow.forEach(function (rowP) {
+            //         total -= rowP.Summary;
+            //     });
 
-                if (total > unPlan) {
-                    msg += wRow.Idnrk + " / ";
-                };
-            });
-            msg = msg.slice(0, -2);
-            return {
-                postDocs: postDocs,
-                msg: msg
-            };
+            //     if (total > unPlan) {
+            //         msg += wRow.Idnrk + " / ";
+            //     };
+            // });
+            // msg = msg.slice(0, -2);
+            // return {
+            //     postDocs: postDocs,
+            //     msg: msg
+            // };
         },
 
         callAction: function (postData, bEvent, username) {

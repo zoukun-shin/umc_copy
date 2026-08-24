@@ -181,7 +181,7 @@
       </f:DynamicPageHeader>
     </f:header>
     <f:content>
-      <smartTable:SmartTable id="smartTable" entitySet="ProductionPlan" smartFilterId="smartFilterBar" tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="false" beforeExport="onBeforeExport" fitContainer="false" height="100%" ignoredFields="Delete_mc,Update_mc,Status,Message,Expand,Theory,ECN,exOut,PlanCheck,WO,FromBOMTable">
+      <smartTable:SmartTable id="smartTable" entitySet="ProductionPlan" smartFilterId="smartFilterBar" tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="headTable" header="{i18n>tableHeaderTitle}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="false" beforeExport="onBeforeExport" fitContainer="false" height="100%" requestAtLeastFields="Plant,MRPResponsible,Product,Idnrk,Stufe,Verid,Mdv01,Sobmx,PlanType" ignoredFields="Delete_mc,Update_mc,Status,Message,Expand,Theory,ECN,exOut,PlanCheck,WO,FromBOMTable">
         <smartTable:customToolbar>
           <OverflowToolbar width="100%">
             <ToolbarSpacer/>
@@ -274,6 +274,16 @@
               <Text text="{Verid}"/>
             </t:template>
           </t:Column>
+          <!-- ADD BEGIN 2026.08.18 CN#41 -->
+          <t:Column id="VerText" label="{i18n>VerText}" width="8rem" sortProperty="VerText" filterProperty="VerText" visible="true" autoResizable="true">
+            <t:customData>
+              <core:CustomData key="p13nData" value='\{"columnKey":"VerText", "leadingProperty":"VerText", "sortProperty":"VerText", "filterProperty": "VerText"}'/>
+            </t:customData>
+            <t:template>
+              <Text text="{VerText}"/>
+            </t:template>
+          </t:Column>
+          <!-- ADD END 2026.08.18 CN#41 -->
           <t:Column id="Mdv01" label="{i18n>Mdv01}" width="6rem" sortProperty="Mdv01" filterProperty="Mdv01" visible="true" autoResizable="true">
             <t:customData>
               <core:CustomData key="p13nData" value='\{"columnKey":"Mdv01", "leadingProperty":"Mdv01", "sortProperty":"Mdv01", "filterProperty": "Mdv01"}'/>
