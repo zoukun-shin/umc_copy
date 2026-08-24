@@ -105,16 +105,16 @@ sap.ui.define([
                     return "";
                 }
                 var sign = "";
-                var decimal = 5;
+                var decimal = 6;
                 if (typeof n === "string") {
                     var bNegative = n.endsWith("-");
                     if (bNegative) {
                         n = "-" + n.substring(0, n.length - 1);
                     }
                 }
-                if (currency === "JPY" || currency === "TWD") {
-                    decimal = 3;
-                }
+                // if (currency === "JPY" || currency === "TWD") {
+                //     decimal = 3;
+                // }
                 var num = Number(n).toFixed(decimal);
                 if (num < 0) {
                     num = num.substring(1);
