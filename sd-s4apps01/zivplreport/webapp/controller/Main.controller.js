@@ -19,7 +19,9 @@ sap.ui.define([
         _initialize: function () {
             this._UserInfo = sap.ushell.Container.getService("UserInfo");
             var sUser = this._UserInfo.getFullName() === undefined ? "" : this._UserInfo.getFullName();
-            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail(); 
+            var sEmail = this._UserInfo.getEmail() === undefined ? "" : this._UserInfo.getEmail();
+            //  存用户邮箱，onBeforeRebindTable 作为 Email 筛选传给后端做销售组织权限过滤
+            this._LocalData.setProperty("/userEmail", sEmail);
             var oContextBinding = this.getModel("Authority").bindContext("/User(Mail='" + sEmail + "',IsActiveEntity=true)", undefined, {
                 "$expand": "_AssignSalesOrg,_AssignRole($expand=_UserRoleAccessBtn)"
             });
@@ -106,6 +108,14 @@ sap.ui.define([
                     value2: oDeliveryDate.getSecondDateValue() || oDeliveryDate.getDateValue()
                 }));
             }
+
+            // 用户邮箱传给后端，由后端按邮箱分配的销售组织做权限过滤
+            this._removeFilterByPath(mBindingParams.filters, "Email");
+            mBindingParams.filters.push(new Filter({
+                path: "Email",
+                operator: FilterOperator.EQ,
+                value1: this._LocalData.getProperty("/userEmail") || ""
+            }));
         },
 
         //========================================================

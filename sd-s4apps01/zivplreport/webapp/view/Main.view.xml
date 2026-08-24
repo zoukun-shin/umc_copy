@@ -37,6 +37,7 @@
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
                             <smartFilterBar:ControlConfiguration index="7" key="SalesOrganization" visibleInAdvancedArea="true" label="{i18n>SalesOrganization}" filterType="multiple"/>
+                            <smartFilterBar:ControlConfiguration index="8" key="BillingDocumentType" visibleInAdvancedArea="true" label="{i18n>BillingDocumentType}" filterType="multiple"/>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -48,7 +49,7 @@
                 tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true"
                 persistencyKey="IvplReportTable" header="{i18n>Result}" enableAutoBinding="false"
                 beforeRebindTable="onBeforeRebindTable" enableExport="true"
-                ignoredFields="Customer,ShippingOrderNo,BillingDocumentDateFilter,SalesOrganization"
+                ignoredFields="Customer,ShippingOrderNo,BillingDocumentDateFilter,SalesOrganization,BillingDocumentType,Email"
                 fitContainer="true" height="100%">
 
                 <t:Table id="Table_IvplReport" selectionMode="None" rowMode="Auto">
