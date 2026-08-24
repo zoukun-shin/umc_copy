@@ -25,7 +25,7 @@
                     <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="InternalPOGRHistory" useToolbar="false" liveMode="false" smartVariant="__SVM02" persistencyKey="PostHistorySFB" search="onSearch">
                         <smartFilterBar:controlConfiguration>
                             <!-- Filter -->
-                            <smartFilterBar:ControlConfiguration index='10' key="Plant" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                            <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                             <smartFilterBar:ControlConfiguration index='20' key="DeliveryMaterial" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>DeliveryMaterial}"/>
                             <smartFilterBar:ControlConfiguration index='30' key="ReceiptMaterial" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>ReceiptMaterial}"/>
                             <smartFilterBar:ControlConfiguration index='40' key="PoNo" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>PoNo}"/>
@@ -47,7 +47,7 @@
                                     </ComboBox>
                                 </smartFilterBar:customControl>
                             </smartFilterBar:ControlConfiguration>
-                            <smartFilterBar:ControlConfiguration index='90' key="DisplayDNLongText" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>DisplayDNLongText}">
+                            <smartFilterBar:ControlConfiguration index='100' key="DisplayDNLongText" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>DisplayDNLongText}">
                                 <smartFilterBar:customControl>
                                     <ComboBox id="cbDisplayDNLongText" selectedKey="{local>/DisplayDNLongText}">
                                         <items>
@@ -60,6 +60,8 @@
                             </smartFilterBar:ControlConfiguration>
 
                             <!-- Unvisible filter -->
+                            <smartFilterBar:ControlConfiguration index='999' key="PoItemNo" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="DeliveryNoteItemNo" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="PostQty" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="DeliveryQuantityUnit" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="ProcessResult" visible="false"/>
@@ -70,7 +72,6 @@
                             <smartFilterBar:ControlConfiguration index='999' key="POStorageLocation" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="ReversedInd" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="ReversedMatDocument" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="PostingDate" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="ReversedPostingDate" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="OrderQuantity" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderQuantityUnit" visible="false"/>
@@ -81,6 +82,8 @@
                             <smartFilterBar:ControlConfiguration index='999' key="ChangeAt" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="delflag" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="DeliveryQty" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="Seq" visible="false"/>
+                            <smartFilterBar:ControlConfiguration index='999' key="TextElementText" visible="false"/>
                         </smartFilterBar:controlConfiguration>
                     </smartFilterBar:SmartFilterBar>
                 </f:content>
@@ -88,7 +91,7 @@
         </f:header>
         <f:content>
             <smartTable:SmartTable id="idsmartTable" entitySet="InternalPOGRHistory" smartFilterId="idSmartFilterBar" smartVariant="__SVM02" tableType="Table" persistencyKey="smartTable" header="{i18n>Results}" 
-                        placeToolbarInTable="true" showRowCount="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" ignoredFields="delflag,DisplayCancel,DisplayDNLongText,DeliveryQty" enableAutoBinding="false" useExportToExcel="true" showFullScreenButton="true">
+                        placeToolbarInTable="true" showRowCount="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" requestAtLeastFields="Plant,Seq" ignoredFields="delflag,DisplayCancel,DisplayDNLongText,DeliveryQty" enableAutoBinding="false" useExportToExcel="true" showFullScreenButton="true">
                 <smartTable:customToolbar>
                     <OverflowToolbar design="Transparent">
                     <ToolbarSpacer/>
@@ -174,6 +177,30 @@
                                 <Text text="{DeliveryNoteItemNo}" wrapping="false" />
                             </table:template>
                         </table:Column>
+                        <table:Column id="ph_col_DDStorageLocation" width="8rem" label="{i18n>DDStorageLocation}" sortProperty="DDStorageLocation" filterProperty="DDStorageLocation">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='{"columnKey":"DDStorageLocation","leadingProperty":"DDStorageLocation","sortProperty":"DDStorageLocation","filterProperty":"DDStorageLocation"}' />
+                            </table:customData>
+                            <table:template>
+                                <Text text="{DDStorageLocation}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="ph_col_DeliveryQty" width="8rem" label="{i18n>DeliveryQty}" sortProperty="DeliveryQty" filterProperty="DeliveryQty" hAlign="End">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='{"columnKey":"DeliveryQty","leadingProperty":"DeliveryQty","sortProperty":"DeliveryQty","filterProperty":"DeliveryQty"}' />
+                            </table:customData>
+                            <table:template>
+                                <Text text="{DeliveryQty}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
+                        <table:Column id="ph_col_TextElementText" width="10rem" label="{i18n>TextElementText}" sortProperty="TextElementText" filterProperty="TextElementText">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='{"columnKey":"TextElementText","leadingProperty":"TextElementText","sortProperty":"TextElementText","filterProperty":"TextElementText"}' />
+                            </table:customData>
+                            <table:template>
+                                <Text text="{TextElementText}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
                         <table:Column id="ph_col_MaterialDocumentNo" width="10rem" label="{i18n>MaterialDocumentNo}" sortProperty="MaterialDocumentNo" filterProperty="MaterialDocumentNo">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='{"columnKey":"MaterialDocumentNo","leadingProperty":"MaterialDocumentNo","sortProperty":"MaterialDocumentNo","filterProperty":"MaterialDocumentNo"}' />
@@ -190,6 +217,7 @@
                                 <Text text="{MaterialDocumentItemNo}" wrapping="false" />
                             </table:template>
                         </table:Column>
+                        
                         <table:Column id="ph_col_PostQty" width="8rem" label="{i18n>PostQty}" sortProperty="PostQty" filterProperty="PostQty" hAlign="End">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='{"columnKey":"PostQty","leadingProperty":"PostQty","sortProperty":"PostQty","filterProperty":"PostQty"}' />
@@ -198,7 +226,7 @@
                                 <Text text="{PostQty}" wrapping="false" />
                             </table:template>
                         </table:Column>
-                        <table:Column id="ph_col_DeliveryQuantityUnit" width="6rem" label="{i18n>DeliveryQuantityUnit}" sortProperty="DeliveryQuantityUnit" filterProperty="DeliveryQuantityUnit">
+                        <table:Column id="ph_col_DeliveryQuantityUnit" width="6rem" label="{i18n>DeliveryQuantityUnit}" sortProperty="DeliveryQuantityUnit" filterProperty="DeliveryQuantityUnit" visible="false">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='{"columnKey":"DeliveryQuantityUnit","leadingProperty":"DeliveryQuantityUnit","sortProperty":"DeliveryQuantityUnit","filterProperty":"DeliveryQuantityUnit"}' />
                             </table:customData>
@@ -206,20 +234,12 @@
                                 <Text text="{DeliveryQuantityUnit}" wrapping="false" />
                             </table:template>
                         </table:Column>
-                        <table:Column id="ph_col_MaterialDocumentYear" width="6rem" label="{i18n>MaterialDocumentYear}" sortProperty="MaterialDocumentYear" filterProperty="MaterialDocumentYear">
+                        <table:Column id="ph_col_MaterialDocumentYear" width="10rem" label="{i18n>MaterialDocumentYear}" sortProperty="MaterialDocumentYear" filterProperty="MaterialDocumentYear">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='{"columnKey":"MaterialDocumentYear","leadingProperty":"MaterialDocumentYear","sortProperty":"MaterialDocumentYear","filterProperty":"MaterialDocumentYear"}' />
                             </table:customData>
                             <table:template>
                                 <Text text="{MaterialDocumentYear}" wrapping="false" />
-                            </table:template>
-                        </table:Column>
-                        <table:Column id="ph_col_DDStorageLocation" width="8rem" label="{i18n>DDStorageLocation}" sortProperty="DDStorageLocation" filterProperty="DDStorageLocation">
-                            <table:customData>
-                                <core:CustomData key="p13nData" value='{"columnKey":"DDStorageLocation","leadingProperty":"DDStorageLocation","sortProperty":"DDStorageLocation","filterProperty":"DDStorageLocation"}' />
-                            </table:customData>
-                            <table:template>
-                                <Text text="{DDStorageLocation}" wrapping="false" />
                             </table:template>
                         </table:Column>
                         <table:Column id="ph_col_POStorageLocation" width="8rem" label="{i18n>POStorageLocation}" sortProperty="POStorageLocation" filterProperty="POStorageLocation">
@@ -262,7 +282,7 @@
                                 <Text text="{ path: 'ReversedPostingDate', type: 'sap.ui.model.type.Date' }" wrapping="false" />
                             </table:template>
                         </table:Column>
-                        <table:Column id="ph_col_OrderQuantity" width="8rem" label="{i18n>OrderQuantity}" sortProperty="OrderQuantity" filterProperty="OrderQuantity" hAlign="End">
+                        <table:Column id="ph_col_OrderQuantity" width="8rem" label="{i18n>OrderQuantity}" sortProperty="OrderQuantity" filterProperty="OrderQuantity" hAlign="End" visible="false">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='{"columnKey":"OrderQuantity","leadingProperty":"OrderQuantity","sortProperty":"OrderQuantity","filterProperty":"OrderQuantity"}' />
                             </table:customData>
@@ -270,7 +290,7 @@
                                 <Text text="{OrderQuantity}" wrapping="false" />
                             </table:template>
                         </table:Column>
-                        <table:Column id="ph_col_PurchaseOrderQuantityUnit" width="6rem" label="{i18n>PurchaseOrderQuantityUnit}" sortProperty="PurchaseOrderQuantityUnit" filterProperty="PurchaseOrderQuantityUnit">
+                        <table:Column id="ph_col_PurchaseOrderQuantityUnit" width="6rem" label="{i18n>PurchaseOrderQuantityUnit}" sortProperty="PurchaseOrderQuantityUnit" filterProperty="PurchaseOrderQuantityUnit" visible="false">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='{"columnKey":"PurchaseOrderQuantityUnit","leadingProperty":"PurchaseOrderQuantityUnit","sortProperty":"PurchaseOrderQuantityUnit","filterProperty":"PurchaseOrderQuantityUnit"}' />
                             </table:customData>
@@ -278,7 +298,7 @@
                                 <Text text="{PurchaseOrderQuantityUnit}" wrapping="false" />
                             </table:template>
                         </table:Column>
-                        <table:Column id="ph_col_TotalQuantity" width="8rem" label="{i18n>TotalQuantity}" sortProperty="TotalQuantity" filterProperty="TotalQuantity" hAlign="End">
+                        <table:Column id="ph_col_TotalQuantity" width="8rem" label="{i18n>TotalQuantity}" sortProperty="TotalQuantity" filterProperty="TotalQuantity" hAlign="End" visible="false">
                             <table:customData>
                                 <core:CustomData key="p13nData" value='{"columnKey":"TotalQuantity","leadingProperty":"TotalQuantity","sortProperty":"TotalQuantity","filterProperty":"TotalQuantity"}' />
                             </table:customData>
@@ -318,7 +338,14 @@
                                 <Text text="{ path: 'ChangeAt', type: 'sap.ui.model.type.DateTime' }" wrapping="false" />
                             </table:template>
                         </table:Column>
-
+                        <table:Column id="ph_col_Seq" width="10rem" label="{i18n>Seq}" sortProperty="Seq" filterProperty="Seq">
+                            <table:customData>
+                                <core:CustomData key="p13nData" value='{"columnKey":"Seq","leadingProperty":"Seq","sortProperty":"Seq","filterProperty":"Seq"}' />
+                            </table:customData>
+                            <table:template>
+                                <Text text="{Seq}" wrapping="false" />
+                            </table:template>
+                        </table:Column>
 
                     </table:columns>
                 </table:Table>

@@ -72,7 +72,7 @@
                 selectionMode="Multi"
                 class="sapUiSizeCompact"
                 rowsUpdated="onRowsUpdated"
-                enableSelectAll="false"
+                enableSelectAll="true"
             >
                 <t:rowMode>
                     <rm:Auto id="idAuto" />
