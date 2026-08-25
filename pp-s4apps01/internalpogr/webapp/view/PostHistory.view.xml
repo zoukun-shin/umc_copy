@@ -29,7 +29,9 @@
                             <smartFilterBar:ControlConfiguration index='20' key="DeliveryMaterial" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>DeliveryMaterial}"/>
                             <smartFilterBar:ControlConfiguration index='30' key="ReceiptMaterial" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>ReceiptMaterial}"/>
                             <smartFilterBar:ControlConfiguration index='40' key="PoNo" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>PoNo}"/>
+                            <smartFilterBar:ControlConfiguration index='50' key="PoItemNo" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>PoItemNo}"/>    
                             <smartFilterBar:ControlConfiguration index='60' key="DeliveryNoteNo" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>DeliveryNoteNo}"/>
+                            <smartFilterBar:ControlConfiguration index='70' key="DeliveryNoteItemNo" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>DeliveryNoteItemNo}"/>
                             <smartFilterBar:ControlConfiguration index='80' key="PostingDate" visibleInAdvancedArea="true" label="{i18n>PostingDate}" >
                                 <smartFilterBar:customControl>
                                     <DateRangeSelection id="dateRange" valueFormat="yyyy/MM/dd" displayFormat="yyyy/MM/dd" change=".onDateRangeChange" />
@@ -60,8 +62,6 @@
                             </smartFilterBar:ControlConfiguration>
 
                             <!-- Unvisible filter -->
-                            <smartFilterBar:ControlConfiguration index='999' key="PoItemNo" visible="false"/>
-                            <smartFilterBar:ControlConfiguration index='999' key="DeliveryNoteItemNo" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="PostQty" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="DeliveryQuantityUnit" visible="false"/>
                             <smartFilterBar:ControlConfiguration index='999' key="ProcessResult" visible="false"/>
