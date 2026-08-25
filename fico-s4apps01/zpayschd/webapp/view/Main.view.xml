@@ -296,7 +296,7 @@
                                     <t:Column width="10rem" hAlign="Right" sortProperty="AmountInTransactionCurrency" filterProperty="AmountInTransactionCurrency">
                                         <Label text="{i18n>colAmountInTransactionCurrency}"/>
                                         <t:customData>
-                                            <core:CustomData key="p13nData" value='\{"columnKey":"AmountInTransactionCurrency","leadingProperty":"AmountInTransactionCurrency","sortProperty":"AmountInTransactionCurrency","filterProperty":"AmountInTransactionCurrency"}'/>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"AmountInTransactionCurrency","leadingProperty":"AmountInTransactionCurrency","sortProperty":"AmountInTransactionCurrency","filterProperty":"AmountInTransactionCurrency","type":"numeric"}'/>
                                         </t:customData>
                                         <t:template>
                                             <Text text="{path:'AmountInTransactionCurrency', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
@@ -314,7 +314,7 @@
                                     <t:Column width="10rem" hAlign="Right" sortProperty="AmountInCompanyCodeCurrency" filterProperty="AmountInCompanyCodeCurrency">
                                         <Label text="{i18n>colAmountInCompanyCodeCurrency}"/>
                                         <t:customData>
-                                            <core:CustomData key="p13nData" value='\{"columnKey":"AmountInCompanyCodeCurrency","leadingProperty":"AmountInCompanyCodeCurrency","sortProperty":"AmountInCompanyCodeCurrency","filterProperty":"AmountInCompanyCodeCurrency"}'/>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"AmountInCompanyCodeCurrency","leadingProperty":"AmountInCompanyCodeCurrency","sortProperty":"AmountInCompanyCodeCurrency","filterProperty":"AmountInCompanyCodeCurrency","type":"numeric"}'/>
                                         </t:customData>
                                         <t:template>
                                             <Text text="{path:'AmountInCompanyCodeCurrency', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
@@ -332,7 +332,7 @@
                                     <t:Column width="8rem" hAlign="Right" sortProperty="ActualQuantityInBaseUnit" filterProperty="ActualQuantityInBaseUnit">
                                         <Label text="{i18n>colActualQuantityInBaseUnit}"/>
                                         <t:customData>
-                                            <core:CustomData key="p13nData" value='\{"columnKey":"ActualQuantityInBaseUnit","leadingProperty":"ActualQuantityInBaseUnit","sortProperty":"ActualQuantityInBaseUnit","filterProperty":"ActualQuantityInBaseUnit"}'/>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"ActualQuantityInBaseUnit","leadingProperty":"ActualQuantityInBaseUnit","sortProperty":"ActualQuantityInBaseUnit","filterProperty":"ActualQuantityInBaseUnit","type":"numeric"}'/>
                                         </t:customData>
                                         <t:template>
                                             <Text text="{path:'ActualQuantityInBaseUnit', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
@@ -372,6 +372,15 @@
                                         </t:customData>
                                         <t:template>
                                             <Text text="{PaymenttermsText}" wrapping="false" tooltip="{PaymenttermsText}"/>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="6rem" hAlign="Right" sortProperty="SettlementDate" filterProperty="SettlementDate">
+                                        <Label text="{i18n>colSettlementDate}"/>
+                                        <t:customData>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"SettlementDate","leadingProperty":"SettlementDate","sortProperty":"SettlementDate","filterProperty":"SettlementDate"}'/>
+                                        </t:customData>
+                                        <t:template>
+                                            <Text text="{SettlementDate}" wrapping="false"/>
                                         </t:template>
                                     </t:Column>
                                     <t:Column width="8rem" sortProperty="BaselineDate" filterProperty="BaselineDate">
@@ -479,7 +488,7 @@
                                     <t:Column width="10rem" hAlign="Right" sortProperty="AmountInTransactionCurrency" filterProperty="AmountInTransactionCurrency">
                                         <Label text="{i18n>colAmountInTransactionCurrency}"/>
                                         <t:customData>
-                                            <core:CustomData key="p13nData" value='\{"columnKey":"AmountInTransactionCurrency","leadingProperty":"AmountInTransactionCurrency","sortProperty":"AmountInTransactionCurrency","filterProperty":"AmountInTransactionCurrency"}'/>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"AmountInTransactionCurrency","leadingProperty":"AmountInTransactionCurrency","sortProperty":"AmountInTransactionCurrency","filterProperty":"AmountInTransactionCurrency","type":"numeric"}'/>
                                         </t:customData>
                                         <t:template>
                                             <Text text="{path:'AmountInTransactionCurrency', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
@@ -497,7 +506,7 @@
                                     <t:Column width="10rem" hAlign="Right" sortProperty="AmountInCompanyCodeCurrency" filterProperty="AmountInCompanyCodeCurrency">
                                         <Label text="{i18n>colAmountInCompanyCodeCurrency}"/>
                                         <t:customData>
-                                            <core:CustomData key="p13nData" value='\{"columnKey":"AmountInCompanyCodeCurrency","leadingProperty":"AmountInCompanyCodeCurrency","sortProperty":"AmountInCompanyCodeCurrency","filterProperty":"AmountInCompanyCodeCurrency"}'/>
+                                            <core:CustomData key="p13nData" value='\{"columnKey":"AmountInCompanyCodeCurrency","leadingProperty":"AmountInCompanyCodeCurrency","sortProperty":"AmountInCompanyCodeCurrency","filterProperty":"AmountInCompanyCodeCurrency","type":"numeric"}'/>
                                         </t:customData>
                                         <t:template>
                                             <Text text="{path:'AmountInCompanyCodeCurrency', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
