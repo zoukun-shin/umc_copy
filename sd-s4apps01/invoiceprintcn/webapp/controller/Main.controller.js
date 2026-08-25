@@ -232,6 +232,16 @@ sap.ui.define([
                     sDecimalLength = "2";
             }
             aPrintData.forEach(function (oData) {
+                //Credit Note & Debit Note Title
+                let sTitle = "";
+                switch (oData.BillingDocumentType) {
+                    case "G2":
+                        sTitle = "Credit Note"; break;
+                    case "L2":
+                        sTitle = "Debit Note"; break;
+                    default:
+                        sTitle = "";
+                }
                 aPrintContent.push({
                     PrintMode: that._sPrintMode,
                     DecimalLength: sDecimalLength,
@@ -240,6 +250,7 @@ sap.ui.define([
                     CompanyAddress: oData.CompanyAddress,
                     CompanyTelephone: oData.CompanyTelephone,
                     CompanyFax: oData.CompanyFax,
+                    Title: sTitle,
                     BillToPartyCode: oData.BillToPartyCode,
                     BillToPartyDescription: oData.BillToPartyDescription,
                     BillToPartyAddress: oData.BillToPartyAddress,
