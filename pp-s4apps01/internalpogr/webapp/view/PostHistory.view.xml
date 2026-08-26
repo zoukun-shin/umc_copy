@@ -32,12 +32,7 @@
                             <smartFilterBar:ControlConfiguration index='50' key="PoItemNo" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>PoItemNo}"/>    
                             <smartFilterBar:ControlConfiguration index='60' key="DeliveryNoteNo" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>DeliveryNoteNo}"/>
                             <smartFilterBar:ControlConfiguration index='70' key="DeliveryNoteItemNo" displayBehaviour="idAndDescription"  visibleInAdvancedArea="true" label="{i18n>DeliveryNoteItemNo}"/>
-                            <smartFilterBar:ControlConfiguration index='80' key="PostingDate" visibleInAdvancedArea="true" label="{i18n>PostingDate}" >
-                                <smartFilterBar:customControl>
-                                    <DateRangeSelection id="dateRange" valueFormat="yyyy/MM/dd" displayFormat="yyyy/MM/dd" change=".onDateRangeChange" />
-                                </smartFilterBar:customControl>
-                            </smartFilterBar:ControlConfiguration>
-
+                            <smartFilterBar:ControlConfiguration index='80' key="PostingDate" visibleInAdvancedArea="true" label="{i18n>PostingDate}" />
                             <smartFilterBar:ControlConfiguration index='90' key="DisplayCancel" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>DisplayCancel}">
                                 <smartFilterBar:customControl>
                                     <ComboBox id="cbDisplayCancel" selectedKey="{local>/DisplayCancel}">
