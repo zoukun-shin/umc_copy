@@ -1,0 +1,295 @@
+<mvc:View
+    controllerName="fico.aplist.controller.OpenAp"
+    displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:t="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+    <f:DynamicPage
+        id="idDPOpenAp"
+    >
+        <f:title>
+            <f:DynamicPageTitle id="idDPTOpenAp">
+                <f:heading>
+                    <sv:SmartVariantManagement
+                        id="idSVMOpenAp"
+                        showShare="true"
+                        persistencyKey="openApVariant"
+                        showExecuteOnSelection="true"
+                        entitySet="OpenAp"
+                    />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="idDPHOpenAp">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar
+                        id="idSFBOpenAp"
+                        smartVariant="idSVMOpenAp"
+                        persistencyKey="openApFilter"
+                        entitySet="OpenAp"
+                        useToolbar="false"
+                        class="sapUiResponsiveMargin"
+                    >
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="CompanyCode"
+                                visibleInAdvancedArea="true"
+                                label="{/#OpenApType/CompanyCode/@sap:label}"
+                                mandatory="notMandatory"
+                                filterType="single"
+                                index="1"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="Ledger"
+                                visibleInAdvancedArea="true"
+                                label="{/#OpenApType/Ledger/@sap:label}"
+                                mandatory="notMandatory"
+                                filterType="single"
+                                index="3"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="Supplier"
+                                visibleInAdvancedArea="true"
+                                label="{/#OpenApType/Supplier/@sap:label}"
+                                mandatory="notMandatory"
+                                index="5"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="BusinessPartnerGrouping"
+                                visibleInAdvancedArea="true"
+                                label="{/#OpenApType/BusinessPartnerGrouping/@sap:label}"
+                                mandatory="notMandatory"
+                                index="7"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="NetDueDate"
+                                visibleInAdvancedArea="true"
+                                label="{/#OpenApType/NetDueDate/@sap:label}"
+                                mandatory="notMandatory"
+                                index="9"
+                            >
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection
+                                        id="idDRNetDueDate"
+                                        valueFormat="yyyy/MM/dd"
+                                        displayFormat="yyyy/MM/dd"
+                                    />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="TransactionCurrency"
+                                visibleInAdvancedArea="true"
+                                label="{/#OpenApType/TransactionCurrency/@sap:label}"
+                                mandatory="notMandatory"
+                                index="11"
+                            />
+                            <smartFilterBar:ControlConfiguration
+                                key="PaymentTerms"
+                                visibleInAdvancedArea="true"
+                                label="{/#OpenApType/PaymentTerms/@sap:label}"
+                                mandatory="notMandatory"
+                                index="13"
+                            />
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable
+                id="idSmartTableOpenAp"
+                entitySet="OpenAp"
+                smartFilterId="idSFBOpenAp"
+                smartVariant="idSVMOpenAp"
+                persistencyKey="openApSmartTable"
+                placeToolbarInTable="true"
+                beforeRebindTable="onBeforeRebindTable"
+                header="{i18n>tableHeaderOpenAp}"
+                ignoredFields="BusinessPartnerGrouping,Ledger"
+                requestAtLeastFields="CompanyCode,FiscalYear,AccountingDocument,LedgerGLLineItem,Ledger"
+            >
+                <t:Table
+                    id="reportTableOpenAp"
+                    selectionMode="None"
+                    class="sapUiSizeCompact"
+                >
+                    <t:rowMode>
+                        <rm:Auto id="idAutoOpenAp" />
+                    </t:rowMode>
+                    <t:columns>
+                        <t:Column width="8rem" label="{/#OpenApType/CompanyCode/@sap:label}" sortProperty="CompanyCode" filterProperty="CompanyCode">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode","leadingProperty":"CompanyCode","sortProperty":"CompanyCode","filterProperty":"CompanyCode"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{CompanyCode}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{/#OpenApType/Supplier/@sap:label}" sortProperty="Supplier" filterProperty="Supplier">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Supplier","leadingProperty":"Supplier","sortProperty":"Supplier","filterProperty":"Supplier"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Supplier}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="16rem" label="{/#OpenApType/SupplierName/@sap:label}" sortProperty="SupplierName" filterProperty="SupplierName">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SupplierName","leadingProperty":"SupplierName","sortProperty":"SupplierName","filterProperty":"SupplierName"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{SupplierName}" wrapping="false" tooltip="{SupplierName}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{/#OpenApType/DocumentReferenceID/@sap:label}" sortProperty="DocumentReferenceID" filterProperty="DocumentReferenceID">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DocumentReferenceID","leadingProperty":"DocumentReferenceID","sortProperty":"DocumentReferenceID","filterProperty":"DocumentReferenceID"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{DocumentReferenceID}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{/#OpenApType/OriginalReferenceDocument/@sap:label}" sortProperty="OriginalReferenceDocument" filterProperty="OriginalReferenceDocument">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"OriginalReferenceDocument","leadingProperty":"OriginalReferenceDocument","sortProperty":"OriginalReferenceDocument","filterProperty":"OriginalReferenceDocument"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{OriginalReferenceDocument}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{/#OpenApType/PaymentTerms/@sap:label}" sortProperty="PaymentTerms" filterProperty="PaymentTerms">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PaymentTerms","leadingProperty":"PaymentTerms","sortProperty":"PaymentTerms","filterProperty":"PaymentTerms"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PaymentTerms}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="14rem" label="{/#OpenApType/PaymentTermsDesc/@sap:label}" sortProperty="PaymentTermsDesc" filterProperty="PaymentTermsDesc">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PaymentTermsDesc","leadingProperty":"PaymentTermsDesc","sortProperty":"PaymentTermsDesc","filterProperty":"PaymentTermsDesc"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PaymentTermsDesc}" wrapping="false" tooltip="{PaymentTermsDesc}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{/#OpenApType/PaymentMethod/@sap:label}" sortProperty="PaymentMethod" filterProperty="PaymentMethod">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PaymentMethod","leadingProperty":"PaymentMethod","sortProperty":"PaymentMethod","filterProperty":"PaymentMethod"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PaymentMethod}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="14rem" label="{/#OpenApType/PaymentMethodDesc/@sap:label}" sortProperty="PaymentMethodDesc" filterProperty="PaymentMethodDesc">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PaymentMethodDesc","leadingProperty":"PaymentMethodDesc","sortProperty":"PaymentMethodDesc","filterProperty":"PaymentMethodDesc"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PaymentMethodDesc}" wrapping="false" tooltip="{PaymentMethodDesc}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" hAlign="Right" label="{/#OpenApType/AmountInTransactionCurrency/@sap:label}" sortProperty="AmountInTransactionCurrency" filterProperty="AmountInTransactionCurrency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AmountInTransactionCurrency","leadingProperty":"AmountInTransactionCurrency","sortProperty":"AmountInTransactionCurrency","filterProperty":"AmountInTransactionCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'AmountInTransactionCurrency', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{/#OpenApType/TransactionCurrency/@sap:label}" sortProperty="TransactionCurrency" filterProperty="TransactionCurrency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"TransactionCurrency","leadingProperty":"TransactionCurrency","sortProperty":"TransactionCurrency","filterProperty":"TransactionCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{TransactionCurrency}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" hAlign="Right" label="{/#OpenApType/AmountInCompanyCodeCurrency/@sap:label}" sortProperty="AmountInCompanyCodeCurrency" filterProperty="AmountInCompanyCodeCurrency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AmountInCompanyCodeCurrency","leadingProperty":"AmountInCompanyCodeCurrency","sortProperty":"AmountInCompanyCodeCurrency","filterProperty":"AmountInCompanyCodeCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'AmountInCompanyCodeCurrency', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{/#OpenApType/CompanyCodeCurrency/@sap:label}" sortProperty="CompanyCodeCurrency" filterProperty="CompanyCodeCurrency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCodeCurrency","leadingProperty":"CompanyCodeCurrency","sortProperty":"CompanyCodeCurrency","filterProperty":"CompanyCodeCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{CompanyCodeCurrency}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" hAlign="Right" label="{/#OpenApType/AmountInFunctionalCurrency/@sap:label}" sortProperty="AmountInFunctionalCurrency" filterProperty="AmountInFunctionalCurrency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AmountInFunctionalCurrency","leadingProperty":"AmountInFunctionalCurrency","sortProperty":"AmountInFunctionalCurrency","filterProperty":"AmountInFunctionalCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'AmountInFunctionalCurrency', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{/#OpenApType/FunctionalCurrency/@sap:label}" sortProperty="FunctionalCurrency" filterProperty="FunctionalCurrency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"FunctionalCurrency","leadingProperty":"FunctionalCurrency","sortProperty":"FunctionalCurrency","filterProperty":"FunctionalCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{FunctionalCurrency}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="14rem" label="{/#OpenApType/DocumentItemText/@sap:label}" sortProperty="DocumentItemText" filterProperty="DocumentItemText">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DocumentItemText","leadingProperty":"DocumentItemText","sortProperty":"DocumentItemText","filterProperty":"DocumentItemText"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{DocumentItemText}" wrapping="false" tooltip="{DocumentItemText}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{/#OpenApType/AccountingDocument/@sap:label}" sortProperty="AccountingDocument" filterProperty="AccountingDocument">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AccountingDocument","leadingProperty":"AccountingDocument","sortProperty":"AccountingDocument","filterProperty":"AccountingDocument"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AccountingDocument}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="14rem" label="{/#OpenApType/AccountingDocumentHeaderText/@sap:label}" sortProperty="AccountingDocumentHeaderText" filterProperty="AccountingDocumentHeaderText">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AccountingDocumentHeaderText","leadingProperty":"AccountingDocumentHeaderText","sortProperty":"AccountingDocumentHeaderText","filterProperty":"AccountingDocumentHeaderText"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AccountingDocumentHeaderText}" wrapping="false" tooltip="{AccountingDocumentHeaderText}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{/#OpenApType/DocumentDate/@sap:label}" sortProperty="DocumentDate" filterProperty="DocumentDate">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DocumentDate","leadingProperty":"DocumentDate","sortProperty":"DocumentDate","filterProperty":"DocumentDate","type":"date"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'DocumentDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd', UTC:true}}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{/#OpenApType/NetDueDate/@sap:label}" sortProperty="NetDueDate" filterProperty="NetDueDate">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"NetDueDate","leadingProperty":"NetDueDate","sortProperty":"NetDueDate","filterProperty":"NetDueDate","type":"date"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'NetDueDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd', UTC:true}}"/>
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

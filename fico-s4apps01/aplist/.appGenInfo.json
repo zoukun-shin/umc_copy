@@ -1,0 +1,23 @@
+{
+  "generationParameters": {
+    "generationDate": "Mon Aug 24 2026 08:11:20 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_APLIST_O2",
+    "appName": "aplist",
+    "appTitle": "付款建议的明细清单",
+    "appDescription": "付款建议的明细清单",
+    "appNamespace": "fico",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.38",
+    "enableEslint": true,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.31.1",
+    "template": "Basic V2",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}

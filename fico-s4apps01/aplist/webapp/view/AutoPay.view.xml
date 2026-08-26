@@ -1,0 +1,329 @@
+<mvc:View
+    controllerName="fico.aplist.controller.AutoPay"
+    displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:t="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+    <f:DynamicPage
+        id="idDPAutoPay"
+    >
+        <f:title>
+            <f:DynamicPageTitle id="idDPTAutoPay">
+                <f:heading>
+                    <sv:SmartVariantManagement
+                        id="idSVMAutoPay"
+                        showShare="true"
+                        persistencyKey="autoPayVariant"
+                        showExecuteOnSelection="true"
+                        entitySet="AutoPay"
+                    />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="idDPHAutoPay">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar
+                        id="idSFBAutoPay"
+                        smartVariant="idSVMAutoPay"
+                        persistencyKey="autoPayFilter"
+                        entitySet="AutoPay"
+                        useToolbar="false"
+                        class="sapUiResponsiveMargin"
+                    >
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="PaymentRunDate"
+                                visibleInAdvancedArea="true"
+                                label="{/#AutoPayType/PaymentRunDate/@sap:label}"
+                                mandatory="mandatory"
+                                index="1"
+                            >
+                                <smartFilterBar:customControl>
+                                    <DateRangeSelection
+                                        id="idDRPaymentRunDate"
+                                        valueFormat="yyyy/MM/dd"
+                                        displayFormat="yyyy/MM/dd"
+                                    />
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="PaymentRunID"
+                                visibleInAdvancedArea="true"
+                                label="{/#AutoPayType/PaymentRunID/@sap:label}"
+                                mandatory="mandatory"
+                                index="3"
+                            />
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable
+                id="idSmartTableAutoPay"
+                entitySet="AutoPay"
+                smartFilterId="idSFBAutoPay"
+                smartVariant="idSVMAutoPay"
+                persistencyKey="autoPaySmartTable"
+                placeToolbarInTable="true"
+                beforeRebindTable="onBeforeRebindTable"
+                header="{i18n>tableHeaderAutoPay}"
+                requestAtLeastFields="PaymentRunDate,PaymentRunID,CompanyCode,Supplier,FiscalYear,AccountingDocument,AccountingDocumentItem"
+            >
+                <t:Table
+                    id="reportTableAutoPay"
+                    selectionMode="None"
+                    class="sapUiSizeCompact"
+                >
+                    <t:rowMode>
+                        <rm:Auto id="idAutoAutoPay" />
+                    </t:rowMode>
+                    <t:columns>
+                        <t:Column width="8rem" label="{/#AutoPayType/CompanyCode/@sap:label}" sortProperty="CompanyCode" filterProperty="CompanyCode">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode","leadingProperty":"CompanyCode","sortProperty":"CompanyCode","filterProperty":"CompanyCode"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{CompanyCode}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{/#AutoPayType/Supplier/@sap:label}" sortProperty="Supplier" filterProperty="Supplier">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Supplier","leadingProperty":"Supplier","sortProperty":"Supplier","filterProperty":"Supplier"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Supplier}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="16rem" label="{/#AutoPayType/SupplierName/@sap:label}" sortProperty="SupplierName" filterProperty="SupplierName">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"SupplierName","leadingProperty":"SupplierName","sortProperty":"SupplierName","filterProperty":"SupplierName"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{SupplierName}" wrapping="false" tooltip="{SupplierName}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{/#AutoPayType/DocumentReferenceID/@sap:label}" sortProperty="DocumentReferenceID" filterProperty="DocumentReferenceID">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DocumentReferenceID","leadingProperty":"DocumentReferenceID","sortProperty":"DocumentReferenceID","filterProperty":"DocumentReferenceID"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{DocumentReferenceID}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{/#AutoPayType/OriginalReferenceDocument/@sap:label}" sortProperty="OriginalReferenceDocument" filterProperty="OriginalReferenceDocument">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"OriginalReferenceDocument","leadingProperty":"OriginalReferenceDocument","sortProperty":"OriginalReferenceDocument","filterProperty":"OriginalReferenceDocument"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{OriginalReferenceDocument}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{/#AutoPayType/PaymentTerms/@sap:label}" sortProperty="PaymentTerms" filterProperty="PaymentTerms">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PaymentTerms","leadingProperty":"PaymentTerms","sortProperty":"PaymentTerms","filterProperty":"PaymentTerms"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PaymentTerms}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="14rem" label="{/#AutoPayType/PaymentTermsDesc/@sap:label}" sortProperty="PaymentTermsDesc" filterProperty="PaymentTermsDesc">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PaymentTermsDesc","leadingProperty":"PaymentTermsDesc","sortProperty":"PaymentTermsDesc","filterProperty":"PaymentTermsDesc"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PaymentTermsDesc}" wrapping="false" tooltip="{PaymentTermsDesc}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{/#AutoPayType/PaymentMethod/@sap:label}" sortProperty="PaymentMethod" filterProperty="PaymentMethod">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PaymentMethod","leadingProperty":"PaymentMethod","sortProperty":"PaymentMethod","filterProperty":"PaymentMethod"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PaymentMethod}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="14rem" label="{/#AutoPayType/PaymentMethodDesc/@sap:label}" sortProperty="PaymentMethodDesc" filterProperty="PaymentMethodDesc">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PaymentMethodDesc","leadingProperty":"PaymentMethodDesc","sortProperty":"PaymentMethodDesc","filterProperty":"PaymentMethodDesc"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PaymentMethodDesc}" wrapping="false" tooltip="{PaymentMethodDesc}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" hAlign="Right" label="{/#AutoPayType/AmountInTransactionCurrency/@sap:label}" sortProperty="AmountInTransactionCurrency" filterProperty="AmountInTransactionCurrency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AmountInTransactionCurrency","leadingProperty":"AmountInTransactionCurrency","sortProperty":"AmountInTransactionCurrency","filterProperty":"AmountInTransactionCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'AmountInTransactionCurrency', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{/#AutoPayType/TransactionCurrency/@sap:label}" sortProperty="TransactionCurrency" filterProperty="TransactionCurrency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"TransactionCurrency","leadingProperty":"TransactionCurrency","sortProperty":"TransactionCurrency","filterProperty":"TransactionCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{TransactionCurrency}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" hAlign="Right" label="{/#AutoPayType/AmountInCompanyCodeCurrency/@sap:label}" sortProperty="AmountInCompanyCodeCurrency" filterProperty="AmountInCompanyCodeCurrency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AmountInCompanyCodeCurrency","leadingProperty":"AmountInCompanyCodeCurrency","sortProperty":"AmountInCompanyCodeCurrency","filterProperty":"AmountInCompanyCodeCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'AmountInCompanyCodeCurrency', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{/#AutoPayType/CompanyCodeCurrency/@sap:label}" sortProperty="CompanyCodeCurrency" filterProperty="CompanyCodeCurrency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCodeCurrency","leadingProperty":"CompanyCodeCurrency","sortProperty":"CompanyCodeCurrency","filterProperty":"CompanyCodeCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{CompanyCodeCurrency}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" hAlign="Right" label="{/#AutoPayType/AmountInFunctionalCurrency/@sap:label}" sortProperty="AmountInFunctionalCurrency" filterProperty="AmountInFunctionalCurrency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AmountInFunctionalCurrency","leadingProperty":"AmountInFunctionalCurrency","sortProperty":"AmountInFunctionalCurrency","filterProperty":"AmountInFunctionalCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'AmountInFunctionalCurrency', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{/#AutoPayType/FunctionalCurrency/@sap:label}" sortProperty="FunctionalCurrency" filterProperty="FunctionalCurrency">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"FunctionalCurrency","leadingProperty":"FunctionalCurrency","sortProperty":"FunctionalCurrency","filterProperty":"FunctionalCurrency"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{FunctionalCurrency}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="14rem" label="{/#AutoPayType/DocumentItemText/@sap:label}" sortProperty="DocumentItemText" filterProperty="DocumentItemText">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DocumentItemText","leadingProperty":"DocumentItemText","sortProperty":"DocumentItemText","filterProperty":"DocumentItemText"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{DocumentItemText}" wrapping="false" tooltip="{DocumentItemText}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{/#AutoPayType/AccountingDocument/@sap:label}" sortProperty="AccountingDocument" filterProperty="AccountingDocument">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AccountingDocument","leadingProperty":"AccountingDocument","sortProperty":"AccountingDocument","filterProperty":"AccountingDocument"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AccountingDocument}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="14rem" label="{/#AutoPayType/AccountingDocumentHeaderText/@sap:label}" sortProperty="AccountingDocumentHeaderText" filterProperty="AccountingDocumentHeaderText">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AccountingDocumentHeaderText","leadingProperty":"AccountingDocumentHeaderText","sortProperty":"AccountingDocumentHeaderText","filterProperty":"AccountingDocumentHeaderText"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AccountingDocumentHeaderText}" wrapping="false" tooltip="{AccountingDocumentHeaderText}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{/#AutoPayType/DocumentDate/@sap:label}" sortProperty="DocumentDate" filterProperty="DocumentDate">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DocumentDate","leadingProperty":"DocumentDate","sortProperty":"DocumentDate","filterProperty":"DocumentDate","type":"date"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'DocumentDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd', UTC:true}}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{/#AutoPayType/NetDueDate/@sap:label}" sortProperty="NetDueDate" filterProperty="NetDueDate">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"NetDueDate","leadingProperty":"NetDueDate","sortProperty":"NetDueDate","filterProperty":"NetDueDate","type":"date"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'NetDueDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd', UTC:true}}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{/#AutoPayType/PaymentRunDate/@sap:label}" sortProperty="PaymentRunDate" filterProperty="PaymentRunDate">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PaymentRunDate","leadingProperty":"PaymentRunDate","sortProperty":"PaymentRunDate","filterProperty":"PaymentRunDate","type":"date"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'PaymentRunDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd', UTC:true}}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{/#AutoPayType/PaymentRunID/@sap:label}" sortProperty="PaymentRunID" filterProperty="PaymentRunID">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PaymentRunID","leadingProperty":"PaymentRunID","sortProperty":"PaymentRunID","filterProperty":"PaymentRunID"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{PaymentRunID}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="8rem" label="{/#AutoPayType/PaymentDate/@sap:label}" sortProperty="PaymentDate" filterProperty="PaymentDate">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"PaymentDate","leadingProperty":"PaymentDate","sortProperty":"PaymentDate","filterProperty":"PaymentDate","type":"date"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{path:'PaymentDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd', UTC:true}}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="10rem" label="{/#AutoPayType/BankNumber/@sap:label}" sortProperty="BankNumber" filterProperty="BankNumber">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BankNumber","leadingProperty":"BankNumber","sortProperty":"BankNumber","filterProperty":"BankNumber"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BankNumber}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="16rem" label="{/#AutoPayType/BankAccountHolderName/@sap:label}" sortProperty="BankAccountHolderName" filterProperty="BankAccountHolderName">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BankAccountHolderName","leadingProperty":"BankAccountHolderName","sortProperty":"BankAccountHolderName","filterProperty":"BankAccountHolderName"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BankAccountHolderName}" wrapping="false" tooltip="{BankAccountHolderName}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="14rem" label="{/#AutoPayType/BankAccount/@sap:label}" sortProperty="BankAccount" filterProperty="BankAccount">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BankAccount","leadingProperty":"BankAccount","sortProperty":"BankAccount","filterProperty":"BankAccount"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BankAccount}" wrapping="false" tooltip="{BankAccount}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="16rem" label="{/#AutoPayType/BankAddress/@sap:label}" sortProperty="BankAddress" filterProperty="BankAddress">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BankAddress","leadingProperty":"BankAddress","sortProperty":"BankAddress","filterProperty":"BankAddress"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BankAddress}" wrapping="false" tooltip="{BankAddress}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="16rem" label="{/#AutoPayType/BankName/@sap:label}" sortProperty="BankName" filterProperty="BankName">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BankName","leadingProperty":"BankName","sortProperty":"BankName","filterProperty":"BankName"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BankName}" wrapping="false" tooltip="{BankName}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="6rem" label="{/#AutoPayType/BankCountryKey/@sap:label}" sortProperty="BankCountryKey" filterProperty="BankCountryKey">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BankCountryKey","leadingProperty":"BankCountryKey","sortProperty":"BankCountryKey","filterProperty":"BankCountryKey"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BankCountryKey}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
