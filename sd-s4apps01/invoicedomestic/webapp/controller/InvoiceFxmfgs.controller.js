@@ -1,11 +1,11 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "./BaseController",
     "./messages",
     "sap/ui/model/Filter",
     "../model/formatter",
-], (Controller, messages, Filter, formatter) => {
+], (BaseController, messages, Filter, formatter) => {
     "use strict";
-    return Controller.extend("sd.invoicedomestic.controller.InvoiceFxmfgs", {
+    return BaseController.extend("sd.invoicedomestic.controller.InvoiceFxmfgs", {
         formatter: formatter,
         onInit() {},
         onSearch() {

@@ -14,7 +14,15 @@ function (JSONModel, Device) {
             var oModel = new JSONModel(Device);
             oModel.setDefaultBindingMode("OneWay");
             return oModel;
-        }
+        },
+        // Create local Model
+        createLocalModel: function () {
+            var oModel = new JSONModel({
+                logInfo: "",
+                excelSet: []
+            });
+            return oModel;
+        },
     };
 
 });

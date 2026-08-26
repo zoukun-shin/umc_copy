@@ -37,7 +37,7 @@
                         <CheckBox id="idCBShowAllInvoices" text="{i18n>ShowAllInvoices}" width="12rem"/>
                         <CheckBox id="idCBShowBatchParent" text="{i18n>ShowBatchParent}" width="16rem"/>
                         <CheckBox id="idCBShowZeroPrice" text="{i18n>ShowZeroPrice}" width="12rem"/>
-                        <CheckBox id="idCBShowInternalDelivery" text="{i18n>ShowInternalDelivery}" width="14rem"/>
+                        <!-- <CheckBox id="idCBShowInternalDelivery" text="{i18n>ShowInternalDelivery}" width="14rem"/> -->
                     </HBox>
                 </f:content>
                 <f:content>
@@ -687,6 +687,46 @@
                             </t:template>
                         </t:Column>
                         <t:Column
+                            width="10rem"
+                            hAlign="Right"
+                            label="{/#InvoiceDetailType/ContributionProfit/@sap:label}"
+                            sortProperty="ContributionProfit"
+                            filterProperty="ContributionProfit"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"ContributionProfit","leadingProperty":"ContributionProfit","sortProperty":"ContributionProfit","filterProperty":"ContributionProfit"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{path:'ContributionProfit', type:'sap.ui.model.odata.type.Decimal'}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            hAlign="Right"
+                            label="{/#InvoiceDetailType/ContributionProfitAmt/@sap:label}"
+                            sortProperty="ContributionProfitAmt"
+                            filterProperty="ContributionProfitAmt"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"ContributionProfitAmt","leadingProperty":"ContributionProfitAmt","sortProperty":"ContributionProfitAmt","filterProperty":"ContributionProfitAmt"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{path:'ContributionProfitAmt', type:'sap.ui.model.odata.type.Decimal'}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
                             width="8rem"
                             label="{/#InvoiceDetailType/AccountingPostingStatusDesc/@sap:label}"
                             sortProperty="AccountingPostingStatusDesc"
@@ -946,9 +986,9 @@
                                 />
                             </t:customData>
                             <t:template>
-                                <Text
-                                    text="{BillingDocumentIsCancelled}"
-                                    wrapping="false"
+                                <core:Icon
+                                    src="sap-icon://accept"
+                                    visible="{BillingDocumentIsCancelled}"
                                 />
                             </t:template>
                         </t:Column>
@@ -1374,6 +1414,25 @@
                             </t:template>
                         </t:Column>
                         <t:Column
+                            width="8rem"
+                            label="{/#InvoiceDetailType/ShippingTypeCode/@sap:label}"
+                            sortProperty="ShippingTypeCode"
+                            filterProperty="ShippingTypeCode"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"ShippingTypeCode","leadingProperty":"ShippingTypeCode","sortProperty":"ShippingTypeCode","filterProperty":"ShippingTypeCode"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{ShippingTypeCode}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
                             width="10rem"
                             label="{/#InvoiceDetailType/ShippingTypeName/@sap:label}"
                             sortProperty="ShippingTypeName"
@@ -1503,6 +1562,26 @@
                             <t:template>
                                 <Text
                                     text="{path:'BillingQuantityNegative', type:'sap.ui.model.odata.type.Decimal'}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            hAlign="Right"
+                            label="{/#InvoiceDetailType/FreeOfChargeUnitPrice/@sap:label}"
+                            sortProperty="FreeOfChargeUnitPrice"
+                            filterProperty="FreeOfChargeUnitPrice"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"FreeOfChargeUnitPrice","leadingProperty":"FreeOfChargeUnitPrice","sortProperty":"FreeOfChargeUnitPrice","filterProperty":"FreeOfChargeUnitPrice"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{path:'FreeOfChargeUnitPrice', type:'sap.ui.model.odata.type.Decimal'}"
                                     wrapping="false"
                                 />
                             </t:template>
@@ -1712,6 +1791,46 @@
                             <t:template>
                                 <Text
                                     text="{ShippingTypeDesc}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            hAlign="Right"
+                            label="{/#InvoiceDetailType/PriceBeforeMarkup/@sap:label}"
+                            sortProperty="PriceBeforeMarkup"
+                            filterProperty="PriceBeforeMarkup"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"PriceBeforeMarkup","leadingProperty":"PriceBeforeMarkup","sortProperty":"PriceBeforeMarkup","filterProperty":"PriceBeforeMarkup"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{path:'PriceBeforeMarkup', type:'sap.ui.model.odata.type.Decimal'}"
+                                    wrapping="false"
+                                />
+                            </t:template>
+                        </t:Column>
+                        <t:Column
+                            width="10rem"
+                            hAlign="Right"
+                            label="{/#InvoiceDetailType/AmountAfterMarkup/@sap:label}"
+                            sortProperty="AmountAfterMarkup"
+                            filterProperty="AmountAfterMarkup"
+                        >
+                            <t:customData>
+                                <core:CustomData
+                                    key="p13nData"
+                                    value='\{"columnKey":"AmountAfterMarkup","leadingProperty":"AmountAfterMarkup","sortProperty":"AmountAfterMarkup","filterProperty":"AmountAfterMarkup"}'
+                                />
+                            </t:customData>
+                            <t:template>
+                                <Text
+                                    text="{path:'AmountAfterMarkup', type:'sap.ui.model.odata.type.Decimal'}"
                                     wrapping="false"
                                 />
                             </t:template>

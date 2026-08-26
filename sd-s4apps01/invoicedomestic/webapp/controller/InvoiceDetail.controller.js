@@ -1,16 +1,17 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "./BaseController",
     "./messages",
     "sap/ui/model/Filter",
     "../model/formatter",
-], (Controller, messages, Filter, formatter) => {
+], (BaseController, messages, Filter, formatter) => {
     "use strict";
-    return Controller.extend("sd.invoicedomestic.controller.InvoiceDetail", {
+    return BaseController.extend("sd.invoicedomestic.controller.InvoiceDetail", {
         formatter: formatter,
         onInit() {},
         onSearch() {
             this.byId("idSmartTable").rebindTable();
         },
+        /*eslint max-statements: ["error", 80,{ "ignoreTopLevelFunctions": true }]*/
         onBeforeRebindTable(oEvent) {
             var oFilter = oEvent.getParameter("bindingParams").filters;
             var oNewFilter, aNewFilter = [];
@@ -53,7 +54,7 @@ sap.ui.define([
             var bShowAllInvoices = this.byId("idCBShowAllInvoices").getSelected();
             var bShowBatchParent = this.byId("idCBShowBatchParent").getSelected();
             var bShowZeroPrice = this.byId("idCBShowZeroPrice").getSelected();
-            var bShowInternalDelivery = this.byId("idCBShowInternalDelivery").getSelected();
+            // var bShowInternalDelivery = this.byId("idCBShowInternalDelivery").getSelected();
 
             if (bShowAllInvoices === true) {
                 aNewFilter.push(new Filter("ShowAllInvoices", "EQ", true));
@@ -64,9 +65,9 @@ sap.ui.define([
             if (bShowZeroPrice === true) {
                 aNewFilter.push(new Filter("ShowZeroPrice", "EQ", true));
             }
-            if (bShowInternalDelivery === true) {
-                aNewFilter.push(new Filter("ShowInternalDelivery", "EQ", true));
-            }
+            // if (bShowInternalDelivery === true) {
+            //     aNewFilter.push(new Filter("ShowInternalDelivery", "EQ", true));
+            // }
 
             // Cleared 下拉框筛选
             var sCleared = this.byId("idClearedSelect").getSelectedKey();
