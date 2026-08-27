@@ -106,11 +106,15 @@ modules:
     - artifacts:
       - mmreturnmatpackprint.zip
       name: mmreturnmatpackprint
-      target-path: resources/     
+      target-path: resources/
     - artifacts:
       - mmmaterialperiodstock.zip
       name: mmmaterialperiodstock
-      target-path: resources/       
+      target-path: resources/
+    - artifacts:
+      - mmpurorderpricing.zip
+      name: mmpurorderpricing
+      target-path: resources/
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -258,6 +262,15 @@ modules:
 - name: mmmaterialperiodstock
   type: html5
   path: materialperiodstock
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmpurorderpricing
+  type: html5
+  path: purorderpricing
   build-parameters:
     build-result: dist
     builder: custom
