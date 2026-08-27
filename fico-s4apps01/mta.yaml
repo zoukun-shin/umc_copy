@@ -191,6 +191,10 @@ modules:
       - ficoaplist.zip
       name: ficoaplist
       target-path: resources/
+    - artifacts:
+      - ficozporecon.zip
+      name: ficozporecon
+      target-path: resources/      
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -522,7 +526,15 @@ modules:
     build-result: dist
     builder: custom
     commands:
-    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozporecon
+  type: html5
+  path: zporecon
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
     - npm run build:cf
     supported-platforms: []
 resources:
