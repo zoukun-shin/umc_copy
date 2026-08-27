@@ -67,6 +67,10 @@ modules:
       - birecoveryupload.zip
       name: birecoveryupload
       target-path: resources/
+    - artifacts:
+      - birecoverylcaupload.zip
+      name: birecoverylcaupload
+      target-path: resources/
 - name: birecoverymanagement
   type: html5
   path: recoverymanagement
@@ -121,6 +125,15 @@ modules:
     commands:
     - npm run build:cf
     supported-platforms: []
+- name: birecoverylcaupload
+  type: html5
+  path: recoverylcaupload
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: bi-s4apps01-uaa
   type: org.cloudfoundry.managed-service
@@ -155,3 +168,4 @@ resources:
     service-plan: app-host
 parameters:
   deploy_mode: html5-repo
+  enable-parallel-deployments: true

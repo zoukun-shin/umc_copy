@@ -1,0 +1,77 @@
+<mvc:View controllerName="bi.recoverylcaupload.controller.Upload"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified"
+    xmlns:upload="sap.m.upload"
+    xmlns:table="sap.ui.table">
+    <Panel expandable="true" expanded="false" headerText="{i18n>templateText}" width="auto">
+        <upload:UploadSet id="idTemplateCollection" items="{ path : 'Attach>/Configuration', filters : { path : 'Object', operator : 'StartsWith', value1 : 'ZUPLOAD_RECOVERY_LCA' } }" multiple="true" uploadEnabled="false" uploadButtonInvisible="true" instantUpload="false">
+            <upload:items>
+                <upload:UploadSetItem fileName="{Attach>TemplateName}" mediaType="{Attach>TemplateMimeType}" url="{Attach>TemplateContent}" visibleEdit="false" visibleRemove="false"/>
+            </upload:items>
+        </upload:UploadSet>
+    </Panel>
+    <Panel id="idFileUploadPanel" expandable="true" expanded="true" headerText="{i18n>uploadText}" width="auto">
+        <unified:FileUploader id="idFileUploader" fileType="xlsx,xls" change="onFileChange" width="40%" class="sapUiSmallMargin"/>
+    </Panel>
+    <Panel expandable="true" expanded="true" headerText="{i18n>result}" width="auto">
+        <table:Table rows="{local>/excelSet}" selectionMode="Multi" fixedColumnCount="4" rowMode="Interactive" class="sapUiSizeCompact">
+            <table:extension>
+                <OverflowToolbar>
+                    <Text text="{local>/logInfo}"/>
+                    <ToolbarSpacer/>
+                    <Button id="idClearButton" icon="sap-icon://clear-all" type="Transparent" text="{i18n>clearBtn}" press="onClear" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Clear}}"/>
+                    <Button id="idSaveButton" icon="sap-icon://save" type="Transparent" text="{i18n>saveBtn}" press="onSave" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Save}}"/>
+                    <Button id="idExportButton" icon="sap-icon://excel-attachment" type="Transparent" text="{i18n>exportBtn}" press="onExport" visible="{= ${local>/excelSet}.length > 0}" enabled="{= ${local>/authorityCheck/button/Export}}"/>
+                </OverflowToolbar>
+            </table:extension>
+            <table:columns>
+                <table:Column autoResizable="true" width="5rem" label="{i18n>Status}">
+                    <table:template>
+                        <ObjectStatus state="{ path:'local>Status',formatter:'.formatter.formatState' }" icon="{ path:'local>Status',formatter:'.formatter.formatIcon' }"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>Message}">
+                    <table:template>
+                        <Text text="{local>Message}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="6rem" label="{i18n>YearMonth}">
+                    <table:template>
+                        <Text text="{local>YearMonth}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>RecoveryManagementNumber}">
+                    <table:template>
+                        <Text text="{local>RecoveryManagementNumber}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>PurchaseOrder}">
+                    <table:template>
+                        <Text text="{local>PurchaseOrder}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="8rem" label="{i18n>PurchaseOrderItem}">
+                    <table:template>
+                        <Text text="{local>PurchaseOrderItem}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>InitialMaterial}">
+                    <table:template>
+                        <Text text="{local>InitialMaterial}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="12rem" label="{i18n>InitialMaterialText}">
+                    <table:template>
+                        <Text text="{local>InitialMaterialText}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+                <table:Column width="10rem" label="{i18n>RecoveryNecessaryAmount}" hAlign="End">
+                    <table:template>
+                        <Text text="{local>RecoveryNecessaryAmount}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </Panel>
+</mvc:View>

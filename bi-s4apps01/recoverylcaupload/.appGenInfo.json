@@ -1,0 +1,23 @@
+{
+  "generationParameters": {
+    "generationDate": "Mon Aug 24 2026 09:27:08 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "https://my412552.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_BI003_UPLOAD_O2",
+    "appName": "recoverylcaupload",
+    "appTitle": "Batch upload for Self-made LCA quotation",
+    "appDescription": "Batch upload for Self-made LCA quotation",
+    "appNamespace": "bi",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.38",
+    "enableEslint": true,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.31.1",
+    "template": "Basic V2",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}

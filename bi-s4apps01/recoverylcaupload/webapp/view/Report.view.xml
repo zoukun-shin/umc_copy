@@ -1,0 +1,133 @@
+<mvc:View controllerName="bi.recoverylcaupload.controller.Report" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table"
+    xmlns:rowmodes="sap.ui.table.rowmodes">
+    <VBox class="sapUiSmallMargin">
+        <sv:SmartVariantManagement id="__SVM01" persistencyKey="CustomListSVM" showShare="true" showExecuteOnSelection="true" entitySet="BI003UploadReport"/>
+        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="BI003UploadReport" useToolbar="false" smartVariant="__SVM01" persistencyKey="CustomListSFB" search="onSearch">
+            <smartFilterBar:controlConfiguration>
+                <smartFilterBar:ControlConfiguration index='10' key="CompanyCode" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>CompanyCode}"/>
+                <smartFilterBar:ControlConfiguration index='20' key="YearMonth" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>YearMonth}">
+                    <smartFilterBar:customControl>
+                        <DatePicker id="idYearMonth" displayFormat="YYYY/MM" valueFormat="YYYY/MM" />
+                    </smartFilterBar:customControl>
+                </smartFilterBar:ControlConfiguration>
+                <smartFilterBar:ControlConfiguration index='30' key="RecoveryManagementNumber" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>RecoveryManagementNumber}"/>
+                <!-- visible -->
+                <smartFilterBar:ControlConfiguration index="999" key="uuid" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="UploadType" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="Customer" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="CustomerName" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="BaseUnit" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="SpotbuyMaterial" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="SpotbuyMaterialText" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="SpotbuyMaterialPrice" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="GeneralMaterial" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="GeneralMaterialText" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="GeneralMaterialPrice" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="MaterialQuantity" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="NetPriceDiff" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="MateriaGroup" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="AccountingDocument" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="AccountingDocumentItem" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="GLAccount" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="GLAccountText" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="FixedAsset" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="FixedAssetText" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="POQuantity" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="NetAmount" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="TransportExpenseMaterial" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="TransportExpenseMaterialText" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="MaterialDocument" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="MaterialDocumentItem" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="SSMaterial" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="SSMaterialText" visible="false"/>
+                <smartFilterBar:ControlConfiguration index="999" key="Quantity" visible="false"/>
+                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrder" visible="false"/>
+                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderItem" visible="false"/>
+                <smartFilterBar:ControlConfiguration index='999' key="RecoveryNecessaryAmount" visible="false"/>
+                <smartFilterBar:ControlConfiguration index='999' key="CompanyCodeText" visible="false"/>
+                <smartFilterBar:ControlConfiguration index='999' key="CompanyCurrency" visible="false"/>
+                <smartFilterBar:ControlConfiguration index='999' key="InitialMaterial" visible="false"/>
+                <smartFilterBar:ControlConfiguration index='999' key="InitialMaterialText" visible="false"/>
+            </smartFilterBar:controlConfiguration>
+        </smartFilterBar:SmartFilterBar>
+        <smartTable:SmartTable entitySet="BI003UploadReport" smartFilterId="idSmartFilterBar" smartVariant="__SVM01" tableType="Table" showRowCount="true" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="CustomListST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="uuid,CompanyCurrency" ignoredFields="uuid,UploadType,CompanyCodeText,Customer,CustomerName,BaseUnit,SpotbuyMaterial,SpotbuyMaterialText,SpotbuyMaterialPrice,GeneralMaterial,GeneralMaterialText,GeneralMaterialPrice,MaterialQuantity,NetPriceDiff,MateriaGroup,AccountingDocument,AccountingDocumentItem,GLAccount,GLAccountText,FixedAsset,FixedAssetText,POQuantity,NetAmount,TransportExpenseMaterial,TransportExpenseMaterialText,MaterialDocument,MaterialDocumentItem,SSMaterial,SSMaterialText,Quantity">
+            <smartTable:customToolbar>
+                <OverflowToolbar design="Transparent">
+                    <ToolbarSpacer/>
+                    <Button icon="sap-icon://delete" text="{i18n>Delete}" type="Transparent" press="onDelete" enabled="{= ${local>/authorityCheck/button/Delete}}"/>
+                </OverflowToolbar>
+            </smartTable:customToolbar>
+            <table:Table id="idCustomListTable" selectionMode="MultiToggle" class="sapUiSizeCompact">
+                <table:rowMode>
+                    <rowmodes:Interactive/>
+                </table:rowMode>
+                <table:columns>
+                    <table:Column width="8rem" label="{i18n>YearMonth}" sortProperty="YearMonth" filterProperty="YearMonth">
+                        <table:customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey":"YearMonth", "leadingProperty":"YearMonth"}'/>
+                        </table:customData>
+                        <table:template>
+                            <Text text="{YearMonth}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>RecoveryManagementNumber}" sortProperty="RecoveryManagementNumber" filterProperty="RecoveryManagementNumber">
+                        <table:customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryManagementNumber", "leadingProperty":"RecoveryManagementNumber"}'/>
+                        </table:customData>
+                        <table:template>
+                            <Text text="{RecoveryManagementNumber}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="10rem" label="{i18n>PurchaseOrder}" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder">
+                        <table:customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrder", "leadingProperty":"PurchaseOrder"}'/>
+                        </table:customData>
+                        <table:template>
+                            <Text text="{PurchaseOrder}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="8rem" label="{i18n>PurchaseOrderItem}" sortProperty="PurchaseOrderItem" filterProperty="PurchaseOrderItem">
+                        <table:customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderItem", "leadingProperty":"PurchaseOrderItem"}'/>
+                        </table:customData>
+                        <table:template>
+                            <Text text="{PurchaseOrderItem}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="12rem" label="{i18n>InitialMaterial}" sortProperty="InitialMaterial" filterProperty="InitialMaterial">
+                        <table:customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey":"InitialMaterial", "leadingProperty":"InitialMaterial"}'/>
+                        </table:customData>
+                        <table:template>
+                            <Text text="{InitialMaterial}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="18rem" label="{i18n>InitialMaterialText}" sortProperty="InitialMaterialText" filterProperty="InitialMaterialText">
+                        <table:customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey":"InitialMaterialText", "leadingProperty":"InitialMaterialText"}'/>
+                        </table:customData>
+                        <table:template>
+                            <Text text="{InitialMaterialText}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" label="{i18n>RecoveryNecessaryAmount}" sortProperty="RecoveryNecessaryAmount" filterProperty="RecoveryNecessaryAmount" hAlign="End">
+                        <table:customData>
+                            <core:CustomData key="p13nData" value='\{"columnKey":"RecoveryNecessaryAmount", "leadingProperty":"RecoveryNecessaryAmount"}'/>
+                        </table:customData>
+                        <table:template>
+                            <Text text="{ parts: [ { path: 'RecoveryNecessaryAmount' }, { path: 'CompanyCurrency' } ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: true } }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </smartTable:SmartTable>
+    </VBox>
+</mvc:View>
