@@ -393,7 +393,6 @@ sap.ui.define([
                 var sType = oContext.getProperty("PlanType");
                 var sSobmx = oContext.getProperty("Sobmx");
                 // 设置整行背景色
-                var $row = $("#" + oRow.getId());
                 if (sType === "I") {
                     $row.css("background-color", "#FFFDBF");
                 } else if (sType === "O") {
@@ -422,8 +421,16 @@ sap.ui.define([
                         return;
                     };
                     var aItems = oCell.getItems && oCell.getItems();
+                    // 不是 VBox，或者没有两个控件
+                    if (!aItems || aItems.length < 2) {
+                        return;
+                    }
                     var oText = aItems[0];
                     var oInput = aItems[1];
+                    // 确保第二个控件确实是 Input
+                    if (!oInput.isA("sap.m.Input")) {
+                        return;
+                    }
 
                     // 不是 W/P 类型，清除日期 Cell 颜色
                     if (sType !== "W" && sType !== "P") {
@@ -433,7 +440,7 @@ sap.ui.define([
 
                     // 根据首字母设置颜色
                     if (sType === "P") {
-                        // 已计划，text一直保留首字母用于判断
+                        // 已计划，text一直保留首字母用于判断，input用于显示
                         var sValue = oText.getText();
                         if (!sValue) {
                             oCell.$().parent().parent().css("background-color", "");
@@ -444,24 +451,21 @@ sap.ui.define([
                             case "B":
                                 oInput.setValue(sValue.slice(1));
                                 oCell.$().parent().parent().css("background-color", "#6495ED");
-                                oInput.$().find(".sapMInputBaseContentWrapper").css("background-color", "#6495ED");
                                 break;
                             case "R":
                                 oInput.setValue(sValue.slice(1));
                                 oCell.$().parent().parent().css("background-color", "#ff0000");
-                                oInput.$().find(".sapMInputBaseContentWrapper").css("background-color", "#ff0000");
                                 break;
                             case "Y":
                                 oInput.setValue(sValue.slice(1));
                                 oCell.$().parent().parent().css("background-color", "#FFFF00");
-                                oInput.$().find(".sapMInputBaseContentWrapper").css("background-color", "#FFFF00");
                                 break;
                             default:
                                 oCell.$().parent().parent().css("background-color", "");
                                 break;
                         }
                     } else {
-                        //未分配，input一直保留首字母用于判断
+                        //未分配，input一直保留首字母用于判断，text用于显示
                         var sValue = oInput.getValue();
                         if (!sValue) {
                             oCell.$().parent().parent().css("background-color", "");
@@ -737,7 +741,7 @@ sap.ui.define([
                             return;
                         }
                         var sValue = oRow[sKey];
-                        if (typeof sValue === "string" && /^[RYG]/.test(sValue)) {
+                        if (typeof sValue === "string" && /^[BRYG]/.test(sValue)) {
                             oRow[sKey] = sValue.slice(1);
                         }
                     });
