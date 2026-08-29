@@ -190,6 +190,28 @@
                             </table:template>
                         </table:Column>
                         <table:Column
+                            width="8rem"
+                            label="{i18n>DeliveryQty}"
+                        >
+                            <table:template>
+                                <Text
+                                    text="{local>DeliveryQty}"
+                                    wrapping="false"
+                                />
+                            </table:template>
+                        </table:Column>
+                        <table:Column
+                            width="8rem"
+                            label="{i18n>UndeliveryQty}"
+                        >
+                            <table:template>
+                                <Text
+                                    text="{local>UndeliveryQty}"
+                                    wrapping="false"
+                                />
+                            </table:template>
+                        </table:Column>
+                        <table:Column
                             width="12rem"
                             label="{i18n>Remark}"
                         >

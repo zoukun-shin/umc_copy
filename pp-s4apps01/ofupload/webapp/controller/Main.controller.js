@@ -89,16 +89,6 @@ sap.ui.define([
                 this.getView().destroy();
                 this.oErrorMessageDialog.open();
             }.bind(this));
-
-                this.getModel("local").setProperty("/authorityCheck", {
-                    button: {
-                        View: true,
-                        Upload: true,
-                        Check: true,
-                        Execute: true,
-                        Export: true,
-                    }
-                });
         },
 
         onFileUploaderChange: function (oEvent) {
@@ -291,6 +281,8 @@ sap.ui.define([
                         aItems.forEach(function (item) {
                             item.Type = line.TYPE;
                             item.Message = line.MESSAGE;
+                            item.DeliveryQty = line.DELIVERYQTY;
+                            item.UndeliveryQty = line.UNDELIVERYQTY;
                         });
                     });
                     this._LocalData.setProperty("/excelSet", aExcelSet);

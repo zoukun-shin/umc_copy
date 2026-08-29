@@ -6,7 +6,7 @@ sap.ui.define([
 ], function (Controller, History, UIComponent, formatter) {
 	"use strict";
 
-	return Controller.extend("mm.quotaarrangement.controller.BaseController", {
+	return Controller.extend("pp.ofupload.controller.BaseController", {
 
 		onInit: function () {
 			this.localData = this.getOwnerComponent().getModel("local");
