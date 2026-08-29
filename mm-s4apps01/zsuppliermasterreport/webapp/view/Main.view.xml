@@ -1,0 +1,66 @@
+<mvc:View controllerName="mm.zsuppliermasterreport.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="SupplierMaster_SVM" showShare="true" showExecuteOnSelection="true" entitySet="ZC_SupplierMasterReport"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ZC_SupplierMasterReport" useToolbar="false" smartVariant="__SVM01" persistencyKey="SupplierMaster_SFB">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Supplier" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="SearchTerm1" visibleInAdvancedArea="true" label="{i18n>SearchTerm1}" />
+                                <smartFilterBar:ControlConfiguration index='30' key="CompanyCode" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>CompanyCode}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="PurchasingOrganization" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PurchasingOrganization}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="CreationDate" visibleInAdvancedArea="true" label="{i18n>CreationDate}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="BusinessPartnerName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ContactPerson" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TelPhone" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="FaxNumber" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="EmailAddress" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Address" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BPAddrCityName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderCurrency" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PaymentMethodsList" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PaymentMethodDescription" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PaymentTerms" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PaymentTermsName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ReferenceSupplier" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IncotermsClassification" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IncotermsLocation1" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IncotermsLocation2" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IndustrySector" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CustomerSupplierIndustryName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchasingGroup" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CreationDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CreatedByUser" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SuplrQualityManagementSystem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SuplrQltyInProcmtCertfnValidTo" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplierSubrange" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplierSubrangeName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="mm.zsuppliermasterreport.fragments.List" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

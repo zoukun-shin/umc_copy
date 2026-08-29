@@ -115,6 +115,10 @@ modules:
       - mmpurorderpricing.zip
       name: mmpurorderpricing
       target-path: resources/
+    - artifacts:
+      - mmzsuppliermasterreport.zip
+      name: mmzsuppliermasterreport
+      target-path: resources/
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -271,6 +275,15 @@ modules:
 - name: mmpurorderpricing
   type: html5
   path: purorderpricing
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmzsuppliermasterreport
+  type: html5
+  path: zsuppliermasterreport
   build-parameters:
     build-result: dist
     builder: custom

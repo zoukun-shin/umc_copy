@@ -1,0 +1,304 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <smartTable:SmartTable entitySet="ZC_SupplierMasterReport" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="SupplierMaster_ST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="true" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="" ignoredFields="">
+        <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto" threshold="5000" enableColumnFreeze="true" fixedColumnCount="2">
+            <table:columns>
+                <!-- 1. 公司 -->
+                <table:Column width="8rem" label="{i18n>CompanyCode}" sortProperty="CompanyCode" filterProperty="CompanyCode">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode", "leadingProperty":"CompanyCode"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{CompanyCode}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 2. 供应商 -->
+                <table:Column width="8rem" label="{i18n>Supplier}" sortProperty="Supplier" filterProperty="Supplier">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Supplier", "leadingProperty":"Supplier"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Supplier}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 3. 供应商名称 -->
+                <table:Column width="15rem" label="{i18n>BusinessPartnerName}" sortProperty="BusinessPartnerName" filterProperty="BusinessPartnerName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"BusinessPartnerName", "leadingProperty":"BusinessPartnerName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{BusinessPartnerName}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 4. 检索项 -->
+                <table:Column width="12rem" label="{i18n>SearchTerm1}" sortProperty="SearchTerm1" filterProperty="SearchTerm1">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SearchTerm1", "leadingProperty":"SearchTerm1"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SearchTerm1}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 5. 采购组织 -->
+                <table:Column width="8rem" label="{i18n>PurchasingOrganization}" sortProperty="PurchasingOrganization" filterProperty="PurchasingOrganization">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PurchasingOrganization", "leadingProperty":"PurchasingOrganization"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PurchasingOrganization}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 6. 联系人 -->
+                <table:Column width="10rem" label="{i18n>ContactPerson}" sortProperty="ContactPerson" filterProperty="ContactPerson">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ContactPerson", "leadingProperty":"ContactPerson"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ContactPerson}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 7. 电话 -->
+                <table:Column width="10rem" label="{i18n>TelPhone}" sortProperty="TelPhone" filterProperty="TelPhone">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"TelPhone", "leadingProperty":"TelPhone"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{TelPhone}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 8. 传真号 -->
+                <table:Column width="10rem" label="{i18n>FaxNumber}" sortProperty="FaxNumber" filterProperty="FaxNumber">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"FaxNumber", "leadingProperty":"FaxNumber"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{FaxNumber}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 9. 邮件地址 -->
+                <table:Column width="12rem" label="{i18n>EmailAddress}" sortProperty="EmailAddress" filterProperty="EmailAddress">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"EmailAddress", "leadingProperty":"EmailAddress"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{EmailAddress}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 10. 地址 -->
+                <table:Column width="15rem" label="{i18n>Address}" sortProperty="Address" filterProperty="Address">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Address", "leadingProperty":"Address"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Address}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 11. 国家 -->
+                <table:Column width="6rem" label="{i18n>Country}" sortProperty="Country" filterProperty="Country">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Country", "leadingProperty":"Country"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Country}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 12. 货币 -->
+                <table:Column width="6rem" label="{i18n>PurchaseOrderCurrency}" sortProperty="PurchaseOrderCurrency" filterProperty="PurchaseOrderCurrency">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderCurrency", "leadingProperty":"PurchaseOrderCurrency"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PurchaseOrderCurrency}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 13. 付款方式 -->
+                <table:Column width="10rem" label="{i18n>PaymentMethodsList}" sortProperty="PaymentMethodsList" filterProperty="PaymentMethodsList">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PaymentMethodsList", "leadingProperty":"PaymentMethodsList"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PaymentMethodsList}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 14. 付款方式描述 -->
+                <table:Column width="20rem" label="{i18n>PaymentMethodDescription}" sortProperty="PaymentMethodDescription" filterProperty="PaymentMethodDescription">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PaymentMethodDescription", "leadingProperty":"PaymentMethodDescription"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PaymentMethodDescription}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 15. 支付条件 -->
+                <table:Column width="8rem" label="{i18n>PaymentTerms}" sortProperty="PaymentTerms" filterProperty="PaymentTerms">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PaymentTerms", "leadingProperty":"PaymentTerms"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PaymentTerms}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 16. 支付条件描述 -->
+                <table:Column width="20rem" label="{i18n>PaymentTermsName}" sortProperty="PaymentTermsName" filterProperty="PaymentTermsName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PaymentTermsName", "leadingProperty":"PaymentTermsName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PaymentTermsName}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 17. 出票方 -->
+                <table:Column width="8rem" label="{i18n>ReferenceSupplier}" sortProperty="ReferenceSupplier" filterProperty="ReferenceSupplier">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ReferenceSupplier", "leadingProperty":"ReferenceSupplier"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ReferenceSupplier}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 18. 国贸条件 -->
+                <table:Column width="8rem" label="{i18n>IncotermsClassification}" sortProperty="IncotermsClassification" filterProperty="IncotermsClassification">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"IncotermsClassification", "leadingProperty":"IncotermsClassification"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{IncotermsClassification}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 19. 国贸条件地址 -->
+                <table:Column width="12rem" label="{i18n>IncotermsLocation1}" sortProperty="IncotermsLocation1" filterProperty="IncotermsLocation1">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"IncotermsLocation1", "leadingProperty":"IncotermsLocation1"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{IncotermsLocation1}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 20. 国贸条件地址2 -->
+                <table:Column width="12rem" label="{i18n>IncotermsLocation2}" sortProperty="IncotermsLocation2" filterProperty="IncotermsLocation2">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"IncotermsLocation2", "leadingProperty":"IncotermsLocation2"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{IncotermsLocation2}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 21. 经营类别 -->
+                <table:Column width="8rem" label="{i18n>IndustrySector}" sortProperty="IndustrySector" filterProperty="IndustrySector">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"IndustrySector", "leadingProperty":"IndustrySector"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{IndustrySector}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 22. 经营类别描述 -->
+                <table:Column width="12rem" label="{i18n>CustomerSupplierIndustryName}" sortProperty="CustomerSupplierIndustryName" filterProperty="CustomerSupplierIndustryName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CustomerSupplierIndustryName", "leadingProperty":"CustomerSupplierIndustryName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{CustomerSupplierIndustryName}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 23. 采购组 -->
+                <table:Column width="8rem" label="{i18n>PurchasingGroup}" sortProperty="PurchasingGroup" filterProperty="PurchasingGroup">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PurchasingGroup", "leadingProperty":"PurchasingGroup"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PurchasingGroup}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 24. 创建日期 -->
+                <table:Column width="8rem" label="{i18n>CreationDate}" sortProperty="CreationDate" filterProperty="CreationDate">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CreationDate", "leadingProperty":"CreationDate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ path: 'CreationDate', type: 'sap.ui.model.type.Date' }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 25. 创建者 -->
+                <table:Column width="10rem" label="{i18n>CreatedByUser}" sortProperty="CreatedByUser" filterProperty="CreatedByUser">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CreatedByUser", "leadingProperty":"CreatedByUser"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{CreatedByUser}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 26. ISO认证 -->
+                <table:Column width="8rem" label="{i18n>SuplrQualityManagementSystem}" sortProperty="SuplrQualityManagementSystem" filterProperty="SuplrQualityManagementSystem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SuplrQualityManagementSystem", "leadingProperty":"SuplrQualityManagementSystem"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SuplrQualityManagementSystem}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 27. ISO有效日期 -->
+                <table:Column width="8rem" label="{i18n>SuplrQltyInProcmtCertfnValidTo}" sortProperty="SuplrQltyInProcmtCertfnValidTo" filterProperty="SuplrQltyInProcmtCertfnValidTo">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SuplrQltyInProcmtCertfnValidTo", "leadingProperty":"SuplrQltyInProcmtCertfnValidTo"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ path: 'SuplrQltyInProcmtCertfnValidTo', type: 'sap.ui.model.type.Date' }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 28. 供应商子范围 -->
+                <table:Column width="15rem" label="{i18n>SupplierSubrange}" sortProperty="SupplierSubrange" filterProperty="SupplierSubrange">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SupplierSubrange", "leadingProperty":"SupplierSubrange"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SupplierSubrange}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 29. 供应商子范围的描述 -->
+                <table:Column width="12rem" label="{i18n>SupplierSubrangeName}" sortProperty="SupplierSubrangeName" filterProperty="SupplierSubrangeName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SupplierSubrangeName", "leadingProperty":"SupplierSubrangeName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SupplierSubrangeName}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </smartTable:SmartTable>
+</core:FragmentDefinition>
