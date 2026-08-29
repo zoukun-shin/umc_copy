@@ -1,0 +1,48 @@
+<mvc:View controllerName="mm.zsupplierdeliveryratioreport.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="SupplierDelivery_SVM" showShare="true" showExecuteOnSelection="true" entitySet="ZC_SupplierDeliveryReport"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ZC_SupplierDeliveryReport" useToolbar="false" smartVariant="__SVM01" persistencyKey="SupplierDelivery_SFB">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Supplier" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}" />
+                                <smartFilterBar:ControlConfiguration index='30' key="DeliveryDate" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>DeliveryDate}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplierName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ReqDeliveryCount" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ActDeliveryCount" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CountRatio" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ReqDeliveryQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ActDeliveryQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QtyRatio" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="OverallAchievementRate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DateHigh" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DateLow" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="mm.zsupplierdeliveryratioreport.fragments.List" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

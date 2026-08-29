@@ -1,0 +1,134 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <smartTable:SmartTable entitySet="ZC_SupplierDeliveryReport" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="SupplierDelivery_ST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="true" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="DeliveryDate,BaseUnit,UserEmail" ignoredFields="DeliveryDate,BaseUnit,UserEmail">
+        <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto" threshold="5000" enableColumnFreeze="true" fixedColumnCount="2">
+            <table:columns>
+                <!-- 1. 工厂 -->
+                <table:Column width="6rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Plant}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 2. 供应商 -->
+                <table:Column width="8rem" label="{i18n>Supplier}" sortProperty="Supplier" filterProperty="Supplier">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Supplier", "leadingProperty":"Supplier"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Supplier}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 3. 供应商名称 -->
+                <table:Column width="20rem" label="{i18n>SupplierName}" sortProperty="SupplierName" filterProperty="SupplierName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SupplierName", "leadingProperty":"SupplierName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SupplierName}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 4. 要求交货次数 -->
+                <table:Column width="8rem" label="{i18n>ReqDeliveryCount}" sortProperty="ReqDeliveryCount" filterProperty="ReqDeliveryCount" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ReqDeliveryCount", "leadingProperty":"ReqDeliveryCount"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ path:'ReqDeliveryCount',formatter:'.formatter.formatNumber' }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 5. 实际交货次数 -->
+                <table:Column width="8rem" label="{i18n>ActDeliveryCount}" sortProperty="ActDeliveryCount" filterProperty="ActDeliveryCount" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ActDeliveryCount", "leadingProperty":"ActDeliveryCount"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ path:'ActDeliveryCount',formatter:'.formatter.formatNumber' }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 6. 次数比率 -->
+                <table:Column width="8rem" label="{i18n>CountRatio}" sortProperty="CountRatio" filterProperty="CountRatio" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CountRatio", "leadingProperty":"CountRatio"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ path:'CountRatio',formatter:'.formatter.formatPercentage' }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 7. 要求交货数量 -->
+                <table:Column width="10rem" label="{i18n>ReqDeliveryQty}" sortProperty="ReqDeliveryQty" filterProperty="ReqDeliveryQty" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ReqDeliveryQty", "leadingProperty":"ReqDeliveryQty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ parts: [ { path: 'ReqDeliveryQty' }, { path: 'BaseUnit' } ], type: 'sap.ui.model.type.Unit', formatOptions: { showMeasure: true } }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 8. 实际交货数量 -->
+                <table:Column width="10rem" label="{i18n>ActDeliveryQty}" sortProperty="ActDeliveryQty" filterProperty="ActDeliveryQty" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ActDeliveryQty", "leadingProperty":"ActDeliveryQty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ parts: [ { path: 'ActDeliveryQty' }, { path: 'BaseUnit' } ], type: 'sap.ui.model.type.Unit', formatOptions: { showMeasure: true } }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 9. 数量比率 -->
+                <table:Column width="8rem" label="{i18n>QtyRatio}" sortProperty="QtyRatio" filterProperty="QtyRatio" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"QtyRatio", "leadingProperty":"QtyRatio"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ path:'QtyRatio',formatter:'.formatter.formatPercentage' }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 10. 综合达成率 -->
+                <table:Column width="8rem" label="{i18n>OverallAchievementRate}" sortProperty="OverallAchievementRate" filterProperty="OverallAchievementRate" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"OverallAchievementRate", "leadingProperty":"OverallAchievementRate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ path:'OverallAchievementRate',formatter:'.formatter.formatPercentage' }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 11. 日期上限 -->
+                <table:Column width="8rem" label="{i18n>DateHigh}" sortProperty="DateHigh" filterProperty="DateHigh">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"DateHigh", "leadingProperty":"DateHigh"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ path:'DateHigh',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 12. 日期下限 -->
+                <table:Column width="8rem" label="{i18n>DateLow}" sortProperty="DateLow" filterProperty="DateLow">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"DateLow", "leadingProperty":"DateLow"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ path:'DateLow',formatter:'.formatter.formatDate' }" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </smartTable:SmartTable>
+</core:FragmentDefinition>
