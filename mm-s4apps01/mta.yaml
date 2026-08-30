@@ -123,6 +123,10 @@ modules:
       - mmzsupplierdeliveryratioreport.zip
       name: mmzsupplierdeliveryratioreport
       target-path: resources/
+    - artifacts:
+      - mmzsupplierresdlvdatereport.zip
+      name: mmzsupplierresdlvdatereport
+      target-path: resources/
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -297,6 +301,15 @@ modules:
 - name: mmzsupplierdeliveryratioreport
   type: html5
   path: zsupplierdeliveryratioreport
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmzsupplierresdlvdatereport
+  type: html5
+  path: zsupplierresdlvdatereport
   build-parameters:
     build-result: dist
     builder: custom

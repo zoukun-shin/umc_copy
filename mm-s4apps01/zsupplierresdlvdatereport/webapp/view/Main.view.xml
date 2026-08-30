@@ -1,0 +1,85 @@
+<mvc:View controllerName="mm.zsupplierresdlvdatereport.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="SupplierResDlv_SVM" showShare="true" showExecuteOnSelection="true" entitySet="ZC_SupplierResDlvDateReport"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ZC_SupplierResDlvDateReport" useToolbar="false" smartVariant="__SVM01" persistencyKey="SupplierResDlv_SFB">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}" />
+                                <smartFilterBar:ControlConfiguration index='20' key="Supplier" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="PurchaseOrder" visibleInAdvancedArea="true" label="{i18n>PurchaseOrder}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="PurchasingOrganization" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PurchasingOrganization}"/>
+                                <smartFilterBar:ControlConfiguration index='50' key="PurchasingGroup" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PurchasingGroup}"/>
+                                <smartFilterBar:ControlConfiguration index='60' key="MRPController" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>MRPController}"/>
+                                <smartFilterBar:ControlConfiguration index='70' key="Material" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='80' key="StorageLocation" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>StorageLocation}"/>
+                                <smartFilterBar:ControlConfiguration index='90' key="POAndItem" visibleInAdvancedArea="true" label="{i18n>POAndItem}"/>
+                                <smartFilterBar:ControlConfiguration index='100' key="PORemainingFlag" visibleInAdvancedArea="true" label="{i18n>PORemainingFlag}"/>
+                                <smartFilterBar:ControlConfiguration index='110' key="ShipmentDate" visibleInAdvancedArea="true" label="{i18n>ShipmentDate}"/>
+                                <smartFilterBar:ControlConfiguration index='120' key="ShipmentNumber" visibleInAdvancedArea="true" label="{i18n>ShipmentNumber}"/>
+                                <smartFilterBar:ControlConfiguration index='130' key="InvoiceNumber" visibleInAdvancedArea="true" label="{i18n>InvoiceNumber}"/>
+                                <smartFilterBar:ControlConfiguration index='140' key="GRDate" visibleInAdvancedArea="true" label="{i18n>GRDate}"/>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="UniqueId" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ShipmentQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="OrderUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CountryOfOrigin" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ETA_HK_Date" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="TotalShipmentQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CreationDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PaymentTerms" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplierName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DocumentCurrency" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplierSubrange" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ManufacturerPartNmbr" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Manufacturer" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ManufacturerMaterial" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderItemText" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IsCompletelyDelivered" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NetPriceAmount" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="OrderQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="UnitPrice" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PORemainingQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="SupplierSubrangeDesc" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="PORequiredDate" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="WeightUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NetWeight" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="HSCode" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CommodityName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="MatDocAndItem" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="GRQuantity" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Status" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="InspectionQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AcceptedQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="DefectiveQty" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="GRAmountUSD" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="USDCurrency" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="UserEmail" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="mm.zsupplierresdlvdatereport.fragments.List" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

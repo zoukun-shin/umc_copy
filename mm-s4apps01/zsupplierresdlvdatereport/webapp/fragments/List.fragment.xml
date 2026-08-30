@@ -1,0 +1,474 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <smartTable:SmartTable entitySet="ZC_SupplierResDlvDateReport" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="SupplierResDlv_ST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="true" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="USDCurrency" ignoredFields="PurchasingOrganization,USDCurrency,UserEmail">
+        <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto" threshold="5000" enableColumnFreeze="true" fixedColumnCount="3">
+            <table:columns>
+                <!-- 1. 唯一识别号 -->
+                <table:Column width="8rem" label="{i18n>UniqueId}" sortProperty="UniqueId" filterProperty="UniqueId">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"UniqueId", "leadingProperty":"UniqueId"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{UniqueId}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 2. 采购订单 -->
+                <table:Column width="8rem" label="{i18n>PurchaseOrder}" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrder", "leadingProperty":"PurchaseOrder"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PurchaseOrder}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 3. 采购订单行项目 -->
+                <table:Column width="8rem" label="{i18n>PurchaseOrderItem}" sortProperty="PurchaseOrderItem" filterProperty="PurchaseOrderItem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderItem", "leadingProperty":"PurchaseOrderItem"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PurchaseOrderItem}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 4. 转运单 -->
+                <table:Column width="8rem" label="{i18n>ShipmentNumber}" sortProperty="ShipmentNumber" filterProperty="ShipmentNumber">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShipmentNumber", "leadingProperty":"ShipmentNumber"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ShipmentNumber}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 5. 转运数量 -->
+                <table:Column width="10rem" label="{i18n>ShipmentQty}" sortProperty="ShipmentQty" filterProperty="ShipmentQty" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShipmentQty", "leadingProperty":"ShipmentQty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'ShipmentQty'}, {path: 'OrderUnit'}], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false, minFractionDigits: 3, maxFractionDigits: 3}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 6. 订单单位 -->
+                <table:Column width="6rem" label="{i18n>OrderUnit}" sortProperty="OrderUnit" filterProperty="OrderUnit">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"OrderUnit", "leadingProperty":"OrderUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{OrderUnit}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 7. 发票号 -->
+                <table:Column width="8rem" label="{i18n>InvoiceNumber}" sortProperty="InvoiceNumber" filterProperty="InvoiceNumber">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"InvoiceNumber", "leadingProperty":"InvoiceNumber"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{InvoiceNumber}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 8. 原产国 -->
+                <table:Column width="6rem" label="{i18n>CountryOfOrigin}" sortProperty="CountryOfOrigin" filterProperty="CountryOfOrigin">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CountryOfOrigin", "leadingProperty":"CountryOfOrigin"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{CountryOfOrigin}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 9. ETA香港日期 -->
+                <table:Column width="8rem" label="{i18n>ETA_HK_Date}" sortProperty="ETA_HK_Date" filterProperty="ETA_HK_Date">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ETA_HK_Date", "leadingProperty":"ETA_HK_Date"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{path: 'ETA_HK_Date', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'yyyy/MM/dd'}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 10. 转运日期 -->
+                <table:Column width="8rem" label="{i18n>ShipmentDate}" sortProperty="ShipmentDate" filterProperty="ShipmentDate">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ShipmentDate", "leadingProperty":"ShipmentDate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{path: 'ShipmentDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'yyyy/MM/dd'}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 11. PO&Item -->
+                <table:Column width="10rem" label="{i18n>POAndItem}" sortProperty="POAndItem" filterProperty="POAndItem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"POAndItem", "leadingProperty":"POAndItem"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{POAndItem}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 12. 已转运总数量 -->
+                <table:Column width="10rem" label="{i18n>TotalShipmentQty}" sortProperty="TotalShipmentQty" filterProperty="TotalShipmentQty" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"TotalShipmentQty", "leadingProperty":"TotalShipmentQty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'TotalShipmentQty'}, {path: 'OrderUnit'}], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false, minFractionDigits: 3, maxFractionDigits: 3}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 13. PO发行日期 -->
+                <table:Column width="8rem" label="{i18n>CreationDate}" sortProperty="CreationDate" filterProperty="CreationDate">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CreationDate", "leadingProperty":"CreationDate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{path: 'CreationDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'yyyy/MM/dd'}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 14. 供应商 -->
+                <table:Column width="8rem" label="{i18n>Supplier}" sortProperty="Supplier" filterProperty="Supplier">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Supplier", "leadingProperty":"Supplier"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Supplier}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 15. 采购组 -->
+                <table:Column width="6rem" label="{i18n>PurchasingGroup}" sortProperty="PurchasingGroup" filterProperty="PurchasingGroup">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PurchasingGroup", "leadingProperty":"PurchasingGroup"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PurchasingGroup}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 16. PayT -->
+                <table:Column width="8rem" label="{i18n>PaymentTerms}" sortProperty="PaymentTerms" filterProperty="PaymentTerms">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PaymentTerms", "leadingProperty":"PaymentTerms"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PaymentTerms}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 17. 供应商名称 -->
+                <table:Column width="20rem" label="{i18n>SupplierName}" sortProperty="SupplierName" filterProperty="SupplierName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SupplierName", "leadingProperty":"SupplierName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SupplierName}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 18. 货币 -->
+                <table:Column width="6rem" label="{i18n>DocumentCurrency}" sortProperty="DocumentCurrency" filterProperty="DocumentCurrency">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"DocumentCurrency", "leadingProperty":"DocumentCurrency"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{DocumentCurrency}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 19. 物料编号 -->
+                <table:Column width="12rem" label="{i18n>Material}" sortProperty="Material" filterProperty="Material">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Material", "leadingProperty":"Material"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Material}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 20. 供应商子范围 -->
+                <table:Column width="8rem" label="{i18n>SupplierSubrange}" sortProperty="SupplierSubrange" filterProperty="SupplierSubrange">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SupplierSubrange", "leadingProperty":"SupplierSubrange"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SupplierSubrange}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 21. 制造商零件编号 -->
+                <table:Column width="12rem" label="{i18n>ManufacturerPartNmbr}" sortProperty="ManufacturerPartNmbr" filterProperty="ManufacturerPartNmbr">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ManufacturerPartNmbr", "leadingProperty":"ManufacturerPartNmbr"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ManufacturerPartNmbr}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 22. 制造商 -->
+                <table:Column width="8rem" label="{i18n>Manufacturer}" sortProperty="Manufacturer" filterProperty="Manufacturer">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Manufacturer", "leadingProperty":"Manufacturer"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Manufacturer}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 23. MPN物料 -->
+                <table:Column width="12rem" label="{i18n>ManufacturerMaterial}" sortProperty="ManufacturerMaterial" filterProperty="ManufacturerMaterial">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"ManufacturerMaterial", "leadingProperty":"ManufacturerMaterial"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{ManufacturerMaterial}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 24. 物料描述 -->
+                <table:Column width="20rem" label="{i18n>PurchaseOrderItemText}" sortProperty="PurchaseOrderItemText" filterProperty="PurchaseOrderItemText">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderItemText", "leadingProperty":"PurchaseOrderItemText"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{PurchaseOrderItemText}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 25. 工厂 -->
+                <table:Column width="6rem" label="{i18n>Plant}" sortProperty="Plant" filterProperty="Plant">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Plant", "leadingProperty":"Plant"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Plant}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 26. 库存地点 -->
+                <table:Column width="6rem" label="{i18n>StorageLocation}" sortProperty="StorageLocation" filterProperty="StorageLocation">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"StorageLocation", "leadingProperty":"StorageLocation"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{StorageLocation}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 27. 交货完成标识 -->
+                <table:Column width="8rem" label="{i18n>IsCompletelyDelivered}" sortProperty="IsCompletelyDelivered" filterProperty="IsCompletelyDelivered">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"IsCompletelyDelivered", "leadingProperty":"IsCompletelyDelivered"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{IsCompletelyDelivered}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 28. 金额 -->
+                <table:Column width="10rem" label="{i18n>NetPriceAmount}" sortProperty="NetPriceAmount" filterProperty="NetPriceAmount" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"NetPriceAmount", "leadingProperty":"NetPriceAmount"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'NetPriceAmount'}, {path: 'DocumentCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false, minFractionDigits: 2, maxFractionDigits: 2}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 29. PO数量 -->
+                <table:Column width="10rem" label="{i18n>OrderQuantity}" sortProperty="OrderQuantity" filterProperty="OrderQuantity" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"OrderQuantity", "leadingProperty":"OrderQuantity"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'OrderQuantity'}, {path: 'OrderUnit'}], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false, minFractionDigits: 3, maxFractionDigits: 3}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 30. PO单价 -->
+                <table:Column width="10rem" label="{i18n>UnitPrice}" sortProperty="UnitPrice" filterProperty="UnitPrice" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"UnitPrice", "leadingProperty":"UnitPrice"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'UnitPrice'}, {path: 'DocumentCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false, minFractionDigits: 2, maxFractionDigits: 2}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 31. PO残数量 -->
+                <table:Column width="10rem" label="{i18n>PORemainingQty}" sortProperty="PORemainingQty" filterProperty="PORemainingQty" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PORemainingQty", "leadingProperty":"PORemainingQty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'PORemainingQty'}, {path: 'OrderUnit'}], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false, minFractionDigits: 3, maxFractionDigits: 3}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 32. 供应商子范围描述 -->
+                <table:Column width="10rem" label="{i18n>SupplierSubrangeDesc}" sortProperty="SupplierSubrangeDesc" filterProperty="SupplierSubrangeDesc">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"SupplierSubrangeDesc", "leadingProperty":"SupplierSubrangeDesc"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{SupplierSubrangeDesc}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 33. PO要求日期 -->
+                <table:Column width="8rem" label="{i18n>PORequiredDate}" sortProperty="PORequiredDate" filterProperty="PORequiredDate">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"PORequiredDate", "leadingProperty":"PORequiredDate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{path: 'PORequiredDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'yyyy/MM/dd'}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 34. 主数据净重 -->
+                <table:Column width="10rem" label="{i18n>NetWeight}" sortProperty="NetWeight" filterProperty="NetWeight" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"NetWeight", "leadingProperty":"NetWeight"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'NetWeight'}, {path: 'WeightUnit'}], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 35. 主数据重量单位 -->
+                <table:Column width="8rem" label="{i18n>WeightUnit}" sortProperty="WeightUnit" filterProperty="WeightUnit">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"WeightUnit", "leadingProperty":"WeightUnit"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{WeightUnit}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 36. 商品编号 -->
+                <table:Column width="10rem" label="{i18n>HSCode}" sortProperty="HSCode" filterProperty="HSCode">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"HSCode", "leadingProperty":"HSCode"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{HSCode}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 37. 商品名称 -->
+                <table:Column width="15rem" label="{i18n>CommodityName}" sortProperty="CommodityName" filterProperty="CommodityName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"CommodityName", "leadingProperty":"CommodityName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{CommodityName}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 38. MRP控制者 -->
+                <table:Column width="8rem" label="{i18n>MRPController}" sortProperty="MRPController" filterProperty="MRPController">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"MRPController", "leadingProperty":"MRPController"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{MRPController}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 39. 物料凭证+行号 -->
+                <table:Column width="10rem" label="{i18n>MatDocAndItem}" sortProperty="MatDocAndItem" filterProperty="MatDocAndItem">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"MatDocAndItem", "leadingProperty":"MatDocAndItem"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{MatDocAndItem}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 40. 收货日期 -->
+                <table:Column width="8rem" label="{i18n>GRDate}" sortProperty="GRDate" filterProperty="GRDate">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"GRDate", "leadingProperty":"GRDate"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{path: 'GRDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'yyyy/MM/dd'}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 41. 收货数量 -->
+                <table:Column width="10rem" label="{i18n>GRQuantity}" sortProperty="GRQuantity" filterProperty="GRQuantity" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"GRQuantity", "leadingProperty":"GRQuantity"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'GRQuantity'}, {path: 'OrderUnit'}], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false, minFractionDigits: 3, maxFractionDigits: 3}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 42. 状态 -->
+                <table:Column width="6rem" label="{i18n>Status}" sortProperty="Status" filterProperty="Status">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"Status", "leadingProperty":"Status"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{Status}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 43. 待检数 -->
+                <table:Column width="10rem" label="{i18n>InspectionQty}" sortProperty="InspectionQty" filterProperty="InspectionQty" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"InspectionQty", "leadingProperty":"InspectionQty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'InspectionQty'}, {path: 'OrderUnit'}], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false, minFractionDigits: 3, maxFractionDigits: 3}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 44. 合格数量 -->
+                <table:Column width="10rem" label="{i18n>AcceptedQty}" sortProperty="AcceptedQty" filterProperty="AcceptedQty" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"AcceptedQty", "leadingProperty":"AcceptedQty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'AcceptedQty'}, {path: 'OrderUnit'}], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false, minFractionDigits: 3, maxFractionDigits: 3}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 45. 不合格数量 -->
+                <table:Column width="10rem" label="{i18n>DefectiveQty}" sortProperty="DefectiveQty" filterProperty="DefectiveQty" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"DefectiveQty", "leadingProperty":"DefectiveQty"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'DefectiveQty'}, {path: 'OrderUnit'}], type: 'sap.ui.model.type.Unit', formatOptions: {showMeasure: false, minFractionDigits: 3, maxFractionDigits: 3}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
+                <!-- 46. 收货金额USD -->
+                <table:Column width="10rem" label="{i18n>GRAmountUSD}" sortProperty="GRAmountUSD" filterProperty="GRAmountUSD" hAlign="End">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"GRAmountUSD", "leadingProperty":"GRAmountUSD"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{parts: [{path: 'GRAmountUSD'}, {path: 'USDDocumentCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false, minFractionDigits: 2, maxFractionDigits: 2}}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+            </table:columns>
+        </table:Table>
+    </smartTable:SmartTable>
+</core:FragmentDefinition>
