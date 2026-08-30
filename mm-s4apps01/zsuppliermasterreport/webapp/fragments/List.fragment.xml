@@ -245,7 +245,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"CreationDate", "leadingProperty":"CreationDate"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ path: 'CreationDate', type: 'sap.ui.model.type.Date' }" wrapping="false"/>
+                        <Text text="{ path: 'CreationDate', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'yyyy/MM/dd'} }" wrapping="false"/>
                     </table:template>
                 </table:Column>
 
@@ -275,7 +275,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"SuplrQltyInProcmtCertfnValidTo", "leadingProperty":"SuplrQltyInProcmtCertfnValidTo"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{ path: 'SuplrQltyInProcmtCertfnValidTo', type: 'sap.ui.model.type.Date' }" wrapping="false"/>
+                        <Text text="{ path: 'SuplrQltyInProcmtCertfnValidTo', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'yyyy/MM/dd'} }" wrapping="false"/>
                     </table:template>
                 </table:Column>
 
