@@ -97,13 +97,20 @@ sap.ui.define([
                         oColumn.type = sap.ui.export.EdmType.Date;
                         break;
                     //  金额类型 (Amount) - 带单位参考
-                    case "NetPriceAmount":
+                    case "NetAmount":
                     case "UnitPrice":
-                    case "GRAmountUSD":
                         oColumn.type = sap.ui.export.EdmType.Number;
                         oColumn.scale = 2;
                         oColumn.delimiter = true;
                         oColumn.unitProperty = "DocumentCurrency";
+                        oColumn.hAlign = "End";
+                        break;
+                    //  金额类型 (Amount) - 带单位参考
+                    case "GRAmountUSD":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.scale = 2;
+                        oColumn.delimiter = true;
+                        oColumn.unitProperty = "USDCurrency";
                         oColumn.hAlign = "End";
                         break;
                     //  数量类型 (Quantity) - 带单位参考

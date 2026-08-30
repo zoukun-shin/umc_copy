@@ -51,7 +51,7 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="ManufacturerMaterial" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderItemText" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="IsCompletelyDelivered" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="NetPriceAmount" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="NetAmount" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="OrderQuantity" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="UnitPrice" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="PORemainingQty" visible="false"/>

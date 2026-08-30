@@ -40,7 +40,7 @@
                 </table:Column>
 
                 <!-- 4. 转运单 -->
-                <table:Column width="8rem" label="{i18n>ShipmentNumber}" sortProperty="ShipmentNumber" filterProperty="ShipmentNumber">
+                <table:Column width="10rem" label="{i18n>ShipmentNumber}" sortProperty="ShipmentNumber" filterProperty="ShipmentNumber">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"ShipmentNumber", "leadingProperty":"ShipmentNumber"}'/>
                     </table:customData>
@@ -280,12 +280,12 @@
                 </table:Column>
 
                 <!-- 28. 金额 -->
-                <table:Column width="10rem" label="{i18n>NetPriceAmount}" sortProperty="NetPriceAmount" filterProperty="NetPriceAmount" hAlign="End">
+                <table:Column width="10rem" label="{i18n>NetAmount}" sortProperty="NetAmount" filterProperty="NetAmount" hAlign="End">
                     <table:customData>
-                        <core:CustomData key="p13nData" value='\{"columnKey":"NetPriceAmount", "leadingProperty":"NetPriceAmount"}'/>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"NetAmount", "leadingProperty":"NetAmount"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{parts: [{path: 'NetPriceAmount'}, {path: 'DocumentCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false, minFractionDigits: 2, maxFractionDigits: 2}}" wrapping="false"/>
+                        <Text text="{parts: [{path: 'NetAmount'}, {path: 'DocumentCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false, minFractionDigits: 2, maxFractionDigits: 2}}" wrapping="false"/>
                     </table:template>
                 </table:Column>
 
@@ -465,7 +465,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"GRAmountUSD", "leadingProperty":"GRAmountUSD"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{parts: [{path: 'GRAmountUSD'}, {path: 'USDDocumentCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false, minFractionDigits: 2, maxFractionDigits: 2}}" wrapping="false"/>
+                        <Text text="{parts: [{path: 'GRAmountUSD'}, {path: 'USDCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false, minFractionDigits: 2, maxFractionDigits: 2}}" wrapping="false"/>
                     </table:template>
                 </table:Column>
             </table:columns>
