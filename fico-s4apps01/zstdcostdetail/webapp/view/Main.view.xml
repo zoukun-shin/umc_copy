@@ -1,0 +1,66 @@
+<mvc:View controllerName="fico.zstdcostdetail.controller.Main" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage headerExpanded="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01" persistencyKey="StdCostDetailSVM" showShare="true" showExecuteOnSelection="true" entitySet="StdCostDetail"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <FlexBox fitContainer="true">
+                        <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="StdCostDetail" useToolbar="false" smartVariant="__SVM01" persistencyKey="StandardListSFB" initialized="onSmartFilterBarInitialized">
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
+                                <smartFilterBar:ControlConfiguration index='20' key="ProductType" mandatory="mandatory" filterType="single" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>ProductType}"/>
+                                <smartFilterBar:ControlConfiguration index='30' key="Material" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Material}"/>
+                                <smartFilterBar:ControlConfiguration index='40' key="CostingDate" mandatory="mandatory" filterType="single" visibleInAdvancedArea="true" label="{i18n>CostingDate}">
+                                    <smartFilterBar:customControl>
+                                        <DatePicker 
+                                            value="{
+                                                'path':'local>/CostingDate',
+                                                'type':'sap.ui.model.type.Date',
+                                                'formatOptions': {
+                                                    'pattern': 'yyyy/MM/dd',
+                                                    'UTC': true
+                                                }
+                                            }"
+                                        />
+                                    </smartFilterBar:customControl>
+                                </smartFilterBar:ControlConfiguration>
+                                <!-- visible -->
+                                <smartFilterBar:ControlConfiguration index='999' key="CostingItemCategory" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="ItemNo" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BillOfMaterialComponent" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CostingLotSize" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CostElement" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CostCenter" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="WorkCenter" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="QuantityInBaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="BaseUnit" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CostCtrActivityType" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="AmountInCoCodeCrcy" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="CompanyCodeCurrency" visible="false"/>
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </FlexBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <FlexBox fitContainer="true">
+                <core:Fragment fragmentName="fico.zstdcostdetail.fragments.StdCostDetail" type="XML"/>
+            </FlexBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

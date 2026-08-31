@@ -194,7 +194,11 @@ modules:
     - artifacts:
       - ficozporecon.zip
       name: ficozporecon
-      target-path: resources/      
+      target-path: resources/
+    - artifacts:
+      - ficozstdcostdetail.zip
+      name: ficozstdcostdetail
+      target-path: resources/
 - name: ficopaidpay
   type: html5
   path: paidpay
@@ -531,6 +535,15 @@ modules:
 - name: ficozporecon
   type: html5
   path: zporecon
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ficozstdcostdetail
+  type: html5
+  path: zstdcostdetail
   build-parameters:
     build-result: dist
     builder: custom
