@@ -81,14 +81,21 @@ sap.ui.define([
         },
 
         // format Float, two decimal + thousandths
-        formatFloat: function (n, decimal) {
+        formatFloat: function (n, currency) {
             if (n) {
+                if (parseFloat(n) === 0 && currency === "") {
+                    return "";
+                }
                 var sign = "";
+                var decimal = 2;
                 if (typeof n === "string") {
                     var bNegative = n.endsWith("-");
                     if (bNegative) {
                         n = "-" + n.substring(0, n.length - 1);
                     }
+                }
+                if (currency === "JPY" || currency === "VND") {
+                    decimal = 0;
                 }
                 var num = Number(n).toFixed(decimal);
                 if (num < 0) {
@@ -103,6 +110,8 @@ sap.ui.define([
                     n1 = sign + n1;
                 }
                 return n1;
+            } else {
+                return n;
             }
         }
     };

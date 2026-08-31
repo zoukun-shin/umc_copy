@@ -281,7 +281,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost01", "leadingProperty":"Cost01", "sortProperty":"Cost01", "filterProperty": "Cost01"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'Cost01', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['Cost01', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>			
 			
@@ -290,7 +290,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity01", "leadingProperty":"ValuationQuantity01", "sortProperty":"ValuationQuantity01", "filterProperty": "ValuationQuantity01"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ValuationQuantity01', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+                <Text text="{path:'ValuationQuantity01', formatter:'.formatter.formatNumber'}" wrapping="false"/>
               </t:template>
             </t:Column>		
 				
@@ -317,7 +317,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost02", "leadingProperty":"Cost02", "sortProperty":"Cost02", "filterProperty": "Cost02"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'Cost02', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['Cost02', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>			
 			
@@ -326,7 +326,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity02", "leadingProperty":"ValuationQuantity02", "sortProperty":"ValuationQuantity02", "filterProperty": "ValuationQuantity02"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ValuationQuantity02', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+                <Text text="{path:'ValuationQuantity02', formatter:'.formatter.formatNumber'}" wrapping="false"/>
               </t:template>
             </t:Column>	
 
@@ -353,7 +353,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost03", "leadingProperty":"Cost03", "sortProperty":"Cost03", "filterProperty": "Cost03"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'Cost03', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['Cost03', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>			
 			
@@ -362,7 +362,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity03", "leadingProperty":"ValuationQuantity03", "sortProperty":"ValuationQuantity03", "filterProperty": "ValuationQuantity03"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ValuationQuantity03', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+                <Text text="{path:'ValuationQuantity03', formatter:'.formatter.formatNumber'}" wrapping="false"/>
               </t:template>
             </t:Column>
 
@@ -389,7 +389,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost04", "leadingProperty":"Cost04", "sortProperty":"Cost04", "filterProperty": "Cost04"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'Cost04', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['Cost04', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>			
 			
@@ -398,7 +398,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity04", "leadingProperty":"ValuationQuantity04", "sortProperty":"ValuationQuantity04", "filterProperty": "ValuationQuantity04"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ValuationQuantity04', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+                <Text text="{path:'ValuationQuantity04', formatter:'.formatter.formatNumber'}" wrapping="false"/>
               </t:template>
             </t:Column>	
 
@@ -425,7 +425,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost05", "leadingProperty":"Cost05", "sortProperty":"Cost05", "filterProperty": "Cost05"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'Cost05', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['Cost05', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>			
 			
@@ -434,7 +434,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity05", "leadingProperty":"ValuationQuantity05", "sortProperty":"ValuationQuantity05", "filterProperty": "ValuationQuantity05"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ValuationQuantity05', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+                <Text text="{path:'ValuationQuantity05', formatter:'.formatter.formatNumber'}" wrapping="false"/>
               </t:template>
             </t:Column>	
 
@@ -461,7 +461,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost06", "leadingProperty":"Cost06", "sortProperty":"Cost06", "filterProperty": "Cost06"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'Cost06', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['Cost06', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>			
 			
@@ -470,7 +470,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity06", "leadingProperty":"ValuationQuantity06", "sortProperty":"ValuationQuantity06", "filterProperty": "ValuationQuantity06"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ValuationQuantity06', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+                <Text text="{path:'ValuationQuantity06', formatter:'.formatter.formatNumber'}" wrapping="false"/>
               </t:template>
             </t:Column>
 
@@ -497,7 +497,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost07", "leadingProperty":"Cost07", "sortProperty":"Cost07", "filterProperty": "Cost07"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'Cost07', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['Cost07', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>			
 			
@@ -506,7 +506,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity07", "leadingProperty":"ValuationQuantity07", "sortProperty":"ValuationQuantity07", "filterProperty": "ValuationQuantity07"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ValuationQuantity07', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+                <Text text="{path:'ValuationQuantity07', formatter:'.formatter.formatNumber'}" wrapping="false"/>
               </t:template>
             </t:Column>	
 
@@ -533,7 +533,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost08", "leadingProperty":"Cost08", "sortProperty":"Cost08", "filterProperty": "Cost08"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'Cost08', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['Cost08', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>			
 			
@@ -542,7 +542,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity08", "leadingProperty":"ValuationQuantity08", "sortProperty":"ValuationQuantity08", "filterProperty": "ValuationQuantity08"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ValuationQuantity08', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+                <Text text="{path:'ValuationQuantity08', formatter:'.formatter.formatNumber'}" wrapping="false"/>
               </t:template>
             </t:Column>
 
@@ -569,7 +569,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost09", "leadingProperty":"Cost09", "sortProperty":"Cost09", "filterProperty": "Cost09"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'Cost09', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['Cost09', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>			
 			
@@ -578,7 +578,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity09", "leadingProperty":"ValuationQuantity09", "sortProperty":"ValuationQuantity09", "filterProperty": "ValuationQuantity09"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ValuationQuantity09', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+                <Text text="{path:'ValuationQuantity09', formatter:'.formatter.formatNumber'}" wrapping="false"/>
               </t:template>
             </t:Column>
 
@@ -605,7 +605,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"Cost10", "leadingProperty":"Cost10", "sortProperty":"Cost10", "filterProperty": "Cost10"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'Cost10', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['Cost10', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>			
 			
@@ -614,7 +614,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ValuationQuantity10", "leadingProperty":"ValuationQuantity10", "sortProperty":"ValuationQuantity10", "filterProperty": "ValuationQuantity10"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ValuationQuantity10', formatter:'.formatter.formatFloat'}" wrapping="false"/>
+                <Text text="{path:'ValuationQuantity10', formatter:'.formatter.formatNumber'}" wrapping="false"/>
               </t:template>
             </t:Column>
 
@@ -623,7 +623,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"MaterialCost2000", "leadingProperty":"MaterialCost2000", "sortProperty":"MaterialCost2000", "filterProperty": "MaterialCost2000"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'MaterialCost2000', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['MaterialCost2000', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
 			
@@ -632,7 +632,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"MaterialCost3000", "leadingProperty":"MaterialCost3000", "sortProperty":"MaterialCost3000", "filterProperty": "MaterialCost3000"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'MaterialCost3000', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['MaterialCost3000', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
 			
@@ -650,7 +650,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"PurGrpAmount1", "leadingProperty":"PurGrpAmount1", "sortProperty":"PurGrpAmount1", "filterProperty": "PurGrpAmount1"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'PurGrpAmount1', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['PurGrpAmount1', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
 
@@ -659,7 +659,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"PurGrpAmount2", "leadingProperty":"PurGrpAmount2", "sortProperty":"PurGrpAmount2", "filterProperty": "PurGrpAmount2"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'PurGrpAmount2', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['PurGrpAmount2', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>	
 				
@@ -668,7 +668,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"PurGrpAmount", "leadingProperty":"PurGrpAmount", "sortProperty":"PurGrpAmount", "filterProperty": "PurGrpAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'PurGrpAmount', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['PurGrpAmount', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
             
@@ -677,7 +677,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableAmount1", "leadingProperty":"ChargeableAmount1", "sortProperty":"ChargeableAmount1", "filterProperty": "ChargeableAmount1"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ChargeableAmount1', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['ChargeableAmount1', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
 				
@@ -686,7 +686,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableAmount2", "leadingProperty":"ChargeableAmount2", "sortProperty":"ChargeableAmount2", "filterProperty": "ChargeableAmount2"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ChargeableAmount2', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['ChargeableAmount2', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
 					
@@ -695,7 +695,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableAmount", "leadingProperty":"ChargeableAmount", "sortProperty":"ChargeableAmount", "filterProperty": "ChargeableAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ChargeableAmount', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['ChargeableAmount', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>	
 			      
@@ -704,7 +704,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"PurGrpTot", "leadingProperty":"PurGrpTot", "sortProperty":"PurGrpTot", "filterProperty": "PurGrpTot"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'PurGrpTot', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['PurGrpTot', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>	
 
@@ -713,7 +713,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"ChargeableTot", "leadingProperty":"ChargeableTot", "sortProperty":"ChargeableTot", "filterProperty": "ChargeableTot"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'ChargeableTot', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['ChargeableTot', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
             
@@ -731,7 +731,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"PreviousStockAmount", "leadingProperty":"PreviousStockAmount", "sortProperty":"PreviousStockAmount", "filterProperty": "PreviousStockAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'PreviousStockAmount', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['PreviousStockAmount', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>	
 
@@ -740,7 +740,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockAmount", "leadingProperty":"CurrentStockAmount", "sortProperty":"CurrentStockAmount", "filterProperty": "CurrentStockAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'CurrentStockAmount', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['CurrentStockAmount', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>					      
             
@@ -749,7 +749,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockSemi", "leadingProperty":"CurrentStockSemi", "sortProperty":"CurrentStockSemi", "filterProperty": "CurrentStockSemi"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'CurrentStockSemi', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['CurrentStockSemi', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
             
@@ -758,7 +758,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockFin", "leadingProperty":"CurrentStockFin", "sortProperty":"CurrentStockFin", "filterProperty": "CurrentStockFin"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'CurrentStockFin', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['CurrentStockFin', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
 				
@@ -767,7 +767,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"CurrentStockTotal", "leadingProperty":"CurrentStockTotal", "sortProperty":"CurrentStockTotal", "filterProperty": "CurrentStockTotal"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'CurrentStockTotal', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['CurrentStockTotal', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
 
@@ -776,7 +776,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"TICOAmount", "leadingProperty":"TICOAmount", "sortProperty":"TICOAmount", "filterProperty": "TICOAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'TICOAmount', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['TICOAmount', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
 
@@ -785,7 +785,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"StockChangeAmount", "leadingProperty":"StockChangeAmount", "sortProperty":"StockChangeAmount", "filterProperty": "StockChangeAmount"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'StockChangeAmount', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['StockChangeAmount', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
 				
@@ -794,7 +794,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"PaidMaterialCost", "leadingProperty":"PaidMaterialCost", "sortProperty":"PaidMaterialCost", "filterProperty": "PaidMaterialCost"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'PaidMaterialCost', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['PaidMaterialCost', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
 				
@@ -803,7 +803,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"CustomerRevenue1", "leadingProperty":"CustomerRevenue1", "sortProperty":"CustomerRevenue1", "filterProperty": "CustomerRevenue1"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'CustomerRevenue1', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['CustomerRevenue1', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>	
 
@@ -812,7 +812,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"CustomerRevenue", "leadingProperty":"CustomerRevenue", "sortProperty":"CustomerRevenue", "filterProperty": "CustomerRevenue"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'CustomerRevenue', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['CustomerRevenue', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>	
 				
@@ -821,7 +821,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"Revenue1", "leadingProperty":"Revenue1", "sortProperty":"Revenue1", "filterProperty": "Revenue1"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'Revenue1', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['Revenue1', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>		
 			
@@ -830,7 +830,7 @@
                 <core:CustomData key="p13nData" value='\{"columnKey":"Revenue", "leadingProperty":"Revenue", "sortProperty":"Revenue", "filterProperty": "Revenue"}'/>
               </t:customData>
               <t:template>
-                <Text text="{path:'Revenue', formatter:'.formatter.formatNumber'}" wrapping="false"/>
+                <Text text="{parts:['Revenue', 'Currency'], formatter:'.formatter.formatFloat'}" wrapping="false"/>
               </t:template>
             </t:Column>
             
