@@ -107,11 +107,15 @@ sap.ui.define([
                         break;
                     //  Number 分隔符
                     case "CurrentPrice":
+                    case "ConditionRateValue":
                     case "NewPrice":
                     case "Difference":
                         oColumn.type = sap.ui.export.EdmType.Number;
                         oColumn.delimiter = true;
-                        oColumn.scale = 5; // 3; // MOD BY XINLEI XU 2026/01/23 AMO#5794
+                        // MOD BEGIN BY XINLEI XU 2026/08/31 CN GAP No.16&75
+                        // oColumn.scale = 5; // 3; // MOD BY XINLEI XU 2026/01/23 AMO#5794
+                        oColumn.scale = 6;
+                        // MOD END BY XINLEI XU 2026/08/31 CN GAP No.16&75
                         oColumn.textAlign = "End";
                         break;
                     case "OrderQuantity":
