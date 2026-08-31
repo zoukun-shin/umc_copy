@@ -31,7 +31,7 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="FaxNumber" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="EmailAddress" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="Address" visible="false"/>
-                                <smartFilterBar:ControlConfiguration index='999' key="BPAddrCityName" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="Country" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderCurrency" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="PaymentMethodsList" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="PaymentMethodDescription" visible="false"/>
@@ -39,6 +39,7 @@
                                 <smartFilterBar:ControlConfiguration index='999' key="PaymentTermsName" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ReferenceSupplier" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="IncotermsClassification" visible="false"/>
+                                <smartFilterBar:ControlConfiguration index='999' key="IncotermsClassificationName" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="IncotermsLocation1" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="IncotermsLocation2" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="IndustrySector" visible="false"/>

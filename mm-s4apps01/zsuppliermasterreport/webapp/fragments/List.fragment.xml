@@ -189,6 +189,16 @@
                     </table:template>
                 </table:Column>
 
+                <!-- 18.1 国贸条件描述 -->
+                <table:Column width="15rem" label="{i18n>IncotermsClassificationName}" sortProperty="IncotermsClassificationName" filterProperty="IncotermsClassificationName">
+                    <table:customData>
+                        <core:CustomData key="p13nData" value='\{"columnKey":"IncotermsClassificationName", "leadingProperty":"IncotermsClassificationName"}'/>
+                    </table:customData>
+                    <table:template>
+                        <Text text="{IncotermsClassificationName}" wrapping="false"/>
+                    </table:template>
+                </table:Column>
+
                 <!-- 19. 国贸条件地址 -->
                 <table:Column width="12rem" label="{i18n>IncotermsLocation1}" sortProperty="IncotermsLocation1" filterProperty="IncotermsLocation1">
                     <table:customData>
