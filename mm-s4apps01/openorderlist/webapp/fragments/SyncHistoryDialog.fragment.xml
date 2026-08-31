@@ -1,0 +1,39 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Dialog id="syncHistoryDialog" title="{i18n>SyncHistory}" contentWidth="70%" draggable="true" resizable="true">
+        <content>
+            <Table id="syncHistoryTable" items="{local>/filteredMRPsyncHistory}">
+                <columns>
+                    <Column width="10%">
+                        <Text text="{i18n>Plant}" />
+                    </Column>
+                    <Column width="20%">
+                        <Text text="{i18n>SyncUser}" />
+                    </Column>
+                    <Column width="35%">
+                        <Text text="{i18n>StartTime}" />
+                    </Column>
+                    <Column width="35%">
+                        <Text text="{i18n>EndTime}" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{local>Plant}" />
+                            <Text text="{local>SyncUser}" />
+                            <Text text="{local>StartTime}" />
+                            <HBox alignItems="Center">
+                                <BusyIndicator visible="{= ${local>EndTime} === '' }" class="sapUiTinyMarginEnd" />
+                                <ObjectStatus text="{= ${local>EndTime} === '' ? ${i18n>Running} : ${local>EndTime} }" state="{= ${local>EndTime} === '' ? 'Information' : (${local>EndTime} === ${i18n>TimeOut} ? 'Error' : 'Success') }" />
+                            </HBox>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+        <beginButton>
+            <Button text="{i18n>Close}" press=".onCloseDialog" />
+        </beginButton>
+    </Dialog>
+</core:FragmentDefinition>

@@ -127,6 +127,10 @@ modules:
       - mmzsupplierresdlvdatereport.zip
       name: mmzsupplierresdlvdatereport
       target-path: resources/
+    - artifacts:
+      - mmopenorderlist.zip
+      name: mmopenorderlist
+      target-path: resources/
 - name: mmsourcelistupload
   type: html5
   path: sourcelistupload
@@ -310,6 +314,15 @@ modules:
 - name: mmzsupplierresdlvdatereport
   type: html5
   path: zsupplierresdlvdatereport
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: mmopenorderlist
+  type: html5
+  path: openorderlist
   build-parameters:
     build-result: dist
     builder: custom

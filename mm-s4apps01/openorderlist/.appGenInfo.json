@@ -1,0 +1,23 @@
+{
+  "generationParameters": {
+    "generationDate": "Fri Aug 28 2026 06:37:03 GMT+0000 (Coordinated Universal Time)",
+    "generatorPlatform": "SAP Business Application Studio",
+    "serviceType": "SAP System (ABAP On-Premise)",
+    "metadataFilename": "",
+    "serviceUrl": "https://my412552-api.s4hana.cloud.sap/sap/opu/odata/sap/ZUI_OPENORDERLIST_O2",
+    "appName": "openorderlist",
+    "appTitle": "新天地残PO照会",
+    "appDescription": "新天地残PO照会",
+    "appNamespace": "mm",
+    "ui5Theme": "sap_horizon",
+    "ui5Version": "1.120.38",
+    "enableEslint": true,
+    "enableTypeScript": false,
+    "showMockDataInfo": true,
+    "generatorVersion": "1.31.1",
+    "template": "Basic V2",
+    "generatorName": "SAP Fiori Application Generator",
+    "entityRelatedConfig": [],
+    "launchText": "To launch the generated application, run the following from the generated application root folder:\n\n```\n    npm start\n```"
+  }
+}
