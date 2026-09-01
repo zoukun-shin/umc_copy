@@ -201,7 +201,7 @@ sap.ui.define([
                     case "check":
                         this._LocalData.setProperty("/recordCheckSuccessed", true);
                         break;
-                    case "save":
+                    case "execute":
                         this._LocalData.setProperty("/recordCheckSuccessed", false);
                         break;
                 }
