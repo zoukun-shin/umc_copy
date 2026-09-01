@@ -24,6 +24,7 @@
                     <FlexBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar" smartVariant="idSmartVariantManagement" persistencyKey="pkCustMatPL" entitySet="ZC_CUSTMATSALESLOSSPROFIT" useToolbar="false">
                             <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration id="sfCompany" index="0" key="CompanyCode" visibleInAdvancedArea="true" label="{i18n>CompanyCode}"/>
                                 <smartFilterBar:ControlConfiguration id="sfPlant" index="1" key="Plant" visibleInAdvancedArea="true" label="{i18n>Plant}"/>
                                 <smartFilterBar:ControlConfiguration id="sfYearMonth" index="2" key="YearMonth" visibleInAdvancedArea="true" mandatory="mandatory" label="{i18n>YearMonth}">
                                     <smartFilterBar:customControl>
