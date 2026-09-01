@@ -19,7 +19,8 @@
                     <FlexBox fitContainer="true">
                         <smartFilterBar:SmartFilterBar id="idSmartFilterBar" entitySet="ZC_SupplierResDlvDateReport" useToolbar="false" smartVariant="__SVM01" persistencyKey="SupplierResDlv_SFB">
                             <smartFilterBar:controlConfiguration>
-                                <smartFilterBar:ControlConfiguration index='10' key="Plant" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}" />
+                                <smartFilterBar:ControlConfiguration index='10' key="Plant" mandatory="mandatory" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Plant}" />
+                                <smartFilterBar:ControlConfiguration index='11' key="UniqueId" visibleInAdvancedArea="true" label="{i18n>UniqueId}" />
                                 <smartFilterBar:ControlConfiguration index='20' key="Supplier" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>Supplier}"/>
                                 <smartFilterBar:ControlConfiguration index='30' key="PurchaseOrder" visibleInAdvancedArea="true" label="{i18n>PurchaseOrder}"/>
                                 <smartFilterBar:ControlConfiguration index='40' key="PurchasingOrganization" displayBehaviour="idAndDescription" visibleInAdvancedArea="true" label="{i18n>PurchasingOrganization}"/>
@@ -34,7 +35,6 @@
                                 <smartFilterBar:ControlConfiguration index='130' key="InvoiceNumber" visibleInAdvancedArea="true" label="{i18n>InvoiceNumber}"/>
                                 <smartFilterBar:ControlConfiguration index='140' key="GRDate" visibleInAdvancedArea="true" label="{i18n>GRDate}"/>
                                 <!-- visible -->
-                                <smartFilterBar:ControlConfiguration index='999' key="UniqueId" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="PurchaseOrderItem" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="ShipmentQty" visible="false"/>
                                 <smartFilterBar:ControlConfiguration index='999' key="OrderUnit" visible="false"/>

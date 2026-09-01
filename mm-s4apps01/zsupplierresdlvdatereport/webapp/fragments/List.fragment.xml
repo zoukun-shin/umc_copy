@@ -6,7 +6,7 @@
     xmlns:table="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:smartTable="sap.ui.comp.smarttable">
-    <smartTable:SmartTable entitySet="ZC_SupplierResDlvDateReport" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="SupplierResDlv_ST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="true" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="USDCurrency" ignoredFields="PurchasingOrganization,USDCurrency,UserEmail">
+    <smartTable:SmartTable entitySet="ZC_SupplierResDlvDateReport" smartFilterId="idSmartFilterBar" tableType="Table" width="100%" showRowCount="true" smartVariant="__SVM01" useVariantManagement="true" useTablePersonalisation="true" persistencyKey="SupplierResDlv_ST" header="{i18n>Results}" enableAutoBinding="false" placeToolbarInTable="true" beforeRebindTable="onBeforeRebindTable" enableExport="true" beforeExport="onBeforeExport" showFullScreenButton="true" requestAtLeastFields="USDCurrency,PORemainingFlag" ignoredFields="PurchasingOrganization,USDCurrency,PORemainingFlag,UserEmail">
         <table:Table id="idStandardListTable" selectionMode="MultiToggle" rowMode="Auto" threshold="5000" enableColumnFreeze="true" fixedColumnCount="3">
             <table:columns>
                 <!-- 1. 唯一识别号 -->
@@ -305,7 +305,7 @@
                         <core:CustomData key="p13nData" value='\{"columnKey":"UnitPrice", "leadingProperty":"UnitPrice"}'/>
                     </table:customData>
                     <table:template>
-                        <Text text="{parts: [{path: 'UnitPrice'}, {path: 'DocumentCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false, minFractionDigits: 2, maxFractionDigits: 2}}" wrapping="false"/>
+                        <Text text="{parts: [{path: 'UnitPrice'}, {path: 'DocumentCurrency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false, minFractionDigits: 6, maxFractionDigits: 6}}" wrapping="false"/>
                     </table:template>
                 </table:Column>
 

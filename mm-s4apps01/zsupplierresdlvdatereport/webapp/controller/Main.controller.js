@@ -96,11 +96,18 @@ sap.ui.define([
                     case "GRDate":
                         oColumn.type = sap.ui.export.EdmType.Date;
                         break;
-                    //  金额类型 (Amount) - 带单位参考
+                    //  金额类型 (Amount) - 带单位参考 2 位小数
                     case "NetAmount":
-                    case "UnitPrice":
                         oColumn.type = sap.ui.export.EdmType.Number;
                         oColumn.scale = 2;
+                        oColumn.delimiter = true;
+                        oColumn.unitProperty = "DocumentCurrency";
+                        oColumn.hAlign = "End";
+                        break;
+                    //  金额类型 (Amount) - 带单位参考 6 位小数
+                    case "UnitPrice":
+                        oColumn.type = sap.ui.export.EdmType.Number;
+                        oColumn.scale = 6;
                         oColumn.delimiter = true;
                         oColumn.unitProperty = "DocumentCurrency";
                         oColumn.hAlign = "End";
