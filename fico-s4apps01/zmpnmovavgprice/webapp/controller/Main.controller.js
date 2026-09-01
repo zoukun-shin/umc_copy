@@ -67,8 +67,10 @@ sap.ui.define([
                 }
                 this.getModel("local").setProperty("/authorityCheck", {
                     button: {
-                        View:   aAllAccessBtns.some(btn => btn.AccessId === "zmpnmovavgprice-View"),
-                        Update: aAllAccessBtns.some(btn => btn.AccessId === "zmpnmovavgprice-Update")
+                        View:      aAllAccessBtns.some(btn => btn.AccessId === "zmpnmovavgprice-View"),
+                        Change:    aAllAccessBtns.some(btn => btn.AccessId === "zmpnmovavgprice-Change"),
+                        ChangeJob: aAllAccessBtns.some(btn => btn.AccessId === "zmpnmovavgprice-ChangeJob"),
+                        Refresh:   aAllAccessBtns.some(btn => btn.AccessId === "zmpnmovavgprice-Refresh")
                     },
                     data: {
                         PlantSet: context._AssignPlant
@@ -467,13 +469,17 @@ sap.ui.define([
             return oBinding.getLength() > 0;
         },
 
+        //  执行中把三个按钮置灰，执行完恢复。
+        //   恢复时要尊重按钮权限（enabled 是绑定的，setEnabled 会把绑定值覆盖掉），
+        //   否则没有权限的按钮会在一次执行之后被点亮
         _setUpdateButtonEnabled: function (bEnabled) {
+            var oButtonAuth = this.getModel("local").getProperty("/authorityCheck/button") || {};
             var oBtn     = this.byId("btnUpdate");
             var oJob     = this.byId("btnUpdateJob");
             var oRefresh = this.byId("btnRefreshStatus");
-            if (oBtn)     { oBtn.setEnabled(bEnabled); }
-            if (oJob)     { oJob.setEnabled(bEnabled); }
-            if (oRefresh) { oRefresh.setEnabled(bEnabled); }
+            if (oBtn)     { oBtn.setEnabled(bEnabled     && oButtonAuth.Change    !== false); }
+            if (oJob)     { oJob.setEnabled(bEnabled     && oButtonAuth.ChangeJob !== false); }
+            if (oRefresh) { oRefresh.setEnabled(bEnabled && oButtonAuth.Refresh   !== false); }
         },
 
         //  重新触发 go（等同于用户再点一次查询）
