@@ -280,7 +280,7 @@
               <core:CustomData key="p13nData" value='\{"columnKey":"VerText", "leadingProperty":"VerText", "sortProperty":"VerText", "filterProperty": "VerText"}'/>
             </t:customData>
             <t:template>
-              <Text text="{VerText}"/>
+              <Text text="{VerText}" tooltip="{VerText}" wrapping="false"/>
             </t:template>
           </t:Column>
           <!-- ADD END 2026.08.18 CN#41 -->
@@ -340,12 +340,15 @@
               <Text text="{Capacity}"/>
             </t:template>
           </t:Column>
-          <t:Column id="Remark" label="{i18n>Remark}" width="4rem" sortProperty="Remark" filterProperty="Remark" visible="true" autoResizable="true">
+          <t:Column id="Remark" label="{i18n>Remark}" width="10rem" sortProperty="Remark" filterProperty="Remark" visible="true" autoResizable="true">
             <t:customData>
               <core:CustomData key="p13nData" value='\{"columnKey":"Remark", "leadingProperty":"Remark", "sortProperty":"Remark", "filterProperty": "Remark"}'/>
             </t:customData>
             <t:template>
-              <Text text="{Remark}"/>
+              <VBox id="VRemark">
+                <Text id="RemarkT" text="{Remark}" visible="{parts:['PlanType'], formatter:'.formatter.setRemarkTextVisible'}" tooltip="{Remark}" wrapping="false"/>
+                <Input id="RemarkI" value="{Remark}" visible="{parts:['PlanType'], formatter:'.formatter.setRemarkInputVisible'}" editable="{= ${local>/tab_mode} === 'edit' &amp;&amp; ${PlanType} === 'W' }" change="onInputChange($event,'Remark')" tooltip="{Remark}"/>
+              </VBox>
             </t:template>
           </t:Column>
           <t:Column id="StockQty" label="{i18n>StockQty}" width="5rem" sortProperty="StockQty" filterProperty="StockQty" visible="true" autoResizable="true">

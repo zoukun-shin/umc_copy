@@ -121,5 +121,19 @@ sap.ui.define([
 			}
 			return false;
 		},
+
+        setRemarkInputVisible: function (value) {
+			if (value) {
+				return (value !== "W") ? false : true;
+			}
+			return true;
+		},
+
+        setRemarkTextVisible: function (value) {
+			if (value) {
+				return (value !== "W") ? true : false;
+			}
+			return false;
+		},
     };
 });

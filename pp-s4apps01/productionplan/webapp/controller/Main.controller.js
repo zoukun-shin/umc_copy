@@ -375,12 +375,15 @@ sap.ui.define([
                 $row.css("background-color", "");
                 var iVisibleCellIndex = 0;
                 aColumns.forEach(function (oColumn, iColumnIndex) {
-                    var sProperty = oColumn.getSortProperty();
-                    if (!sProperty || !/^D\d+$/.test(sProperty)) {
+                    if (!oColumn.getVisible()) {
                         return;
                     }
                     var oCell = aCells[iVisibleCellIndex];
                     iVisibleCellIndex++;
+                    var sProperty = oColumn.getSortProperty();
+                    if (!sProperty || !/^D0(0[1-9]|[1-9][0-9])$/.test(sProperty)) {
+                        return;
+                    }
                     if (oCell) {
                         oCell.$().parent().parent().css("background-color", "");
                     }
@@ -403,21 +406,22 @@ sap.ui.define([
                     $row.css("background-color", "");
                 };
                 // 处理当前显示的日期列
-                var iVisibleCellIndex = 0;
+                var iCellIndex = 0;
                 aColumns.forEach(function (oColumn, iColumnIndex) {
-                    var sProperty = oColumn.getSortProperty();
-                    // 只处理 D001、D002、D003... 日期字段
-                    if (!sProperty || !/^D\d+$/.test(sProperty)) {
-                        return;
-                    };
                     // Column 隐藏，不处理
                     if (!oColumn.getVisible()) {
                         return;
                     };
-                    var oCell = aCells[iVisibleCellIndex];
+                    var oCell = aCells[iCellIndex];
                     // 当前 Column 对应当前可见 Cell
-                    iVisibleCellIndex++;
+                    iCellIndex++;
                     if (!oCell) {
+                        return;
+                    };
+
+                    var sProperty = oColumn.getSortProperty();
+                    // 只处理 D001、D002、D003... 日期字段
+                    if (!sProperty || !/^D0(0[1-9]|[1-9][0-9])$/.test(sProperty)) {
                         return;
                     };
                     var aItems = oCell.getItems && oCell.getItems();
@@ -737,7 +741,7 @@ sap.ui.define([
                 if (oRow.PlanType === "P" || oRow.PlanType === "W" || oRow.PlanType === "I") {
                     // 去掉首字母
                     Object.keys(oRow).forEach(function (sKey) {
-                        if (!/^D\d+$/.test(sKey)) {
+                        if (!/^D0(0[1-9]|[1-9][0-9])$/.test(sKey)) {
                             return;
                         }
                         var sValue = oRow[sKey];
@@ -825,7 +829,30 @@ sap.ui.define([
         },
 
         _exportExcel: function (oTable, sFileName) {
-            var aExcelSet = this.getModel("local").getProperty("/resultSet") ? this.getModel("local").getProperty("/resultSet") : [];
+            var aResultSet = this.getModel("local").getProperty("/resultSet") ? this.getModel("local").getProperty("/resultSet") : [];
+            var aExcelSet = aResultSet.map(function (oRow) {
+
+                var oExcelRow = Object.assign({}, oRow);
+
+                Object.keys(oExcelRow).forEach(function (sKey) {
+
+                    // 日期字段：D001、D002、D003...
+                    if (!/^D0(0[1-9]|[1-9][0-9])$/.test(sKey)) {
+                        return;
+                    }
+
+                    var sValue = oExcelRow[sKey];
+
+                    if (typeof sValue === "string" &&
+                        /^[RYGB]/.test(sValue)) {
+
+                        oExcelRow[sKey] = sValue.slice(1);
+                    }
+                });
+
+                return oExcelRow;
+            });
+
             var aExcelCol = [];
             var aTableCol = oTable.getColumns();
             for (var i = 0; i < aTableCol.length; i++) {
@@ -837,34 +864,42 @@ sap.ui.define([
                         sFieldName = aTableCol[i].getAggregation("template").mBindingInfos.text.parts[0].path;
                     } else if (aTableCol[i].getAggregation("template").getItems() && aTableCol[i].getAggregation("template").getItems()[0].mBindingInfos) {
                         sFieldName = aTableCol[i].getAggregation("template").getItems()[0].mBindingInfos.text.parts[0].path;
-                    }
-                    switch (sFieldName) {
-                        //  Number 分隔符
-                        case "SupplierPrice":
-                        case "StandardPrice":
-                        case "RequiredQty":
-                        case "StockQty":
-                        case "SuppliedQty":
-                        case "AvailableStock":
-                        case "RemainingQty":
-                        case "SafetyStock":
-                        case "ShipmentNoticeQty":
-                        case "PastQty":
-                        case "FutureQty":
-                        case "TotalQty":
-                        case "OrderQuantity":
-                        case "Balance":
-                        case "MinimumPurchaseOrderQty":
-                        case "MaterialPlannedDeliveryDurn":
-                        case "MaterialPlannedDeliveryDurn":
-                            sType = sap.ui.export.EdmType.Number;
-                            bDelimiter = true;
-                            sTextAlign = "End";
-                            break;
-                        default:
-                            sType = sap.ui.export.EdmType.String;
-                            sTextAlign = "Begin";
-                            break;
+                    };
+
+                    if (/^D0(0[1-9]|[1-9][0-9])$/.test(sFieldName)) {
+                        // D001 ~ D099
+                        sType = sap.ui.export.EdmType.Number;
+                        bDelimiter = true;
+                        sTextAlign = "End";
+                    } else {
+                        switch (sFieldName) {
+                            //  Number 分隔符
+                            case "SupplierPrice":
+                            case "StandardPrice":
+                            case "RequiredQty":
+                            case "StockQty":
+                            case "SuppliedQty":
+                            case "AvailableStock":
+                            case "RemainingQty":
+                            case "SafetyStock":
+                            case "ShipmentNoticeQty":
+                            case "PastQty":
+                            case "FutureQty":
+                            case "TotalQty":
+                            case "OrderQuantity":
+                            case "Balance":
+                            case "MinimumPurchaseOrderQty":
+                            case "MaterialPlannedDeliveryDurn":
+                            case "MaterialPlannedDeliveryDurn":
+                                sType = sap.ui.export.EdmType.Number;
+                                bDelimiter = true;
+                                sTextAlign = "End";
+                                break;
+                            default:
+                                sType = sap.ui.export.EdmType.String;
+                                sTextAlign = "Begin";
+                                break;
+                        }
                     }
                     var oExcelCol = {
                         label: sLabelText,
@@ -877,6 +912,7 @@ sap.ui.define([
                     };
                     aExcelCol.push(oExcelCol);
                 }
+
             }
             var oSettings = {
                 workbook: {
