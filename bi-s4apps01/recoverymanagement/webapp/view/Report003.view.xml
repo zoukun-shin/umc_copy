@@ -150,7 +150,7 @@
                         <smartfield:SmartField id="idSfRep03ManagementNumber" value="{RecoveryManagementNumber}" wrapping="false" editable="false" />
                     </table:template>
                 </table:Column>
-                <table:Column id="idRep03PurchaseOrder" width="10em" label="{i18n>PurchaseOrder}" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder" visible="true">
+                <table:Column id="idRep03PurchaseOrder" width="10em" label="{i18n>PurchaseOrder03}" sortProperty="PurchaseOrder" filterProperty="PurchaseOrder" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrder",  "leadingProperty":"PurchaseOrder", "sortProperty":"PurchaseOrder", "filterProperty": "PurchaseOrder"}'/>
                     </table:customData>
@@ -158,7 +158,7 @@
                         <smartfield:SmartField id="sfRep03PurchaseOrder" value="{PurchaseOrder}" wrapping="false" editable="false" />
                     </table:template>
                 </table:Column>
-                <table:Column id="idRep03PurchaseOrderItem" width="12em" label="{i18n>PurchaseOrderItem}" sortProperty="PurchaseOrderItem" filterProperty="PurchaseOrderItem" visible="true">
+                <table:Column id="idRep03PurchaseOrderItem" width="12em" label="{i18n>PurchaseOrderItem03}" sortProperty="PurchaseOrderItem" filterProperty="PurchaseOrderItem" visible="true">
                     <table:customData>
                         <core:CustomData key="p13nData" value='\{"columnKey":"PurchaseOrderItem",  "leadingProperty":"PurchaseOrderItem", "sortProperty":"PurchaseOrderItem", "filterProperty": "PurchaseOrderItem"}'/>
                     </table:customData>
