@@ -185,8 +185,10 @@ sap.ui.define([
 
         onSplit1: function (oEvent) {
             var that = this;
-            var sNew_Qty = this.byId("idNew_Qty").getValue();
-            var sBarcode_Qty = this.byId("idBarcode_Qty").getValue();
+            // var sNew_Qty = this.byId("idNew_Qty").getValue();
+            // var sBarcode_Qty = this.byId("idBarcode_Qty").getValue();
+            var sNew_Qty = String(this.byId("idNew_Qty").getValue()).replace(/,/g, "");
+            var sBarcode_Qty = String(this.byId("idBarcode_Qty").getValue()).replace(/,/g, "");
             if (!sNew_Qty) {
                 MessageBox.error(this.getResourceBundle().getText("msg008"));
                 return;
@@ -273,8 +275,10 @@ sap.ui.define([
 
         onSplit2: function (oEvent) {
             var that = this;
-            var sNew_Qty = this.byId("idNew_Qty").getValue();
-            var sBarcode_Qty = this.byId("idBarcode_Qty").getValue();
+            // var sNew_Qty = this.byId("idNew_Qty").getValue();
+            // var sBarcode_Qty = this.byId("idBarcode_Qty").getValue();
+            var sNew_Qty = String(this.byId("idNew_Qty").getValue()).replace(/,/g, "");
+            var sBarcode_Qty = String(this.byId("idBarcode_Qty").getValue()).replace(/,/g, "");
             if (!sNew_Qty) {
                 MessageBox.error(this.getResourceBundle().getText("msg008"));
                 return;
