@@ -93,6 +93,11 @@ sap.ui.define([
                 return;
             }
 
+            if (!oSmartFilterBar.getFilterData().MRPResponsible && !oSmartFilterBar.getFilterData().Product) {
+                MessageBox.error(this.getView().getModel("i18n").getResourceBundle().getText("oneMoreFilterField"));  
+                return;
+            }
+
             var bSelected = this.byId("idCB1").getSelected();
             aFilters.push(new Filter("OnlyDispPlndOrder", FilterOperator.EQ, bSelected));
 
@@ -142,8 +147,18 @@ sap.ui.define([
                     case "CustomerName":
                         sWidth = "15rem";
                         break;
-                    default:
+                    case "Plant":
+                    case "MRPResponsible":
+                    case "Version01Quantity":
+                    case "Version03Quantity":
+                    case "ATPQuantity":
+                    case "PlannedQuantity":
+                    case "DifferenceQuantity":
+                    case "Rate":
                         sWidth = "10rem";
+                        break;
+                    default:
+                        sWidth = "6rem";
                         break;
                 }
                 oLabel = new Label({ text: "{i18n>" + key + "}" });
@@ -197,9 +212,15 @@ sap.ui.define([
                             sType = sap.ui.export.EdmType.String;
                             sTextAlign = "Begin";
                             break;
+                        case "Rate":
+                            sType = sap.ui.export.EdmType.Number;
+                            sTextAlign = "End";
+                            iScale = 2;
+                            break;
                         default:
                             sType = sap.ui.export.EdmType.Number;
                             sTextAlign = "End";
+                            iScale = 3;
                             break;
                     }
                     var oExcelCol = {
