@@ -76,6 +76,15 @@
             <Annotations Target="cds_zui_custmatsalespl_o2.I_SalesOrganizationType/AddressID">
                 <Annotation Term="UI.HiddenFilter"/>
             </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.ZC_ProductVHType/ValuationArea">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.ZC_ProductVHType/BaseUnit">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.ZC_ProductVHType/DfltStorageLocationExtProcmt">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
             <Annotations Target="_Entities"/>
         </Schema>
     </edmx:DataServices>

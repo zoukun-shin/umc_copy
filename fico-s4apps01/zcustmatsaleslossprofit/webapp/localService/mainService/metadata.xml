@@ -42,6 +42,35 @@
     </edmx:Reference>
     <edmx:DataServices m:DataServiceVersion="2.0">
         <Schema Namespace="cds_zui_custmatsalespl_o2" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="I_CompanyCodeType" sap:label="Company Code" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CompanyCode"/>
+                </Key>
+                <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="CompanyCodeName" sap:label="Company Code"/>
+                <Property Name="CompanyCodeName" Type="Edm.String" MaxLength="25" sap:label="Company Name" sap:quickinfo="Name of Company Code or Company"/>
+                <Property Name="CityName" Type="Edm.String" MaxLength="25" sap:label="City"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country/Region Key"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
+                <Property Name="Language" Type="Edm.String" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="ChartOfAccounts" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Chart of Accounts"/>
+                <Property Name="FiscalYearVariant" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Fiscal Year Variant"/>
+                <Property Name="Company" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Company"/>
+                <Property Name="CreditControlArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="CreditControlArea_Text" sap:label="Credit Control Area"/>
+                <Property Name="CreditControlArea_Text" Type="Edm.String" MaxLength="35" sap:label="Description" sap:quickinfo="Description of the credit control area" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="CountryChartOfAccounts" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Alternative COA" sap:quickinfo="Alternative Chart of Accounts"/>
+                <Property Name="FinancialManagementArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="FM Area" sap:quickinfo="Financial Management Area"/>
+                <Property Name="AddressID" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Address"/>
+                <Property Name="TaxableEntity" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Taxes on Sls/Purc." sap:quickinfo="Taxes on Sales/Purchases Group"/>
+                <Property Name="VATRegistration" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="VAT Registration No." sap:quickinfo="VAT Registration Number"/>
+                <Property Name="ExtendedWhldgTaxIsActive" Type="Edm.Boolean" sap:label="Ext. Withholding Tax" sap:quickinfo="Indicator: Extended Withholding Tax Active"/>
+                <Property Name="ControllingArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="ControllingArea_Text" sap:label="Controlling Area"/>
+                <Property Name="ControllingArea_Text" Type="Edm.String" MaxLength="25" sap:label="Controlling Area Name" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="FieldStatusVariant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Field Status Variant"/>
+                <Property Name="NonTaxableTransactionTaxCode" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Output Tax Code" sap:quickinfo="Output Tax Code for Non-Taxable Transactions"/>
+                <Property Name="DocDateIsUsedForTaxDetn" Type="Edm.Boolean" sap:label="Tax Determ.with Doc.Date" sap:quickinfo="Indicator: Document Date As the Basis for Tax Determination"/>
+                <Property Name="TaxRptgDateIsActive" Type="Edm.Boolean" sap:label="Tax Date" sap:quickinfo="Tax Reporting Date Active in Documents"/>
+                <Property Name="CashDiscountBaseAmtIsNetAmt" Type="Edm.Boolean" sap:label="Net Discount Base" sap:quickinfo="Indicator: Discount base amount is the net value"/>
+            </EntityType>
             <EntityType Name="I_CustomerType" sap:label="Customer" sap:value-list="true" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Customer"/>
@@ -168,6 +197,7 @@
                 </Key>
                 <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="PlantName" sap:label="Plant"/>
                 <Property Name="PlantName" Type="Edm.String" MaxLength="30" sap:label="Plant Name"/>
+                <Property Name="PlantName2" Type="Edm.String" MaxLength="30" sap:label="Name 2"/>
                 <Property Name="ValuationArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Area"/>
                 <Property Name="PlantCustomer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer No Plant" sap:quickinfo="Customer Number of Plant"/>
                 <Property Name="PlantSupplier" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Sppl. No. Plnt" sap:quickinfo="Supplier Number of Plant"/>
@@ -181,15 +211,6 @@
                 <Property Name="Language" Type="Edm.String" MaxLength="2" sap:label="Language Key"/>
                 <Property Name="IsMarkedForArchiving" Type="Edm.Boolean" sap:label="Archiving Flag" sap:quickinfo="Central archiving marker for master record"/>
                 <Property Name="BusinessPlace" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Business Place"/>
-            </EntityType>
-            <EntityType Name="I_ProductTextType" sap:label="Product - Text" sap:value-list="true" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Product"/>
-                    <PropertyRef Name="Language"/>
-                </Key>
-                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
-                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
-                <Property Name="ProductName" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
             </EntityType>
             <EntityType Name="I_SalesOrganizationType" sap:label="Sales Organization" sap:value-list="true" sap:content-version="1">
                 <Key>
@@ -213,7 +234,7 @@
                 <Property Name="BillingDocumentItem" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="NonNegative" sap:label="Item (SD)" sap:quickinfo="Item number of the SD document"/>
                 <Property Name="YearMonth" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="UpperCase" sap:label="年月" sap:quickinfo="Year Month"/>
                 <Property Name="ReportType" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:label="清单类型"/>
-                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Company Code" sap:value-list="standard"/>
                 <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant" sap:value-list="standard"/>
                 <Property Name="SalesOrg" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales Organization" sap:value-list="standard"/>
                 <Property Name="Customer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number" sap:value-list="standard"/>
@@ -234,7 +255,7 @@
                 <Property Name="StandardCost" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="TargetCurrency" sap:variable-scale="true"/>
                 <Property Name="StPerUnit" Type="Edm.Decimal" Precision="13" Scale="6"/>
                 <Property Name="StGrossProfit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="TargetCurrency" sap:variable-scale="true"/>
-                <Property Name="StGrossProfitMargin" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="StGrossProfitMargin" Type="Edm.String" MaxLength="10"/>
                 <Property Name="StMaterialCost" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="TargetCurrency" sap:variable-scale="true"/>
                 <Property Name="StPrimaryMaterial" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="TargetCurrency" sap:variable-scale="true"/>
                 <Property Name="StAuxiliaryMaterial" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="TargetCurrency" sap:variable-scale="true"/>
@@ -248,7 +269,7 @@
                 <Property Name="ActualCost" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="TargetCurrency" sap:variable-scale="true"/>
                 <Property Name="AcPerUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="TargetCurrency" sap:variable-scale="true"/>
                 <Property Name="AcGrossProfit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="TargetCurrency" sap:variable-scale="true"/>
-                <Property Name="AcGrossProfitMargin" Type="Edm.Decimal" Precision="5" Scale="2"/>
+                <Property Name="AcGrossProfitMargin" Type="Edm.String" MaxLength="10"/>
                 <Property Name="AcMaterialCost" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="TargetCurrency" sap:variable-scale="true"/>
                 <Property Name="AcPrimaryMaterial" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="TargetCurrency" sap:variable-scale="true"/>
                 <Property Name="AcAuxiliaryMaterial" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="TargetCurrency" sap:variable-scale="true"/>
@@ -259,6 +280,25 @@
                 <Property Name="AcPowerCost" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="TargetCurrency" sap:variable-scale="true"/>
                 <Property Name="AcTransportationCost" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="TargetCurrency" sap:variable-scale="true"/>
                 <Property Name="AcOtherExpense" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="TargetCurrency" sap:variable-scale="true"/>
+                <Property Name="UserEmail" Type="Edm.String" MaxLength="241"/>
+            </EntityType>
+            <EntityType Name="ZC_ProductVHType" sap:label="Product Value Help" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Material"/>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Product"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="MaterialDescription" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
+                <Property Name="ProductType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Product Type"/>
+                <Property Name="StandardPrice" Type="Edm.Decimal" Precision="23" Scale="3" sap:unit="Currency" sap:variable-scale="true" sap:label="Standard Price"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
+                <Property Name="FunctionalPrice" Type="Edm.Decimal" Precision="26" Scale="5" sap:label="Functional Price"/>
+                <Property Name="FunctionalCurrency" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
+                <Property Name="PriceUnitQty" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Price Unit"/>
+                <Property Name="ValuationArea" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Valuation Area"/>
+                <Property Name="BaseUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="DfltStorageLocationExtProcmt" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location" sap:quickinfo="Default Storage Location for External Procurement"/>
             </EntityType>
             <EntityType Name="SAP__Currency" sap:content-version="1">
                 <Key>
@@ -276,7 +316,7 @@
                 <Property Name="UnitCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Internal UoM" sap:semantics="unit-of-measure"/>
                 <Property Name="ISOCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="ISO Code"/>
                 <Property Name="ExternalCode" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Commercial"/>
-                <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Meas. Unit Text"/>
+                <Property Name="Text" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Unit Text (Long)"/>
                 <Property Name="DecimalPlaces" Type="Edm.Int16" sap:label="Decimal Places"/>
             </EntityType>
             <EntityType Name="SAP__DocumentDescription" sap:content-version="1">
@@ -516,11 +556,12 @@
                 </ReferentialConstraint>
             </Association>
             <EntityContainer Name="cds_zui_custmatsalespl_o2_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx pdf">
+                <EntitySet Name="I_CompanyCode" EntityType="cds_zui_custmatsalespl_o2.I_CompanyCodeType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_Customer" EntityType="cds_zui_custmatsalespl_o2.I_CustomerType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 <EntitySet Name="I_Plant" EntityType="cds_zui_custmatsalespl_o2.I_PlantType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="I_ProductText" EntityType="cds_zui_custmatsalespl_o2.I_ProductTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="I_SalesOrganization" EntityType="cds_zui_custmatsalespl_o2.I_SalesOrganizationType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="ZC_CUSTMATSALESLOSSPROFIT" EntityType="cds_zui_custmatsalespl_o2.ZC_CUSTMATSALESLOSSPROFITType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_ProductVH" EntityType="cds_zui_custmatsalespl_o2.ZC_ProductVHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
                 <EntitySet Name="SAP__FormatSet" EntityType="cds_zui_custmatsalespl_o2.SAP__Format" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__PDFStandardSet" EntityType="cds_zui_custmatsalespl_o2.SAP__PDFStandard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="SAP__TableColumnsSet" EntityType="cds_zui_custmatsalespl_o2.SAP__TableColumns" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
@@ -572,6 +613,92 @@
                 </AssociationSet>
             </EntityContainer>
             <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="cds_zui_custmatsalespl_o2.ZC_CUSTMATSALESLOSSPROFITType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Company Code"/>
+                        <PropertyValue Property="CollectionPath" String="I_CompanyCode"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="CompanyCode"/>
+                                    <PropertyValue Property="ValueListProperty" String="CompanyCode"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CompanyCodeName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CityName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Country"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Language"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ChartOfAccounts"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="FiscalYearVariant"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Company"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CreditControlArea"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CreditControlArea_Text"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CountryChartOfAccounts"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="FinancialManagementArea"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="AddressID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="TaxableEntity"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="VATRegistration"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ExtendedWhldgTaxIsActive"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ControllingArea"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="ControllingArea_Text"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="FieldStatusVariant"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="NonTaxableTransactionTaxCode"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="DocDateIsUsedForTaxDetn"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="TaxRptgDateIsActive"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="CashDiscountBaseAmtIsNetAmt"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.ZC_CUSTMATSALESLOSSPROFITType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -586,6 +713,9 @@
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
                                     <PropertyValue Property="ValueListProperty" String="PlantName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PlantName2"/>
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
                                     <PropertyValue Property="ValueListProperty" String="ValuationArea"/>
@@ -993,19 +1123,38 @@
                 <Annotation Term="Common.ValueList">
                     <Record>
                         <PropertyValue Property="Label" String="Material"/>
-                        <PropertyValue Property="CollectionPath" String="I_ProductText"/>
+                        <PropertyValue Property="CollectionPath" String="ZC_ProductVH"/>
                         <PropertyValue Property="SearchSupported" Bool="true"/>
                         <PropertyValue Property="Parameters">
                             <Collection>
                                 <Record Type="Common.ValueListParameterInOut">
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="Material"/>
-                                    <PropertyValue Property="ValueListProperty" String="Product"/>
+                                    <PropertyValue Property="ValueListProperty" String="Material"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Plant"/>
+                                    <PropertyValue Property="ValueListProperty" String="Plant"/>
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="Language"/>
+                                    <PropertyValue Property="ValueListProperty" String="MaterialDescription"/>
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="ProductName"/>
+                                    <PropertyValue Property="ValueListProperty" String="ProductType"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="StandardPrice"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="FunctionalPrice"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="FunctionalCurrency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="PriceUnitQty"/>
                                 </Record>
                             </Collection>
                         </PropertyValue>
@@ -1014,6 +1163,23 @@
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.cds_zui_custmatsalespl_o2_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.cds_zui_custmatsalespl_o2_Entities/I_CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.cds_zui_custmatsalespl_o2_Entities/I_Customer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
@@ -1033,23 +1199,6 @@
                 </Annotation>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.cds_zui_custmatsalespl_o2_Entities/I_Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Capabilities.DeleteRestrictions">
-                    <Record>
-                        <PropertyValue Property="Deletable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.InsertRestrictions">
-                    <Record>
-                        <PropertyValue Property="Insertable" Bool="false"/>
-                    </Record>
-                </Annotation>
-                <Annotation Term="Capabilities.UpdateRestrictions">
-                    <Record>
-                        <PropertyValue Property="Updatable" Bool="false"/>
-                    </Record>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="cds_zui_custmatsalespl_o2.cds_zui_custmatsalespl_o2_Entities/I_ProductText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="Capabilities.DeleteRestrictions">
                     <Record>
                         <PropertyValue Property="Deletable" Bool="false"/>
@@ -1097,6 +1246,30 @@
                 <Annotation Term="Capabilities.UpdateRestrictions">
                     <Record>
                         <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.cds_zui_custmatsalespl_o2_Entities/ZC_ProductVH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SAPObjectNodeType">
+                    <Record>
+                        <PropertyValue Property="Name" String="CompanyCode"/>
                     </Record>
                 </Annotation>
             </Annotations>
@@ -1172,6 +1345,9 @@
                     </Record>
                 </Annotation>
             </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.ZC_ProductVHType/DfltStorageLocationExtProcmt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LGFSB&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/BusinessPartnerName1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AD_NAME1&amp;origin=JG5_100"/>
             </Annotations>
@@ -1187,6 +1363,9 @@
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/DataMediumExchangeIndicator" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=DTAMS&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/Company" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=RCOMP_D&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/DataController1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
             </Annotations>
@@ -1195,6 +1374,9 @@
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.ZC_CUSTMATSALESLOSSPROFITType/UnitOfMeasure" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VRKME&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/NonTaxableTransactionTaxCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MWSKZ_NSTA&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/InternationalLocationNumber1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BBBNR&amp;origin=JG5_100"/>
@@ -1211,8 +1393,14 @@
             <Annotations Target="cds_zui_custmatsalespl_o2.ZC_CUSTMATSALESLOSSPROFITType/SalesOrg" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VKORG&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/CashDiscountBaseAmtIsNetAmt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=XSKFN&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/InternationalLocationNumber3" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUBKZ&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/Country" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LAND1&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.ZC_CUSTMATSALESLOSSPROFITType/TargetCurrency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS&amp;origin=JG5_100"/>
@@ -1231,6 +1419,9 @@
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_PlantType/BusinessPlace" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=J_1BBRANC_&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.ZC_ProductVHType/ValuationArea" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BWKEY&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/InternationalLocationNumber2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BBSNR&amp;origin=JG5_100"/>
@@ -1274,8 +1465,8 @@
             <Annotations Target="cds_zui_custmatsalespl_o2.I_PlantType/DefaultPurchasingOrganization" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=EKORG&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_custmatsalespl_o2.I_ProductTextType/Product" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/FinancialManagementArea" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=FIKRS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_PlantType/Language" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=SPRAS&amp;origin=JG5_100"/>
@@ -1286,11 +1477,17 @@
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/FreeDefinedAttribute05" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KATR5&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.ZC_ProductVHType/ProductType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTTYPE&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/VATRegistration" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=STCEG&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/Region" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=REGIO&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/ChartOfAccounts" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KTOPL&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/IsOneTimeAccount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=XCPDK&amp;origin=JG5_100"/>
@@ -1307,11 +1504,20 @@
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/Industry" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BRSCH&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/ControllingArea" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KOKRS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/ExtendedWhldgTaxIsActive" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WT_NEWWT&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/POBoxDeviatingCityName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AD_POBXLOC&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/DataController3" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/TaxableEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=UMKRS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/DeletionIndicator" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=LOEVM_X&amp;origin=JG5_100"/>
@@ -1367,6 +1573,9 @@
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/PostalCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PSTLZ&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.ZC_ProductVHType/Plant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WERKS_D&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/TaxNumber2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=STCD2&amp;origin=JG5_100"/>
             </Annotations>
@@ -1421,17 +1630,20 @@
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/StreetName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=STRAS_GP&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.ZC_ProductVHType/FunctionalCurrency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/FreeDefinedAttribute07" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KATR7&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.ZC_CUSTMATSALESLOSSPROFITType/Material" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MATNR&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/VATRegistration" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=STCEG&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/FreeDefinedAttribute09" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KATR9&amp;origin=JG5_100"/>
-            </Annotations>
-            <Annotations Target="cds_zui_custmatsalespl_o2.I_ProductTextType/Language" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=SPRAS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/TaxNumber3" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=STCD3&amp;origin=JG5_100"/>
@@ -1442,8 +1654,17 @@
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/BR_ICMSTaxPayerType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=J_1BICMSTAXPAY&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/AddressID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ADRNR&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/DataControllerSet" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_XDCSET&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/CityName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=ORT01&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/CustomerConditionGroup5" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KDKG5&amp;origin=JG5_100"/>
@@ -1456,6 +1677,9 @@
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/SortField" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=SORTL&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/FieldStatusVariant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=FSTVA&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/AddressSearchTerm2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=AD_SORT2&amp;origin=JG5_100"/>
@@ -1505,8 +1729,14 @@
             <Annotations Target="cds_zui_custmatsalespl_o2.I_PlantType/Division" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=SPAIV&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/CreditControlArea" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KKBER&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/TaxNumber1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=STCD1&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/CountryChartOfAccounts" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KTOP2&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/AlternativePayerAccount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KNRZA&amp;origin=JG5_100"/>
@@ -1514,14 +1744,26 @@
             <Annotations Target="cds_zui_custmatsalespl_o2.I_PlantType/FactoryCalendar" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=FABKL&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/TaxRptgDateIsActive" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=XVATDATE&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/TrainStationName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BAHNS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_PlantType/SalesOrganization" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=VKOIV&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/DocDateIsUsedForTaxDetn" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=XSTDT_001&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.ZC_ProductVHType/MaterialDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/CustomerCorporateGroup" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KONZS&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/Language" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=SPRAS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/DataController7" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BU_DATA_CONTROLLER&amp;origin=JG5_100"/>
@@ -1562,17 +1804,29 @@
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/IsBusinessPurposeCompleted" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=CVP_XBLCK&amp;origin=JG5_100"/>
             </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.ZC_ProductVHType/Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=WAERS&amp;origin=JG5_100"/>
+            </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/ResponsibleType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=J_1AFITP_D&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.ZC_ProductVHType/Material" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTNUMBER&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/FreeDefinedAttribute10" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=KATR10&amp;origin=JG5_100"/>
             </Annotations>
-            <Annotations Target="cds_zui_custmatsalespl_o2.I_ProductTextType/ProductName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PRODUCTDESCRIPTION&amp;origin=JG5_100"/>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/FiscalYearVariant" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=PERIV&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.I_CompanyCodeType/CompanyCode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=BUKRS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/TaxNumberType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=J_1ATOID&amp;origin=JG5_100"/>
+            </Annotations>
+            <Annotations Target="cds_zui_custmatsalespl_o2.ZC_ProductVHType/BaseUnit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=MEINS&amp;origin=JG5_100"/>
             </Annotations>
             <Annotations Target="cds_zui_custmatsalespl_o2.I_CustomerType/VATLiability" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__common.DocumentationRef" String="urn:sap-com:documentation:key?=type=DE&amp;id=STKZU&amp;origin=JG5_100"/>
