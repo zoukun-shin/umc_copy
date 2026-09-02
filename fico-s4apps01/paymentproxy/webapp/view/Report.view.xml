@@ -1,0 +1,239 @@
+<mvc:View controllerName="fico.paymentproxy.controller.Report"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:table="sap.ui.table"
+    xmlns:rm="sap.ui.table.rowmodes"
+    xmlns:plugins="sap.ui.table.plugins">
+    <f:DynamicPage id="idDynamicPage">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <sv:SmartVariantManagement
+                        id="idVariantManagement"
+                        persistencyKey="paymentproxyFilter"
+                        entitySet="PaymentProxy"
+                        showShare="true"
+                        showExecuteOnSelection="true"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="false">
+                <smartFilterBar:SmartFilterBar
+                    id="idSmartFilterBar"
+                    entitySet="PaymentProxy"
+                    useToolbar="false"
+                    persistencyKey="paymentproxySmartFilter"
+                    smartVariant="idVariantManagement">
+                    <smartFilterBar:controlConfiguration>
+                        <smartFilterBar:ControlConfiguration
+                            key="CompanyCode"
+                            visibleInAdvancedArea="false"
+                            label="{/#PaymentProxyType/CompanyCode/@sap:label}"
+                            mandatory="notMandatory"
+                            index="5"/>
+                        <smartFilterBar:ControlConfiguration
+                            key="Supplier"
+                            visibleInAdvancedArea="false"
+                            label="{/#PaymentProxyType/Supplier/@sap:label}"
+                            mandatory="notMandatory"
+                            index="10"/>
+                        <smartFilterBar:ControlConfiguration
+                            key="PaymentDate"
+                            visibleInAdvancedArea="false"
+                            label="{/#PaymentProxyType/PaymentDate/@sap:label}"
+                            mandatory="notMandatory"
+                            index="15">
+                            <smartFilterBar:customControl>
+                                <DateRangeSelection
+                                    id="idDRPaymentDate"
+                                    valueFormat="yyyy/MM/dd"
+                                    displayFormat="yyyy/MM/dd"/>
+                            </smartFilterBar:customControl>
+                        </smartFilterBar:ControlConfiguration>
+                        <smartFilterBar:ControlConfiguration
+                            key="Currency"
+                            visibleInAdvancedArea="true"
+                            label="{/#PaymentProxyType/Currency/@sap:label}"
+                            mandatory="notMandatory"
+                            index="20"/>
+                        <smartFilterBar:ControlConfiguration
+                            key="Responsible"
+                            visibleInAdvancedArea="true"
+                            label="{/#PaymentProxyType/Responsible/@sap:label}"
+                            mandatory="notMandatory"
+                            index="25"/>
+                    </smartFilterBar:controlConfiguration>
+                </smartFilterBar:SmartFilterBar>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable
+                id="idSmartTable"
+                entitySet="PaymentProxy"
+                smartFilterId="idSmartFilterBar"
+                smartVariant="idVariantManagement"
+                persistencyKey="paymentproxySmartTable"
+                header="{i18n>tableHeaderTitle}"
+                showRowCount="true"
+                requestAtLeastFields="CompanyCode,Supplier,PaymentDate,Currency,Responsible,PaymentMethod,TransactionAmount,PaymentAmount,SupplierName,FeeAmount,BankCountryKey,BankAccountHolderName,BankAccount,BankAddress"
+                beforeRebindTable="onBeforeRebindTable">
+                <smartTable:customToolbar>
+                    <OverflowToolbar design="Transparent">
+                        <ToolbarSpacer/>
+                        <Button id="idPrintBtn"
+                            icon="sap-icon://print"
+                            type="Transparent"
+                            text="{i18n>printBtn}"
+                            press="onPrint"
+                            enabled="{= ${local>/authorityCheck/button/Print}}"/>
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+                    <table:Table
+                        id="idReportTable"
+                        selectionMode="Multi"
+                        enableSelectAll="true">
+                        <table:dependents>
+                            <plugins:MultiSelectionPlugin
+                                id="idMultiSelectionPlugin"
+                                limit="0"
+                                enableNotification="true"
+                                showHeaderSelector="true"
+                                selectionMode="MultiToggle"/>
+                        </table:dependents>
+                        <table:rowMode>
+                            <rm:Auto id="idAuto"/>
+                        </table:rowMode>
+                        <table:columns>
+                            <table:Column width="7rem" label="{/#PaymentProxyType/CompanyCode/@sap:label}" sortProperty="CompanyCode" filterProperty="CompanyCode">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"CompanyCode","leadingProperty":"CompanyCode","sortProperty":"CompanyCode","filterProperty":"CompanyCode"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{CompanyCode}" wrapping="false"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column width="9rem" label="{/#PaymentProxyType/Supplier/@sap:label}" sortProperty="Supplier" filterProperty="Supplier">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"Supplier","leadingProperty":"Supplier","sortProperty":"Supplier","filterProperty":"Supplier"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{Supplier}" wrapping="false"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column width="14rem" label="{/#PaymentProxyType/SupplierName/@sap:label}" sortProperty="SupplierName" filterProperty="SupplierName">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"SupplierName","leadingProperty":"SupplierName","sortProperty":"SupplierName","filterProperty":"SupplierName"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{SupplierName}" wrapping="false" tooltip="{SupplierName}"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column width="9rem" label="{/#PaymentProxyType/PaymentDate/@sap:label}" sortProperty="PaymentDate" filterProperty="PaymentDate">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"PaymentDate","leadingProperty":"PaymentDate","sortProperty":"PaymentDate","filterProperty":"PaymentDate","type":"date"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{path:'PaymentDate', type:'sap.ui.model.type.Date'}" wrapping="false"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column width="6rem" label="{/#PaymentProxyType/PaymentMethod/@sap:label}" sortProperty="PaymentMethod" filterProperty="PaymentMethod">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"PaymentMethod","leadingProperty":"PaymentMethod","sortProperty":"PaymentMethod","filterProperty":"PaymentMethod"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{PaymentMethod}" wrapping="false"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column width="12rem" label="{/#PaymentProxyType/BankName/@sap:label}" sortProperty="BankName" filterProperty="BankName">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"BankName","leadingProperty":"BankName","sortProperty":"BankName","filterProperty":"BankName"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{BankName}" wrapping="false" tooltip="{BankName}"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column width="10rem" hAlign="Right" label="{/#PaymentProxyType/TransactionAmount/@sap:label}" sortProperty="TransactionAmount" filterProperty="TransactionAmount">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"TransactionAmount","leadingProperty":"TransactionAmount","sortProperty":"TransactionAmount","filterProperty":"TransactionAmount"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{path:'TransactionAmount', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column width="9rem" hAlign="Right" label="{/#PaymentProxyType/FeeAmount/@sap:label}" sortProperty="FeeAmount" filterProperty="FeeAmount">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"FeeAmount","leadingProperty":"FeeAmount","sortProperty":"FeeAmount","filterProperty":"FeeAmount"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{path:'FeeAmount', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column width="10rem" hAlign="Right" label="{/#PaymentProxyType/PaymentAmount/@sap:label}" sortProperty="PaymentAmount" filterProperty="PaymentAmount">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"PaymentAmount","leadingProperty":"PaymentAmount","sortProperty":"PaymentAmount","filterProperty":"PaymentAmount"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{path:'PaymentAmount', type:'sap.ui.model.odata.type.Decimal'}" wrapping="false"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column width="6rem" label="{/#PaymentProxyType/Currency/@sap:label}" sortProperty="Currency" filterProperty="Currency">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"Currency","leadingProperty":"Currency","sortProperty":"Currency","filterProperty":"Currency"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{Currency}" wrapping="false"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column width="10rem" label="{/#PaymentProxyType/Responsible/@sap:label}" sortProperty="Responsible" filterProperty="Responsible">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"Responsible","leadingProperty":"Responsible","sortProperty":"Responsible","filterProperty":"Responsible"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{Responsible}" wrapping="false" tooltip="{Responsible}"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column width="6rem" label="{/#PaymentProxyType/BankCountryKey/@sap:label}" sortProperty="BankCountryKey" filterProperty="BankCountryKey">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"BankCountryKey","leadingProperty":"BankCountryKey","sortProperty":"BankCountryKey","filterProperty":"BankCountryKey"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{BankCountryKey}" wrapping="false"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column width="12rem" label="{/#PaymentProxyType/BankAccountHolderName/@sap:label}" sortProperty="BankAccountHolderName" filterProperty="BankAccountHolderName">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"BankAccountHolderName","leadingProperty":"BankAccountHolderName","sortProperty":"BankAccountHolderName","filterProperty":"BankAccountHolderName"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{BankAccountHolderName}" wrapping="false" tooltip="{BankAccountHolderName}"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column width="12rem" label="{/#PaymentProxyType/BankAccount/@sap:label}" sortProperty="BankAccount" filterProperty="BankAccount">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"BankAccount","leadingProperty":"BankAccount","sortProperty":"BankAccount","filterProperty":"BankAccount"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{BankAccount}" wrapping="false" tooltip="{BankAccount}"/>
+                                </table:template>
+                            </table:Column>
+                            <table:Column width="16rem" label="{/#PaymentProxyType/BankAddress/@sap:label}" sortProperty="BankAddress" filterProperty="BankAddress">
+                                <table:customData>
+                                    <core:CustomData key="p13nData" value='\{"columnKey":"BankAddress","leadingProperty":"BankAddress","sortProperty":"BankAddress","filterProperty":"BankAddress"}'/>
+                                </table:customData>
+                                <table:template>
+                                    <Text text="{BankAddress}" wrapping="false" tooltip="{BankAddress}"/>
+                                </table:template>
+                            </table:Column>
+                        </table:columns>
+                    </table:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

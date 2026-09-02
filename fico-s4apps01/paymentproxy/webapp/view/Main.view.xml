@@ -1,0 +1,25 @@
+<mvc:View controllerName="fico.paymentproxy.controller.Main"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page showHeader="false" showFooter="false">
+        <content>
+            <IconTabBar
+                id="idIconTabBar"
+                expanded="{device>/isNoPhone}"
+                stretchContentHeight="true"
+                backgroundDesign="Transparent"
+                applyContentPadding="false"
+                class="sapUiNoContentPadding">
+                <items>
+                    <IconTabFilter text="{i18n>tabUpload}" key="Upload">
+                        <mvc:XMLView viewName="fico.paymentproxy.view.Upload" height="100%"/>
+                    </IconTabFilter>
+                    <IconTabFilter text="{i18n>tabReport}" key="Report">
+                        <mvc:XMLView viewName="fico.paymentproxy.view.Report" height="100%"/>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

@@ -199,6 +199,10 @@ modules:
       - ficozstdcostdetail.zip
       name: ficozstdcostdetail
       target-path: resources/
+    - artifacts:
+      - ficopaymentproxy.zip
+      name: ficopaymentproxy
+      target-path: resources/
 - name: ficopaidpay
   type: html5
   path: paidpay
