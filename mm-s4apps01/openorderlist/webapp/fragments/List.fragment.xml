@@ -11,9 +11,9 @@
                 <!-- MOD BEGIN BY XINLEI XU 2026/06/10 CM#6502 -->
                 <!-- <MessageStrip id="idMRPSynchronousMsg" showIcon="true"/> -->
                 <!-- <Button id="idMRPSynchronous" icon="sap-icon://synchronize" type="Ghost" text="{i18n>MRPSynchronous}" press="onMRPSynchronous" enabled="{= ${local>/authorityCheck/button/MRPSynchronous}}"/> -->
-                <MessageStrip id="idMRPSynchronousMsg" showIcon="true" text="{i18n>InitialMessageStrip}"/>
+                <!-- <MessageStrip id="idMRPSynchronousMsg" showIcon="true" text="{i18n>InitialMessageStrip}"/> -->
                 <!-- <Button icon="sap-icon://history" type="Ghost" text="{i18n>SyncHistory}" press="onGetMRPSyncHistory(true)" enabled="{= ${local>/authorityCheck/button/SyncHistory}}"/> -->
-                <Button id="idMRPSynchronous" icon="sap-icon://synchronize" type="Ghost" text="{i18n>MRPSynchronous}" press="onMRPSubmitByPlant" enabled="{= ${local>/authorityCheck/button/MRPSynchronous}}"/>
+                <!-- <Button id="idMRPSynchronous" icon="sap-icon://synchronize" type="Ghost" text="{i18n>MRPSynchronous}" press="onMRPSubmitByPlant" enabled="{= ${local>/authorityCheck/button/MRPSynchronous}}"/> -->
                 <!-- MOD END BY XINLEI XU 2026/06/10 CM#6502 -->
                 <Button icon="sap-icon://excel-attachment" type="Ghost" text="{i18n>Download}" press="onExport" enabled="{= ${local>/authorityCheck/button/Export} &amp;&amp; ${local>/resultSet}.length > 0}"/>
             </OverflowToolbar>
