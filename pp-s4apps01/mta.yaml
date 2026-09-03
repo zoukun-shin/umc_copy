@@ -255,6 +255,10 @@ modules:
       - ppzworkhrmtpntbud.zip
       name: ppzworkhrmtpntbud
       target-path: resources/
+    - artifacts:
+      - ppecocheck.zip
+      name: ppecocheck
+      target-path: resources/
 - name: ppzbomupload
   type: html5
   path: zbomupload
@@ -726,6 +730,15 @@ modules:
 - name: ppzworkhrmtpntbud
   type: html5
   path: zworkhrmtpntbud
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm run build:cf
+    supported-platforms: []
+- name: ppecocheck
+  type: html5
+  path: ecocheck
   build-parameters:
     build-result: dist
     builder: custom
