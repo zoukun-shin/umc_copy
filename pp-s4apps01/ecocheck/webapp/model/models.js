@@ -14,6 +14,14 @@ function (JSONModel, Device) {
             var oModel = new JSONModel(Device);
             oModel.setDefaultBindingMode("OneWay");
             return oModel;
+        },
+
+        /**
+         * Provides the local JSON model for runtime state (e.g. /authorityCheck).
+         * @returns {sap.ui.model.json.JSONModel} The local model.
+         */
+        createLocalModel: function () {
+            return new JSONModel({});
         }
     };
 

@@ -1,6 +1,303 @@
-<mvc:View controllerName="pp.ecocheck.controller.Main"
+<mvc:View controllerName="pp.ecocheck.controller.Main" displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-    </Page>
+    xmlns:t="sap.ui.table"
+    height="100%">
+
+    <f:DynamicPage id="idDynamicPage" headerExpanded="true" showFooter="false" fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle id="idDynamicPageTitle">
+                <f:heading>
+                    <sv:SmartVariantManagement id="__SVM01"
+                        persistencyKey="BomCheckSVM"
+                        showShare="true"
+                        showExecuteOnSelection="true"
+                        entitySet="BomCheck"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader id="idDynamicPageHeader" pinnable="true">
+                <f:content>
+                    <smartFilterBar:SmartFilterBar
+                        id="idSmartFilterBar"
+                        useToolbar="false"
+                        entitySet="BomCheck"
+                        smartVariant="__SVM01"
+                        persistencyKey="BomCheckFilter"
+                        initialized="onSmartFilterBarInitialized">
+                        <smartFilterBar:controlConfiguration>
+                            <smartFilterBar:ControlConfiguration
+                                key="Plant"
+                                index="5"
+                                filterType="single"
+                                visibleInAdvancedArea="true"
+                                mandatory="mandatory"
+                                label="{/#BomCheckType/Plant/@sap:label}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="BOMHdrMatlHierNode"
+                                index="10"
+                                visibleInAdvancedArea="true"
+                                label="{/#BomCheckType/BOMHdrMatlHierNode/@sap:label}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="BillOfMaterialVariant"
+                                index="15"
+                                filterType="single"
+                                visibleInAdvancedArea="true"
+                                label="{/#BomCheckType/BillOfMaterialVariant/@sap:label}"/>
+                            <smartFilterBar:ControlConfiguration
+                                key="EffectiveDate"
+                                index="20"
+                                visibleInAdvancedArea="true"
+                                mandatory="mandatory"
+                                label="{/#BomCheckType/EffectiveDate/@sap:label}">
+                                <smartFilterBar:customControl>
+                                    <DatePicker
+                                        id="idEffectiveDate"
+                                        valueFormat="yyyy/MM/dd"
+                                        displayFormat="yyyy/MM/dd"/>
+                                </smartFilterBar:customControl>
+                            </smartFilterBar:ControlConfiguration>
+                        </smartFilterBar:controlConfiguration>
+                    </smartFilterBar:SmartFilterBar>
+                </f:content>
+                <f:content>
+                    <HBox >
+                        <CheckBox id="idCBShowAllItems" text="{/#BomCheckType/ShowAllItems/@sap:label}"/>
+                    </HBox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <smartTable:SmartTable
+                id="idSmartTable"
+                entitySet="BomCheck"
+                smartVariant="__SVM01"
+                smartFilterId="idSmartFilterBar"
+                tableType="Table"
+                showRowCount="true"
+                useTablePersonalisation="true"
+                persistencyKey="BomCheckSmartTable"
+                header="{i18n>tableHeaderTitle}"
+                placeToolbarInTable="true"
+                beforeRebindTable="onBeforeRebindTable"
+                requestAtLeastFields="BillOfMaterial,BillOfMaterialItemNumber,Plant,BOMHdrMatlHierNode,MessageType,Message"
+                fitContainer="true"
+                height="100%">
+
+                <t:Table id="Table_BomCheck" selectionMode="None">
+                    <t:columns>
+
+                        <t:Column width="6rem" label="{/#BomCheckType/MessageType/@sap:label}" sortProperty="MessageType" filterProperty="MessageType">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"MessageType","leadingProperty":"MessageType","sortProperty":"MessageType","filterProperty":"MessageType"}'/>
+                            </t:customData>
+                            <t:template>
+                                <ObjectStatus
+                                    state="{ path: 'MessageType', formatter: '.formatter.setState' }"
+                                    icon="{ path: 'MessageType', formatter: '.formatter.setStateIcon' }"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="6rem" label="{/#BomCheckType/Plant/@sap:label}" sortProperty="Plant" filterProperty="Plant">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Plant","leadingProperty":"Plant","sortProperty":"Plant","filterProperty":"Plant"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Plant}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="10rem" label="{/#BomCheckType/BOMHdrMatlHierNode/@sap:label}" sortProperty="BOMHdrMatlHierNode" filterProperty="BOMHdrMatlHierNode">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BOMHdrMatlHierNode","leadingProperty":"BOMHdrMatlHierNode","sortProperty":"BOMHdrMatlHierNode","filterProperty":"BOMHdrMatlHierNode"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BOMHdrMatlHierNode}" tooltip="{BOMHdrMatlHierNode}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="8rem" label="{/#BomCheckType/BillOfMaterial/@sap:label}" sortProperty="BillOfMaterial" filterProperty="BillOfMaterial">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterial","leadingProperty":"BillOfMaterial","sortProperty":"BillOfMaterial","filterProperty":"BillOfMaterial"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BillOfMaterial}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="7rem" label="{/#BomCheckType/BillOfMaterialVariant/@sap:label}" sortProperty="BillOfMaterialVariant" filterProperty="BillOfMaterialVariant">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialVariant","leadingProperty":"BillOfMaterialVariant","sortProperty":"BillOfMaterialVariant","filterProperty":"BillOfMaterialVariant"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BillOfMaterialVariant}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="7rem" label="{/#BomCheckType/BillOfMaterialVariantUsage/@sap:label}" sortProperty="BillOfMaterialVariantUsage" filterProperty="BillOfMaterialVariantUsage">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialVariantUsage","leadingProperty":"BillOfMaterialVariantUsage","sortProperty":"BillOfMaterialVariantUsage","filterProperty":"BillOfMaterialVariantUsage"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BillOfMaterialVariantUsage}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="7rem" label="{/#BomCheckType/BillOfMaterialItemNumber/@sap:label}" sortProperty="BillOfMaterialItemNumber" filterProperty="BillOfMaterialItemNumber">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialItemNumber","leadingProperty":"BillOfMaterialItemNumber","sortProperty":"BillOfMaterialItemNumber","filterProperty":"BillOfMaterialItemNumber"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BillOfMaterialItemNumber}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="10rem" label="{/#BomCheckType/BillOfMaterialComponent/@sap:label}" sortProperty="BillOfMaterialComponent" filterProperty="BillOfMaterialComponent">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialComponent","leadingProperty":"BillOfMaterialComponent","sortProperty":"BillOfMaterialComponent","filterProperty":"BillOfMaterialComponent"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BillOfMaterialComponent}" tooltip="{BillOfMaterialComponent}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="14rem" label="{/#BomCheckType/ComponentDescription/@sap:label}" sortProperty="ComponentDescription" filterProperty="ComponentDescription">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"ComponentDescription","leadingProperty":"ComponentDescription","sortProperty":"ComponentDescription","filterProperty":"ComponentDescription"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ComponentDescription}" tooltip="{ComponentDescription}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="10rem" label="{/#BomCheckType/BillOfMaterialItemQuantity/@sap:label}" sortProperty="BillOfMaterialItemQuantity" filterProperty="BillOfMaterialItemQuantity" hAlign="Right">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialItemQuantity","leadingProperty":"BillOfMaterialItemQuantity","sortProperty":"BillOfMaterialItemQuantity","filterProperty":"BillOfMaterialItemQuantity"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ path: 'BillOfMaterialItemQuantity', type: 'sap.ui.model.odata.type.Decimal' }" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="7rem" label="{/#BomCheckType/BillOfMaterialItemUnit/@sap:label}" sortProperty="BillOfMaterialItemUnit" filterProperty="BillOfMaterialItemUnit">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BillOfMaterialItemUnit","leadingProperty":"BillOfMaterialItemUnit","sortProperty":"BillOfMaterialItemUnit","filterProperty":"BillOfMaterialItemUnit"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BillOfMaterialItemUnit}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="7rem" label="{/#BomCheckType/AlternativeItemGroup/@sap:label}" sortProperty="AlternativeItemGroup" filterProperty="AlternativeItemGroup">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AlternativeItemGroup","leadingProperty":"AlternativeItemGroup","sortProperty":"AlternativeItemGroup","filterProperty":"AlternativeItemGroup"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AlternativeItemGroup}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="7rem" label="{/#BomCheckType/AlternativeItemPriority/@sap:label}" sortProperty="AlternativeItemPriority" filterProperty="AlternativeItemPriority">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AlternativeItemPriority","leadingProperty":"AlternativeItemPriority","sortProperty":"AlternativeItemPriority","filterProperty":"AlternativeItemPriority"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AlternativeItemPriority}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="7rem" label="{/#BomCheckType/AlternativeItemStrategy/@sap:label}" sortProperty="AlternativeItemStrategy" filterProperty="AlternativeItemStrategy">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"AlternativeItemStrategy","leadingProperty":"AlternativeItemStrategy","sortProperty":"AlternativeItemStrategy","filterProperty":"AlternativeItemStrategy"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{AlternativeItemStrategy}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="9rem" label="{/#BomCheckType/UsageProbabilityPercent/@sap:label}" sortProperty="UsageProbabilityPercent" filterProperty="UsageProbabilityPercent" hAlign="Right">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"UsageProbabilityPercent","leadingProperty":"UsageProbabilityPercent","sortProperty":"UsageProbabilityPercent","filterProperty":"UsageProbabilityPercent"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{ path: 'UsageProbabilityPercent', type: 'sap.ui.model.odata.type.Int32' }" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="9rem" label="{/#BomCheckType/DiscontinuationGroup/@sap:label}" sortProperty="DiscontinuationGroup" filterProperty="DiscontinuationGroup">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"DiscontinuationGroup","leadingProperty":"DiscontinuationGroup","sortProperty":"DiscontinuationGroup","filterProperty":"DiscontinuationGroup"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{DiscontinuationGroup}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="9rem" label="{/#BomCheckType/FollowUpGroup/@sap:label}" sortProperty="FollowUpGroup" filterProperty="FollowUpGroup">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"FollowUpGroup","leadingProperty":"FollowUpGroup","sortProperty":"FollowUpGroup","filterProperty":"FollowUpGroup"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{FollowUpGroup}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="8rem" label="{/#BomCheckType/BOMItemSorter/@sap:label}" sortProperty="BOMItemSorter" filterProperty="BOMItemSorter">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BOMItemSorter","leadingProperty":"BOMItemSorter","sortProperty":"BOMItemSorter","filterProperty":"BOMItemSorter"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BOMItemSorter}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="8rem" label="{/#BomCheckType/BOMItemIsCostingRelevant/@sap:label}" sortProperty="BOMItemIsCostingRelevant" filterProperty="BOMItemIsCostingRelevant">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BOMItemIsCostingRelevant","leadingProperty":"BOMItemIsCostingRelevant","sortProperty":"BOMItemIsCostingRelevant","filterProperty":"BOMItemIsCostingRelevant"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BOMItemIsCostingRelevant}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="8rem" label="{/#BomCheckType/IsBulkMaterial/@sap:label}" sortProperty="IsBulkMaterial" filterProperty="IsBulkMaterial">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"IsBulkMaterial","leadingProperty":"IsBulkMaterial","sortProperty":"IsBulkMaterial","filterProperty":"IsBulkMaterial"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{IsBulkMaterial}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="8rem" label="{/#BomCheckType/BOMIsRecursive/@sap:label}" sortProperty="BOMIsRecursive" filterProperty="BOMIsRecursive">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"BOMIsRecursive","leadingProperty":"BOMIsRecursive","sortProperty":"BOMIsRecursive","filterProperty":"BOMIsRecursive"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{BOMIsRecursive}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column width="24rem" label="{/#BomCheckType/Message/@sap:label}" sortProperty="Message" filterProperty="Message">
+                            <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey":"Message","leadingProperty":"Message","sortProperty":"Message","filterProperty":"Message"}'/>
+                            </t:customData>
+                            <t:template>
+                                <Text text="{Message}" tooltip="{Message}" wrapping="false"/>
+                            </t:template>
+                        </t:Column>
+
+                    </t:columns>
+                </t:Table>
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>
